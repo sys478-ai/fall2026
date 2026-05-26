@@ -1,0 +1,70 @@
+import { getAllQuizMetadata, getQuizData, getQuizCheatsheet, QuizMetadata, QuizData } from '@/lib/markdown';
+import { getWeekNumber } from '@/lib/config';
+import PageHeader from '@/components/PageHeader';
+import ContentLayout from '@/components/ContentLayout';
+import QuickLinksNav from '@/components/QuickLinksNav';
+import QuizzesListClient from '@/components/QuizzesListClient';
+
+function getDaysLeft(dateString: string): number | null {
+  if (!dateString) return null;
+  
+  const [year, month, day] = dateString.split('-').map(Number);
+  const quizDate = new Date(year, month - 1, day);
+  const today = new Date();
+  
+  // Set both dates to midnight to avoid timezone issues
+  today.setHours(0, 0, 0, 0);
+  quizDate.setHours(0, 0, 0, 0);
+  
+  // Calculate difference in days
+  const diffTime = quizDate.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  return diffDays;
+}
+
+export default async function QuizzesPage() {
+  const allQuizzes = getAllQuizMetadata();
+  
+  // Filter out draft quizzes
+  const publishedQuizzes = allQuizzes.filter(quiz => !quiz.draft || quiz.draft !== 1);
+  
+  // Load quiz data for all quizzes and calculate week/days left
+  const quizzesWithData: Array<QuizMetadata & { quizData: QuizData | null; cheatsheetContent: string | null; weekNumber?: number; daysLeft?: number | null }> = publishedQuizzes.map(quiz => {
+    const weekNumber = quiz.start_date ? getWeekNumber(quiz.start_date) : undefined;
+    const daysLeft = quiz.start_date ? getDaysLeft(quiz.start_date) : null;
+    const quizData = getQuizData(quiz.slug);
+    const cheatsheetContent = getQuizCheatsheet(quizData, quiz.slug);
+    
+    return {
+      ...quiz,
+      quizData,
+      cheatsheetContent,
+      weekNumber,
+      daysLeft
+    };
+  });
+
+  // Sort quizzes by start_date if available, otherwise by name
+  quizzesWithData.sort((a, b) => {
+    if (a.start_date && b.start_date) {
+      return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
+    }
+    if (a.start_date) return -1;
+    if (b.start_date) return 1;
+    return a.quizName.localeCompare(b.quizName);
+  });
+
+  return (
+    <ContentLayout variant="list" leftNav={<QuickLinksNav />}>
+      <div className="space-y-6">
+        <PageHeader 
+          title="Quizzes" 
+          excerpt="Practice quizzes to test your understanding of course material"
+        />
+        
+        <QuizzesListClient quizzes={quizzesWithData} />
+      </div>
+    </ContentLayout>
+  );
+}

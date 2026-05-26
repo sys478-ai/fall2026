@@ -1,0 +1,35 @@
+[
+  {
+    "href": "/",
+    "label": "Home"
+  },
+  {
+    "href": "/",
+    "label": "Schedule"
+  },
+  {
+    "href": "/syllabus",
+    "label": "Syllabus"
+  },
+  {
+    "href": "/assignments",
+    "label": "Assignments"
+  },
+  {
+    "href": "/resources",
+    "label": "Resources"
+  },
+  {
+    "href": "/bibliography",
+    "label": "Bibliography"
+  },
+  {
+    "href": "/quizzes",
+    "label": "Quizzes"
+  },
+  {
+    "href": "https://drive.google.com/drive/folders/1Wv7M96s7D-q4kbZVp6gjKomLQf-vxqXY?usp=sharing",
+    "label": "Videos",
+    "external": true
+  }
+]

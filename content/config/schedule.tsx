@@ -1,0 +1,485 @@
+import React from 'react';
+
+export const baseTopics = [
+  {
+    id: 1,
+    title: 'What Is Intelligence?',
+    description: (
+      <>
+        <ul className="list-spaced">
+          <li>
+            <strong>Purpose:</strong> Examine how definitions of intelligence shape technologies, institutions, and
+            public expectations, and why those definitions matter as AI becomes a civic issue.
+          </li>
+          <li>
+            <strong>Key Questions:</strong>
+            <ol className="list-tight">
+              <li>What do people mean when they call something &quot;intelligent&quot;?</li>
+              <li>Who gets to define intelligence?</li>
+              <li>What is lost when human intelligence is reduced to prediction, optimization, or performance?</li>
+              <li>How do metaphors of intelligence influence the technologies we build?</li>
+            </ol>
+          </li>
+          <li>
+            <strong>Project connection:</strong> Students begin a public confusion and public question inventory by
+            tracking what people around them seem confused, curious, or anxious about when it comes to AI, and by
+            identifying misconceptions or unresolved questions that may be worth addressing through public-facing work.
+          </li>
+          <li>
+            <strong>Research role:</strong> Collect baseline mental models of intelligence, machine learning, what
+            students think AI is, and whether they see AI as tool, agent, infrastructure, or social force.
+          </li>
+        </ul>
+      </>
+    ),
+    meetings: [
+      {
+        date: 'Week 1',
+        topic: 'Course launch: human and machine intelligence as a public issue',
+        description: (
+          <>
+            We frame the course around socio-technical systems and introduce <em>The Dream Hotel</em> as our shared
+            speculative case: a world where data, institutions, and prediction reshape freedom.
+          </>
+        ),
+        activities: [
+          { title: 'Introduce the public-facing final project' },
+          {
+            title: 'Baseline reflection: What do people need to understand about AI?',
+          },
+        ],
+        readings: [
+          { citation: <>Langdon Winner, &quot;Do Artifacts Have Politics?&quot;</> },
+          {
+            citation: <>Sheila Jasanoff on socio-technical imaginaries</>,
+          },
+        ],
+      },
+      {
+        date: 'Week 2',
+        topic: 'What is intelligence? Human, animal, machine, social, embodied',
+        description: (
+          <>
+            We treat intelligence as a social construction and ask what kinds of evidence students think should count as
+            knowledge about a person.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Public question inventory: common assumptions about intelligence, AI, risk, and prediction',
+          },
+        ],
+        readings: [
+          { citation: <>Stephen Jay Gould</> },
+          { citation: <>Ruha Benjamin</> },
+          {
+            citation: <>Disability studies and critical race perspectives on measurement and classification</>,
+          },
+        ],
+      },
+      {
+        date: 'Week 3',
+        topic: 'Human learning, memory, dreams, prediction, and adaptation',
+        description: (
+          <>
+            We focus on embodiment, interiority, and situated cognition as we begin <em>The Dream Hotel</em> and
+            consider dreams as intimate, ambiguous, embodied data.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Short explainer: Why are human thoughts, dreams, or emotions difficult to turn into data?',
+          },
+        ],
+        readings: [
+          { citation: <>Lucy Suchman</> },
+          { citation: <>Andy Clark</> },
+          {
+            citation: <>Lisa Feldman Barrett or predictive processing excerpts</>,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: 'How Do Machines Learn, and How Do People Imagine Them?',
+    description: (
+      <>
+        <ul className="list-spaced">
+          <li>
+            <strong>Purpose:</strong> Develop enough conceptual grounding in contemporary AI to distinguish between
+            different forms of machine learning and communicate those distinctions responsibly to others.
+          </li>
+          <li>
+            <strong>Topics:</strong> Rules, statistics, machine learning, neural networks, generative AI as one paradigm
+            rather than the whole of AI, training versus inference, supervised versus unsupervised learning, and model
+            behavior versus human understanding.
+          </li>
+          <li>
+            <strong>Project connection:</strong> Students submit a Project Seed Memo identifying an audience they may
+            want to address, an AI-related issue they may want to explain, and why it matters beyond the classroom.
+          </li>
+          <li>
+            <strong>Activities:</strong> Students practice explaining concepts in plain language to a parent, a
+            policymaker, and a high school student, then revise those explanations through peer feedback.
+          </li>
+          <li>
+            <strong>Research role:</strong> We assess where students overgeneralize from LLMs to all AI, equate learning
+            with human-like understanding, or assume more agency and autonomy than is warranted.
+          </li>
+        </ul>
+      </>
+    ),
+    meetings: [
+      {
+        date: 'Week 4',
+        topic: 'How machines learn: data, rules, models, training, and inference',
+        description: (
+          <>
+            We introduce machine learning as a set of models and simplifications of the world, asking what kinds of data
+            a system trusts and what gets lost when interior life becomes input data.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Practice public explanation: supervised vs. unsupervised learning, prediction, and risk scoring',
+          },
+        ],
+        readings: [
+          {
+            citation: (
+              <>
+                Kate Crawford, <em>Atlas of AI</em>
+              </>
+            ),
+          },
+          { citation: <>Emily Bender et al.</> },
+          { citation: <>Nick Seaver</> },
+        ],
+      },
+      {
+        date: 'Week 5',
+        topic: 'Generative AI as one AI paradigm, not all AI',
+        description: (
+          <>
+            We examine hype, metaphor, and public imagination, and discuss how <em>The Dream Hotel</em> makes its AI
+            system plausible through familiar fears about AI knowing us.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Project Seed Memo due: audience, issue, and possible public-facing product',
+          },
+        ],
+        readings: [
+          { citation: <>Sheila Jasanoff</> },
+          { citation: <>Ted Chiang essays</> },
+          { citation: <>AI hype critiques</> },
+        ],
+      },
+      {
+        date: 'Week 6',
+        topic: 'Neural networks, biological analogy, and artificial neurons',
+        description: (
+          <>
+            We use metaphor and analogy to compare brain metaphors in AI with the novel&apos;s treatment of dreams,
+            minds, prediction, and machine inference.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Students analyze one AI metaphor and revise it for public clarity',
+          },
+        ],
+        readings: [
+          { citation: <>Lakoff and Johnson on metaphor</> },
+          { citation: <>N. Katherine Hayles</> },
+          { citation: <>BRAID neuroscience primer</> },
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: 'Brain-Inspired Computing and Neuromorphic Systems',
+    description: (
+      <>
+        <ul className="list-spaced">
+          <li>
+            <strong>Purpose:</strong> Use neuromorphic computing as a case study in how emerging technologies draw on
+            biological metaphors, create new technical possibilities, and raise difficult public questions before their
+            social uses are settled.
+          </li>
+          <li>
+            <strong>Topics:</strong> Neurons, spikes, synapses, plasticity, what spiking neural networks capture and
+            what they miss, von Neumann versus neuromorphic computing, cerebellum-inspired anomaly detection and
+            anticipatory response, and the grant-specific focus on hardware-level, energy-efficient, adaptive anomaly
+            detection.
+          </li>
+          <li>
+            <strong>Project connection:</strong> Students complete the SNN and neuromorphic learning activity, then
+            identify what was hard to understand, what helped, and what a public audience would need before discussing
+            ethical implications.
+          </li>
+          <li>
+            <strong>Research role:</strong> We assess learning from the interactive tutorial, examine how students
+            translate technical ideas into public-facing language, and collect reflections on what sufficient
+            understanding looks like.
+          </li>
+        </ul>
+      </>
+    ),
+    meetings: [
+      {
+        date: 'Week 7',
+        topic: 'Neuromorphic computing: architectures, SNNs, spikes, and timing',
+        description: (
+          <>
+            We compare von Neumann and neuromorphic architectures and focus on how real emerging AI depends on hardware,
+            sensors, energy, and institutions rather than software alone.
+          </>
+        ),
+        activities: [{ title: 'Plain-language explanation of neuromorphic computing' }],
+        readings: [
+          { citation: <>BRAID introduction to neuromorphic computing slides</> },
+          { citation: <>Langdon Winner</> },
+          { citation: <>Infrastructure studies selections</> },
+        ],
+      },
+      {
+        date: 'Week 8',
+        topic: 'Cerebellum-inspired anomaly detection: prediction, surprise, response, adaptation',
+        description: (
+          <>
+            We connect normality, anomaly, and classification to the central questions of <em>The Dream Hotel</em>: what
+            does the system classify as abnormal, risky, or threatening, and who defines normal?
+          </>
+        ),
+        activities: [
+          {
+            title: 'SNN and anomaly detection activity: students compare color anomalies to social anomalies',
+          },
+        ],
+        readings: [
+          {
+            citation: (
+              <>
+                Bowker and Star, <em>Sorting Things Out</em>
+              </>
+            ),
+          },
+          { citation: <>Ian Hacking</> },
+          {
+            citation: <>BRAID project description on cerebellum-inspired anomaly detection</>,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: 'From Mechanism to Implications',
+    description: (
+      <>
+        <ul className="list-spaced">
+          <li>
+            <strong>Purpose:</strong> Connect technical features of emerging AI systems to specific societal, ethical,
+            and governance questions, then use that analysis to define public-facing projects.
+          </li>
+          <li>
+            <strong>Topics:</strong> Anomaly detection in low- versus high-stakes contexts, edge AI, biosensing,
+            robotics, cybersecurity, interpretability and accountability in adaptive hardware, bias in defining the
+            normal and the anomalous, surveillance, misuse, power concentration, and environmental claims and lifecycle
+            thinking.
+          </li>
+          <li>
+            <strong>Project connection:</strong> Students choose or refine a final project topic around a real public
+            issue, such as anomaly detection in schools, adaptive biosensors, energy-efficiency claims, edge AI and
+            privacy, or the meaning of human oversight for adaptive hardware systems.
+          </li>
+          <li>
+            <strong>Research role:</strong> We assess whether conceptual grounding enables richer ethical reasoning,
+            what scaffolds help students move from interesting technology to governance implications, and whether
+            analogies, stakeholder maps, and case comparisons improve their reasoning.
+          </li>
+        </ul>
+      </>
+    ),
+    meetings: [
+      {
+        date: 'Week 9',
+        topic: 'Unsupervised learning, clustering, false positives, and false negatives',
+        description: (
+          <>
+            We connect bias, fairness, and representational harm to lived consequences such as detention, stigma, loss
+            of agency, and the inability to prove innocence.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Students analyze a low-stakes vs. high-stakes anomaly detection scenario',
+          },
+        ],
+        readings: [
+          { citation: <>Ruha Benjamin</> },
+          { citation: <>Safiya Noble</> },
+          { citation: <>Joy Buolamwini and Timnit Gebru</> },
+        ],
+      },
+      {
+        date: 'Week 10',
+        topic: 'Edge AI, sensors, wearables, biosensing, and cybersecurity',
+        description: (
+          <>
+            We finish <em>The Dream Hotel</em> by focusing on dream monitoring, bodily data, institutional power, and
+            who is made visible or vulnerable through surveillance infrastructures.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Project Proposal due: issue, audience, public product, and social or theoretical lens',
+          },
+        ],
+        readings: [
+          { citation: <>Simone Browne</> },
+          { citation: <>Virginia Eubanks</> },
+          { citation: <>Shoshana Zuboff</> },
+        ],
+      },
+      {
+        date: 'Week 11',
+        topic: 'Explainability, opacity, adaptive systems, and hardware-level learning',
+        description: (
+          <>
+            We ask what accountability, contestability, and moral crumple zones look like in practice, and what it would
+            mean for Sara to contest a system decision in the novel.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Accountability map: designer, deployer, regulator, institution, affected person, and public',
+          },
+        ],
+        readings: [
+          { citation: <>Madeleine Clare Elish</> },
+          { citation: <>NIST AI RMF overview</> },
+          { citation: <>EU AI Act overview</> },
+        ],
+      },
+      {
+        date: 'Week 12',
+        topic: 'Environmental claims: efficiency, energy use, materials, e-waste, and lifecycle costs',
+        description: (
+          <>
+            We examine political economy and material consequences by asking what the novel foregrounds and hides: data
+            centers, labor, hardware, maintenance, energy, and contractors.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Students add environmental or political-economic analysis to their project',
+          },
+        ],
+        readings: [
+          { citation: <>Kate Crawford</> },
+          { citation: <>Jennifer Gabrys</> },
+          { citation: <>Lifecycle assessment and AI energy readings</> },
+        ],
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Governing Uncertain Futures',
+    description: (
+      <>
+        <ul className="list-spaced">
+          <li>
+            <strong>Purpose:</strong> Use anticipatory governance tools to turn technical and ethical analysis into
+            public-facing proposals, resources, or interventions.
+          </li>
+          <li>
+            <strong>Topics:</strong> Why govern before technology is fully deployed, historical analogies involving
+            biometrics, wearables, IoT, predictive policing, and cybersecurity infrastructures, stakeholder
+            participation and its limits, design fiction, scenario planning, public records of concern, and governance
+            frameworks such as the NIST AI RMF, EU AI Act, and OECD anticipatory governance.
+          </li>
+          <li>
+            <strong>Project connection:</strong> This unit is project-studio based. Students draft, test, and revise
+            their public-facing materials, seek feedback from peers or a small outside audience where feasible, and
+            prepare for the SYS showcase.
+          </li>
+          <li>
+            <strong>Research role:</strong> Final projects and reflections become evidence of integrative reasoning,
+            public communication skill, and the ability to connect technical mechanisms to societal and governance
+            implications.
+          </li>
+        </ul>
+      </>
+    ),
+    meetings: [
+      {
+        date: 'Week 13',
+        topic: 'Historical analogies: biometrics, IoT, predictive policing, automation, and cybernetics',
+        description: (
+          <>
+            We treat <em>The Dream Hotel</em> as design fiction and ask what real histories make its imagined future
+            feel plausible.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Project studio: add one historical or analogical case to the public artifact',
+          },
+        ],
+        readings: [
+          { citation: <>Virginia Eubanks</> },
+          { citation: <>Ruha Benjamin</> },
+          { citation: <>Safiya Noble</> },
+          { citation: <>Richmond Wong on design fiction and values advocacy</> },
+        ],
+      },
+      {
+        date: 'Week 14',
+        topic: 'Governance frameworks: NIST AI RMF, EU AI Act, OECD AI principles, IEEE Ethically Aligned Design',
+        description: (
+          <>
+            We use anticipatory governance and responsible innovation tools to ask what safeguards should have existed
+            before the dream-risk system was deployed.
+          </>
+        ),
+        activities: [
+          {
+            title: 'Draft workshop: students connect projects to one governance framework',
+          },
+        ],
+        readings: [
+          { citation: <>Stilgoe, Owen, and Macnaghten</> },
+          { citation: <>OECD anticipatory governance materials</> },
+          { citation: <>NIST AI RMF</> },
+          { citation: <>IEEE Ethically Aligned Design</> },
+        ],
+      },
+      {
+        date: 'Week 15',
+        topic: 'Public communication, showcase, and reflection',
+        description: (
+          <>
+            We close by asking what fiction can help publics see about AI that technical explanation alone may miss, and
+            we focus on public scholarship and civic participation.
+          </>
+        ),
+        activities: [
+          { title: 'SYS showcase: public-facing resource or presentation' },
+          { title: 'Final integrative reflection' },
+        ],
+        readings: [
+          {
+            citation: <>No major new reading; revisit Winner, Jasanoff, Benjamin, Elish, and course frameworks</>,
+          },
+        ],
+      },
+    ],
+  },
+];

@@ -1,0 +1,28 @@
+{
+  "tagGroups": [
+    {
+      "id": "course-topics",
+      "label": "Course Topics",
+      "tags": ["intelligence", "machine-learning", "labor", "creativity", "energy", "religion"]
+    },
+    {
+      "id": "resource-types",
+      "label": "Type",
+      "tags": ["article", "book", "video", "tool"]
+    }
+  ],
+  "links": [
+    {
+      "id": "nyt-pope-leo-magnifica-humanitas-encyclical",
+      "title": "Pope Leo XIV's Encyclical on AI and Human Dignity (Magnifica Humanitas)",
+      "url": "https://www.nytimes.com/2026/05/25/world/europe/pope-leo-encyclical.html",
+      "authors": "The New York Times",
+      "type": "article",
+      "published": "2026-05-25",
+      "tags": ["intelligence", "religion"],
+      "notes": "NYT coverage of Pope Leo XIV's first encyclical on safeguarding the human person in the age of artificial intelligence, including calls for AI regulation and worker protections.",
+      "added": "2026-05-25",
+      "draft": false
+    }
+  ]
+}

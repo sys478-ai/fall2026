@@ -1,0 +1,1275 @@
+/* stylelint-disable at-rule-no-unknown */
+@import 'tailwindcss';
+
+/* Tailwind v4: Define custom dark mode variant for class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --secondary: #22c55e;
+  --accent: transparent;
+  --border: #e5e7eb;
+  /* --border: #F00; */
+  --muted: #6b7280;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --table-header: #f4f4f4;
+}
+
+/* Dark mode variables */
+.dark {
+  --primary: #b8e6fe;
+  --accent: #b8e6fe;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --border: #1f2937;
+  --muted: #9ca3af;
+  --card: #1f2937;
+  --card-foreground: #f9fafb;
+  --table-header: #222;
+}
+
+h1 {
+  @apply text-3xl md:text-4xl font-light mb-8 mt-12;
+  font-family: var(--font-outfit), serif;
+  color: var(--foreground);
+}
+
+h2 {
+  @apply text-xl md:text-2xl mb-4 mt-8 font-bold;
+  font-family: var(--font-outfit), serif;
+  color: var(--foreground);
+  /* scroll-margin-top should match SCROLL_OFFSET_PX in src/lib/utils.ts */
+  /* This ensures browser's native anchor scrolling aligns with our custom scrollToAnchor function */
+  scroll-margin-top: 20px;
+}
+
+h3,
+.logo {
+  @apply text-lg md:text-xl mb-2 mt-6;
+  font-family: var(--font-outfit), serif;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+h4 {
+  @apply md:text-lg font-bold mb-0 mt-4;
+  font-family: var(--font-outfit), serif;
+  color: var(--foreground);
+}
+
+h5 {
+  @apply mb-0 mt-4 text-lg font-medium text-blue-800 dark:text-blue-200;
+  font-family: var(--font-outfit), serif;
+}
+
+table {
+  @apply w-full border-collapse mb-20 rounded-lg overflow-hidden border;
+  border-color: var(--border);
+  table-layout: auto;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+}
+
+table.width-auto {
+  width: auto !important;
+}
+
+table.badge-column {
+  td:nth-child(2),
+  th:nth-child(2) {
+    /* width: 100px; */
+    white-space: nowrap;
+  }
+}
+
+table.last-col-nowrap {
+  td:last-child,
+  th:last-child {
+    white-space: nowrap;
+  }
+}
+
+table .markdown-checkbox {
+  margin-top: 0;
+}
+
+th,
+td {
+  @apply border-b p-2;
+  background: var(--background);
+  border-color: var(--border);
+  color: var(--foreground);
+  word-wrap: break-word;
+  vertical-align: top;
+}
+
+th {
+  @apply text-left border-b;
+  border-color: var(--border);
+  background: var(--table-header);
+  color: var(--foreground);
+}
+
+.wireframe-rules-table td,
+.wireframe-rules-table th {
+  border-left: solid 1px var(--border) !important;
+  vertical-align: top;
+  width: 50%;
+}
+
+.exam-answer-table .answer-line-cell::after {
+  content: '';
+  display: block;
+  height: 1.25rem;
+  border-bottom: 1px solid currentColor;
+}
+
+/* a {
+  @apply border-b-2 hover:border-b-2;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+} */
+
+ol {
+  @apply list-decimal pl-12 mb-4;
+  color: var(--foreground);
+}
+
+ul {
+  @apply list-disc pl-12 mb-4;
+  color: var(--foreground);
+}
+
+/* Top-level lists (not nested in li) get more bottom margin */
+ul:not(li ul),
+ol:not(li ol) {
+  @apply mb-6;
+}
+
+/* Nested lists keep smaller margin */
+li ul,
+li ol {
+  @apply mb-2;
+}
+
+p {
+  @apply mb-4;
+  color: var(--foreground);
+}
+
+li {
+  color: var(--foreground);
+}
+
+blockquote,
+.callout {
+  @apply mt-8 bg-yellow-50 dark:bg-yellow-800 border border-yellow-200 dark:border-yellow-800 p-4 !mb-10;
+}
+
+blockquote h2,
+.callout h2,
+blockquote h3,
+blockquote h4,
+blockquote h5 {
+  @apply !mt-0;
+}
+
+blockquote > *:last-child {
+  @apply !mb-0;
+}
+
+blockquote {
+  details,
+  .prose details.mb-4 {
+    margin-top: 0 !important;
+    .hljs,
+    code {
+      @apply bg-transparent dark:bg-transparent;
+    }
+  }
+}
+
+blockquote .hljs,
+blockquote code {
+  @apply bg-white dark:bg-black;
+}
+
+li .hljs,
+li pre {
+  @apply mb-6;
+}
+
+.dark blockquote {
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #e5e7eb;
+}
+
+blockquote.info {
+  @apply bg-green-50 p-4 rounded-lg border-green-300 dark:!border-green-500 dark:!bg-green-900;
+}
+
+blockquote.reference {
+  @apply bg-blue-50 p-4 rounded-lg border-blue-300 dark:!border-blue-900 dark:!bg-blue-950;
+}
+
+ul + blockquote.info,
+ol + blockquote.info,
+li + blockquote.info {
+  @apply !mt-8;
+}
+
+blockquote.info > h1:first-child,
+blockquote.info > h2:first-child,
+blockquote.info > h3:first-child,
+blockquote.info > h4:first-child {
+  @apply !mt-0;
+}
+
+blockquote.info h2 {
+  @apply !mt-0;
+}
+
+blockquote.info > *:last-child {
+  @apply !mb-0;
+}
+
+/* Remove bottom margin from nested list items */
+ul ul li,
+ol ol li,
+ul ol li,
+ol ul li {
+  @apply !mb-0;
+}
+
+.list-tight li,
+.compact li {
+  @apply !mb-0;
+}
+
+.list-spaced > li {
+  @apply !mb-6;
+}
+
+.list-spaced-more li {
+  @apply !mb-8;
+}
+
+.extra-list-spacing li {
+  @apply mb-12;
+}
+
+.list-spaced > li,
+.alpha-list > li {
+  @apply !mb-2;
+}
+
+.list-medium-spaced > li {
+  @apply !mb-6;
+}
+
+.list-extra-spaced > li {
+  @apply !mb-12;
+}
+
+.alpha-list,
+.alpha-list-spaced {
+  list-style: lower-alpha;
+  padding-left: 1rem;
+}
+
+/* Hide bullets for list items with checkboxes and use flexbox layout */
+li:has(input[type='checkbox']) {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0rem; /* Add spacing between checkbox items */
+}
+
+/* Checkbox column - narrow, fixed width */
+li:has(input[type='checkbox']) input[type='checkbox'] {
+  flex-shrink: 0;
+  margin-right: 0;
+  margin-top: 0.4rem;
+}
+
+/* Text content column - takes remaining space */
+li:has(input[type='checkbox']) .checkbox-content-wrapper {
+  flex: 1;
+  min-width: 0; /* Allows text to wrap properly */
+}
+
+/* Strikethrough for checked items - target the content wrapper */
+li:has(input[type='checkbox']:checked) .checkbox-content-wrapper,
+li.checkbox-checked .checkbox-content-wrapper {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* But don't strikethrough the checkbox itself */
+li:has(input[type='checkbox']:checked) input[type='checkbox'],
+li.checkbox-checked input[type='checkbox'] {
+  text-decoration: none;
+  opacity: 1;
+}
+
+.syllabus-page,
+.assignment-page {
+  li {
+    @apply mb-1;
+  }
+  ul li {
+    @apply mb-2;
+  }
+  .prose ul li {
+    @apply mb-2;
+  }
+  table li {
+    @apply mb-0;
+  }
+  ul,
+  ol {
+    @apply mb-2;
+  }
+  table {
+    @apply !mb-10;
+  }
+}
+
+/* Tutorial02 specific styles - remove margin from li in blockquotes */
+.assignment-page-tutorial02 blockquote li {
+  @apply !mb-0;
+}
+
+.syllabus-page {
+  h2 {
+    color: var(--primary);
+    @apply border-b-2 pb-2;
+    border-color: var(--primary);
+  }
+  h3 {
+    @apply border-b pb-2;
+  }
+  h4 {
+    @apply border-b pb-2;
+    border-color: #ccc;
+  }
+  ul li::marker,
+  ol li::marker {
+    color: var(--primary);
+  }
+  ol > li > p:has(+ ol),
+  ol > li > p:has(+ ul),
+  ol > li > p:has(+ p) {
+    @apply mb-1;
+  }
+  ol ul {
+    @apply mt-0;
+  }
+  ol ul li {
+    @apply !my-0;
+  }
+  blockquote {
+    @apply bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-4 !mb-10;
+    border-width: 1px;
+  }
+}
+
+/* Activity page specific styles */
+.assignment-page.activity-content,
+.activity-content {
+  /* Enhanced blockquotes for callouts */
+  blockquote {
+    @apply border-l-4 rounded-r-lg p-4 my-6;
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent);
+    border-color: var(--primary);
+    position: relative;
+  }
+
+  blockquote::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--primary);
+    border-radius: 2px 0 0 2px;
+  }
+
+  /* Enhanced checklists */
+  input[type='checkbox'] {
+    @apply w-5 h-5 rounded border-2 border-gray-300 dark:border-gray-800;
+    accent-color: var(--primary);
+    margin-right: 0.75rem;
+    cursor: pointer;
+  }
+
+  input[type='checkbox']:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  /* Horizontal rules with gradient */
+  hr {
+    @apply my-8 border-0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 100%, transparent);
+  }
+
+  /* Enhanced code blocks */
+  pre {
+    @apply rounded-lg p-4 my-6 overflow-x-auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark pre {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  pre code {
+    @apply bg-transparent p-0;
+    color: var(--foreground);
+  }
+
+  .dark pre code {
+    color: #e2e8f0;
+  }
+
+  /* Inline code with better styling */
+  code:not(pre code) {
+    @apply px-2 py-1 rounded text-sm;
+    background: var(--card);
+    border: 1px solid var(--border);
+    font-size: 0.875em;
+    color: var(--foreground);
+  }
+
+  .dark code:not(pre code) {
+    background: #1e293b;
+    border-color: #334155;
+    color: #e2e8f0;
+  }
+
+  /* Better list spacing and styling - more compact */
+  ul,
+  ol {
+    @apply space-y-1;
+  }
+
+  li {
+    @apply mb-1;
+    line-height: 1.5;
+  }
+
+  ul li::marker {
+    color: var(--primary);
+  }
+
+  /* Enhanced headings */
+  h2 {
+    @apply mt-0 pt-0;
+    /* color: var(--primary); */
+    position: relative;
+  }
+
+  h2:not(:first-child) {
+    @apply mt-6 pt-6 mb-3;
+  }
+
+  /* Horizontal rule - 2px line, 100% width, centered */
+  /* h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0.4rem;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+  } */
+
+  /* Better spacing for sections */
+  h2 + p,
+  h3 + p {
+    @apply mt-2;
+  }
+
+  /* Enhanced links */
+  a {
+    @apply transition-colors duration-200;
+    color: #2563eb; /* blue-600 */
+  }
+
+  a:hover {
+    @apply opacity-80;
+  }
+
+  .dark .prose a {
+    color: #60a5fa; /* blue-400 */
+  }
+}
+
+/* Markdown checkbox styles - scoped to avoid interfering with other checkboxes */
+.markdown-checkbox {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  flex-shrink: 0;
+  margin-top: 0.4rem;
+}
+
+.markdown-checkbox-line {
+  @apply !ml-6;
+  pointer-events: auto !important;
+}
+
+.markdown-checkbox-content {
+  flex: 1;
+  min-width: 0;
+  transition:
+    text-decoration 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Strikethrough and opacity for checked checkboxes */
+.markdown-checkbox:checked + .markdown-checkbox-content {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Prose links styling for all pages (syllabus, assignments, etc.) */
+.prose a {
+  color: #2563eb; /* blue-600 */
+}
+
+.dark .prose a {
+  /* blue-400 */
+}
+
+/* Schedule page links styling - make all links blue with hover underline */
+.schedule-content a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.schedule-content a:hover {
+  text-decoration: underline;
+}
+
+.dark .schedule-content a {
+  color: #60a5fa; /* blue-400 */
+}
+
+/* Numbered steps styling */
+.prose ol li {
+  @apply pl-2;
+  counter-increment: list-counter;
+}
+
+/* Better spacing for nested lists */
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+  @apply mt-2 mb-2;
+}
+
+/* stylelint-disable-next-line */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Global base styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Custom global styles */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Disable html overflow on desktop pages using ContentLayout (mobile uses body scroll) */
+@media (min-width: 1024px) {
+  html.content-layout-page {
+    overflow-y: hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Custom utility classes that can't be done with Tailwind */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* .hover-lift {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+} */
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+}
+
+/* Layout overrides - ensure consistent positioning across all pages */
+main[data-layout] {
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Prevent layout shift - apply immediately for all ContentLayout variants */
+main > div.relative {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+img.frame {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  @apply mb-4;
+}
+img.xsmall {
+  max-width: 250px;
+  width: 60%;
+  @apply mb-4;
+}
+img.small {
+  max-width: 450px;
+  width: 60%;
+  @apply mb-4;
+}
+img.large {
+  max-width: 100%;
+  width: 100%;
+  @apply mb-4;
+}
+
+code {
+  @apply bg-gray-100 dark:bg-gray-800 p-1 rounded-md text-sm;
+  color: inherit;
+  font-size: 0.875em;
+}
+
+.dark code {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155;
+}
+
+/* Ensure code tags in prose content are dark-friendly */
+.dark .prose code {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155;
+  padding: 0.125rem 0.375rem;
+}
+
+/* Ensure code tags in prose/markdown content are dark-friendly */
+.dark .prose code,
+.dark p code,
+.dark li code,
+.dark span code,
+.dark div code {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+/* Syntax highlighting styles */
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #f6f8fa;
+  border-radius: 6px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 1em 0;
+  white-space: pre;
+}
+
+/* Ensure pre and code elements preserve whitespace */
+pre,
+pre code {
+  white-space: pre !important;
+}
+
+/* Subtle scrollbar for code blocks */
+.hljs::-webkit-scrollbar {
+  height: 10px;
+}
+
+.hljs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hljs::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.hljs::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark .hljs::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark .hljs::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dark .hljs {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+/* Copy code button styles */
+.copy-code-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.copy-code-button:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: #9ca3af;
+  color: #111827;
+}
+
+.copy-code-button:active {
+  transform: scale(0.95);
+}
+
+.copy-code-button.copied {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+.copy-code-button.copied:hover {
+  background: #059669;
+  border-color: #059669;
+}
+
+.copy-code-button svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.copy-code-text {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Dark mode copy button */
+.dark .copy-code-button {
+  background: rgba(31, 41, 55, 0.95);
+  border-color: #4b5563;
+  color: #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark .copy-code-button:hover {
+  background: rgba(31, 41, 55, 1);
+  border-color: #6b7280;
+  color: #f9fafb;
+}
+
+.dark .copy-code-button.copied {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+.dark .copy-code-button.copied:hover {
+  background: #059669;
+  border-color: #059669;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #6a737d;
+  font-style: italic;
+}
+
+.dark .hljs-comment,
+.dark .hljs-quote {
+  color: #94a3b8;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #d73a49;
+}
+
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-subst {
+  color: #f87171;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #005cc5;
+}
+
+.dark .hljs-number,
+.dark .hljs-literal,
+.dark .hljs-variable,
+.dark .hljs-template-variable,
+.dark .hljs-tag .hljs-attr {
+  color: #60a5fa;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #032f62;
+}
+
+.dark .hljs-string,
+.dark .hljs-doctag {
+  color: #93c5fd;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #6f42c1;
+  font-weight: bold;
+}
+
+.dark .hljs-title,
+.dark .hljs-section,
+.dark .hljs-selector-id {
+  color: #a78bfa;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #6f42c1;
+  font-weight: bold;
+}
+
+.dark .hljs-type,
+.dark .hljs-class .hljs-title {
+  color: #a78bfa;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #22863a;
+  font-weight: normal;
+}
+
+.dark .hljs-tag,
+.dark .hljs-name,
+.dark .hljs-attribute {
+  color: #4ade80;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #032f62;
+}
+
+.dark .hljs-regexp,
+.dark .hljs-link {
+  color: #93c5fd;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #e36209;
+}
+
+.dark .hljs-symbol,
+.dark .hljs-bullet {
+  color: #fb923c;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #e36209;
+}
+
+.dark .hljs-built_in,
+.dark .hljs-builtin-name {
+  color: #fb923c;
+}
+
+.hljs-meta {
+  color: #6a737d;
+  font-weight: bold;
+}
+
+.dark .hljs-meta {
+  color: #94a3b8;
+}
+
+.hljs-deletion {
+  background: #ffeef0;
+}
+
+.dark .hljs-deletion {
+  background: #7f1d1d;
+}
+
+.hljs-addition {
+  background: #f0fff4;
+}
+
+.dark .hljs-addition {
+  background: #14532d;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.codepen-frame {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Custom spacing for societal-implications activity */
+.societal-implications-content.prose ol li {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Badge style for optional items */
+.badge {
+  @apply inline-block px-2 py-0.5 text-xs font-medium rounded uppercase bg-amber-50 border border-amber-200 text-gray-700;
+}
+
+.badge.success {
+  @apply inline-block px-2 py-0.5 text-xs font-medium rounded uppercase bg-green-50 border border-green-200 text-gray-700;
+}
+
+.badge.neutral {
+  @apply inline-block px-2 py-0.5 text-xs font-medium rounded uppercase bg-gray-50 border border-gray-200 text-gray-700;
+}
+
+.dark .badge {
+  background-color: #374151; /* gray-700 */
+  color: #9ca3af; /* gray-400 */
+  border-color: #4b5563; /* gray-600 */
+}
+
+/* Download button styling */
+.button,
+.nu-button {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium !text-black dark:!text-white bg-gray-200 dark:bg-gray-800;
+}
+
+.button:hover,
+.nu-button:hover {
+  @apply bg-gray-300 dark:bg-gray-600;
+}
+
+.button i,
+.nu-button i {
+  font-size: 0.875rem;
+}
+
+.dark .button,
+.dark .nu-button {
+  @apply bg-blue-500 text-white;
+}
+
+.dark .button:hover,
+.dark .nu-button:hover {
+  @apply bg-blue-400 text-white;
+}
+
+/* Cheatsheet styles */
+.cheatsheet-content h2 {
+  @apply text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4;
+}
+
+.cheatsheet-content table.cheatsheet-table {
+  @apply w-full border-collapse mt-4;
+}
+
+.cheatsheet-content table.cheatsheet-table thead {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+.cheatsheet-content table.cheatsheet-table th {
+  @apply px-4 py-3 text-left font-semibold text-gray-900 dark:text-gray-100 border-b border-gray-300 dark:border-gray-700;
+}
+
+.cheatsheet-content table.cheatsheet-table td {
+  @apply px-4 py-3 text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-800;
+}
+
+.cheatsheet-content table.cheatsheet-table td:first-child {
+  @apply font-mono text-sm;
+  color: var(--foreground);
+}
+
+.cheatsheet-content table.cheatsheet-table code {
+  @apply font-mono text-sm;
+  color: var(--foreground);
+}
+
+.answer-sm {
+  @apply mb-4 border border-black dark:border-white p-4 rounded-lg;
+  height: 50px;
+}
+
+.answer-md {
+  @apply mb-4 border border-black dark:border-white p-4 rounded-lg;
+  height: 150px;
+}
+
+.answer-lg {
+  @apply mb-4 border border-black dark:border-white p-4 rounded-lg;
+  height: 300px;
+}
+
+.answer-xl {
+  @apply mb-4 border border-black dark:border-white p-4 rounded-lg;
+  height: 420px;
+}
+
+/* Fade in/out animation for reset message */
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+}
+
+.animate-fade-in-out {
+  animation: fade-in-out 3s ease-in-out;
+}
+
+/* Auto-caret styling for markdown <details><summary>...</summary></details> blocks */
+/* mb-4 is applied when closed, removed when open */
+.prose details.mb-4 {
+  @apply mt-8;
+  transition: margin-bottom 0.3s ease-out;
+}
+
+.prose details.mb-4:not([open]) {
+  @apply mb-4;
+}
+
+.prose details.mb-4[open] {
+  @apply mb-0;
+}
+
+.prose details {
+  @apply mt-4;
+}
+
+.prose details > summary {
+  @apply cursor-pointer font-semibold select-none leading-snug;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Level-specific sizes matching prose headings */
+.prose details.collapsible-h1 > summary {
+  @apply text-3xl md:text-4xl;
+}
+
+.prose details.collapsible-h2 > summary {
+  @apply text-xl md:text-2xl font-bold;
+}
+
+.prose details.collapsible-h3 > summary {
+  @apply text-lg md:text-xl font-bold;
+}
+
+.prose details.collapsible-h4 > summary {
+  @apply md:text-lg font-bold;
+}
+
+.prose details.collapsible-h5 > summary {
+  /* Base size, no explicit text size needed */
+}
+
+.prose details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose details > summary::before {
+  content: '\f105'; /* fa-angle-right */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  display: inline-block;
+  font-size: 0.875rem;
+  line-height: 1;
+  width: 0.875rem;
+  transition: transform 0.2s ease-out;
+}
+
+.prose details[open] > summary::before {
+  content: '\f107'; /* fa-angle-down */
+}
+
+/* Add left margin to content inside details to align with heading text */
+/* Icon width (0.875rem) + gap (0.5rem) = ~1.375rem, round to 1.5rem for clean alignment */
+.prose details > *:not(summary) {
+  @apply ml-6;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+}
+
+.prose details[open] > *:not(summary) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Print stylesheet overrides */
+
+.print-only {
+  display: none;
+}
+@media print {
+  .page-break {
+    break-before: page; /* modern */
+    page-break-before: always; /* older browsers */
+  }
+
+  h1 {
+    @apply mt-0 mb-4;
+  }
+
+  /* Hide global navigation and side navigation in print */
+  nav,                       /* all semantic nav regions (breadcrumbs, TOCs, etc.) */
+    #breadcrumbs,             /* breadcrumbs */
+    .quick-links-nav,          /* right-hand quick links */
+    footer, 
+    .resources-nav {
+    /* resources sidebar nav */
+    display: none !important;
+  }
+
+  .print-only {
+    @apply block mb-12;
+  }
+}
