@@ -16,6 +16,14 @@ export interface PostData {
   id: string;
   num?: string;
   title: string;
+  topics?: string[];
+  themes?: string[];
+  ethical_patterns?: string[];
+  braid_topics?: string[];
+  governance_frameworks?: string[];
+  featured_topics?: string[];
+  featured_assignments?: string[];
+  featured_resources?: string[];
   group?: string;
   group_order?: number;
   order?: number;

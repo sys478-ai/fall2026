@@ -5,6 +5,7 @@ import PageHeader from '@/components/PageHeaderExpandable';
 import Meeting from '@/components/schedule-entry/Meeting';
 
 import { Topic } from '@/lib/topics';
+import { getMeetingAnchorId, getModuleAnchorId } from '@/lib/navigation-helpers';
 
 interface ScheduleContentProps {
   topics: Topic[];
@@ -74,22 +75,24 @@ export default function ScheduleContent({ topics }: ScheduleContentProps) {
         topics={topics}
       />
       {topics.map(topic => (
-        <div key={topic.id} id={`topic-${topic.id}`} className="mb-16">
+        <div key={topic.id} id={getModuleAnchorId(topic.id)} className="mb-16">
           <h2>
-            Topic {topic.id}: {topic.title}
+            Module {topic.id}: {topic.title}
           </h2>
 
           {topic.description}
 
           {topic.meetings.map((meeting, index) => {
             const meetingKey = `meeting-${meeting.date}-${meeting.topic.replace(/\s+/g, '-').toLowerCase()}`;
+            const meetingAnchorId = getMeetingAnchorId(topic.id, index, meeting.topic);
             return (
-              <Meeting
-                meeting={meeting}
-                key={`${topic.id}-${index}`}
-                showDetails={meetingStates[meetingKey] || false}
-                setShowDetails={show => setMeetingState(meetingKey, show)}
-              />
+              <div key={`${topic.id}-${index}`} id={meetingAnchorId}>
+                <Meeting
+                  meeting={meeting}
+                  showDetails={meetingStates[meetingKey] || false}
+                  setShowDetails={show => setMeetingState(meetingKey, show)}
+                />
+              </div>
             );
           })}
         </div>

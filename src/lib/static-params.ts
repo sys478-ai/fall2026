@@ -5,13 +5,14 @@ import { getAllPostIds, getPostData, PostData } from './markdown';
  * Used when all items are drafts to satisfy Next.js's requirement
  * that generateStaticParams returns at least one param.
  */
-export function getPlaceholderSlug(contentType: 'activities' | 'assignments' | 'resources' | 'exams' | 'career-modules'): string {
+export function getPlaceholderSlug(contentType: 'activities' | 'assignments' | 'resources' | 'exams' | 'career-modules' | 'ethical-patterns'): string {
   const singularMap: Record<typeof contentType, string> = {
     activities: 'activity',
     assignments: 'assignment',
     resources: 'resource',
     exams: 'exam',
     'career-modules': 'career-module',
+    'ethical-patterns': 'ethical-pattern',
   };
   return `__no-${singularMap[contentType]}__`;
 }
@@ -19,7 +20,7 @@ export function getPlaceholderSlug(contentType: 'activities' | 'assignments' | '
 /**
  * Checks if a slug is a placeholder slug (indicating all items are drafts).
  */
-export function isPlaceholderSlug(slug: string, contentType: 'activities' | 'assignments' | 'resources' | 'exams' | 'career-modules'): boolean {
+export function isPlaceholderSlug(slug: string, contentType: 'activities' | 'assignments' | 'resources' | 'exams' | 'career-modules' | 'ethical-patterns'): boolean {
   return slug === getPlaceholderSlug(contentType);
 }
 
@@ -39,7 +40,7 @@ export function shouldRenderPost(postData: PostData): boolean {
  * Returns a placeholder slug if no posts exist to satisfy Next.js requirements.
  */
 export async function generateStaticParamsForContentType(
-  contentType: 'activities' | 'assignments' | 'resources' | 'exams' | 'career-modules'
+  contentType: 'activities' | 'assignments' | 'resources' | 'exams' | 'career-modules' | 'ethical-patterns'
 ): Promise<Array<{ slug: string }>> {
   try {
     const postIds = getAllPostIds(contentType);
@@ -86,7 +87,7 @@ export async function generateStaticParamsForContentType(
 export function validatePostForRender(
   slug: string,
   postData: PostData,
-  contentType: 'activities' | 'assignments' | 'exams' | 'resources' | 'career-modules'
+  contentType: 'activities' | 'assignments' | 'exams' | 'resources' | 'career-modules' | 'ethical-patterns'
 ): boolean {
   // Handle placeholder slug when all posts are drafts
   if (isPlaceholderSlug(slug, contentType)) {

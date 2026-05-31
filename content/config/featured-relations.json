@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "description": "Optional curated relationships that supplement frontmatter- and topic-derived crosslisting. Use this only for featured or editorially preferred links, not for the whole site graph.",
+  "patterns": {
+    "classification-is-not-neutral": {
+      "featuredAssignments": ["lab01a"],
+      "featuredTopics": [
+        "measurement-categories-and-intelligence",
+        "objectivity-neutrality-and-who-gets-defined"
+      ],
+      "featuredResources": []
+    },
+    "emerging-technologies-require-anticipatory-governance": {
+      "featuredAssignments": ["career-module08"],
+      "featuredTopics": [
+        "braid-neuromorphic-anomaly-detection",
+        "governance-frameworks-nist-eu-ai-act-oecd-ieee"
+      ],
+      "featuredResources": []
+    }
+  },
+  "topics": {
+    "measurement-categories-and-intelligence": {
+      "featuredAssignments": ["lab01a"],
+      "featuredPatterns": ["classification-is-not-neutral"],
+      "featuredResources": []
+    },
+    "braid-neuromorphic-anomaly-detection": {
+      "featuredAssignments": ["lab12"],
+      "featuredPatterns": [
+        "emerging-technologies-require-anticipatory-governance",
+        "ai-is-material"
+      ],
+      "featuredResources": []
+    }
+  }
+}

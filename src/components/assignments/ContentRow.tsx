@@ -122,6 +122,20 @@ export default function ContentRow({ item, showWeek, contentType }: ContentRowPr
     return '';
   }
 
+  function getTypeBadgeClass(typeLabel: string): string {
+    const normalized = typeLabel.toLowerCase();
+
+    if (normalized === 'lab') {
+      return 'badge success';
+    }
+
+    if (normalized === 'career module') {
+      return 'badge';
+    }
+
+    return 'badge neutral';
+  }
+
   function isDraft(item: ContentData): boolean {
     return (item.draft !== undefined && item.draft === 1);
   }
@@ -164,7 +178,7 @@ export default function ContentRow({ item, showWeek, contentType }: ContentRowPr
 
   return (
     <tr className={`p-6 ${isChecked ? 'opacity-60' : ''}`}>
-      <td className="w-[50px]">
+      <td className="w-[50px] align-top">
         {shouldShowCheckbox && (
           <input
             type="checkbox"
@@ -179,22 +193,26 @@ export default function ContentRow({ item, showWeek, contentType }: ContentRowPr
           />
         )}
       </td>
-      <td className="hidden md:table-cell w-[100px]">
+      <td className="hidden md:table-cell w-[90px] align-top">
         <strong>{showWeek}</strong>
       </td>
-      <td>
+      <td className="w-[150px] align-top pr-4">
         <div className={isChecked ? 'line-through' : ''}>
           {getContentLink(item)}
         </div>
       </td>
-      <td className="hidden md:table-cell md:w-[400px]">
+      <td className="hidden md:table-cell align-top pr-4">
         <div className={isChecked ? 'line-through' : ''}>{item.title}</div>
       </td>
-      <td className="hidden md:table-cell md:w-[140px]">
-        <div className={isChecked ? 'line-through' : ''}>{getTypeLabel(item)}</div>
+      <td className="hidden md:table-cell w-[140px] align-top pr-4">
+        {getTypeLabel(item) && (
+          <span className={getTypeBadgeClass(getTypeLabel(item))}>
+            {getTypeLabel(item)}
+          </span>
+        )}
       </td>
-      <td>{item.due_date ? formatDate(item.due_date) : ''}</td>
-      <td><DaysLeft dueDate={item.due_date || ''} /></td>
+      <td className="w-[110px] align-top">{item.due_date ? formatDate(item.due_date) : ''}</td>
+      <td className="w-[110px] align-top"><DaysLeft dueDate={item.due_date || ''} /></td>
     </tr>
   );
 }

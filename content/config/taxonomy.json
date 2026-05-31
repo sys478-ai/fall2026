@@ -2,6 +2,7 @@
   "version": 1,
   "description": "Canonical taxonomy for course themes, BRAID topics, governance frameworks, and relationship keys used in frontmatter across the SYS/BRAID site.",
   "suggestedFrontmatter": {
+    "topics": "Array of canonical meeting-topic slugs from content/config/topics.json.",
     "themes": "Array of canonical course theme slugs.",
     "ethical_patterns": "Array of canonical ethical pattern slugs.",
     "braid_topics": "Array of canonical BRAID or hardware topic slugs.",

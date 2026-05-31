@@ -29,11 +29,9 @@ interface ContentLayoutProps {
  * Shared layout component that ensures consistent content positioning across all pages.
  * 
  * Layout variants:
- * - resources-detail: Left nav (256px) + Content + TOC (256px fixed right)
- * - detail-with-toc: Spacer (256px) + Content + TOC (256px fixed right)
- * - list: Spacer (256px) + Content (no TOC)
- * 
- * All content starts at 256px from the left to maintain consistent positioning.
+ * - resources-detail: Content + TOC (256px fixed right)
+ * - detail-with-toc: Content + TOC (256px fixed right)
+ * - list: Content (no TOC)
  */
 export default function ContentLayout({
   children,
@@ -303,7 +301,7 @@ export default function ContentLayout({
   }, [pathname]);
   
   return (
-    <div className="relative lg:h-[calc(100vh-4rem)] lg:overflow-hidden -mx-4 lg:-mx-8">
+    <div className="relative lg:h-screen lg:overflow-hidden -mx-4 lg:-mx-8">
       {/* Mobile: Stacked layout */}
       <div className="lg:hidden">
         {leftNav && (
@@ -321,21 +319,8 @@ export default function ContentLayout({
         </div>
       </div>
       
-      {/* Desktop: Three-column layout with scrollable content */}
+      {/* Desktop: Content column with optional right TOC */}
       <div className="hidden lg:flex h-full">
-        {/* Left Column: Nav (resources or due dates) or Spacer */}
-        <div className="w-64 shrink-0">
-          {leftNav ? (
-            <div className="h-full overflow-y-auto border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
-              {leftNav}
-            </div>
-          ) : (
-            // Invisible spacer to align content with pages that have nav
-            <div className="h-full" aria-hidden="true" />
-          )}
-        </div>
-        
-        {/* Center Column: Content - scrollable on all pages */}
         <div 
           ref={scrollContainerRef}
           id="main-content-scroll"
@@ -352,11 +337,10 @@ export default function ContentLayout({
       
       {/* Right Column: Table of Contents (fixed, flush to right edge) */}
       {(isResourcesDetail || isDetailWithToc) && showToc && (
-        <div className="hidden lg:block fixed top-16 right-0 w-72 h-[calc(100vh-4rem)] overflow-y-auto border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-black pr-1 [&::-webkit-scrollbar-track]:bg-white dark:[&::-webkit-scrollbar-track]:bg-black">
+        <div className="hidden lg:block fixed top-0 right-0 w-72 h-screen overflow-y-auto border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-black pr-1 [&::-webkit-scrollbar-track]:bg-white dark:[&::-webkit-scrollbar-track]:bg-black">
           <TableOfContents maxLevel={tocMaxLevel} />
         </div>
       )}
     </div>
   );
 }
-

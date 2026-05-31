@@ -9,6 +9,7 @@ interface Activity {
   url?: string;
   draft?: number;
   excluded?: number;
+  order?: number;
 }
 
 interface Assignment {
@@ -16,6 +17,8 @@ interface Assignment {
   title: string;
   url?: string;
   draft?: number;
+  order?: number;
+  type?: string;
 }
 
 export interface Reading {
@@ -41,6 +44,7 @@ export interface DiscussionQuestion {
 }
 
 export interface Meeting {
+  slug?: string;
   date: string;
   topic: string;
   description?: string | React.ReactElement;
@@ -53,13 +57,20 @@ export interface Meeting {
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
+  ethicalPatterns?: string[];
+  recognitionPatternNotes?: string[];
+  themes?: string[];
 }
 
 export interface Topic {
   id: number;
+  slug?: string;
   title: string;
   description: string | React.ReactElement;
   meetings: Meeting[];
+  ethicalPatterns?: string[];
+  recognitionPatternNotes?: string[];
+  themes?: string[];
 }
 
 // Input type for baseTopics from schedule.tsx - allows quizzes to be either Quiz, Reading (citation), or ScheduleQuiz (quizName/url)
@@ -69,6 +80,7 @@ interface ScheduleQuizInput {
 }
 
 interface BaseMeeting {
+  slug?: string;
   date: string;
   topic: string;
   description?: string | React.ReactElement;
@@ -80,13 +92,20 @@ interface BaseMeeting {
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
+  ethicalPatterns?: string[];
+  recognitionPatternNotes?: string[];
+  themes?: string[];
 }
 
 interface BaseTopic {
   id: number;
+  slug?: string;
   title: string;
   description: string | React.ReactElement;
   meetings: BaseMeeting[];
+  ethicalPatterns?: string[];
+  recognitionPatternNotes?: string[];
+  themes?: string[];
 }
 
 type TopicsArray = Topic[];

@@ -20,8 +20,9 @@ export default function ConditionalFooter() {
                             normalizedPath === '/resources' ||
                             normalizedPath.startsWith('/resources/') ||
                             normalizedPath === '/bibliography' ||
-                            normalizedPath === '/quizzes' ||
-                            normalizedPath.startsWith('/quizzes/') ||
+                            normalizedPath === '/planning/taxonomy' ||
+                            normalizedPath === '/ethical-pattern-recognition-field-guide' ||
+                            normalizedPath.startsWith('/ethical-pattern-recognition-field-guide/') ||
                             normalizedPath === '/exams' ||
                             normalizedPath.startsWith('/exams/') ||
                             normalizedPath === '/repos-hidden';
@@ -32,4 +33,3 @@ export default function ConditionalFooter() {
   
   return <Footer />;
 }
-

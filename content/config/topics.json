@@ -1,0 +1,415 @@
+{
+  "version": 1,
+  "description": "Stable course topic and module definitions that can be reused across semesters even when the schedule changes.",
+  "modules": [
+    {
+      "id": 1,
+      "slug": "what-is-intelligence",
+      "title": "What Is Intelligence?",
+      "ethicalPatterns": [
+        "ai-systems-are-socio-technical-systems",
+        "classification-is-not-neutral",
+        "data-is-produced-not-found"
+      ],
+      "themes": [
+        "ai-as-technical-and-social-system",
+        "classification-categories",
+        "data-representation-institutional-bias"
+      ],
+      "unitFocus": "Students begin by asking what counts as intelligence, who gets to define it, and how measurement, categorization, and data production shape public life.",
+      "braidElsiArc": "This unit introduces BRAID as a socio-technical system and establishes that categories such as normal, signal, noise, and anomaly have ethical and governance consequences.",
+      "meetings": [
+        {
+          "slug": "course-launch-human-machine-intelligence-public-issue",
+          "title": "Course launch: human + machine intelligence as public issue",
+          "focus": "Course launch and human + machine intelligence as a public issue.",
+          "ethicalPatterns": ["ai-systems-are-socio-technical-systems"],
+          "themes": ["ai-as-technical-and-social-system"],
+          "braidElsiConnection": "AI is not just software; it is infrastructure, labor, hardware, institutions, and governance."
+        },
+        {
+          "slug": "what-counts-as-intelligence-human-animal-machine-social-embodied",
+          "title": "What counts as intelligence? Human, animal, machine, social, embodied",
+          "focus": "What counts as intelligence across human, animal, machine, social, and embodied forms.",
+          "ethicalPatterns": ["ai-systems-are-socio-technical-systems"],
+          "themes": ["ai-as-technical-and-social-system"],
+          "braidElsiConnection": "Map BRAID as a socio-technical system involving chip, lab, funder, user, regulator, and public."
+        },
+        {
+          "slug": "measurement-categories-and-intelligence",
+          "title": "Measurement, categories, and intelligence",
+          "focus": "Measurement, categories, and intelligence.",
+          "ethicalPatterns": ["classification-is-not-neutral"],
+          "themes": ["classification-categories", "objectivity-neutrality"],
+          "braidElsiConnection": "Normal, signal, noise, and anomaly are categories with consequences."
+        },
+        {
+          "slug": "objectivity-neutrality-and-who-gets-defined",
+          "title": "Objectivity, neutrality, and who gets defined",
+          "focus": "Objectivity, neutrality, and who gets defined.",
+          "ethicalPatterns": ["classification-is-not-neutral"],
+          "themes": ["objectivity-neutrality", "classification-categories"],
+          "braidElsiConnection": "Who gets to define intelligence, normality, risk, or error?"
+        },
+        {
+          "slug": "human-learning-memory-dreams-prediction-adaptation",
+          "title": "Human learning, memory, dreams, prediction, adaptation",
+          "focus": "Human learning, memory, dreams, prediction, and adaptation.",
+          "ethicalPatterns": ["data-is-produced-not-found"],
+          "themes": ["data-representation-institutional-bias", "prediction-history-feedback-loops"],
+          "braidElsiConnection": "A bridge into The Dream Hotel and the question of what gets lost when inner life becomes data."
+        },
+        {
+          "slug": "embodiment-interiority-and-difficult-to-measure-experience",
+          "title": "Embodiment, interiority, and difficult-to-measure experience",
+          "focus": "Embodiment, interiority, and difficult-to-measure experience.",
+          "ethicalPatterns": ["data-is-produced-not-found"],
+          "themes": ["data-representation-institutional-bias"],
+          "braidElsiConnection": "A strong opening for The Dream Hotel and its treatment of intimate, difficult-to-measure experience."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "how-do-machines-learn",
+      "title": "How Do Machines Learn?",
+      "ethicalPatterns": [
+        "features-are-value-choices",
+        "thresholds-distribute-harm",
+        "prediction-imports-the-past"
+      ],
+      "themes": [
+        "features-proxies-value-choices",
+        "thresholds-errors-responsibility",
+        "prediction-history-feedback-loops"
+      ],
+      "unitFocus": "Students learn how models, data, scores, and thresholds operate while also asking how those choices encode institutional priorities and historical assumptions.",
+      "braidElsiArc": "This unit prepares students to see that technical choices in sensing, feature design, thresholds, and adaptation shape downstream governance questions.",
+      "meetings": [
+        {
+          "slug": "data-rules-models-training-and-inference",
+          "title": "Data, rules, models, training, and inference",
+          "focus": "Data, rules, models, training, and inference.",
+          "ethicalPatterns": ["features-are-value-choices"],
+          "themes": ["features-proxies-value-choices"],
+          "braidElsiConnection": "Sensor choices, features, and spike encodings shape what hardware can see."
+        },
+        {
+          "slug": "generative-ai-as-one-paradigm-not-all-ai",
+          "title": "Generative AI as one paradigm, not all AI",
+          "focus": "Generative AI as one paradigm, not all AI.",
+          "ethicalPatterns": ["features-are-value-choices"],
+          "themes": ["technological-solutionism", "features-proxies-value-choices"],
+          "braidElsiConnection": "Prevent overgeneralizing from LLMs to all AI, especially neuromorphic AI."
+        },
+        {
+          "slug": "supervised-learning-scores-and-decisions",
+          "title": "Supervised learning, scores, and decisions",
+          "focus": "Supervised learning, scores, and decisions.",
+          "ethicalPatterns": ["thresholds-distribute-harm"],
+          "themes": ["thresholds-errors-responsibility"],
+          "braidElsiConnection": "False positives and false negatives matter differently across use cases."
+        },
+        {
+          "slug": "error-responsibility-and-decision-thresholds",
+          "title": "Error, responsibility, and decision thresholds",
+          "focus": "Error, responsibility, and decision thresholds.",
+          "ethicalPatterns": ["thresholds-distribute-harm"],
+          "themes": ["thresholds-errors-responsibility"],
+          "braidElsiConnection": "Connect thresholds to accountability, auditability, and oversight."
+        },
+        {
+          "slug": "prediction-and-historical-data",
+          "title": "Prediction and historical data",
+          "focus": "Prediction and historical data.",
+          "ethicalPatterns": ["prediction-imports-the-past"],
+          "themes": ["prediction-history-feedback-loops", "data-representation-institutional-bias"],
+          "braidElsiConnection": "Prior patterns become embedded in future anomaly judgments."
+        },
+        {
+          "slug": "feedback-loops-and-neutral-prediction",
+          "title": "Feedback loops and neutral prediction",
+          "focus": "Feedback loops and neutral prediction.",
+          "ethicalPatterns": ["prediction-imports-the-past"],
+          "themes": ["prediction-history-feedback-loops"],
+          "braidElsiConnection": "Adaptive systems may learn from their own classifications."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "brain-inspired-computing-and-neuromorphic-systems",
+      "title": "Brain-Inspired Computing and Neuromorphic Systems",
+      "ethicalPatterns": [
+        "anthropomorphism-aliveness-sentience-claims",
+        "opacity-shifts-authority",
+        "ai-is-material",
+        "dependency-cognitive-offloading-deskilling"
+      ],
+      "themes": [
+        "anthropomorphism-aliveness-sentience",
+        "opacity-explainability-contestability",
+        "dependency-cognitive-offloading-deskilling",
+        "environmental-impacts-of-ai"
+      ],
+      "unitFocus": "Students build technical grounding in neuroscience metaphors, neural networks, spiking systems, timing, and neuromorphic architectures without collapsing those systems into myths of human-like intelligence.",
+      "braidElsiArc": "The unit prepares students to analyze how brain metaphors, material substrates, and hardware design choices affect public understanding, trust, and governance.",
+      "meetings": [
+        {
+          "slug": "neuroscience-primer-neurons-synapses-weights-plasticity",
+          "title": "Neuroscience primer: neurons, synapses, weights, plasticity",
+          "focus": "Neuroscience primer covering neurons, synapses, weights, and plasticity.",
+          "ethicalPatterns": ["anthropomorphism-aliveness-sentience-claims"],
+          "themes": ["anthropomorphism-aliveness-sentience"],
+          "braidElsiConnection": "Ground biological inspiration before students critique neural networks."
+        },
+        {
+          "slug": "neural-networks-opacity-trust-contestability-dependency",
+          "title": "Neural networks, opacity, trust, contestability, dependency",
+          "focus": "Neural networks, opacity, trust, contestability, and dependency.",
+          "ethicalPatterns": [
+            "opacity-shifts-authority",
+            "dependency-cognitive-offloading-deskilling"
+          ],
+          "themes": [
+            "opacity-explainability-contestability",
+            "dependency-cognitive-offloading-deskilling"
+          ],
+          "braidElsiConnection": "Brain metaphors can mislead, and opaque systems can encourage over-trust or deference."
+        },
+        {
+          "slug": "fall-break",
+          "title": "Fall Break",
+          "focus": "Fall Break.",
+          "ethicalPatterns": [],
+          "themes": [],
+          "braidElsiConnection": "No class."
+        },
+        {
+          "slug": "neuromorphic-computing-snns-spikes-timing",
+          "title": "Neuromorphic computing: SNNs, spikes, timing",
+          "focus": "Neuromorphic computing through SNNs, spikes, and timing.",
+          "ethicalPatterns": ["ai-is-material"],
+          "themes": ["environmental-impacts-of-ai"],
+          "braidElsiConnection": "Introduce spikes, timing, event-driven computation, and the limits of biological analogy."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "from-mechanism-to-implications",
+      "title": "From Mechanism to Implications",
+      "ethicalPatterns": [
+        "normal-is-constructed",
+        "measurement-becomes-datafication",
+        "automation-changes-accountability",
+        "power-can-concentrate-in-infrastructure",
+        "ai-is-material",
+        "opacity-shifts-authority",
+        "emerging-technologies-require-anticipatory-governance"
+      ],
+      "themes": [
+        "anomaly-detection-normal",
+        "surveillance-datafication",
+        "edge-ai-privacy-accountability",
+        "environmental-impacts-of-ai",
+        "power-political-economy",
+        "anticipatory-governance"
+      ],
+      "unitFocus": "Students move from mechanism to consequence by connecting anomaly detection, sensing, edge AI, hardware, environmental claims, and institutional power to real governance questions.",
+      "braidElsiArc": "This is the core translational unit for turning neuromorphic mechanisms into questions about surveillance, accountability, vendor power, materials, and lifecycle harm.",
+      "meetings": [
+        {
+          "slug": "unsupervised-learning-clustering-anomaly-detection",
+          "title": "Unsupervised learning, clustering, anomaly detection",
+          "focus": "Unsupervised learning, clustering, and anomaly detection.",
+          "ethicalPatterns": ["normal-is-constructed"],
+          "themes": ["anomaly-detection-normal"],
+          "braidElsiConnection": "Core BRAID concept: anomaly detection requires a baseline of expected behavior."
+        },
+        {
+          "slug": "normality-anomaly-surveillance",
+          "title": "Normality, anomaly, surveillance",
+          "focus": "Normality, anomaly, and surveillance.",
+          "ethicalPatterns": ["normal-is-constructed"],
+          "themes": ["anomaly-detection-normal", "surveillance-datafication"],
+          "braidElsiConnection": "Misuse risk: anomaly detection can become surveillance or social control."
+        },
+        {
+          "slug": "sensors-edge-ai-wearables-biosensing-cybersecurity",
+          "title": "Sensors, edge AI, wearables, biosensing, cybersecurity",
+          "focus": "Sensors, edge AI, wearables, biosensing, and cybersecurity.",
+          "ethicalPatterns": [
+            "measurement-becomes-datafication",
+            "automation-changes-accountability"
+          ],
+          "themes": ["surveillance-datafication", "edge-ai-privacy-accountability"],
+          "braidElsiConnection": "Edge or on-chip AI changes data flows, logging, oversight, and responsibility."
+        },
+        {
+          "slug": "edge-ai-cloud-chips-vendors-human-judgment",
+          "title": "Edge AI, cloud, chips, vendors, human judgment",
+          "focus": "Edge AI, cloud, chips, vendors, and human judgment.",
+          "ethicalPatterns": ["power-can-concentrate-in-infrastructure"],
+          "themes": ["power-political-economy", "edge-ai-privacy-accountability"],
+          "braidElsiConnection": "Hardware, vendors, standards, and repair shape who can govern or contest systems."
+        },
+        {
+          "slug": "hardware-memristors-energy-and-material-ai",
+          "title": "Hardware, memristors, energy, and material AI",
+          "focus": "Hardware, memristors, energy, and material AI.",
+          "ethicalPatterns": ["ai-is-material"],
+          "themes": ["environmental-impacts-of-ai"],
+          "braidElsiConnection": "Memristors and memtransistors, on-chip learning, energy efficiency, and lifecycle impacts."
+        },
+        {
+          "slug": "braid-neuromorphic-anomaly-detection",
+          "title": "BRAID neuromorphic anomaly detection",
+          "focus": "BRAID neuromorphic anomaly detection.",
+          "ethicalPatterns": [
+            "emerging-technologies-require-anticipatory-governance",
+            "ai-is-material"
+          ],
+          "themes": ["anticipatory-governance", "environmental-impacts-of-ai"],
+          "braidElsiConnection": "Apply NIST, EU AI Act, IEEE, and OECD-style questions to BRAID."
+        },
+        {
+          "slug": "explainability-adaptive-hardware-and-public-understanding",
+          "title": "Explainability, adaptive hardware, and public understanding",
+          "focus": "Explainability, adaptive hardware, and public understanding.",
+          "ethicalPatterns": ["opacity-shifts-authority"],
+          "themes": ["opacity-explainability-contestability"],
+          "braidElsiConnection": "Students translate a technical mechanism into public-facing language."
+        },
+        {
+          "slug": "environmental-claims-efficiency-lifecycle-costs",
+          "title": "Environmental claims, efficiency, lifecycle costs",
+          "focus": "Environmental claims, efficiency, and lifecycle costs.",
+          "ethicalPatterns": [
+            "ai-is-material",
+            "power-can-concentrate-in-infrastructure"
+          ],
+          "themes": ["environmental-impacts-of-ai", "power-political-economy"],
+          "braidElsiConnection": "Efficiency claims must be weighed against materials, fabrication, e-waste, and scale."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "governing-uncertain-futures",
+      "title": "Governing Uncertain Futures",
+      "ethicalPatterns": [
+        "emerging-technologies-require-anticipatory-governance",
+        "alternatives-can-be-foreclosed"
+      ],
+      "recognitionPatternNotes": ["Student-selected pattern."],
+      "themes": [
+        "anticipatory-governance",
+        "progress-inevitability",
+        "power-political-economy"
+      ],
+      "unitFocus": "Students connect stakeholders, harms, benefits, history, alternatives, and governance frameworks in order to draft public-facing analyses and proposals.",
+      "braidElsiArc": "The central question becomes how to govern anomaly detection and other emerging AI systems before their assumptions, harms, and dependencies become locked in.",
+      "meetings": [
+        {
+          "slug": "stakeholders-harms-benefits-governance",
+          "title": "Stakeholders, harms, benefits, governance",
+          "focus": "Stakeholders, harms, benefits, and governance.",
+          "ethicalPatterns": [],
+          "recognitionPatternNotes": ["Student-selected pattern."],
+          "themes": ["anticipatory-governance"],
+          "braidElsiConnection": "Build an ELSI risk memo around a neuromorphic or emerging AI use case."
+        },
+        {
+          "slug": "alternatives-refusal-repair-democratic-governance",
+          "title": "Alternatives, refusal, repair, democratic governance",
+          "focus": "Alternatives, refusal, repair, and democratic governance.",
+          "ethicalPatterns": ["alternatives-can-be-foreclosed"],
+          "themes": ["progress-inevitability", "anticipatory-governance"],
+          "braidElsiConnection": "Ask when anomaly detection should be limited, redesigned, refused, or governed differently."
+        },
+        {
+          "slug": "university-senior-symposium",
+          "title": "University Senior Symposium",
+          "focus": "University Senior Symposium.",
+          "ethicalPatterns": [],
+          "themes": [],
+          "braidElsiConnection": "No class."
+        },
+        {
+          "slug": "governance-frameworks-nist-eu-ai-act-oecd-ieee",
+          "title": "Governance frameworks: NIST, EU AI Act, OECD, IEEE",
+          "focus": "Governance frameworks including NIST, the EU AI Act, OECD, and IEEE.",
+          "ethicalPatterns": ["emerging-technologies-require-anticipatory-governance"],
+          "themes": ["anticipatory-governance"],
+          "braidElsiConnection": "Turn technical and ethical analysis into governance questions."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "public-communication-and-final-synthesis",
+      "title": "Public Communication and Final Synthesis",
+      "ethicalPatterns": ["emerging-technologies-require-anticipatory-governance"],
+      "recognitionPatternNotes": ["Student-selected pattern."],
+      "themes": ["anticipatory-governance"],
+      "unitFocus": "Students revise public-facing work, practice peer feedback, and bring technical explanation into direct conversation with stakeholder analysis and governance reasoning.",
+      "braidElsiArc": "The culminating task is to connect mechanism, stakeholder concern, risk, and governance question in a form that is public-facing and usable.",
+      "meetings": [
+        {
+          "slug": "draft-presentations-peer-review",
+          "title": "Draft presentations / peer review",
+          "focus": "Draft presentations and peer review.",
+          "ethicalPatterns": [],
+          "recognitionPatternNotes": ["Student-selected pattern."],
+          "themes": ["anticipatory-governance"],
+          "braidElsiConnection": "Review for technical accuracy, ELSI clarity, and public usefulness."
+        },
+        {
+          "slug": "thanksgiving-break",
+          "title": "Thanksgiving Break",
+          "focus": "Thanksgiving Break.",
+          "ethicalPatterns": [],
+          "themes": [],
+          "braidElsiConnection": "No class."
+        },
+        {
+          "slug": "last-day-of-class-synthesis",
+          "title": "Last day of class: synthesis",
+          "focus": "Last day of class synthesis.",
+          "ethicalPatterns": ["emerging-technologies-require-anticipatory-governance"],
+          "themes": ["anticipatory-governance"],
+          "braidElsiConnection": "Technical mechanism to stakeholder concern to risk to governance question."
+        },
+        {
+          "slug": "optional-support",
+          "title": "Optional support",
+          "focus": "Optional support.",
+          "ethicalPatterns": [],
+          "themes": [],
+          "braidElsiConnection": "Optional final ELSI project support."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "final-exam-presentations",
+      "title": "Final Exam / Presentations",
+      "ethicalPatterns": [],
+      "recognitionPatternNotes": ["Student-selected pattern(s)."],
+      "themes": ["anticipatory-governance"],
+      "unitFocus": "Final presentations synthesize technical explanation, public communication, and governance analysis.",
+      "meetings": [
+        {
+          "slug": "final-presentations",
+          "title": "Final presentations",
+          "focus": "Final presentations.",
+          "ethicalPatterns": [],
+          "recognitionPatternNotes": ["Student-selected pattern(s)."],
+          "themes": ["anticipatory-governance"],
+          "braidElsiConnection": "Public-facing explainer plus ELSI risk analysis."
+        }
+      ]
+    }
+  ]
+}

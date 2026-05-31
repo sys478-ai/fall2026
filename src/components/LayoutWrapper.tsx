@@ -17,13 +17,15 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                               (pathname.startsWith('/assignments/') && pathname !== '/assignments') ||
                               (pathname.startsWith('/activities/') && pathname !== '/activities') ||
                               (pathname.startsWith('/exams/') && pathname !== '/exams') ||
+                              (pathname.startsWith('/ethical-pattern-recognition-field-guide/') && pathname !== '/ethical-pattern-recognition-field-guide') ||
                               pathname === '/repos-hidden';
       const isListPage = pathname === '/' || 
                         pathname === '/assignments' || 
                         pathname === '/activities' || 
                         pathname === '/resources' ||
                         pathname === '/bibliography' ||
-                        pathname === '/quizzes' ||
+                        pathname === '/planning/taxonomy' ||
+                        pathname === '/ethical-pattern-recognition-field-guide' ||
                         pathname === '/exams';
       
       // Apply appropriate data attributes and classes

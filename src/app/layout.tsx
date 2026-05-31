@@ -59,13 +59,17 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} ${abril.variable} ${outfit.variable}`}>
-        <Navigation />
-        <LayoutWrapper>
-          <main>
-            {children}
-          </main>
-        </LayoutWrapper>
-        <ConditionalFooter />
+        <div className="min-h-screen md:flex">
+          <Navigation />
+          <div className="min-w-0 flex-1">
+            <LayoutWrapper>
+              <main>
+                {children}
+              </main>
+            </LayoutWrapper>
+            <ConditionalFooter />
+          </div>
+        </div>
       </body>
     </html>
   );
