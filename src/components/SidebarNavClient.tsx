@@ -9,7 +9,6 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
-  DocumentTextIcon,
   FolderIcon,
   HomeIcon,
   MoonIcon,
@@ -25,10 +24,6 @@ interface SidebarTopicItem {
   title: string;
   date: string;
   contentHref: string;
-  resourcesHref: string;
-  resourcesCount: number;
-  activitiesHref: string;
-  activitiesCount: number;
 }
 
 interface SidebarModuleItem {
@@ -44,13 +39,53 @@ interface SidebarNavClientProps {
 }
 
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
+const modulePanelStyles = [
+  {
+    border: 'border-gray-200 dark:border-gray-800',
+    bg: 'bg-gray-50/70 dark:bg-gray-950/20',
+    topicHover: 'hover:bg-gray-100/80 dark:hover:bg-gray-900/40',
+    topicActive: 'bg-white ring-1 ring-gray-200 dark:bg-black dark:ring-gray-800',
+    contentBlock: 'border-gray-200 bg-white/80 dark:border-gray-800 dark:bg-black/40',
+  },
+  {
+    border: 'border-gray-200 dark:border-gray-800',
+    bg: 'bg-gray-50/70 dark:bg-gray-950/20',
+    topicHover: 'hover:bg-gray-100/80 dark:hover:bg-gray-900/40',
+    topicActive: 'bg-white ring-1 ring-gray-200 dark:bg-black dark:ring-gray-800',
+    contentBlock: 'border-gray-200 bg-white/80 dark:border-gray-800 dark:bg-black/40',
+  },
+  {
+    border: 'border-gray-200 dark:border-gray-800',
+    bg: 'bg-gray-50/70 dark:bg-gray-950/20',
+    topicHover: 'hover:bg-gray-100/80 dark:hover:bg-gray-900/40',
+    topicActive: 'bg-white ring-1 ring-gray-200 dark:bg-black dark:ring-gray-800',
+    contentBlock: 'border-gray-200 bg-white/80 dark:border-gray-800 dark:bg-black/40',
+  },
+  {
+    border: 'border-gray-200 dark:border-gray-800',
+    bg: 'bg-gray-50/70 dark:bg-gray-950/20',
+    topicHover: 'hover:bg-gray-100/80 dark:hover:bg-gray-900/40',
+    topicActive: 'bg-white ring-1 ring-gray-200 dark:bg-black dark:ring-gray-800',
+    contentBlock: 'border-gray-200 bg-white/80 dark:border-gray-800 dark:bg-black/40',
+  },
+  {
+    border: 'border-gray-200 dark:border-gray-800',
+    bg: 'bg-gray-50/70 dark:bg-gray-950/20',
+    topicHover: 'hover:bg-gray-100/80 dark:hover:bg-gray-900/40',
+    topicActive: 'bg-white ring-1 ring-gray-200 dark:bg-black dark:ring-gray-800',
+    contentBlock: 'border-gray-200 bg-white/80 dark:border-gray-800 dark:bg-black/40',
+  },
+  {
+    border: 'border-gray-200 dark:border-gray-800',
+    bg: 'bg-gray-50/70 dark:bg-gray-950/20',
+    topicHover: 'hover:bg-gray-100/80 dark:hover:bg-gray-900/40',
+    topicActive: 'bg-white ring-1 ring-gray-200 dark:bg-black dark:ring-gray-800',
+    contentBlock: 'border-gray-200 bg-white/80 dark:border-gray-800 dark:bg-black/40',
+  },
+];
 
 function normalizePath(path: string) {
   return (path.replace(/^\/fall2026/, '').replace(/\/$/, '')) || '/';
-}
-
-function countLabel(count: number) {
-  return count > 0 ? `${count}` : '';
 }
 
 export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
@@ -60,11 +95,13 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const [mounted, setMounted] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [modulesOpen, setModulesOpen] = useState(normalizedPath === '/');
-  const [openModules, setOpenModules] = useState<Record<number, boolean>>(() =>
-    Object.fromEntries(modules.map((module) => [module.id, normalizedPath === '/']))
-  );
-  const [openTopics, setOpenTopics] = useState<Record<string, boolean>>({});
+  const [modulesOpen, setModulesOpen] = useState(normalizedPath === '/' || normalizedPath.startsWith('/modules'));
+  const [openModuleId, setOpenModuleId] = useState<number | null>(() => {
+    const activeModule = modules.find((module) =>
+      module.topics.some((topic) => normalizePath(topic.contentHref) === normalizedPath)
+    );
+    return activeModule?.id ?? modules[0]?.id ?? null;
+  });
 
   useEffect(() => {
     setMounted(true);
@@ -83,15 +120,28 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
     setMobileOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const activeModule = modules.find((module) =>
+      module.topics.some((topic) => normalizePath(topic.contentHref) === normalizedPath)
+    );
+
+    if (activeModule) {
+      setOpenModuleId(activeModule.id);
+      setModulesOpen(true);
+    }
+  }, [modules, normalizedPath]);
+
   const activeTaxonomy = normalizedPath.startsWith('/planning/taxonomy');
   const activePatternGuide = normalizedPath.startsWith('/ethical-pattern-recognition-field-guide');
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeResources = normalizedPath === '/resources' || normalizedPath.startsWith('/resources/');
+  const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
   const activeHome = normalizedPath === '/';
 
   const navItems = useMemo(
     () => [
       { label: 'Home', href: '/', icon: HomeIcon, active: activeHome },
+      { label: 'Modules', href: '/modules', icon: RectangleGroupIcon, active: activeModules },
       { label: 'Resources', href: '/resources', icon: BookOpenIcon, active: activeResources },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
       {
@@ -107,7 +157,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
         active: activePatternGuide,
       },
     ],
-    [activeAssignments, activeHome, activePatternGuide, activeResources, activeTaxonomy]
+    [activeAssignments, activeHome, activeModules, activePatternGuide, activeResources, activeTaxonomy]
   );
 
   const toggleDarkMode = () => {
@@ -128,8 +178,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
 
     if (newValue) {
       setModulesOpen(false);
-      setOpenModules({});
-      setOpenTopics({});
+      setOpenModuleId(null);
     }
   };
 
@@ -138,23 +187,19 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
       setCollapsed(false);
       localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
       setModulesOpen(true);
+      setOpenModuleId(modules[0]?.id ?? null);
       return;
     }
     setModulesOpen((current) => !current);
   };
 
   const toggleModule = (moduleId: number) => {
-    setOpenModules((current) => ({
-      ...current,
-      [moduleId]: !current[moduleId],
-    }));
-  };
-
-  const toggleTopic = (topicId: string) => {
-    setOpenTopics((current) => ({
-      ...current,
-      [topicId]: !current[topicId],
-    }));
+    setOpenModuleId((current) => {
+      if (current === moduleId) {
+        return null;
+      }
+      return moduleId;
+    });
   };
 
   const baseLinkClass =
@@ -217,117 +262,95 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
             </Link>
           ))}
 
-          <button
-            onClick={toggleModules}
-            className={`${baseLinkClass} w-full ${
-              activeHome
-                ? 'bg-gray-100 font-semibold text-gray-900 dark:bg-gray-900 dark:text-gray-100'
-                : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-900'
-            } ${collapsed ? 'justify-center' : 'justify-between'}`}
-          >
-            <span className={`flex items-center gap-3 ${collapsed ? 'justify-center' : ''}`}>
-              <RectangleGroupIcon className="h-5 w-5 shrink-0" />
-              {!collapsed && <span>Modules</span>}
-            </span>
-            {!collapsed && (
-              <ChevronDownIcon className={`h-4 w-4 transition-transform ${modulesOpen ? '' : '-rotate-90'}`} />
-            )}
-          </button>
+          <div className="rounded-xl border border-gray-200 bg-white p-1 dark:border-gray-800 dark:bg-black">
+            <div className="flex items-center gap-1">
+              <Link
+                href="/modules"
+                className={`${baseLinkClass} flex-1 ${
+                  activeModules
+                    ? 'bg-gray-100 font-semibold text-gray-900 dark:bg-gray-900 dark:text-gray-100'
+                    : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-900'
+                } ${collapsed ? 'justify-center' : ''}`}
+              >
+                {renderNavContent('Modules', RectangleGroupIcon)}
+              </Link>
+              {!collapsed && (
+                <button
+                  onClick={toggleModules}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-900"
+                  aria-label="Toggle module browser"
+                >
+                  <ChevronDownIcon className={`h-4 w-4 transition-transform ${modulesOpen ? '' : '-rotate-90'}`} />
+                </button>
+              )}
+            </div>
+          </div>
 
           {!collapsed && modulesOpen && (
-            <div className="ml-2 mt-1 space-y-1 border-l border-gray-200 pl-3 dark:border-gray-800">
-              {modules.map((module) => (
-                <div key={module.id} className="space-y-1">
-                  <div className="flex items-center gap-1">
+            <div className="space-y-3 pt-2">
+              {modules.map((module, index) => {
+                const panelStyle = modulePanelStyles[index % modulePanelStyles.length];
+                const isOpen = openModuleId === module.id;
+
+                return (
+                <section
+                  key={module.id}
+                  className={`rounded-2xl border p-2 ${panelStyle.border} ${panelStyle.bg}`}
+                >
+                  <div className="flex items-center gap-2">
                     <Link
                       href={module.href}
-                      className="flex-1 rounded-lg px-2 py-1.5 text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-900 !no-underline !border-0"
+                      className="flex-1 rounded-xl px-3 py-2 text-sm font-medium text-gray-800 hover:bg-white/70 dark:text-gray-200 dark:hover:bg-black/30 !no-underline !border-0"
                     >
-                      <span className="block truncate">{module.title}</span>
+                      <span className="block whitespace-normal leading-snug text-sm font-medium text-gray-800 dark:text-gray-200">
+                        {module.id}. {module.title}
+                      </span>
                     </Link>
                     <button
                       onClick={() => toggleModule(module.id)}
-                      className="rounded-md p-1 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-900"
+                      className="rounded-lg p-2 text-gray-500 hover:bg-white/70 dark:text-gray-400 dark:hover:bg-black/30"
                       aria-label={`Toggle ${module.title}`}
                     >
                       <ChevronDownIcon
-                        className={`h-4 w-4 transition-transform ${openModules[module.id] ? '' : '-rotate-90'}`}
+                        className={`h-4 w-4 transition-transform ${isOpen ? '' : '-rotate-90'}`}
                       />
                     </button>
                   </div>
 
-                  {openModules[module.id] && (
-                    <div className="ml-2 space-y-1 border-l border-gray-200 pl-3 dark:border-gray-800">
-                      {module.topics.map((topic) => (
-                        <div key={topic.id} className="space-y-1">
-                          <div className="flex items-start gap-1">
-                            <button
-                              onClick={() => toggleTopic(topic.id)}
-                              className="mt-0.5 rounded-md p-1 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-900"
-                              aria-label={`Toggle ${topic.title}`}
-                            >
-                              <ChevronDownIcon
-                                className={`h-3.5 w-3.5 transition-transform ${openTopics[topic.id] ? '' : '-rotate-90'}`}
-                              />
-                            </button>
-                            <div className="min-w-0 flex-1">
+                  {isOpen && (
+                    <div className="mt-2 space-y-2">
+                      {module.topics.map((topic, topicIndex) => {
+                        const isTopicActive = normalizePath(topic.contentHref) === normalizedPath;
+
+                        return (
+                          <article
+                            key={topic.id}
+                            className={`rounded-xl border border-white/80 p-2 dark:border-gray-800 ${
+                              isTopicActive ? panelStyle.topicActive : ''
+                            }`}
+                          >
+                            <div className={`${topicIndex > 0 ? 'border-t border-black/5 pt-2 dark:border-white/5' : ''}`}>
                               <Link
                                 href={topic.contentHref}
-                                className="block rounded-lg px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-900 !no-underline !border-0"
+                                className={`block min-w-0 rounded-lg px-2 py-1.5 !no-underline !border-0 ${panelStyle.topicHover}`}
                               >
-                                <span className="block truncate">{topic.title}</span>
+                                <span className={`block text-sm text-gray-800 dark:text-gray-200 ${isTopicActive ? 'font-semibold' : 'font-normal'}`}>
+                                  {topic.title}
+                                </span>
                                 <span className="block text-xs text-gray-500 dark:text-gray-500">{topic.date}</span>
                               </Link>
                             </div>
-                          </div>
-
-                          {openTopics[topic.id] && (
-                            <div className="ml-5 space-y-1">
-                              <Link
-                                href={topic.contentHref}
-                                className="flex items-center justify-between rounded-lg px-2 py-1.5 text-xs text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-900 !no-underline !border-0"
-                              >
-                                <span className="flex items-center gap-2">
-                                  <DocumentTextIcon className="h-4 w-4" />
-                                  Content
-                                </span>
-                              </Link>
-                              <Link
-                                href={topic.resourcesHref}
-                                className="flex items-center justify-between rounded-lg px-2 py-1.5 text-xs text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-900 !no-underline !border-0"
-                              >
-                                <span className="flex items-center gap-2">
-                                  <FolderIcon className="h-4 w-4" />
-                                  Resources
-                                </span>
-                                {topic.resourcesCount > 0 && (
-                                  <span className="badge neutral">{countLabel(topic.resourcesCount)}</span>
-                                )}
-                              </Link>
-                              <Link
-                                href={topic.activitiesHref}
-                                className="flex items-center justify-between rounded-lg px-2 py-1.5 text-xs text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-900 !no-underline !border-0"
-                              >
-                                <span className="flex items-center gap-2">
-                                  <ClipboardDocumentListIcon className="h-4 w-4" />
-                                  Activities / Labs
-                                </span>
-                                {topic.activitiesCount > 0 && (
-                                  <span className="badge success">{countLabel(topic.activitiesCount)}</span>
-                                )}
-                              </Link>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                          </article>
+                        );
+                      })}
                     </div>
                   )}
-                </div>
-              ))}
+                </section>
+              )})}
             </div>
           )}
 
-          {navItems.slice(1).map((item) => (
+          {navItems.slice(2).map((item) => (
             <Link
               key={item.href}
               href={item.href}

@@ -76,12 +76,12 @@ export default async function Navigation() {
     title: topic.title,
     href: `/#${getModuleAnchorId(topic.id)}`,
     topics: topic.meetings.map((meeting, index) => {
-      const contentHref = `/#${getMeetingAnchorId(topic.id, index, meeting.topic)}`;
+      const contentHref = meeting.slug ? `/topics/${meeting.slug}` : `/#${getMeetingAnchorId(topic.id, index, meeting.topic)}`;
       const { resourcesHref, resourcesCount } = extractResourcesInfo(meeting, contentHref);
       const { activitiesHref, activitiesCount } = extractActivitiesInfo(meeting, contentHref);
 
       return {
-        id: getMeetingAnchorId(topic.id, index, meeting.topic),
+        id: meeting.slug || getMeetingAnchorId(topic.id, index, meeting.topic),
         title: meeting.topic,
         date: meeting.date,
         contentHref,

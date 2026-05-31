@@ -634,6 +634,24 @@ export async function getTopics() {
   return await enrichTopicsWithMarkdown(baseTopics);
 }
 
+export async function getTopicMeetingBySlug(slug: string) {
+  const topics = await getTopics();
+
+  for (const topic of topics) {
+    const meetingIndex = topic.meetings.findIndex((meeting) => meeting.slug === slug);
+
+    if (meetingIndex !== -1) {
+      return {
+        topic,
+        meeting: topic.meetings[meetingIndex],
+        meetingIndex,
+      };
+    }
+  }
+
+  return null;
+}
+
 // Default export: for now, return base topics (components will be updated to use getTopics())
 // Note: baseTopics is now imported from content/config/schedule.tsx
 export default baseTopics;
