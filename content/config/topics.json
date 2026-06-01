@@ -60,9 +60,9 @@
           "braidElsiConnection": "A bridge into The Dream Hotel and the question of what gets lost when inner life becomes data."
         },
         {
-          "slug": "embodiment-interiority-and-difficult-to-measure-experience",
-          "title": "Embodiment, interiority, and difficult-to-measure experience",
-          "focus": "Embodiment, interiority, and difficult-to-measure experience.",
+          "slug": "embodiment-subjectivity-and-difficult-to-measure-experience",
+          "title": "Embodiment, subjectivity, and difficult-to-measure experience",
+          "focus": "Embodiment, subjectivity, and difficult-to-measure experience.",
           "ethicalPatterns": ["data-is-produced-not-found"],
           "themes": ["data-representation-institutional-bias"],
           "braidElsiConnection": "A strong opening for The Dream Hotel and its treatment of intimate, difficult-to-measure experience."
@@ -73,11 +73,7 @@
       "id": 2,
       "slug": "how-do-machines-learn",
       "title": "How Do Machines Learn?",
-      "ethicalPatterns": [
-        "features-are-value-choices",
-        "thresholds-distribute-harm",
-        "prediction-imports-the-past"
-      ],
+      "ethicalPatterns": ["features-are-value-choices", "thresholds-distribute-harm", "prediction-imports-the-past"],
       "themes": [
         "features-proxies-value-choices",
         "thresholds-errors-responsibility",
@@ -167,14 +163,8 @@
           "slug": "neural-networks-opacity-trust-contestability-dependency",
           "title": "Neural networks, opacity, trust, contestability, dependency",
           "focus": "Neural networks, opacity, trust, contestability, and dependency.",
-          "ethicalPatterns": [
-            "opacity-shifts-authority",
-            "dependency-cognitive-offloading-deskilling"
-          ],
-          "themes": [
-            "opacity-explainability-contestability",
-            "dependency-cognitive-offloading-deskilling"
-          ],
+          "ethicalPatterns": ["opacity-shifts-authority", "dependency-cognitive-offloading-deskilling"],
+          "themes": ["opacity-explainability-contestability", "dependency-cognitive-offloading-deskilling"],
           "braidElsiConnection": "Brain metaphors can mislead, and opaque systems can encourage over-trust or deference."
         },
         {
@@ -239,10 +229,7 @@
           "slug": "sensors-edge-ai-wearables-biosensing-cybersecurity",
           "title": "Sensors, edge AI, wearables, biosensing, cybersecurity",
           "focus": "Sensors, edge AI, wearables, biosensing, and cybersecurity.",
-          "ethicalPatterns": [
-            "measurement-becomes-datafication",
-            "automation-changes-accountability"
-          ],
+          "ethicalPatterns": ["measurement-becomes-datafication", "automation-changes-accountability"],
           "themes": ["surveillance-datafication", "edge-ai-privacy-accountability"],
           "braidElsiConnection": "Edge or on-chip AI changes data flows, logging, oversight, and responsibility."
         },
@@ -266,10 +253,7 @@
           "slug": "braid-neuromorphic-anomaly-detection",
           "title": "BRAID neuromorphic anomaly detection",
           "focus": "BRAID neuromorphic anomaly detection.",
-          "ethicalPatterns": [
-            "emerging-technologies-require-anticipatory-governance",
-            "ai-is-material"
-          ],
+          "ethicalPatterns": ["emerging-technologies-require-anticipatory-governance", "ai-is-material"],
           "themes": ["anticipatory-governance", "environmental-impacts-of-ai"],
           "braidElsiConnection": "Apply NIST, EU AI Act, IEEE, and OECD-style questions to BRAID."
         },
@@ -285,10 +269,7 @@
           "slug": "environmental-claims-efficiency-lifecycle-costs",
           "title": "Environmental claims, efficiency, lifecycle costs",
           "focus": "Environmental claims, efficiency, and lifecycle costs.",
-          "ethicalPatterns": [
-            "ai-is-material",
-            "power-can-concentrate-in-infrastructure"
-          ],
+          "ethicalPatterns": ["ai-is-material", "power-can-concentrate-in-infrastructure"],
           "themes": ["environmental-impacts-of-ai", "power-political-economy"],
           "braidElsiConnection": "Efficiency claims must be weighed against materials, fabrication, e-waste, and scale."
         }
@@ -298,16 +279,9 @@
       "id": 5,
       "slug": "governing-uncertain-futures",
       "title": "Governing Uncertain Futures",
-      "ethicalPatterns": [
-        "emerging-technologies-require-anticipatory-governance",
-        "alternatives-can-be-foreclosed"
-      ],
+      "ethicalPatterns": ["emerging-technologies-require-anticipatory-governance", "alternatives-can-be-foreclosed"],
       "recognitionPatternNotes": ["Student-selected pattern."],
-      "themes": [
-        "anticipatory-governance",
-        "progress-inevitability",
-        "power-political-economy"
-      ],
+      "themes": ["anticipatory-governance", "progress-inevitability", "power-political-economy"],
       "unitFocus": "Students connect stakeholders, harms, benefits, history, alternatives, and governance frameworks in order to draft public-facing analyses and proposals.",
       "braidElsiArc": "The central question becomes how to govern anomaly detection and other emerging AI systems before their assumptions, harms, and dependencies become locked in.",
       "meetings": [

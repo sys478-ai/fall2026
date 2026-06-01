@@ -5,7 +5,7 @@ import MarkdownContent from '@/components/MarkdownContent';
 import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
 import StyleGuideStyles from '@/components/StyleGuideStyles';
-import Link from 'next/link';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { notFound } from 'next/navigation';
 
 interface AssignmentPageProps {
@@ -53,13 +53,12 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         showToc={postData.toc !== false}
         tocMaxLevel={heading_max_level || 2}
       >
-        <div className="mb-4" id="breadcrumbs">
-          <Link href="/" className="text-blue-600 dark:text-blue-400 hover:underline">
-            Schedule
-          </Link>
-          {' > '}
-          <span className="text-gray-900 dark:text-gray-100">{postData.title}</span>
-        </div>
+        <Breadcrumbs
+          items={[
+            { label: 'Schedule', href: '/' },
+            { label: postData.title },
+          ]}
+        />
         <PageHeader 
           title={postData.title} 
           excerpt={postData.excerpt}

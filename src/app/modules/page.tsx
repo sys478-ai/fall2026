@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import ContentLayout from '@/components/ContentLayout';
 import PageHeader from '@/components/PageHeader';
 import { getTopicModules } from '@/lib/topic-config';
@@ -10,7 +11,7 @@ export default function ModulesPage() {
       <div className="space-y-7">
         <PageHeader
           title="Modules"
-          excerpt="A semester overview of the six core modules, their main questions, and the topic sequence inside each one."
+          excerpt="A semester overview of the course modules, their main questions, and the topic sequence inside each one."
         />
 
         <section className="grid gap-5 lg:grid-cols-2">
@@ -28,11 +29,16 @@ export default function ModulesPage() {
                       Module {module.id}
                     </p>
                     <h2 className="m-0 text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      {module.title}
+                      <Link
+                        href={`/topics/${module.slug}`}
+                        className="text-gray-900 no-underline hover:text-[#0b5d8f] dark:text-gray-100 dark:hover:text-[#8fc4ee]"
+                      >
+                        {module.title}
+                      </Link>
                     </h2>
                   </div>
                   <span className="rounded-full border border-gray-200 px-2.5 py-1 text-xs font-medium text-gray-700 dark:border-gray-800 dark:text-gray-300">
-                    {module.meetings.length} topics
+                    {module.meetings.length + 1} pages
                   </span>
                 </div>
 
@@ -55,6 +61,13 @@ export default function ModulesPage() {
                     {module.themes.length} linked themes
                   </span>
                 </div>
+
+                <Link
+                  href={`/topics/${module.slug}`}
+                  className="mt-5 inline-flex rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-900 no-underline transition-colors hover:border-[#0b5d8f] hover:text-[#0b5d8f] dark:border-gray-800 dark:text-gray-100 dark:hover:border-[#8fc4ee] dark:hover:text-[#8fc4ee]"
+                >
+                  View module overview
+                </Link>
               </article>
             );
           })}

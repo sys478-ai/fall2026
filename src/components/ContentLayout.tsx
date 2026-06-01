@@ -23,6 +23,7 @@ interface ContentLayoutProps {
   resourcePages?: ResourcePage[]; // For resources detail pages
   showFooter?: boolean; // Whether to show footer inside content area
   fullWidth?: boolean; // Allow dense planning/index pages to use the full content area
+  contentPadding?: boolean; // Whether to apply default inner content padding
 }
 
 /**
@@ -41,6 +42,7 @@ export default function ContentLayout({
   tocMaxLevel = 2,
   showFooter = true,
   fullWidth = false,
+  contentPadding = true,
 }: ContentLayoutProps) {
   const isResourcesDetail = variant === 'resources-detail';
   const isDetailWithToc = variant === 'detail-with-toc';
@@ -310,7 +312,7 @@ export default function ContentLayout({
           </div>
         )}
         <div className="w-full">
-            <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl mx-auto'} px-4`}>
+          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl mx-auto'} ${contentPadding ? 'px-16' : ''}`}>
             <div className="space-y-6 py-6">
               {children}
               {showFooter && <Footer />}
@@ -326,7 +328,7 @@ export default function ContentLayout({
           id="main-content-scroll"
           className={`flex-1 min-w-0 overflow-y-auto ${hasToc ? 'mr-72' : ''}`}
         >
-          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl'} px-4 lg:pl-0 lg:pr-8`}>
+          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl'} ${contentPadding ? 'px-16' : ''}`}>
             <div className="space-y-6 py-6">
               {children}
               {showFooter && <Footer />}

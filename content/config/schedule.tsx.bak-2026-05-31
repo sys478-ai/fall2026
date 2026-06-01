@@ -82,7 +82,7 @@ export const baseTopics = [
         topic: 'Human learning, memory, dreams, prediction, and adaptation',
         description: (
           <>
-            We focus on embodiment, interiority, and situated cognition as we begin <em>The Dream Hotel</em> and
+            We focus on embodiment, subjectivity, and situated cognition as we begin <em>The Dream Hotel</em> and
             consider dreams as intimate, ambiguous, embodied data.
           </>
         ),
