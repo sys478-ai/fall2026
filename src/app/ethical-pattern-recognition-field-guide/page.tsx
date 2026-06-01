@@ -102,7 +102,7 @@ export default function EthicalPatternRecognitionFieldGuidePage() {
       variant="list"
       fullWidth
       header={
-        <header className="border-y border-violet-200 bg-violet-50 px-16 py-16 dark:border-violet-900 dark:bg-violet-950/30">
+        <header className="border-y border-violet-200 bg-violet-50 px-4 py-16 dark:border-violet-900 dark:bg-violet-950/30 md:px-16">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
             Field Guide
           </p>

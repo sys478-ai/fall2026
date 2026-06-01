@@ -58,7 +58,7 @@ function PatternHeader({
   excerpt?: string;
 }) {
   return (
-    <header className="grid gap-6 border-y border-violet-200 bg-violet-50 px-16 py-16 dark:border-violet-900 dark:bg-violet-950/30 md:grid-cols-[8rem_1fr]">
+    <header className="grid gap-6 border-y border-violet-200 bg-violet-50 px-4 py-16 dark:border-violet-900 dark:bg-violet-950/30 md:grid-cols-[8rem_1fr] md:px-16">
       <div className="flex flex-col justify-center border-b border-violet-200 pb-4 dark:border-violet-900 md:border-b-0 md:border-r md:pb-0 md:pr-5">
         <p className="mb-1 text-3xl font-semibold leading-none tracking-tight text-violet-700 dark:text-violet-300">
           {scope}
@@ -216,7 +216,7 @@ function PatternSection({ label, children }: { label: string; children: ReactNod
       <div className="border-b border-gray-200 pb-4 dark:border-gray-800 md:border-b-0 md:border-r md:pb-0 md:pr-5">
         <p className="mb-0 text-lg font-semibold text-[#0b5d8f] dark:text-[#8fc4ee]">{label}</p>
       </div>
-      <div className="min-w-0 [&_li]:my-2 [&_ul]:pl-0!">{children}</div>
+      <div className="min-w-0 [&_li]:my-2 [&_ol]:pl-5! [&_ul]:pl-5!">{children}</div>
     </section>
   );
 }
@@ -278,7 +278,7 @@ export default async function EthicalPatternPage({ params }: PageProps) {
         header={
           <div className="space-y-4 py-6">
             <Breadcrumbs
-              className="px-16"
+              className="px-4 md:px-16"
               items={[
                 { label: 'Ethical Pattern Recognition Field Guide', href: '/ethical-pattern-recognition-field-guide' },
                 { label: postData.title },

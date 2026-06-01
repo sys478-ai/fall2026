@@ -17,7 +17,7 @@ export default async function SyllabusPage() {
       tocMaxLevel={heading_max_level || 2}
       fullWidth
       header={
-        <header className="grid gap-6 border-b border-sky-200 bg-sky-50 px-16 py-12 dark:border-sky-900 dark:bg-sky-950/30 md:grid-cols-[8rem_1fr]">
+        <header className="grid gap-6 border-b border-sky-200 bg-sky-50 px-4 py-12 dark:border-sky-900 dark:bg-sky-950/30 md:grid-cols-[8rem_1fr] md:px-16">
           <div className="flex flex-col justify-center border-b border-sky-200 pb-4 dark:border-sky-900 md:border-b-0 md:border-r md:pb-0 md:pr-5">
             <p className="mb-0 text-3xl font-semibold leading-none tracking-tight text-sky-700 dark:text-sky-300">
               Syllabus

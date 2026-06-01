@@ -159,7 +159,7 @@ export default function ContentLayout({
         )}
         <div className="w-full">
           {header}
-          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl mx-auto'} ${contentPadding ? 'px-16' : ''}`}>
+          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl mx-auto'} ${contentPadding ? 'px-4 md:px-16' : ''}`}>
             <div className="space-y-6 py-6">
               {children}
               {showFooter && <Footer />}

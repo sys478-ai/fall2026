@@ -484,7 +484,7 @@ function TopicHeader({
 }) {
   return (
     <header
-      className={`grid gap-6 border-y px-16 py-16 ${moduleColor.background} ${moduleColor.border} md:grid-cols-[8rem_1fr]`}
+      className={`grid gap-6 border-y px-4 py-16 ${moduleColor.background} ${moduleColor.border} md:grid-cols-[8rem_1fr] md:px-16`}
     >
       <div
         className={`flex flex-col justify-center border-b pb-4 ${moduleColor.border} md:border-b-0 md:border-r md:pb-0 md:pr-5`}
@@ -646,7 +646,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
       <ContentLayout variant="detail-with-toc" fullWidth showToc={false} contentPadding={false}>
         <div className="space-y-8">
           <Breadcrumbs
-            className="px-16"
+            className="px-4 md:px-16"
             items={[
               { label: 'Modules', href: '/modules' },
               { label: `${overviewTopic.id}. ${overviewTopic.title}` },
@@ -663,7 +663,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             excerpt={overviewData.excerpt}
           />
 
-          <div className="space-y-10 px-16">
+          <div className="space-y-10 px-4 md:px-16">
             <div className="max-w-4xl">
               <MarkdownContent content={overviewData.content} />
             </div>
@@ -783,7 +783,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
     <ContentLayout variant="detail-with-toc" fullWidth showToc={false} contentPadding={false}>
       <div className="space-y-8">
         <Breadcrumbs
-          className="px-16"
+          className="px-4 md:px-16"
           items={[
             { label: 'Modules', href: '/modules' },
             { label: `${topic.id}. ${topic.title}` },
@@ -800,7 +800,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
           title={meeting.topic}
         />
 
-        <div className="space-y-10 px-16">
+        <div className="space-y-10 px-4 md:px-16">
           <TopicSectionNav items={topicSections.map(section => section.navItem)}>
             {topicSections.map(section => section.panel)}
           </TopicSectionNav>
