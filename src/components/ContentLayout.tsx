@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useLayoutEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import TableOfContents from './TableOfContents';
 import Footer from './Footer';
@@ -17,6 +17,7 @@ interface ResourcePage {
 interface ContentLayoutProps {
   children: ReactNode;
   variant: 'resources-detail' | 'detail-with-toc' | 'list';
+  header?: ReactNode; // Full-width content header rendered above the padded content area
   leftNav?: ReactNode; // For resources detail pages
   showToc?: boolean;
   tocMaxLevel?: number;
@@ -37,6 +38,7 @@ interface ContentLayoutProps {
 export default function ContentLayout({
   children,
   variant,
+  header,
   leftNav,
   showToc = true,
   tocMaxLevel = 2,
@@ -48,165 +50,9 @@ export default function ContentLayout({
   const isDetailWithToc = variant === 'detail-with-toc';
   const pathname = usePathname();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isRestoringRef = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   // All pages use full-height scrollable containers
   const hasToc = (isResourcesDetail || isDetailWithToc) && showToc;
-  
-  // Restore scroll position - wait for meeting states to be restored first (sequencing matters)
-  useLayoutEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const scrollKey = `scroll-position-percentage-${pathname}`;
-    const savedPercentage = localStorage.getItem(scrollKey);
-    
-    if (!savedPercentage) return;
-    
-    const percentage = parseFloat(savedPercentage);
-    if (isNaN(percentage)) return;
-    
-    isRestoringRef.current = true;
-    
-    // Function to restore scroll position
-    const startScrollRestoration = () => {
-      // Try to restore immediately (before paint)
-      const scrollContainer = scrollContainerRef.current || document.getElementById('main-content-scroll');
-      if (scrollContainer) {
-        const scrollHeight = scrollContainer.scrollHeight;
-        const clientHeight = scrollContainer.clientHeight;
-        const maxScroll = scrollHeight - clientHeight;
-        
-        if (maxScroll > 0 && scrollHeight > 200) {
-          const targetPosition = (percentage / 100) * maxScroll;
-          scrollContainer.scrollTop = targetPosition;
-        }
-      }
-      
-      // Also restore after content loads (in case initial attempt was too early)
-      let lastScrollHeight = 0;
-      let stableCount = 0;
-      
-      const restoreScroll = () => {
-        const container = scrollContainerRef.current || document.getElementById('main-content-scroll');
-        if (!container) {
-          requestAnimationFrame(restoreScroll);
-          return;
-        }
-        
-        const scrollHeight = container.scrollHeight;
-        const clientHeight = container.clientHeight;
-        const maxScroll = scrollHeight - clientHeight;
-        
-        if (maxScroll <= 0 || scrollHeight < 200) {
-          requestAnimationFrame(restoreScroll);
-          return;
-        }
-        
-        // Check if scroll height has stabilized
-        if (scrollHeight === lastScrollHeight) {
-          stableCount++;
-          if (stableCount >= 2) {
-            // Content is stable, restore using percentage
-            const targetPosition = (percentage / 100) * maxScroll;
-            container.scrollTop = targetPosition;
-            
-            setTimeout(() => {
-              isRestoringRef.current = false;
-            }, 200);
-            return;
-          }
-        } else {
-          lastScrollHeight = scrollHeight;
-          stableCount = 0;
-        }
-        
-        requestAnimationFrame(restoreScroll);
-      };
-      
-      // Start checking after initial render
-      requestAnimationFrame(restoreScroll);
-    };
-    
-    // Check if we're on the schedule page - if so, wait for meeting states to be restored
-    // Normalize pathname by removing base path if present
-    const normalizedPath = pathname.replace(/^\/fall2026/, '') || '/';
-    const isSchedulePage = normalizedPath === '/';
-    
-    if (isSchedulePage) {
-      // Wait for meeting states to be restored before starting scroll restoration
-      // This ensures proper sequencing: meeting states first, then scroll position
-      const handleMeetingStatesRestored = () => {
-        // Small delay to ensure DOM has updated with new meeting states
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            startScrollRestoration();
-          });
-        });
-      };
-      
-      // Set up listener immediately (useLayoutEffect runs synchronously)
-      window.addEventListener('meeting-states-restored', handleMeetingStatesRestored, { once: true });
-      
-      // Fallback: if event doesn't fire within 200ms, start restoration anyway
-      // This handles cases where ScheduleContent hasn't mounted yet or event fails
-      setTimeout(() => {
-        window.removeEventListener('meeting-states-restored', handleMeetingStatesRestored);
-        startScrollRestoration();
-      }, 200);
-    } else {
-      // Not schedule page, start restoration immediately
-      startScrollRestoration();
-    }
-  }, [pathname]);
-  
-  // Save scroll position on scroll
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const scrollContainer = scrollContainerRef.current || document.getElementById('main-content-scroll');
-    if (!scrollContainer) return;
-    
-    const scrollKey = `scroll-position-percentage-${pathname}`;
-    
-    const handleScroll = () => {
-      // Don't save during restoration
-      if (isRestoringRef.current) return;
-      
-      // Debounce to avoid too many writes
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-      
-      scrollTimeoutRef.current = setTimeout(() => {
-        // Double-check we're not restoring (in case flag changed during timeout)
-        if (isRestoringRef.current) return;
-        
-        const container = scrollContainerRef.current || document.getElementById('main-content-scroll');
-        if (!container) return;
-        
-        const scrollTop = container.scrollTop;
-        const scrollHeight = container.scrollHeight;
-        const clientHeight = container.clientHeight;
-        const maxScroll = scrollHeight - clientHeight;
-        
-        // Save as percentage (more reliable when content height changes)
-        if (maxScroll > 0) {
-          const percentage = (scrollTop / maxScroll) * 100;
-          localStorage.setItem(scrollKey, percentage.toString());
-        }
-      }, 150);
-    };
-    
-    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      scrollContainer.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, [pathname]);
   
   // Handle anchor link clicks and initial hash on page load
   useEffect(() => {
@@ -312,6 +158,7 @@ export default function ContentLayout({
           </div>
         )}
         <div className="w-full">
+          {header}
           <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl mx-auto'} ${contentPadding ? 'px-16' : ''}`}>
             <div className="space-y-6 py-6">
               {children}
@@ -326,23 +173,28 @@ export default function ContentLayout({
         <div 
           ref={scrollContainerRef}
           id="main-content-scroll"
-          className={`flex-1 min-w-0 overflow-y-auto ${hasToc ? 'mr-72' : ''}`}
+          className="flex-1 min-w-0 overflow-y-auto"
         >
-          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl'} ${contentPadding ? 'px-16' : ''}`}>
-            <div className="space-y-6 py-6">
-              {children}
-              {showFooter && <Footer />}
+          {header}
+          <div className={contentPadding ? 'px-16' : ''}>
+            <div className={hasToc ? 'grid grid-cols-[minmax(0,1fr)_17.25rem] gap-6' : ''}>
+              <div className={fullWidth ? 'max-w-none' : 'max-w-4xl'}>
+                <div className="space-y-6 py-6">
+                  {children}
+                  {showFooter && <Footer />}
+                </div>
+              </div>
+              {hasToc && (
+                <aside
+                  className="sticky top-[20px] self-start max-h-[calc(100vh-20px)] overflow-y-auto"
+                >
+                  <TableOfContents maxLevel={tocMaxLevel} />
+                </aside>
+              )}
             </div>
           </div>
         </div>
       </div>
-      
-      {/* Right Column: Table of Contents (fixed, flush to right edge) */}
-      {(isResourcesDetail || isDetailWithToc) && showToc && (
-        <div className="hidden lg:block fixed top-0 right-0 w-72 h-screen overflow-y-auto border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-black pr-1 [&::-webkit-scrollbar-track]:bg-white dark:[&::-webkit-scrollbar-track]:bg-black">
-          <TableOfContents maxLevel={tocMaxLevel} />
-        </div>
-      )}
     </div>
   );
 }

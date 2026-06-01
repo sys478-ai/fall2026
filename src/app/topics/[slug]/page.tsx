@@ -5,7 +5,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ContentLayout from '@/components/ContentLayout';
 import MarkdownContent from '@/components/MarkdownContent';
+import TopicSectionNav from '@/components/TopicSectionNav';
+import type { TopicSectionNavItem } from '@/components/TopicSectionNav';
+import TopicWorkList from '@/components/TopicWorkList';
+import type { TopicWorkItem } from '@/components/TopicWorkList';
 import { getPostData } from '@/lib/markdown';
+import type { PostData } from '@/lib/markdown';
 import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
 import { getTopicModules } from '@/lib/topic-config';
@@ -91,25 +96,33 @@ function renderReading(citation: string | ReactElement, url?: string) {
 }
 
 function EditorialSection({
+  id,
   label,
   title,
+  titleClassName,
+  labelClassName,
   children,
 }: {
+  id?: string;
   label: string;
-  title: string;
+  title?: string;
+  titleClassName?: string;
+  labelClassName?: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="grid gap-5 border-t border-gray-200 pt-7 dark:border-gray-800 md:grid-cols-[8rem_1fr]">
+    <section id={id} className="scroll-mt-24 grid gap-5 border-t border-gray-200 pt-7 dark:border-gray-800 md:grid-cols-[8rem_1fr]">
       <div className="border-b border-gray-200 pb-4 dark:border-gray-800 md:border-b-0 md:border-r md:pb-0 md:pr-5">
-        <p className="mb-0 text-xs font-semibold uppercase tracking-[0.18em] text-[#0b5d8f] dark:text-[#8fc4ee]">
+        <p className={`mb-0 text-xs font-semibold uppercase tracking-[0.18em] text-[#0b5d8f] dark:text-[#8fc4ee] ${labelClassName || ''}`}>
           {label}
         </p>
       </div>
       <div>
-        <h2 className="m-0! mb-4! text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-          {title}
-        </h2>
+        {title && (
+          <h2 className={`m-0! mb-4! text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${titleClassName || ''}`}>
+            {title}
+          </h2>
+        )}
         {children}
       </div>
     </section>
@@ -130,6 +143,16 @@ interface TopicNavigationItem {
   slug: string;
   title: string;
   number: string;
+}
+
+interface EmbeddedTopicContent {
+  id: string;
+  type: 'assignment' | 'activity';
+  title: string;
+  shortTitle: string;
+  sourceHref: string;
+  contentHref: string;
+  postData: PostData | null;
 }
 
 function getModuleOverviewNumber(topic: Topic) {
@@ -183,6 +206,270 @@ function findTopicMeeting(topics: Topic[], slug: string) {
   }
 
   return null;
+}
+
+function getMeetingKey(date: string, topicTitle: string) {
+  return `meeting-${date}-${topicTitle.replace(/\s+/g, '-').toLowerCase()}`;
+}
+
+function getSlugFromUrl(url: string | undefined, contentType: 'assignments' | 'activities') {
+  return url?.match(new RegExp(`/${contentType}/([^/]+)/?`))?.[1];
+}
+
+function normalizeHref(href: string | undefined) {
+  return href?.replace(/^\/fall2026/, '').replace(/\/$/, '') || '';
+}
+
+function getScopedHref(href: string | undefined, anchorByHref: Map<string, string>) {
+  if (!href) {
+    return undefined;
+  }
+
+  return anchorByHref.get(normalizeHref(href)) || href;
+}
+
+function getReadingTitle(citation: string | ReactElement, index: number, fallback: string) {
+  return typeof citation === 'string' ? citation : `${fallback} ${index + 1}`;
+}
+
+function getAssignmentTitle(item: { titleShort?: string; title: string }) {
+  return item.titleShort ? `${item.titleShort}: ${item.title}` : item.title;
+}
+
+function toDisplayLabel(value: string) {
+  return value
+    .split(/[\s-]+/)
+    .filter(Boolean)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function getEmbeddedContentShortTitle(postData: PostData | null, fallbackType: EmbeddedTopicContent['type']) {
+  if (postData?.type) {
+    const typeLabel = toDisplayLabel(postData.type);
+    return postData.num ? `${typeLabel} ${postData.num}` : typeLabel;
+  }
+
+  return fallbackType === 'assignment' ? 'Assignment' : 'Activity';
+}
+
+function buildTopicWorkItems({
+  topicSlug,
+  meeting,
+  anchorByHref = new Map<string, string>(),
+}: {
+  topicSlug: string;
+  meeting: Topic['meetings'][number];
+  anchorByHref?: Map<string, string>;
+}): TopicWorkItem[] {
+  const meetingKey = getMeetingKey(meeting.date, meeting.topic);
+  const items: TopicWorkItem[] = [];
+
+  (meeting.readings || []).forEach((reading, index) => {
+    items.push({
+      id: `reading-${index}`,
+      type: 'reading',
+      title: getReadingTitle(reading.citation, index, 'Assigned reading'),
+      href: reading.url,
+      syncKeys: [`${meetingKey}-reading-${index}`],
+    });
+  });
+
+  (meeting.optionalReadings || []).forEach((reading, index) => {
+    items.push({
+      id: `optional-reading-${index}`,
+      type: 'optional-reading',
+      title: getReadingTitle(reading.citation, index, 'Optional reading'),
+      href: reading.url,
+      optional: true,
+      syncKeys: [`${meetingKey}-optional-reading-${index}`],
+    });
+  });
+
+  (meeting.activities || []).forEach((activity, index) => {
+    if (activity.excluded === 1 || activity.draft === 1) {
+      return;
+    }
+
+    items.push({
+      id: `activity-${index}`,
+      type: 'activity',
+      title: activity.title,
+      href: getScopedHref(activity.url, anchorByHref),
+      syncKeys: [`${meetingKey}-activity-${index}`],
+    });
+  });
+
+  const assignedItems = Array.isArray(meeting.assigned)
+    ? meeting.assigned
+    : meeting.assigned
+      ? [meeting.assigned]
+      : [];
+
+  assignedItems.forEach((item, index) => {
+    if (typeof item === 'string' || item.draft === 1) {
+      return;
+    }
+
+    const assignmentSlug = getSlugFromUrl(item.url, 'assignments');
+
+    items.push({
+      id: `assigned-${index}`,
+      type: 'assignment',
+      title: getAssignmentTitle(item),
+      href: getScopedHref(item.url, anchorByHref),
+      optional: true,
+      syncKeys: [
+        `${meetingKey}-assigned-${index}`,
+        ...(assignmentSlug ? [`assignment-${assignmentSlug}`, `assignments-${assignmentSlug}`] : []),
+      ],
+    });
+  });
+
+  const dueItems = Array.isArray(meeting.due)
+    ? meeting.due
+    : meeting.due
+      ? [meeting.due]
+      : [];
+
+  dueItems.forEach((item, index) => {
+    if (typeof item === 'string' || item.draft === 1) {
+      return;
+    }
+
+    const assignmentSlug = getSlugFromUrl(item.url, 'assignments');
+
+    items.push({
+      id: `due-${index}`,
+      type: 'due',
+      title: getAssignmentTitle(item),
+      href: getScopedHref(item.url, anchorByHref),
+      meta: meeting.date,
+      syncKeys: [
+        `${meetingKey}-due-${index}`,
+        ...(assignmentSlug ? [`assignment-${assignmentSlug}`, `assignments-${assignmentSlug}`] : []),
+      ],
+    });
+  });
+
+  return items.map(item => ({
+    ...item,
+    id: `${topicSlug}-${item.id}`,
+  }));
+}
+
+function collectEmbeddedContentCandidates(meeting: Topic['meetings'][number]) {
+  const candidates: Array<{
+    type: 'assignment' | 'activity';
+    title: string;
+    href: string;
+    contentType: 'assignments' | 'activities';
+    slug: string;
+  }> = [];
+
+  (meeting.activities || []).forEach(activity => {
+    if (activity.excluded === 1 || activity.draft === 1 || !activity.url) {
+      return;
+    }
+
+    const assignmentSlug = getSlugFromUrl(activity.url, 'assignments');
+    const activitySlug = getSlugFromUrl(activity.url, 'activities');
+
+    if (assignmentSlug || activitySlug) {
+      candidates.push({
+        type: assignmentSlug ? 'assignment' : 'activity',
+        title: activity.title,
+        href: activity.url,
+        contentType: assignmentSlug ? 'assignments' : 'activities',
+        slug: assignmentSlug || activitySlug || '',
+      });
+    }
+  });
+
+  const assignmentItems = [
+    ...(Array.isArray(meeting.assigned) ? meeting.assigned : meeting.assigned ? [meeting.assigned] : []),
+    ...(Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : []),
+  ];
+
+  assignmentItems.forEach(item => {
+    if (typeof item === 'string' || item.draft === 1 || !item.url) {
+      return;
+    }
+
+    const assignmentSlug = getSlugFromUrl(item.url, 'assignments');
+    if (assignmentSlug) {
+      candidates.push({
+        type: 'assignment',
+        title: getAssignmentTitle(item),
+        href: item.url,
+        contentType: 'assignments',
+        slug: assignmentSlug,
+      });
+    }
+  });
+
+  const seen = new Set<string>();
+  return candidates.filter(candidate => {
+    const key = normalizeHref(candidate.href);
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
+}
+
+async function getEmbeddedTopicContent(meeting: Topic['meetings'][number]): Promise<EmbeddedTopicContent[]> {
+  const candidates = collectEmbeddedContentCandidates(meeting);
+
+  return Promise.all(
+    candidates.map(async (candidate, index) => {
+      const id = `topic-work-${candidate.type}-${candidate.slug || index}`;
+      let postData: PostData | null = null;
+
+      try {
+        postData = await getPostData(candidate.slug, candidate.contentType);
+      } catch {
+        postData = null;
+      }
+
+      return {
+        id,
+        type: candidate.type,
+        title: postData?.title || candidate.title,
+        shortTitle: getEmbeddedContentShortTitle(postData, candidate.type),
+        sourceHref: candidate.href,
+        contentHref: `#${id}`,
+        postData,
+      };
+    })
+  );
+}
+
+function EmbeddedTopicContentSection({
+  item,
+  accentClassName,
+}: {
+  item: EmbeddedTopicContent;
+  accentClassName: string;
+}) {
+  return (
+    <EditorialSection
+      id={item.id}
+      label={item.shortTitle}
+    >
+      {item.postData ? (
+        <MarkdownContent
+          content={item.postData.content}
+          className={`embedded-topic-content ${accentClassName}`}
+        />
+      ) : (
+        <p className="mb-0 text-gray-700 dark:text-gray-300">
+          This item has a standalone page, but it could not be embedded here.
+        </p>
+      )}
+    </EditorialSection>
+  );
 }
 
 function TopicHeader({
@@ -316,7 +603,7 @@ function TopicSequenceNav({
               Previous
             </span>
             <span className="block wrap-break-word font-medium text-gray-900 group-hover:text-[#0b5d8f] dark:text-gray-100 dark:group-hover:text-[#8fc4ee]">
-              {previousTopic.number}. {previousTopic.title}
+              {previousTopic.number} {previousTopic.title}
             </span>
           </div>
         </Link>
@@ -334,7 +621,7 @@ function TopicSequenceNav({
               Next
             </span>
             <span className="block wrap-break-word font-medium text-gray-900 group-hover:text-[#0b5d8f] dark:text-gray-100 dark:group-hover:text-[#8fc4ee]">
-              {nextTopic.number}. {nextTopic.title}
+              {nextTopic.number} {nextTopic.title}
             </span>
           </div>
           <ChevronRightIcon className="ml-auto h-5 w-5 shrink-0 text-gray-600 group-hover:text-[#0b5d8f] dark:text-gray-300 dark:group-hover:text-[#8fc4ee] sm:ml-0" />
@@ -382,7 +669,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             items={[
               { label: 'Modules', href: '/modules' },
               { label: `${overviewTopic.id}. ${overviewTopic.title}` },
-              { label: `${overviewNumber}. Overview` },
+              { label: `${overviewNumber} Overview` },
             ]}
           />
 
@@ -424,6 +711,88 @@ export default async function TopicPage({ params }: TopicPageProps) {
   const readings = meeting.readings || [];
   const optionalReadings = meeting.optionalReadings || [];
   const activities = (meeting.activities || []).filter(activity => activity.excluded !== 1);
+  const embeddedTopicContent = await getEmbeddedTopicContent(meeting);
+  const anchorByHref = new Map(
+    embeddedTopicContent.map(item => [normalizeHref(item.sourceHref), item.contentHref])
+  );
+  const topicWorkItems = buildTopicWorkItems({
+    topicSlug: meeting.slug || slug,
+    meeting,
+    anchorByHref,
+  });
+  const topicSections: Array<{
+    navItem: TopicSectionNavItem;
+    panel: ReactElement;
+  }> = [];
+
+  topicSections.push({
+    navItem: { id: 'topic-overview', label: 'Overview' },
+    panel: (
+      <EditorialSection key="topic-overview" label="Context" title="Topic Overview">
+        <div className="max-w-4xl text-lg leading-8 text-gray-800 dark:text-gray-200">
+          {typeof meeting.description === 'string' ? (
+            <p className="mb-0">{meeting.description}</p>
+          ) : (
+            meeting.description
+          )}
+        </div>
+      </EditorialSection>
+    ),
+  });
+
+  if (readings.length > 0 || optionalReadings.length > 0) {
+    topicSections.push({
+      navItem: { id: 'read-watch', label: 'Read / Watch' },
+      panel: (
+        <EditorialSection key="read-watch" label="Materials" title="Readings">
+          <div className="space-y-6">
+            {readings.length > 0 && (
+              <div className="space-y-3">
+                <EditorialLabel>Assigned Readings</EditorialLabel>
+                <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
+                  {readings.map((reading, index) => (
+                    <li key={`${meeting.slug}-reading-${index}`} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
+                      {renderReading(reading.citation, reading.url)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {optionalReadings.length > 0 && (
+              <div className="space-y-3">
+                <EditorialLabel>Optional Or Recommended</EditorialLabel>
+                <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
+                  {optionalReadings.map((reading, index) => (
+                    <li key={`${meeting.slug}-optional-reading-${index}`} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
+                      {renderReading(reading.citation, reading.url)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </EditorialSection>
+      ),
+    });
+  }
+
+  embeddedTopicContent.forEach(item => {
+    topicSections.push({
+      navItem: {
+        id: item.id,
+        label: item.shortTitle,
+      },
+      panel: <EmbeddedTopicContentSection key={item.id} item={item} accentClassName={moduleColor.accent} />,
+    });
+  });
+
+  if (topicWorkItems.length > 0) {
+    topicSections.push({
+      navItem: { id: 'topic-work', label: 'Checklist' },
+      panel: <TopicWorkList key="topic-work" topicSlug={meeting.slug || slug} items={topicWorkItems} />,
+    });
+  }
 
   return (
     <ContentLayout variant="detail-with-toc" fullWidth showToc={false} contentPadding={false}>
@@ -433,7 +802,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
           items={[
             { label: 'Modules', href: '/modules' },
             { label: `${topic.id}. ${topic.title}` },
-            { label: `${topicNumber}. ${meeting.topic}` },
+            { label: `${topicNumber} ${meeting.topic}` },
           ]}
         />
 
@@ -447,127 +816,13 @@ export default async function TopicPage({ params }: TopicPageProps) {
         />
 
         <div className="space-y-10 px-16">
-          <EditorialSection label="Context" title="Topic Overview">
-            <div className="max-w-4xl text-lg leading-8 text-gray-800 dark:text-gray-200">
-              {typeof meeting.description === 'string' ? (
-                <p className="mb-0">{meeting.description}</p>
-              ) : (
-                meeting.description
-              )}
-            </div>
-          </EditorialSection>
+          <TopicSectionNav items={topicSections.map(section => section.navItem)}>
+            {topicSections.map(section => section.panel)}
+          </TopicSectionNav>
 
-          {(readings.length > 0 || optionalReadings.length > 0) && (
-            <EditorialSection label="Materials" title="Readings">
-              <div className="space-y-6">
-                {readings.length > 0 && (
-                  <div className="space-y-3">
-                    <EditorialLabel>Assigned Readings</EditorialLabel>
-                    <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
-                      {readings.map((reading, index) => (
-                        <li key={`${meeting.slug}-reading-${index}`} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
-                          {renderReading(reading.citation, reading.url)}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {optionalReadings.length > 0 && (
-                  <div className="space-y-3">
-                    <EditorialLabel>Optional Or Recommended</EditorialLabel>
-                    <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
-                      {optionalReadings.map((reading, index) => (
-                        <li key={`${meeting.slug}-optional-reading-${index}`} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
-                          {renderReading(reading.citation, reading.url)}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </EditorialSection>
-          )}
-
-          {activities.length > 0 && (
-            <EditorialSection label="Activities" title="Activities And Labs">
-              <div className="divide-y divide-gray-200 border-y border-gray-200 dark:divide-gray-800 dark:border-gray-800">
-                {activities.map(activity => (
-                  <div
-                    key={`${meeting.slug}-activity-${activity.title}`}
-                    className="py-3 text-sm leading-6"
-                  >
-                    {activity.url ? (
-                      <Link
-                        href={activity.url}
-                        className="font-medium text-gray-900 no-underline hover:text-[#0b5d8f] dark:text-gray-100 dark:hover:text-[#8fc4ee]"
-                      >
-                        {activity.title}
-                      </Link>
-                    ) : (
-                      <p className="m-0 text-base font-medium text-gray-900 dark:text-gray-100">
-                        {activity.title}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </EditorialSection>
-          )}
-
-          {(assignedItems.length > 0 || dueItems.length > 0) && (
-            <EditorialSection label="Practice" title="Assigned And Due">
-              <div className="space-y-7">
-                {assignedItems.length > 0 && (
-                  <div className="space-y-3">
-                    <EditorialLabel>Assigned</EditorialLabel>
-                    <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
-                      {assignedItems.map((item, index) => (
-                        <li key={`${meeting.slug}-assigned-${index}`} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
-                          {typeof item === 'string' ? (
-                            item
-                          ) : item.url ? (
-                            <Link href={item.url} className="font-medium text-gray-900 no-underline hover:text-[#0b5d8f] dark:text-gray-100 dark:hover:text-[#8fc4ee]">
-                              {item.titleShort ? `${item.titleShort}: ${item.title}` : item.title}
-                            </Link>
-                          ) : item.titleShort ? (
-                            `${item.titleShort}: ${item.title}`
-                          ) : (
-                            item.title
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {dueItems.length > 0 && (
-                  <div className="space-y-3">
-                    <EditorialLabel>Due</EditorialLabel>
-                    <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
-                      {dueItems.map((item, index) => (
-                        <li key={`${meeting.slug}-due-${index}`} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
-                          {typeof item === 'string' ? (
-                            item
-                          ) : item.url ? (
-                            <Link href={item.url} className="font-medium text-gray-900 no-underline hover:text-[#0b5d8f] dark:text-gray-100 dark:hover:text-[#8fc4ee]">
-                              {item.titleShort ? `${item.titleShort}: ${item.title}` : item.title}
-                            </Link>
-                          ) : item.titleShort ? (
-                            `${item.titleShort}: ${item.title}`
-                          ) : (
-                            item.title
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </EditorialSection>
-          )}
-
-          <TopicSequenceNav previousTopic={previousTopic} nextTopic={nextTopic} />
+          <div id="topic-sequence" className="scroll-mt-24">
+            <TopicSequenceNav previousTopic={previousTopic} nextTopic={nextTopic} />
+          </div>
         </div>
       </div>
     </ContentLayout>

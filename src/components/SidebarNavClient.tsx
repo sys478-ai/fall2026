@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   Bars3Icon,
   BookOpenIcon,
+  CheckCircleIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
@@ -18,6 +19,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { useDarkMode } from '@/hooks/useDarkMode';
+import { readTopicCompletion, TOPIC_PROGRESS_EVENT } from '@/lib/topic-progress';
 
 interface SidebarTopicItem {
   id: string;
@@ -44,6 +46,10 @@ function normalizePath(path: string) {
   return path.replace(/^\/fall2026/, '').replace(/\/$/, '') || '/';
 }
 
+function getTopicSlugFromHref(href: string) {
+  return href.match(/\/topics\/([^/#?]+)/)?.[1] || null;
+}
+
 export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -52,6 +58,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const [mounted, setMounted] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [completedTopics, setCompletedTopics] = useState<Record<string, boolean>>({});
   const [modulesOpen, setModulesOpen] = useState(
     normalizedPath === '/' || normalizedPath.startsWith('/modules') || normalizedPath.startsWith('/topics')
   );
@@ -69,6 +76,46 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
       setCollapsed(savedCollapsed === 'true');
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const refreshCompletedTopics = () => {
+      const nextCompletedTopics: Record<string, boolean> = {};
+
+      modules.forEach(module => {
+        module.topics.forEach(topic => {
+          const topicSlug = getTopicSlugFromHref(topic.contentHref);
+          if (topicSlug) {
+            nextCompletedTopics[topicSlug] = readTopicCompletion(topicSlug);
+          }
+        });
+      });
+
+      setCompletedTopics(nextCompletedTopics);
+    };
+
+    const handleTopicProgressChanged = () => {
+      refreshCompletedTopics();
+    };
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key?.startsWith('topic-complete-')) {
+        refreshCompletedTopics();
+      }
+    };
+
+    refreshCompletedTopics();
+    window.addEventListener(TOPIC_PROGRESS_EVENT, handleTopicProgressChanged as EventListener);
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      window.removeEventListener(TOPIC_PROGRESS_EVENT, handleTopicProgressChanged as EventListener);
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, [modules]);
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
@@ -306,6 +353,8 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                             <div className="space-y-0.5">
                               {module.topics.map(topic => {
                                 const isTopicActive = normalizePath(topic.contentHref) === normalizedPath;
+                                const topicSlug = getTopicSlugFromHref(topic.contentHref);
+                                const isCompleted = topicSlug ? completedTopics[topicSlug] === true : false;
 
                                 return (
                                   <Link
@@ -318,15 +367,23 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                     }`}
                                   >
                                     <span
-                                      className={`absolute left-[-17px] top-3 h-2 w-2 rounded-full ${
-                                        isTopicActive
-                                          ? 'bg-[#0b5d8f] dark:bg-[#2f80d7]'
-                                          : 'bg-[#0b5d8f]/20 dark:bg-[#2f80d7]/35'
-                                      }`}
-                                    />
+                                      className="absolute left-[-22px] top-2 flex h-5 w-5 items-center justify-center"
+                                    >
+                                      {isCompleted ? (
+                                        <CheckCircleIcon className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                                      ) : (
+                                        <span
+                                          className={`h-2.5 w-2.5 rounded-full ${
+                                            isTopicActive
+                                              ? 'bg-[#0b5d8f] dark:bg-[#2f80d7]'
+                                              : 'bg-[#0b5d8f]/20 dark:bg-[#2f80d7]/35'
+                                          }`}
+                                        />
+                                      )}
+                                    </span>
                                     <span className="min-w-0">
                                       <span
-                                        className={`block line-clamp-2 text-[13px] leading-snug ${
+                                        className={`block min-w-0 line-clamp-2 text-[13px] leading-snug ${
                                           isTopicActive ? 'font-semibold' : 'font-normal'
                                         }`}
                                       >

@@ -671,6 +671,14 @@ html {
     display: none !important;
   }
 
+  .topic-section-tablist {
+    display: none !important;
+  }
+
+  .topic-section-panel[data-active="true"] {
+    display: block !important;
+  }
+
   body {
     font-size: 12pt;
     line-height: 1.4;
@@ -1093,6 +1101,14 @@ pre code {
 /* Cheatsheet styles */
 .cheatsheet-content h2 {
   @apply text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4;
+}
+
+.embedded-topic-content > h1:first-child,
+.embedded-topic-content > h2:first-child,
+.embedded-topic-content > h3:first-child {
+  color: inherit;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 .cheatsheet-content table.cheatsheet-table {

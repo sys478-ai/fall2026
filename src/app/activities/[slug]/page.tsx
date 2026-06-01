@@ -6,6 +6,8 @@ import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
 import StyleGuideStyles from '@/components/StyleGuideStyles';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import TopicContextBanner from '@/components/TopicContextBanner';
+import { getTopicContextForHref } from '@/lib/topic-context';
 import { notFound } from 'next/navigation';
 
 interface AssignmentPageProps {
@@ -45,6 +47,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
     
     const { heading_max_level } = postData;
     const isStyleGuideDemo = slug === 'style-guide-demo';
+    const topicContext = await getTopicContextForHref(`/activities/${slug}`);
     
     return (
       <ContentLayout
@@ -53,6 +56,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         showToc={postData.toc !== false}
         tocMaxLevel={heading_max_level || 2}
       >
+        <TopicContextBanner context={topicContext} />
         <Breadcrumbs
           items={[
             { label: 'Schedule', href: '/' },

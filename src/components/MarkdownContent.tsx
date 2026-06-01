@@ -11,8 +11,6 @@ interface MarkdownContentProps {
 
 export default function MarkdownContent({ content, className }: MarkdownContentProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const previousAllCheckedRef = useRef(false);
-  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -54,28 +52,6 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
       return Array.from(checkboxes).every((checkbox) => checkbox.checked);
     };
 
-    // Helper function to check and trigger confetti if all are checked
-    const checkAndTriggerConfetti = () => {
-      const allChecked = areAllCheckboxesChecked();
-      
-      // Skip on initial load - just set the initial state
-      if (isInitialLoad.current) {
-        previousAllCheckedRef.current = allChecked;
-        isInitialLoad.current = false;
-        return;
-      }
-      
-      // Trigger confetti when transitioning from "not all checked" to "all checked"
-      if (allChecked && !previousAllCheckedRef.current) {
-        triggerConfetti();
-      }
-      
-      previousAllCheckedRef.current = allChecked;
-    };
-
-    // Check initial state (but don't trigger confetti on load)
-    checkAndTriggerConfetti();
-
     // Add event listeners to save state when checkboxes are clicked
     const handleCheckboxChange = (event: Event) => {
       const target = event.target as HTMLInputElement;
@@ -85,8 +61,13 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
       }
       // Update styling when checkbox state changes
       updateCheckboxStyling(target);
-      // Check if all are checked and trigger confetti if needed
-      checkAndTriggerConfetti();
+      const wasAllChecked = Array.from(checkboxes).every((checkbox) =>
+        checkbox === target ? !target.checked : checkbox.checked
+      );
+      const isAllChecked = areAllCheckboxesChecked();
+      if (target.checked && isAllChecked && !wasAllChecked) {
+        triggerConfetti();
+      }
     };
 
     checkboxes.forEach((checkbox) => {

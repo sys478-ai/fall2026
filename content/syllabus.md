@@ -33,40 +33,67 @@ title: 'Syllabus: "Thinking" Machines, Human Choices: Power & Responsibility in 
 
 ## Course Description
 
-This course examines intelligence as a biological, computational, and social idea. Students will explore how humans and machines learn, how metaphors of brains and intelligence shape public understanding of AI, and how emerging technologies such as neuromorphic computing raise new questions about classification, anomaly detection, surveillance, accountability, and governance. The course treats AI systems as socio-technical systems: not just algorithms or hardware, but arrangements of data, institutions, labor, values, users, and power. Through readings, case studies, interactive technical demonstrations, and public-facing projects, students will learn to explain complex technologies clearly and evaluate their implications for real communities. The course culminates in a public-facing resource, brief, exhibit, or presentation designed to help a non-specialist audience reason about emerging AI and its possible futures.
+This senior seminar examines AI as both a technical system and a public problem. We will study how systems classify, measure, predict, and detect anomalies, while asking how those technical choices shape surveillance, accountability, labor, infrastructure, environmental impact, and governance. Rather than treating AI as only software, the course approaches it as socio-technical and material: built from data, hardware, institutions, values, supply chains, and stories about what intelligence is supposed to be.
+
+The course is anchored by an NSF-funded BRAID case study focused on an emerging cerebellum-inspired neuromorphic circuit for anomaly detection in edge computing. Students will use that case to practice anticipatory governance: asking ethical, legal, and societal questions while a technology is still emerging rather than waiting until it is already entrenched.
+
+The course also includes a career-readiness strand and a substantial final project. Over the semester, students will build professional goals, communication skills, and reflective career materials that support a final senior-level artifact. That artifact may take the form of a public-facing explainer, governance brief, exhibit, memo set, presentation, or other stakeholder-facing resource that helps non-specialists reason about an emerging AI system and its possible futures.
 
 ## Learning Objectives
 
 By the end of the course, students will be able to:
 
-- Analyze, interpret, and communicate with data effectively to different stakeholders / audiences
-- Analyze and critique data sources and underlying assumptions
-- Apply principles of effective visual design and perception to data communication
-- Apply UX/UI principles to evaluate, test, and refine based on user feedback
-- Develop technical fluency with data analysis and visualization tools
-- Understand both the possibilities and limits of using data to represent complex problems
+- Explain key AI mechanisms such as classification, feature selection, thresholds, prediction, anomaly detection, neural networks, edge AI, and neuromorphic computing in clear, accessible language.
+- Analyze AI systems as socio-technical and material systems rather than as isolated algorithms.
+- Identify how categories, datasets, proxies, baselines, and thresholds encode human judgment and institutional values.
+- Evaluate how technical design choices shape downstream questions of bias, surveillance, explainability, accountability, environmental impact, and governance.
+- Apply anticipatory governance frameworks to an emerging neuromorphic anomaly-detection case study.
+- Communicate technical and ethical analysis effectively to non-specialist, public, or stakeholder audiences.
+- Develop a meaningful final artifact that synthesizes technical understanding, governance analysis, and public or professional communication.
 
 ## Topics
 
-- Please see the [course schedule](/)
+Major topics include:
+
+- intelligence as a contested category
+- classification, categories, and measurement
+- training data, features, thresholds, and prediction
+- neural networks, opacity, and explanation
+- anomaly detection, normality, and surveillance
+- edge AI, privacy, and accountability
+- brain-inspired and neuromorphic computing
+- hardware, energy, and environmental impact
+- anticipatory governance of emerging technologies
+- career readiness, professional storytelling, and public communication
+
+Please see the [course schedule](/) for the full module and meeting sequence.
 
 ## Assessment
 
-1. **Participation & Attendance**: 15%
-1. **Labs**: 20%
-1. **Homework**: 25%
-1. **Midterm Exam**: 15%
-1. **Final Project**: 25%
+1. **Participation and Seminar Engagement**: 20%
+1. **Labs**: 40%
+1. **Final Project**: 40%
 
-### 1. Participation (15%)
+### 1. Participation and Seminar Engagement (20%)
 
-We will use classroom discussion as a form of collaborative sense-making to understand, critique, and interrogate the required course readings. Your timely and engaged attendance at every class is thus very important – both for you and for your classmates. Every student will need to participate in a thoughtful and productive manner in order for these discussions to be effective. Building on and reacting to other participants’ comments is encouraged, and should be done in a respectful tone even if you disagree. In order to participate fully, please do not let your laptop, phone, or other devices distract you or other participants.
+Participation and seminar engagement are worth 20% of the course grade. This category includes attendance, preparation, discussion, and meaningful participation in the career-readiness strand of the course.
 
-You are allowed two absences during the semester, no questions asked. You should reserve these absences for emergency or illness. After two absences, your grade will be impacted.
+We will use classroom discussion as a form of collaborative sense-making to understand, critique, and interrogate the required readings, case studies, and technical examples. Your timely and engaged attendance at every class is thus very important — both for you and for your classmates. Every student will need to participate thoughtfully and productively in order for these discussions to be effective. Building on and reacting to other participants’ comments is encouraged, and should be done in a respectful tone even if you disagree. In order to participate fully, please do not let your laptop, phone, or other devices distract you or other participants.
 
-### 2. Labs (20%)
+Participation and seminar engagement also includes the career-readiness strand of the course. These modules are part of the seminar experience, not an unrelated add-on. Completing those activities, reflecting seriously, and contributing to the professional and public-facing dimensions of the course are part of this category.
 
-We will have roughly 8 labs that are designed to help you work with the tools, technologies, and techniques that can be used to analyze and create data displays and narratives.
+You are allowed two absences during the semester, no questions asked. You should reserve these absences for emergency or illness.
+
+Because this is a discussion-based senior seminar, attendance also has course-wide significance. After two absences, the attendance policy becomes strict:
+
+- the third absence lowers your final course grade by half a letter
+- each additional absence lowers your final course grade by another half letter
+
+Because this is a discussion-based senior seminar, excessive absence does not only affect your own learning. It also affects the quality of the course for everyone else. If you are facing circumstances that may affect attendance in an ongoing way, please communicate with me as early as possible.
+
+### 2. Labs (40%)
+
+Labs are a central part of the course. They are designed to make technical systems concrete so that ethical and governance questions do not stay abstract. In labs, you may sort ambiguous cases, trace a tiny neural network, define anomaly baselines, map data flows, compare architectures, analyze hardware constraints, or evaluate governance safeguards for emerging systems.
 
 Labs will be graded according to the following scale (from 0-3 points):
 
@@ -79,22 +106,23 @@ Labs will be graded according to the following scale (from 0-3 points):
 
 Labs are designed to be completed during class. That said, you may have a week to turn them in. **I do not accept late labs**.
 
-### 3. Homework (25%)
+### 3. Final Project (40%)
 
-We will have roughly 4 homework assignments that will ask you to apply the theories and principles learned in class to analyze a series of "real world" contexts and scenarios.
+The final project is the culminating senior-seminar artifact. Students will complete the project in groups and develop a public-facing or stakeholder-facing resource related to AI, governance, and emerging technology. Possible formats may include a governance brief, public explainer, exhibit, memo set, presentation, or other substantial communication artifact.
 
-### 4. Midterm Exam (15%)
+Strong final projects will:
 
-There will be an in-class midterm exam that will ask you to apply the perspectives and principles from the readings. Doing the readings and engaging in class discussions is the best way to prepare for the midterm.
+- explain a concrete technical system clearly
+- identify relevant stakeholders, risks, and possible benefits
+- connect technical design choices to social and governance consequences
+- use course concepts and ethical recognition patterns precisely
+- communicate effectively to a non-specialist or mixed audience
 
-### 5. Final Project (25%)
-
-This class will also have a final project, to be completed in groups. The project will involve creating a data-intensive information campaign around a topic of your choice.
+The career-readiness modules are part of the support structure for this final project. They are intended to help you develop goals, stories, and communication practices that strengthen your final work. Project checkpoints, proposal work, drafting, revision, and the final presentation all belong to this category.
 
 ## Late Policy
 
 - No late labs or project deliverables will be accepted.
-- Homework submitted up to 1 week after it is due will be assigned a 20% penalty. Any work received after that will not be accepted.
 
 ## Draft Generative AI Policy
 

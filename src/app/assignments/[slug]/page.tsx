@@ -5,6 +5,8 @@ import MarkdownContent from '@/components/MarkdownContent';
 import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
 import StyleGuideStyles from '@/components/StyleGuideStyles';
+import TopicContextBanner from '@/components/TopicContextBanner';
+import { getTopicContextForHref } from '@/lib/topic-context';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -37,6 +39,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
     const { heading_max_level } = postData;
     const isStyleGuideDemo = slug === 'style-guide-demo';
     const isTutorial02 = slug === 'tutorial02';
+    const topicContext = await getTopicContextForHref(`/assignments/${slug}`);
     
     return (
       <ContentLayout
@@ -46,6 +49,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         tocMaxLevel={heading_max_level || 2}
       >
         <div className={`assignment-page${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
+          <TopicContextBanner context={topicContext} />
           <div className="mb-4">
             <Link href="/assignments" className="text-blue-600 dark:text-blue-400 hover:underline">
               Assignments

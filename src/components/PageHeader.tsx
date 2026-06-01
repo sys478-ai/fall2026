@@ -7,14 +7,15 @@ interface PageHeaderProps {
   group?: string;
   num?: string;
   includeExpandButton?: boolean
+  borderless?: boolean;
 }
 
-export default function PageHeader({ title, excerpt, type, group, num }: PageHeaderProps) {
+export default function PageHeader({ title, excerpt, type, group, num, borderless = false }: PageHeaderProps) {
   const className = '!border-transparent hover:border-b-2';
   const isAssignmentType = !!type && ['homework', 'lab', 'assignment', 'tutorial'].includes(type);
   const isExamType = !!type && ['exam', 'practice exam', 'assessment'].includes(type);
   return (
-    <div className="border-b border-gray-200 dark:border-gray-800 pb-4">
+    <div className={borderless ? 'pb-4' : 'border-b border-gray-200 dark:border-gray-800 pb-4'}>
       <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
         {type && type === 'activity' ? (<><Link href="/" className={className}>Schedule</Link> &gt; </>) : ''}
         {isAssignmentType ? (<><Link href="/assignments" className={className}>Assignments</Link> &gt; </>) : ''}

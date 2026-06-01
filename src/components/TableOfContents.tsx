@@ -18,8 +18,41 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
   const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
-    let intersectionObserver: IntersectionObserver | null = null;
     let lastItemsHash = '';
+    let currentHeadings: HTMLElement[] = [];
+    let animationFrame: number | null = null;
+    const scrollContainer = document.getElementById('main-content-scroll');
+
+    const updateActiveHeading = () => {
+      if (currentHeadings.length === 0) {
+        return;
+      }
+
+      const containerTop = scrollContainer?.getBoundingClientRect().top ?? 0;
+      const activationLine = containerTop + SCROLL_OFFSET_PX + 1;
+      let activeHeading = currentHeadings[0];
+
+      for (const heading of currentHeadings) {
+        if (heading.getBoundingClientRect().top <= activationLine) {
+          activeHeading = heading;
+        } else {
+          break;
+        }
+      }
+
+      setActiveId(activeHeading.id);
+    };
+
+    const scheduleActiveHeadingUpdate = () => {
+      if (animationFrame !== null) {
+        return;
+      }
+
+      animationFrame = requestAnimationFrame(() => {
+        animationFrame = null;
+        updateActiveHeading();
+      });
+    };
     
     const performScan = () => {
       // Build selector based on maxLevel
@@ -31,7 +64,6 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
       
       // Try to find headings within the main content scroll container first
       // Otherwise fall back to the resources layout container or document
-      const scrollContainer = document.getElementById('main-content-scroll');
       const resourcesLayout = document.querySelector('[data-resources-layout]');
       const searchRoot = scrollContainer || resourcesLayout || document;
       
@@ -41,7 +73,9 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
       
       allHeadings.forEach((heading) => {
         const instructorNotesSection = heading.closest('[data-instructor-notes="true"]');
-        if (!instructorNotesSection) {
+        const tocExcludedSection = heading.closest('[data-toc-exclude="true"]');
+        const text = heading.textContent?.trim();
+        if (!instructorNotesSection && !tocExcludedSection && text !== 'On This Page') {
           const level = parseInt(heading.tagName.charAt(1));
           headings.push({ element: heading, level });
         }
@@ -54,7 +88,8 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
         collapsibleSummaries.forEach((summary) => {
           const details = summary.closest('details');
           const instructorNotesSection = details?.closest('[data-instructor-notes="true"]');
-          if (!instructorNotesSection && details) {
+          const tocExcludedSection = details?.closest('[data-toc-exclude="true"]');
+          if (!instructorNotesSection && !tocExcludedSection && details) {
             headings.push({ element: summary, level: 3 });
           }
         });
@@ -112,35 +147,10 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
         setTocItems(items);
       }
 
-      // Clean up old observer
-      if (intersectionObserver) {
-        sortedHeadings.forEach((headingData) => intersectionObserver!.unobserve(headingData.element));
-      }
-
-      // Set up new intersection observer
-      // Use scroll container as root if it exists and is scrollable, otherwise use viewport
-      const isContainerScrollable = scrollContainer && 
-        (getComputedStyle(scrollContainer).overflowY === 'auto' || 
-         getComputedStyle(scrollContainer).overflowY === 'scroll');
-      
-      intersectionObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveId(entry.target.id);
-            }
-          });
-        },
-        {
-          root: isContainerScrollable ? scrollContainer : null,
-          // rootMargin top should match SCROLL_OFFSET_PX from utils.ts
-          // This ensures TOC highlighting aligns with anchor scroll position
-          rootMargin: `-${SCROLL_OFFSET_PX}px 0px -80% 0px`,
-          threshold: 0.1
-        }
-      );
-
-      sortedHeadings.forEach((headingData) => intersectionObserver!.observe(headingData.element));
+      currentHeadings = sortedHeadings
+        .map(headingData => headingData.element)
+        .filter((element): element is HTMLElement => element instanceof HTMLElement);
+      scheduleActiveHeadingUpdate();
     };
     
     // Initial scan
@@ -152,13 +162,16 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
     // Re-scan periodically to catch dynamically added headings (like quiz)
     // Use a shorter interval for faster detection
     const interval = setInterval(performScan, 1000);
+    const scrollTarget = scrollContainer || window;
+    scrollTarget.addEventListener('scroll', scheduleActiveHeadingUpdate, { passive: true });
+    window.addEventListener('resize', scheduleActiveHeadingUpdate);
 
     return () => {
       clearInterval(interval);
-      if (intersectionObserver) {
-        // Clean up observer on unmount
-        const allHeadings = document.querySelectorAll('h2, h3, h4, h5, h6, details.mb-4 > summary');
-        allHeadings.forEach((heading) => intersectionObserver!.unobserve(heading));
+      scrollTarget.removeEventListener('scroll', scheduleActiveHeadingUpdate);
+      window.removeEventListener('resize', scheduleActiveHeadingUpdate);
+      if (animationFrame !== null) {
+        cancelAnimationFrame(animationFrame);
       }
     };
   }, [maxLevel]);
@@ -168,9 +181,8 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
   }
 
   return (
-    <nav className="">
-      <div 
-        className="pl-4">
+    <nav className="" data-toc-exclude="true">
+      <div className="pl-4 pt-2">
         <h2 className="!text-lg !font-normal mb-2">On This Page</h2>
         <ul className="!list-none !p-0 !m-0 space-y-0.5">
           {tocItems.map((item) => {
