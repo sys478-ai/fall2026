@@ -3,7 +3,6 @@ import path from 'path';
 import type { Metadata } from 'next';
 import taxonomyData from '../../../content/config/taxonomy.json';
 import ContentLayout from '@/components/ContentLayout';
-import PageHeader from '@/components/PageHeader';
 import RecognitionPatternCards from '@/components/RecognitionPatternCards';
 import { getAllPosts } from '@/lib/markdown';
 
@@ -99,14 +98,25 @@ export default function EthicalPatternRecognitionFieldGuidePage() {
   const patterns = getPatternsWithMarkdownMetadata();
 
   return (
-    <ContentLayout variant="list" fullWidth>
+    <ContentLayout
+      variant="list"
+      fullWidth
+      header={
+        <header className="border-y border-violet-200 bg-violet-50 px-16 py-16 dark:border-violet-900 dark:bg-violet-950/30">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
+            Field Guide
+          </p>
+          <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
+            Ethical Pattern Recognition Field Guide
+          </h1>
+          <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">
+            A standalone reference for the recurring patterns students can practice noticing across technical systems,
+            social consequences, and governance debates.
+          </p>
+        </header>
+      }
+    >
       <div className="space-y-7">
-        <PageHeader
-          title="Ethical Pattern Recognition Field Guide"
-          excerpt="A standalone reference for the recurring patterns students can practice noticing across technical systems, social consequences, and governance debates."
-        />
-
-
         <RecognitionPatternCards patterns={patterns} />
       </div>
     </ContentLayout>

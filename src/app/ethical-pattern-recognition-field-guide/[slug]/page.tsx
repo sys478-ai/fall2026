@@ -13,6 +13,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import ContentLayout from '@/components/ContentLayout';
 import MarkdownContent from '@/components/MarkdownContent';
 import PatternCaseTabs, { type PatternCaseTab } from '@/components/PatternCaseTabs';
+import PatternComicStrip, { type PatternComicStripItem } from '@/components/PatternComicStrip';
 
 interface PageProps {
   params: Promise<{
@@ -33,12 +34,6 @@ interface TaxonomyData {
 }
 
 const taxonomy = taxonomyData as TaxonomyData;
-
-interface PatternSubsection {
-  id: string;
-  label: string;
-  content: string;
-}
 
 function formatGroupLabel(group?: string) {
   if (!group) {
@@ -141,10 +136,10 @@ function splitPatternContentSections(content: string) {
 
 function splitPatternSubsections(content: string): {
   intro: string;
-  items: PatternSubsection[];
+  items: PatternComicStripItem[];
 } {
   const headingRegex = /<h3[^>]*>([\s\S]*?)<\/h3>/gi;
-  const items: PatternSubsection[] = [];
+  const items: PatternComicStripItem[] = [];
   let intro = '';
   let currentLabel = '';
   let currentStart = 0;
@@ -226,36 +221,12 @@ function PatternSection({ label, children }: { label: string; children: ReactNod
   );
 }
 
-function PatternStepGrid({ intro, steps }: { intro: string; steps: PatternSubsection[] }) {
-  return (
-    <div className="space-y-6">
-      {intro && <MarkdownContent content={intro} />}
-      <div className="grid gap-8 lg:grid-cols-3">
-        {steps.map(step => (
-          <article
-            key={step.id}
-            className="min-w-0 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-black"
-          >
-            <h3 className="m-0! mb-4! text-lg font-semibold leading-tight text-gray-950 dark:text-gray-50">
-              {step.label}
-            </h3>
-            <MarkdownContent
-              content={step.content}
-              className="[&_blockquote]:mb-0 [&_blockquote]:mt-4 [&_img]:mb-4 [&_img]:aspect-4/3 [&_img]:w-full [&_img]:max-w-none [&_img]:rounded-xl [&_img]:object-cover"
-            />
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function PatternContentSection({ section }: { section: { label: string; content: string } }) {
   const caseTabs = section.label === 'Examples' ? splitPatternCaseTabs(section.content) : [];
   const stepGrid = section.label === 'What To Notice' ? splitPatternSubsections(section.content) : null;
 
   if (stepGrid && stepGrid.items.length > 0) {
-    return <PatternStepGrid intro={stepGrid.intro} steps={stepGrid.items} />;
+    return <PatternComicStrip intro={stepGrid.intro} items={stepGrid.items} />;
   }
 
   if (caseTabs.length > 0) {
