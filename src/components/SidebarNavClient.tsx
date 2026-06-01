@@ -41,7 +41,7 @@ interface SidebarNavClientProps {
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
 
 function normalizePath(path: string) {
-  return (path.replace(/^\/fall2026/, '').replace(/\/$/, '')) || '/';
+  return path.replace(/^\/fall2026/, '').replace(/\/$/, '') || '/';
 }
 
 export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
@@ -52,10 +52,12 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const [mounted, setMounted] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [modulesOpen, setModulesOpen] = useState(normalizedPath === '/' || normalizedPath.startsWith('/modules') || normalizedPath.startsWith('/topics'));
+  const [modulesOpen, setModulesOpen] = useState(
+    normalizedPath === '/' || normalizedPath.startsWith('/modules') || normalizedPath.startsWith('/topics')
+  );
   const [openModuleId, setOpenModuleId] = useState<number | null>(() => {
-    const activeModule = modules.find((module) =>
-      module.topics.some((topic) => normalizePath(topic.contentHref) === normalizedPath)
+    const activeModule = modules.find(module =>
+      module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
     );
     return activeModule?.id ?? modules[0]?.id ?? null;
   });
@@ -78,8 +80,8 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   }, [pathname]);
 
   useEffect(() => {
-    const activeModule = modules.find((module) =>
-      module.topics.some((topic) => normalizePath(topic.contentHref) === normalizedPath)
+    const activeModule = modules.find(module =>
+      module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
     );
 
     if (activeModule) {
@@ -162,7 +164,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   };
 
   const toggleModule = (moduleId: number) => {
-    setOpenModuleId((current) => {
+    setOpenModuleId(current => {
       if (current === moduleId) {
         return null;
       }
@@ -216,7 +218,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
 
       <div className="flex-1 overflow-y-auto px-3 py-4 scrollbar-none [&::-webkit-scrollbar]:hidden">
         <nav className="space-y-1">
-          {navItems.slice(0, 1).map((item) => (
+          {navItems.slice(0, 1).map(item => (
             <Link
               key={item.href}
               href={item.href}
@@ -258,7 +260,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
             {!collapsed && modulesOpen && (
               <div className="border-y border-gray-100 py-2 dark:border-gray-900">
                 <div className="space-y-1">
-                  {modules.map((module) => {
+                  {modules.map(module => {
                     const isOpen = openModuleId === module.id;
 
                     return (
@@ -267,7 +269,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                         className={`border transition-colors ${
                           isOpen
                             ? 'border-white dark:border-[#2f80d7]/25'
-                            : 'border-transparent bg-transparent hover:bg-[#fbfaf7] dark:hover:bg-gray-950/30'
+                            : 'border-transparent bg-transparent hover:bg-slate-50 dark:hover:bg-gray-950/30'
                         }`}
                       >
                         <div className="flex items-center">
@@ -302,7 +304,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                         {isOpen && (
                           <div className="ml-4 mr-1 mt-1 border-l border-[#0b5d8f]/20 pb-3 pl-3 dark:border-[#2f80d7]/35">
                             <div className="space-y-0.5">
-                              {module.topics.map((topic) => {
+                              {module.topics.map(topic => {
                                 const isTopicActive = normalizePath(topic.contentHref) === normalizedPath;
 
                                 return (
@@ -348,7 +350,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
             )}
           </div>
 
-          {navItems.slice(2).map((item) => (
+          {navItems.slice(2).map(item => (
             <Link
               key={item.href}
               href={item.href}
@@ -394,9 +396,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
         <div className="w-10" aria-hidden="true" />
       </div>
 
-      <aside className="hidden md:block md:h-screen md:shrink-0">
-        {sidebarInner}
-      </aside>
+      <aside className="hidden md:block md:h-screen md:shrink-0">{sidebarInner}</aside>
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden">

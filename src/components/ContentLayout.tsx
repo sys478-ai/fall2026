@@ -326,7 +326,7 @@ export default function ContentLayout({
           id="main-content-scroll"
           className={`flex-1 min-w-0 overflow-y-auto ${hasToc ? 'mr-72' : ''}`}
         >
-          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl'} px-4 lg:px-8`}>
+          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl'} px-4 lg:pl-0 lg:pr-8`}>
             <div className="space-y-6 py-6">
               {children}
               {showFooter && <Footer />}
