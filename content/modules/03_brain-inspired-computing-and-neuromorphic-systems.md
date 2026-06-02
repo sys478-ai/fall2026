@@ -2,6 +2,7 @@
 id: 3
 slug: brain-inspired-computing-and-neuromorphic-systems
 title: 'Brain-Inspired Computing'
+color: emerald
 excerpt: 'This module builds technical grounding in neural networks, spiking systems, and neuromorphic hardware while questioning easy brain metaphors.'
 unit_focus: 'Students build technical grounding in neuroscience metaphors, neural networks, spiking systems, timing, and neuromorphic architectures without collapsing those systems into myths of human-like intelligence.'
 braid_elsi_arc: 'The unit prepares students to analyze how brain metaphors, material substrates, and hardware design choices affect public understanding, trust, and governance.'

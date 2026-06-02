@@ -2,6 +2,7 @@
 id: 7
 slug: final-exam-presentations
 title: 'Final Exam / Presentations'
+color: teal
 excerpt: 'This module is the course culmination, where students present a public-facing synthesis of technical explanation and governance analysis.'
 unit_focus: 'Final presentations synthesize technical explanation, public communication, and governance analysis.'
 ---

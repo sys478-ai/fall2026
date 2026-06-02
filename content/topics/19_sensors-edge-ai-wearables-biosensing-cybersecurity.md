@@ -1,8 +1,8 @@
 ---
-title: "Sensors, edge AI, wearables, biosensing, cybersecurity"
+title: "How Do Sensors Make Data?"
 slug: "sensors-edge-ai-wearables-biosensing-cybersecurity"
 module: "from-mechanism-to-implications"
-focus: "Sensors, edge AI, wearables, biosensing, and cybersecurity."
+subtitle: "Trace how sensing systems translate bodies, behavior, and environments into data."
 ethical_patterns:
   - "measurement-becomes-datafication"
   - "automation-changes-accountability"

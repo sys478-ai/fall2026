@@ -1,8 +1,8 @@
 ---
-title: "Neural networks, opacity, trust, contestability, dependency"
+title: "Why Are Neural Networks Hard to Trust?"
 slug: "neural-networks-opacity-trust-contestability-dependency"
 module: "brain-inspired-computing-and-neuromorphic-systems"
-focus: "Neural networks, opacity, trust, contestability, and dependency."
+subtitle: "Connect neural networks to trust, contestability, opacity, and dependency."
 ethical_patterns:
   - "opacity-shifts-authority"
   - "dependency-cognitive-offloading-deskilling"

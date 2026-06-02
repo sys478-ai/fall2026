@@ -1,8 +1,8 @@
 ---
-title: "Objectivity, neutrality, and who or what gets defined"
+title: "Who or What Gets Defined?"
 slug: "human-learning-memory-dreams-prediction-adaptation"
 module: "what-is-intelligence"
-focus: "Objectivity, neutrality, and who or what gets defined."
+subtitle: "Ask who or what gets defined when categories appear objective, neutral, or authoritative."
 ethical_patterns:
   - "classification-is-not-neutral"
 themes:

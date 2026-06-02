@@ -1,8 +1,8 @@
 ---
-title: "Prediction and historical data"
+title: "How Does Prediction Use the Past?"
 slug: "prediction-and-historical-data"
 module: "how-do-machines-learn"
-focus: "Prediction and historical data."
+subtitle: "Show how historical data shapes future judgments and outcomes."
 ethical_patterns:
   - "prediction-imports-the-past"
 themes:

@@ -41,24 +41,39 @@ function SyllabusTopicList({ topics }: { topics: SyllabusTopics }) {
 
           <ol className="m-0 divide-y divide-gray-200 p-0! dark:divide-gray-800">
             {topic.meetings.map((meeting, index) => {
-              const topicHref = meeting.slug ? `/topics/${meeting.slug}` : undefined;
+              const isNoClass = meeting.holiday === true;
+              const topicHref = meeting.slug && !isNoClass ? `/topics/${meeting.slug}` : undefined;
 
               return (
                 <li
                   key={`${topic.id}-${meeting.slug || index}`}
-                  className="grid gap-4 px-2 py-2 grid-cols-[6rem_minmax(0,1fr)]"
+                  className="grid gap-4 px-2 py-2 grid-cols-[7rem_minmax(0,1fr)]"
                 >
-                  <span className="text-sm text-gray-600 dark:text-gray-400">{meeting.date}</span>
+                  <span className="flex items-center text-sm text-gray-600 dark:text-gray-400">{meeting.date}</span>
                   {topicHref ? (
-                    <Link
-                      href={topicHref}
-                      className="min-w-0 text-sm font-medium text-gray-950 no-underline hover:text-[#0b5d8f] dark:text-gray-100 dark:hover:text-[#8fc4ee]"
-                    >
-                      {meeting.topic}
+                    <Link href={topicHref} className="min-w-0 no-underline group">
+                      <span className="block text-md font-medium text-gray-950 group-hover:text-[#0b5d8f] dark:text-gray-100 dark:group-hover:text-[#8fc4ee]">
+                        {meeting.topic}
+                      </span>
+                      {meeting.subtitle && (
+                        <span className="mt-0.5 block text-md font-normal leading-5 text-gray-500 dark:text-gray-500">
+                          {meeting.subtitle}
+                        </span>
+                      )}
                     </Link>
                   ) : (
-                    <span className="min-w-0 text-sm font-medium text-gray-950 dark:text-gray-100">
-                      {meeting.topic}
+                    <span className="min-w-0">
+                      <span className="block text-md font-medium text-gray-950 dark:text-gray-100">{meeting.topic}</span>
+                      {isNoClass && (
+                        <span className="mt-0.5 block text-md font-medium text-gray-500 dark:text-gray-500">
+                          No class
+                        </span>
+                      )}
+                      {!isNoClass && meeting.subtitle && (
+                        <span className="mt-0.5 block text-sm font-normal leading-5 text-gray-500 dark:text-gray-500">
+                          {meeting.subtitle}
+                        </span>
+                      )}
                     </span>
                   )}
                 </li>

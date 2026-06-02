@@ -1,8 +1,8 @@
 ---
-title: "Stakeholders, harms, benefits, governance"
+title: "Who Is Affected?"
 slug: "stakeholders-harms-benefits-governance"
 module: "governing-uncertain-futures"
-focus: "Stakeholders, harms, benefits, and governance."
+subtitle: "Map benefits, risks, and governance questions around an emerging AI system."
 ethical_patterns: []
 recognition_pattern_notes:
   - "Student-selected pattern."

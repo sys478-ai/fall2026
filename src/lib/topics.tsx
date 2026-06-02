@@ -2,6 +2,8 @@ import { getAllPosts, PostData, getAllQuizMetadata, QuizMetadata, getQuizData, g
 import React from 'react';
 import { baseTopics } from '../../content/config/schedule';
 import { getCourseConfig } from './config';
+import type { ModuleColorToken } from './module-colors';
+import { getTopicMarkdownBySlug } from './topic-markdown';
 
 // Type definitions for topics structure
 interface Activity {
@@ -47,6 +49,7 @@ export interface Meeting {
   slug?: string;
   date: string;
   topic: string;
+  subtitle?: string;
   description?: string | React.ReactElement;
   topicContentId?: string;
   focus?: string;
@@ -70,6 +73,7 @@ export interface Topic {
   slug?: string;
   moduleContentId?: string;
   title: string;
+  color: ModuleColorToken;
   description: string | React.ReactElement;
   meetings: Meeting[];
   ethicalPatterns?: string[];
@@ -87,6 +91,7 @@ interface BaseMeeting {
   slug?: string;
   date: string;
   topic: string;
+  subtitle?: string;
   description?: string | React.ReactElement;
   topicContentId?: string;
   focus?: string;
@@ -109,6 +114,7 @@ interface BaseTopic {
   slug?: string;
   moduleContentId?: string;
   title: string;
+  color: ModuleColorToken;
   description: string | React.ReactElement;
   meetings: BaseMeeting[];
   ethicalPatterns?: string[];
@@ -255,11 +261,22 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
   // Cast baseTopics to allow quizzes to be (Quiz | Reading)[] initially
   const enrichedTopics: TopicsArray = baseTopics.map((topic: BaseTopic) => ({
     ...topic,
-    meetings: topic.meetings.map((meeting: BaseMeeting) => ({
-      ...meeting,
-      activities: meeting.activities ? [...meeting.activities] : undefined,
-      assigned: meeting.assigned ? (typeof meeting.assigned === 'object' ? { ...meeting.assigned } : meeting.assigned) : undefined,
-    })) as Meeting[]
+    meetings: topic.meetings.map((meeting: BaseMeeting) => {
+      const markdownTopic = meeting.slug ? getTopicMarkdownBySlug(meeting.slug) : null;
+
+      return {
+        ...meeting,
+        topic: markdownTopic?.title || meeting.topic,
+        subtitle: markdownTopic?.subtitle || meeting.subtitle,
+        focus: markdownTopic?.focus || meeting.focus,
+        braidElsiConnection: markdownTopic?.braidElsiConnection || meeting.braidElsiConnection,
+        ethicalPatterns: markdownTopic?.ethicalPatterns || meeting.ethicalPatterns,
+        recognitionPatternNotes: markdownTopic?.recognitionPatternNotes || meeting.recognitionPatternNotes,
+        themes: markdownTopic?.themes || meeting.themes,
+        activities: meeting.activities ? [...meeting.activities] : undefined,
+        assigned: meeting.assigned ? (typeof meeting.assigned === 'object' ? { ...meeting.assigned } : meeting.assigned) : undefined,
+      };
+    }) as Meeting[]
   }));
   
   // Enrich each meeting

@@ -1,8 +1,8 @@
 ---
-title: "Hardware, memristors, energy, and material AI"
+title: "What Makes AI Material?"
 slug: "hardware-memristors-energy-and-material-ai"
 module: "from-mechanism-to-implications"
-focus: "Hardware, memristors, energy, and material AI."
+subtitle: "Connect memristors, hardware, energy, and the physical substrates of AI."
 ethical_patterns:
   - "ai-is-material"
 themes:

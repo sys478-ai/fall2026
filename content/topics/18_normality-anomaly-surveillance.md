@@ -1,8 +1,8 @@
 ---
-title: "Normality, anomaly, surveillance"
+title: "When Does Anomaly Detection Become Surveillance?"
 slug: "normality-anomaly-surveillance"
 module: "from-mechanism-to-implications"
-focus: "Normality, anomaly, and surveillance."
+subtitle: "Ask how anomaly detection can turn norms into monitoring and social control."
 ethical_patterns:
   - "normal-is-constructed"
 themes:

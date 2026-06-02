@@ -1,8 +1,8 @@
 ---
-title: "Edge AI, cloud, chips, vendors, human judgment"
+title: "Who Controls the Infrastructure?"
 slug: "edge-ai-cloud-chips-vendors-human-judgment"
 module: "from-mechanism-to-implications"
-focus: "Edge AI, cloud, chips, vendors, and human judgment."
+subtitle: "Examine chips, vendors, cloud systems, and where human judgment still matters."
 ethical_patterns:
   - "power-can-concentrate-in-infrastructure"
 themes:

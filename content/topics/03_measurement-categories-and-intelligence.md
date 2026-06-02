@@ -1,8 +1,8 @@
 ---
-title: 'Psychology, cognitive science, neuroscience, and the learning sciences'
+title: 'How Do Different Fields Study Intelligence?'
 slug: 'measurement-categories-and-intelligence'
 module: 'what-is-intelligence'
-focus: 'Psychology, cognitive science, neuroscience, and the learning sciences.'
+subtitle: 'Compare how psychology, cognitive science, neuroscience, and the learning sciences approach intelligence.'
 ethical_patterns:
   - 'classification-is-not-neutral'
 themes:

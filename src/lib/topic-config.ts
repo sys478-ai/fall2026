@@ -1,10 +1,12 @@
 import featuredRelationsData from '../../content/config/featured-relations.json';
 import { getAllModuleMarkdownMetadata } from './module-markdown';
+import type { ModuleColorToken } from './module-colors';
 import { getTopicMarkdownByModule } from './topic-markdown';
 
 export interface TopicMeetingConfig {
   slug: string;
   title: string;
+  subtitle: string;
   focus: string;
   ethicalPatterns: string[];
   recognitionPatternNotes?: string[];
@@ -17,6 +19,7 @@ interface TopicModuleConfigBase {
   id: number;
   slug: string;
   title: string;
+  color: ModuleColorToken;
   excerpt?: string;
   unitFocus: string;
   braidElsiArc?: string;
@@ -67,6 +70,7 @@ export function getTopicModules() {
       meetings: topics.map(topic => ({
         slug: topic.slug,
         title: topic.title,
+        subtitle: topic.subtitle,
         focus: topic.focus,
         ethicalPatterns: topic.ethicalPatterns,
         recognitionPatternNotes: topic.recognitionPatternNotes,

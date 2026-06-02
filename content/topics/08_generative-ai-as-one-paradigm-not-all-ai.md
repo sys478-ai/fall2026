@@ -1,8 +1,8 @@
 ---
-title: "Generative AI as one paradigm, not all AI"
+title: "Is Generative AI the Same as AI?"
 slug: "generative-ai-as-one-paradigm-not-all-ai"
 module: "how-do-machines-learn"
-focus: "Generative AI as one paradigm, not all AI."
+subtitle: "Situate generative AI as one paradigm among many, not the whole of AI."
 ethical_patterns:
   - "features-are-value-choices"
 themes:

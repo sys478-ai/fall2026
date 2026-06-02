@@ -1,8 +1,8 @@
 ---
-title: "Final presentations"
+title: "What Should Others Understand?"
 slug: "final-presentations"
 module: "final-exam-presentations"
-focus: "Final presentations."
+subtitle: "Present a public-facing explainer and ELSI analysis."
 ethical_patterns: []
 recognition_pattern_notes:
   - "Student-selected pattern(s)."

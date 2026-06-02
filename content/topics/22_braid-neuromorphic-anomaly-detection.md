@@ -1,8 +1,8 @@
 ---
-title: "BRAID neuromorphic anomaly detection"
+title: "What Does the BRAID Case Reveal?"
 slug: "braid-neuromorphic-anomaly-detection"
 module: "from-mechanism-to-implications"
-focus: "BRAID neuromorphic anomaly detection."
+subtitle: "Apply course concepts and governance questions to the BRAID neuromorphic anomaly-detection case."
 ethical_patterns:
   - "emerging-technologies-require-anticipatory-governance"
   - "ai-is-material"

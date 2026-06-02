@@ -1,8 +1,8 @@
 ---
-title: "Embodiment, subjectivity, and what resists measurement"
+title: "What Resists Measurement?"
 slug: "embodiment-subjectivity-and-difficult-to-measure-experience"
 module: "what-is-intelligence"
-focus: "Embodiment, subjectivity, and what resists measurement."
+subtitle: "Consider embodiment, subjectivity, and forms of experience that do not fit clean metrics."
 ethical_patterns:
   - "data-is-produced-not-found"
 themes:

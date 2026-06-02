@@ -1,8 +1,8 @@
 ---
-title: "Last day of class: synthesis"
+title: "What Have We Learned?"
 slug: "last-day-of-class-synthesis"
 module: "public-communication-and-final-synthesis"
-focus: "Last day of class synthesis."
+subtitle: "Bring together mechanism, stakeholders, risks, and governance questions."
 ethical_patterns:
   - "emerging-technologies-require-anticipatory-governance"
 themes:

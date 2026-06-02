@@ -2,6 +2,7 @@
 id: 1
 slug: what-is-intelligence
 title: 'What Counts as Intelligence?'
+color: indigo
 excerpt: 'This module opens the course by treating intelligence as a contested social, technical, and political category shaped by definition and measurement.'
 unit_focus: 'Students begin by asking what counts as intelligence, how different fields study it, who gets to define it, and how measurement and categorization shape public life.'
 braid_elsi_arc: 'This unit introduces BRAID as a socio-technical system and establishes that categories such as normal, signal, noise, and anomaly have ethical and governance consequences.'

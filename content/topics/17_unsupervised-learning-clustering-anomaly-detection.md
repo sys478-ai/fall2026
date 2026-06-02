@@ -1,8 +1,8 @@
 ---
-title: "Unsupervised learning, clustering, anomaly detection"
+title: "What Counts as an Anomaly?"
 slug: "unsupervised-learning-clustering-anomaly-detection"
 module: "from-mechanism-to-implications"
-focus: "Unsupervised learning, clustering, and anomaly detection."
+subtitle: "Introduce clustering, baselines, and unsupervised approaches to finding difference."
 ethical_patterns:
   - "normal-is-constructed"
 themes:

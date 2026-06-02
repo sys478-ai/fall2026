@@ -1,8 +1,8 @@
 ---
-title: "Error, responsibility, and decision thresholds"
+title: "Who Pays for Error?"
 slug: "error-responsibility-and-decision-thresholds"
 module: "how-do-machines-learn"
-focus: "Error, responsibility, and decision thresholds."
+subtitle: "Examine how error costs and decision thresholds distribute harm and accountability."
 ethical_patterns:
   - "thresholds-distribute-harm"
 themes:

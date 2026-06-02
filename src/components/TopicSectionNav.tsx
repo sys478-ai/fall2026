@@ -73,7 +73,7 @@ export default function TopicSectionNav({ items, children }: TopicSectionNavProp
         aria-label="Topic sections"
       >
         <div className="flex overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-none [&::-webkit-scrollbar]:hidden">
-          {items.map(item => {
+          {items.map((item, index) => {
             const isActive = activeId === item.id;
 
             return (
@@ -85,16 +85,25 @@ export default function TopicSectionNav({ items, children }: TopicSectionNavProp
                 aria-selected={isActive}
                 aria-controls={`${item.id}-panel`}
                 onClick={() => activateTab(item.id)}
-                className={`relative -mb-px shrink-0 whitespace-nowrap border-b-3 px-4 py-2 text-sm font-semibold transition-colors ${
+                className={`relative -mb-px flex shrink-0 items-center gap-2 whitespace-nowrap border-b-3 px-4 py-2 text-sm font-semibold transition-colors ${
                   isActive
                     ? 'border-[#0b5d8f] text-[#0b5d8f] dark:border-[#8fc4ee] dark:text-[#8fc4ee]'
                     : 'border-transparent text-gray-600 hover:border-gray-300 hover:text-[#0b5d8f] dark:text-gray-400 dark:hover:border-gray-700 dark:hover:text-[#8fc4ee]'
                 }`}
               >
-                {item.label}
-                {typeof item.count === 'number' && (
-                  <span className="ml-1 opacity-75">({item.count})</span>
-                )}
+                <span
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
+                    isActive
+                      ? 'bg-[#0b5d8f]/10 text-[#0b5d8f] dark:bg-[#8fc4ee]/15 dark:text-[#8fc4ee]'
+                      : 'bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400'
+                  }`}
+                >
+                  {index + 1}
+                </span>
+                <span>
+                  {item.label}
+                  {typeof item.count === 'number' && <span className="ml-1 opacity-75">({item.count})</span>}
+                </span>
               </button>
             );
           })}

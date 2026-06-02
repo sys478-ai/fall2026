@@ -1,4 +1,5 @@
 import { getCourseConfig } from '@/lib/config';
+import type { ModuleColorToken } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import { getMeetingAnchorId, getModuleAnchorId } from '@/lib/navigation-helpers';
 import SidebarNavClient from './SidebarNavClient';
@@ -8,6 +9,7 @@ interface SidebarTopicItem {
   title: string;
   date: string;
   contentHref: string;
+  isNoClass?: boolean;
   resourcesHref: string;
   resourcesCount: number;
   activitiesHref: string;
@@ -17,6 +19,7 @@ interface SidebarTopicItem {
 interface SidebarModuleItem {
   id: number;
   title: string;
+  color: ModuleColorToken;
   href: string;
   topics: SidebarTopicItem[];
 }
@@ -74,6 +77,7 @@ export default async function Navigation() {
   const modules: SidebarModuleItem[] = topics.map((topic) => ({
     id: topic.id,
     title: topic.title,
+    color: topic.color,
     href: topic.slug ? `/topics/${topic.slug}` : `/#${getModuleAnchorId(topic.id)}`,
     topics: [
       ...(topic.slug
@@ -83,6 +87,7 @@ export default async function Navigation() {
               title: `Overview`,
               date: 'Module overview',
               contentHref: `/topics/${topic.slug}`,
+          isNoClass: false,
               resourcesHref: `/topics/${topic.slug}`,
               resourcesCount: 0,
               activitiesHref: `/topics/${topic.slug}`,
@@ -100,6 +105,7 @@ export default async function Navigation() {
           title: `${meeting.topic}`,
           date: meeting.date,
           contentHref,
+          isNoClass: meeting.holiday === true,
           resourcesHref,
           resourcesCount,
           activitiesHref,

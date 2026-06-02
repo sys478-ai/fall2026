@@ -1,8 +1,8 @@
 ---
-title: "Alternatives, refusal, repair, democratic governance"
+title: "What Alternatives Are Still Possible?"
 slug: "alternatives-refusal-repair-democratic-governance"
 module: "governing-uncertain-futures"
-focus: "Alternatives, refusal, repair, and democratic governance."
+subtitle: "Consider redesign, repair, democratic governance, and the option to say no."
 ethical_patterns:
   - "alternatives-can-be-foreclosed"
 themes:

@@ -1,8 +1,8 @@
 ---
-title: "Draft presentations / peer review"
+title: "How Do We Make This Clear to Others?"
 slug: "draft-presentations-peer-review"
 module: "public-communication-and-final-synthesis"
-focus: "Draft presentations and peer review."
+subtitle: "Use peer review to strengthen clarity, accuracy, and public usefulness."
 ethical_patterns: []
 recognition_pattern_notes:
   - "Student-selected pattern."

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { writeTopicCompletion } from '@/lib/topic-progress';
+import { writeTopicProgressStatus } from '@/lib/topic-progress';
 import { triggerConfetti } from '@/lib/utils';
 
 export type TopicWorkItemType =
@@ -98,8 +98,11 @@ export default function TopicWorkList({ id, topicSlug, items }: TopicWorkListPro
 
     const isComplete =
       trackedItems.length > 0 && trackedItems.every(trackedItem => checkedItems[trackedItem.id]);
+    const completedCount = trackedItems.filter(trackedItem => checkedItems[trackedItem.id]).length;
+    const progressStatus =
+      trackedItems.length === 0 || completedCount === 0 ? 'not-started' : isComplete ? 'complete' : 'partial';
 
-    writeTopicCompletion(topicSlug, isComplete);
+    writeTopicProgressStatus(topicSlug, progressStatus);
 
     if (userInteractionRef.current && isComplete && !previousCompleteRef.current) {
       triggerConfetti();

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ContentLayout from '@/components/ContentLayout';
 import PageHeader from '@/components/PageHeader';
+import { getModuleColorClasses } from '@/lib/module-colors';
 import { getTopicModules } from '@/lib/topic-config';
 
 export default function ModulesPage() {
@@ -17,15 +18,16 @@ export default function ModulesPage() {
         <section className="grid gap-8 lg:grid-cols-2">
           {modules.map(module => {
             const patternCount = module.ethicalPatterns.length + (module.recognitionPatternNotes?.length || 0);
+            const moduleColor = getModuleColorClasses(module.color);
 
             return (
               <article
                 key={module.slug}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-black"
+                className={`rounded-2xl border p-5 shadow-sm ${moduleColor.background} ${moduleColor.border}`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-gray-600 dark:text-gray-400">
+                    <p className={`mb-2 text-xs font-semibold uppercase tracking-[0.18em] ${moduleColor.accent}`}>
                       Module {module.id}
                     </p>
                     <h2 className="m-0 text-2xl font-bold text-gray-900 dark:text-gray-100">

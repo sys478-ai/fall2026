@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { getDefaultModuleColorToken, isModuleColorToken, type ModuleColorToken } from './module-colors';
 
 const modulesDirectory = path.join(process.cwd(), 'content', 'modules');
 
@@ -9,6 +10,7 @@ export interface ModuleMarkdownMetadata {
   id: number;
   slug: string;
   title: string;
+  color: ModuleColorToken;
   excerpt?: string;
   unitFocus: string;
   braidElsiArc?: string;
@@ -34,6 +36,7 @@ function readModuleMarkdownMetadata(fileName: string, fallbackOrder: number): Mo
   const matterResult = matter(fileContents);
   const data = matterResult.data;
   const slug = asString(data.slug);
+  const id = asNumber(data.id, getOrderFromFilename(fileName, fallbackOrder));
 
   if (!slug) {
     throw new Error(`Missing slug frontmatter in module markdown file "${fileName}"`);
@@ -41,9 +44,10 @@ function readModuleMarkdownMetadata(fileName: string, fallbackOrder: number): Mo
 
   return {
     contentId,
-    id: asNumber(data.id, getOrderFromFilename(fileName, fallbackOrder)),
+    id,
     slug,
     title: asString(data.title, slug),
+    color: isModuleColorToken(data.color) ? data.color : getDefaultModuleColorToken(id),
     excerpt: asString(data.excerpt) || undefined,
     unitFocus: asString(data.unit_focus),
     braidElsiArc: asString(data.braid_elsi_arc) || undefined,

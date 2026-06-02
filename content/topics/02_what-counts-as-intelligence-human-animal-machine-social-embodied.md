@@ -1,8 +1,8 @@
 ---
-title: 'What counts as intelligence? Human, animal, machine, social, embodied'
+title: 'What Counts as Intelligence?'
 slug: 'what-counts-as-intelligence-human-animal-machine-social-embodied'
 module: 'what-is-intelligence'
-focus: 'What counts as intelligence across human, animal, machine, social, and embodied forms.'
+subtitle: 'Compare competing definitions of intelligence across human, animal, machine, social, and embodied forms.'
 ethical_patterns:
   - 'ai-systems-are-socio-technical-systems'
 themes:

@@ -1,8 +1,8 @@
 ---
-title: "Course launch: human + machine intelligence as public issue"
+title: "Course Launch"
 slug: "course-launch-human-machine-intelligence-public-issue"
 module: "what-is-intelligence"
-focus: "Course launch and human + machine intelligence as a public issue."
+subtitle: "Frame human and machine intelligence as technical questions with public consequences."
 ethical_patterns:
   - "ai-systems-are-socio-technical-systems"
 themes:

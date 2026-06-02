@@ -10,6 +10,7 @@ export interface TopicMarkdownMetadata {
   slug: string;
   title: string;
   module: string;
+  subtitle: string;
   focus: string;
   ethicalPatterns: string[];
   recognitionPatternNotes?: string[];
@@ -47,13 +48,16 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     throw new Error(`Missing slug frontmatter in topic markdown file "${fileName}"`);
   }
 
+  const subtitle = asString(data.subtitle, asString(data.focus));
+
   return {
     id,
     order: getOrderFromFilename(fileName, fallbackOrder),
     slug,
     title: asString(data.title, slug),
     module: asString(data.module),
-    focus: asString(data.focus),
+    subtitle,
+    focus: asString(data.focus, subtitle),
     ethicalPatterns: asStringArray(data.ethical_patterns),
     recognitionPatternNotes: asStringArray(data.recognition_pattern_notes),
     themes: asStringArray(data.themes),

@@ -1,8 +1,8 @@
 ---
-title: "Neuroscience primer: neurons, synapses, weights, plasticity"
+title: "What Can Neuroscience Tell Us?"
 slug: "neuroscience-primer-neurons-synapses-weights-plasticity"
 module: "brain-inspired-computing-and-neuromorphic-systems"
-focus: "Neuroscience primer covering neurons, synapses, weights, and plasticity."
+subtitle: "Ground brain-inspired computing in basic neuroscience terms and their limits."
 ethical_patterns:
   - "anthropomorphism-aliveness-sentience-claims"
 themes:

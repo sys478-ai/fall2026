@@ -1,8 +1,8 @@
 ---
-title: "Data, rules, models, training, and inference"
+title: "How Do Machines Learn?"
 slug: "data-rules-models-training-and-inference"
 module: "how-do-machines-learn"
-focus: "Data, rules, models, training, and inference."
+subtitle: "Introduce data, rules, models, training, and inference as design choices."
 ethical_patterns:
   - "features-are-value-choices"
 themes:

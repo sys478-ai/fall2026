@@ -1,8 +1,8 @@
 ---
-title: "Neuromorphic computing: SNNs, spikes, timing"
+title: "How Does Neuromorphic Computing Work?"
 slug: "neuromorphic-computing-snns-spikes-timing"
 module: "brain-inspired-computing-and-neuromorphic-systems"
-focus: "Neuromorphic computing through SNNs, spikes, and timing."
+subtitle: "Introduce neuromorphic computing through spiking neural networks, event-driven signals, and timing."
 ethical_patterns:
   - "ai-is-material"
 themes:

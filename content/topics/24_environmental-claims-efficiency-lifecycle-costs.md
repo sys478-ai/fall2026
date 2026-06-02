@@ -1,8 +1,8 @@
 ---
-title: "Environmental claims, efficiency, lifecycle costs"
+title: "What Makes an AI System Sustainable?"
 slug: "environmental-claims-efficiency-lifecycle-costs"
 module: "from-mechanism-to-implications"
-focus: "Environmental claims, efficiency, and lifecycle costs."
+subtitle: "Test efficiency narratives against lifecycle costs, materials, and scale."
 ethical_patterns:
   - "ai-is-material"
   - "power-can-concentrate-in-infrastructure"

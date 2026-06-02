@@ -121,6 +121,7 @@ function buildMeeting(module: ModuleMarkdownMetadata, semesterMeeting: SemesterM
   return {
     slug: meeting.slug,
     topic: meeting.title,
+    subtitle: meeting.subtitle,
     date: semesterMeeting.date,
     description: semesterMeeting.holiday || meeting.holiday ? 'No class.' : renderMeetingDescription(meeting),
     holiday: semesterMeeting.holiday || meeting.holiday || false,
@@ -412,6 +413,7 @@ export const baseTopics = semesterSchedule.map(scheduledModule => {
     slug: module.slug,
     moduleContentId: module.contentId,
     title: module.title,
+    color: module.color,
     description: renderModuleDescription(module),
     ethicalPatterns: moduleMetadata.ethicalPatterns,
     recognitionPatternNotes: moduleMetadata.recognitionPatternNotes,

@@ -1,8 +1,8 @@
 ---
-title: "Feedback loops and neutral prediction"
+title: "Are Predictions Ever Neutral?"
 slug: "feedback-loops-and-neutral-prediction"
 module: "how-do-machines-learn"
-focus: "Feedback loops and neutral prediction."
+subtitle: "Explore how supposedly neutral prediction can reinforce the patterns it learns."
 ethical_patterns:
   - "prediction-imports-the-past"
 themes:

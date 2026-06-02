@@ -1,8 +1,8 @@
 ---
-title: "Optional support"
+title: "Optional Support"
 slug: "optional-support"
 module: "public-communication-and-final-synthesis"
-focus: "Optional support."
+subtitle: "Optional time for conferences, revision, and final project support."
 ethical_patterns: []
 themes: []
 braid_elsi_connection: "Optional final ELSI project support."

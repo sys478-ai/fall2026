@@ -1,8 +1,8 @@
 ---
-title: "Measurement, categories, and intelligence"
+title: "How Is Intelligence Measured?"
 slug: "objectivity-neutrality-and-who-gets-defined"
 module: "what-is-intelligence"
-focus: "Measurement, categories, and intelligence."
+subtitle: "Examine how tests, categories, and metrics shape what counts as intelligence."
 ethical_patterns:
   - "classification-is-not-neutral"
 themes:

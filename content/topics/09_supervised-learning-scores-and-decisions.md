@@ -1,8 +1,8 @@
 ---
-title: "Supervised learning, scores, and decisions"
+title: "How Do Scores Become Decisions?"
 slug: "supervised-learning-scores-and-decisions"
 module: "how-do-machines-learn"
-focus: "Supervised learning, scores, and decisions."
+subtitle: "Trace how supervised learning turns data into scores, rankings, and action."
 ethical_patterns:
   - "thresholds-distribute-harm"
 themes:

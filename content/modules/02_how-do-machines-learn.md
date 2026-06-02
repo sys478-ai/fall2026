@@ -2,6 +2,7 @@
 id: 2
 slug: how-do-machines-learn
 title: 'How Do Machines Learn?'
+color: sky
 excerpt: 'This module makes model learning concrete while showing how data, features, scores, and thresholds carry social choices.'
 unit_focus: 'Students learn how models, data, scores, and thresholds operate while also asking how those choices encode institutional priorities and historical assumptions.'
 braid_elsi_arc: 'This unit prepares students to see that technical choices in sensing, feature design, thresholds, and adaptation shape downstream governance questions.'

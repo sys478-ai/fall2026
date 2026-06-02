@@ -13,6 +13,7 @@ import TopicWorkList from '@/components/TopicWorkList';
 import type { TopicWorkItem } from '@/components/TopicWorkList';
 import { getPostData } from '@/lib/markdown';
 import type { PostData } from '@/lib/markdown';
+import { getModuleColorClasses, type ModuleColorClasses } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
 import { getTopicModules } from '@/lib/topic-config';
@@ -21,53 +22,6 @@ interface TopicPageProps {
   params: Promise<{
     slug: string;
   }>;
-}
-
-const MODULE_COLOR_CLASSES = [
-  {
-    background: 'bg-indigo-50 dark:bg-indigo-950/30',
-    border: 'border-indigo-200 dark:border-indigo-900',
-    accent: 'text-indigo-700 dark:text-indigo-300',
-  },
-  {
-    background: 'bg-sky-50 dark:bg-sky-950/30',
-    border: 'border-sky-200 dark:border-sky-900',
-    accent: 'text-sky-700 dark:text-sky-300',
-  },
-  {
-    background: 'bg-emerald-50 dark:bg-emerald-950/30',
-    border: 'border-emerald-200 dark:border-emerald-900',
-    accent: 'text-emerald-700 dark:text-emerald-300',
-  },
-  {
-    background: 'bg-amber-50 dark:bg-amber-950/30',
-    border: 'border-amber-200 dark:border-amber-900',
-    accent: 'text-amber-700 dark:text-amber-300',
-  },
-  {
-    background: 'bg-rose-50 dark:bg-rose-950/30',
-    border: 'border-rose-200 dark:border-rose-900',
-    accent: 'text-rose-700 dark:text-rose-300',
-  },
-  {
-    background: 'bg-violet-50 dark:bg-violet-950/30',
-    border: 'border-violet-200 dark:border-violet-900',
-    accent: 'text-violet-700 dark:text-violet-300',
-  },
-  {
-    background: 'bg-teal-50 dark:bg-teal-950/30',
-    border: 'border-teal-200 dark:border-teal-900',
-    accent: 'text-teal-700 dark:text-teal-300',
-  },
-  {
-    background: 'bg-orange-50 dark:bg-orange-950/30',
-    border: 'border-orange-200 dark:border-orange-900',
-    accent: 'text-orange-700 dark:text-orange-300',
-  },
-] as const;
-
-function getModuleColorClasses(moduleId: number) {
-  return MODULE_COLOR_CLASSES[(moduleId - 1) % MODULE_COLOR_CLASSES.length];
 }
 
 export const dynamicParams = false;
@@ -256,8 +210,6 @@ function EditorialLabel({ children }: { children: React.ReactNode }) {
     </h3>
   );
 }
-
-type ModuleColorClasses = ReturnType<typeof getModuleColorClasses>;
 
 interface TopicNavigationItem {
   slug: string;
@@ -585,7 +537,7 @@ function TopicHeader({
   moduleId,
   moduleTitle,
   title,
-  excerpt,
+  subtitle,
 }: {
   moduleColor: ModuleColorClasses;
   number: string;
@@ -593,7 +545,7 @@ function TopicHeader({
   moduleId: number;
   moduleTitle: string;
   title: string;
-  excerpt?: string;
+  subtitle?: string;
 }) {
   return (
     <header
@@ -613,7 +565,7 @@ function TopicHeader({
         <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
           {title}
         </h1>
-        {excerpt && <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{excerpt}</p>}
+        {subtitle && <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{subtitle}</p>}
       </div>
     </header>
   );
@@ -750,7 +702,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
     }
 
     const overviewNumber = getModuleOverviewNumber(overviewTopic);
-    const moduleColor = getModuleColorClasses(overviewTopic.id);
+    const moduleColor = getModuleColorClasses(overviewTopic.color);
 
     return (
       <ContentLayout variant="detail-with-toc" fullWidth showToc={false} contentPadding={false}>
@@ -770,7 +722,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             moduleId={overviewTopic.id}
             moduleTitle={overviewTopic.title}
             title={overviewData.title}
-            excerpt={overviewData.excerpt}
+          subtitle={overviewData.excerpt}
           />
 
           <div className="space-y-10 px-4 md:px-16">
@@ -793,7 +745,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
   const { topic, meeting, meetingIndex } = result;
   const topicNumber = getMeetingTopicNumber(topic, meetingIndex);
-  const moduleColor = getModuleColorClasses(topic.id);
+  const moduleColor = getModuleColorClasses(topic.color);
 
   const assignedItems = Array.isArray(meeting.assigned) ? meeting.assigned : meeting.assigned ? [meeting.assigned] : [];
 
@@ -911,6 +863,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
           moduleId={topic.id}
           moduleTitle={topic.title}
           title={meeting.topic}
+          subtitle={meeting.subtitle}
         />
 
         <div className="space-y-10 px-4 md:px-16">
