@@ -308,6 +308,21 @@ function getAssignmentTitle(item: { titleShort?: string; title: string }) {
   return item.titleShort ? `${item.titleShort}: ${item.title}` : item.title;
 }
 
+function getAssignmentWorkLabel(item: { type?: string; url?: string }) {
+  const normalizedType = item.type?.toLowerCase();
+  const assignmentSlug = getSlugFromUrl(item.url, 'assignments') || '';
+
+  if (normalizedType === 'career module' || assignmentSlug.startsWith('career-module')) {
+    return 'Career Module';
+  }
+
+  if (normalizedType === 'lab' || assignmentSlug.startsWith('lab')) {
+    return 'Lab';
+  }
+
+  return undefined;
+}
+
 function toDisplayLabel(value: string) {
   return value
     .split(/[\s-]+/)
@@ -367,6 +382,7 @@ function buildTopicWorkItems({
       id: `activity-${index}`,
       type: 'activity',
       title: activity.title,
+      label: getAssignmentWorkLabel(activity),
       href: getScopedHref(activity.url, anchorByHref),
       syncKeys: [`${meetingKey}-activity-${index}`],
     });
@@ -385,6 +401,7 @@ function buildTopicWorkItems({
       id: `assigned-${index}`,
       type: 'assignment',
       title: getAssignmentTitle(item),
+      label: getAssignmentWorkLabel(item),
       href: getScopedHref(item.url, anchorByHref),
       optional: true,
       syncKeys: [
@@ -407,6 +424,7 @@ function buildTopicWorkItems({
       id: `due-${index}`,
       type: 'due',
       title: getAssignmentTitle(item),
+      label: getAssignmentWorkLabel(item),
       href: getScopedHref(item.url, anchorByHref),
       meta: meeting.date,
       syncKeys: [

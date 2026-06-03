@@ -1,8 +1,8 @@
 ---
-title: "Course Launch"
+title: "Why Is AI a Public and Ethical Issue?"
 slug: "course-launch-human-machine-intelligence-public-issue"
 module: "what-is-intelligence"
-subtitle: "Frame human and machine intelligence as technical questions with public consequences."
+subtitle: "Frame AI as a technical project shaped by public values, institutions, and ethical choices."
 ethical_patterns:
   - "ai-systems-are-socio-technical-systems"
 themes:
@@ -40,7 +40,7 @@ In this opening session, we will:
 
 ## Looking Ahead
 
-This topic sets up the rest of Module 1. In the next meetings, we will ask what counts as intelligence across human, animal, machine, social, and embodied forms; how different fields study intelligence; and what happens when intelligence becomes measurable, categorized, and normalized.
+This topic sets up the rest of Module 1. In the next meetings, we will ask what kinds of good AI is supposed to produce, what counts as intelligence, how different fields study it, and what kinds of human experience should place limits on technical ambition.
 
 ## Recognition Patterns
 
@@ -53,3 +53,9 @@ This pattern matters at the start of the course because it keeps us from treatin
 The BRAID case study in this course focuses on an emerging cerebellum-inspired neuromorphic circuit for anomaly detection in edge computing. Even before students learn the hardware details, this first meeting establishes an important principle: BRAID is not only a chip or a lab prototype. It is also a social and institutional project involving researchers, funders, use cases, public claims, governance questions, and possible downstream impacts.
 
 That means BRAID should be approached from the beginning as a socio-technical system. As the semester continues, we will keep asking who designs such systems, who benefits from them, who may be harmed by them, what kinds of oversight are possible, and what assumptions are built into their technical goals.
+
+## Notes
+
+Keep Day 1 light. This meeting should introduce the course, establish AI as a socio-technical and public issue, and give students a shared vocabulary for the semester without turning into a full moral philosophy session.
+
+If ethical framing comes up here, keep it simple: AI is not neutral because it is built by people and institutions for particular purposes. Save the more explicit framework discussion for Day 2.

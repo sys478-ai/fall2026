@@ -1,15 +1,15 @@
 ---
 id: 1
 slug: what-is-intelligence
-title: 'What Counts as Intelligence?'
+title: 'AI, Ethics, and Intelligence'
 color: indigo
-excerpt: 'This module opens the course by treating intelligence as a contested social, technical, and political category shaped by definition and measurement.'
-unit_focus: 'Students begin by asking what counts as intelligence, how different fields study it, who gets to define it, and how measurement and categorization shape public life.'
-braid_elsi_arc: 'This unit introduces BRAID as a socio-technical system and establishes that categories such as normal, signal, noise, and anomaly have ethical and governance consequences.'
+excerpt: 'This module frames AI through competing visions of benefit, harm, care, intelligence, public responsibility, and technological solutionism.'
+unit_focus: 'Students begin by asking what AI is for, what counts as intelligence, how different fields study it, how technological solutionism shapes AI promises, and why some forms of human experience resist easy measurement.'
+braid_elsi_arc: 'This unit introduces BRAID as a socio-technical system and establishes that technical goals such as efficiency, detection, adaptation, safety, and optimization are always tied to ethical assumptions and public consequences.'
 ---
 
-This module asks what counts as intelligence, how different fields define and study it, and what happens when those definitions become embedded in tests, datasets, institutions, and technical systems.
+This module introduces the course by treating AI as both a technical project and an ethical one. Students begin by asking what AI is supposed to help us do, what counts as intelligence, and how competing definitions of intelligence shape public expectations.
 
-Students begin with human, animal, machine, social, and embodied intelligence. From there, the module moves through psychology, cognitive science, neuroscience, and the learning sciences before shifting toward measurement: how categories are made, how they travel through data, and how they can appear neutral after their social choices have been hidden.
+Students compare human, animal, machine, social, and embodied intelligence, examine how different fields study intelligence, and consider what forms of experience resist clean measurement or standardization. They also begin naming technological solutionism: the tendency to treat social, political, or institutional problems as if they can be fixed primarily through better tools, better optimization, or smarter systems. The goal is to establish that technical systems are built within larger visions of benefit, care, efficiency, and justice rather than outside of them.
 
-The module also introduces the course's BRAID throughline. Terms such as signal, noise, normal, and anomaly are not only technical labels. They are categories that shape what a system can detect, what it ignores, and who becomes responsible for the consequences.
+The module also introduces the course's BRAID throughline. Even before students study neuromorphic anomaly detection in detail, they begin asking how claims about intelligence, adaptation, protection, efficiency, and technical solutionism are tied to public values and governance choices.

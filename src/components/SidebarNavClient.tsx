@@ -10,6 +10,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
+  DocumentTextIcon,
   FolderIcon,
   HomeIcon,
   MoonIcon,
@@ -142,6 +143,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const activeTaxonomy = normalizedPath.startsWith('/planning/taxonomy');
   const activePatternGuide = normalizedPath.startsWith('/ethical-pattern-recognition-field-guide');
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
+  const activeBibliography = normalizedPath === '/bibliography';
   const activeResources = normalizedPath === '/resources' || normalizedPath.startsWith('/resources/');
   const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
   const activeHome = normalizedPath === '/' || normalizedPath === '/syllabus';
@@ -151,6 +153,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
       { label: 'Home', href: '/', icon: HomeIcon, active: activeHome },
       { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
       { label: 'Resources', href: '/resources', icon: BookOpenIcon, active: activeResources },
+      { label: 'Bibliography', href: '/bibliography', icon: DocumentTextIcon, active: activeBibliography },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
       {
         label: 'Taxonomy',
@@ -165,7 +168,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
         active: activePatternGuide,
       },
     ],
-    [activeAssignments, activeHome, activeModules, activePatternGuide, activeResources, activeTaxonomy]
+    [activeAssignments, activeBibliography, activeHome, activeModules, activePatternGuide, activeResources, activeTaxonomy]
   );
 
   const toggleDarkMode = () => {

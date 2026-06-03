@@ -1,7 +1,7 @@
 import { getAllPosts, PostData } from '@/lib/markdown';
-import PageHeader from '@/components/PageHeader';
 import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
+import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import Link from 'next/link';
 
 interface ResourceItem {
@@ -67,13 +67,19 @@ export default async function ResourcesPage() {
 
 
   return (
-    <ContentLayout variant="list" leftNav={<QuickLinksNav />}>
-      <div className="space-y-6">
-        <PageHeader 
-          title="Course Resources" 
-          excerpt="Technical guides and documentation for the course technologies"
+    <ContentLayout
+      variant="list"
+      leftNav={<QuickLinksNav />}
+      header={
+        <TopLevelPageHeader
+          label="Resources"
+          title="Course Resources"
+          description="Technical guides and documentation for the course technologies."
+          tone="slate"
         />
-        
+      }
+    >
+      <div className="space-y-6">
         {chapters.map((chapter, idx) => (
         <div key={chapter.name} className="mb-8">
           {/* Chapter header */}

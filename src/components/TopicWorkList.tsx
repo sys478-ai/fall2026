@@ -16,6 +16,7 @@ export interface TopicWorkItem {
   id: string;
   type: TopicWorkItemType;
   title: string;
+  label?: string;
   href?: string;
   meta?: string;
   optional?: boolean;
@@ -162,7 +163,7 @@ export default function TopicWorkList({ id, topicSlug, items }: TopicWorkListPro
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-600 dark:border-gray-800 dark:text-gray-400">
-                    {TYPE_LABELS[item.type]}
+                    {item.label || TYPE_LABELS[item.type]}
                   </span>
                   {item.meta && (
                     <span className="text-xs font-medium text-gray-500 dark:text-gray-400">

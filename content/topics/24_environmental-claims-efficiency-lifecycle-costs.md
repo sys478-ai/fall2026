@@ -6,6 +6,7 @@ subtitle: "Test efficiency narratives against lifecycle costs, materials, and sc
 ethical_patterns:
   - "ai-is-material"
   - "power-can-concentrate-in-infrastructure"
+  - "extraction-can-be-disguised-as-innovation"
 themes:
   - "environmental-impacts-of-ai"
   - "power-political-economy"

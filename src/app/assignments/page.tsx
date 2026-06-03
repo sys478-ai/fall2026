@@ -1,8 +1,8 @@
 import { getAllPostIds, getPostData } from '@/lib/markdown';
-import PageHeader from '@/components/PageHeader';
 import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
-import ContentTable from '@/components/assignments/ContentTable';
+import TopLevelPageHeader from '@/components/TopLevelPageHeader';
+import AssignmentsTabbedList from '@/components/assignments/AssignmentsTabbedList';
 import externalAssignments from '../../../content/config/external-assignments.json';
 
 interface AssignmentData {
@@ -74,15 +74,24 @@ export default async function AssignmentsPage() {
     return aNum - bNum;
   });
 
+  const pageDescription =
+    'Labs, career modules, and other assignment-type course materials. Unless otherwise noted, submitted work is due at 11:59pm ET on the listed date.';
+
   return (
-    <ContentLayout variant="list" leftNav={<QuickLinksNav />}>
-      <div className="space-y-6">
-        <PageHeader 
-          title="Assignments" 
-          excerpt="Labs, career modules, and other assignment-type course materials. Unless otherwise noted, submitted work is due at 11:59pm ET on the listed date."
+    <ContentLayout
+      variant="list"
+      leftNav={<QuickLinksNav />}
+      header={
+        <TopLevelPageHeader
+          label="Assignments"
+          title="Assignments"
+          description={pageDescription}
+          tone="sky"
         />
-        
-        <ContentTable items={assignments} contentType="assignments" />
+      }
+    >
+      <div className="space-y-6">
+        <AssignmentsTabbedList items={assignments} />
       </div>
     </ContentLayout>
   );

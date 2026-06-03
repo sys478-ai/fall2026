@@ -1,46 +1,51 @@
 ---
-title: 'What Counts as Intelligence?'
+title: 'What Is AI Supposed to Help Us Do?'
 slug: 'what-counts-as-intelligence-human-animal-machine-social-embodied'
 module: 'what-is-intelligence'
-subtitle: 'Compare competing definitions of intelligence across human, animal, machine, social, and embodied forms.'
+subtitle: 'Examine how ideas about safety, care, efficiency, creativity, and improvement shape what AI is imagined to be for.'
 ethical_patterns:
   - 'ai-systems-are-socio-technical-systems'
 themes:
   - 'ai-as-technical-and-social-system'
+  - 'technological-solutionism'
 braid_elsi_connection: 'Map BRAID as a socio-technical system involving chip, lab, funder, user, regulator, and public.'
 ---
 
 ## Topic / Focus
 
-This topic asks a foundational question for the course: what counts as intelligence in the first place? Rather than starting with the assumption that intelligence is a single trait that humans possess and machines imitate, we examine multiple ways intelligence is described across human, animal, machine, social, and embodied contexts.
+This topic asks what AI systems are supposed to help us do. Public conversations about AI often assume that faster, smarter, more efficient systems are obviously beneficial, but those claims already depend on underlying ideas about safety, care, productivity, creativity, assistance, and social improvement. That is not necessarily good or bad on its own, but it does mean that AI systems are built with intentions by particular people, organizations, and institutions. Once we recognize that, it becomes harder to treat AI as neutral.
 
-The goal is not to decide on one final definition. Instead, we compare different examples and ask what each definition makes visible and what it leaves out. Some accounts of intelligence focus on reasoning, planning, or problem-solving. Others emphasize adaptation, memory, learning, coordination, communication, care, social interaction, or the ability to respond to a changing environment. Once those possibilities are on the table, the category of intelligence becomes less natural and more contested.
+Rather than assuming that AI has one clear purpose, we compare several different visions of benefit. Some systems are justified in terms of efficiency. Others are framed as tools for care, safety, creativity, convenience, accessibility, or prediction. Those visions are not interchangeable. They highlight different values, different risks, and different ideas about what technical systems should be optimizing in the first place.
 
-This topic is important because later AI debates often rely on narrow or unexamined definitions. Claims that a system is intelligent, human-like, creative, or autonomous depend on prior judgments about what kinds of behavior count as meaningful. Before students can critique AI systems well, they need practice seeing those definitions as choices rather than facts.
+This topic also introduces technological solutionism. Many AI narratives assume that if a problem matters enough, a technical system should be built to address it. That assumption can make AI sound inevitable, even when the underlying issue may require political, institutional, or collective responses rather than simply better prediction or automation.
 
-By the end of this topic, you should be able to explain why intelligence is not a single obvious category and why different definitions matter for both technical design and public discourse.
+This topic matters because AI debates are never only about what systems can do. They are also about what systems should do, whose interests they should serve, and what kinds of tradeoffs are considered acceptable. Before students can evaluate claims about intelligence, they need a way to recognize that AI is always tied to a vision of the good.
+
+By the end of this topic, you should be able to explain how competing visions of benefit shape public expectations about AI and why both those visions and solutionist assumptions deserve ethical scrutiny.
 
 ## Guiding Questions
 
-- What behaviors or capacities usually lead people to call something intelligent?
-- Are reasoning and language the only signs of intelligence?
-- How might intelligence look different in animals, groups, bodies, or machines?
-- What kinds of intelligence are often ignored or undervalued?
-- How do public claims about machine intelligence depend on human definitions?
+- What kind of good are AI systems usually supposed to produce?
+- Who gets to define whether a system is helping, protecting, or improving something?
+- How do ideas like efficiency, care, safety, and creativity compete with each other?
+- When does a promise of technical help become technological solutionism?
+- When do benefit claims hide tradeoffs or exclusions?
+- How do public visions of the good shape technical design and deployment?
 
 ## In This Class
 
 In this meeting, we will:
 
-- compare multiple examples of human, animal, machine, social, and embodied intelligence
-- examine competing definitions of intelligence
-- discuss what different definitions privilege or ignore
-- identify how intelligence claims shape expectations about AI
-- prepare for later questions about measurement, categories, and neutrality
+- compare different public and institutional visions of what AI is for
+- examine how values such as efficiency, care, safety, and creativity shape system goals
+- identify where technological solutionism appears in AI narratives
+- discuss who benefits from particular definitions of success
+- identify how ethical assumptions show up before any model is built
+- prepare for later questions about intelligence, measurement, and technical design
 
 ## Looking Ahead
 
-This topic broadens the concept of intelligence before the course narrows in on how intelligence gets studied, measured, categorized, and operationalized. The next meetings will ask how psychology, cognitive science, neuroscience, and the learning sciences approach intelligence, and what happens when those approaches become technical systems or institutional standards.
+This topic establishes that AI is always tied to a theory of benefit before the course narrows in on intelligence more directly. The next meetings ask what counts as intelligence, how different fields define it, and how those definitions shape later measurement and system design.
 
 ## Recognition Patterns
 
@@ -55,6 +60,15 @@ The BRAID case asks students to examine an emerging neuromorphic anomaly-detecti
 This topic also helps students begin mapping BRAID as more than a technical object. A neuromorphic system is connected to a lab, a funding structure, imagined use cases, users, regulators, and public narratives about efficiency, intelligence, and innovation. Seeing those connections early will make later governance questions sharper and more concrete.
 
 ## Notes
+
+This is the best place to introduce the ethical frameworks more explicitly. Use the question of what AI is supposed to help us do as the entry point for four lenses:
+
+- utilitarianism: what produces the best overall consequences?
+- care ethics: who is vulnerable, dependent, or in need of care?
+- deontological ethics: what duties, rights, or limits should not be violated?
+- common good: what supports shared flourishing and trustworthy institutions?
+
+Keep the frameworks light and applied rather than turning the day into a full survey of moral philosophy. Start with familiar AI promises such as safety, efficiency, care, convenience, or prediction, then use the four lenses to compare what kind of good is being imagined.
 
 Maybe ask Grace about some epistemology readings? Knowledge and intelligence are different concepts, but they're linked.
 

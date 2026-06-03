@@ -5,6 +5,7 @@ module: "how-do-machines-learn"
 subtitle: "Situate generative AI as one paradigm among many, not the whole of AI."
 ethical_patterns:
   - "features-are-value-choices"
+  - "extraction-can-be-disguised-as-innovation"
 themes:
   - "technological-solutionism"
   - "features-proxies-value-choices"

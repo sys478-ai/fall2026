@@ -330,16 +330,28 @@
       "slug": "emerging-technologies-require-anticipatory-governance",
       "title": "Emerging technologies require anticipatory governance.",
       "group": "course-synthesis",
-      "order": 16,
+      "order": 17,
       "relatedThemes": [
         "anticipatory-governance"
+      ]
+    },
+    {
+      "slug": "extraction-can-be-disguised-as-innovation",
+      "title": "Extraction can be disguised as innovation.",
+      "group": "critical-lenses",
+      "order": 14,
+      "relatedThemes": [
+        "data-representation-institutional-bias",
+        "power-political-economy",
+        "technological-solutionism",
+        "environmental-impacts-of-ai"
       ]
     },
     {
       "slug": "power-can-concentrate-in-infrastructure",
       "title": "Power can concentrate in infrastructure.",
       "group": "critical-lenses",
-      "order": 14,
+      "order": 15,
       "relatedThemes": [
         "power-political-economy"
       ]
@@ -348,7 +360,7 @@
       "slug": "alternatives-can-be-foreclosed",
       "title": "Alternatives can be foreclosed.",
       "group": "critical-lenses",
-      "order": 15,
+      "order": 16,
       "relatedThemes": [
         "progress-inevitability",
         "technological-solutionism"

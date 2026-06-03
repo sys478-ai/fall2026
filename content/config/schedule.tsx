@@ -135,7 +135,7 @@ function buildMeeting(module: ModuleMarkdownMetadata, semesterMeeting: SemesterM
   };
 }
 
-const semesterSchedule: SemesterModuleConfig[] = [
+export const semesterSchedule: SemesterModuleConfig[] = [
   {
     moduleSlug: 'what-is-intelligence',
     meetings: [
@@ -162,23 +162,6 @@ const semesterSchedule: SemesterModuleConfig[] = [
         activities: [{ title: 'Lab 1: Classification Is Not Neutral', url: '/assignments/lab01a/', draft: 0 }],
       },
       {
-        meetingSlug: 'objectivity-neutrality-and-who-gets-defined',
-        date: 'Thu, Aug 27',
-        activities: [
-          { title: 'Discussion: case + theory' },
-          {
-            title: 'Career Module 2: Three possible lives + SMART goals',
-            url: '/assignments/career-module02/',
-            draft: 0,
-          },
-        ],
-      },
-      {
-        meetingSlug: 'human-learning-memory-dreams-prediction-adaptation',
-        date: 'Tue, Sep 1',
-        activities: [{ title: 'Lab 2: Turning experience into data', url: '/assignments/lab02/', draft: 0 }],
-      },
-      {
         meetingSlug: 'embodiment-subjectivity-and-difficult-to-measure-experience',
         date: 'Thu, Sep 3',
         activities: [
@@ -195,6 +178,23 @@ const semesterSchedule: SemesterModuleConfig[] = [
   {
     moduleSlug: 'how-do-machines-learn',
     meetings: [
+      {
+        meetingSlug: 'objectivity-neutrality-and-who-gets-defined',
+        date: 'Thu, Aug 27',
+        activities: [
+          { title: 'Discussion: case + theory' },
+          {
+            title: 'Career Module 2: Three possible lives + SMART goals',
+            url: '/assignments/career-module02/',
+            draft: 0,
+          },
+        ],
+      },
+      {
+        meetingSlug: 'human-learning-memory-dreams-prediction-adaptation',
+        date: 'Tue, Sep 1',
+        activities: [{ title: 'Lab 2: Turning experience into data', url: '/assignments/lab02/', draft: 0 }],
+      },
       {
         meetingSlug: 'data-rules-models-training-and-inference',
         date: 'Tue, Sep 8',

@@ -1,8 +1,8 @@
 ---
-title: 'How Do Different Fields Study Intelligence?'
+title: 'What Counts as Intelligence?'
 slug: 'measurement-categories-and-intelligence'
 module: 'what-is-intelligence'
-subtitle: 'Compare how psychology, cognitive science, neuroscience, and the learning sciences approach intelligence.'
+subtitle: 'Compare how different fields define intelligence and what those definitions make visible or leave out.'
 ethical_patterns:
   - 'classification-is-not-neutral'
 themes:
@@ -13,13 +13,13 @@ braid_elsi_connection: 'Normal, signal, noise, and anomaly are categories with c
 
 ## Topic / Focus
 
-This topic introduces several fields that study intelligence, learning, memory, perception, and adaptation. Rather than treating intelligence as something that belongs naturally to one discipline, we compare how psychology, cognitive science, neuroscience, and the learning sciences ask different questions and produce different kinds of evidence.
+This topic serves as a bridge between the course's opening ethical questions and its later focus on intelligent tools and systems. If the previous meetings ask what AI is supposed to be for and what kinds of benefit or public good people hope it will produce, this meeting asks what counts as intelligence strongly enough to support those hopes in the first place.
 
-The point is not to master each field in detail. The point is to see that intelligence is always studied through particular methods, assumptions, and models. One field may focus on behavior, another on mental processes, another on neural activity, and another on social or developmental learning. Each approach highlights something important, but none gives a complete, neutral account of what intelligence is.
+Rather than treating intelligence as a self-evident capacity that humans have and machines might copy, we compare several ways of defining and studying it. Psychology, cognitive science, neuroscience, and the learning sciences each ask different questions and produce different kinds of evidence. One field may focus on behavior, another on mental processes, another on neural activity, and another on social or developmental learning. Each approach highlights something important, but none gives a complete, neutral account of what intelligence is.
 
-This matters for AI because technical systems often borrow concepts, metaphors, and legitimacy from these fields. Terms such as learning, memory, attention, intelligence, and adaptation travel from science into engineering and then into public language. Once that happens, distinctions between metaphor, mechanism, and measurement can easily blur.
+This matters for AI because technical systems often borrow concepts, metaphors, and legitimacy from these fields. Terms such as learning, memory, attention, intelligence, and adaptation travel from science into engineering and then into public language. Once that happens, distinctions between ethical aspiration, scientific model, and technical mechanism can easily blur.
 
-By the end of this topic, you should be able to explain how different fields study intelligence and why those disciplinary choices matter for later claims about AI.
+By the end of this topic, you should be able to explain how different fields study intelligence, why those disciplinary choices matter, and how they shape later claims about intelligent tools.
 
 ## Guiding Questions
 
@@ -41,7 +41,7 @@ In this meeting, we will:
 
 ## Looking Ahead
 
-Once we see that intelligence is studied through multiple disciplinary lenses, the next step is to ask how those lenses become systems of measurement. The following meetings focus on categories, metrics, neutrality claims, and the consequences of deciding who or what counts.
+Once we see that intelligence is studied through multiple disciplinary lenses, the next step is to ask what those lenses clarify, what they distort, and what kinds of technical goals they encourage. The remaining work in Module 1 turns to brain and learning metaphors, then closes by asking what AI should actually be for.
 
 ## Recognition Patterns
 

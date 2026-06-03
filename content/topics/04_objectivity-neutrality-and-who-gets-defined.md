@@ -1,8 +1,8 @@
 ---
-title: "How Is Intelligence Measured?"
+title: "How Does Intelligence Become Measurable?"
 slug: "objectivity-neutrality-and-who-gets-defined"
-module: "what-is-intelligence"
-subtitle: "Examine how tests, categories, and metrics shape what counts as intelligence."
+module: "how-do-machines-learn"
+subtitle: "Examine how tests, categories, metrics, and baselines turn messy capacities into technical signals."
 ethical_patterns:
   - "classification-is-not-neutral"
 themes:

@@ -4,6 +4,7 @@ import MarkdownContent from '@/components/MarkdownContent';
 import ContentLayout from '@/components/ContentLayout';
 import ResourceQuiz from '@/components/ResourceQuiz';
 import QuickLinksNav from '@/components/QuickLinksNav';
+import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import { getTopics } from '@/lib/topics';
 
 type SyllabusTopics = Awaited<ReturnType<typeof getTopics>>;
@@ -101,16 +102,7 @@ export default async function SyllabusPageContent() {
       tocMaxLevel={heading_max_level || 2}
       fullWidth
       header={
-        <header className="grid gap-6 border-b border-sky-200 bg-sky-50 px-4 py-12 dark:border-sky-900 dark:bg-sky-950/30 md:px-16">
-          <div>
-            <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
-              {title}
-            </h1>
-            {excerpt && (
-              <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{excerpt}</p>
-            )}
-          </div>
-        </header>
+        <TopLevelPageHeader label="Syllabus" title={title} description={excerpt} tone="sky" />
       }
     >
       <div className="max-w-4xl pr-8 pt-6">

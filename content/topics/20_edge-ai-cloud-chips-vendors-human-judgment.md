@@ -5,6 +5,7 @@ module: "from-mechanism-to-implications"
 subtitle: "Examine chips, vendors, cloud systems, and where human judgment still matters."
 ethical_patterns:
   - "power-can-concentrate-in-infrastructure"
+  - "extraction-can-be-disguised-as-innovation"
 themes:
   - "power-political-economy"
   - "edge-ai-privacy-accountability"

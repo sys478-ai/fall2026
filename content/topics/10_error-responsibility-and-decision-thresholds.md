@@ -1,5 +1,5 @@
 ---
-title: "Who Pays for Error?"
+title: "Who Bears the Cost of Error?"
 slug: "error-responsibility-and-decision-thresholds"
 module: "how-do-machines-learn"
 subtitle: "Examine how error costs and decision thresholds distribute harm and accountability."

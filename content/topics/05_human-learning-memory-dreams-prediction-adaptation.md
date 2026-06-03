@@ -1,8 +1,8 @@
 ---
-title: "Who or What Gets Defined?"
+title: "How Do Categories and Baselines Get Built?"
 slug: "human-learning-memory-dreams-prediction-adaptation"
-module: "what-is-intelligence"
-subtitle: "Ask who or what gets defined when categories appear objective, neutral, or authoritative."
+module: "how-do-machines-learn"
+subtitle: "Ask how formal categories come to look objective, natural, and ready for technical use."
 ethical_patterns:
   - "classification-is-not-neutral"
 themes:
@@ -41,7 +41,7 @@ In this meeting, we will:
 
 ## Looking Ahead
 
-This topic closes the module’s work on categories and neutrality by asking who gets defined and with what consequences. The final topic in Module 1 turns to embodiment and subjectivity, asking what forms of experience resist standardization or measurement altogether.
+This topic continues Module 2’s work on operationalization by asking how categories become stable enough to travel into technical systems. The next meeting turns more directly to data, rules, models, and features as design choices rather than neutral inputs.
 
 ## Recognition Patterns
 

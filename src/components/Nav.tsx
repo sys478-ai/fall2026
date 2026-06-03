@@ -2,6 +2,7 @@ import { getCourseConfig } from '@/lib/config';
 import type { ModuleColorToken } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import { getMeetingAnchorId, getModuleAnchorId } from '@/lib/navigation-helpers';
+import { getTopicModules } from '@/lib/topic-config';
 import SidebarNavClient from './SidebarNavClient';
 
 interface SidebarTopicItem {
@@ -10,10 +11,6 @@ interface SidebarTopicItem {
   date: string;
   contentHref: string;
   isNoClass?: boolean;
-  resourcesHref: string;
-  resourcesCount: number;
-  activitiesHref: string;
-  activitiesCount: number;
 }
 
 interface SidebarModuleItem {
@@ -24,92 +21,48 @@ interface SidebarModuleItem {
   topics: SidebarTopicItem[];
 }
 
-function extractResourcesInfo(
-  meeting: Awaited<ReturnType<typeof getTopics>>[number]['meetings'][number],
-  contentHref: string
-) {
-  const readingUrls = [...(meeting.readings || []), ...(meeting.optionalReadings || [])]
-    .map((reading) => reading.url)
-    .filter((url): url is string => Boolean(url));
-
-  const resourcesCount = (meeting.readings?.length || 0) + (meeting.optionalReadings?.length || 0);
-
-  return {
-    resourcesHref: readingUrls[0] || contentHref,
-    resourcesCount,
-  };
-}
-
-function extractActivitiesInfo(
-  meeting: Awaited<ReturnType<typeof getTopics>>[number]['meetings'][number],
-  contentHref: string
-) {
-  const urls: string[] = [];
-
-  (meeting.activities || []).forEach((activity) => {
-    if (activity.url) {
-      urls.push(activity.url);
-    }
-  });
-
-  const assignedItems = Array.isArray(meeting.assigned)
-    ? meeting.assigned
-    : meeting.assigned
-      ? [meeting.assigned]
-      : [];
-
-  assignedItems.forEach((item) => {
-    if (typeof item === 'object' && item.url) {
-      urls.push(item.url);
-    }
-  });
-
-  return {
-    activitiesHref: urls[0] || contentHref,
-    activitiesCount: (meeting.activities?.length || 0) + assignedItems.length,
-  };
-}
-
 export default async function Navigation() {
   const courseConfig = getCourseConfig();
-  const topics = await getTopics();
+  const scheduledTopics = await getTopics();
+  const topicModules = getTopicModules();
 
-  const modules: SidebarModuleItem[] = topics.map((topic) => ({
-    id: topic.id,
-    title: topic.title,
-    color: topic.color,
-    href: topic.slug ? `/topics/${topic.slug}` : `/#${getModuleAnchorId(topic.id)}`,
+  const meetingBySlug = new Map(
+    scheduledTopics.flatMap((module) =>
+      module.meetings
+        .filter((meeting) => meeting.slug)
+        .map((meeting) => [meeting.slug!, meeting] as const)
+    )
+  );
+
+  const modules: SidebarModuleItem[] = topicModules.map((module) => ({
+    id: module.id,
+    title: module.title,
+    color: module.color,
+    href: module.slug ? `/topics/${module.slug}` : `/#${getModuleAnchorId(module.id)}`,
     topics: [
-      ...(topic.slug
+      ...(module.slug
         ? [
             {
-              id: topic.slug,
+              id: module.slug,
               title: `Overview`,
               date: 'Module overview',
-              contentHref: `/topics/${topic.slug}`,
-          isNoClass: false,
-              resourcesHref: `/topics/${topic.slug}`,
-              resourcesCount: 0,
-              activitiesHref: `/topics/${topic.slug}`,
-              activitiesCount: 0,
+              contentHref: `/topics/${module.slug}`,
+              isNoClass: false,
             },
           ]
         : []),
-      ...topic.meetings.map((meeting, index) => {
-        const contentHref = meeting.slug ? `/topics/${meeting.slug}` : `/#${getMeetingAnchorId(topic.id, index, meeting.topic)}`;
-        const { resourcesHref, resourcesCount } = extractResourcesInfo(meeting, contentHref);
-        const { activitiesHref, activitiesCount } = extractActivitiesInfo(meeting, contentHref);
+      ...module.meetings.map((meeting, index) => {
+        const scheduledMeeting = meetingBySlug.get(meeting.slug);
+        const contentHref = meeting.slug
+          ? `/topics/${meeting.slug}`
+          : `/#${getMeetingAnchorId(module.id, index, meeting.title)}`;
 
         return {
-          id: meeting.slug || getMeetingAnchorId(topic.id, index, meeting.topic),
-          title: `${meeting.topic}`,
-          date: meeting.date,
+          id: meeting.slug || getMeetingAnchorId(module.id, index, meeting.title),
+          title: meeting.title,
+          date: scheduledMeeting?.date || '',
           contentHref,
-          isNoClass: meeting.holiday === true,
-          resourcesHref,
-          resourcesCount,
-          activitiesHref,
-          activitiesCount,
+          isNoClass: scheduledMeeting?.holiday === true,
         };
       }),
     ],

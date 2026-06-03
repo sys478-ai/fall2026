@@ -1,9 +1,11 @@
 import { getAllPosts, PostData, getAllQuizMetadata, QuizMetadata, getQuizData, getQuizCheatsheet, QuizData } from './markdown';
 import React from 'react';
-import { baseTopics } from '../../content/config/schedule';
+import taxonomyConfig from '../../content/config/taxonomy.json';
+import { semesterSchedule } from '../../content/config/schedule';
 import { getCourseConfig } from './config';
 import type { ModuleColorToken } from './module-colors';
-import { getTopicMarkdownBySlug } from './topic-markdown';
+import { getAllModuleMarkdownMetadata, type ModuleMarkdownMetadata } from './module-markdown';
+import { getTopicMarkdownByModule, getTopicMarkdownBySlug, type TopicMarkdownMetadata } from './topic-markdown';
 
 // Type definitions for topics structure
 interface Activity {
@@ -124,6 +126,23 @@ interface BaseTopic {
 
 type TopicsArray = Topic[];
 type BaseTopicsArray = BaseTopic[];
+type PatternConfig = { slug: string; title: string };
+
+interface SemesterMeetingConfig {
+  meetingSlug: string;
+  date: string;
+  holiday?: boolean;
+  activities?: Activity[];
+}
+
+interface SemesterModuleConfig {
+  moduleSlug: string;
+  meetings: SemesterMeetingConfig[];
+}
+
+const patternTitleBySlug = Object.fromEntries(
+  ((taxonomyConfig.ethicalPatterns || []) as PatternConfig[]).map(pattern => [pattern.slug, pattern.title])
+) as Record<string, string>;
 
 function getAssignmentTitleShort(assignment: { type?: string; num?: string | number }): string {
   if (assignment.type === 'homework') {
@@ -143,6 +162,137 @@ function getAssignmentTitleShort(assignment: { type?: string; num?: string | num
     : 'Assignment';
 
   return assignment.num ? `${typeLabel} ${assignment.num}` : typeLabel;
+}
+
+function uniqueStrings(values: Array<string | undefined>) {
+  return Array.from(new Set(values.filter((value): value is string => typeof value === 'string' && value.length > 0)));
+}
+
+function getRecognitionPatternLabels(patternSlugs: string[], notes?: string[]) {
+  return [...patternSlugs.map(slug => patternTitleBySlug[slug] || slug), ...(notes || [])];
+}
+
+function getModuleTopicMetadata(moduleSlug: string) {
+  const topics = getTopicMarkdownByModule(moduleSlug);
+  const recognitionPatternNotes = uniqueStrings(topics.flatMap(topic => topic.recognitionPatternNotes || []));
+
+  return {
+    ethicalPatterns: uniqueStrings(topics.flatMap(topic => topic.ethicalPatterns)),
+    recognitionPatternNotes: recognitionPatternNotes.length > 0 ? recognitionPatternNotes : undefined,
+    themes: uniqueStrings(topics.flatMap(topic => topic.themes)),
+  };
+}
+
+function renderModuleDescription(module: ModuleMarkdownMetadata) {
+  const moduleMetadata = getModuleTopicMetadata(module.slug);
+  const recognitionPatterns = getRecognitionPatternLabels(
+    moduleMetadata.ethicalPatterns,
+    moduleMetadata.recognitionPatternNotes
+  );
+
+  return (
+    <>
+      <ul className="list-spaced">
+        {recognitionPatterns.length > 0 && (
+          <li>
+            <strong>Recognition patterns:</strong> {recognitionPatterns.join('; ')}
+          </li>
+        )}
+        <li>
+          <strong>Unit focus:</strong> {module.unitFocus}
+        </li>
+        {module.braidElsiArc && (
+          <li>
+            <strong>BRAID / ELSI arc:</strong> {module.braidElsiArc}
+          </li>
+        )}
+      </ul>
+    </>
+  );
+}
+
+function renderMeetingDescription(meeting: TopicMarkdownMetadata) {
+  const recognitionPatterns = getRecognitionPatternLabels(meeting.ethicalPatterns, meeting.recognitionPatternNotes);
+
+  return (
+    <>
+      <p>
+        <strong>Topic / focus:</strong> {meeting.focus}
+      </p>
+      {recognitionPatterns.length > 0 && (
+        <>
+          <p>
+            <strong>Recognition patterns:</strong>
+          </p>
+          <ul className="list-tight">
+            {recognitionPatterns.map(pattern => (
+              <li key={pattern}>{pattern}</li>
+            ))}
+          </ul>
+        </>
+      )}
+      <p>
+        <strong>BRAID / ELSI connection:</strong> {meeting.braidElsiConnection}
+      </p>
+    </>
+  );
+}
+
+function buildMeeting(module: ModuleMarkdownMetadata, semesterMeeting: SemesterMeetingConfig): BaseMeeting {
+  const meeting = getTopicMarkdownBySlug(semesterMeeting.meetingSlug);
+
+  if (!meeting) {
+    throw new Error(`Missing topic markdown slug "${semesterMeeting.meetingSlug}" for module "${module.slug}"`);
+  }
+
+  if (meeting.module !== module.slug) {
+    throw new Error(
+      `Topic markdown slug "${meeting.slug}" belongs to module "${meeting.module}", but schedule places it in "${module.slug}"`
+    );
+  }
+
+  return {
+    slug: meeting.slug,
+    topic: meeting.title,
+    subtitle: meeting.subtitle,
+    date: semesterMeeting.date,
+    description: semesterMeeting.holiday || meeting.holiday ? 'No class.' : renderMeetingDescription(meeting),
+    holiday: semesterMeeting.holiday || meeting.holiday || false,
+    topicContentId: meeting.id,
+    focus: meeting.focus,
+    braidElsiConnection: meeting.braidElsiConnection,
+    activities: semesterMeeting.activities,
+    ethicalPatterns: meeting.ethicalPatterns,
+    recognitionPatternNotes: meeting.recognitionPatternNotes,
+    themes: meeting.themes,
+  };
+}
+
+function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
+  const modules = getAllModuleMarkdownMetadata();
+
+  return (semesterSchedule as SemesterModuleConfig[]).map((scheduledModule) => {
+    const module = modules.find(item => item.slug === scheduledModule.moduleSlug);
+
+    if (!module) {
+      throw new Error(`Missing module slug "${scheduledModule.moduleSlug}" in content/modules`);
+    }
+
+    const moduleMetadata = getModuleTopicMetadata(module.slug);
+
+    return {
+      id: module.id,
+      slug: module.slug,
+      moduleContentId: module.contentId,
+      title: module.title,
+      color: module.color,
+      description: renderModuleDescription(module),
+      ethicalPatterns: moduleMetadata.ethicalPatterns,
+      recognitionPatternNotes: moduleMetadata.recognitionPatternNotes,
+      themes: moduleMetadata.themes,
+      meetings: scheduledModule.meetings.map(meeting => buildMeeting(module, meeting)),
+    };
+  });
 }
 
 // Date parsing utilities
@@ -656,7 +806,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
 
 // Export async function to get enriched topics
 export async function getTopics() {
-  return await enrichTopicsWithMarkdown(baseTopics);
+  return await enrichTopicsWithMarkdown(buildBaseTopicsFromMarkdown());
 }
 
 export async function getTopicMeetingBySlug(slug: string) {
@@ -677,6 +827,4 @@ export async function getTopicMeetingBySlug(slug: string) {
   return null;
 }
 
-// Default export: for now, return base topics (components will be updated to use getTopics())
-// Note: baseTopics is now imported from content/config/schedule.tsx
-export default baseTopics;
+export default getTopics;

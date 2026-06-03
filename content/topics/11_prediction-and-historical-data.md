@@ -1,8 +1,8 @@
 ---
-title: "How Does Prediction Use the Past?"
+title: "When Does Prediction Start to Look Like Intelligence?"
 slug: "prediction-and-historical-data"
 module: "how-do-machines-learn"
-subtitle: "Show how historical data shapes future judgments and outcomes."
+subtitle: "Examine how prediction, pattern recognition, and historical data can make models seem smart."
 ethical_patterns:
   - "prediction-imports-the-past"
 themes:
@@ -13,7 +13,7 @@ braid_elsi_connection: "Prior patterns become embedded in future anomaly judgmen
 
 ## Topic / Focus
 
-Prediction and historical data.
+Prediction, historical data, and the appearance of intelligent behavior.
 
 ## Recognition Patterns
 

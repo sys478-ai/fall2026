@@ -1,8 +1,8 @@
 ---
-title: "What Resists Measurement?"
+title: "What Should AI Be For?"
 slug: "embodiment-subjectivity-and-difficult-to-measure-experience"
 module: "what-is-intelligence"
-subtitle: "Consider embodiment, subjectivity, and forms of experience that do not fit clean metrics."
+subtitle: "Use embodiment, subjectivity, and lived experience to ask what technical systems should and should not try to optimize."
 ethical_patterns:
   - "data-is-produced-not-found"
 themes:
@@ -12,16 +12,17 @@ braid_elsi_connection: "A strong opening for The Dream Hotel and its treatment o
 
 ## Topic / Focus
 
-This topic ends Module 1 by asking what remains hard to capture when intelligence, experience, or behavior are translated into categories and data. If earlier meetings show how definitions and measurements gain authority, this one asks what those systems leave out.
+This topic ends Module 1 by asking what AI should actually be for once we take embodiment, subjectivity, and lived context seriously. If earlier meetings establish that AI is shaped by ethical assumptions and contested definitions of intelligence, this one asks what kinds of technical goals remain defensible once we account for what systems leave out.
 
 Embodiment matters because intelligence is not only abstract reasoning. It is also shaped by bodies, environments, histories, sensory conditions, vulnerability, care, affect, and lived context. Subjectivity matters because many important dimensions of human life are felt, interpreted, or narrated rather than easily measured. Once intelligence or experience is reduced to a narrow signal, a system may become easier to scale while becoming less adequate to the realities it claims to represent.
 
-This meeting gives students a way to name those losses without sliding into the claim that all measurement is impossible or useless. The question is not whether systems can measure anything. The question is what they cannot measure well, what they flatten in the process, and what ethical risks follow when those limits are ignored.
+This meeting gives students a way to name those losses without sliding into the claim that all measurement is impossible or useless. The question is not whether systems can measure anything. The question is what they cannot measure well, what they flatten in the process, and what ethical risks follow when those limits are ignored. That, in turn, helps students ask what kinds of problems AI should take on, what kinds of goals deserve caution, and where technical ambition should meet ethical restraint.
 
-By the end of this topic, you should be able to explain why embodiment and subjectivity matter for AI analysis and why some forms of experience resist easy standardization.
+By the end of this topic, you should be able to explain why embodiment and subjectivity matter for AI analysis and how those limits should shape ideas about what AI is for.
 
 ## Guiding Questions
 
+- What should AI be for once we take embodied, lived experience seriously?
 - What aspects of intelligence or experience are hard to measure?
 - How do bodies, environments, and lived contexts shape what a person can do or know?
 - What gets flattened when a system treats experience as data alone?
@@ -36,6 +37,7 @@ In this meeting, we will:
 - discuss embodiment, context, and subjectivity as part of human intelligence
 - consider what gets lost when inner life becomes a signal or score
 - connect limits of measurement to institutional and technical power
+- use those limits to ask what goals AI systems should and should not pursue
 - prepare for Module 2, where we examine how systems learn from data, features, scores, and predictions
 
 ## Looking Ahead

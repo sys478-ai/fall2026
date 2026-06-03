@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ContentLayout from '@/components/ContentLayout';
-import PageHeader from '@/components/PageHeader';
+import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import { getModuleColorClasses } from '@/lib/module-colors';
 import { getTopicModules } from '@/lib/topic-config';
 
@@ -8,13 +8,19 @@ export default function ModulesPage() {
   const modules = getTopicModules();
 
   return (
-    <ContentLayout variant="list" fullWidth>
-      <div className="space-y-7">
-        <PageHeader
+    <ContentLayout
+      variant="list"
+      fullWidth
+      header={
+        <TopLevelPageHeader
+          label="Course Schedule"
           title="Modules"
-          excerpt="A semester overview of the course modules, their main questions, and the topic sequence inside each one."
+          description="A semester overview of the course modules, their main questions, and the topic sequence inside each one."
+          tone="indigo"
         />
-
+      }
+    >
+      <div className="space-y-7">
         <section className="grid gap-8 lg:grid-cols-2">
           {modules.map(module => {
             const patternCount = module.ethicalPatterns.length + (module.recognitionPatternNotes?.length || 0);
