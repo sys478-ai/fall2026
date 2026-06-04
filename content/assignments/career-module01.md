@@ -1,6 +1,6 @@
 ---
 title: 'Career Module 1: Career Quiz, Values, and Coaching Access'
-scheduled_day: 1
+scheduled_day: 2
 num: '1'
 type: 'career module'
 excerpt: 'Helping you identify your values and interests'

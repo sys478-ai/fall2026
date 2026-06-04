@@ -2,6 +2,11 @@
 title: 'AI systems are socio-technical systems.'
 excerpt: 'AI systems are shaped by technical design, institutions, labor, infrastructure, and governance.'
 num: '1'
+field_guide_section: 'what-the-system-is-made-of'
+field_guide_section_title: '1. What the System Is Made Of'
+field_guide_section_intro: 'Before an AI system acts in the world, people have already made choices about data, infrastructure, materials, and what counts as a meaningful signal. This section helps you look upstream at what systems are made of.'
+field_guide_section_order: 1
+field_guide_order: 1
 ---
 
 ## What To Notice

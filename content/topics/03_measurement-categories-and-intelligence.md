@@ -1,62 +1,50 @@
 ---
-title: 'What Counts as Intelligence?'
+title: 'What Is Knowledge, and How Is It Made?'
 scheduled_day: 3
 module_id: 1
-subtitle: 'Compare how different fields define intelligence and what those definitions make visible or leave out.'
+subtitle: 'Examine how evidence, interpretation, institutions, and authority shape what comes to count as knowledge.'
 ---
 
 ## Topic / Focus
 
-This topic serves as a bridge between the course's opening ethical questions and its later focus on intelligent tools and systems. If the previous meetings ask what AI is supposed to be for and what kinds of benefit or public good people hope it will produce, this meeting asks what counts as intelligence strongly enough to support those hopes in the first place.
+This topic asks how knowledge gets made rather than treating it as something that simply appears on its own. In both everyday life and technical systems, knowledge depends on choices about what counts as evidence, who is trusted to interpret it, which institutions certify it, and what kinds of uncertainty are tolerated.
 
-Rather than treating intelligence as a self-evident capacity that humans have and machines might copy, we compare several ways of defining and studying it. Psychology, cognitive science, neuroscience, and the learning sciences each ask different questions and produce different kinds of evidence. One field may focus on behavior, another on mental processes, another on neural activity, and another on social or developmental learning. Each approach highlights something important, but none gives a complete, neutral account of what intelligence is.
+That matters for AI because datasets, models, and outputs are often treated as if they deliver objective knowledge automatically. Before students can evaluate those claims, they need language for thinking about interpretation, expertise, classification, and the difference between raw observation and justified belief.
 
-This matters for AI because technical systems often borrow concepts, metaphors, and legitimacy from these fields. Terms such as learning, memory, attention, intelligence, and adaptation travel from science into engineering and then into public language. Once that happens, distinctions between ethical aspiration, scientific model, and technical mechanism can easily blur.
-
-By the end of this topic, you should be able to explain how different fields study intelligence, why those disciplinary choices matter, and how they shape later claims about intelligent tools.
+By the end of this topic, you should be able to explain why knowledge is produced through methods and institutions, why claims of objectivity deserve scrutiny, and how those questions prepare us to analyze later AI systems.
 
 ## Guiding Questions
 
-- How do psychology, cognitive science, neuroscience, and the learning sciences approach intelligence differently?
-- What kinds of evidence count in each field?
-- What does each field make visible, and what does it leave out?
-- How do scientific models of intelligence travel into technical systems and public discourse?
-- Why is it risky to assume that one field has the final definition of intelligence?
+- What counts as evidence?
+- How do interpretation and authority shape what people accept as knowledge?
+- Which institutions get to certify knowledge claims?
+- When does a measurement or output begin to look more objective than it really is?
+- How do these questions carry over into AI systems and data practices?
 
 ## In This Class
 
 In this meeting, we will:
 
-- compare several disciplinary approaches to intelligence and learning
-- discuss the methods and assumptions behind those approaches
-- identify what each field treats as important evidence
-- examine how concepts such as learning, memory, and adaptation move into AI language
-- prepare for later questions about measurement, categorization, and neutrality
+- compare different ways people justify knowledge claims
+- discuss evidence, interpretation, uncertainty, and institutional authority
+- identify how classification and measurement shape what becomes knowable
+- prepare for later questions about learning, intelligence, and operationalization
 
 ## Looking Ahead
 
-Once we see that intelligence is studied through multiple disciplinary lenses, the next step is to ask what those lenses clarify, what they distort, and what kinds of technical goals they encourage. The remaining work in Module 1 turns to brain and learning metaphors, then closes by asking what AI should actually be for.
+The next two meetings build from knowledge into ethics and learning. After that, Module 1 closes by asking what counts as intelligence and why AI claims often smuggle in assumptions about knowledge, learning, and value all at once.
 
 ## Recognition Patterns
 
 - Classification is not neutral.
 
-This pattern matters here because disciplinary frameworks do not just describe intelligence; they also sort, prioritize, and normalize particular forms of behavior, cognition, and evidence. What looks like a neutral scientific approach often depends on prior assumptions about what should count.
+This pattern matters here because knowledge practices sort, prioritize, and normalize certain kinds of evidence while ignoring others. What looks like a neutral description of reality often depends on earlier judgments about what should count in the first place.
 
 ## BRAID / ELSI Connection
 
-BRAID draws on brain-inspired and neuromorphic ideas, which means students need practice separating scientific inspiration from simplified public stories. This topic helps establish that neuroscience and learning research can inform technical design without automatically justifying every intelligence claim made about a system.
+BRAID draws on research claims, engineering choices, and public narratives about intelligence, sensing, and efficiency. This topic helps establish that none of those claims should be treated as self-validating just because they come wrapped in technical language or institutional authority.
 
-It also prepares students to ask later whether a system is genuinely modeling something meaningful, borrowing a scientific metaphor loosely, or using scientific language to make technical claims sound more authoritative than they are.
-
-## Potential Activities
-
-1. Listing all of the different forms of intelligence (the categories), and then putting different instances into categories.
-2. Listing how different intelligences are rewarded in society.
-
-## Slides
-
-### Slide 1: Title
+It also prepares students to ask later whether a system is measuring something meaningful, borrowing a scientific metaphor loosely, or using technical outputs to make contested claims look more settled than they are.
 
 **Psychology, Cognitive Science, Neuroscience, and the Learning Sciences**
 

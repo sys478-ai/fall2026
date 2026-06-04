@@ -1,52 +1,47 @@
 ---
-title: 'What Should AI Be For?'
+title: 'What Ethical Lenses Help Us Evaluate AI?'
 scheduled_day: 4
 module_id: 1
-subtitle: 'Use embodiment, subjectivity, and lived experience to ask what technical systems should and should not try to optimize.'
+subtitle: 'Introduce utilitarianism, care ethics, deontology, and the common good as practical ways to assess AI systems.'
 ---
 
 ## Topic / Focus
 
-This topic ends Module 1 by asking what AI should actually be for once we take embodiment, subjectivity, and lived context seriously. If earlier meetings establish that AI is shaped by ethical assumptions and contested definitions of intelligence, this one asks what kinds of technical goals remain defensible once we account for what systems leave out.
+This topic gives students a shared ethical vocabulary for the rest of the semester. Rather than treating ethics as a separate add-on, we introduce several lenses that make different features of AI systems visible: overall consequences, duties and rights, relations of care, and the health of the common good.
 
-Embodiment matters because intelligence is not only abstract reasoning. It is also shaped by bodies, environments, histories, sensory conditions, vulnerability, care, affect, and lived context. Subjectivity matters because many important dimensions of human life are felt, interpreted, or narrated rather than easily measured. Once intelligence or experience is reduced to a narrow signal, a system may become easier to scale while becoming less adequate to the realities it claims to represent.
+The goal is not to turn this class into a full survey of moral philosophy. The goal is to give students practical tools for asking better questions. An AI system that looks efficient from one perspective may look harmful from another. A system justified as beneficial in the aggregate may still fail vulnerable people, violate duties, or weaken shared institutions.
 
-This meeting gives students a way to name those losses without sliding into the claim that all measurement is impossible or useless. The question is not whether systems can measure anything. The question is what they cannot measure well, what they flatten in the process, and what ethical risks follow when those limits are ignored. That, in turn, helps students ask what kinds of problems AI should take on, what kinds of goals deserve caution, and where technical ambition should meet ethical restraint.
-
-By the end of this topic, you should be able to explain why embodiment and subjectivity matter for AI analysis and how those limits should shape ideas about what AI is for.
+By the end of this topic, you should be able to explain how different ethical lenses frame AI differently and why no single lens is enough on its own.
 
 ## Guiding Questions
 
-- What should AI be for once we take embodied, lived experience seriously?
-- What aspects of intelligence or experience are hard to measure?
-- How do bodies, environments, and lived contexts shape what a person can do or know?
-- What gets flattened when a system treats experience as data alone?
-- When do measurement systems confuse partial signals with whole realities?
-- Why do limits of measurement matter for governance and accountability?
+- What counts as a good outcome?
+- What duties or rights should not be violated, even for the sake of efficiency?
+- Who is vulnerable, dependent, or in need of care in a given system?
+- What supports the common good rather than only private gain or narrow optimization?
+- How do different ethical lenses change what kinds of AI systems look acceptable?
 
 ## In This Class
 
 In this meeting, we will:
 
-- identify forms of intelligence or experience that resist simple measurement
-- discuss embodiment, context, and subjectivity as part of human intelligence
-- consider what gets lost when inner life becomes a signal or score
-- connect limits of measurement to institutional and technical power
-- use those limits to ask what goals AI systems should and should not pursue
-- prepare for Module 2, where we examine how systems learn from data, features, scores, and predictions
+- introduce utilitarianism, care ethics, deontology, and the common good
+- compare how each lens evaluates familiar AI examples
+- discuss why ethical disagreement persists even around the same technical system
+- build a shared set of questions we can reuse in labs and case studies all semester
 
 ## Looking Ahead
 
-This topic closes Module 1 by showing that even strong systems of definition and measurement have limits. Module 2 picks up from that point by asking how machine learning systems operationalize data, learning, features, thresholds, and prediction, and what those operational choices make visible or obscure.
+The next meeting turns to learning directly, and the close of Module 1 asks what counts as intelligence once we have taken ethics, knowledge, and different models of learning seriously.
 
 ## Recognition Patterns
 
-- Data is produced, not found.
+- AI systems are socio-technical systems.
 
-This pattern matters here because difficult-to-measure experiences do not become neutral simply because a system assigns them a score, category, or signal. Data always reflects choices about what to observe, how to encode it, and what to treat as meaningful.
+This pattern matters here because ethical evaluation has to include institutions, incentives, data practices, labor, infrastructure, and public consequences, not just model behavior in the abstract.
 
 ## BRAID / ELSI Connection
 
-This topic offers an important bridge into later discussions of anomaly detection, sensing, and prediction. Systems may be powerful at detecting deviations in measurable signals while still missing the meaning of the lived conditions behind those signals.
+BRAID invites several ethical readings at once. A neuromorphic anomaly detector may be framed as efficient, low-power, protective, or innovative, but those benefits do not settle questions about surveillance, accountability, care, or public legitimacy.
 
-It also works as a strong opening for _The Dream Hotel_ and similar cases in which intimate, internal, or difficult-to-measure experience is turned into data. For BRAID, the lesson is that technical efficiency does not remove the need to ask what kinds of experience a system cannot adequately represent and what harms may follow when partial signals are treated as total knowledge.
+This topic gives students a set of lenses they can carry into the rest of the course, including later questions about anomaly detection, infrastructure, and anticipatory governance.

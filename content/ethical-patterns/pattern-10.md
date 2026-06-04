@@ -2,6 +2,11 @@
 title: "Automation changes accountability."
 num: '10'
 excerpt: "Automation can make decisions feel more diffuse, making it harder to locate who is responsible for choices, errors, or harms."
+field_guide_section: 'how-the-system-acts-and-shifts-power'
+field_guide_section_title: '3. How the System Acts and Shifts Power'
+field_guide_section_intro: 'Once a system is operating, it begins to sort, score, intervene, and redistribute authority. This section helps you trace how system outputs become actions and how those actions shift power.'
+field_guide_section_order: 3
+field_guide_order: 2
 ---
 
 ## What To Notice

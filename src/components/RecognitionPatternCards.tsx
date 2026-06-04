@@ -4,6 +4,7 @@ import ThemedImage from './ThemedImage';
 interface TaxonomyEntry {
   slug?: string;
   title: string;
+  subtitle?: string;
   shortDescription?: string;
   group?: string;
   order?: number;
@@ -35,16 +36,18 @@ function PatternIllustration({
   title,
   featuredImage,
   featuredImageDark,
+  placeholderLabel,
 }: {
   index: number;
   title: string;
   featuredImage?: string;
   featuredImageDark?: string;
+  placeholderLabel?: string;
 }) {
   return (
     <div
       aria-hidden="true"
-      className={`relative h-44 w-full shrink-0 overflow-hidden sm:h-52 ${patternImageStyles[index % patternImageStyles.length]}`}
+      className={`relative h-44 w-full shrink-0 overflow-hidden md:h-auto md:w-72 lg:w-80 ${patternImageStyles[index % patternImageStyles.length]}`}
     >
       {featuredImage ? (
         <ThemedImage
@@ -55,7 +58,11 @@ function PatternIllustration({
           title={`${title} illustration`}
         />
       ) : (
-        <div className="h-full w-full flex items-center justify-center">???</div>
+        <div className="flex h-full w-full items-center justify-center px-6 text-center">
+          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+            {placeholderLabel || 'Field Guide'}
+          </span>
+        </div>
       )}
     </div>
   );
@@ -63,36 +70,56 @@ function PatternIllustration({
 
 export default function RecognitionPatternCards({
   patterns,
-  title = 'Ethical Recognition Patterns',
-  description = 'Short recurring patterns students can learn to notice across AI systems, labs, and governance cases.',
+  badgeLabel = 'Lens',
+  preserveOrder = false,
 }: {
   patterns: TaxonomyEntry[];
-  title?: string;
-  description?: string;
+  badgeLabel?: string;
+  preserveOrder?: boolean;
 }) {
-  const sortedPatterns = [...patterns].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+  const sortedPatterns = preserveOrder
+    ? patterns
+    : [...patterns].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
   return (
-    <section id="field-guide" className="space-y-4">
+    <section id="field-guide" className="space-y-4 max-w-5xl">
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6">
         {sortedPatterns.map((pattern, index) => {
+          const shouldShowShortDescription =
+            pattern.shortDescription &&
+            pattern.shortDescription.trim() !== pattern.subtitle?.trim();
+
           const card = (
             <article
-              className={`flex h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-colors dark:bg-black ${patternCardStyles[index % patternCardStyles.length]}`}
+              className={`flex h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-colors md:min-h-52 md:flex-row dark:bg-black ${patternCardStyles[index % patternCardStyles.length]}`}
             >
               <PatternIllustration
                 index={index}
                 title={pattern.title}
                 featuredImage={pattern.featured_image}
                 featuredImageDark={pattern.featured_image_dark}
+                placeholderLabel={badgeLabel}
               />
 
-              <div className="flex-1 bg-white p-4 text-gray-900 dark:bg-black dark:text-gray-100">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="m-0 text-lg font-semibold leading-snug text-[#0b5d8f] dark:text-[#8fc4ee]">
-                    {pattern.title}
+              <div className="flex flex-1 items-center bg-white p-5 text-gray-900 dark:bg-black dark:text-gray-100 md:p-6">
+                <div className="max-w-3xl">
+                  <h3 className="m-0 flex flex-wrap items-center gap-2 text-lg font-semibold leading-snug text-[#0b5d8f] dark:text-[#8fc4ee]">
+                    <span className="rounded-full bg-violet-100 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-violet-700 dark:bg-violet-950 dark:text-violet-300">
+                      {badgeLabel}
+                    </span>
+                    <span>{pattern.title}</span>
                   </h3>
+                  {pattern.subtitle && (
+                    <p className="mb-0 mt-1 text-base leading-6 text-gray-800 dark:text-gray-200">
+                      {pattern.subtitle}
+                    </p>
+                  )}
+                  {shouldShowShortDescription && (
+                    <p className="mb-0 mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">
+                      {pattern.shortDescription}
+                    </p>
+                  )}
                 </div>
               </div>
             </article>
@@ -106,7 +133,7 @@ export default function RecognitionPatternCards({
             <Link
               key={pattern.slug}
               href={`/field-guide/${pattern.slug}`}
-              className="group block h-full rounded-xl border-0! text-inherit! no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b5d8f] dark:focus-visible:outline-[#8fc4ee]"
+              className="group block h-full rounded-xl border-0! text-inherit! no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b5d8f] dark:focus-visible:outline-[#8fc4ee]"
             >
               {card}
             </Link>

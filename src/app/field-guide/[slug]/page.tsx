@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import taxonomyData from '../../../../content/config/taxonomy.json';
 import { getPostData, PostData } from '@/lib/markdown';
 import { generateStaticParamsForContentType, validatePostForRender } from '@/lib/static-params';
 import {
@@ -20,20 +19,6 @@ interface PageProps {
     slug: string;
   }>;
 }
-
-interface TaxonomyEntry {
-  slug?: string;
-  title: string;
-  group?: string;
-  relatedThemes?: string[];
-}
-
-interface TaxonomyData {
-  themes: Array<{ slug: string; title: string }>;
-  ethicalPatterns: TaxonomyEntry[];
-}
-
-const taxonomy = taxonomyData as TaxonomyData;
 
 function formatGroupLabel(group?: string) {
   if (!group) {
@@ -256,11 +241,6 @@ export default async function EthicalPatternPage({ params }: PageProps) {
       notFound();
     }
 
-    const taxonomyPattern = taxonomy.ethicalPatterns.find(pattern => pattern.slug === slug);
-    if (!taxonomyPattern) {
-      notFound();
-    }
-
     const relatedTopics = getRelatedTopicsForPattern(slug);
     const relatedTaggedContent = getRelatedContentForPattern(slug);
     const relatedScheduleItems = await getRelatedScheduleItemsForPattern(slug);
@@ -271,7 +251,11 @@ export default async function EthicalPatternPage({ params }: PageProps) {
 
     const resourceItems = relatedTaggedContent.items.filter(item => item.kind === 'resources');
     const combinedScheduleItems = relatedScheduleItems;
-    const groupLabel = formatGroupLabel(taxonomyPattern.group);
+    const postWithGuideMetadata = postData as PostData & {
+      field_guide_section_title?: string;
+      group?: string;
+    };
+    const groupLabel = postWithGuideMetadata.field_guide_section_title || formatGroupLabel(postWithGuideMetadata.group);
     const patternContentSections = splitPatternContentSections(postData.content);
 
     return (

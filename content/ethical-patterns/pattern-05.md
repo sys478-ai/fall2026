@@ -2,6 +2,15 @@
 title: "\"Normal\" is constructed."
 num: '5'
 excerpt: "Anomaly detection depends on baselines, and baselines reflect choices about what counts as ordinary, acceptable, or suspicious."
+field_guide_section: 'how-the-system-sees-the-world'
+field_guide_section_title: '2. How the System Sees the World'
+field_guide_section_intro: 'AI systems do not encounter the world directly. They measure, categorize, model, and predict through particular representations. This section helps you ask how a system is seeing, simplifying, and interpreting the world.'
+field_guide_section_order: 2
+field_guide_order: 2
+field_guide_merge_key: 'categories-and-norms'
+field_guide_merge_title: 'Categories and norms are constructed.'
+field_guide_merge_subtitle: 'Systems do not simply discover natural groups or obvious baselines. We define categories, draw boundaries, and decide what counts as normal.'
+field_guide_merge_description: 'This brings together classification and normality, showing how systems make some differences legible while treating others as deviant, suspicious, or out of bounds.'
 ---
 
 ## What To Notice

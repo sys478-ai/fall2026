@@ -3,6 +3,11 @@ title: 'Data is produced, not found.'
 num: '2'
 excerpt: 'Data is created through measurement choices, interfaces, institutions, and assumptions about what should count.'
 featured_image: 'fall2026/images/ethics-field-guide/data/02-observation-sensing.png'
+field_guide_section: 'what-the-system-is-made-of'
+field_guide_section_title: '1. What the System Is Made Of'
+field_guide_section_intro: 'Before an AI system acts in the world, people have already made choices about data, infrastructure, materials, and what counts as a meaningful signal. This section helps you look upstream at what systems are made of.'
+field_guide_section_order: 1
+field_guide_order: 2
 ---
 
 ## What To Notice

@@ -29,8 +29,8 @@ interface ContentLayoutProps {
  * Shared layout component that ensures consistent content positioning across all pages.
  * 
  * Layout variants:
- * - resources-detail: Content + TOC (256px fixed right)
- * - detail-with-toc: Content + TOC (256px fixed right)
+ * - resources-detail: Content + TOC
+ * - detail-with-toc: Content + TOC
  * - list: Content (no TOC)
  */
 export default function ContentLayout({
@@ -49,6 +49,7 @@ export default function ContentLayout({
   
   // All pages use full-height scrollable containers
   const hasToc = (isResourcesDetail || isDetailWithToc) && showToc;
+  const desktopContentWidthClass = fullWidth ? 'max-w-none' : hasToc ? 'max-w-5xl' : 'max-w-4xl';
   
   return (
     <div className="relative lg:h-screen lg:overflow-hidden -mx-4 lg:-mx-8">
@@ -78,8 +79,8 @@ export default function ContentLayout({
         >
           {header}
           <div className={contentPadding ? 'px-16' : ''}>
-            <div className={hasToc ? 'grid grid-cols-[minmax(0,1fr)_17.25rem] gap-6' : ''}>
-              <div className={fullWidth ? 'max-w-none' : 'max-w-4xl'}>
+            <div className={hasToc ? 'grid grid-cols-[minmax(0,1fr)_13rem] gap-6' : ''}>
+              <div className={desktopContentWidthClass}>
                 <div className="space-y-6 py-6">
                   {children}
                   {showFooter && <Footer />}

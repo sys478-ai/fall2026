@@ -1,7 +1,12 @@
 ---
-title: "Emerging technologies require anticipatory governance."
+title: "Early choices can shape future benefits and harms."
 num: '17'
-excerpt: "Systems should be governed before their assumptions, harms, and dependencies become entrenched."
+excerpt: "Design, data, and deployment decisions can shape who benefits, who is exposed to risk, and what becomes harder to change later."
+field_guide_section: 'accountability-transparency-and-governance'
+field_guide_section_title: '4. Accountability, Transparency, and Governance'
+field_guide_section_intro: 'AI systems raise questions not only about what they do, but about who can inspect them, challenge them, govern them, and refuse them. This section brings together transparency, accountability, oversight, and public response.'
+field_guide_section_order: 4
+field_guide_order: 2
 ---
 
 ## What To Notice

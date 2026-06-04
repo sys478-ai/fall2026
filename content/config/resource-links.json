@@ -34,6 +34,61 @@
       "notes": "AI Governance and Safety Canada's Executive Director Wyatt Tessari L'Allié tells Canadian MPs that AI loss of control incidents are already emerging, that experts warn AI poses a risk of human extinction, and that Canada should spearhead talks to prevent the threat.",
       "added": "2026-05-31",
       "draft": false
+    },
+    {
+      "id": "stanford-craft-resources",
+      "title": "CRAFT Resources",
+      "url": "https://craft.stanford.edu/resources/",
+      "authors": "Stanford CRAFT",
+      "type": "tool",
+      "tags": ["online learning hub", "AI education"],
+      "notes": "A growing collection of AI education resources and lessons across AI and society, arts, science, language arts, math, and history-social science.",
+      "added": "2026-06-04",
+      "draft": false
+    },
+    {
+      "id": "critical-big-data-algorithmic-literacy-network",
+      "title": "Critical Big Data and Algorithmic Literacy Network",
+      "url": "https://www.bigdataliteracy.net/",
+      "authors": "Critical Big Data and Algorithmic Literacy Network",
+      "type": "tool",
+      "tags": ["online learning hub", "data literacy", "algorithmic literacy"],
+      "notes": "An international network and resource collection focused on critical thinking, ethical reflection, and education for datafication, big data, algorithms, and AI.",
+      "added": "2026-06-04",
+      "draft": false
+    },
+    {
+      "id": "privacy-international-teaching-about-data",
+      "title": "Teaching about Data: A Resource for Educators",
+      "url": "https://privacyinternational.org/learning-resources/teaching-about-data-resource-educators",
+      "authors": "Privacy International and Cardiff University",
+      "type": "tool",
+      "tags": ["online learning hub", "data literacy", "algorithmic literacy"],
+      "notes": "An educator resource for teaching critical data literacy, including how data and technology shape power, autonomy, public debate, and social decision-making.",
+      "added": "2026-06-04",
+      "draft": false
+    },
+    {
+      "id": "ethics-and-algorithms-toolkit",
+      "title": "Ethics & Algorithms Toolkit",
+      "url": "https://ethicstoolkit.ai/",
+      "authors": "GovEx, City and County of San Francisco, Harvard DataSmart, and Data Community DC",
+      "type": "tool",
+      "tags": ["algorithmic literacy", "governance", "risk management"],
+      "notes": "A practitioner-facing risk management toolkit for governments and other organizations to assess algorithmic risk, discuss impacts with stakeholders, and plan mitigation strategies.",
+      "added": "2026-06-04",
+      "draft": false
+    },
+    {
+      "id": "data-ethics-decision-aid-deda",
+      "title": "Data Ethics Decision Aid (DEDA)",
+      "url": "https://deda.dataschool.nl/en/",
+      "authors": "Data School, Utrecht University",
+      "type": "tool",
+      "tags": ["data literacy", "governance", "risk management"],
+      "notes": "An open-access toolkit that helps data analysts, project managers, and policymakers identify ethical and practical issues in data and AI projects, document deliberation, and support accountability.",
+      "added": "2026-06-04",
+      "draft": false
     }
   ]
 }

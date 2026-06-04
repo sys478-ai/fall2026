@@ -2,6 +2,11 @@
 title: "Measurement becomes datafication."
 num: '3'
 excerpt: "When systems measure more of life, experiences and behaviors become trackable, modelable, and governable as data."
+field_guide_section: 'how-the-system-sees-the-world'
+field_guide_section_title: '2. How the System Sees the World'
+field_guide_section_intro: 'AI systems do not encounter the world directly. They measure, categorize, model, and predict through particular representations. This section helps you ask how a system is seeing, simplifying, and interpreting the world.'
+field_guide_section_order: 2
+field_guide_order: 1
 ---
 
 ## What To Notice
