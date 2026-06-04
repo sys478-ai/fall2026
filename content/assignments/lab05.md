@@ -1,9 +1,8 @@
 ---
 title: 'Prediction & Historical Data'
+scheduled_day: 11
 num: '5'
-date: '2026-10-07'
 type: 'lab'
-due_date: '2026-10-14'
 draft: 0
 ---
 

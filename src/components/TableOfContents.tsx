@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { scrollToAnchor, SCROLL_OFFSET_PX } from '@/lib/utils';
+import { SCROLL_OFFSET_PX } from '@/lib/utils';
 
 interface TocItem {
   id: string;
@@ -199,10 +199,6 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
             >
               <a
                 href={`#${item.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToAnchor(item.id);
-                }}
                 className={`block py-0.5 px-2 text-sm font-normal transition-colors whitespace-nowrap overflow-hidden border-0! text-ellipsis rounded toc-link ${
                   activeId === item.id
                     ? 'font-extrabold! text-blue-600 dark:text-blue-100 hover:text-blue-600 dark:hover:text-blue-200'

@@ -1,13 +1,8 @@
 ---
 title: "What Makes AI Material?"
-slug: "hardware-memristors-energy-and-material-ai"
-module: "from-mechanism-to-implications"
+scheduled_day: 20
+module_id: 4
 subtitle: "Connect memristors, hardware, energy, and the physical substrates of AI."
-ethical_patterns:
-  - "ai-is-material"
-themes:
-  - "environmental-impacts-of-ai"
-braid_elsi_connection: "Memristors and memtransistors, on-chip learning, energy efficiency, and lifecycle impacts."
 ---
 
 ## Topic / Focus

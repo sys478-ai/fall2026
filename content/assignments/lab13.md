@@ -1,9 +1,8 @@
 ---
 title: 'Spikes, Timing, and Event-Driven Computation'
+scheduled_day: 15
 num: '13'
-date: '2026-12-02'
 type: 'lab'
-due_date: '2026-12-09'
 draft: 0
 ---
 

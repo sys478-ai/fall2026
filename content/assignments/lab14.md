@@ -1,9 +1,7 @@
 ---
 title: 'Hardware Governance Lab'
 num: '14'
-date: '2026-12-09'
 type: 'lab'
-due_date: '2026-12-16'
 draft: 0
 ---
 

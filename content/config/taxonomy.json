@@ -234,7 +234,7 @@
   ],
   "ethicalPatterns": [
     {
-      "slug": "ai-systems-are-socio-technical-systems",
+      "slug": "pattern-01",
       "title": "AI systems are socio-technical systems.",
       "group": "course-foundations",
       "order": 1,
@@ -243,7 +243,7 @@
       ]
     },
     {
-      "slug": "classification-is-not-neutral",
+      "slug": "pattern-04",
       "title": "Classification is not neutral.",
       "group": "core-sys-sequence",
       "order": 4,
@@ -253,7 +253,7 @@
       ]
     },
     {
-      "slug": "data-is-produced-not-found",
+      "slug": "pattern-02",
       "title": "Data is produced, not found.",
       "group": "core-sys-sequence",
       "order": 2,
@@ -262,7 +262,7 @@
       ]
     },
     {
-      "slug": "features-are-value-choices",
+      "slug": "pattern-06",
       "title": "Features are value choices.",
       "group": "core-sys-sequence",
       "order": 6,
@@ -271,7 +271,7 @@
       ]
     },
     {
-      "slug": "thresholds-distribute-harm",
+      "slug": "pattern-07",
       "title": "Thresholds make uncertainty consequential.",
       "group": "core-sys-sequence",
       "order": 7,
@@ -280,7 +280,7 @@
       ]
     },
     {
-      "slug": "prediction-imports-the-past",
+      "slug": "pattern-08",
       "title": "Prediction imports the past.",
       "group": "core-sys-sequence",
       "order": 8,
@@ -289,7 +289,7 @@
       ]
     },
     {
-      "slug": "opacity-shifts-authority",
+      "slug": "pattern-09",
       "title": "Opacity shifts authority.",
       "group": "core-sys-sequence",
       "order": 9,
@@ -298,7 +298,7 @@
       ]
     },
     {
-      "slug": "measurement-becomes-datafication",
+      "slug": "pattern-03",
       "title": "Measurement becomes datafication.",
       "group": "core-sys-sequence",
       "order": 3,
@@ -307,7 +307,7 @@
       ]
     },
     {
-      "slug": "normal-is-constructed",
+      "slug": "pattern-05",
       "title": "\"Normal\" is constructed.",
       "group": "core-sys-sequence",
       "order": 5,
@@ -317,7 +317,7 @@
       ]
     },
     {
-      "slug": "automation-changes-accountability",
+      "slug": "pattern-10",
       "title": "Automation changes accountability.",
       "group": "core-sys-sequence",
       "order": 10,
@@ -327,7 +327,7 @@
       ]
     },
     {
-      "slug": "emerging-technologies-require-anticipatory-governance",
+      "slug": "pattern-17",
       "title": "Emerging technologies require anticipatory governance.",
       "group": "course-synthesis",
       "order": 17,
@@ -336,7 +336,7 @@
       ]
     },
     {
-      "slug": "extraction-can-be-disguised-as-innovation",
+      "slug": "pattern-14",
       "title": "Extraction can be disguised as innovation.",
       "group": "critical-lenses",
       "order": 14,
@@ -348,7 +348,7 @@
       ]
     },
     {
-      "slug": "power-can-concentrate-in-infrastructure",
+      "slug": "pattern-15",
       "title": "Power can concentrate in infrastructure.",
       "group": "critical-lenses",
       "order": 15,
@@ -357,7 +357,7 @@
       ]
     },
     {
-      "slug": "alternatives-can-be-foreclosed",
+      "slug": "pattern-16",
       "title": "Alternatives can be foreclosed.",
       "group": "critical-lenses",
       "order": 16,
@@ -367,7 +367,7 @@
       ]
     },
     {
-      "slug": "anthropomorphism-aliveness-sentience-claims",
+      "slug": "pattern-12",
       "title": "AI systems can encourage anthropomorphism, aliveness, or sentience claims.",
       "group": "critical-lenses",
       "order": 12,
@@ -376,7 +376,7 @@
       ]
     },
     {
-      "slug": "dependency-cognitive-offloading-deskilling",
+      "slug": "pattern-11",
       "title": "AI can create dependency, cognitive offloading, and deskilling.",
       "group": "critical-lenses",
       "order": 11,
@@ -385,7 +385,7 @@
       ]
     },
     {
-      "slug": "ai-is-material",
+      "slug": "pattern-13",
       "title": "AI is material: it depends on energy, water, chips, labor, mining, and waste.",
       "group": "critical-lenses",
       "order": 13,

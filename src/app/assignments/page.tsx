@@ -3,6 +3,7 @@ import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
 import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import AssignmentsTabbedList from '@/components/assignments/AssignmentsTabbedList';
+import { getDueDateForScheduledDay } from '@/lib/course-calendar';
 import externalAssignments from '../../../content/config/external-assignments.json';
 
 interface AssignmentData {
@@ -14,6 +15,7 @@ interface AssignmentData {
   due_date?: string;
   type?: string;
   assigned?: string;
+  scheduled_day?: number;
   notes?: string;
   draft?: number;
   external_url?: string;
@@ -36,9 +38,10 @@ export default async function AssignmentsPage() {
       title: postData.title,
       excerpt: postData.excerpt,
       date: postData.date,
-      due_date: postData.due_date,
+      due_date: getDueDateForScheduledDay(postData.scheduled_day) || postData.due_date,
       type: postData.type,
       assigned: postData.assigned,
+      scheduled_day: postData.scheduled_day,
       notes: postData.notes,
       draft: postData.draft,
       excluded: postData.excluded,

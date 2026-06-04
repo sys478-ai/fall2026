@@ -171,19 +171,17 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
             const titleParts = getAssignmentTitleParts(item);
             const daysLeftLabel = getDaysLeftLabel(item.due_date);
             const careerModule = isCareerModule(item);
-            const titleContent = (
-              <span className="inline-flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="inline-flex rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-700 dark:border-gray-800 dark:text-gray-300">
-                  {titleParts.prefix}
-                </span>
-                {titleParts.title && <span> {titleParts.title}</span>}
+            const badgeContent = (
+              <span className="inline-flex rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-700 dark:border-gray-800 dark:text-gray-300">
+                {titleParts.prefix}
               </span>
             );
+            const titleContent = <span>{titleParts.title || getDisplayTitle(item)}</span>;
 
             return (
               <li
                 key={item.id}
-                className="grid! items-start max-w-3xl gap-6 px-2 py-3 grid-cols-[5rem_auto_10rem]"
+                className="grid! max-w-5xl items-start gap-6 px-2 py-3 grid-cols-[5rem_9.5rem_minmax(0,1fr)_10rem]"
               >
                 <span className="text-sm text-gray-600 dark:text-gray-400">
                   <span className="min-w-0">
@@ -191,12 +189,14 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
                   </span>
                 </span>
 
+                <span className="pt-0.5">{badgeContent}</span>
+
                 <div className="flex min-w-0 gap-3">
                   <div className="min-w-0">
                     {(item.notes || draft) && (
                       <div className="mb-1 flex flex-wrap items-center gap-2">
-                      {item.notes && <span className="text-xs text-gray-500 dark:text-gray-500">({item.notes})</span>}
-                      {draft && <span className="text-xs font-medium text-gray-500 dark:text-gray-500">Draft</span>}
+                        {item.notes && <span className="text-xs text-gray-500 dark:text-gray-500">({item.notes})</span>}
+                        {draft && <span className="text-xs font-medium text-gray-500 dark:text-gray-500">Draft</span>}
                       </div>
                     )}
 

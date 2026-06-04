@@ -1,13 +1,7 @@
 ---
 title: "Automation changes accountability."
+num: '10'
 excerpt: "Automation can make decisions feel more diffuse, making it harder to locate who is responsible for choices, errors, or harms."
-ethical_patterns:
-  - automation-changes-accountability
-themes:
-  - edge-ai-privacy-accountability
-  - thresholds-errors-responsibility
-featured_topics:
-  - sensors-edge-ai-wearables-biosensing-cybersecurity
 ---
 
 ## What To Notice

@@ -31,7 +31,7 @@ export default function HorizontalCardStrip({
       <div className="relative min-w-0">
         <div className="pointer-events-none absolute bottom-4 left-0 top-0 z-10 w-8 bg-linear-to-r from-white to-transparent dark:from-black" />
         <div className="pointer-events-none absolute bottom-4 right-0 top-0 z-10 w-8 bg-linear-to-l from-white to-transparent dark:from-black" />
-        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto overflow-y-hidden pb-4 pr-8 scroll-smooth scrollbar-none [&::-webkit-scrollbar]:hidden">
+        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto overflow-y-hidden pb-4 pr-8 scrollbar-none [&::-webkit-scrollbar]:hidden">
           {items.map(item => (
             <article
               key={item.id}

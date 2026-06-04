@@ -1,16 +1,7 @@
 ---
 title: "Classification is not neutral."
+num: '4'
 excerpt: "Categories and labels are constructed choices that shape what kinds of people, behaviors, or events become visible and consequential."
-ethical_patterns:
-  - classification-is-not-neutral
-themes:
-  - classification-categories
-  - objectivity-neutrality
-featured_topics:
-  - measurement-categories-and-intelligence
-  - objectivity-neutrality-and-who-gets-defined
-featured_assignments:
-  - lab01a
 ---
 
 ## What To Notice

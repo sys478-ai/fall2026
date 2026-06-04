@@ -1,9 +1,7 @@
 ---
 title: 'Clustering Lab'
 num: '1c'
-date: '2026-09-09'
 type: 'lab'
-due_date: '2026-09-16'
 draft: 0
 ---
 

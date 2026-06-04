@@ -1,12 +1,7 @@
 ---
 title: "AI systems can encourage anthropomorphism, aliveness, or sentience claims."
+num: '12'
 excerpt: "Human-centered metaphors can distort public understanding of what systems are, what they do, and what they deserve."
-ethical_patterns:
-  - anthropomorphism-aliveness-sentience-claims
-themes:
-  - anthropomorphism-aliveness-sentience
-featured_topics:
-  - neuroscience-primer-neurons-synapses-weights-plasticity
 ---
 
 ## What To Notice

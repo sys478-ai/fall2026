@@ -1,9 +1,8 @@
 ---
 title: 'Features Are Value Choices'
+scheduled_day: 7
 num: '3'
-date: '2026-09-23'
 type: 'lab'
-due_date: '2026-09-30'
 draft: 0
 ---
 

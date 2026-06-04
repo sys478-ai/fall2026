@@ -1,15 +1,7 @@
 ---
 title: "Emerging technologies require anticipatory governance."
+num: '17'
 excerpt: "Systems should be governed before their assumptions, harms, and dependencies become entrenched."
-ethical_patterns:
-  - emerging-technologies-require-anticipatory-governance
-themes:
-  - anticipatory-governance
-featured_topics:
-  - braid-neuromorphic-anomaly-detection
-  - governance-frameworks-nist-eu-ai-act-oecd-ieee
-featured_assignments:
-  - career-module08
 ---
 
 ## What To Notice

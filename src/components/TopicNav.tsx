@@ -11,30 +11,17 @@ interface TopicNavProps {
 }
 
 export default function TopicNav({ topics }: TopicNavProps) {
-
-  const scrollToTopic = (topicId: number) => {
-    const element = document.getElementById(`topic-${topicId}-meeting-0`);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  };
-
   return (
       <nav className="sticky top-[60px] w-84">
         <ol>
         {topics.map((topic) => (
           <li key={`topic-${topic.id}`} className="">
-              <button
+              <a
               key={topic.id}
-              onClick={() => {
-                scrollToTopic(topic.id);
-              }}
+              href={`#topic-${topic.id}-meeting-0`}
               className="flex text-left min-h-[2em] px-2 py-1 "
             >{topic.title}
-            </button>
+            </a>
           </li>
         ))}
         </ol>

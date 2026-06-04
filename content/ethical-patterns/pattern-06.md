@@ -1,12 +1,7 @@
 ---
 title: "Features are value choices."
+num: '6'
 excerpt: "Feature selection reflects judgments about what matters, what can stand in for it, and what the system is allowed to ignore."
-ethical_patterns:
-  - features-are-value-choices
-themes:
-  - features-proxies-value-choices
-featured_topics:
-  - data-rules-models-training-and-inference
 ---
 
 ## What To Notice

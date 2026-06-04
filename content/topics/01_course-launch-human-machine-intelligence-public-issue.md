@@ -1,13 +1,8 @@
 ---
 title: "Why Is AI a Public and Ethical Issue?"
-slug: "course-launch-human-machine-intelligence-public-issue"
-module: "what-is-intelligence"
+scheduled_day: 1
+module_id: 1
 subtitle: "Frame AI as a technical project shaped by public values, institutions, and ethical choices."
-ethical_patterns:
-  - "ai-systems-are-socio-technical-systems"
-themes:
-  - "ai-as-technical-and-social-system"
-braid_elsi_connection: "AI is not just software; it is infrastructure, labor, hardware, institutions, and governance."
 ---
 
 ## Topic / Focus

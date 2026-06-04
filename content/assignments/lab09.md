@@ -1,9 +1,8 @@
 ---
 title: 'Edge AI, Privacy, and Accountability'
+scheduled_day: 18
 num: '9'
-date: '2026-11-04'
 type: 'lab'
-due_date: '2026-11-11'
 draft: 0
 ---
 

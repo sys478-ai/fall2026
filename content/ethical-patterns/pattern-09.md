@@ -1,13 +1,7 @@
 ---
 title: "Opacity shifts authority."
+num: '9'
 excerpt: "When systems become difficult to inspect or explain, authority can move away from affected people and toward institutions, vendors, or technical specialists."
-ethical_patterns:
-  - opacity-shifts-authority
-themes:
-  - opacity-explainability-contestability
-featured_topics:
-  - neural-networks-opacity-trust-contestability-dependency
-  - explainability-adaptive-hardware-and-public-understanding
 ---
 
 ## What To Notice

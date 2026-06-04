@@ -1,14 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { getModuleMarkdownById } from './module-markdown';
 
 const topicsDirectory = path.join(process.cwd(), 'content', 'topics');
 
 export interface TopicMarkdownMetadata {
   id: string;
   order: number;
+  scheduledDay?: number;
   slug: string;
   title: string;
+  moduleId: number;
   module: string;
   subtitle: string;
   focus: string;
@@ -31,9 +34,30 @@ function asString(value: unknown, fallback = '') {
   return typeof value === 'string' ? value : fallback;
 }
 
+function asNumber(value: unknown) {
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  if (typeof value === 'string' && value.trim() !== '') {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed) ? undefined : parsed;
+  }
+
+  return undefined;
+}
+
 function getOrderFromFilename(fileName: string, fallback: number) {
   const match = fileName.match(/^(\d+)_/);
   return match ? Number.parseInt(match[1], 10) : fallback;
+}
+
+function getTopicSlug(id: string, scheduledDay?: number) {
+  if (typeof scheduledDay === 'number') {
+    return `topic-${String(scheduledDay).padStart(2, '0')}`;
+  }
+
+  return id.replace(/^\d+_/, '');
 }
 
 function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): TopicMarkdownMetadata {
@@ -42,20 +66,28 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
   const data = matterResult.data;
-  const slug = asString(data.slug);
+  const scheduledDay = asNumber(data.scheduled_day);
+  const slug = getTopicSlug(id, scheduledDay);
+  const subtitle = asString(data.subtitle, asString(data.focus));
+  const moduleId = asNumber(data.module_id);
 
-  if (!slug) {
-    throw new Error(`Missing slug frontmatter in topic markdown file "${fileName}"`);
+  if (typeof moduleId !== 'number') {
+    throw new Error(`Missing module_id frontmatter in topic markdown file "${fileName}"`);
   }
 
-  const subtitle = asString(data.subtitle, asString(data.focus));
+  const module = getModuleMarkdownById(moduleId);
+  if (!module) {
+    throw new Error(`Topic markdown file "${fileName}" references unknown module_id ${moduleId}`);
+  }
 
   return {
     id,
     order: getOrderFromFilename(fileName, fallbackOrder),
+    scheduledDay,
     slug,
     title: asString(data.title, slug),
-    module: asString(data.module),
+    moduleId,
+    module: module.slug,
     subtitle,
     focus: asString(data.focus, subtitle),
     ethicalPatterns: asStringArray(data.ethical_patterns),

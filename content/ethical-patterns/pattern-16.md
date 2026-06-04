@@ -1,13 +1,7 @@
 ---
 title: "Alternatives can be foreclosed."
+num: '16'
 excerpt: "Stories of inevitability can narrow the range of options that institutions or communities are willing to consider."
-ethical_patterns:
-  - alternatives-can-be-foreclosed
-themes:
-  - progress-inevitability
-  - technological-solutionism
-featured_topics:
-  - alternatives-refusal-repair-democratic-governance
 ---
 
 ## What To Notice

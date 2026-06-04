@@ -1,16 +1,7 @@
 ---
 title: "\"Normal\" is constructed."
+num: '5'
 excerpt: "Anomaly detection depends on baselines, and baselines reflect choices about what counts as ordinary, acceptable, or suspicious."
-ethical_patterns:
-  - normal-is-constructed
-themes:
-  - anomaly-detection-normal
-  - classification-categories
-featured_topics:
-  - unsupervised-learning-clustering-anomaly-detection
-  - normality-anomaly-surveillance
-featured_assignments:
-  - lab08
 ---
 
 ## What To Notice

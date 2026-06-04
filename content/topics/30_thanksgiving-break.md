@@ -1,11 +1,7 @@
 ---
 title: "Thanksgiving Break"
-slug: "thanksgiving-break"
-module: "public-communication-and-final-synthesis"
+module_id: 6
 subtitle: "No class."
-ethical_patterns: []
-themes: []
-braid_elsi_connection: "No class."
 holiday: true
 ---
 

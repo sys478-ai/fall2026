@@ -1,9 +1,8 @@
 ---
 title: 'Training Data Shapes Learning'
+scheduled_day: 5
 num: '2'
-date: '2026-09-16'
 type: 'lab'
-due_date: '2026-09-23'
 draft: 0
 ---
 

@@ -1,18 +1,7 @@
 ---
 title: "Extraction can be disguised as innovation."
+num: '14'
 excerpt: "New AI systems can frame the capture of data, labor, attention, resources, or public value as progress."
-ethical_patterns:
-  - extraction-can-be-disguised-as-innovation
-themes:
-  - data-representation-institutional-bias
-  - power-political-economy
-  - technological-solutionism
-  - environmental-impacts-of-ai
-featured_topics:
-  - data-rules-models-training-and-inference
-  - generative-ai-as-one-paradigm-not-all-ai
-  - edge-ai-cloud-chips-vendors-human-judgment
-  - environmental-claims-efficiency-lifecycle-costs
 ---
 
 ## What To Notice

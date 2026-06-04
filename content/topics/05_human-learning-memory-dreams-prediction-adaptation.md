@@ -1,14 +1,8 @@
 ---
 title: "How Do Categories and Baselines Get Built?"
-slug: "human-learning-memory-dreams-prediction-adaptation"
-module: "how-do-machines-learn"
+scheduled_day: 5
+module_id: 2
 subtitle: "Ask how formal categories come to look objective, natural, and ready for technical use."
-ethical_patterns:
-  - "classification-is-not-neutral"
-themes:
-  - "objectivity-neutrality"
-  - "classification-categories"
-braid_elsi_connection: "Who gets to define intelligence, normality, risk, or error?"
 ---
 
 ## Topic / Focus

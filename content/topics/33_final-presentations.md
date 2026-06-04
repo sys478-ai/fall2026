@@ -1,14 +1,10 @@
 ---
 title: "What Should Others Understand?"
-slug: "final-presentations"
-module: "final-exam-presentations"
+scheduled_day: 30
+module_id: 7
 subtitle: "Present a public-facing explainer and ELSI analysis."
-ethical_patterns: []
 recognition_pattern_notes:
   - "Student-selected pattern(s)."
-themes:
-  - "anticipatory-governance"
-braid_elsi_connection: "Public-facing explainer plus ELSI risk analysis."
 ---
 
 ## Topic / Focus

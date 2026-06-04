@@ -1,9 +1,8 @@
 ---
 title: 'Von Neumann vs. Neuromorphic Architectures'
+scheduled_day: 20
 num: '12'
-date: '2026-11-25'
 type: 'lab'
-due_date: '2026-12-02'
 draft: 0
 ---
 

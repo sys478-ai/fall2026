@@ -1,13 +1,7 @@
 ---
 title: "Power can concentrate in infrastructure."
+num: '15'
 excerpt: "Control over hardware, platforms, standards, vendors, and repair pathways can centralize decision-making power."
-ethical_patterns:
-  - power-can-concentrate-in-infrastructure
-themes:
-  - power-political-economy
-featured_topics:
-  - edge-ai-cloud-chips-vendors-human-judgment
-  - environmental-claims-efficiency-lifecycle-costs
 ---
 
 ## What To Notice

@@ -1,12 +1,7 @@
 ---
 title: "AI can create dependency, cognitive offloading, and deskilling."
+num: '11'
 excerpt: "As systems take over tasks, they can reshape judgment, memory, expertise, and the distribution of skill."
-ethical_patterns:
-  - dependency-cognitive-offloading-deskilling
-themes:
-  - dependency-cognitive-offloading-deskilling
-featured_topics:
-  - neural-networks-opacity-trust-contestability-dependency
 ---
 
 ## What To Notice

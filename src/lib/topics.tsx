@@ -1,11 +1,12 @@
 import { getAllPosts, PostData, getAllQuizMetadata, QuizMetadata, getQuizData, getQuizCheatsheet, QuizData } from './markdown';
 import React from 'react';
 import taxonomyConfig from '../../content/config/taxonomy.json';
-import { semesterSchedule } from '../../content/config/schedule';
+import { courseCalendar } from '../../content/config/schedule';
 import { getCourseConfig } from './config';
 import type { ModuleColorToken } from './module-colors';
-import { getAllModuleMarkdownMetadata, type ModuleMarkdownMetadata } from './module-markdown';
-import { getTopicMarkdownByModule, getTopicMarkdownBySlug, type TopicMarkdownMetadata } from './topic-markdown';
+import { getAllModuleMarkdownMetadata, getModuleMarkdownBySlug, type ModuleMarkdownMetadata } from './module-markdown';
+import { getAllTopicMarkdownMetadata, getTopicMarkdownByModule, getTopicMarkdownBySlug, type TopicMarkdownMetadata } from './topic-markdown';
+import { generateCourseMeetingDates, getDueDateForScheduledDay, type GeneratedMeetingDate } from './course-calendar';
 
 // Type definitions for topics structure
 interface Activity {
@@ -49,6 +50,7 @@ export interface DiscussionQuestion {
 
 export interface Meeting {
   slug?: string;
+  scheduledDay?: number;
   date: string;
   topic: string;
   subtitle?: string;
@@ -83,7 +85,7 @@ export interface Topic {
   themes?: string[];
 }
 
-// Input type for baseTopics from schedule.tsx - allows quizzes to be either Quiz, Reading (citation), or ScheduleQuiz (quizName/url)
+// Allows quizzes to be either Quiz, Reading (citation), or ScheduleQuiz (quizName/url).
 interface ScheduleQuizInput {
   quizName: string;
   url: string;
@@ -91,6 +93,7 @@ interface ScheduleQuizInput {
 
 interface BaseMeeting {
   slug?: string;
+  scheduledDay?: number;
   date: string;
   topic: string;
   subtitle?: string;
@@ -128,18 +131,6 @@ type TopicsArray = Topic[];
 type BaseTopicsArray = BaseTopic[];
 type PatternConfig = { slug: string; title: string };
 
-interface SemesterMeetingConfig {
-  meetingSlug: string;
-  date: string;
-  holiday?: boolean;
-  activities?: Activity[];
-}
-
-interface SemesterModuleConfig {
-  moduleSlug: string;
-  meetings: SemesterMeetingConfig[];
-}
-
 const patternTitleBySlug = Object.fromEntries(
   ((taxonomyConfig.ethicalPatterns || []) as PatternConfig[]).map(pattern => [pattern.slug, pattern.title])
 ) as Record<string, string>;
@@ -162,6 +153,19 @@ function getAssignmentTitleShort(assignment: { type?: string; num?: string | num
     : 'Assignment';
 
   return assignment.num ? `${typeLabel} ${assignment.num}` : typeLabel;
+}
+
+function getScheduledDay(value: unknown) {
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  if (typeof value === 'string' && value.trim() !== '') {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed) ? undefined : parsed;
+  }
+
+  return undefined;
 }
 
 function uniqueStrings(values: Array<string | undefined>) {
@@ -238,45 +242,160 @@ function renderMeetingDescription(meeting: TopicMarkdownMetadata) {
   );
 }
 
-function buildMeeting(module: ModuleMarkdownMetadata, semesterMeeting: SemesterMeetingConfig): BaseMeeting {
-  const meeting = getTopicMarkdownBySlug(semesterMeeting.meetingSlug);
-
-  if (!meeting) {
-    throw new Error(`Missing topic markdown slug "${semesterMeeting.meetingSlug}" for module "${module.slug}"`);
-  }
-
-  if (meeting.module !== module.slug) {
-    throw new Error(
-      `Topic markdown slug "${meeting.slug}" belongs to module "${meeting.module}", but schedule places it in "${module.slug}"`
-    );
-  }
-
+function buildTopicMeeting(module: ModuleMarkdownMetadata, meeting: TopicMarkdownMetadata, meetingDate: GeneratedMeetingDate): BaseMeeting {
   return {
     slug: meeting.slug,
+    scheduledDay: meeting.scheduledDay,
     topic: meeting.title,
     subtitle: meeting.subtitle,
-    date: semesterMeeting.date,
-    description: semesterMeeting.holiday || meeting.holiday ? 'No class.' : renderMeetingDescription(meeting),
-    holiday: semesterMeeting.holiday || meeting.holiday || false,
+    date: meetingDate.dateLabel,
+    description: meeting.holiday ? 'No class.' : renderMeetingDescription(meeting),
+    holiday: meeting.holiday || false,
     topicContentId: meeting.id,
     focus: meeting.focus,
     braidElsiConnection: meeting.braidElsiConnection,
-    activities: semesterMeeting.activities,
     ethicalPatterns: meeting.ethicalPatterns,
     recognitionPatternNotes: meeting.recognitionPatternNotes,
     themes: meeting.themes,
   };
 }
 
+function buildHolidayMeeting(module: ModuleMarkdownMetadata, holidayTopic: TopicMarkdownMetadata | null, meetingDate: GeneratedMeetingDate): BaseMeeting {
+  const title = meetingDate.holiday?.title || holidayTopic?.title || 'No class';
+
+  return {
+    slug: holidayTopic?.slug,
+    topic: title,
+    subtitle: 'No class',
+    date: meetingDate.dateLabel,
+    description: 'No class.',
+    holiday: true,
+    topicContentId: holidayTopic?.id,
+    focus: holidayTopic?.focus,
+    braidElsiConnection: holidayTopic?.braidElsiConnection,
+    ethicalPatterns: holidayTopic?.ethicalPatterns || [],
+    recognitionPatternNotes: holidayTopic?.recognitionPatternNotes,
+    themes: holidayTopic?.themes || [],
+  };
+}
+
+function buildFinalExamMeeting(module: ModuleMarkdownMetadata, meeting: TopicMarkdownMetadata): BaseMeeting {
+  return {
+    slug: meeting.slug,
+    topic: meeting.title,
+    subtitle: meeting.subtitle,
+    date: courseCalendar.finalExam.dateLabel,
+    description: renderMeetingDescription(meeting),
+    holiday: meeting.holiday || false,
+    topicContentId: meeting.id,
+    focus: meeting.focus,
+    braidElsiConnection: meeting.braidElsiConnection,
+    ethicalPatterns: meeting.ethicalPatterns,
+    recognitionPatternNotes: meeting.recognitionPatternNotes,
+    themes: meeting.themes,
+  };
+}
+
+function getModuleForHolidayDate(holidayDate: GeneratedMeetingDate, topics: TopicMarkdownMetadata[]) {
+  const sortedScheduledTopics = topics
+    .filter((topic): topic is TopicMarkdownMetadata & { scheduledDay: number } => typeof topic.scheduledDay === 'number')
+    .sort((a, b) => a.scheduledDay - b.scheduledDay);
+
+  const meetingDateByScheduledDay = new Map(
+    generateCourseMeetingDates()
+      .filter((meetingDate): meetingDate is GeneratedMeetingDate & { scheduledDay: number } => typeof meetingDate.scheduledDay === 'number')
+      .map(meetingDate => [meetingDate.scheduledDay, meetingDate.date])
+  );
+  const nextTopic = sortedScheduledTopics.find(topic => {
+    const topicDate = meetingDateByScheduledDay.get(topic.scheduledDay);
+    return topicDate ? topicDate > holidayDate.date : false;
+  });
+  const previousTopic = [...sortedScheduledTopics].reverse().find(topic => {
+    const topicDate = meetingDateByScheduledDay.get(topic.scheduledDay);
+    return topicDate ? topicDate < holidayDate.date : false;
+  });
+  const moduleSlug = nextTopic?.module || previousTopic?.module;
+
+  return moduleSlug ? getModuleMarkdownBySlug(moduleSlug) : null;
+}
+
 function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
   const modules = getAllModuleMarkdownMetadata();
+  const allTopics = getAllTopicMarkdownMetadata();
+  const meetingDates = generateCourseMeetingDates();
+  const meetingDateByScheduledDay = new Map(
+    meetingDates
+      .filter((meetingDate): meetingDate is GeneratedMeetingDate & { scheduledDay: number } => typeof meetingDate.scheduledDay === 'number')
+      .map(meetingDate => [meetingDate.scheduledDay, meetingDate])
+  );
+  const holidayTopicsByTitle = new Map(
+    allTopics
+      .filter(topic => topic.holiday)
+      .map(topic => [topic.title.toLowerCase(), topic])
+  );
+  const topicMeetingsByModule = new Map<string, BaseMeeting[]>();
 
-  return (semesterSchedule as SemesterModuleConfig[]).map((scheduledModule) => {
-    const module = modules.find(item => item.slug === scheduledModule.moduleSlug);
+  allTopics
+    .filter(topic => !topic.holiday && topic.slug !== courseCalendar.finalExam.topicSlug)
+    .forEach(topic => {
+      if (typeof topic.scheduledDay !== 'number') {
+        throw new Error(`Missing scheduled_day frontmatter in topic "${topic.slug}"`);
+      }
 
+      const module = getModuleMarkdownBySlug(topic.module);
+      if (!module) {
+        throw new Error(`Missing module slug "${topic.module}" for topic "${topic.slug}"`);
+      }
+
+      const meetingDate = meetingDateByScheduledDay.get(topic.scheduledDay);
+      if (!meetingDate) {
+        throw new Error(`No generated class meeting for scheduled_day ${topic.scheduledDay} used by topic "${topic.slug}"`);
+      }
+
+      const meetings = topicMeetingsByModule.get(module.slug) || [];
+      meetings.push(buildTopicMeeting(module, topic, meetingDate));
+      topicMeetingsByModule.set(module.slug, meetings);
+    });
+
+  meetingDates
+    .filter(meetingDate => meetingDate.holiday)
+    .forEach(meetingDate => {
+      const holidayTopic = holidayTopicsByTitle.get((meetingDate.holiday?.title || '').toLowerCase()) || null;
+      const module = holidayTopic
+        ? getModuleMarkdownBySlug(holidayTopic.module)
+        : getModuleForHolidayDate(meetingDate, allTopics);
+
+      if (!module) {
+        throw new Error(`Unable to place holiday "${meetingDate.holiday?.title}" in a module`);
+      }
+
+      const meetings = topicMeetingsByModule.get(module.slug) || [];
+      meetings.push(buildHolidayMeeting(module, holidayTopic, meetingDate));
+      topicMeetingsByModule.set(module.slug, meetings);
+    });
+
+  const finalExamTopic = getTopicMarkdownBySlug(courseCalendar.finalExam.topicSlug);
+  if (finalExamTopic) {
+    const module = getModuleMarkdownBySlug(finalExamTopic.module);
     if (!module) {
-      throw new Error(`Missing module slug "${scheduledModule.moduleSlug}" in content/modules`);
+      throw new Error(`Missing module slug "${finalExamTopic.module}" for final exam topic "${finalExamTopic.slug}"`);
     }
+
+    const meetings = topicMeetingsByModule.get(module.slug) || [];
+    meetings.push(buildFinalExamMeeting(module, finalExamTopic));
+    topicMeetingsByModule.set(module.slug, meetings);
+  }
+
+  return modules.map((module) => {
+    const meetings = topicMeetingsByModule.get(module.slug) || [];
+    meetings.sort((a, b) => {
+      const dateA = parseMeetingDate(a.date) || '9999-99-99';
+      const dateB = parseMeetingDate(b.date) || '9999-99-99';
+      if (dateA !== dateB) {
+        return dateA.localeCompare(dateB);
+      }
+      return (a.scheduledDay || 999999) - (b.scheduledDay || 999999);
+    });
 
     const moduleMetadata = getModuleTopicMetadata(module.slug);
 
@@ -290,7 +409,7 @@ function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
       ethicalPatterns: moduleMetadata.ethicalPatterns,
       recognitionPatternNotes: moduleMetadata.recognitionPatternNotes,
       themes: moduleMetadata.themes,
-      meetings: scheduledModule.meetings.map(meeting => buildMeeting(module, meeting)),
+      meetings,
     };
   });
 }
@@ -349,30 +468,40 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
   const allAssignments = getAllPosts('assignments');
   const allQuizzes = getAllQuizMetadata();
   
-  // Filter activities with start_date and assignments with assigned_date or due_date
-  // Also filter out excluded activities (handle both boolean and number)
-  const activitiesWithDates = allActivities.filter(a => {
-    if (!a.start_date) return false;
-    // Exclude if excluded is truthy (handles boolean true, number 1, etc.)
-    return !a.excluded;
-  });
+  // Filter scheduled activities and assignments by scheduled_day.
+  const scheduledActivities = allActivities.filter(a => typeof getScheduledDay(a.scheduled_day) === 'number' && !a.excluded);
+  const scheduledAssignments = allAssignments.filter(a => typeof getScheduledDay(a.scheduled_day) === 'number' && a.hide_from_list !== 1);
   const assignmentsWithAssignedDate = allAssignments.filter(a => a.assigned_date && a.hide_from_list !== 1);
-  const assignmentsWithDueDate = allAssignments.filter(a => a.due_date && a.hide_from_list !== 1);
+  const assignmentsWithDueDate = allAssignments.filter(a => {
+    const dueDate = getDueDateForScheduledDay(a.scheduled_day) || a.due_date;
+    return Boolean(dueDate && a.hide_from_list !== 1);
+  });
   const quizzesWithDates = allQuizzes.filter(q => q.start_date);
   
-  // Create maps for quick lookup by date
-  const activitiesByDate = new Map<string, PostData[]>();
+  // Create maps for quick lookup by scheduled day/date
+  const activitiesByScheduledDay = new Map<number, PostData[]>();
+  const assignmentsByScheduledDay = new Map<number, PostData[]>();
   const assignmentsByAssignedDate = new Map<string, PostData[]>();
   const assignmentsByDueDate = new Map<string, PostData[]>();
   const quizzesByDate = new Map<string, QuizMetadata[]>();
   
-  activitiesWithDates.forEach(activity => {
-    const date = normalizeDate(activity.start_date);
-    if (date) {
-      if (!activitiesByDate.has(date)) {
-        activitiesByDate.set(date, []);
+  scheduledActivities.forEach(activity => {
+    const scheduledDay = getScheduledDay(activity.scheduled_day);
+    if (typeof scheduledDay === 'number') {
+      if (!activitiesByScheduledDay.has(scheduledDay)) {
+        activitiesByScheduledDay.set(scheduledDay, []);
       }
-      activitiesByDate.get(date)!.push(activity);
+      activitiesByScheduledDay.get(scheduledDay)!.push(activity);
+    }
+  });
+
+  scheduledAssignments.forEach(assignment => {
+    const scheduledDay = getScheduledDay(assignment.scheduled_day);
+    if (typeof scheduledDay === 'number') {
+      if (!assignmentsByScheduledDay.has(scheduledDay)) {
+        assignmentsByScheduledDay.set(scheduledDay, []);
+      }
+      assignmentsByScheduledDay.get(scheduledDay)!.push(assignment);
     }
   });
   
@@ -387,7 +516,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
   });
   
   assignmentsWithDueDate.forEach(assignment => {
-    const date = normalizeDate(assignment.due_date);
+    const date = normalizeDate(getDueDateForScheduledDay(assignment.scheduled_day) || assignment.due_date);
     if (date) {
       if (!assignmentsByDueDate.has(date)) {
         assignmentsByDueDate.set(date, []);
@@ -406,9 +535,9 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
     }
   });
   
-  // Clone baseTopics to avoid mutating the original
+  // Clone generated base topics to avoid mutating the original
   // We need to preserve React elements in descriptions, so we do a shallow copy
-  // Cast baseTopics to allow quizzes to be (Quiz | Reading)[] initially
+  // Cast topics to allow quizzes to be (Quiz | Reading)[] initially
   const enrichedTopics: TopicsArray = baseTopics.map((topic: BaseTopic) => ({
     ...topic,
     meetings: topic.meetings.map((meeting: BaseMeeting) => {
@@ -525,8 +654,11 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
         }
       }
       
-      // Find matching activities
-      const matchingActivities = activitiesByDate.get(meetingDateStr) || [];
+      // Find matching activities and assignments by scheduled_day
+      const matchingScheduledActivities =
+        typeof meeting.scheduledDay === 'number' ? activitiesByScheduledDay.get(meeting.scheduledDay) || [] : [];
+      const matchingScheduledAssignments =
+        typeof meeting.scheduledDay === 'number' ? assignmentsByScheduledDay.get(meeting.scheduledDay) || [] : [];
       
       // Find matching assignments by assigned_date
       const matchingAssignmentsByAssigned = assignmentsByAssignedDate.get(meetingDateStr) || [];
@@ -538,7 +670,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       const matchingQuizzes = quizzesByDate.get(meetingDateStr) || [];
       
       // Create auto-populated activity entries (excluding excluded activities)
-      const autoActivities = matchingActivities
+      const autoActivities = matchingScheduledActivities
         .filter((activity: PostData) => !activity.excluded)
         .map((activity: PostData) => ({
           title: activity.title,
@@ -547,6 +679,15 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           excluded: activity.excluded ? 1 : 0,
           order: activity.ordering ?? activity.order
         }));
+
+      const autoScheduledAssignmentsAsActivities = matchingScheduledAssignments.map((assignment: PostData) => ({
+        title: assignment.title,
+        url: `/assignments/${assignment.id}/`,
+        draft: assignment.draft || 0,
+        order: assignment.ordering ?? assignment.order,
+      }));
+
+      const autoScheduledActivities = [...autoActivities, ...autoScheduledAssignmentsAsActivities];
       
       // Create auto-populated assignment entries for assigned (all matches, including drafts)
       const autoAssignedAssignments = matchingAssignmentsByAssigned.map((assignment) => {
@@ -588,11 +729,11 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       });
       
       // Merge activities: keep manual entries, add auto-populated ones
-      if (autoActivities.length > 0) {
+      if (autoScheduledActivities.length > 0) {
         const existingActivities = meeting.activities || [];
         // Check if auto-populated activities already exist (by URL) to avoid duplicates
         const existingUrls = new Set(existingActivities.map((a: Activity) => a.url));
-        const newAutoActivities = autoActivities.filter((a: Activity) => !existingUrls.has(a.url));
+        const newAutoActivities = autoScheduledActivities.filter((a: Activity) => !existingUrls.has(a.url));
         meeting.activities = [...existingActivities, ...newAutoActivities];
       }
       // Sort activities: first by order, then alphabetically by title (always sort if activities exist)

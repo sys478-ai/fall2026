@@ -1,9 +1,8 @@
 ---
 title: 'Anomaly Detection and Normal'
+scheduled_day: 16
 num: '8'
-date: '2026-10-28'
 type: 'lab'
-due_date: '2026-11-04'
 draft: 0
 ---
 

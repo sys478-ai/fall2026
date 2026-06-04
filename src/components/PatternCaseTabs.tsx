@@ -32,7 +32,7 @@ export default function PatternCaseTabs({ cases }: PatternCaseTabsProps) {
           </>
         )}
         <div
-          className="flex max-w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden scroll-smooth border-b border-gray-200 scrollbar-none touch-pan-x cursor-grab select-none active:cursor-grabbing dark:border-gray-800 [&::-webkit-scrollbar]:hidden"
+          className="flex max-w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden border-b border-gray-200 scrollbar-none touch-pan-x cursor-grab select-none active:cursor-grabbing dark:border-gray-800 [&::-webkit-scrollbar]:hidden"
           role="tablist"
           aria-label="Pattern case studies"
         >
@@ -47,9 +47,8 @@ export default function PatternCaseTabs({ cases }: PatternCaseTabsProps) {
                 role="tab"
                 aria-selected={isActive}
                 aria-controls={`${item.id}-panel`}
-                onClick={(event) => {
+                onClick={() => {
                   setActiveId(item.id);
-                  event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
                 }}
                 className={`relative -mb-px max-w-48 shrink-0 snap-start truncate whitespace-nowrap border-b-3 px-4 py-2 text-sm font-semibold transition-colors sm:max-w-none ${
                   isActive

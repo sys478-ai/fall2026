@@ -1,13 +1,8 @@
 ---
 title: "Are Predictions Ever Neutral?"
-slug: "feedback-loops-and-neutral-prediction"
-module: "how-do-machines-learn"
+scheduled_day: 12
+module_id: 2
 subtitle: "Explore how supposedly neutral prediction can reinforce the patterns it learns."
-ethical_patterns:
-  - "prediction-imports-the-past"
-themes:
-  - "prediction-history-feedback-loops"
-braid_elsi_connection: "Adaptive systems may learn from their own classifications."
 ---
 
 ## Topic / Focus

@@ -1,15 +1,7 @@
 ---
 title: "Thresholds make uncertainty consequential."
+num: '7'
 excerpt: "Thresholds turn scores, signals, and probabilities into action. They decide when systems intervene, wait, ignore, escalate, or ask for human judgment."
-ethical_patterns:
-  - thresholds-distribute-harm
-themes:
-  - thresholds-errors-responsibility
-featured_topics:
-  - supervised-learning-scores-and-decisions
-  - error-responsibility-and-decision-thresholds
-featured_assignments:
-  - lab04
 ---
 
 ## What To Notice

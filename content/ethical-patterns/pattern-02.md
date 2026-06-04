@@ -1,12 +1,7 @@
 ---
 title: 'Data is produced, not found.'
+num: '2'
 excerpt: 'Data is created through measurement choices, interfaces, institutions, and assumptions about what should count.'
-ethical_patterns:
-  - data-is-produced-not-found
-themes:
-  - data-representation-institutional-bias
-featured_topics:
-  - human-learning-memory-dreams-prediction-adaptation
 featured_image: 'fall2026/images/ethics-field-guide/data/02-observation-sensing.png'
 ---
 

@@ -69,3 +69,7 @@ export function getAllModuleMarkdownMetadata(): ModuleMarkdownMetadata[] {
 export function getModuleMarkdownBySlug(slug: string) {
   return getAllModuleMarkdownMetadata().find(module => module.slug === slug) || null;
 }
+
+export function getModuleMarkdownById(id: number) {
+  return getAllModuleMarkdownMetadata().find(module => module.id === id) || null;
+}

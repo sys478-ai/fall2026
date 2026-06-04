@@ -1,15 +1,8 @@
 ---
 title: "What Does the BRAID Case Reveal?"
-slug: "braid-neuromorphic-anomaly-detection"
-module: "from-mechanism-to-implications"
+scheduled_day: 21
+module_id: 4
 subtitle: "Apply course concepts and governance questions to the BRAID neuromorphic anomaly-detection case."
-ethical_patterns:
-  - "emerging-technologies-require-anticipatory-governance"
-  - "ai-is-material"
-themes:
-  - "anticipatory-governance"
-  - "environmental-impacts-of-ai"
-braid_elsi_connection: "Apply NIST, EU AI Act, IEEE, and OECD-style questions to BRAID."
 ---
 
 ## Topic / Focus

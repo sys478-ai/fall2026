@@ -41,9 +41,6 @@ h2 {
   @apply text-xl md:text-2xl mb-4 mt-8 font-bold;
   font-family: var(--font-outfit), serif;
   color: var(--foreground);
-  /* scroll-margin-top should match SCROLL_OFFSET_PX in src/lib/utils.ts */
-  /* This ensures browser's native anchor scrolling aligns with our custom scrollToAnchor function */
-  scroll-margin-top: 20px;
 }
 
 h3,
@@ -66,10 +63,9 @@ h5 {
 }
 
 table {
-  @apply w-full border-collapse mb-20 rounded-lg overflow-hidden border;
+  @apply w-full border-collapse mb-20 border;
   border-color: var(--border);
   table-layout: auto;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
 }
 
 table.width-auto {
@@ -515,7 +511,7 @@ li.checkbox-checked input[type='checkbox'] {
   /* Enhanced links */
   a {
     @apply transition-colors duration-200;
-    color: #2563eb; /* blue-600 */
+    color: #0b5d8f;
   }
 
   a:hover {
@@ -523,7 +519,7 @@ li.checkbox-checked input[type='checkbox'] {
   }
 
   .dark .prose a {
-    color: #60a5fa; /* blue-400 */
+    color: #8fc4ee;
   }
 }
 
@@ -556,16 +552,16 @@ li.checkbox-checked input[type='checkbox'] {
 
 /* Prose links styling for all pages (syllabus, assignments, etc.) */
 .prose a {
-  color: #2563eb; /* blue-600 */
+  color: #0b5d8f;
 }
 
 .dark .prose a {
-  /* blue-400 */
+  color: #8fc4ee;
 }
 
 /* Schedule page links styling - make all links blue with hover underline */
 .schedule-content a {
-  color: #2563eb; /* blue-600 */
+  color: #0b5d8f;
   text-decoration: none;
   transition: text-decoration 0.2s ease;
 }
@@ -575,7 +571,7 @@ li.checkbox-checked input[type='checkbox'] {
 }
 
 .dark .schedule-content a {
-  color: #60a5fa; /* blue-400 */
+  color: #8fc4ee;
 }
 
 /* Numbered steps styling */
@@ -613,7 +609,6 @@ body {
 /* Custom global styles */
 html {
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
 /* Disable html overflow on desktop pages using ContentLayout (mobile uses body scroll) */

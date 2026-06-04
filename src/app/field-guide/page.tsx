@@ -90,7 +90,7 @@ function getPatternsWithMarkdownMetadata(): TaxonomyEntry[] {
 }
 
 export const metadata: Metadata = {
-  title: 'Ethical Pattern Recognition Field Guide',
+  title: 'Field Guide',
   description: 'A field guide to recurring ethical recognition patterns across AI systems, labs, and governance cases.',
 };
 
@@ -107,7 +107,7 @@ export default function EthicalPatternRecognitionFieldGuidePage() {
             Field Guide
           </p>
           <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
-            Ethical Pattern Recognition Field Guide
+            Field Guide
           </h1>
           <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">
             A standalone reference for the recurring patterns students can practice noticing across technical systems,

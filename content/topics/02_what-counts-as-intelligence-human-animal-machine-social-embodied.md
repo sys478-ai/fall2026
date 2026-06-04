@@ -1,14 +1,8 @@
 ---
 title: 'What Is AI Supposed to Help Us Do?'
-slug: 'what-counts-as-intelligence-human-animal-machine-social-embodied'
-module: 'what-is-intelligence'
+scheduled_day: 2
+module_id: 1
 subtitle: 'Examine how ideas about safety, care, efficiency, creativity, and improvement shape what AI is imagined to be for.'
-ethical_patterns:
-  - 'ai-systems-are-socio-technical-systems'
-themes:
-  - 'ai-as-technical-and-social-system'
-  - 'technological-solutionism'
-braid_elsi_connection: 'Map BRAID as a socio-technical system involving chip, lab, funder, user, regulator, and public.'
 ---
 
 ## Topic / Focus

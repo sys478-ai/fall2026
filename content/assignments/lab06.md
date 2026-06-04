@@ -1,9 +1,8 @@
 ---
 title: 'Neural Networks & Opacity'
+scheduled_day: 13
 num: '6'
-date: '2026-10-14'
 type: 'lab'
-due_date: '2026-10-21'
 draft: 0
 ---
 

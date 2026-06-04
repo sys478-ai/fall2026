@@ -1,9 +1,8 @@
 ---
 title: 'Classification Is Not Neutral'
+scheduled_day: 3
 num: '1a'
-date: '2026-08-24'
 type: 'lab'
-due_date: '2026-09-02'
 draft: 0
 ---
 

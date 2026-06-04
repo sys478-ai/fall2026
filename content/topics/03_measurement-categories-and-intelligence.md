@@ -1,14 +1,8 @@
 ---
 title: 'What Counts as Intelligence?'
-slug: 'measurement-categories-and-intelligence'
-module: 'what-is-intelligence'
+scheduled_day: 3
+module_id: 1
 subtitle: 'Compare how different fields define intelligence and what those definitions make visible or leave out.'
-ethical_patterns:
-  - 'classification-is-not-neutral'
-themes:
-  - 'classification-categories'
-  - 'objectivity-neutrality'
-braid_elsi_connection: 'Normal, signal, noise, and anomaly are categories with consequences.'
 ---
 
 ## Topic / Focus

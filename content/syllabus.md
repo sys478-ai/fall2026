@@ -1,12 +1,12 @@
 ---
-title: 'Syllabus: "Thinking" Machines, Human Choices: Power & Responsibility in AI Design & Deployment'
+title: '“Thinking” Machines, Human Choices: Power & Responsibility in AI Design & Deployment'
 ---
 
 <table>
   <tr>
     <td><strong>Course</strong></td>
     <td>
-      SYS 478: "Thinking" Machines, Human Choices: Power & Responsibility in AI Design & Deployment
+      SYS 478: “Thinking” Machines, Human Choices: Power & Responsibility in AI Design & Deployment
     </td>
   </tr>
   <tr>

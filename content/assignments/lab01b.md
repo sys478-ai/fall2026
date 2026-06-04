@@ -1,9 +1,7 @@
 ---
 title: 'Categorization Lab'
 num: '1b'
-date: '2026-09-02'
 type: 'lab'
-due_date: '2026-09-09'
 draft: 0
 ---
 

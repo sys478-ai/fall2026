@@ -73,7 +73,7 @@ export default function RecognitionPatternCards({
   const sortedPatterns = [...patterns].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
   return (
-    <section id="ethical-pattern-recognition-field-guide" className="space-y-4">
+    <section id="field-guide" className="space-y-4">
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {sortedPatterns.map((pattern, index) => {
@@ -105,7 +105,7 @@ export default function RecognitionPatternCards({
           return (
             <Link
               key={pattern.slug}
-              href={`/ethical-pattern-recognition-field-guide/${pattern.slug}`}
+              href={`/field-guide/${pattern.slug}`}
               className="group block h-full rounded-xl border-0! text-inherit! no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b5d8f] dark:focus-visible:outline-[#8fc4ee]"
             >
               {card}

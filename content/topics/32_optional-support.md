@@ -1,11 +1,8 @@
 ---
 title: "Optional Support"
-slug: "optional-support"
-module: "public-communication-and-final-synthesis"
+scheduled_day: 29
+module_id: 6
 subtitle: "Optional time for conferences, revision, and final project support."
-ethical_patterns: []
-themes: []
-braid_elsi_connection: "Optional final ELSI project support."
 ---
 
 ## Topic / Focus

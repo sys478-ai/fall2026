@@ -1,9 +1,7 @@
 ---
 title: 'BRAID Anticipatory Governance Lab'
 num: '10'
-date: '2026-11-11'
 type: 'lab'
-due_date: '2026-11-18'
 draft: 0
 ---
 

@@ -1,9 +1,7 @@
 ---
 title: 'Sensors Translate the World into Data'
 num: '7'
-date: '2026-10-21'
 type: 'lab'
-due_date: '2026-10-28'
 draft: 0
 ---
 

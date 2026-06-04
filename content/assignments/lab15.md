@@ -1,9 +1,7 @@
 ---
 title: 'Energy and Computation'
 num: '15'
-date: '2026-12-16'
 type: 'lab'
-due_date: '2026-12-23'
 draft: 0
 ---
 

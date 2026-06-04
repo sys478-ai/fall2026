@@ -22,8 +22,8 @@ export default function ConditionalFooter() {
                             normalizedPath.startsWith('/resources/') ||
                             normalizedPath === '/bibliography' ||
                             normalizedPath === '/planning/taxonomy' ||
-                            normalizedPath === '/ethical-pattern-recognition-field-guide' ||
-                            normalizedPath.startsWith('/ethical-pattern-recognition-field-guide/') ||
+                            normalizedPath === '/field-guide' ||
+                            normalizedPath.startsWith('/field-guide/') ||
                             normalizedPath.startsWith('/topics/') ||
                             normalizedPath === '/exams' ||
                             normalizedPath.startsWith('/exams/') ||

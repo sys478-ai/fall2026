@@ -1,13 +1,8 @@
 ---
 title: "What Can Neuroscience Tell Us?"
-slug: "neuroscience-primer-neurons-synapses-weights-plasticity"
-module: "brain-inspired-computing-and-neuromorphic-systems"
+scheduled_day: 13
+module_id: 3
 subtitle: "Ground brain-inspired computing in basic neuroscience terms and their limits."
-ethical_patterns:
-  - "anthropomorphism-aliveness-sentience-claims"
-themes:
-  - "anthropomorphism-aliveness-sentience"
-braid_elsi_connection: "Ground biological inspiration before students critique neural networks."
 ---
 
 ## Topic / Focus

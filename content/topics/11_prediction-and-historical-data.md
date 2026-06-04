@@ -1,14 +1,8 @@
 ---
 title: "When Does Prediction Start to Look Like Intelligence?"
-slug: "prediction-and-historical-data"
-module: "how-do-machines-learn"
+scheduled_day: 11
+module_id: 2
 subtitle: "Examine how prediction, pattern recognition, and historical data can make models seem smart."
-ethical_patterns:
-  - "prediction-imports-the-past"
-themes:
-  - "prediction-history-feedback-loops"
-  - "data-representation-institutional-bias"
-braid_elsi_connection: "Prior patterns become embedded in future anomaly judgments."
 ---
 
 ## Topic / Focus

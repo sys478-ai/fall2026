@@ -72,7 +72,7 @@ export default function TopicSectionNav({ items, children }: TopicSectionNavProp
         role="tablist"
         aria-label="Topic sections"
       >
-        <div className="flex overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-none [&::-webkit-scrollbar]:hidden">
+        <div className="flex overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden">
           {items.map((item, index) => {
             const isActive = activeId === item.id;
 

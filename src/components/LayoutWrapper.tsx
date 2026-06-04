@@ -20,7 +20,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                               (normalizedPath.startsWith('/activities/') && normalizedPath !== '/activities') ||
                               (normalizedPath.startsWith('/exams/') && normalizedPath !== '/exams') ||
                               (normalizedPath.startsWith('/topics/') && normalizedPath !== '/topics') ||
-                              (normalizedPath.startsWith('/ethical-pattern-recognition-field-guide/') && normalizedPath !== '/ethical-pattern-recognition-field-guide') ||
+                              (normalizedPath.startsWith('/field-guide/') && normalizedPath !== '/field-guide') ||
                               normalizedPath === '/repos-hidden';
       const isListPage = normalizedPath === '/modules' ||
                         normalizedPath === '/assignments' || 
@@ -28,7 +28,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                         normalizedPath === '/resources' ||
                         normalizedPath === '/bibliography' ||
                         normalizedPath === '/planning/taxonomy' ||
-                        normalizedPath === '/ethical-pattern-recognition-field-guide' ||
+                        normalizedPath === '/field-guide' ||
                         normalizedPath === '/exams';
       
       // Apply appropriate data attributes and classes

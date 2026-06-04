@@ -167,6 +167,7 @@ export interface PostData {
   group_order?: number;
   order?: number;
   ordering?: number;
+  scheduled_day?: number;
   description?: string;
   date: string;
   start_date?: string;

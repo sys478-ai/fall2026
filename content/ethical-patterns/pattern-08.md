@@ -1,15 +1,7 @@
 ---
 title: "Prediction imports the past."
+num: '8'
 excerpt: "Predictive systems often reuse historical patterns, which means older inequalities and institutional habits can reappear inside future-facing tools."
-ethical_patterns:
-  - prediction-imports-the-past
-themes:
-  - prediction-history-feedback-loops
-featured_topics:
-  - prediction-and-historical-data
-  - feedback-loops-and-neutral-prediction
-featured_assignments:
-  - lab05
 ---
 
 ## What To Notice

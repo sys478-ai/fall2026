@@ -1,9 +1,7 @@
 ---
 title: 'Learning, Memory, and Biological Metaphors'
 num: '16'
-date: '2026-12-23'
 type: 'lab'
-due_date: '2026-12-30'
 draft: 0
 ---
 

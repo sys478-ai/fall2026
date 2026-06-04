@@ -141,7 +141,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   }, [modules, normalizedPath]);
 
   const activeTaxonomy = normalizedPath.startsWith('/planning/taxonomy');
-  const activePatternGuide = normalizedPath.startsWith('/ethical-pattern-recognition-field-guide');
+  const activePatternGuide = normalizedPath.startsWith('/field-guide');
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeBibliography = normalizedPath === '/bibliography';
   const activeResources = normalizedPath === '/resources' || normalizedPath.startsWith('/resources/');
@@ -162,8 +162,8 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
         active: activeTaxonomy,
       },
       {
-        label: 'Ethical Pattern Recognition Field Guide',
-        href: '/ethical-pattern-recognition-field-guide',
+        label: 'Field Guide',
+        href: '/field-guide',
         icon: ScaleIcon,
         active: activePatternGuide,
       },

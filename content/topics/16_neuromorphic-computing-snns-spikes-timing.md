@@ -1,13 +1,8 @@
 ---
 title: "How Does Neuromorphic Computing Work?"
-slug: "neuromorphic-computing-snns-spikes-timing"
-module: "brain-inspired-computing-and-neuromorphic-systems"
+scheduled_day: 15
+module_id: 3
 subtitle: "Introduce neuromorphic computing through spiking neural networks, event-driven signals, and timing."
-ethical_patterns:
-  - "ai-is-material"
-themes:
-  - "environmental-impacts-of-ai"
-braid_elsi_connection: "Introduce spikes, timing, event-driven computation, and the limits of biological analogy."
 ---
 
 ## Topic / Focus

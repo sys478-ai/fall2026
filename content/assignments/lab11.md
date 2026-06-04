@@ -1,9 +1,7 @@
 ---
 title: 'Memory as Physical State'
 num: '11'
-date: '2026-11-18'
 type: 'lab'
-due_date: '2026-11-25'
 draft: 0
 ---
 

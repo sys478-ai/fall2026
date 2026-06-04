@@ -1,14 +1,7 @@
 ---
 title: 'AI is material: it depends on energy, water, chips, labor, mining, and waste.'
+num: '13'
 excerpt: 'AI systems have physical substrates and environmental costs, even when they appear clean or abstract at the interface.'
-ethical_patterns:
-  - ai-is-material
-themes:
-  - environmental-impacts-of-ai
-featured_topics:
-  - neuromorphic-computing-snns-spikes-timing
-  - hardware-memristors-energy-and-material-ai
-  - environmental-claims-efficiency-lifecycle-costs
 ---
 
 ## What To Notice

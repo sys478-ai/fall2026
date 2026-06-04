@@ -1,15 +1,8 @@
 ---
 title: "How Do Sensors Make Data?"
-slug: "sensors-edge-ai-wearables-biosensing-cybersecurity"
-module: "from-mechanism-to-implications"
+scheduled_day: 18
+module_id: 4
 subtitle: "Trace how sensing systems translate bodies, behavior, and environments into data."
-ethical_patterns:
-  - "measurement-becomes-datafication"
-  - "automation-changes-accountability"
-themes:
-  - "surveillance-datafication"
-  - "edge-ai-privacy-accountability"
-braid_elsi_connection: "Edge or on-chip AI changes data flows, logging, oversight, and responsibility."
 ---
 
 ## Topic / Focus

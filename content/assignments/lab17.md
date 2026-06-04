@@ -1,9 +1,7 @@
 ---
 title: 'Electricity as Information'
 num: '17'
-date: '2026-12-30'
 type: 'lab'
-due_date: '2027-01-06'
 draft: 0
 ---
 

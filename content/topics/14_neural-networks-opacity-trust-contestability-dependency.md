@@ -1,15 +1,8 @@
 ---
 title: "Why Are Neural Networks Hard to Trust?"
-slug: "neural-networks-opacity-trust-contestability-dependency"
-module: "brain-inspired-computing-and-neuromorphic-systems"
+scheduled_day: 14
+module_id: 3
 subtitle: "Connect neural networks to trust, contestability, opacity, and dependency."
-ethical_patterns:
-  - "opacity-shifts-authority"
-  - "dependency-cognitive-offloading-deskilling"
-themes:
-  - "opacity-explainability-contestability"
-  - "dependency-cognitive-offloading-deskilling"
-braid_elsi_connection: "Brain metaphors can mislead, and opaque systems can encourage over-trust or deference."
 ---
 
 ## Topic / Focus

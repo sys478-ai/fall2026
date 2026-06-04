@@ -1,13 +1,8 @@
 ---
 title: "What Counts as an Anomaly?"
-slug: "unsupervised-learning-clustering-anomaly-detection"
-module: "from-mechanism-to-implications"
+scheduled_day: 16
+module_id: 4
 subtitle: "Introduce clustering, baselines, and unsupervised approaches to finding difference."
-ethical_patterns:
-  - "normal-is-constructed"
-themes:
-  - "anomaly-detection-normal"
-braid_elsi_connection: "Core BRAID concept: anomaly detection requires a baseline of expected behavior."
 ---
 
 ## Topic / Focus

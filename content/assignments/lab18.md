@@ -1,9 +1,7 @@
 ---
 title: 'How Circuits Do Math'
 num: '18'
-date: '2027-01-06'
 type: 'lab'
-due_date: '2027-01-13'
 draft: 0
 ---
 

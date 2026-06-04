@@ -1,9 +1,8 @@
 ---
 title: 'Thresholds and the Cost of Error'
+scheduled_day: 9
 num: '4'
-date: '2026-09-30'
 type: 'lab'
-due_date: '2026-10-07'
 draft: 0
 ---
 

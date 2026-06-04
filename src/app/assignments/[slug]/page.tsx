@@ -1,13 +1,12 @@
 import { getPostData } from '@/lib/markdown';
 import { generateStaticParamsForContentType, validatePostForRender } from '@/lib/static-params';
-import PageHeader from '@/components/PageHeader';
 import MarkdownContent from '@/components/MarkdownContent';
 import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
 import StyleGuideStyles from '@/components/StyleGuideStyles';
-import TopicContextBanner from '@/components/TopicContextBanner';
-import { getTopicContextForHref } from '@/lib/topic-context';
-import Link from 'next/link';
+import TopLevelPageHeader from '@/components/TopLevelPageHeader';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { getDueDateForScheduledDay } from '@/lib/course-calendar';
 import { notFound } from 'next/navigation';
 
 interface AssignmentPageProps {
@@ -39,7 +38,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
     const { heading_max_level } = postData;
     const isStyleGuideDemo = slug === 'style-guide-demo';
     const isTutorial02 = slug === 'tutorial02';
-    const topicContext = await getTopicContextForHref(`/assignments/${slug}`);
+    const dueDate = getDueDateForScheduledDay(postData.scheduled_day) || postData.due_date;
     
     return (
       <ContentLayout
@@ -47,31 +46,33 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         leftNav={<QuickLinksNav />}
         showToc={postData.toc !== false}
         tocMaxLevel={heading_max_level || 2}
-      >
-        <div className={`assignment-page${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
-          <TopicContextBanner context={topicContext} />
-          <div className="mb-4">
-            <Link href="/assignments" className="text-blue-600 dark:text-blue-400 hover:underline">
-              Assignments
-            </Link>
-            {' > '}
-            <span className="text-gray-900 dark:text-gray-100">{postData.title}</span>
+        fullWidth
+        header={
+          <div className="space-y-4 py-6">
+            <Breadcrumbs
+              className="px-4 md:px-16"
+              items={[
+                { label: 'Assignments', href: '/assignments' },
+                { label: postData.title },
+              ]}
+            />
+            <TopLevelPageHeader
+              label={postData.type || 'Assignment'}
+              title={postData.title}
+              description={postData.excerpt}
+              tone="sky"
+            />
           </div>
-          <PageHeader 
-            title={postData.title} 
-            excerpt={postData.excerpt}
-            type={postData.type}
-            num={postData.num}
-          />
-        {postData.due_date && (
-          <p className="mt-2 text-lg font-bold">
-            {postData.type === 'career module' ? 'Scheduled ' : 'Due '}
-            {formatDate(postData.due_date)}
-            {postData.type === 'career module' ? '' : ' at 11:59pm'}
-          </p>
-        )}
+        }
+      >
+        <div className={`assignment-page max-w-4xl pr-8 pt-6${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
+          {dueDate && (
+            <p className="mt-0 text-lg font-bold">
+              Due {formatDate(dueDate)} at 11:59pm
+            </p>
+          )}
           {isStyleGuideDemo && <StyleGuideStyles />}
-          <MarkdownContent content={postData.content} />
+          <MarkdownContent content={postData.content} className="[&_a]:underline [&_a]:underline-offset-2" />
         </div>
       </ContentLayout>
     );

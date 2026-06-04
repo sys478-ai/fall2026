@@ -231,7 +231,7 @@ function FieldGuideReturnSection() {
         across the course.
       </p>
       <Link
-        href="/ethical-pattern-recognition-field-guide"
+        href="/field-guide"
         className="mt-5 inline-flex items-center rounded-full bg-violet-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-violet-800 dark:bg-violet-500 dark:hover:bg-violet-400"
       >
         Back to the Field Guide
@@ -284,7 +284,7 @@ export default async function EthicalPatternPage({ params }: PageProps) {
             <Breadcrumbs
               className="px-4 md:px-16"
               items={[
-                { label: 'Ethical Pattern Recognition Field Guide', href: '/ethical-pattern-recognition-field-guide' },
+                { label: 'Field Guide', href: '/field-guide' },
                 { label: postData.title },
               ]}
             />

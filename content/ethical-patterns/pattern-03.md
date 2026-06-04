@@ -1,12 +1,7 @@
 ---
 title: "Measurement becomes datafication."
+num: '3'
 excerpt: "When systems measure more of life, experiences and behaviors become trackable, modelable, and governable as data."
-ethical_patterns:
-  - measurement-becomes-datafication
-themes:
-  - surveillance-datafication
-featured_topics:
-  - sensors-edge-ai-wearables-biosensing-cybersecurity
 ---
 
 ## What To Notice

@@ -1,12 +1,7 @@
 ---
-title: "AI systems are socio-technical systems."
-excerpt: "AI systems are shaped by technical design, institutions, labor, infrastructure, and governance."
-ethical_patterns:
-  - ai-systems-are-socio-technical-systems
-themes:
-  - ai-as-technical-and-social-system
-featured_topics:
-  - course-launch-human-machine-intelligence-public-issue
+title: 'AI systems are socio-technical systems.'
+excerpt: 'AI systems are shaped by technical design, institutions, labor, infrastructure, and governance.'
+num: '1'
 ---
 
 ## What To Notice
