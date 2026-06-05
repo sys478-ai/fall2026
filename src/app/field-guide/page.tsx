@@ -2,11 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
 import ContentLayout from '@/components/ContentLayout';
+import FieldGuideNav from '@/components/FieldGuideNav';
+import ThemedImage from '@/components/ThemedImage';
 import RecognitionPatternCards from '@/components/RecognitionPatternCards';
 import { getAllPosts, type PostData } from '@/lib/markdown';
 
 interface TaxonomyEntry {
   slug?: string;
+  num?: string;
   title: string;
   subtitle?: string;
   shortDescription?: string;
@@ -25,6 +28,7 @@ interface TaxonomyEntry {
   field_guide_merge_title?: string;
   field_guide_merge_subtitle?: string;
   field_guide_merge_description?: string;
+  card_type?: string;
 }
 
 interface GuideSection {
@@ -50,9 +54,7 @@ function normalizeFeaturedImagePath(src?: string) {
 
 function getPublicFilePath(src: string) {
   const pathname = src.split(/[?#]/)[0];
-  const publicPathname = pathname.startsWith(`${basePath}/`)
-    ? pathname.slice(basePath.length)
-    : pathname;
+  const publicPathname = pathname.startsWith(`${basePath}/`) ? pathname.slice(basePath.length) : pathname;
   const filePath = path.join(publicDirectory, publicPathname);
   const relativePath = path.relative(publicDirectory, filePath);
 
@@ -85,12 +87,14 @@ function getDarkFeaturedImagePath(src?: string) {
 
 function getPatternsWithMarkdownMetadata(): TaxonomyEntry[] {
   return getAllPosts('ethical-patterns')
-    .filter(post => !post.hide_from_list && !post.no_render)
+    .filter(post => !post.hide_from_list && !post.no_render && post.card_type === 'recognition')
     .map((post: PostData) => ({
       slug: post.id,
+      num: post.num,
       title: post.field_guide_display_title || post.title,
       subtitle: post.excerpt,
       shortDescription: post.description,
+      order: post.order ?? post.field_guide_order,
       featured_image: normalizeFeaturedImagePath(post.featured_image),
       featured_image_dark: getDarkFeaturedImagePath(post.featured_image),
       field_guide_section: post.field_guide_section,
@@ -103,6 +107,7 @@ function getPatternsWithMarkdownMetadata(): TaxonomyEntry[] {
       field_guide_merge_title: post.field_guide_merge_title,
       field_guide_merge_subtitle: post.field_guide_merge_subtitle,
       field_guide_merge_description: post.field_guide_merge_description,
+      card_type: post.card_type,
     }));
 }
 
@@ -161,10 +166,18 @@ function getFieldGuideSections(patterns: TaxonomyEntry[]): GuideSection[] {
 
       const mergedItems: TaxonomyEntry[] = Array.from(groupedItems.values()).map(items => {
         const base = items.sort((a, b) => (a.field_guide_order ?? 999) - (b.field_guide_order ?? 999))[0];
+        const nums = items
+          .map(item => item.num)
+          .filter((num): num is string => Boolean(num))
+          .sort((a, b) => Number(a) - Number(b));
+        const mergedNum =
+          nums.length > 1 && nums[0] !== nums[nums.length - 1] ? `${nums[0]}-${nums[nums.length - 1]}` : nums[0];
         return {
+          num: mergedNum,
           title: base.field_guide_merge_title || base.title,
           subtitle: base.field_guide_merge_subtitle || base.subtitle,
           shortDescription: base.field_guide_merge_description || base.shortDescription,
+          order: base.order ?? base.field_guide_order,
           featured_image: base.featured_image,
           featured_image_dark: base.featured_image_dark,
           field_guide_order: base.field_guide_order,
@@ -201,24 +214,33 @@ export default function EthicalPatternRecognitionFieldGuidePage() {
             Field Guide
           </p>
           <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
-            AI in the Wild: A Field Guide to Making Sense of AI Debates in Everyday Life
+            { metadata.title as string }
           </h1>
           <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">
-            Practical tools for noticing patterns, asking better questions, and making sense of how AI shows up in
-            everyday systems, institutions, and public debates.
+            { metadata.description }
           </p>
+          <FieldGuideNav />
         </header>
       }
     >
       <div className="space-y-12">
         <section className="max-w-6xl px-4 md:px-16">
-          <p className="mb-0 text-base leading-8 text-gray-700 dark:text-gray-300">
-            This field guide is here to help you think more clearly about AI as you encounter it in the world. Each
-            section offers a different way of seeing: how systems are built, what they do, how they shape power and
-            public life, and how we can respond. The goal is not to give you one fixed opinion about AI, but to give
-            you practical tools for noticing patterns, asking better questions, and making sense of the claims,
-            controversies, and tradeoffs that surround AI in everyday life.
-          </p>
+          <div className="shrink-0">
+            <ThemedImage
+              src="/fall2026/images/ethics-field-guide/landing/binoculars-landscape.png"
+              darkSrc="/fall2026/images/ethics-field-guide/landing/binoculars-landscape.dark.png"
+              className="rounded-xl w-full"
+            />
+          </div>
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-10">
+            <p className="mb-0 text-base leading-8 text-gray-700 dark:text-gray-300">
+              This field guide is here to help you think more clearly about AI as you encounter it in the world. Each
+              section offers a different way of seeing: how systems are built, what they do, how they shape power and
+              public life, and how we can respond. The goal is not to give you one fixed opinion about AI, but to give
+              you practical tools for noticing patterns, asking better questions, and making sense of the claims,
+              controversies, and tradeoffs that surround AI in everyday life.
+            </p>
+          </div>
         </section>
         {sections.map(section => (
           <section

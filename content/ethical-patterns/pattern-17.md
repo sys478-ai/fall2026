@@ -2,11 +2,13 @@
 title: "Early choices can shape future benefits and harms."
 num: '17'
 excerpt: "Design, data, and deployment decisions can shape who benefits, who is exposed to risk, and what becomes harder to change later."
-field_guide_section: 'accountability-transparency-and-governance'
-field_guide_section_title: '4. Accountability, Transparency, and Governance'
-field_guide_section_intro: 'AI systems raise questions not only about what they do, but about who can inspect them, challenge them, govern them, and refuse them. This section brings together transparency, accountability, oversight, and public response.'
-field_guide_section_order: 4
-field_guide_order: 2
+field_guide_section: 'concept-cards'
+field_guide_section_title: 'Concept Cards'
+field_guide_section_intro: 'These cards provide the STS foundations underlying the recognition patterns. Use them for deeper analysis, formal writing, or understanding why the recognition patterns occur.'
+field_guide_section_order: 7
+field_guide_order: 7
+order: 2
+card_type: concept
 ---
 
 ## What To Notice

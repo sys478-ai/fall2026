@@ -1,12 +1,14 @@
 ---
 title: 'AI is material: it depends on energy, water, chips, labor, mining, and waste.'
-num: '13'
+num: '4'
 excerpt: 'AI systems have physical substrates and environmental costs, even when they appear clean or abstract at the interface.'
-field_guide_section: 'what-the-system-is-made-of'
-field_guide_section_title: '1. What the System Is Made Of'
-field_guide_section_intro: 'Before an AI system acts in the world, people have already made choices about data, infrastructure, materials, and what counts as a meaningful signal. This section helps you look upstream at what systems are made of.'
-field_guide_section_order: 1
-field_guide_order: 4
+field_guide_section: 'concept-cards'
+field_guide_section_title: 'Concept Cards'
+field_guide_section_intro: 'These cards provide the STS foundations underlying the recognition patterns. Use them for deeper analysis, formal writing, or understanding why the recognition patterns occur.'
+field_guide_section_order: 7
+field_guide_order: 6
+order: 4
+card_type: concept
 field_guide_display_title: 'AI is material.'
 ---
 

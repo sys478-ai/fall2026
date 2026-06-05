@@ -2,11 +2,13 @@
 title: "Prediction imports the past."
 num: '8'
 excerpt: "Predictive systems often reuse historical patterns, which means older inequalities and institutional habits can reappear inside future-facing tools."
-field_guide_section: 'how-the-system-sees-the-world'
-field_guide_section_title: '2. How the System Sees the World'
-field_guide_section_intro: 'AI systems do not encounter the world directly. They measure, categorize, model, and predict through particular representations. This section helps you ask how a system is seeing, simplifying, and interpreting the world.'
-field_guide_section_order: 2
-field_guide_order: 3
+field_guide_section: 'how-data-is-made-and-used'
+field_guide_section_title: 'On how data is made and used'
+field_guide_section_intro: "AI systems make some things visible and others invisible. This section helps you notice how data is gathered, what purposes it was built for, what gets measured — and what doesn't."
+field_guide_section_order: 1
+field_guide_order: 1
+order: 4
+card_type: recognition
 ---
 
 ## What To Notice

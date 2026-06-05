@@ -2,11 +2,13 @@
 title: "AI systems can encourage anthropomorphism, aliveness, or sentience claims."
 num: '12'
 excerpt: "Human-centered metaphors can distort public understanding of what systems are, what they do, and what they deserve."
-field_guide_section: 'how-the-system-acts-and-shifts-power'
-field_guide_section_title: '3. How the System Acts and Shifts Power'
-field_guide_section_intro: 'Once a system is operating, it begins to sort, score, intervene, and redistribute authority. This section helps you trace how system outputs become actions and how those actions shift power.'
+field_guide_section: 'how-systems-act-and-shift-power'
+field_guide_section_title: 'On how systems act and shift power'
+field_guide_section_intro: "AI systems don't just process information — they act in the world, redistributing authority and accountability. This section helps you trace who gains power, who loses it, and what happens to responsibility when a system makes a decision."
 field_guide_section_order: 3
 field_guide_order: 4
+order: 4
+card_type: recognition
 field_guide_display_title: 'AI can encourage anthropomorphism and aliveness claims.'
 ---
 

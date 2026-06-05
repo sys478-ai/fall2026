@@ -1,16 +1,14 @@
 ---
 title: "Alternatives can be foreclosed."
-num: '16'
+num: '15'
 excerpt: "Stories of inevitability can narrow the range of options that institutions or communities are willing to consider."
-field_guide_section: 'how-the-system-acts-and-shifts-power'
-field_guide_section_title: '3. How the System Acts and Shifts Power'
-field_guide_section_intro: 'Once a system is operating, it begins to sort, score, intervene, and redistribute authority. This section helps you trace how system outputs become actions and how those actions shift power.'
-field_guide_section_order: 3
-field_guide_order: 5
-field_guide_merge_key: 'innovation-extraction-concentration-lock-in'
-field_guide_merge_title: 'Innovation can hide extraction, concentration, and lock-in.'
-field_guide_merge_subtitle: 'Stories of progress can make it harder to see what is being captured, who gains control, and what alternatives are being narrowed or shut out.'
-field_guide_merge_description: 'This brings together extraction, infrastructure power, and foreclosed alternatives to help you read innovation narratives more critically.'
+field_guide_section: 'power-infrastructure-and-alternatives'
+field_guide_section_title: 'On power, infrastructure, and alternatives'
+field_guide_section_intro: 'AI development concentrates resources, locks in dependencies, and forecloses alternatives. This section helps you see who controls the infrastructure others depend on, and what paths are being closed off.'
+field_guide_section_order: 5
+field_guide_order: 3
+order: 5
+card_type: recognition
 ---
 
 ## What To Notice

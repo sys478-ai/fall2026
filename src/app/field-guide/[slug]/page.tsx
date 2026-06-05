@@ -13,6 +13,7 @@ import ContentLayout from '@/components/ContentLayout';
 import MarkdownContent from '@/components/MarkdownContent';
 import PatternCaseTabs, { type PatternCaseTab } from '@/components/PatternCaseTabs';
 import PatternComicStrip, { type PatternComicStripItem } from '@/components/PatternComicStrip';
+import { getExamplesForCard } from '@/lib/examples';
 
 interface PageProps {
   params: Promise<{
@@ -244,6 +245,7 @@ export default async function EthicalPatternPage({ params }: PageProps) {
     const relatedTopics = getRelatedTopicsForPattern(slug);
     const relatedTaggedContent = getRelatedContentForPattern(slug);
     const relatedScheduleItems = await getRelatedScheduleItemsForPattern(slug);
+    const relatedExamples = await getExamplesForCard(postData.num ?? '');
 
     const featuredTopics = (postData as PostData & { featured_topics?: string[] }).featured_topics || [];
     const featuredAssignments = (postData as PostData & { featured_assignments?: string[] }).featured_assignments || [];
@@ -282,6 +284,18 @@ export default async function EthicalPatternPage({ params }: PageProps) {
               <PatternContentSection section={section} />
             </PatternSection>
           ))}
+
+          {relatedExamples.length > 0 && (
+            <PatternSection label="Examples">
+              <PatternCaseTabs
+                cases={relatedExamples.map(ex => ({
+                  id: ex.slug,
+                  label: ex.title,
+                  content: `${ex.content}<div class="mt-5 rounded-lg border border-violet-200 bg-violet-50 p-4 dark:border-violet-800 dark:bg-violet-950/30"><p class="mb-1 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">How this connects</p><p class="mb-0 text-sm leading-6 text-gray-800 dark:text-gray-200">${ex.interpretation}</p></div>`,
+                }))}
+              />
+            </PatternSection>
+          )}
 
           <PatternSection label="Related Course Topics">
             {relatedTopics.length > 0 ? (

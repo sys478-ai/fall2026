@@ -1,12 +1,14 @@
 ---
 title: "Opacity shifts authority."
-num: '9'
+num: '16'
 excerpt: "When systems become difficult to inspect or explain, authority can move away from affected people and toward institutions, vendors, or technical specialists."
-field_guide_section: 'accountability-transparency-and-governance'
-field_guide_section_title: '4. Accountability, Transparency, and Governance'
-field_guide_section_intro: 'AI systems raise questions not only about what they do, but about who can inspect them, challenge them, govern them, and refuse them. This section brings together transparency, accountability, oversight, and public response.'
-field_guide_section_order: 4
+field_guide_section: 'how-systems-act-and-shift-power'
+field_guide_section_title: 'On how systems act and shift power'
+field_guide_section_intro: "AI systems don't just process information — they act in the world, redistributing authority and accountability. This section helps you trace who gains power, who loses it, and what happens to responsibility when a system makes a decision."
+field_guide_section_order: 3
 field_guide_order: 1
+order: 1
+card_type: recognition
 ---
 
 ## What To Notice

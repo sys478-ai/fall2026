@@ -199,6 +199,9 @@ export interface PostData {
   quizzes?: string[];
   no_render?: number;
   hide_from_list?: number;
+  card_type?: string;
+  domains?: string[];
+  connected_cards?: Array<{ num: string; interpretation: string }>;
 }
 
 export function getAllPostIds(subdirectory?: string) {

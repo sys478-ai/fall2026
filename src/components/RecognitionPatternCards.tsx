@@ -3,6 +3,7 @@ import ThemedImage from './ThemedImage';
 
 interface TaxonomyEntry {
   slug?: string;
+  num?: string;
   title: string;
   subtitle?: string;
   shortDescription?: string;
@@ -11,6 +12,7 @@ interface TaxonomyEntry {
   relatedThemes?: string[];
   featured_image?: string;
   featured_image_dark?: string;
+  card_type?: string;
 }
 
 const patternCardStyles = [
@@ -77,18 +79,14 @@ export default function RecognitionPatternCards({
   badgeLabel?: string;
   preserveOrder?: boolean;
 }) {
-  const sortedPatterns = preserveOrder
-    ? patterns
-    : [...patterns].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+  const sortedPatterns = preserveOrder ? patterns : [...patterns].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
   return (
     <section id="field-guide" className="space-y-4 max-w-5xl">
-
       <div className="grid grid-cols-1 gap-6">
         {sortedPatterns.map((pattern, index) => {
           const shouldShowShortDescription =
-            pattern.shortDescription &&
-            pattern.shortDescription.trim() !== pattern.subtitle?.trim();
+            pattern.shortDescription && pattern.shortDescription.trim() !== pattern.subtitle?.trim();
 
           const card = (
             <article
@@ -105,15 +103,17 @@ export default function RecognitionPatternCards({
               <div className="flex flex-1 items-center bg-white p-5 text-gray-900 dark:bg-black dark:text-gray-100 md:p-6">
                 <div className="max-w-3xl">
                   <h3 className="m-0 flex flex-wrap items-center gap-2 text-lg font-semibold leading-snug text-[#0b5d8f] dark:text-[#8fc4ee]">
-                    <span className="rounded-full bg-violet-100 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-violet-700 dark:bg-violet-950 dark:text-violet-300">
-                      {badgeLabel}
+                    {pattern.card_type && (
+                      <span className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white bg-[#0b5d8f] dark:bg-[#2f80d7]">
+                        {pattern.card_type}
+                      </span>
+                    )}
+                    <span>
+                      {pattern.num ? `${pattern.num}. ` : ''}{pattern.title}
                     </span>
-                    <span>{pattern.title}</span>
                   </h3>
                   {pattern.subtitle && (
-                    <p className="mb-0 mt-1 text-base leading-6 text-gray-800 dark:text-gray-200">
-                      {pattern.subtitle}
-                    </p>
+                    <p className="mb-0 mt-1 text-base leading-6 text-gray-800 dark:text-gray-200">{pattern.subtitle}</p>
                   )}
                   {shouldShowShortDescription && (
                     <p className="mb-0 mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">

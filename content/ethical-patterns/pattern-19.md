@@ -2,11 +2,13 @@
 title: "Technical expertise can be used to dismiss democratic oversight."
 num: '19'
 excerpt: "Expertise matters, but it should not be used to narrow who gets to ask questions, raise concerns, or shape public decisions."
-field_guide_section: 'accountability-transparency-and-governance'
-field_guide_section_title: '4. Accountability, Transparency, and Governance'
-field_guide_section_intro: 'AI systems raise questions not only about what they do, but about who can inspect them, challenge them, govern them, and refuse them. This section brings together transparency, accountability, oversight, and public response.'
+field_guide_section: 'who-has-voice-and-who-bears-risk'
+field_guide_section_title: 'On who has voice and who bears risk'
+field_guide_section_intro: 'Who gets to shape a system matters as much as what the system does. This section helps you notice when affected communities were excluded from design, and when some people bear costs they had no hand in choosing.'
 field_guide_section_order: 4
-field_guide_order: 4
+field_guide_order: 2
+order: 4
+card_type: recognition
 ---
 
 ## What To Notice
