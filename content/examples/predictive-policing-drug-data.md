@@ -2,6 +2,18 @@
 title: 'Predictive policing and drug-crime data'
 excerpt: 'Predictive policing systems trained on arrest records learned the history of enforcement, not the geography of drug use.'
 domains: ['criminal-justice-and-policing']
+contested: >-
+  Defenders of predictive policing argue that the feedback loop critique applies most strongly to
+  person-based prediction, and that place-based prediction — directing patrol to geographic areas —
+  can reduce crime under certain conditions when input data reflects actual harm rather than
+  enforcement history. Some city deployments showed reduced crime rates; others showed null results
+  or increased harm. Several cities discontinued their predictive policing programs after civil
+  liberties challenges; others retained them. The empirical literature is mixed. The stronger and
+  more consistent evidence for feedback loop concerns applies specifically to the conditions
+  documented in Oakland drug enforcement data, where arrest records were heavily shaped by
+  prior enforcement patterns rather than measuring underlying harm directly. See: Lum and Isaac,
+  _Significance_, 2016; Ensign et al., _PMLR_, 2018; Perry et al., "Predictive Policing," RAND,
+  2013 for a more favorable account.
 connected_cards:
   - num: '2'
     interpretation: "Drug arrest records were treated as if they measured where drug use occurs. But those records were produced by patrol decisions, enforcement priorities, and earlier patterns of surveillance. Drug use is far more widespread than arrest data suggests. A model trained on arrest records learned the history of policing — and sent police back to already-policed neighborhoods, generating more records that appeared to confirm the original pattern."

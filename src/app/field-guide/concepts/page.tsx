@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
 import RecognitionPatternCards from '@/components/RecognitionPatternCards';
+import { FieldGuideViewProvider, FieldGuideCardSection, FieldGuideCompactSection } from '@/components/FieldGuideView';
 import { getAllPosts, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
 
@@ -44,9 +45,22 @@ export default function ConceptCardsPage() {
   return (
     <FieldGuideSectionLayout contentDir="concept-guide">
       {(columns) => (
-        <section className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16">
-          <RecognitionPatternCards patterns={cards} badgeLabel="Concept" preserveOrder columns={columns} />
-        </section>
+        <div>
+          <FieldGuideViewProvider>
+            <FieldGuideCardSection>
+              <section className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16">
+                <RecognitionPatternCards patterns={cards} badgeLabel="Concept" preserveOrder columns={columns} />
+              </section>
+            </FieldGuideCardSection>
+            <FieldGuideCompactSection
+              cards={cards.map(card => ({
+                title: card.title,
+                subtitle: card.subtitle,
+                href: card.slug ? `/field-guide/${card.slug}` : undefined,
+              }))}
+            />
+          </FieldGuideViewProvider>
+        </div>
       )}
     </FieldGuideSectionLayout>
   );

@@ -1,7 +1,23 @@
 ---
 title: 'Facebook data and Cambridge Analytica'
+year: '2018'
+show_in_timeline: true
 excerpt: 'Data collected through a personality quiz for academic research was used to build political targeting profiles for 87 million users.'
 domains: ['platform-and-consumer']
+contested: >-
+  Cambridge Analytica's actual influence on election outcomes is heavily disputed — including by
+  political scientists who study advertising effects and by former CA employees who suggest the
+  company overstated its capabilities to clients for business reasons. The data harvest was a genuine
+  privacy violation. Whether the psychographic targeting actually moved votes is a separate question
+  the available evidence doesn't resolve. These are worth keeping distinct: the privacy problem
+  stands regardless of whether the manipulation worked.
+timeline_cards:
+  - label: 'Data collected for one purpose gets used for another'
+    href: '/field-guide/pattern-03'
+  - label: "Consent was obtained but wasn't meaningful"
+    href: '/field-guide/pattern-26'
+  - label: 'Extraction can be disguised as innovation'
+    href: '/field-guide/pattern-14'
 connected_cards:
   - num: '5'
     interpretation: "Facebook users provided personal data through a third-party quiz app in what appeared to be an academic research context. That data was then used by a political consulting firm to build personality profiles and target political advertising. The collection and repurposing were separated by multiple layers — Facebook's API, a researcher, and a consulting firm — none of which were visible to users. The context of the original collection bore no resemblance to the context of its eventual use."

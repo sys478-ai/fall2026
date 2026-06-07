@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
 import RecognitionPatternCards from '@/components/RecognitionPatternCards';
+import { FieldGuideViewProvider, FieldGuideCardSection, FieldGuideCompactSection } from '@/components/FieldGuideView';
 import { getAllPosts, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
 
@@ -128,20 +129,36 @@ export default function RecognitionCardsPage() {
 
   return (
     <FieldGuideSectionLayout contentDir="recognition-guide">
-      {(columns) => sections.map(section => (
-        <section
-          key={section.title}
-          className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16"
-        >
-          <div className="space-y-3">
-            <h2 className="m-0 text-5xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-              {section.title}
-            </h2>
-            <p className="mb-0 max-w-5xl text-base leading-7 text-gray-700 dark:text-gray-300">{section.intro}</p>
-          </div>
-          <RecognitionPatternCards patterns={section.items} badgeLabel="Lens" preserveOrder columns={columns} />
-        </section>
-      ))}
+      {(columns) => (
+        <div>
+          <FieldGuideViewProvider>
+            {sections.map(section => (
+              <div key={section.title}>
+                <FieldGuideCardSection>
+                  <section className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16">
+                    <div className="space-y-3">
+                      <h2 className="m-0 text-5xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
+                        {section.title}
+                      </h2>
+                      <p className="mb-0 max-w-5xl text-base leading-7 text-gray-700 dark:text-gray-300">{section.intro}</p>
+                    </div>
+                    <RecognitionPatternCards patterns={section.items} badgeLabel="Lens" preserveOrder columns={columns} />
+                  </section>
+                </FieldGuideCardSection>
+                <FieldGuideCompactSection
+                  label={section.title}
+                  description={section.intro}
+                  cards={section.items.map(item => ({
+                    title: item.title,
+                    subtitle: item.subtitle,
+                    href: item.slug ? `/field-guide/${item.slug}` : undefined,
+                  }))}
+                />
+              </div>
+            ))}
+          </FieldGuideViewProvider>
+        </div>
+      )}
     </FieldGuideSectionLayout>
   );
 }

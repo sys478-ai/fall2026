@@ -46,6 +46,11 @@ function PatternIllustration({
   featuredImageDark?: string;
   placeholderLabel?: string;
 }) {
+  const maskStyle = featuredImage ? {
+    WebkitMaskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%)',
+    maskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%)',
+  } : undefined;
+
   return (
     <div
       aria-hidden="true"
@@ -57,6 +62,7 @@ function PatternIllustration({
           darkSrc={featuredImageDark}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
+          style={maskStyle}
           title={`${title} illustration`}
         />
       ) : (
@@ -84,64 +90,52 @@ export default function RecognitionPatternCards({
   const sortedPatterns = preserveOrder ? patterns : [...patterns].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
   return (
-    <section id="field-guide" className="space-y-4 max-w-5xl">
-      <div className={`grid gap-6 ${columns === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
-        {sortedPatterns.map((pattern, index) => {
-          const shouldShowShortDescription =
-            pattern.shortDescription && pattern.shortDescription.trim() !== pattern.subtitle?.trim();
+    <div id="field-guide" className={`grid gap-6 ${columns === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'} max-w-5xl`}>
+      {sortedPatterns.map((pattern, index) => {
+        const shouldShowShortDescription =
+          pattern.shortDescription && pattern.shortDescription.trim() !== pattern.subtitle?.trim();
 
-          const card = (
-            <article
-              className={`flex h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-colors md:min-h-52 md:flex-row dark:bg-black ${patternCardStyles[index % patternCardStyles.length]}`}
-            >
-              <PatternIllustration
-                index={index}
-                title={pattern.title}
-                featuredImage={pattern.featured_image}
-                featuredImageDark={pattern.featured_image_dark}
-                placeholderLabel={badgeLabel}
-              />
-
-              <div className="flex flex-1 items-center bg-white p-5 text-gray-900 dark:bg-black dark:text-gray-100 md:p-6">
-                <div className="max-w-3xl">
-                  <h3 className="m-0 flex flex-wrap items-center gap-2 text-lg font-semibold leading-snug text-[#0b5d8f] dark:text-[#8fc4ee]">
-                    {pattern.card_type && (
-                      <span className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white bg-[#0b5d8f] dark:bg-[#2f80d7]">
-                        {pattern.card_type}
-                      </span>
-                    )}
-                    <span>
-                      {pattern.num ? `${pattern.num}. ` : ''}{pattern.title}
-                    </span>
-                  </h3>
-                  {pattern.subtitle && (
-                    <p className="mb-0 mt-1 text-base leading-6 text-gray-800 dark:text-gray-200">{pattern.subtitle}</p>
-                  )}
-                  {shouldShowShortDescription && (
-                    <p className="mb-0 mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">
-                      {pattern.shortDescription}
-                    </p>
-                  )}
-                </div>
+        const card = (
+          <article
+            className={`flex h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-colors md:min-h-52 md:flex-row dark:bg-black ${patternCardStyles[index % patternCardStyles.length]}`}
+          >
+            <PatternIllustration
+              index={index}
+              title={pattern.title}
+              featuredImage={pattern.featured_image}
+              featuredImageDark={pattern.featured_image_dark}
+              placeholderLabel={badgeLabel}
+            />
+            <div className="flex flex-1 items-center bg-white p-5 text-gray-900 dark:bg-black dark:text-gray-100 md:p-6">
+              <div className="max-w-3xl">
+                <h3 className="m-0 text-lg font-semibold leading-snug text-[#0b5d8f] dark:text-[#8fc4ee]">
+                  {pattern.title}
+                </h3>
+                {pattern.subtitle && (
+                  <p className="mb-0 mt-1 text-base leading-6 text-gray-800 dark:text-gray-200">{pattern.subtitle}</p>
+                )}
+                {shouldShowShortDescription && (
+                  <p className="mb-0 mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">
+                    {pattern.shortDescription}
+                  </p>
+                )}
               </div>
-            </article>
-          );
+            </div>
+          </article>
+        );
 
-          if (!pattern.slug) {
-            return <div key={pattern.title}>{card}</div>;
-          }
+        if (!pattern.slug) return <div key={pattern.title}>{card}</div>;
 
-          return (
-            <Link
-              key={pattern.slug}
-              href={`/field-guide/${pattern.slug}`}
-              className="group block h-full rounded-xl border-0! text-inherit! no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b5d8f] dark:focus-visible:outline-[#8fc4ee]"
-            >
-              {card}
-            </Link>
-          );
-        })}
-      </div>
-    </section>
+        return (
+          <Link
+            key={pattern.slug}
+            href={`/field-guide/${pattern.slug}`}
+            className="group block h-full rounded-xl border-0! text-inherit! no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b5d8f] dark:focus-visible:outline-[#8fc4ee]"
+          >
+            {card}
+          </Link>
+        );
+      })}
+    </div>
   );
 }

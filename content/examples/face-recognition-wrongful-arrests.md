@@ -1,7 +1,16 @@
 ---
 title: 'Face recognition match thresholds and wrongful arrests'
+year: '2020'
+show_in_timeline: true
 excerpt: 'Three men were wrongfully arrested in part because face recognition systems returned weak matches that analysts treated as identifications.'
 domains: ['criminal-justice-and-policing']
+timeline_cards:
+  - label: 'This system treats one group as the default'
+    href: '/field-guide/pattern-22'
+  - label: 'Automation changes accountability'
+    href: '/field-guide/pattern-10'
+  - label: 'Thresholds make uncertainty consequential'
+    href: '/field-guide/pattern-07'
 connected_cards:
   - num: '9'
     interpretation: "Face recognition systems produce a similarity score, not a yes/no identification. Analysts apply a threshold to decide when a score counts as a match. Setting that threshold low catches more potential suspects but generates more false positives. In the wrongful arrest cases, the threshold was low, the probe images were poor quality, and human review was insufficient. The arrests were downstream effects of a threshold decision — not just of model accuracy."

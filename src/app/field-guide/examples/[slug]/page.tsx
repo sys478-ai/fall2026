@@ -46,9 +46,11 @@ export default async function ExamplePage({ params }: PageProps) {
   try {
     const post = await getPostData(slug, 'examples');
     const domains = (post.domains as string[]) ?? [];
+    const contested = (post as typeof post & { contested?: string }).contested;
     const connectedCards = (post.connected_cards as Array<{ num: string; interpretation: string }>) ?? [];
     const allPatterns = [...getAllPosts('recognition-guide'), ...getAllPosts('concept-guide')];
-    const numToSlug = Object.fromEntries(allPatterns.map(p => [p.num, p.id]));
+    const numToSlug = Object.fromEntries(allPatterns.map(p => [String(p.num), p.id]));
+    const numToTitle = Object.fromEntries(allPatterns.map(p => [String(p.num), p.title]));
 
     return (
       <ContentLayout
@@ -94,6 +96,16 @@ export default async function ExamplePage({ params }: PageProps) {
         }
       >
         <div className="space-y-8">
+          {contested && (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-900/50 dark:bg-amber-950/20">
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-500">
+                Contested
+              </p>
+              <p className="mb-0 text-sm italic leading-6 text-gray-700 dark:text-gray-300">
+                {contested}
+              </p>
+            </div>
+          )}
           <section className="space-y-4 pt-4">
             <MarkdownContent content={post.content} />
           </section>
@@ -110,6 +122,7 @@ export default async function ExamplePage({ params }: PageProps) {
               <div className="space-y-3">
                 {connectedCards.map(({ num: cardNum, interpretation }) => {
                   const cardSlug = numToSlug[cardNum];
+                  const cardTitle = numToTitle[cardNum];
                   return (
                   <Link
                     key={cardNum}
@@ -119,6 +132,11 @@ export default async function ExamplePage({ params }: PageProps) {
                     <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">
                       Recognition Card
                     </p>
+                    {cardTitle && (
+                      <p className="mb-2 font-semibold text-gray-950 group-hover:text-violet-700 dark:text-gray-50 dark:group-hover:text-violet-300">
+                        {cardTitle}
+                      </p>
+                    )}
                     <p className="mb-0 text-sm leading-6 text-gray-800 dark:text-gray-200">{interpretation}</p>
                   </Link>
                   );

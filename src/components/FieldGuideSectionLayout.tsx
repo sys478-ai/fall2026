@@ -4,7 +4,7 @@ import { getPostData, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
 
 interface Props {
-  contentDir: 'recognition-guide' | 'concept-guide' | 'examples';
+  contentDir: 'recognition-guide' | 'concept-guide' | 'examples' | 'ethic-guide' | 'technical-explainers';
   children: (columns: 1 | 2) => React.ReactNode;
 }
 
@@ -38,8 +38,32 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
             )}
           </header>
           {imageSrc && (
-            <div className="shrink-0">
-              <ThemedImage src={imageSrc} darkSrc={imageDarkSrc} className="w-full mb-8" />
+            <div className="relative shrink-0">
+              <ThemedImage
+                src={imageSrc}
+                darkSrc={imageDarkSrc}
+                className="w-full my-8"
+                style={{
+                  WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
+                  maskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
+                }}
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-b from-transparent to-white dark:to-black"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-t from-transparent to-white dark:to-black"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-linear-to-l from-transparent to-white dark:to-black"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-linear-to-r from-transparent to-white dark:to-black"
+              />
             </div>
           )}
         </>

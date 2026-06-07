@@ -2,6 +2,17 @@
 title: 'Blood pressure and the overnight epidemic'
 excerpt: 'In 2017, a guideline change reclassified 31 million Americans as hypertensive — without any change in their physiology. What changed was where the threshold was drawn.'
 domains: ['healthcare-and-medicine']
+contested: >-
+  The American Academy of Family Physicians declined to endorse the 2017 ACC/AHA guidelines,
+  finding the evidence base insufficient to justify labeling an additional 31 million Americans as
+  hypertensive and initiating medication in patients with relatively low absolute cardiovascular
+  risk. Critics also noted that several guideline committee members had financial ties to
+  pharmaceutical companies. The core empirical question — whether treating blood pressure in the
+  130/80–140/90 range produces net clinical benefit at the population level — is not fully
+  resolved. Different clinical bodies examined the same evidence and reached different conclusions,
+  which is informative: threshold decisions in medicine involve value judgments about acceptable
+  risk and acceptable intervention, not only data. See: AAFP, "AAFP Decides to Not Endorse AHA/ACC
+  Hypertension Guidelines," 2017.
 connected_cards:
   - num: '9'
     interpretation: "The threshold for hypertension diagnosis — 130/80 vs. 140/90 mmHg — is a judgment call about what risk level warrants a clinical label and intervention. When that judgment changed in 2017, 31 million people crossed the threshold without any change in their bodies. The threshold didn't track a natural boundary in reality; it produced a medical status. Where the line is drawn determines who receives medication, monitoring, insurance flags, and the self-perception that comes with a chronic condition label."

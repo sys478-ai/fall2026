@@ -47,6 +47,9 @@ const FIELD_GUIDE_ITEMS = [
   { label: 'Recognition Cards', href: '/field-guide/recognition' },
   { label: 'Concept Cards', href: '/field-guide/concepts' },
   { label: 'Examples', href: '/field-guide/examples' },
+  { label: 'Ethical Frameworks', href: '/field-guide/frameworks' },
+  { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
+  { label: 'History of AI', href: '/field-guide/ai-history' },
 ];
 
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';

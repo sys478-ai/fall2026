@@ -13,17 +13,20 @@ card_type: recognition
 
 ## What To Notice
 
-You will often hear that regulation slows progress, blocks creativity, or risks leaving us behind. This framing treats speed as an unquestioned good and makes oversight sound like obstruction rather than public responsibility.
+A recurring rhetorical move in debates about AI: accountability requirements — safety testing, impact assessments, disclosure requirements, independent audits, regulatory review — are framed as bureaucratic drag, as obstacles that will cause the US (or another actor) to fall behind, as the enemy of beneficial progress.
 
-When governance is cast as anti-innovation, it becomes harder to ask who benefits from rapid deployment and who bears the risk when systems arrive without meaningful scrutiny.
+This framing positions oversight and innovation as opposites. They aren't. Safety requirements exist in aviation, pharmaceuticals, nuclear power, food, and many other domains without preventing development. The question is not whether oversight slows things down — it may — but what kinds of accountability are being avoided, and whose interests are served by avoiding them.
+
+Look for: urgency arguments that preclude deliberation; international competition invoked to dismiss domestic accountability requirements; technical complexity used to argue that outsiders cannot evaluate risks; "move fast" language applied to high-stakes systems.
 
 ## Questions To Ask
 
-- Who benefits when speed is treated as more important than oversight?
-- What kinds of accountability are being dismissed as too slow or burdensome?
-- What risks are being normalized in the name of innovation?
-- Who is being asked to absorb uncertainty while others move quickly?
+- What specific oversight mechanisms are being characterized as obstacles?
+- What risks or harms would those mechanisms be designed to catch?
+- Who would bear those risks if oversight is reduced?
+- Is this argument being made by the people who would be subject to oversight, or by those who would be protected by it?
+- What would change if those accountability mechanisms were in place?
 
 ## Why This Matters
 
-This pattern helps you hear a familiar rhetorical move more clearly. It does not assume governance and innovation are always opposed. Instead, it asks what kinds of public value, accountability, and democratic choice are being pushed aside when speed becomes the only metric that matters.
+Framing oversight as a barrier is itself a governance move — it shapes which accountability mechanisms are seen as legitimate and which are dismissed before the substantive questions can be asked. This card pairs with "Refusal and non-adoption are legitimate choices": both ask you to take seriously the possibility that slowing down, reviewing carefully, or declining to deploy is sometimes the right answer rather than a failure of ambition.

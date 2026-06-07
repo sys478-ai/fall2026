@@ -13,17 +13,20 @@ card_type: recognition
 
 ## What To Notice
 
-Public debates about AI often assume that deployment is the natural end point. But sometimes the responsible move is to slow down, redesign, limit use, or refuse adoption altogether.
+Technology adoption is often presented as inevitable: the question is not whether a system will be deployed but how fast, how well, and by whom. This framing treats non-adoption as a failure state rather than a deliberate choice.
 
-This pattern asks you to treat caution as a meaningful governance option rather than as a sign of failure or ignorance.
+But cities have banned facial recognition. Hospitals have declined to implement certain predictive tools. Communities have organized to stop surveillance systems from being installed. These are not failures — they are governance decisions, made by people who concluded that the risks, costs, or conditions were not acceptable.
+
+Refusal can take many forms: outright prohibition; conditional adoption (we will use this only if certain safeguards are in place); delay while impact assessments are completed; requirements for community consent before deployment; sunset clauses that require active re-authorization.
 
 ## Questions To Ask
 
-- What would it look like not to adopt this system?
-- Who loses when delay or refusal is treated as unrealistic?
-- What harms might be avoided by slowing down?
-- Are there nontechnical or lower-tech alternatives that deserve more attention?
+- Is non-adoption being presented as an option, or is deployment being treated as inevitable?
+- What would need to be true for refusal to be the right choice here?
+- What are the conditions under which adoption would be acceptable?
+- Who has the standing to refuse — individuals, institutions, communities, governments?
+- What mechanisms exist for reversing adoption once a system is in place?
 
 ## Why This Matters
 
-This pattern keeps the range of possible responses open. It reminds you that governance is not only about making systems safer after they are built, but also about deciding whether they should be built or deployed at all.
+The existence of a technology does not create an obligation to use it. This card helps you resist the "inevitability" frame and take seriously the full range of governance responses — including the ones that involve not deploying, or not deploying yet, or deploying only under specific conditions. It pairs directly with "Alternatives can be foreclosed": keeping refusal visible as an option requires resisting the narrative that the train has already left the station.
