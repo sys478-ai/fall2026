@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Bars3Icon,
-  BookOpenIcon,
   CalendarDaysIcon,
   ChevronDownIcon,
   ChevronRightIcon,
@@ -49,7 +48,6 @@ const FIELD_GUIDE_ITEMS = [
   { label: 'Examples', href: '/field-guide/examples' },
   { label: 'Ethical Frameworks', href: '/field-guide/frameworks' },
   { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
-  { label: 'History of AI', href: '/field-guide/ai-history' },
 ];
 
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
@@ -160,7 +158,6 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const activePatternGuide = normalizedPath.startsWith('/field-guide');
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeBibliography = normalizedPath === '/bibliography';
-  const activeResources = normalizedPath === '/resources' || normalizedPath.startsWith('/resources/');
   const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
   const activeHome = normalizedPath === '/' || normalizedPath === '/syllabus';
 
@@ -168,7 +165,6 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
     () => [
       { label: 'Home', href: '/', icon: HomeIcon, active: activeHome },
       { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
-      { label: 'Resources', href: '/resources', icon: BookOpenIcon, active: activeResources },
       { label: 'Bibliography', href: '/bibliography', icon: DocumentTextIcon, active: activeBibliography },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
       {
@@ -178,7 +174,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
         active: activeTaxonomy,
       },
     ],
-    [activeAssignments, activeBibliography, activeHome, activeModules, activeResources, activeTaxonomy]
+    [activeAssignments, activeBibliography, activeHome, activeModules, activeTaxonomy]
   );
 
   const toggleDarkMode = () => {

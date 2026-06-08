@@ -14,7 +14,7 @@ interface FrameworkEntry {
 }
 
 function getFrameworkCards(): FrameworkEntry[] {
-  return getAllPosts('ethic-guide')
+  return getAllPosts('ethics-guide')
     .filter(post => !post.hide_from_list && !post.no_render && post.card_type === 'ethical-framework')
     .map((post: PostData) => ({
       slug: `frameworks/${post.id}`,
@@ -36,7 +36,7 @@ export default function EthicalFrameworksPage() {
   const cards = getFrameworkCards();
 
   return (
-    <FieldGuideSectionLayout contentDir="ethic-guide">
+    <FieldGuideSectionLayout contentDir="ethics-guide">
       {(columns) => (
         <div>
           <FieldGuideViewProvider>

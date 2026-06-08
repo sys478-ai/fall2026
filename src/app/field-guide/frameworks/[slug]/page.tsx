@@ -13,7 +13,7 @@ interface PageProps {
 export const dynamicParams = false;
 
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
-  return getAllPostIds('ethic-guide')
+  return getAllPostIds('ethics-guide')
     .filter(({ params }) => params.id !== 'index')
     .map(({ params }) => ({ slug: params.id }));
 }
@@ -21,7 +21,7 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const postData = await getPostData(slug, 'ethic-guide');
+    const postData = await getPostData(slug, 'ethics-guide');
     return { title: `${postData.title} — Ethical Frameworks` };
   } catch {
     return { title: 'Ethical Framework' };
@@ -32,7 +32,7 @@ export default async function EthicalFrameworkDetailPage({ params }: PageProps) 
   const { slug } = await params;
 
   try {
-    const postData = await getPostData(slug, 'ethic-guide');
+    const postData = await getPostData(slug, 'ethics-guide');
     const subtitle = (postData as PostData & { subtitle?: string }).subtitle;
 
     return (

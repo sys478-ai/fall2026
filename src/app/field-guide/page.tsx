@@ -17,7 +17,7 @@ export default async function FieldGuideLandingPage() {
     getPostData('index', 'recognition-guide'),
     getPostData('index', 'concept-guide'),
     getPostData('index', 'examples'),
-    getPostData('index', 'ethic-guide'),
+    getPostData('index', 'ethics-guide'),
     getPostData('index', 'technical-explainers'),
   ]);
 

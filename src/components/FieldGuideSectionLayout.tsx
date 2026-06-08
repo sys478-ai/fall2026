@@ -4,7 +4,7 @@ import { getPostData, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
 
 interface Props {
-  contentDir: 'recognition-guide' | 'concept-guide' | 'examples' | 'ethic-guide' | 'technical-explainers';
+  contentDir: 'recognition-guide' | 'concept-guide' | 'examples' | 'ethics-guide' | 'technical-explainers';
   children: (columns: 1 | 2) => React.ReactNode;
 }
 
