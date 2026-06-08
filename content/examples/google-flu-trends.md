@@ -8,7 +8,6 @@ connected_cards:
   - num: '2'
     interpretation: "Search queries were treated as a direct sensor for flu infection, but they were produced by how people use a search engine — shaped by autocomplete suggestions, news coverage, public anxiety, and platform design. When media attention to flu increased, searches increased too, regardless of actual infection rates. The data was a record of search behavior, not of disease."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

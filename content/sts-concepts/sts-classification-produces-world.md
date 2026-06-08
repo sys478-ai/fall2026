@@ -3,53 +3,47 @@ title: "Classification systems don't just describe the world — they produce it
 num: '23'
 id: sts-classification-produces-world
 slug: classification-systems-dont-just-describe-the-world-they-produce-it
-excerpt: "When a system sorts, labels, or categorizes, it doesn't simply reflect reality. It creates the categories that people, institutions, and environments are then made to fit."
+excerpt: "Before a system can classify anything, someone has to build the categories. Once deployed, those categories reshape the behavior and reality they were built to describe."
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
-field_guide_order: 9
-order: 9
+field_guide_order: 2
+order: 2
 card_type: concept
+field_guide_group: 'constructed-not-natural'
+subtheme: 'constructed-not-natural'
+subtheme_title: 'Constructed, not natural'
 related_recognition_cards: ['pattern-22', 'pattern-07', 'pattern-08']
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 1
 ---
 
-## Core Idea
+## What This Means
 
-A map is not a neutral picture of territory. A zoning code is not a description of how land is used — it is an authorization of how land may be used. A medical diagnosis is not just a label — it determines what treatments are available, what insurance covers, what accommodations are granted. A credit score is not a reflection of trustworthiness — it produces the conditions that make someone more or less creditworthy over time.
+Classification looks like description. Before a system can classify anything, someone has to decide what categories exist — what counts as one kind of thing and not another. Those decisions are not neutral. They reflect what was considered important to distinguish, what kinds of similarity and difference were treated as meaningful, and what happened to things that didn't fit the available categories. Geoffrey Bowker and Susan Leigh Star, in their study of classification systems in medicine and other institutions, called this the "politics of classification": every category system reflects choices made by particular people with particular interests, and leaves visible traces of who was doing the classifying and who was being classified.
 
-Classification systems are performative. Once a category exists and is acted upon by institutions, it shapes behavior, allocates resources, closes off options, and over time can make the classification look natural and inevitable — even when it was a choice.
+Classification systems also create residuals — things that don't fit cleanly. What happens to those residuals reveals where a system's assumptions break down. A person whose condition doesn't match any diagnostic code. A worker whose labor doesn't fit any legal employment category. A behavior that falls between threat categories in an anomaly detection system. How residuals are handled — whether they are forced into available categories, flagged for human review, or simply dropped — is a political and institutional question, not a technical one.
 
-This is what Geoffrey Bowker and Susan Leigh Star mean when they describe classification as infrastructure: it becomes invisible precisely because it works, and its effects accumulate silently in the background of every decision a system makes.
-
-## Why This Matters for AI
-
-AI systems depend on classification at every layer — training labels, output categories, threshold decisions, feature definitions. Each of those classification choices doesn't just sort inputs. It produces a world in which certain things are countable, certain people are legible, certain harms are visible, and certain outcomes are possible.
-
-When a predictive policing system classifies neighborhoods as high-risk, it produces more policing there, which produces more arrests, which produces more data confirming the classification. The category becomes self-fulfilling. The world reshapes itself around the map.
-
-## Connection to Environmental and Land Use Classification
-
-Zoning maps, environmental impact categories, pollution thresholds, species protection designations — these are classification systems with direct material consequences. A wetland classified as "marginal" can be developed. A neighborhood classified as industrial accepts facilities that residential zones refuse. An ecosystem classified below a remediation threshold receives no intervention. The classification doesn't describe the environment's value — it produces its legal and institutional status.
-
-Environmental justice scholarship has documented how these classifications have historically sorted along racial and economic lines — not always explicitly, but through the accumulated effects of where boundaries were drawn and who had voice in drawing them.
+But categories don't just reflect choices — they produce effects. Judith Butler's work on performativity and Donald MacKenzie's work on financial models both point to the same insight: when categories are enacted by institutions, they reshape the reality they were supposed to describe. A neighborhood classified as high-risk receives more surveillance, which generates more arrests, which confirms the classification. A person diagnosed with a condition gets treated according to the category, which changes the course of their condition. Ian Hacking called this "looping effects": being classified changes how people understand and present themselves, which changes the data the classification sees. The category and the world it classifies begin reshaping each other.
 
 ## Questions To Ask
 
-- What category is this person, place, or thing being put into?
-- What becomes possible or impossible as a result of that classification?
-- Who drew the boundary between categories, and when?
-- What happens to things that don't fit cleanly into the available categories?
-- Is the classification being treated as a description of reality or as the thing that produces it?
+- Who defined the categories this system uses, and what were their goals?
+- What kinds of people, behaviors, or situations don't fit the available categories?
+- What happens to those that don't fit — are they forced into categories, dropped, or flagged?
+- Is the classification being treated as a description of reality, or is it understood as producing reality?
+- What feedback loops exist between the classification and the thing being classified?
 - Who benefits from the current category boundaries staying where they are?
+
+## Why This Matters
+
+This card sits at the foundation of several other concepts in the field guide. Understanding that classification is constructed — someone built these categories, reflecting their assumptions and goals — and performative — the categories now shape the world — gives you a way to ask sharp questions about any AI system.
+
+In the BRAID neuromorphic case, this shows up in how "anomaly" is defined. The system doesn't detect anomalies in nature — it detects departures from a baseline that was built from prior data. How that baseline was constructed, whose behavior it treats as normal, and what feedback effects the classification produces when acted upon are all classification questions with direct governance consequences.
 
 ## Related Recognition Cards
 
-- [This system treats one group as the default](/fall2026/field-guide/pattern-22)
-- [Thresholds make uncertainty consequential](/fall2026/field-guide/pattern-07)
-- [Prediction imports the past](/fall2026/field-guide/pattern-08)
+- [This system treats one group as the default](/fall2026/field-guide/deployment-patterns/this-system-treats-one-group-as-the-default)
+- [Thresholds make uncertainty consequential](/fall2026/field-guide/deployment-patterns/thresholds-make-uncertainty-consequential)
+- [Prediction imports the past](/fall2026/field-guide/deployment-patterns/prediction-imports-the-past)

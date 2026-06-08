@@ -5,18 +5,18 @@ id: sts-materiality
 slug: ai-is-material
 excerpt: 'AI systems have physical substrates and environmental costs, even when they appear clean or abstract at the interface.'
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
-field_guide_order: 6
+field_guide_order: 8
 order: 4
 card_type: concept
+field_guide_group: 'sociotechnical-systems'
+subtheme: 'sociotechnical-systems'
+subtheme_title: 'AI systems are socio-technical systems'
 field_guide_display_title: 'AI is material.'
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 3
 ---
 
 ## What To Notice

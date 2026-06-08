@@ -16,7 +16,6 @@ connected_cards:
   - num: '22'
     interpretation: "The Gender Shades study found that commercial face analysis systems had been benchmarked primarily on lighter-skinned faces, and that performance on those faces was treated as the standard for evaluation. The accuracy gaps weren't incidental — they were a direct consequence of whose faces the training data reflected most fully. The systems worked well for the group that was treated as the default, and performed substantially worse for everyone else."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

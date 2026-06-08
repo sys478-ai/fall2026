@@ -23,7 +23,6 @@ connected_cards:
   - num: '15'
     interpretation: "The compute required to train frontier-scale language models is accessible only to a handful of companies with sufficient capital and infrastructure. This concentrates the power to determine what models exist, how they behave, on what terms they are available, and what data is included in training. Organizations and individuals who integrate these models become dependent on the terms set by a small number of providers."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

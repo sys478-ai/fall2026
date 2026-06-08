@@ -21,7 +21,6 @@ connected_cards:
   - num: '24'
     interpretation: "The engineers who built the tool and the HR leadership who deployed it did not include candidates in the design process. Candidates had no mechanism to know the system existed, no knowledge that they were being penalized for attending a women's college or participating in women's professional organizations, and no recourse. The people most affected by the tool's outputs had no input into its design."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

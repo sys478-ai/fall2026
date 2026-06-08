@@ -33,7 +33,6 @@ connected_cards:
   - num: '26'
     interpretation: "Images posted publicly are technically accessible. Accessibility in a given context does not constitute consent to all possible uses. A photo posted on a professional networking site is public in that context. Its inclusion in a facial recognition database used for law enforcement identification is a categorically different use that the original context did not disclose or anticipate."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

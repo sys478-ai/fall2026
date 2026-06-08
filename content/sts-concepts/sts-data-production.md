@@ -6,17 +6,17 @@ slug: data-is-produced-not-found
 excerpt: 'Data is created through measurement choices, interfaces, institutions, and assumptions about what should count.'
 featured_image: 'fall2026/images/ethics-field-guide/data/02-observation-sensing.png'
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
 field_guide_order: 1
 order: 2
 card_type: concept
+field_guide_group: 'constructed-not-natural'
+subtheme: 'constructed-not-natural'
+subtheme_title: 'Constructed, not natural'
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 1
 ---
 
 ## What To Notice

@@ -35,7 +35,6 @@ connected_cards:
   - num: '11'
     interpretation: "The concern raised by striking writers was not only about displacement — losing jobs entirely — but about craft: that routinizing AI assistance in the writers' room would atrophy the skills that make original television and film distinctive, creating dependency in the workforce and reducing the bargaining power of individual writers over time. Deskilling is a long-term consequence of tool adoption that doesn't show up in short-term productivity comparisons."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

@@ -6,6 +6,7 @@ section_label: 'Ethical Frameworks'
 featured_image: 'fall2026/images/ethics-field-guide/ethics/scales-banner.png'
 thumb_image: 'fall2026/images/ethics-field-guide/ethics/scales-landscape.png'
 priority: low
+field_guide_section_title: 'Ethical Frameworks'
 ---
 
 Each ethical framework offers a different lens for evaluating what you have found. Recognition cards help you see what is happening; ethical frameworks help you reason about whether it is acceptable, and why.

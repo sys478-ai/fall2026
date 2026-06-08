@@ -31,7 +31,6 @@ connected_cards:
   - num: '22'
     interpretation: "When recorded recidivism rates differ between groups, no classifier can simultaneously achieve equal false positive rates and equal false negative rates. Northpointe's tool was calibrated for predictive parity — accuracy balanced across groups — which mathematically required accepting different error rates. Whether predictive parity or equal false positive rates is the correct criterion is a value judgment that the algorithm does not and cannot make."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

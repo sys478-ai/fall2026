@@ -5,13 +5,7 @@ id: dp-invisible-labor
 slug: invisible-labor-makes-the-system-possible
 excerpt: "AI systems depend on human work that is systematically hidden — content moderators, data labelers, crowd workers — whose conditions and contributions rarely appear in how the system is described."
 field_guide_section: 'deployment-patterns'
-field_guide_section_title: 'AI Deployment Patterns'
-field_guide_section_intro: "These cards describe recurring patterns in how AI systems are deployed in the world. Use them to identify what a system is doing to and through people when you encounter it."
-field_guide_section_order: 5
 field_guide_group: 'power-infrastructure-and-alternatives'
-field_guide_group_title: 'On power, infrastructure, and alternatives'
-field_guide_group_intro: 'AI development concentrates resources, locks in dependencies, and forecloses alternatives. This section helps you see who controls the infrastructure others depend on, and what paths are being closed off.'
-field_guide_group_order: 5
 field_guide_order: 4
 card_type: recognition
 status: unverified

@@ -33,7 +33,6 @@ connected_cards:
   - num: '23'
     interpretation: "Facebook's internal research teams measured engagement — clicks, time on site, reactions, shares — because those metrics were trackable and tied to business outcomes. Questions about downstream effects on mental health, civic discourse, or political polarization were harder to operationalize and less directly tied to revenue. What got measured shaped what got optimized. The case raises a question that applies wherever algorithmic systems use proxies: when you optimize for a metric, what are you actually optimizing?"
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

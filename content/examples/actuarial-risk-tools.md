@@ -28,7 +28,6 @@ connected_cards:
   - num: '22'
     interpretation: "Risk tools that use neighborhood, employment history, and family criminal history as features import the background conditions of structural inequality without naming them. The tool doesn't account for differential policing; it reproduces its outcomes. Groups most subject to surveillance and prosecution appear higher-risk — a consequence of who the system was watching, not only who was committing crimes."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

@@ -8,7 +8,6 @@ connected_cards:
   - num: '9'
     interpretation: "A FICO score of 620 marks a conventional threshold for mortgage eligibility, but 620 is not derived from the model — it is a policy choice layered on top of the model's output. Lenders set this line by weighing the cost of defaults against the cost of denied loans. Those error costs are not symmetric: the lender bears financial risk from one kind of mistake; the applicant bears denial, higher rates, or no credit access from the other. Moving the threshold changes who gets locked out without changing the underlying model."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

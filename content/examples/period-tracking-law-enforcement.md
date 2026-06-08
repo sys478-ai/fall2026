@@ -8,7 +8,6 @@ connected_cards:
   - num: '5'
     interpretation: "Period tracking apps collected intimate health data in a personal health context — cycle logs, symptoms, pregnancy attempts. After Roe v. Wade was overturned, that data could potentially be subpoenaed or purchased by law enforcement. The data hadn't changed. What changed was the institutional context it could now flow into. People who shared the data for personal health reasons had no way to anticipate its use in a criminal investigation."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

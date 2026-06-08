@@ -29,7 +29,6 @@ connected_cards:
   - num: '10'
     interpretation: "The PATRIOT Act expanded the use of National Security Letters, which allowed FBI field agents to obtain records from telecommunications and financial companies without judicial review. Removing the judicial check changed accountability: a decision that previously required a judge now required only an agent's determination that the records were relevant to an investigation. The distributed structure of that authorization made it difficult to trace or challenge."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

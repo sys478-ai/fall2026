@@ -17,7 +17,6 @@ connected_cards:
   - num: '15'
     interpretation: "The recommendation system is the layer through which content reaches viewers. At platform scale, whoever controls that layer controls what gets seen, what doesn't, and under what conditions. The Netflix Prize accelerated development of that layer and established recommendation infrastructure as a source of concentrated power over information flow — including decisions about which films, shows, and creators become visible to which audiences."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

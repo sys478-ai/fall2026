@@ -5,17 +5,17 @@ id: sts-path-dependency
 slug: early-choices-can-shape-future-benefits-and-harms
 excerpt: "Design, data, and deployment decisions can shape who benefits, who is exposed to risk, and what becomes harder to change later."
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
-field_guide_order: 7
+field_guide_order: 12
 order: 2
 card_type: concept
+field_guide_group: 'anticipation-and-change'
+subtheme: 'anticipation-and-change'
+subtheme_title: 'Anticipation & Change'
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 1
 ---
 
 ## What To Notice

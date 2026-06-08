@@ -8,7 +8,6 @@ connected_cards:
   - num: '2'
     interpretation: "The Street Bump map looked like a record of road conditions, but it was produced through smartphone ownership, app installation, and commuting patterns. Which neighborhoods got mapped depended on who participated — and participation tracked wealth and existing civic engagement, not pothole density. The data was made by particular people in particular circumstances, not found."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

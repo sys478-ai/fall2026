@@ -30,7 +30,6 @@ connected_cards:
   - num: '26'
     interpretation: "Technology companies' terms of service disclosed potential government access in broad legal language. That language was technically accurate and practically unreadable. Users had no realistic way to evaluate what they were agreeing to, no real alternative to the services, and no knowledge of the specific authorities being exercised. Formal consent structured as a precondition for service use is not the same as informed agreement."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

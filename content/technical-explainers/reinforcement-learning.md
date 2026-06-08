@@ -10,7 +10,6 @@ related_recognition_cards: ['23', '8', '25']
 related_concept_cards: []
 related_labs: []
 field_guide_section: 'technical-explainers'
-field_guide_section_title: 'Technical Explainers'
 status: unverified
 status_reviewer:
 status_date:

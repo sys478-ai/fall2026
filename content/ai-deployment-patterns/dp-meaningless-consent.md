@@ -5,13 +5,7 @@ id: dp-meaningless-consent
 slug: consent-was-obtained-but-wasnt-meaningful
 excerpt: "Formal consent — a checkbox, a terms-of-service agreement, a signature — does not guarantee that people understood what they agreed to or had a real choice."
 field_guide_section: 'deployment-patterns'
-field_guide_section_title: 'AI Deployment Patterns'
-field_guide_section_intro: "These cards describe recurring patterns in how AI systems are deployed in the world. Use them to identify what a system is doing to and through people when you encounter it."
-field_guide_section_order: 1
 field_guide_group: 'how-data-is-made-and-used'
-field_guide_group_title: 'On how data is made and used'
-field_guide_group_intro: "AI systems make some things visible and others invisible. This section helps you notice how data is gathered, what purposes it was built for, what gets measured — and what doesn't."
-field_guide_group_order: 1
 field_guide_order: 5
 card_type: recognition
 status: unverified

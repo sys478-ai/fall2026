@@ -8,7 +8,6 @@ connected_cards:
   - num: '22'
     interpretation: "Pulse oximeters were calibrated using data collected primarily from lighter-skinned subjects. That calibration defined what a normal reading looks like. When used on darker-skinned patients, the devices performed as calibrated — but calibrated meant designed around a particular group. Darker-skinned patients were treated as an edge case by a device that presented itself as universal. During COVID-19, this produced falsely reassuring oxygen readings for patients whose hypoxia was being missed."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

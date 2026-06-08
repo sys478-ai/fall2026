@@ -19,7 +19,6 @@ connected_cards:
   - num: '22'
     interpretation: "All three wrongful arrests involved darker-skinned men. The accuracy gap that made weak matches more dangerous was itself a consequence of training data that underrepresented darker-skinned faces. The system's higher error rate for this group meant that when the match threshold was set low enough to return a hit, the hit was less reliable than it would have been for a lighter-skinned subject — but was treated with the same confidence."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

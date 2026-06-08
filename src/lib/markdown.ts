@@ -620,8 +620,14 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
 
   contentHtml = addDarkModeImageVariants(contentHtml);
 
-  // Combine the data with the id and contentHtml
+  const sectionDefaults = subdirectory ? loadSectionDefaults(directory) : {};
+  const groupMap = subdirectory ? loadGroupMap(directory) : new Map();
+  const groupId = matterResult.data.field_guide_group as string | undefined;
+  const groupMeta = groupId ? groupMap.get(groupId) : undefined;
+
   return {
+    ...sectionDefaults,
+    ...(groupMeta ?? {}),
     id,
     content: contentHtml,
     ...matterResult.data,
@@ -647,31 +653,65 @@ export async function getPostDataBySlug(slug: string, subdirectory: string): Pro
   throw new Error(`No post found with slug "${slug}" in ${subdirectory}`);
 }
 
+function loadSectionDefaults(directory: string): Partial<PostData> {
+  const indexPath = path.join(directory, 'index.md');
+  if (!fs.existsSync(indexPath)) return {};
+  const { data } = matter(fs.readFileSync(indexPath, 'utf8'));
+  const defaults: Partial<PostData> = {};
+  if (data.field_guide_section_title !== undefined) defaults.field_guide_section_title = data.field_guide_section_title;
+  if (data.field_guide_section_intro !== undefined) defaults.field_guide_section_intro = data.field_guide_section_intro;
+  if (data.field_guide_section_order !== undefined) defaults.field_guide_section_order = data.field_guide_section_order;
+  return defaults;
+}
+
+type GroupMeta = { field_guide_group_title: string; field_guide_group_intro: string; field_guide_group_order: number };
+
+function loadGroupMap(directory: string): Map<string, GroupMeta> {
+  const groupsDir = path.join(directory, 'groups');
+  const map = new Map<string, GroupMeta>();
+  if (!fs.existsSync(groupsDir)) return map;
+  fs.readdirSync(groupsDir)
+    .filter(f => f.endsWith('.md'))
+    .forEach(f => {
+      const { data } = matter(fs.readFileSync(path.join(groupsDir, f), 'utf8'));
+      if (data.id) {
+        map.set(data.id, {
+          field_guide_group_title: data.title ?? '',
+          field_guide_group_intro: data.description ?? '',
+          field_guide_group_order: data.order ?? 999,
+        });
+      }
+    });
+  return map;
+}
+
 export function getAllPosts(subdirectory?: string): PostData[] {
-  const directory = subdirectory 
+  const directory = subdirectory
     ? path.join(postsDirectory, subdirectory)
     : postsDirectory;
-    
+
   if (!fs.existsSync(directory)) {
     return [];
   }
-  
+
+  const sectionDefaults = loadSectionDefaults(directory);
+  const groupMap = loadGroupMap(directory);
+
   const fileNames = fs.readdirSync(directory);
   const allPostsData = fileNames
-    .filter(fileName => fileName.endsWith('.md'))
+    .filter(fileName => fileName.endsWith('.md') && fileName !== 'index.md')
     .map(fileName => {
-      // Remove ".md" from file name to get id
       const id = fileName.replace(/\.md$/, '');
-
-      // Read markdown file as string
       const fullPath = path.join(directory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-      // Use gray-matter to parse the post metadata section
       const matterResult = matter(fileContents);
 
-      // Combine the data with the id — filename always wins so file lookups work
+      const groupId = matterResult.data.field_guide_group as string | undefined;
+      const groupMeta = groupId ? groupMap.get(groupId) : undefined;
+
       return {
+        ...sectionDefaults,
+        ...(groupMeta ?? {}),
         ...matterResult.data,
         id,
       } as PostData;

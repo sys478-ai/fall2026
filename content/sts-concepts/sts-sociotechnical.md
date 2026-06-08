@@ -5,17 +5,17 @@ num: '1'
 id: sts-sociotechnical
 slug: ai-systems-are-socio-technical-systems
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
-field_guide_order: 2
+field_guide_order: 6
 order: 1
 card_type: concept
+field_guide_group: 'sociotechnical-systems'
+subtheme: 'sociotechnical-systems'
+subtheme_title: 'AI systems are socio-technical systems'
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 1
 ---
 
 ## What To Notice

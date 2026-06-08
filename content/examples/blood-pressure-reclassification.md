@@ -21,7 +21,6 @@ connected_cards:
   - num: '23'
     interpretation: "This case directly illustrates how classification produces rather than describes. The category 'hypertensive' is not a natural state waiting to be discovered — it is a status produced by a threshold. When the guideline changed, the category's boundary moved, and millions of people were suddenly inside it. Their bodies hadn't changed; the classification had. And with it, what treatments were available, what insurance categories applied, and how they understood their own health."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

@@ -5,13 +5,7 @@ id: dp-anthropomorphism
 slug: ai-systems-can-encourage-anthropomorphism-aliveness-or-sentience-claims
 excerpt: "Human-centered metaphors can distort public understanding of what systems are, what they do, and what they deserve."
 field_guide_section: 'deployment-patterns'
-field_guide_section_title: 'AI Deployment Patterns'
-field_guide_section_intro: "These cards describe recurring patterns in how AI systems are deployed in the world. Use them to identify what a system is doing to and through people when you encounter it."
-field_guide_section_order: 3
 field_guide_group: 'how-systems-act-and-shift-power'
-field_guide_group_title: 'On how systems act and shift power'
-field_guide_group_intro: "AI systems don't just process information — they act in the world, redistributing authority and accountability. This section helps you trace who gains power, who loses it, and what happens to responsibility when a system makes a decision."
-field_guide_group_order: 3
 field_guide_order: 4
 order: 4
 card_type: recognition

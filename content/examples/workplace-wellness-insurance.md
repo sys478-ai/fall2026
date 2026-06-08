@@ -8,7 +8,6 @@ connected_cards:
   - num: '5'
     interpretation: "Employees generate detailed health data through employer wellness programs in the context of a workplace benefit. That data can flow to insurers, benefits administrators, and third-party vendors, where it becomes input for actuarial calculations. The context of collection — a health benefit — and the context of use — insurance risk assessment — are very different. Participation is often incentivized or practically required, limiting how meaningfully employees can refuse."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

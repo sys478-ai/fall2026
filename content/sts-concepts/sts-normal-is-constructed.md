@@ -5,17 +5,17 @@ id: sts-normal-is-constructed
 slug: normal-is-constructed
 excerpt: "Anomaly detection depends on baselines, and baselines reflect choices about what counts as ordinary, acceptable, or suspicious."
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
-field_guide_order: 4
+field_guide_order: 9
 order: 3
 card_type: concept
+field_guide_group: 'power-and-governance'
+subtheme: 'power-and-governance'
+subtheme_title: 'Power & Governance'
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 1
 ---
 
 ## What To Notice

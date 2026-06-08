@@ -10,7 +10,6 @@ related_recognition_cards: []
 related_concept_cards: []
 related_example_cards: []
 field_guide_section: 'ethical-frameworks'
-field_guide_section_title: 'Ethical Frameworks'
 status: unverified
 status_reviewer:
 status_date:

@@ -25,7 +25,6 @@ connected_cards:
   - num: '21'
     interpretation: "The Act explicitly classifies some AI applications as prohibited — social scoring systems by public authorities, real-time biometric identification in public spaces in most cases, AI that exploits psychological vulnerabilities. The prohibition is a formal claim that the ability to build something does not settle whether to build it. Certain risk levels are treated as unacceptable regardless of potential benefit."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:

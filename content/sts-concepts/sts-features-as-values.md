@@ -5,17 +5,17 @@ id: sts-features-as-values
 slug: features-are-value-choices
 excerpt: "Feature selection reflects judgments about what matters, what can stand in for it, and what the system is allowed to ignore."
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
-field_guide_order: 5
+field_guide_order: 4
 order: 3
 card_type: concept
+field_guide_group: 'constructed-not-natural'
+subtheme: 'constructed-not-natural'
+subtheme_title: 'Constructed, not natural'
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 2
 ---
 
 ## What To Notice

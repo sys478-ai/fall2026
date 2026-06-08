@@ -6,6 +6,7 @@ section_label: 'Technical Explainers'
 featured_image: 'fall2026/images/ethics-field-guide/technical-explainers/technical-banner.png'
 thumb_image: 'fall2026/images/ethics-field-guide/technical-explainers/technical-landscape.png'
 priority: low
+field_guide_section_title: 'Technical Explainers'
 ---
 
 Each explainer covers a different class of AI system — what it is designed to do, how it works technically, and where the design choices that produce ethical and governance patterns are located. The goal is not to train engineers but to give you the vocabulary to ask better questions.

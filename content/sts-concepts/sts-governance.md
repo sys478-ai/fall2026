@@ -5,17 +5,17 @@ id: sts-governance
 slug: governance-is-broader-than-regulation-alone
 excerpt: "Governance also includes standards, procurement, audits, documentation, labor rules, institutional policy, and the choice not to adopt a system at all."
 field_guide_section: 'sts-concepts'
-field_guide_section_title: 'STS Concepts'
-field_guide_section_intro: "These cards provide the theoretical foundations that explain why deployment patterns occur. Use them for deeper analysis, formal writing, or understanding the structural forces behind what you observe."
-field_guide_section_order: 7
-field_guide_order: 8
+field_guide_order: 10
 order: 5
 card_type: concept
+field_guide_group: 'power-and-governance'
+subtheme: 'power-and-governance'
+subtheme_title: 'Power & Governance'
 status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: medium
+priority: 2
 ---
 
 ## What To Notice

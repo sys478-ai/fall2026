@@ -5,13 +5,7 @@ id: dp-expertise-as-dismissal
 slug: technical-expertise-can-be-used-to-dismiss-democratic-oversight
 excerpt: "Expertise matters, but it should not be used to narrow who gets to ask questions, raise concerns, or shape public decisions."
 field_guide_section: 'deployment-patterns'
-field_guide_section_title: 'AI Deployment Patterns'
-field_guide_section_intro: "These cards describe recurring patterns in how AI systems are deployed in the world. Use them to identify what a system is doing to and through people when you encounter it."
-field_guide_section_order: 4
 field_guide_group: 'who-has-voice-and-who-bears-risk'
-field_guide_group_title: 'On who has voice and who bears risk'
-field_guide_group_intro: 'Who gets to shape a system matters as much as what the system does. This section helps you notice when affected communities were excluded from design, and when some people bear costs they had no hand in choosing.'
-field_guide_group_order: 4
 field_guide_order: 2
 order: 4
 card_type: recognition

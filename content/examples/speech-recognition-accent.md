@@ -8,7 +8,6 @@ connected_cards:
   - num: '22'
     interpretation: "Voice recognition systems were trained heavily on certain speech patterns, and performance on those patterns became the industry benchmark for accuracy. Speakers whose speech differed — by race, dialect, accent, or first language — bore the accuracy gap as a personal limitation rather than a system design choice. The study found the gap persisted across five major commercial platforms, suggesting it was a structural feature of whose speech the systems were built around."
 field_guide_section: 'examples'
-field_guide_section_title: 'Examples'
 status: unverified
 status_reviewer:
 status_date:
