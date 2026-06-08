@@ -1,7 +1,7 @@
 ---
 title: "\"Normal\" is constructed."
 num: '7'
-id: sts-07
+id: sts-normal-is-constructed
 slug: normal-is-constructed
 excerpt: "Anomaly detection depends on baselines, and baselines reflect choices about what counts as ordinary, acceptable, or suspicious."
 field_guide_section: 'sts-concepts'

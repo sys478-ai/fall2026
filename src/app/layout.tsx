@@ -47,25 +47,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('theme');
-                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const shouldBeDark = theme === 'dark' || (!theme && prefersDark);
-                  const html = document.documentElement;
-                  if (shouldBeDark) {
-                    html.classList.add('dark');
-                    html.style.colorScheme = 'dark';
-                  } else {
-                    html.classList.remove('dark');
-                    html.style.colorScheme = 'light';
-                  }
-                } catch (e) {}
-              })();
-            `,
+            __html: `(function(){try{var t=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme:dark)').matches,s=t==='dark'||(!t&&d),h=document.documentElement;if(s){h.classList.add('dark');h.style.colorScheme='dark';}else{h.classList.remove('dark');h.style.colorScheme='light';}}catch(e){}})();`,
           }}
         />
       </head>

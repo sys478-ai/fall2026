@@ -1,7 +1,7 @@
 ---
 title: "Features are value choices."
 num: '3'
-id: sts-03
+id: sts-features-as-values
 slug: features-are-value-choices
 excerpt: "Feature selection reflects judgments about what matters, what can stand in for it, and what the system is allowed to ignore."
 field_guide_section: 'sts-concepts'

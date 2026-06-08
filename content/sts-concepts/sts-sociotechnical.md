@@ -2,7 +2,7 @@
 title: 'AI systems are socio-technical systems.'
 excerpt: 'AI systems are shaped by technical design, institutions, labor, infrastructure, and governance.'
 num: '1'
-id: sts-01
+id: sts-sociotechnical
 slug: ai-systems-are-socio-technical-systems
 field_guide_section: 'sts-concepts'
 field_guide_section_title: 'STS Concepts'

@@ -1,7 +1,7 @@
 ---
 title: "Early choices can shape future benefits and harms."
 num: '17'
-id: sts-17
+id: sts-path-dependency
 slug: early-choices-can-shape-future-benefits-and-harms
 excerpt: "Design, data, and deployment decisions can shape who benefits, who is exposed to risk, and what becomes harder to change later."
 field_guide_section: 'sts-concepts'

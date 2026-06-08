@@ -665,10 +665,10 @@ export function getAllPosts(subdirectory?: string): PostData[] {
       // Use gray-matter to parse the post metadata section
       const matterResult = matter(fileContents);
 
-      // Combine the data with the id
+      // Combine the data with the id — filename always wins so file lookups work
       return {
-        id,
         ...matterResult.data,
+        id,
       } as PostData;
     });
 

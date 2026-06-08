@@ -1,7 +1,7 @@
 ---
 title: 'Data is produced, not found.'
 num: '2'
-id: sts-02
+id: sts-data-production
 slug: data-is-produced-not-found
 excerpt: 'Data is created through measurement choices, interfaces, institutions, and assumptions about what should count.'
 featured_image: 'fall2026/images/ethics-field-guide/data/02-observation-sensing.png'

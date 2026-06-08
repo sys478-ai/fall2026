@@ -1,7 +1,7 @@
 ---
 title: "Classification is not neutral."
 num: '6'
-id: sts-06
+id: sts-classification
 slug: classification-is-not-neutral
 excerpt: "Categories and labels are constructed choices that shape what kinds of people, behaviors, or events become visible and consequential."
 field_guide_section: 'sts-concepts'

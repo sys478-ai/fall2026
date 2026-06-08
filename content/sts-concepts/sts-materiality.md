@@ -1,7 +1,7 @@
 ---
 title: 'AI is material: it depends on energy, water, chips, labor, mining, and waste.'
 num: '4'
-id: sts-04
+id: sts-materiality
 slug: ai-is-material
 excerpt: 'AI systems have physical substrates and environmental costs, even when they appear clean or abstract at the interface.'
 field_guide_section: 'sts-concepts'

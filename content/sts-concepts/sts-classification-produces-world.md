@@ -1,7 +1,7 @@
 ---
 title: "Classification systems don't just describe the world — they produce it."
 num: '23'
-id: sts-23
+id: sts-classification-produces-world
 slug: classification-systems-dont-just-describe-the-world-they-produce-it
 excerpt: "When a system sorts, labels, or categorizes, it doesn't simply reflect reality. It creates the categories that people, institutions, and environments are then made to fit."
 field_guide_section: 'sts-concepts'

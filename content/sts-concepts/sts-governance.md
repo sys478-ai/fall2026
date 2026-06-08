@@ -1,7 +1,7 @@
 ---
 title: "Governance is broader than regulation alone."
 num: '20'
-id: sts-20
+id: sts-governance
 slug: governance-is-broader-than-regulation-alone
 excerpt: "Governance also includes standards, procurement, audits, documentation, labor rules, institutional policy, and the choice not to adopt a system at all."
 field_guide_section: 'sts-concepts'
