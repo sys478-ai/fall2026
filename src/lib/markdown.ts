@@ -172,6 +172,10 @@ export interface PostData {
   field_guide_section_title?: string;
   field_guide_section_intro?: string;
   field_guide_section_order?: number;
+  field_guide_group?: string;
+  field_guide_group_title?: string;
+  field_guide_group_intro?: string;
+  field_guide_group_order?: number;
   field_guide_order?: number;
   field_guide_display_title?: string;
   field_guide_merge_key?: string;

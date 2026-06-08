@@ -8,6 +8,10 @@ field_guide_section: 'deployment-patterns'
 field_guide_section_title: 'AI Deployment Patterns'
 field_guide_section_intro: "These cards describe recurring patterns in how AI systems are deployed in the world. Use them to identify what a system is doing to and through people when you encounter it."
 field_guide_section_order: 6
+field_guide_group: 'governance-and-refusal'
+field_guide_group_title: 'On governance and refusal'
+field_guide_group_intro: 'Governance of AI is contested — and that contestation is itself a site of power. This section helps you notice how oversight gets framed, who has standing to challenge a system, and when refusing to adopt a technology is a legitimate response.'
+field_guide_group_order: 6
 field_guide_order: 2
 order: 6
 card_type: recognition

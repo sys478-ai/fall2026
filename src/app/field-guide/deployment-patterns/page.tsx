@@ -17,6 +17,10 @@ interface TaxonomyEntry {
   field_guide_section_title?: string;
   field_guide_section_intro?: string;
   field_guide_section_order?: number;
+  field_guide_group?: string;
+  field_guide_group_title?: string;
+  field_guide_group_intro?: string;
+  field_guide_group_order?: number;
   field_guide_order?: number;
   field_guide_display_title?: string;
   field_guide_merge_key?: string;
@@ -49,6 +53,10 @@ function getPatternsWithMarkdownMetadata(): TaxonomyEntry[] {
       field_guide_section_title: post.field_guide_section_title,
       field_guide_section_intro: post.field_guide_section_intro,
       field_guide_section_order: post.field_guide_section_order,
+      field_guide_group: post.field_guide_group,
+      field_guide_group_title: post.field_guide_group_title,
+      field_guide_group_intro: post.field_guide_group_intro,
+      field_guide_group_order: post.field_guide_group_order,
       field_guide_order: post.field_guide_order,
       field_guide_display_title: post.field_guide_display_title,
       field_guide_merge_key: post.field_guide_merge_key,
@@ -63,7 +71,7 @@ function getFieldGuideSections(patterns: TaxonomyEntry[]): GuideSection[] {
   const sectionsByKey = new Map<string, { title: string; intro: string; order: number; items: TaxonomyEntry[] }>();
 
   patterns.forEach(pattern => {
-    const { field_guide_section: key, field_guide_section_title: title, field_guide_section_intro: intro, field_guide_section_order: order } = pattern;
+    const { field_guide_group: key, field_guide_group_title: title, field_guide_group_intro: intro, field_guide_group_order: order } = pattern;
     if (!key || !title || !intro || typeof order !== 'number') return;
     if (!sectionsByKey.get(key)) sectionsByKey.set(key, { title, intro, order, items: [] });
     sectionsByKey.get(key)?.items.push(pattern);
