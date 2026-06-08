@@ -231,7 +231,7 @@ function FieldGuideReturnSection({ sectionTitle, sectionHref }: { sectionTitle?:
 export const dynamicParams = false;
 
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
-  const recognition = await generateStaticParamsForContentType('recognition-guide');
+  const recognition = await generateStaticParamsForContentType('ai-deployment-patterns');
   const concept = await generateStaticParamsForContentType('sts-concepts');
   return [...recognition, ...concept];
 }
@@ -241,10 +241,10 @@ export default async function EthicalPatternPage({ params }: PageProps) {
 
   try {
     let postData;
-    let contentDir: 'recognition-guide' | 'sts-concepts';
+    let contentDir: 'ai-deployment-patterns' | 'sts-concepts';
     try {
-      postData = await getPostData(slug, 'recognition-guide');
-      contentDir = 'recognition-guide';
+      postData = await getPostData(slug, 'ai-deployment-patterns');
+      contentDir = 'ai-deployment-patterns';
     } catch {
       postData = await getPostData(slug, 'sts-concepts');
       contentDir = 'sts-concepts';

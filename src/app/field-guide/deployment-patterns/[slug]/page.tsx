@@ -162,7 +162,7 @@ function FieldGuideReturnSection() {
 export const dynamicParams = false;
 
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
-  const posts = getAllPosts('recognition-guide').filter(
+  const posts = getAllPosts('ai-deployment-patterns').filter(
     p => p.card_type === 'recognition' && p.slug && !p.excluded && p.no_render !== 1
   );
   return posts.map(p => ({ slug: p.slug as string }));
@@ -171,7 +171,7 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
 export default async function DeploymentPatternPage({ params }: PageProps) {
   const { slug } = await params;
   try {
-    const postData = await getPostDataBySlug(slug, 'recognition-guide');
+    const postData = await getPostDataBySlug(slug, 'ai-deployment-patterns');
     const relatedTopics = getRelatedTopicsForPattern(postData.id);
     const relatedTaggedContent = getRelatedContentForPattern(postData.id);
     const relatedScheduleItems = await getRelatedScheduleItemsForPattern(postData.id);

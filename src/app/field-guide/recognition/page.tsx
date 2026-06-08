@@ -34,7 +34,7 @@ interface GuideSection {
 }
 
 function getPatternsWithMarkdownMetadata(): TaxonomyEntry[] {
-  return getAllPosts('recognition-guide')
+  return getAllPosts('ai-deployment-patterns')
     .filter(post => !post.hide_from_list && !post.no_render && post.card_type === 'recognition')
     .map((post: PostData) => ({
       slug: post.slug ? `deployment-patterns/${post.slug}` : post.id,
@@ -128,7 +128,7 @@ export default function RecognitionCardsPage() {
   const sections = getFieldGuideSections(patterns);
 
   return (
-    <FieldGuideSectionLayout contentDir="recognition-guide">
+    <FieldGuideSectionLayout contentDir="ai-deployment-patterns">
       {(columns) => (
         <div>
           <FieldGuideViewProvider>

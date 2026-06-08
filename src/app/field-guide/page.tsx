@@ -14,7 +14,7 @@ const COLUMNS: 1 | 2 = 1;
 
 export default async function FieldGuideLandingPage() {
   const [recognitionPost, conceptPost, examplesPost, frameworksPost, explainersPost] = await Promise.all([
-    getPostData('index', 'recognition-guide'),
+    getPostData('index', 'ai-deployment-patterns'),
     getPostData('index', 'sts-concepts'),
     getPostData('index', 'examples'),
     getPostData('index', 'ethical-frameworks'),
