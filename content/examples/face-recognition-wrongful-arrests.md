@@ -6,6 +6,7 @@ year: '2020'
 show_in_timeline: true
 excerpt: 'Three men were wrongfully arrested in part because face recognition systems returned weak matches that analysts treated as identifications.'
 domains: ['criminal-justice-and-policing']
+tags: ['criminal-justice']
 timeline_cards:
   - label: 'This system treats one group as the default'
     href: '/field-guide/pattern-22'

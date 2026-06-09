@@ -6,6 +6,7 @@ year: '2022'
 show_in_timeline: true
 excerpt: "OpenAI releases ChatGPT, making large language model capabilities available to the general public at scale for the first time — triggering a wave of adoption and public debate about work, creativity, education, and truth."
 domains: ['platform-and-consumer', 'labor-and-employment']
+tags: ['labor', 'media-platforms']
 timeline_cards:
   - label: 'AI systems can encourage anthropomorphism'
     href: '/field-guide/pattern-12'

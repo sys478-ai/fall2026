@@ -4,6 +4,7 @@ id: ex-speech-recognition-accent
 slug: speech-recognition-accent
 excerpt: 'A systematic study found that major commercial speech recognition systems had substantially higher error rates for Black speakers than for white speakers.'
 domains: ['platform-and-consumer', 'labor-and-employment']
+tags: ['labor', 'media-platforms']
 connected_cards:
   - num: '22'
     interpretation: "Voice recognition systems were trained heavily on certain speech patterns, and performance on those patterns became the industry benchmark for accuracy. Speakers whose speech differed — by race, dialect, accent, or first language — bore the accuracy gap as a personal limitation rather than a system design choice. The study found the gap persisted across five major commercial platforms, suggesting it was a structural feature of whose speech the systems were built around."

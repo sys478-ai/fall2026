@@ -6,6 +6,7 @@ year: '2013'
 show_in_timeline: true
 excerpt: "Edward Snowden reveals that the NSA has direct access to data held by major technology companies — demonstrating the gap between what users understood their data was used for and what it was actually used for."
 domains: ['criminal-justice-and-policing', 'platform-and-consumer']
+tags: ['national-security']
 contested: >-
   The NSA has argued that Section 702 surveillance produced genuinely valuable intelligence, and
   has declassified some examples in support of this claim. Civil liberties advocates and

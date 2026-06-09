@@ -6,6 +6,7 @@ year: '2018'
 show_in_timeline: true
 excerpt: 'Data collected through a personality quiz for academic research was used to build political targeting profiles for 87 million users.'
 domains: ['platform-and-consumer']
+tags: ['governance', 'media-platforms']
 contested: >-
   Cambridge Analytica's actual influence on election outcomes is heavily disputed — including by
   political scientists who study advertising effects and by former CA employees who suggest the

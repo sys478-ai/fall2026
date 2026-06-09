@@ -4,6 +4,7 @@ id: ex-blood-pressure-reclassification
 slug: blood-pressure-reclassification
 excerpt: 'In 2017, a guideline change reclassified 31 million Americans as hypertensive — without any change in their physiology. What changed was where the threshold was drawn.'
 domains: ['healthcare-and-medicine']
+tags: ['healthcare']
 contested: >-
   The American Academy of Family Physicians declined to endorse the 2017 ACC/AHA guidelines,
   finding the evidence base insufficient to justify labeling an additional 31 million Americans as

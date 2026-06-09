@@ -6,6 +6,7 @@ year: '2020'
 show_in_timeline: true
 excerpt: "Sidewalk Labs, an Alphabet subsidiary, proposed a sensor-saturated 'smart neighborhood' on Toronto's eastern waterfront. The project was cancelled in 2020 after sustained public opposition that contested not just the privacy implications but the imaginary itself — the idea that cities are optimization problems to be solved through data collection."
 domains: ['housing-and-urban-infrastructure']
+tags: ['housing', 'governance']
 connected_cards:
   - num: '25'
     section: 'sts-concepts'

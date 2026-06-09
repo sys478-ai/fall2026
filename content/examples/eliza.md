@@ -6,6 +6,7 @@ year: '1966'
 show_in_timeline: true
 excerpt: "Joseph Weizenbaum builds a program that simulates a therapist by pattern-matching user input and reflecting it back as questions. Users attribute genuine understanding and empathy to a system that has none."
 domains: ['platform-and-consumer']
+tags: ['media-platforms']
 timeline_cards:
   - label: 'AI systems can encourage anthropomorphism'
     href: '/field-guide/pattern-12'

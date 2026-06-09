@@ -6,6 +6,7 @@ year: '2026'
 show_in_timeline: false
 excerpt: 'A reporting boundary determined which deaths in immigration detention entered the official record — and a policy change in 2026 moved that boundary back.'
 domains: ['immigration-and-borders']
+tags: ['immigration', 'governance']
 timeline_cards:
   - label: 'Changing what gets measured changes what exists'
     href: '/field-guide/pattern-23'

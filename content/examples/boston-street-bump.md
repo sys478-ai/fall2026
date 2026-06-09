@@ -4,6 +4,7 @@ id: ex-boston-street-bump
 slug: boston-street-bump
 excerpt: 'A city used smartphone accelerometers to detect potholes — and produced a map shaped more by who had a phone than by road conditions.'
 domains: ['housing-and-urban-infrastructure', 'platform-and-consumer']
+tags: ['housing']
 connected_cards:
   - num: '2'
     interpretation: "The Street Bump map looked like a record of road conditions, but it was produced through smartphone ownership, app installation, and commuting patterns. Which neighborhoods got mapped depended on who participated — and participation tracked wealth and existing civic engagement, not pothole density. The data was made by particular people in particular circumstances, not found."

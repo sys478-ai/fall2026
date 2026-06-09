@@ -16,7 +16,7 @@ status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: 3
+priority: low
 ---
 
 ## What To Notice

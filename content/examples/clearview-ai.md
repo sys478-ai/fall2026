@@ -6,6 +6,7 @@ year: '2019'
 show_in_timeline: true
 excerpt: "Clearview AI scrapes billions of images from public websites to build a facial recognition database used by law enforcement — testing the claim that publicly accessible data is available for any use."
 domains: ['criminal-justice-and-policing', 'platform-and-consumer']
+tags: ['criminal-justice', 'governance']
 contested: >-
   Courts and regulators have reached different conclusions about Clearview's liability. The FTC's
   2022 settlement restricted commercial use but not law enforcement use. European data protection

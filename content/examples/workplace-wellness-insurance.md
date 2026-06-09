@@ -4,6 +4,7 @@ id: ex-workplace-wellness-insurance
 slug: workplace-wellness-insurance
 excerpt: 'Health data collected through employer wellness programs — framed as a benefit — can flow to insurers and affect how risk is calculated.'
 domains: ['labor-and-employment', 'healthcare-and-medicine']
+tags: ['healthcare', 'labor']
 connected_cards:
   - num: '5'
     interpretation: "Employees generate detailed health data through employer wellness programs in the context of a workplace benefit. That data can flow to insurers, benefits administrators, and third-party vendors, where it becomes input for actuarial calculations. The context of collection — a health benefit — and the context of use — insurance risk assessment — are very different. Participation is often incentivized or practically required, limiting how meaningfully employees can refuse."

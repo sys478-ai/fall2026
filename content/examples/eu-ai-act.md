@@ -6,6 +6,7 @@ year: '2024'
 show_in_timeline: true
 excerpt: "The European Union's AI Act enters into force — establishing the first comprehensive regulatory framework for AI systems, and becoming the reference point for global debates about AI governance."
 domains: ['criminal-justice-and-policing', 'platform-and-consumer']
+tags: ['governance']
 contested: >-
   Critics from both directions argue the Act got the balance wrong. Industry groups and some
   researchers argue risk-based classification is too rigid and will stifle development, particularly

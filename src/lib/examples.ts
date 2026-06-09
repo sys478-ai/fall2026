@@ -1,4 +1,27 @@
-import { getAllPosts, getPostData } from './markdown';
+import { getAllPosts, getPostData, type PostData } from './markdown';
+
+export interface TagData {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export function getAllTags(): TagData[] {
+  return getAllPosts('examples/tags')
+    .map(post => ({
+      id: post.id,
+      title: post.title,
+      description: (post.description as string) ?? '',
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export function getExamplesForTag(tag: string): PostData[] {
+  return getAllPosts('examples')
+    .filter(post => !post.hide_from_list && !post.no_render)
+    .filter(post => ((post.tags as string[] | undefined) ?? []).includes(tag))
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
 
 export interface ExampleForCard {
   slug: string;

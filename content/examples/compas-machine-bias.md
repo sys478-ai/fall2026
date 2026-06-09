@@ -6,6 +6,7 @@ year: '2016'
 show_in_timeline: true
 excerpt: "ProPublica's investigation of the COMPAS recidivism prediction tool finds it nearly twice as likely to falsely flag Black defendants as high-risk compared to white defendants — sparking a major public and academic debate about what it means for a predictive system to be fair."
 domains: ['criminal-justice-and-policing']
+tags: ['criminal-justice']
 contested: >-
   Northpointe, the tool's maker, disputed ProPublica's methodology. Subsequent research by computer
   scientists showed that the different definitions of fairness each side invoked are mathematically

@@ -4,6 +4,7 @@ id: ex-pulse-oximeters-skin-tone
 slug: pulse-oximeters-skin-tone
 excerpt: 'Devices used to measure blood oxygen produced falsely reassuring readings for darker-skinned patients during COVID-19 — a problem rooted in how the devices were calibrated.'
 domains: ['healthcare-and-medicine']
+tags: ['healthcare']
 connected_cards:
   - num: '29'
     section: 'sts-concepts'

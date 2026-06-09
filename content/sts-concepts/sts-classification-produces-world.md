@@ -16,7 +16,7 @@ status: unverified
 status_reviewer:
 status_date:
 status_notes:
-priority: 1
+priority: high
 ---
 
 ## What This Means

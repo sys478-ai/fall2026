@@ -6,6 +6,7 @@ year: '2014'
 show_in_timeline: true
 excerpt: "Amazon develops a machine learning tool to screen resumes. Trained on historical hiring data, it learns to penalize resumes associated with women. Amazon discovers the bias internally and abandons the tool in 2018."
 domains: ['labor-and-employment']
+tags: ['labor']
 timeline_cards:
   - label: 'Prediction imports the past'
     href: '/field-guide/pattern-08'

@@ -5,6 +5,7 @@ slug: credit-invisibles
 year: '2015'
 excerpt: "Millions of Americans — disproportionately Black, Hispanic, and low-income — have no credit file or too thin a file to generate a score. The classification does not merely describe their creditworthiness; it structures the conditions under which creditworthiness becomes possible."
 domains: ['public-benefits-and-welfare']
+tags: ['finance']
 connected_cards:
   - num: '23'
     section: 'sts-concepts'

@@ -6,6 +6,7 @@ year: '2006'
 show_in_timeline: true
 excerpt: "Netflix offers $1 million to improve its recommendation algorithm -- and releases 100 million user ratings as the training dataset. Netflix offers $1 million to improve its recommendation algorithm -- and releases 100 million user ratings as the training dataset. Researchers subsequently show the data can be de-anonymized, exposing sensitive attributes users never consented to share. The winning algorithm is never deployed. The competition accelerates machine learning research and generates significant press about Netflix's technical sophistication, while establishing a template platforms have used repeatedly since: release proprietary data as a public challenge, extract free research labor, and retain the data and reputational benefits regardless of outcome."
 domains: ['platform-and-consumer']
+tags: ['media-platforms']
 timeline_cards:
   - label: 'Extraction can be disguised as innovation'
     href: '/field-guide/pattern-14'

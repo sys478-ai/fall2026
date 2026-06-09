@@ -6,6 +6,7 @@ year: '2021'
 show_in_timeline: true
 excerpt: "Frances Haugen, a former Facebook product manager, leaks internal documents and testifies before Congress about Facebook's awareness of its systems' effects — raising the question of what a system optimized for engagement is actually optimizing."
 domains: ['platform-and-consumer']
+tags: ['media-platforms']
 contested: >-
   Several researchers whose work was cited in the leaked documents publicly disputed how it was
   characterized in press coverage and congressional testimony [citation needed]. Separately, a

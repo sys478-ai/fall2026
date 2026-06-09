@@ -6,6 +6,7 @@ year: '1975'
 show_in_timeline: true
 excerpt: "Concerned about unknown risks of recombinant DNA research, a group of leading molecular biologists called a voluntary moratorium on the most dangerous experiments and convened an international conference to establish biosafety guidelines — before a documented incident had occurred."
 domains: []
+tags: ['governance']
 connected_cards:
   - num: '26'
     section: 'sts-concepts'

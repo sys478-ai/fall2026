@@ -6,6 +6,7 @@ year: '2023'
 show_in_timeline: true
 excerpt: "Hollywood writers and actors strike, with AI among the central issues — the first major labor actions explicitly about AI's potential to displace creative workers and use their likenesses and work without consent or compensation."
 domains: ['labor-and-employment']
+tags: ['labor', 'media-platforms']
 contested: >-
   The copyright status of AI training on copyrighted works is actively litigated in US federal
   courts, with multiple cases pending from publishers, authors, visual artists, and news

@@ -6,6 +6,7 @@ year: '1994'
 show_in_timeline: true
 excerpt: "Statistical instruments that use group-level factors to predict individual recidivism appear in US sentencing and parole decisions — establishing the template for algorithmic decision-making in high-stakes institutional contexts, and the arguments about fairness that persist today."
 domains: ['criminal-justice-and-policing']
+tags: ['criminal-justice']
 contested: >-
   Defenders argue that actuarial tools are more accurate and less biased than unstructured judicial
   discretion — which is also subject to racial disparities — and that the relevant comparison is not

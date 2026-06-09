@@ -206,6 +206,7 @@ export interface PostData {
   hide_from_list?: number;
   card_type?: string;
   domains?: string[];
+  tags?: string[];
   connected_cards?: Array<{ num: string; interpretation: string }>;
   status?: 'verified' | 'in-progress' | 'unverified';
   status_reviewer?: string;

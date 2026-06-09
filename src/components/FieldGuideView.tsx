@@ -44,7 +44,7 @@ export function FieldGuideCompactSection({
 }: {
   label?: string;
   description?: string;
-  cards: { title: string; subtitle?: string; href?: string }[];
+  cards: { title: string; subtitle?: string; href?: string; tags?: { label: string; href?: string }[] }[];
 }) {
   const view = useContext(ViewContext);
   if (view !== 'compact') return null;
@@ -78,6 +78,28 @@ export function FieldGuideCompactSection({
                       )}
                     </h3>
                     {card.subtitle ?? ''}
+                    {card.tags && card.tags.length > 0 && (
+                      <div className="mt-1.5 flex flex-wrap gap-1">
+                        {card.tags.map((tag, j) => (
+                          tag.href ? (
+                            <Link
+                              key={j}
+                              href={tag.href}
+                              className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-violet-700 no-underline hover:bg-violet-200 dark:bg-violet-900/50 dark:text-violet-300 dark:hover:bg-violet-800/50"
+                            >
+                              {tag.label}
+                            </Link>
+                          ) : (
+                            <span
+                              key={j}
+                              className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gray-500 dark:bg-gray-800 dark:text-gray-400"
+                            >
+                              {tag.label}
+                            </span>
+                          )
+                        ))}
+                      </div>
+                    )}
                   </td>
                   <td className="py-2.5 text-right align-top whitespace-nowrap">
                     {card.href && (

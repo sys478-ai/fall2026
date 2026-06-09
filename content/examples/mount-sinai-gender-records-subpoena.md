@@ -4,6 +4,7 @@ id: ex-mount-sinai-gender-records-subpoena
 slug: mount-sinai-gender-records-subpoena
 excerpt: 'Medical records collected for adolescent healthcare were subpoenaed by a federal grand jury investigating gender-related treatments — the second Manhattan hospital system to face such a demand.'
 domains: ['healthcare-and-medicine', 'criminal-justice-and-policing']
+tags: ['healthcare', 'governance']
 contested: >-
   The legal authority behind these subpoenas is actively being contested in court. Several hospitals
   in other jurisdictions successfully challenged similar demands, with judges finding they were

@@ -6,6 +6,7 @@ year: '2001'
 show_in_timeline: true
 excerpt: "The PATRIOT Act dramatically expands government authority to access communications and financial records — establishing the legal architecture for large-scale data collection and demonstrating how infrastructure built for one purpose can be repurposed at scale."
 domains: ['criminal-justice-and-policing']
+tags: ['national-security', 'governance']
 contested: >-
   The intelligence community argued the Act's authorities were necessary, carefully bounded, and
   subject to judicial and congressional oversight. Independent evaluations — including the National

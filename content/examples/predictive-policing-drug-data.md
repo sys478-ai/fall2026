@@ -4,6 +4,7 @@ id: ex-predictive-policing-drug-data
 slug: predictive-policing-drug-data
 excerpt: 'Predictive policing systems trained on arrest records learned the history of enforcement, not the geography of drug use.'
 domains: ['criminal-justice-and-policing']
+tags: ['criminal-justice']
 contested: >-
   Defenders of predictive policing argue that the feedback loop critique applies most strongly to
   person-based prediction, and that place-based prediction — directing patrol to geographic areas —

@@ -4,6 +4,7 @@ id: ex-google-flu-trends
 slug: google-flu-trends
 excerpt: 'Google used flu-related search queries to estimate infection rates — but search behavior is not the same thing as disease.'
 domains: ['healthcare-and-medicine', 'platform-and-consumer']
+tags: ['healthcare', 'media-platforms']
 connected_cards:
   - num: '2'
     interpretation: "Search queries were treated as a direct sensor for flu infection, but they were produced by how people use a search engine — shaped by autocomplete suggestions, news coverage, public anxiety, and platform design. When media attention to flu increased, searches increased too, regardless of actual infection rates. The data was a record of search behavior, not of disease."

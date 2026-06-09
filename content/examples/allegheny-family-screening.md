@@ -4,6 +4,7 @@ id: ex-allegheny-family-screening
 slug: allegheny-family-screening
 excerpt: 'A child welfare risk model produces a score from 1 to 20. The county had to decide what score triggers a high-risk flag — and that threshold is a policy choice about which families receive scrutiny.'
 domains: ['public-benefits-and-welfare', 'criminal-justice-and-policing']
+tags: ['criminal-justice', 'public-benefits']
 contested: >-
   The tool has been studied and defended by its creators and independent researchers, who found it
   performed comparably to experienced caseworkers on average and reduced some disparities in

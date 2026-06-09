@@ -6,6 +6,7 @@ year: '2018'
 show_in_timeline: true
 excerpt: 'Systematic testing of commercial face analysis systems found error rates up to 34 percentage points higher for darker-skinned women than for lighter-skinned men.'
 domains: ['criminal-justice-and-policing', 'platform-and-consumer']
+tags: ['criminal-justice', 'media-platforms']
 timeline_cards:
   - label: 'This system treats one group as the default'
     href: '/field-guide/pattern-22'
