@@ -3,7 +3,7 @@ title: 'ICE and the 30-day reporting window'
 id: ex-ice-30-day-reporting
 slug: ice-30-day-reporting
 year: '2026'
-show_in_timeline: true
+show_in_timeline: false
 excerpt: 'A reporting boundary determined which deaths in immigration detention entered the official record — and a policy change in 2026 moved that boundary back.'
 domains: ['immigration-and-borders']
 timeline_cards:
