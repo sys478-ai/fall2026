@@ -22,9 +22,13 @@ timeline_cards:
   - label: 'This system treats one group as the default'
     href: '/field-guide/pattern-22'
 connected_cards:
+  - num: '28'
+    section: 'sts-concepts'
+    interpretation: "The COMPAS case shows how a knowledge-production system can simultaneously generate factual claims about people and generate authority over them — and how opacity in the production process protects that authority from challenge. The risk score was not merely information provided to a judge; it was a classification that authorized institutional action. By embedding that determination in a proprietary technical system, Northpointe insulated the knowledge-production process from the forms of challenge available against a human expert — a forensic psychologist offering a risk opinion could be cross-examined, but the algorithm could not be. The Loomis court's acknowledgment that the opacity was a problem, combined with its ruling that it did not make the system unconstitutional, is itself an example of how institutional authority absorbs and neutralizes challenges to knowledge claims it has invested in."
   - num: '08'
     interpretation: "COMPAS was trained on historical data from a criminal justice system with documented disparities in surveillance and prosecution. A defendant's prior arrest record is a feature that encodes not only their conduct but the policing practices of their community. The prediction encodes those practices as an individual risk assessment."
   - num: '25'
+    section: 'ai-deployment-patterns'
     interpretation: "COMPAS's aggregate accuracy statistics looked acceptable. The accuracy concealed a sharp disparity in error types by race. False positives — incorrectly predicting that someone would reoffend — were concentrated among Black defendants. False negatives were concentrated among white defendants. These errors are not equivalent in consequence, and they don't cancel each other out."
   - num: '07'
     interpretation: "The COMPAS score is a probability expressed as a categorical risk level. A threshold converts that category into a sentencing or bail input. The choice of threshold is not set by the model — it is a human decision — and its effects fall disproportionately on one group depending on where the line is drawn."

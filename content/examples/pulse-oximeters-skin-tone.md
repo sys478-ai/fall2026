@@ -5,6 +5,9 @@ slug: pulse-oximeters-skin-tone
 excerpt: 'Devices used to measure blood oxygen produced falsely reassuring readings for darker-skinned patients during COVID-19 — a problem rooted in how the devices were calibrated.'
 domains: ['healthcare-and-medicine']
 connected_cards:
+  - num: '29'
+    section: 'sts-concepts'
+    interpretation: "The pulse oximetry case illustrates situated knowledge because the epistemic failure has a specific, verifiable mechanism and a directly measurable consequence. The people calibrating the devices were working from a particular standpoint — one that treated lighter-skinned subjects as the reference population, implicitly. Haraway's point is precisely this: the view from the calibration lab was not a view from nowhere, and its blind spots had direct epistemic consequences. The patients who received dangerously low oxygen while their oximeters showed safe readings possessed knowledge through their own bodies that was epistemically relevant to making the device work better — knowledge that could only be accessed by including diverse populations in validation, not by further optimizing within the existing calibration framework."
   - num: '22'
     interpretation: "Pulse oximeters were calibrated using data collected primarily from lighter-skinned subjects. That calibration defined what a normal reading looks like. When used on darker-skinned patients, the devices performed as calibrated — but calibrated meant designed around a particular group. Darker-skinned patients were treated as an edge case by a device that presented itself as universal. During COVID-19, this produced falsely reassuring oxygen readings for patients whose hypoxia was being missed."
 field_guide_section: 'examples'

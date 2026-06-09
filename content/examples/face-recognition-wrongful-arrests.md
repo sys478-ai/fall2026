@@ -14,6 +14,9 @@ timeline_cards:
   - label: 'Thresholds make uncertainty consequential'
     href: '/field-guide/pattern-07'
 connected_cards:
+  - num: '26'
+    section: 'sts-concepts'
+    interpretation: "The facial recognition case shows what happens when anticipatory governance is not practiced. The technology was adopted by hundreds of agencies before accuracy disparities were formally documented, before governance frameworks were established, and before affected communities had formal mechanisms to contest its use. The NIST FRVT Part 3 report in December 2019 established the evidence base for governance, but by then the technology was already embedded in operational law enforcement workflows at scale. Those who benefit from rapid deployment had incentives to move quickly while those who would bear the risks had no formal mechanism to require governance before deployment — the cost of waiting for evidence of harm was paid entirely by the people the technology was used against."
   - num: '9'
     interpretation: "Face recognition systems produce a similarity score, not a yes/no identification. Analysts apply a threshold to decide when a score counts as a match. Setting that threshold low catches more potential suspects but generates more false positives. In the wrongful arrest cases, the threshold was low, the probe images were poor quality, and human review was insufficient. The arrests were downstream effects of a threshold decision — not just of model accuracy."
   - num: '22'

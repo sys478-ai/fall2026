@@ -9,19 +9,19 @@ export interface ExampleForCard {
   interpretation: string;
 }
 
-export async function getExamplesForCard(cardNum: string): Promise<ExampleForCard[]> {
+export async function getExamplesForCard(cardNum: string, section?: string): Promise<ExampleForCard[]> {
   const allExamples = getAllPosts('examples');
 
   const matches = allExamples.filter(example => {
-    const connected = example.connected_cards as Array<{ num: string }> | undefined;
-    return connected?.some(c => c.num === cardNum) ?? false;
+    const connected = example.connected_cards as Array<{ num: string; section?: string }> | undefined;
+    return connected?.some(c => c.num === cardNum && (!section || !c.section || c.section === section)) ?? false;
   });
 
   return Promise.all(
     matches.map(async example => {
       const postData = await getPostData(example.id, 'examples');
-      const connected = example.connected_cards as Array<{ num: string; interpretation: string }> | undefined;
-      const connection = connected?.find(c => c.num === cardNum);
+      const connected = example.connected_cards as Array<{ num: string; section?: string; interpretation: string }> | undefined;
+      const connection = connected?.find(c => c.num === cardNum && (!section || !c.section || c.section === section));
 
       return {
         slug: example.id,

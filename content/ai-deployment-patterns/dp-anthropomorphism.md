@@ -5,9 +5,9 @@ id: dp-anthropomorphism
 slug: ai-systems-can-encourage-anthropomorphism-aliveness-or-sentience-claims
 excerpt: "Human-centered metaphors can distort public understanding of what systems are, what they do, and what they deserve."
 field_guide_section: 'deployment-patterns'
-field_guide_group: 'visibility-and-surveillance'
-subtheme: 'visibility-and-surveillance'
-subtheme_title: 'Visibility and surveillance'
+field_guide_group: 'how-systems-act-and-shift-power'
+subtheme: 'how-systems-act-and-shift-power'
+subtheme_title: 'How systems act and shift power'
 field_guide_order: 4
 order: 4
 card_type: recognition

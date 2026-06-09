@@ -28,6 +28,7 @@ connected_cards:
   - num: '03'
     interpretation: "Users interacted with Google, Facebook, Apple, Microsoft, and other companies for social, commercial, and communication purposes. The data those interactions generated — email, search queries, files, communications — was accessible to the NSA through PRISM under legal authorities most users didn't know existed. The purposes of collection (service delivery) and the purposes of use (intelligence gathering) were entirely different."
   - num: '26'
+    section: 'ai-deployment-patterns'
     interpretation: "Technology companies' terms of service disclosed potential government access in broad legal language. That language was technically accurate and practically unreadable. Users had no realistic way to evaluate what they were agreeing to, no real alternative to the services, and no knowledge of the specific authorities being exercised. Formal consent structured as a precondition for service use is not the same as informed agreement."
 field_guide_section: 'examples'
 status: unverified

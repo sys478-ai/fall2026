@@ -29,8 +29,10 @@ timeline_cards:
     href: '/field-guide/pattern-11'
 connected_cards:
   - num: '27'
+    section: 'ai-deployment-patterns'
     interpretation: "The training data for generative AI systems — scripts, dialogue, descriptions of story structure, images of actors' faces and bodies — was produced by exactly the workers who went on strike. The value of the models derives in part from the documented work product of these workers. They had no say in whether their work was included in training data and received no compensation for it."
   - num: '26'
+    section: 'ai-deployment-patterns'
     interpretation: "Standard industry contracts did not include provisions about AI-generated likenesses or AI-assisted script generation because the capability didn't exist when those contracts were written. Studios asserted that existing work-for-hire provisions covered AI training uses. Workers argued that agreeing to make content for a studio is not the same as consenting to that content being used to train a system that will generate similar content without payment."
   - num: '11'
     interpretation: "The concern raised by striking writers was not only about displacement — losing jobs entirely — but about craft: that routinizing AI assistance in the writers' room would atrophy the skills that make original television and film distinctive, creating dependency in the workforce and reducing the bargaining power of individual writers over time. Deskilling is a long-term consequence of tool adoption that doesn't show up in short-term productivity comparisons."

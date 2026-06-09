@@ -20,6 +20,9 @@ timeline_cards:
   - label: 'Delay, refusal, and non-adoption can be responsible choices'
     href: '/field-guide/pattern-21'
 connected_cards:
+  - num: '26'
+    section: 'sts-concepts'
+    interpretation: "The EU AI Act is an instance of anticipatory governance working — imperfectly, contested, but working. The prohibitions on real-time remote biometric identification and untargeted facial image scraping were enacted before those practices were widely deployed in EU member states. The debate over which systems counted as 'high-risk' and which practices were prohibited was a debate about which governance questions to ask before deployment rather than after. What the Act also illustrates is that anticipatory governance is not frictionless: negotiations took years, involved significant industry lobbying, and produced a framework with implementation dates extending years past passage — but those questions were asked formally, publicly, with legislative force, while deployment was still limited."
   - num: '18'
     interpretation: "The Act was contested by technology companies and some EU member states on the grounds that compliance costs would disadvantage European AI development. This framing — governance as a drag on innovation — positions regulatory requirements and technical progress as inherently in tension, and treats the question 'can we build this?' as answering the question 'should we?'"
   - num: '21'

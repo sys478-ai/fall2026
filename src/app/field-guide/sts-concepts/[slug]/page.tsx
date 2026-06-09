@@ -176,7 +176,7 @@ export default async function STSConceptPage({ params }: PageProps) {
     const relatedTopics = getRelatedTopicsForPattern(postData.id);
     const relatedTaggedContent = getRelatedContentForPattern(postData.id);
     const relatedScheduleItems = await getRelatedScheduleItemsForPattern(postData.id);
-    const relatedExamples = await getExamplesForCard(postData.num ?? '');
+    const relatedExamples = await getExamplesForCard(postData.num ?? '', 'sts-concepts');
     const bibliographyReadings = getReadingsForCard(postData.num ?? '');
     const featuredTopics = (postData as PostData & { featured_topics?: string[] }).featured_topics || [];
     const featuredAssignments = (postData as PostData & { featured_assignments?: string[] }).featured_assignments || [];

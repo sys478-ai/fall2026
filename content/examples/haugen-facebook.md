@@ -31,7 +31,11 @@ timeline_cards:
     href: '/field-guide/pattern-18'
 connected_cards:
   - num: '23'
+    section: 'ai-deployment-patterns'
     interpretation: "Facebook's internal research teams measured engagement — clicks, time on site, reactions, shares — because those metrics were trackable and tied to business outcomes. Questions about downstream effects on mental health, civic discourse, or political polarization were harder to operationalize and less directly tied to revenue. What got measured shaped what got optimized. The case raises a question that applies wherever algorithmic systems use proxies: when you optimize for a metric, what are you actually optimizing?"
+  - num: '27'
+    section: 'sts-concepts'
+    interpretation: "The MSI algorithm was built to measure meaningful engagement, but by rewarding specific behavioral signals it changed what content was produced — publishers optimized for the rewarded signals rather than the underlying goal those signals were meant to proxy. This is MacKenzie's 'engines, not cameras' insight: the algorithm did not passively reflect what users found meaningful, it actively shaped what content existed to be found. Hacking's looping effect is visible in the feedback: as publishers produced more outrage-optimized content, that content became the dominant signal for further ranking iterations, and the system and the information environment it was supposed to measure co-evolved in a direction the platform's own research showed was predictable and predicted."
 field_guide_section: 'examples'
 status: unverified
 status_reviewer:
