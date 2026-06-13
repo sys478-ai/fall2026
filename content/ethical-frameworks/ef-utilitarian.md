@@ -10,18 +10,18 @@ related_recognition_cards: []
 related_concept_cards: []
 related_example_cards: []
 field_guide_section: 'ethical-frameworks'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
+status: verified
+status_reviewer: Maxwell Chalmers
+status_date: 2026-06-13
+status_notes: "Reviewed for conceptual accuracy, accessibility, diagnostic usefulness, limitations, and cross-references."
 priority: high
 ---
 
 ## The Core Idea
 
-Utilitarianism holds that the right action is the one that produces the greatest good for the greatest number. Applied to AI systems, this frame asks: what are the actual consequences of deploying this system, who benefits, who is harmed, and does the overall balance justify it?
+Utilitarianism holds that the right action is the one expected to produce the greatest overall well-being, considering the benefits and harms for everyone affected. Applied to AI systems, this framework asks: what are the actual consequences of deploying this system, who benefits, who is harmed, and does the overall balance justify it?
 
-This is the most common ethical frame in AI policy debates, often appearing as: "this system improves outcomes on average," "the benefits outweigh the costs," or "more people are helped than harmed." Understanding its logic — and its limits — is essential for evaluating those arguments.
+AI policy debates often rely on utilitarian reasoning, even when they do not name it directly. Claims that a system “improves outcomes on average,” that “the benefits outweigh the costs,” or that “more people are helped than harmed” all use this logic.
 
 ## The Diagnostic Question
 
@@ -31,6 +31,7 @@ This is the most common ethical frame in AI policy debates, often appearing as: 
 
 - What outcomes does this system produce, and for whom?
 - How are benefits and harms being measured — and what is being left out of the measurement?
+- What indirect or long-term consequences might be missing from the calculation?
 - Who decided what counts as a good outcome?
 - Is aggregate benefit being used to justify harm that falls on specific groups?
 - What would it take for the aggregate balance to shift?
@@ -45,7 +46,7 @@ Utilitarian reasoning can justify concentrated harm on minorities if aggregate b
 
 **John Stuart Mill** (1806–1873) refined Bentham's utilitarianism, distinguishing between higher and lower pleasures and introducing the harm principle — that liberty should only be restricted to prevent harm to others. His _Utilitarianism_ (1863) remains the most widely read statement of the view.
 
-**Peter Singer** (1946–) is the most influential contemporary utilitarian, applying the framework to animal welfare, global poverty, and effective altruism. His work demonstrates both the reach of utilitarian reasoning and its tendency to produce conclusions that challenge conventional moral intuitions.
+**Peter Singer** (1946–) is one of the most influential contemporary utilitarian philosophers, applying the framework to animal welfare, global poverty, and effective altruism. His work demonstrates both the reach of utilitarian reasoning and its tendency to produce conclusions that challenge conventional moral intuitions.
 
 **Henry Sidgwick** (1838–1900) provided the most systematic philosophical defense of utilitarianism in _The Methods of Ethics_ (1874), grappling seriously with the tension between utilitarian conclusions and common-sense morality.
 
