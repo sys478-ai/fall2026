@@ -38,7 +38,7 @@ Applied to AI and automated systems, care ethics asks whether a system attends t
 
 ## Tensions and Limits
 
-Care ethics can be accused of privileging existing relationships over fairness to strangers — of being too parochial. It also resists formalization: care is hard to encode, and attempts to do so often produce systems that simulate responsiveness without providing it. The framework is most useful as a corrective to the blind spots of more rule-based approaches — a reminder that particular people in particular situations are not well-served by being treated as generic cases.
+Care ethics can be criticized for prioritizing existing relationships over fairness to strangers — for focusing too narrowly on the people closest to us. It also resists formalization: care is hard to encode, and attempts to do so often produce systems that simulate responsiveness without providing it. The framework is most useful as a corrective to the blind spots of more rule-based approaches — a reminder that particular people in particular situations are not well-served by being treated as generic cases.
 
 ## Key Thinkers
 
