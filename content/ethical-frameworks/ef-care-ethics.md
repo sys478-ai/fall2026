@@ -10,10 +10,10 @@ related_recognition_cards: []
 related_concept_cards: []
 related_example_cards: []
 field_guide_section: 'ethical-frameworks'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
+status: verified
+status_reviewer: Maxwell Chalmers
+status_date: 2026-06-13
+status_notes: "Reviewed for conceptual accuracy, clarity, diagnostic usefulness, and limitations; no substantive changes needed. The Questions To Ask section could be condensed in a future stylistic pass."
 priority: high
 ---
 
@@ -34,6 +34,7 @@ Applied to AI and automated systems, care ethics asks whether a system attends t
 - Does the system allow for the kind of contextual, individualized judgment that care sometimes requires, or does it enforce uniform treatment?
 - Are the people most dependent on this system also the most powerless to contest its outputs?
 - When the system makes an error, who absorbs the consequences — and do they have a relationship with anyone who is accountable?
+- Does the system support accountable relationships of care, or merely simulate attentiveness while leaving no person responsible for responding to someone’s needs?
 
 ## Tensions and Limits
 
