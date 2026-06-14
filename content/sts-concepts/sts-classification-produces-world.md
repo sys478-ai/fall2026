@@ -12,20 +12,24 @@ field_guide_group: 'constructed-not-natural'
 subtheme: 'constructed-not-natural'
 subtheme_title: 'Constructed, not natural'
 related_recognition_cards: ['pattern-22', 'pattern-07', 'pattern-08']
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
+status: verified
+status_reviewer: Maxwell Chalmers
+status_date: 2026-06-14
+status_notes: "Reviewed for conceptual accuracy, accessibility, observational usefulness, and cross-references."
 priority: high
 ---
 
-## What This Means
+## What To Notice
+
+When you encounter an AI system that sorts people, behaviors, or situations into categories, pause before asking whether the classifications are accurate. First ask where the categories came from, what does not fit inside them, and how acting on those categories may change the world being classified.
 
 Classification looks like description. Before a system can classify anything, someone has to decide what categories exist — what counts as one kind of thing and not another. Those decisions are not neutral. They reflect what was considered important to distinguish, what kinds of similarity and difference were treated as meaningful, and what happened to things that didn't fit the available categories. Geoffrey Bowker and Susan Leigh Star, in their study of classification systems in medicine and other institutions, called this the "politics of classification": every category system reflects choices made by particular people with particular interests, and leaves visible traces of who was doing the classifying and who was being classified.
 
-Classification systems also create residuals — things that don't fit cleanly. What happens to those residuals reveals where a system's assumptions break down. A person whose condition doesn't match any diagnostic code. A worker whose labor doesn't fit any legal employment category. A behavior that falls between threat categories in an anomaly detection system. How residuals are handled — whether they are forced into available categories, flagged for human review, or simply dropped — is a political and institutional question, not a technical one.
+Classification systems also create “residuals”: people, behaviors, or situations that do not fit neatly into the available categories. What happens to those residuals reveals where a system's assumptions break down. A person whose condition doesn't match any diagnostic code. A worker whose labor doesn't fit any legal employment category. A behavior that falls between threat categories in an anomaly detection system. How residuals are handled — whether they are forced into available categories, flagged for human review, or simply dropped — is a political and institutional question, not a technical one.
 
-But categories don't just reflect choices — they produce effects. Judith Butler's work on performativity and Donald MacKenzie's work on financial models both point to the same insight: when categories are enacted by institutions, they reshape the reality they were supposed to describe. A neighborhood classified as high-risk receives more surveillance, which generates more arrests, which confirms the classification. A person diagnosed with a condition gets treated according to the category, which changes the course of their condition. Ian Hacking called this "looping effects": being classified changes how people understand and present themselves, which changes the data the classification sees. The category and the world it classifies begin reshaping each other.
+But categories do not just reflect choices — they produce effects. Different theoretical traditions show how categories and models can help shape the realities they appear only to describe. Judith Butler’s work on performativity examines how repeated social norms help constitute identities, while Donald MacKenzie’s work on financial models shows how models can reshape markets when institutions begin acting on them.
+
+A neighborhood classified as high-risk receives more surveillance, which generates more arrests, which confirms the classification. A person diagnosed with a condition gets treated according to the category, which changes the course of their condition. Ian Hacking called this "looping effects": being classified changes how people understand and present themselves, which changes the data the classification sees. The category and the world it classifies begin reshaping each other.
 
 ## Questions To Ask
 
@@ -38,7 +42,7 @@ But categories don't just reflect choices — they produce effects. Judith Butle
 
 ## Why This Matters
 
-This card sits at the foundation of several other concepts in the field guide. Understanding that classification is constructed — someone built these categories, reflecting their assumptions and goals — and performative — the categories now shape the world — gives you a way to ask sharp questions about any AI system.
+This concept supports several other ideas in the field guide. Categories are constructed by people with particular assumptions and goals, and once institutions begin using them, they can reshape the world they were meant to describe. Recognizing both processes helps you ask better questions about how AI systems classify people, behavior, and risk.
 
 In the BRAID neuromorphic case, this shows up in how "anomaly" is defined. The system doesn't detect anomalies in nature — it detects departures from a baseline that was built from prior data. How that baseline was constructed, whose behavior it treats as normal, and what feedback effects the classification produces when acted upon are all classification questions with direct governance consequences.
 
