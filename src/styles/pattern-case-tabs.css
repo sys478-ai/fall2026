@@ -1,0 +1,74 @@
+/* Tabbed example sliders — PatternCaseTabs component and {% examples %} markdown tag */
+
+.pattern-case-tabs__tablist {
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-bottom: 1px solid var(--color-gray-200);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-x;
+  user-select: none;
+}
+
+.pattern-case-tabs__tablist:active {
+  cursor: grabbing;
+}
+
+.pattern-case-tabs__tablist::-webkit-scrollbar {
+  display: none;
+}
+
+.pattern-case-tabs__tab {
+  position: relative;
+  margin-bottom: -1px;
+  max-width: 12rem;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: var(--color-gray-600);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.pattern-case-tabs__tab:hover {
+  border-color: var(--color-gray-300);
+  color: #0b5d8f;
+}
+
+.pattern-case-tabs__tab[aria-selected='true'] {
+  border-color: #0b5d8f;
+  color: #0b5d8f;
+}
+
+.dark .pattern-case-tabs__tablist {
+  border-color: var(--color-gray-800);
+}
+
+.dark .pattern-case-tabs__tab {
+  color: var(--color-gray-400);
+}
+
+.dark .pattern-case-tabs__tab:hover {
+  border-color: var(--color-gray-700);
+  color: #8fc4ee;
+}
+
+.dark .pattern-case-tabs__tab[aria-selected='true'] {
+  border-color: #8fc4ee;
+  color: #8fc4ee;
+}
+
+@media (min-width: 640px) {
+  .pattern-case-tabs__tab {
+    max-width: none;
+  }
+}

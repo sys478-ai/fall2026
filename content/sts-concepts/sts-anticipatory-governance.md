@@ -18,32 +18,27 @@ status_notes: 'Reviewed for conceptual accuracy, accessibility, observational us
 priority: high
 ---
 
-## What to Notice
+Anticipatory governance is the practice of asking ethical, political, and design questions while a technology is still being shaped, before it becomes hard to change. The main question is not only **_whether_** a system works. It is **_what should be shaped, limited, redirected, or refused while meaningful choices are still available_**.
 
-When you encounter an emerging technology, people may argue that governance must wait until the technology is mature or until harms are proven. However, it often which design choices are still open now, who is shaping them, and which alternatives may disappear once the system becomes widely adopted.
+## Scenario
 
-Governance of emerging technologies can be considered at two broad moments:
+A college campus is considering AI-powered anomaly detection cameras in dorm hallways. The proposal is simple: use the system to spot unusual behavior, alert staff faster, and improve safety.
 
-1. **Before a technology is widespread**, when evidence of harm may be limited but many choices remain open; and
-2. **After it is widespread**, when harms may be more visible but the system is harder to challenge or change. Governance often becomes most visible after a technology is already widespread, when harms are easier to identify but changing the system is more difficult.
+<img class="mt-10 mb-4" src="/fall2026/images/ethics-field-guide/sts/anticipatory-governance/dorm-camera.png" />
 
-**_Anticipatory governance_**, developed by David Guston **[CITATION NEEDED]** and colleagues, is a framework for building foresight, public engagement, and reflection into the development of emerging technologies while important choices remain open. It argues that waiting for evidence of harm before asking governance questions is not neutral – it is a political choice that advantages those who benefit from deployment and disadvantages those who will bear risks. The argument is not that the future is fully predictable, but that foreseeable consequences can be reasoned about now, using available evidence and analogical reasoning, while democratic choices remain open and institutional alternatives have not yet been closed off.
+> **What should the campus do:** approve it, pause it, redesign it, or reject it? Before reading further, can you think of any unintended consequences?
 
-Erik Fisher's related concept of **_midstream modulation_** **[CITATION NEEDED]** makes the case for intervening during development – not just before or after. The researchers and engineers building a system make consequential choices every day about what to optimize, what to measure, and what to test. Engaging with those choices during development, rather than after deployment, is when intervention has the most leverage. Anticipatory governance is related to precaution, but it places particular emphasis on exploring possible futures, involving affected groups, and shaping research and design while development is still underway.
+## Why Anticipation Matters
 
-## Consider the Following Scenario: AI Cameras in Dorms
+Emerging technologies are easiest to shape before they become normal infrastructure. Once a system is installed, habits form quickly. Contracts get signed. Data practices solidify. Staff begin relying on outputs. People change their behavior because they know they are being watched.
 
-Imagine a campus installs AI-powered anomaly detection cameras in dorm hallways. The system is marketed as a safety tool that can flag unusual behavior, alert housing staff, and help prevent harm.
+This is why waiting for harms to be fully documented is not neutral. By the time evidence is clear enough to satisfy skeptics, the system may already be much harder to challenge, redesign, or remove.
 
-At first, the system seems reasonable. But the meaning of “unusual” is not neutral. A student walking back late from work, pacing during a panic attack, letting in a visitor, carrying laundry at odd hours, or moving differently because of disability could all look anomalous to a system trained on ordinary hallway patterns.
+## Questions to Ask
 
-<img class="my-10" src="/fall2026/images/ethics-field-guide/sts/anticipatory-governance/anticipatory.png" />
+Start with questions about control, then move to questions about boundaries.
 
-If the campus waits until harms are fully documented, the system may already be hard to change. The vendor contract may be signed. Camera placement may be normalized. Data practices may be established. Staff may come to rely on alerts. Students may change their behavior because they know they are being watched.
-
-### Key Questions
-
-Anticipatory governance asks the campus to **slow down** before the system becomes infrastructure, and ask:
+### Questions About Control
 
 {% flip-cards %}
 
@@ -79,6 +74,14 @@ Anticipatory governance asks the campus to **slow down** before the system becom
         Students may be misread by the system or by the people interpreting its alerts. If a flag leads to questioning, discipline, housing consequences, or police involvement, students need a way to understand and challenge what happened. Governance should define who reviews flags, what evidence is available, and how students can contest errors.
     {% endflip-card %}
 
+{% endflip-cards %}
+
+### Questions About Boundaries
+
+Then ask where the limits should be before the system becomes normal campus infrastructure.
+
+{% flip-cards %}
+
     {% flip-card icon="fa-ban" title="No-Camera Zones" %}
         Are there places where cameras should never be used?
 
@@ -97,50 +100,54 @@ Anticipatory governance asks the campus to **slow down** before the system becom
 
 {% endflip-cards %}
 
-### Potential Benefits
+## Possible Benefits
+
+Before looking at the cards below, list two reasons a campus might want this system.
 
 {% flip-cards tone="benefit" %}
 
-    {% flip-card icon="fa-shield-halved" title="Safety Support" %}
-        What kinds of harm might the system help prevent?
+    {% flip-card icon="fa-shield-halved" title="Emergency Response" %}
+        Faster response to emergencies or urgent situations
 
         ---
 
         AI cameras in dorm hallways might help staff notice dangerous situations more quickly, such as an assault, medical emergency, unauthorized entry, or escalating conflict. This benefit depends on whether the system can distinguish serious risks from ordinary behavior, and whether alerts lead to helpful rather than punitive responses.
     {% endflip-card %}
 
-    {% flip-card icon="fa-bolt" title="Faster Response" %}
-        Could the system help people respond sooner?
+    {% flip-card icon="fa-bolt" title="Repeated Safety Concerns" %}
+        Earlier identification of repeated safety concerns
 
         ---
 
-        Anomaly detection systems can flag unusual events in real time. In some cases, faster alerts could help housing staff or emergency responders intervene before harm escalates. But speed is not automatically good: a fast response to a mistaken flag can also amplify harm.
+        Aggregated data might help a campus notice recurring safety issues, such as repeated unauthorized entries, poorly lit spaces, or times when staffing is inadequate. But this only helps if the campus uses the information to improve conditions rather than to intensify surveillance.
     {% endflip-card %}
 
-    {% flip-card icon="fa-user-shield" title="Support for Vulnerable Students" %}
-        Could the system help protect students who need help?
+    {% flip-card icon="fa-user-shield" title="Support" %}
+        Support for students who may be isolated, distressed, or at risk
 
         ---
 
         A campus might argue that anomaly detection could help identify students in distress, students being followed, or students at risk of harm. This benefit depends on whether students trust the system, whether support is separated from discipline, and whether students have meaningful choices about being monitored.
     {% endflip-card %}
 
-    {% flip-card icon="fa-chart-line" title="Pattern Awareness" %}
-        What patterns might the campus learn from the system?
+    {% flip-card icon="fa-chart-line" title="Evaluation" %}
+        Better information for evaluating whether existing safety practices are working
 
         ---
 
-        Aggregated data might help a campus notice recurring safety issues, such as poorly lit areas, repeated unauthorized entries, or times when staffing is inadequate. But this benefit depends on strong limits: pattern analysis should not become individualized tracking, discipline, or surveillance of everyday student life.
+        A campus may claim that the system could reveal where response systems are weak, when staffing patterns fail, or whether existing policies are addressing the safety problems they are meant to solve. But this benefit depends on strong limits: evaluation should not become individualized tracking, discipline, or surveillance of everyday student life.
     {% endflip-card %}
 
 {% endflip-cards %}
 
-### Potential Harms
+## Possible Harms
+
+Now list two ways this system could cause harm, even if it works as designed.
 
 {% flip-cards tone="harm" %}
 
     {% flip-card icon="fa-eye" title="Privacy Loss" %}
-        What everyday information could the system reveal?
+        Privacy loss in residential spaces
 
         ---
 
@@ -148,39 +155,71 @@ Anticipatory governance asks the campus to **slow down** before the system becom
     {% endflip-card %}
 
     {% flip-card icon="fa-scale-balanced" title="Unequal Impact" %}
-        Who is more likely to be flagged?
+        Unequal impact on students whose routines differ from dominant patterns
 
         ---
 
-        Anomaly detection systems learn patterns of “normal.” Students whose routines differ from the dominant pattern – because of work, disability, caregiving, culture, anxiety, or social marginalization – may be flagged more often. The same system can produce different burdens for different groups.
+        Anomaly detection systems learn patterns of “normal.” Students whose routines differ from the dominant pattern - because of work, disability, caregiving, culture, anxiety, or social marginalization - may be flagged more often. The same system can produce different burdens for different groups.
     {% endflip-card %}
 
     {% flip-card icon="fa-snowflake" title="Chilling Effect" %}
-        How might being watched change behavior?
+        Chilling effects on social life, movement, and help-seeking
 
         ---
 
         Students may avoid normal activities because they do not know how the system will interpret them. They may stop visiting friends, pacing, lingering, coming home late, or seeking help in visible ways. A chilling effect occurs when surveillance changes behavior even without punishment.
-
     {% endflip-card %}
 
     {% flip-card icon="fa-bullseye" title="Misidentification" %}
-        What happens if the system gets it wrong?
+        Misidentification or overreaction to ordinary behavior
 
         ---
 
         The system may flag harmless behavior as suspicious or miss genuinely concerning situations. A false alert could lead to embarrassment, disciplinary action, police involvement, or loss of trust. Misidentification is especially serious when people cannot understand, challenge, or appeal the label.
     {% endflip-card %}
 
+    {% flip-card icon="fa-database" title="Repurposing" %}
+        Repurposing of data beyond the original safety goal
+
+        ---
+
+        Data collected for dorm safety may later be used for discipline, policing, attendance monitoring, housing disputes, or other analytics that students did not expect or meaningfully consent to. A system can function as designed and still expand into new forms of control.
+    {% endflip-card %}
+
 {% endflip-cards %}
 
-The point is not to predict every future harm perfectly. The point is to ask foreseeable questions while choices are still open.
+<img class="my-10" src="/fall2026/images/ethics-field-guide/sts/anticipatory-governance/anticipatory.png" />
 
-## Questions To Ask
+> ### The Big Idea
+>
+> The earlier we ask governance questions, the less evidence we may have but the more power we have to shape the system; the later we ask, the clearer harms may be but the harder the system may be to reverse.
 
-- What choices are still open in this system's development – about design, deployment, governance, oversight?
-- What consequences are foreseeable now, even without complete evidence?
-- What do similar systems or deployment contexts suggest about likely trajectories?
-- Who is at the table when these choices are made, and who is not?
-- What would it mean to slow down, redirect, or refuse this technology at this stage?
-- What governance questions should be asked before scale arrives?
+## Alternatives
+
+Anticipatory governance is not only about regulating a proposed system. It is also about asking whether the same problem could be addressed differently. In the dorm-camera case, alternatives might include better lighting, more resident support staff, improved access to mental health response, clearer guest policies, emergency call systems, or restorative approaches to recurring conflict.
+
+This matters because a new technology can narrow our imagination. Once a camera system is framed as the obvious answer, other options can disappear from view. Asking about alternatives keeps the problem open long enough to compare more than one path.
+
+## Real-World Examples
+
+{% examples %}
+
+## Theoretical Foundations
+
+Governance of emerging technologies can happen at two broad moments:
+
+1. **Before a technology is widespread**, when evidence may be limited but many choices are still open.
+2. **After it is widespread**, when harms may be easier to identify but the system is much harder to change.
+
+**_Anticipatory governance_**, developed by David Guston **[CITATION NEEDED]** and colleagues, argues for building foresight, reflection, and public input into emerging technologies before they harden into infrastructure. The claim is not that the future can be predicted perfectly. It is that foreseeable consequences can be reasoned about while democratic choices are still open.
+
+Erik Fisher’s idea of **_midstream modulation_** **[CITATION NEEDED]** adds that intervention during development can matter more than critique after deployment. Researchers and engineers make consequential choices every day about what to optimize, what to measure, and what to test. That is often where governance has the most leverage.
+
+## Questions You Should Ask of an Emerging Technology
+
+- What choices are still open right now?
+- Who is defining the problem and setting the terms?
+- What could become difficult to undo later?
+- Who will benefit if the system scales quickly?
+- Who will bear the risks if the system gets it wrong?
+- What non-technical or less invasive alternatives are being ignored?

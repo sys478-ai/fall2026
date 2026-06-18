@@ -2,8 +2,10 @@
  * Lightweight helpers to handle Jekyll-style custom tags in markdown.
  *
  * We currently support:
+ *   - {% sequence %} / {% step %} / {% endstep %} / {% endsequence %} (see sequence.ts)
  *   - {% collapsible %} / {% collapsible closed %}
  *   - {% flip-cards tone="benefit|harm" %} / {% flip-card %} (see flip-cards.ts)
+ *   - {% examples %} (see example-slider.ts)
  *   - {% no-copy %}
  *   - {: .class #id } (Kramdown-style inline attribute lists)
  *
@@ -23,35 +25,22 @@ export function preprocessMarkdownTags(markdown: string): string {
   let result = markdown;
 
   // {% collapsible closed %} -> <!-- collapsible closed -->
-  result = result.replace(
-    /{%\s*collapsible\s+closed\s*%}/gi,
-    '<!-- collapsible closed -->',
-  );
+  result = result.replace(/{%\s*collapsible\s+closed\s*%}/gi, '<!-- collapsible closed -->');
 
   // {% collapsible %} -> <!-- collapsible -->
-  result = result.replace(
-    /{%\s*collapsible\s*%}/gi,
-    '<!-- collapsible -->',
-  );
+  result = result.replace(/{%\s*collapsible\s*%}/gi, '<!-- collapsible -->');
 
   // {% no-copy %} -> <!-- no-copy-button -->
-  result = result.replace(
-    /{%\s*no-copy\s*%}/gi,
-    '<!-- no-copy-button -->',
-  );
+  result = result.replace(/{%\s*no-copy\s*%}/gi, '<!-- no-copy-button -->');
 
   // {: .class #id } -> <!-- ATTR-BLOCK: .class #id -->
   // Matches Kramdown-style inline attribute lists on their own line
   // Supports both "before" (marker before element) and "after" (marker after element) placement
-  result = result.replace(
-    /^\s*\{\:\s+([^}]+)\}\s*$/gm,
-    (match, attrs) => {
-      // Preserve the attributes, trimming whitespace
-      const trimmedAttrs = attrs.trim();
-      return `<!-- ATTR-BLOCK: ${trimmedAttrs} -->`;
-    }
-  );
+  result = result.replace(/^\s*\{\:\s+([^}]+)\}\s*$/gm, (match, attrs) => {
+    // Preserve the attributes, trimming whitespace
+    const trimmedAttrs = attrs.trim();
+    return `<!-- ATTR-BLOCK: ${trimmedAttrs} -->`;
+  });
 
   return result;
 }
-

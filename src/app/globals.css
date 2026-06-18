@@ -1,6 +1,8 @@
 /* stylelint-disable at-rule-no-unknown */
 @import 'tailwindcss';
 @import '../styles/flip-cards.css';
+@import '../styles/pattern-case-tabs.css';
+@import '../styles/sequence.css';
 
 /* Tailwind v4: Define custom dark mode variant for class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -42,6 +44,10 @@ h2 {
   @apply text-xl md:text-2xl mb-4 mt-8 font-bold;
   font-family: var(--font-outfit), serif;
   color: var(--foreground);
+}
+
+.sts-concept-section .h2 {
+  @apply mt-0!;
 }
 
 h3,
@@ -671,7 +677,7 @@ html {
     display: none !important;
   }
 
-  .topic-section-panel[data-active="true"] {
+  .topic-section-panel[data-active='true'] {
     display: block !important;
   }
 
