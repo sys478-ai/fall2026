@@ -533,15 +533,15 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
       }
     }
     
-    // Look for next heading of equal or greater level (h1-h5)
-    const nextHeadingMatch = afterHeading.match(/<(h[1-5])[^>]*>/);
+    // Look for the first heading of equal or greater level (h1-h5) after this section
     let nextHeadingIndex: number | undefined = undefined;
-    if (nextHeadingMatch && nextHeadingMatch.index !== undefined) {
-      const nextHeadingTag = nextHeadingMatch[1];
-      const nextHeadingLevel = parseInt(nextHeadingTag.substring(1));
-      // Only consider if it's at same or higher level (lower or equal number)
+    const headingTagRegex = /<(h[1-5])[^>]*>/g;
+    let headingTagMatch;
+    while ((headingTagMatch = headingTagRegex.exec(afterHeading)) !== null) {
+      const nextHeadingLevel = parseInt(headingTagMatch[1].substring(1), 10);
       if (nextHeadingLevel <= headingLevel) {
-        nextHeadingIndex = nextHeadingMatch.index;
+        nextHeadingIndex = headingTagMatch.index;
+        break;
       }
     }
     

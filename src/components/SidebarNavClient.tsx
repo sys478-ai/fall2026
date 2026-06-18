@@ -9,6 +9,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
+  CpuChipIcon,
   DocumentTextIcon,
   FolderIcon,
   HomeIcon,
@@ -156,6 +157,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
 
   const activeTaxonomy = normalizedPath.startsWith('/planning/taxonomy');
   const activePatternGuide = normalizedPath.startsWith('/field-guide');
+  const activeBraidCaseStudy = normalizedPath.startsWith('/braid-case-study');
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeBibliography = normalizedPath === '/bibliography';
   const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
@@ -539,6 +541,13 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
               </div>
             )}
           </div>
+
+          <Link
+            href="/braid-case-study"
+            className={`${baseLinkClass} ${activeBraidCaseStudy ? activeTopLevelClass : inactiveTopLevelClass} ${collapsed ? 'justify-center' : ''}`}
+          >
+            {renderNavContent('BRAID Case Study', CpuChipIcon)}
+          </Link>
         </nav>
       </div>
 

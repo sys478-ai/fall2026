@@ -14,6 +14,7 @@ export default function ConditionalFooter() {
   const usesContentLayout = normalizedPath === '/' || 
                             normalizedPath === '/modules' ||
                             normalizedPath === '/syllabus' ||
+                            normalizedPath === '/braid-case-study' ||
                             normalizedPath === '/assignments' ||
                             normalizedPath.startsWith('/assignments/') ||
                             normalizedPath === '/activities' ||

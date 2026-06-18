@@ -52,7 +52,7 @@ h3,
 }
 
 h4 {
-  @apply md:text-lg font-bold mb-0 mt-4;
+  @apply md:text-lg font-bold mb-4! mt-4;
   font-family: var(--font-outfit), serif;
   color: var(--foreground);
 }
@@ -63,7 +63,7 @@ h5 {
 }
 
 table {
-  @apply w-full border-collapse mb-20 border;
+  @apply w-full border-collapse mb-8 border;
   border-color: var(--border);
   table-layout: auto;
 }

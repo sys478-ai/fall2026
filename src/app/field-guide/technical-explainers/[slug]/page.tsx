@@ -40,7 +40,8 @@ export default async function TechnicalExplainerDetailPage({ params }: PageProps
       <ContentLayout
         variant="detail-with-toc"
         fullWidth
-        showToc={false}
+        showToc={postData.toc !== false}
+        tocMaxLevel={postData.heading_max_level || 2}
         header={
           <>
             <StatusBanner status={postData.status} status_reviewer={postData.status_reviewer} status_date={postData.status_date} status_notes={postData.status_notes} contentType="technical-explainers" />
