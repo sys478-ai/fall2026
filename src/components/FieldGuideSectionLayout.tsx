@@ -4,7 +4,13 @@ import { getPostData, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
 
 interface Props {
-  contentDir: 'ai-deployment-patterns' | 'sts-concepts' | 'examples' | 'ethical-frameworks' | 'technical-explainers';
+  contentDir:
+    | 'ai-deployment-patterns'
+    | 'sts-concepts'
+    | 'examples'
+    | 'ethical-frameworks'
+    | 'technical-explainers'
+    | 'governance';
   children: (columns: 1 | 2) => React.ReactNode;
 }
 
@@ -44,8 +50,10 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
                 darkSrc={imageDarkSrc}
                 className="w-full my-8"
                 style={{
-                  WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
-                  maskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
+                  WebkitMaskImage:
+                    'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
+                  maskImage:
+                    'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
                 }}
               />
               <div

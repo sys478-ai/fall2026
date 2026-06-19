@@ -35,38 +35,46 @@ title: '“Thinking” Machines, Human Choices: Power & Responsibility in AI Des
 
 This senior seminar examines AI as both a technical system and a public problem. We will study how systems classify, measure, predict, and detect anomalies, while asking how those technical choices shape surveillance, accountability, labor, infrastructure, environmental impact, and governance. Rather than treating AI as only software, the course approaches it as socio-technical and material: built from data, hardware, institutions, values, supply chains, and stories about what intelligence is supposed to be.
 
-The course is anchored by an NSF-funded BRAID case study focused on an emerging cerebellum-inspired neuromorphic circuit for anomaly detection in edge computing. Students will use that case to practice anticipatory governance: asking ethical, legal, and societal questions while a technology is still emerging rather than waiting until it is already entrenched.
+The course includes a recurring NSF-funded BRAID case study focused on an emerging cerebellum-inspired neuromorphic circuit for anomaly detection in edge computing. This case gives us a chance to apply the course’s guiding questions to a technology that is still under development: What kind of AI is this? How does it work technically? How might it work socially? Where could it be deployed? And what positions should publics, designers, institutions, and regulators take before its uses become settled?
 
 The course also includes a career-readiness strand and a substantial final project. Over the semester, students will build professional goals, communication skills, and reflective career materials that support a final senior-level artifact. That artifact may take the form of a public-facing explainer, governance brief, exhibit, memo set, presentation, or other stakeholder-facing resource that helps non-specialists reason about an emerging AI system and its possible futures.
+
+## Guiding Questions: How to Read an AI-Mediated World
+
+This course is organized around five recurring questions. We will return to these questions throughout the semester as we move from everyday AI systems to machine learning mechanisms, domain case studies, neuromorphic computing, governance frameworks, and final public-facing projects.
+
+1. **Form: What kinds of AI systems are out there?**
+   We will learn to recognize different kinds of AI systems, including classifiers, recommenders, predictive systems, generative AI, anomaly detectors, edge AI, and neuromorphic systems.
+
+2. **Mechanism: How do they work technically?**
+   We will examine mechanisms such as data collection, features, labels, models, training, inference, thresholds, prediction, neural networks, event-driven computation, and hardware-level learning.
+
+3. **Social Logic: How do they work socially?**
+   We will ask how AI systems produce categories, define normality, distribute attention, encode institutional values, shape expertise, concentrate power, and make some people or behaviors more visible than others.
+
+4. **Context: Where are they deployed?**
+   We will compare how AI systems operate across contexts such as work, education, healthcare, media, politics, infrastructure, public services, security, science, and everyday life.
+
+5. **Position: What should we think, do, govern, redesign, contest, or refuse?**
+   We will develop reasoned judgments about when AI systems should be used, limited, redesigned, governed, contested, refused, or explained differently.
 
 ## Learning Objectives
 
 By the end of the course, students will be able to:
 
-- Explain key AI mechanisms such as classification, feature selection, thresholds, prediction, anomaly detection, neural networks, edge AI, and neuromorphic computing in clear, accessible language.
-- Analyze AI systems as socio-technical and material systems rather than as isolated algorithms.
-- Identify how categories, datasets, proxies, baselines, and thresholds encode human judgment and institutional values.
-- Evaluate how technical design choices shape downstream questions of bias, surveillance, explainability, accountability, environmental impact, and governance.
-- Apply anticipatory governance frameworks to an emerging neuromorphic anomaly-detection case study.
-- Communicate technical and ethical analysis effectively to non-specialist, public, or stakeholder audiences.
-- Develop a meaningful final artifact that synthesizes technical understanding, governance analysis, and public or professional communication.
+<!-- .list-spaced -->
 
-## Topics
+1. Recognize common forms of AI mediation across everyday, institutional, scientific, and infrastructural contexts.
+1. Explain key AI mechanisms such as classification, feature selection, thresholds, prediction, anomaly detection, neural networks, edge AI, and neuromorphic computing in clear, accessible language.
+1. Analyze AI systems as sociotechnical and material systems shaped by institutions, infrastructures, labor, data practices, environmental costs, and power relations.
+1. Identify how categories, datasets, proxies, baselines, thresholds, and definitions of “normal” encode human judgment, institutional values, and historical patterns.
+1. Evaluate how technical design choices shape downstream questions of bias, surveillance, explainability, accountability, contestability, environmental impact, and governance.
+1. Develop reasoned positions about AI systems, including when they should be used, limited, redesigned, governed, contested, or refused.
+1. Communicate technical, ethical, and governance analysis effectively through a final public-facing or professional artifact.
 
-Major topics include:
+## Schedule
 
-- intelligence as a contested category
-- classification, categories, and measurement
-- training data, features, thresholds, and prediction
-- neural networks, opacity, and explanation
-- anomaly detection, normality, and surveillance
-- edge AI, privacy, and accountability
-- brain-inspired and neuromorphic computing
-- hardware, energy, and environmental impact
-- anticipatory governance of emerging technologies
-- career readiness, professional storytelling, and public communication
-
-The full module and meeting sequence appears below.
+{% schedule %}
 
 ## Assessment
 

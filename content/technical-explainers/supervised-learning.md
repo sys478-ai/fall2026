@@ -2,8 +2,8 @@
 card_type: technical-explainer
 id: te-supervised-learning
 slug: supervised-learning
-title: "Supervised Learning"
-subtitle: "How machines learn from labeled examples — and what happens when those labels carry assumptions."
+title: 'Supervised Learning'
+subtitle: 'How machines learn from labeled examples — and why what the system learns depends entirely on what people decided to label.'
 num: '1'
 order: 1
 related_recognition_cards: ['8', '23', '25', '7']
@@ -17,48 +17,109 @@ status_notes:
 priority: high
 ---
 
-## What the System Is Trying to Do
+<style>
+    table, tr {
+        width: auto !important;
+        height: auto !important;
+        min-width: 300px;
+    }
+    table td, table th {
+        padding: 4px 8px !important;
+    }
+</style>
 
-Supervised learning trains a model to map inputs to outputs by showing it many labeled examples — images tagged as "cat" or "not cat," loan applications marked as "repaid" or "defaulted," medical scans labeled "malignant" or "benign." The goal is a function that generalizes: one that correctly predicts labels for inputs it has never seen before.
+## The Basic Idea
 
-## Core Mechanism
+People with diabetes can lose their vision to a disease called diabetic retinopathy. It develops slowly, and catching it early matters. But there are not enough eye specialists in many parts of the world to screen every patient who needs it.
 
-The model adjusts its internal parameters to minimize the difference between its predictions and the correct labels across a training dataset. This is called minimizing a loss function. A model that has not yet learned anything will make poor predictions; training iteratively pushes the model's parameters toward values that produce better predictions. The model only ever sees training examples and their labels — it does not reason about the world, it finds statistical patterns that reduce prediction error.
+Researchers had an idea: could a computer learn to look at photographs of the eye and detect early signs of the disease?
+
+To teach it, they collected thousands of eye photographs that specialist doctors had already reviewed and labeled — each image marked with a category: **no disease**, **mild**, **moderate**, **severe**, or **proliferative** (the most serious stage).
+
+The system studied those labeled photographs. It found patterns connecting what the image looks like to what category doctors assigned. Now, when it sees a new photograph it has never encountered before, it can predict which category it belongs to.
+
+That is supervised learning: **show the system many examples that have already been labeled by humans, let it find patterns, and use those patterns to classify new examples.**
+
+<img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised1.png" />
 
 ## How It Works
 
-Given training data (x₁, y₁), (x₂, y₂), …, (xₙ, yₙ) where each **xᵢ** is an input and **yᵢ** is a label, the model finds parameters **w** that minimize:
+**Step 1: Label thousands of examples.**
+Specialist doctors reviewed thousands of eye photographs and assigned each one a category. This is called the **training data** — a large collection of examples where the correct answer is already known.
 
-**L(w) = (1/n) Σᵢ loss(f(xᵢ; w), yᵢ)**
+<img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised2.png" />
 
-For regression, the loss is typically squared error. For classification, it is cross-entropy. Parameters are updated using gradient descent:
+**Step 2: Train the system.**
+The system looks at all the labeled photographs and tries to find patterns — combinations of visual features that tend to appear in each category. It adjusts its internal settings based on those patterns until it can predict labels accurately on the examples it has seen.
 
-**w ← w − α∇L(w)**
+<img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised3.png" />
 
-where **α** is the learning rate. Modern supervised learning scales this to neural networks with millions or billions of parameters using backpropagation to compute gradients efficiently across many layers.
+**Step 3: Classify new photographs.**
+When a new, unlabeled photograph comes in, the system assigns it a category — and a confidence score showing how certain it is.
+
+<img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised4.png" />
+
+## Not Just Yes or No
+
+Many people assume supervised learning always produces a simple yes-or-no answer. Sometimes it does. But the diabetic retinopathy system produces five categories, not two — and a confidence score for each one.
+
+| Category      | What it means                   |
+| ------------- | ------------------------------- |
+| No disease    | No signs detected               |
+| Mild          | Early changes present           |
+| Moderate      | More widespread changes         |
+| Severe        | Significant risk of vision loss |
+| Proliferative | Most advanced stage — urgent    |
+
+The same structure applies whether a system is sorting emails into folders, identifying species of plants from photographs, or estimating how likely a patient is to be readmitted to a hospital. What changes is the number of categories, the meaning of each one, and the stakes involved.
+
+<img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised5.png" />
+
+## What Labels Are — and Why They Matter
+
+Before the system could learn anything, doctors had to label thousands of photographs. That labeling process looks straightforward — but it involves real judgment calls.
+
+Two specialists looking at the same photograph sometimes disagree. Mild and moderate can be genuinely hard to distinguish. The criteria for each category had to be defined, agreed upon, and applied consistently — by people, with all the variability that involves.
+
+**The system learns to reproduce the labels it was given — not some objective truth about the photographs.** If the labeling criteria change, or if different specialists labeled different parts of the dataset, the system inherits that inconsistency.
 
 ## What Can Go Wrong
 
-**Training data reflects historical patterns.** The model learns from data generated by past decisions. If historical hiring, lending, or policing decisions were discriminatory, the model learns to reproduce those patterns — not because it was told to, but because those patterns minimize prediction error on its training data.
+**Training data carries the context it came from.** The diabetic retinopathy system was trained largely on photographs from specific populations and camera equipment. When researchers tested it on photographs from other contexts — different cameras, different populations, different lighting conditions — performance dropped. The system had learned patterns from one setting and was being asked to generalize to another.
 
-**Labels encode human judgment.** Every training label required someone to decide what the right answer is. Those decisions carry the values, blind spots, and incentive structures of the people doing the labeling — whether they are clinicians, content moderators, or low-wage annotators completing tasks for a few cents per item.
+**Labels encode the judgment of the people who assigned them.** In medicine, labeling requires expertise and careful protocols. In other contexts — hiring, criminal justice, credit — labels come from historical decisions that may have been discriminatory, inconsistent, or shaped by institutional pressures. The system cannot tell the difference between a carefully considered label and a biased one. It treats them all as ground truth.
 
-**The model optimizes for the metric it is given.** The loss function defines what "good" means during training. If the loss function doesn't capture what you actually care about, the model learns to do the measurable thing rather than the right thing.
+**A single accuracy number can hide unequal performance.** A system that performs well on average may perform worse for patients whose photographs look different from the majority of the training data — different skin tones affecting how blood vessels appear, for example. That variation may not appear in overall accuracy statistics.
 
-**Accuracy is reported in aggregate.** A model that is 95% accurate overall can be significantly worse for specific subgroups. Aggregate metrics often mask systematic failures for particular populations, especially those underrepresented in training data.
+**The same approach applied elsewhere raises harder questions.** Supervised learning trained on historical hiring decisions will learn to reproduce those decisions — including any biases they contained. The same mechanism that helps detect disease can sort job applicants, score loan applications, or predict recidivism. The technique is the same. What changes is what was labeled, by whom, and with what consequences when the system gets it wrong.
 
-**Decision thresholds are set by designers.** Classification models output probabilities. Turning probabilities into binary decisions — flagged or not flagged, approved or denied — requires choosing a threshold. That threshold determines the balance between false positives and false negatives, a values choice with unequal consequences for different groups.
+## Key Takeaways
+
+1. Supervised learning finds patterns in labeled examples. It does not reason about the world — it finds what tends to go with what in the data it was trained on.
+2. Labels are human decisions. The system learns to reproduce what people decided, not what is objectively true.
+3. Training data carries the context it came from. A system trained in one setting may not generalize well to another.
+4. Aggregate accuracy can hide unequal performance across groups.
+5. The same technique applies across many domains. The stakes depend on what is being classified, and what happens when the system is wrong.
+
+{% collapsible closed %}
+
+## Going Deeper: How the Training Process Works
+
+During training, the system repeatedly compares its predictions to the correct labels, measures how wrong it was, and adjusts its internal settings slightly in the direction that would have reduced that error. After many thousands of repetitions, the settings stabilize.
+
+Two important limits of this process:
+
+- The system can only minimize errors on its training data. It has no guarantee of performing well on examples that look different from what it was trained on.
+- Minimizing errors does not mean the system has learned something meaningful about the world. It means it has gotten better at predicting the labels in its training set — whatever those labels encode.
+
+{% endcollapsible %}
 
 ## Critical Bridge
 
-| Technical failure mode | Field guide recognition card |
-|---|---|
-| Training data reflects historical patterns | [Prediction imports the past](/field-guide/pattern-08) |
-| Labels encode human judgment | *Data is produced, not found (not yet published)* |
-| Model optimizes for the metric it's given | [Changing what gets measured changes what exists](/field-guide/pattern-23) |
-| Accuracy reported in aggregate | [Concentrated harm is hidden by aggregate benefit](/field-guide/pattern-25) |
-| Decision thresholds set by designers | [Thresholds make uncertainty consequential](/field-guide/pattern-07) |
-
-## Connected Labs
-
-Labs 1a, 2, 3, 4, 5, and 6 all involve supervised learning systems or their outputs.
+| What the system does                      | What that creates                                          | Field guide resource                                                                                                                           |
+| ----------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Learns from historically labeled data     | Training context shapes what the system can and cannot see | [Prediction imports the past](/fall2026/field-guide/deployment-patterns/prediction-imports-the-past)                                           |
+| Labels encode human judgment              | System reproduces decisions, not ground truth              | [Data is produced, not found](/fall2026/field-guide/sts-concepts/data-is-produced-not-found)                                                   |
+| Optimizes for the metric it is given      | Measurable target can replace real goal                    | [Changing what gets measured changes what exists](/fall2026/field-guide/deployment-patterns/changing-what-gets-measured-changes-what-exists)   |
+| Reports accuracy in aggregate             | Group-level failures become invisible                      | [Concentrated harm is hidden by aggregate benefit](/fall2026/field-guide/deployment-patterns/concentrated-harm-is-hidden-by-aggregate-benefit) |
+| Requires a threshold to produce decisions | Threshold choice determines who is harmed by errors        | [Thresholds make uncertainty consequential](/fall2026/field-guide/deployment-patterns/thresholds-make-uncertainty-consequential)               |

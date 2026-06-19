@@ -6,6 +6,7 @@
  *   - {% collapsible %} / {% collapsible closed %}
  *   - {% flip-cards tone="benefit|harm" %} / {% flip-card %} (see flip-cards.ts)
  *   - {% examples %} (see example-slider.ts)
+ *   - {% schedule %} (see schedule-embed.ts)
  *   - {% no-copy %}
  *   - {: .class #id } (Kramdown-style inline attribute lists)
  *

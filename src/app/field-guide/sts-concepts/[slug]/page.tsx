@@ -15,7 +15,6 @@ import { getReadingsForCard, type Reading } from '@/lib/readings';
 import StatusBanner from '@/components/StatusBanner';
 import { StsConceptSection } from '@/components/sts-concepts';
 import { splitPatternContentSections } from '@/lib/pattern-content-sections';
-import ScopedScrollReveal from '@/components/ScopedScrollReveal';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -177,8 +176,6 @@ export default async function STSConceptPage({ params }: PageProps) {
     const postWithGuideMetadata = postData as PostData & { field_guide_section_title?: string; group?: string };
     const groupLabel = postWithGuideMetadata.field_guide_section_title || formatGroupLabel(postWithGuideMetadata.group);
     const patternContentSections = splitPatternContentSections(postData.content);
-    const enableScrollReveal = slug === 'anticipatory-governance';
-
     return (
       <ContentLayout
         variant="detail-with-toc"
@@ -209,13 +206,8 @@ export default async function STSConceptPage({ params }: PageProps) {
         }
       >
         <div className="space-y-8">
-          {enableScrollReveal && <ScopedScrollReveal selector=".sts-concept-section--scroll-reveal" />}
           {patternContentSections.map((section, index) => (
-            <StsConceptSection
-              key={`${section.label || 'intro'}-${index}`}
-              label={section.label}
-              className={enableScrollReveal ? 'sts-concept-section--scroll-reveal' : undefined}
-            >
+            <StsConceptSection key={`${section.label || 'intro'}-${index}`} label={section.label}>
               <PatternContentSection section={section} />
             </StsConceptSection>
           ))}

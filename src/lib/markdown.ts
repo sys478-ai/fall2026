@@ -11,6 +11,7 @@ import { preprocessMarkdownTags } from './markdown-tags';
 import { preprocessFlipCards } from './flip-cards';
 import { postprocessSequences, preprocessSequenceTags } from './sequence';
 import { preprocessExampleSliderTags, injectExampleSliders } from './example-slider';
+import { preprocessScheduleTags } from './schedule-embed';
 
 const postsDirectory = path.join(process.cwd(), 'content');
 const quizzesDirectory = path.join(process.cwd(), 'content', 'quizzes');
@@ -284,6 +285,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   markdownContent = preprocessMarkdownTags(markdownContent);
   markdownContent = preprocessFlipCards(markdownContent);
   markdownContent = preprocessExampleSliderTags(markdownContent);
+  markdownContent = preprocessScheduleTags(markdownContent);
 
   // Pre-process checkboxes: replace [ ] patterns with placeholders
   // This prevents GFM from converting them into disabled task list items

@@ -18,7 +18,7 @@ const DOMAIN_LABELS: Record<string, string> = {
   'housing-and-urban-infrastructure': 'Housing and Urban Infrastructure',
   'immigration-and-borders': 'Immigration and Borders',
   'environment-and-land-use': 'Environment and Land Use',
-  'education': 'Education',
+  education: 'Education',
   'platform-and-consumer': 'Platform and Consumer',
   'public-benefits-and-welfare': 'Public Benefits and Welfare',
 };
@@ -49,12 +49,21 @@ export default async function ExamplePage({ params }: PageProps) {
     const domains = (post.domains as string[]) ?? [];
     const contested = (post as typeof post & { contested?: string }).contested;
     const connectedCards = (post.connected_cards as Array<{ num: string; interpretation: string }>) ?? [];
-    const allPatterns = [...getAllPosts('ai-deployment-patterns'), ...getAllPosts('sts-concepts')];
-    const numToSlug = Object.fromEntries(allPatterns.map(p => {
-      const section = p.card_type === 'recognition' ? 'deployment-patterns' : 'sts-concepts';
-      const urlSlug = (p as typeof p & { slug?: string }).slug || p.id;
-      return [String(p.num), `${section}/${urlSlug}`];
-    }));
+    const allPatterns = [
+      ...getAllPosts('ai-deployment-patterns'),
+      ...getAllPosts('sts-concepts'),
+      ...getAllPosts('governance'),
+    ];
+    const numToSlug = Object.fromEntries(
+      allPatterns.map(p => {
+        const section =
+          p.field_guide_section === 'ai-deployment-patterns'
+            ? 'deployment-patterns'
+            : p.field_guide_section || 'sts-concepts';
+        const urlSlug = (p as typeof p & { slug?: string }).slug || p.id;
+        return [String(p.num), `${section}/${urlSlug}`];
+      })
+    );
     const numToTitle = Object.fromEntries(allPatterns.map(p => [String(p.num), p.title]));
 
     return (
@@ -64,7 +73,13 @@ export default async function ExamplePage({ params }: PageProps) {
         showToc={false}
         header={
           <>
-            <StatusBanner status={post.status} status_reviewer={post.status_reviewer} status_date={post.status_date} status_notes={post.status_notes} contentType="examples" />
+            <StatusBanner
+              status={post.status}
+              status_reviewer={post.status_reviewer}
+              status_date={post.status_date}
+              status_notes={post.status_notes}
+              contentType="examples"
+            />
             <div className="space-y-4 py-6">
               <Breadcrumbs
                 className="px-4 md:px-16"
@@ -109,9 +124,7 @@ export default async function ExamplePage({ params }: PageProps) {
               <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-500">
                 Contested
               </p>
-              <p className="mb-0 text-sm italic leading-6 text-gray-700 dark:text-gray-300">
-                {contested}
-              </p>
+              <p className="mb-0 text-sm italic leading-6 text-gray-700 dark:text-gray-300">{contested}</p>
             </div>
           )}
           <section className="space-y-4 pt-4">
@@ -121,32 +134,32 @@ export default async function ExamplePage({ params }: PageProps) {
           {connectedCards.length > 0 && (
             <section className="space-y-4 pt-4">
               <h2 className="text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-                Recognition Cards
+                Related Field Guide Pages
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                This example activates multiple lenses simultaneously. The interpretation for each is on the
-                recognition card.
+                This example connects to multiple field guide pages. Each one offers a different way to interpret what
+                the case makes visible.
               </p>
               <div className="space-y-3">
                 {connectedCards.map(({ num: cardNum, interpretation }) => {
                   const cardSlug = numToSlug[cardNum];
                   const cardTitle = numToTitle[cardNum];
                   return (
-                  <Link
-                    key={cardNum}
-                    href={cardSlug ? `/field-guide/${cardSlug}` : '/field-guide'}
-                    className="group block rounded-xl border border-gray-200 bg-white p-5 no-underline shadow-sm transition-colors hover:border-violet-300 hover:bg-violet-50/50 dark:border-gray-800 dark:bg-black dark:hover:border-violet-700 dark:hover:bg-violet-950/20"
-                  >
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">
-                      Recognition Card
-                    </p>
-                    {cardTitle && (
-                      <p className="mb-2 font-semibold text-gray-950 group-hover:text-violet-700 dark:text-gray-50 dark:group-hover:text-violet-300">
-                        {cardTitle}
+                    <Link
+                      key={cardNum}
+                      href={cardSlug ? `/field-guide/${cardSlug}` : '/field-guide'}
+                      className="group block rounded-xl border border-gray-200 bg-white p-5 no-underline shadow-sm transition-colors hover:border-violet-300 hover:bg-violet-50/50 dark:border-gray-800 dark:bg-black dark:hover:border-violet-700 dark:hover:bg-violet-950/20"
+                    >
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">
+                        Field Guide Page
                       </p>
-                    )}
-                    <p className="mb-0 text-sm leading-6 text-gray-800 dark:text-gray-200">{interpretation}</p>
-                  </Link>
+                      {cardTitle && (
+                        <p className="mb-2 font-semibold text-gray-950 group-hover:text-violet-700 dark:text-gray-50 dark:group-hover:text-violet-300">
+                          {cardTitle}
+                        </p>
+                      )}
+                      <p className="mb-0 text-sm leading-6 text-gray-800 dark:text-gray-200">{interpretation}</p>
+                    </Link>
                   );
                 })}
               </div>

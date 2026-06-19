@@ -13,13 +13,15 @@ export const metadata: Metadata = {
 const COLUMNS: 1 | 2 = 1;
 
 export default async function FieldGuideLandingPage() {
-  const [recognitionPost, conceptPost, examplesPost, frameworksPost, explainersPost] = await Promise.all([
-    getPostData('index', 'ai-deployment-patterns'),
-    getPostData('index', 'sts-concepts'),
-    getPostData('index', 'examples'),
-    getPostData('index', 'ethical-frameworks'),
-    getPostData('index', 'technical-explainers'),
-  ]);
+  const [recognitionPost, conceptPost, examplesPost, frameworksPost, explainersPost, governancePost] =
+    await Promise.all([
+      getPostData('index', 'ai-deployment-patterns'),
+      getPostData('index', 'sts-concepts'),
+      getPostData('index', 'examples'),
+      getPostData('index', 'ethical-frameworks'),
+      getPostData('index', 'technical-explainers'),
+      getPostData('index', 'governance'),
+    ]);
 
   const sections = [
     {
@@ -47,6 +49,11 @@ export default async function FieldGuideLandingPage() {
       href: '/field-guide/technical-explainers',
       post: explainersPost,
     },
+    {
+      label: 'Governance',
+      href: '/field-guide/governance',
+      post: governancePost,
+    },
   ];
 
   return (
@@ -72,9 +79,10 @@ export default async function FieldGuideLandingPage() {
         {sections.map(section => {
           const title = (section.post as PostData & { title?: string }).title ?? section.label;
           const subtitle = (section.post as PostData & { subtitle?: string }).subtitle;
-          const rawImage = COLUMNS === 2
-            ? (section.post as PostData & { featured_image?: string }).featured_image
-            : (section.post as PostData & { thumb_image?: string }).thumb_image;
+          const rawImage =
+            COLUMNS === 2
+              ? (section.post as PostData & { featured_image?: string }).featured_image
+              : (section.post as PostData & { thumb_image?: string }).thumb_image;
           const imageSrc = normalizeFeaturedImagePath(rawImage);
           const imageDarkSrc = getDarkFeaturedImagePath(rawImage);
 
@@ -102,9 +110,7 @@ export default async function FieldGuideLandingPage() {
                     {title}
                   </h2>
                   {subtitle && (
-                    <p className="mb-0 mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                      {subtitle}
-                    </p>
+                    <p className="mb-0 mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{subtitle}</p>
                   )}
                 </div>
               </Link>
@@ -135,9 +141,7 @@ export default async function FieldGuideLandingPage() {
                     {title}
                   </h2>
                   {subtitle && (
-                    <p className="mb-0! mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                      {subtitle}
-                    </p>
+                    <p className="mb-0! mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{subtitle}</p>
                   )}
                 </div>
               </div>
