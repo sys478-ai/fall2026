@@ -1,7 +1,8 @@
 ---
 title: "What Should Others Understand?"
+slug: what-should-others-understand
 scheduled_day: 30
-module_id: 7
+module_id: 6
 subtitle: "Present a public-facing explainer and ELSI analysis."
 recognition_pattern_notes:
   - "Student-selected pattern(s)."

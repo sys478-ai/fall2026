@@ -1,7 +1,8 @@
 ---
 title: "When Does AI Become Technological Solutionism?"
-scheduled_day: 23
-module_id: 4
+slug: when-does-ai-become-technological-solutionism
+scheduled_day: 26
+module_id: 5
 subtitle: "Use domain cases to ask when AI is being asked to solve problems that are also political, institutional, or social."
 status: unverified
 status_reviewer:

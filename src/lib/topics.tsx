@@ -336,7 +336,7 @@ function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
   const topicMeetingsByModule = new Map<string, BaseMeeting[]>();
 
   allTopics
-    .filter(topic => !topic.holiday && topic.slug !== courseCalendar.finalExam.topicSlug)
+    .filter(topic => !topic.holiday && !topic.retired && topic.slug !== courseCalendar.finalExam.topicSlug)
     .forEach(topic => {
       if (typeof topic.scheduledDay !== 'number') {
         throw new Error(`Missing scheduled_day frontmatter in topic "${topic.slug}"`);

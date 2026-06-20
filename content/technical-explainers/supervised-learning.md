@@ -59,21 +59,11 @@ When a new, unlabeled photograph comes in, the system assigns it a category — 
 
 <img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised4.png" />
 
-## Not Just Yes or No
+Once trained, the classifier can be used on many new unlabeled eye images, sorting each one into one of the five categories it learned from the labeled examples.
 
-Many people assume supervised learning always produces a simple yes-or-no answer. Sometimes it does. But the diabetic retinopathy system produces five categories, not two — and a confidence score for each one.
+<img class="mt-8" src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised5.png" />
 
-| Category      | What it means                   |
-| ------------- | ------------------------------- |
-| No disease    | No signs detected               |
-| Mild          | Early changes present           |
-| Moderate      | More widespread changes         |
-| Severe        | Significant risk of vision loss |
-| Proliferative | Most advanced stage — urgent    |
-
-The same structure applies whether a system is sorting emails into folders, identifying species of plants from photographs, or estimating how likely a patient is to be readmitted to a hospital. What changes is the number of categories, the meaning of each one, and the stakes involved.
-
-<img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised5.png" />
+Notably, a very similar technique can be applied to other kinds of classification tasks - whether a system is sorting emails into folders, identifying species of plants from photographs, or estimating how likely a patient is to be readmitted to a hospital. What changes is the number of categories, the meaning of each one, and the stakes involved.
 
 ## What Labels Are — and Why They Matter
 

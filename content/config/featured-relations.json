@@ -5,27 +5,27 @@
     "pattern-04": {
       "featuredAssignments": ["lab01a"],
       "featuredTopics": [
-        "topic-03",
-        "topic-04"
+        "what-is-knowledge-and-how-is-it-made",
+        "what-ethical-lenses-help-us-evaluate-ai"
       ],
       "featuredResources": []
     },
     "pattern-17": {
       "featuredAssignments": ["career-module08"],
       "featuredTopics": [
-        "topic-21",
-        "topic-26"
+        "how-is-ai-entering-schools-and-other-social-institutions",
+        "how-should-we-govern-emerging-ai"
       ],
       "featuredResources": []
     }
   },
   "topics": {
-    "topic-03": {
+    "what-is-knowledge-and-how-is-it-made": {
       "featuredAssignments": ["lab01a"],
       "featuredPatterns": ["pattern-04"],
       "featuredResources": []
     },
-    "topic-21": {
+    "how-is-ai-entering-schools-and-other-social-institutions": {
       "featuredAssignments": ["lab12"],
       "featuredPatterns": [
         "pattern-17",

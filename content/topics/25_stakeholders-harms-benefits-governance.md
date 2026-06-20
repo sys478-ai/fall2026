@@ -1,6 +1,7 @@
 ---
 title: "Who Is Affected?"
-scheduled_day: 24
+slug: who-is-affected
+scheduled_day: 27
 module_id: 5
 subtitle: "Map benefits, risks, and governance questions around an emerging AI system."
 recognition_pattern_notes:

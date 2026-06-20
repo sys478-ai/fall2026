@@ -1,6 +1,7 @@
 ---
 title: 'What Is Knowledge, and How Is It Made?'
-scheduled_day: 3
+slug: what-is-knowledge-and-how-is-it-made
+scheduled_day: 5
 module_id: 1
 subtitle: 'Examine how evidence, interpretation, institutions, and authority shape what comes to count as knowledge.'
 status: unverified

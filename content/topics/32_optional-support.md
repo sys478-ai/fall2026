@@ -1,7 +1,8 @@
 ---
 title: "Optional Support"
-scheduled_day: 29
-module_id: 6
+slug: optional-support
+retired: true
+module_id: 5
 subtitle: "Optional time for conferences, revision, and final project support."
 status: unverified
 status_reviewer:
@@ -10,14 +11,4 @@ status_notes:
 priority: low
 ---
 
-## Topic / Focus
-
-Optional support.
-
-## Recognition Patterns
-
-No specific recognition pattern is assigned for this topic.
-
-## BRAID / ELSI Connection
-
-Optional final ELSI project support.
+This topic has been retired from the active course schedule.

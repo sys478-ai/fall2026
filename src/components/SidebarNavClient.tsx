@@ -10,6 +10,7 @@ import {
   ChevronRightIcon,
   ClipboardDocumentListIcon,
   CpuChipIcon,
+  QueueListIcon,
   DocumentTextIcon,
   FolderIcon,
   HomeIcon,
@@ -544,7 +545,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
         </nav>
       </div>
 
-      <div className="border-t border-slate-200 px-3 py-2 dark:border-slate-800">
+      <div className="border-t border-slate-200 px-3 py-2 dark:border-slate-800 space-y-0.5">
         <Link
           href="/planning/review-status"
           className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm no-underline! transition-colors ${
@@ -558,6 +559,21 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
             className={`min-w-0 truncate transition-[opacity,width] duration-300 ease-in-out ${collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}
           >
             Review Status
+          </span>
+        </Link>
+        <Link
+          href="/planning/playlist-inventory"
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm no-underline! transition-colors ${
+            normalizedPath === '/planning/playlist-inventory'
+              ? 'font-semibold text-slate-950 dark:text-slate-100'
+              : 'text-slate-500 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300'
+          } ${collapsed ? 'justify-center' : ''}`}
+        >
+          <QueueListIcon className="h-5 w-5 shrink-0" />
+          <span
+            className={`min-w-0 truncate transition-[opacity,width] duration-300 ease-in-out ${collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}
+          >
+            Playlist Inventory
           </span>
         </Link>
       </div>

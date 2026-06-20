@@ -20,6 +20,7 @@ export interface TopicMarkdownMetadata {
   themes: string[];
   braidElsiConnection: string;
   holiday?: boolean;
+  retired?: boolean;
 }
 
 function asStringArray(value: unknown): string[] {
@@ -67,7 +68,7 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
   const matterResult = matter(fileContents);
   const data = matterResult.data;
   const scheduledDay = asNumber(data.scheduled_day);
-  const slug = getTopicSlug(id, scheduledDay);
+  const slug = asString(data.slug) || getTopicSlug(id, scheduledDay);
   const subtitle = asString(data.subtitle, asString(data.focus));
   const moduleId = asNumber(data.module_id);
 
@@ -95,6 +96,7 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     themes: asStringArray(data.themes),
     braidElsiConnection: asString(data.braid_elsi_connection),
     holiday: data.holiday === true,
+    retired: data.retired === true,
   };
 }
 

@@ -1,6 +1,7 @@
 ---
 title: 'What Is AI Supposed to Help Us Do?'
-scheduled_day: 2
+slug: what-is-ai-supposed-to-help-us-do
+scheduled_day: 3
 module_id: 1
 subtitle: 'Examine how ideas about safety, care, efficiency, creativity, and improvement shape what AI is imagined to be for.'
 status: unverified

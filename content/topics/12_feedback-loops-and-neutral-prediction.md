@@ -1,6 +1,7 @@
 ---
 title: "Who Bears the Cost of Error?"
-scheduled_day: 12
+slug: who-bears-the-cost-of-error
+scheduled_day: 13
 module_id: 2
 subtitle: "Examine how false positives, false negatives, and threshold choices distribute harm and accountability."
 status: unverified
