@@ -1,0 +1,13 @@
+/* Technical explainer typography — scoped via .technical-explainer-content on the page */
+
+.prose.technical-explainer-content > h2 {
+  @apply mb-5 mt-14 border-0 bg-transparent p-0 text-3xl font-semibold leading-tight tracking-tight text-gray-950 dark:text-gray-50;
+}
+
+.prose.technical-explainer-content > h2:first-child {
+  @apply mt-0;
+}
+
+.prose.technical-explainer-content h3 {
+  @apply mb-3 mt-8 text-lg font-medium leading-snug text-violet-700 dark:text-violet-300;
+}

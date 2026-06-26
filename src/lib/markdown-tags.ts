@@ -7,6 +7,7 @@
  *   - {% flip-cards tone="benefit|harm" %} / {% flip-card %} (see flip-cards.ts)
  *   - {% examples %} (see example-slider.ts)
  *   - {% schedule %} (see schedule-embed.ts)
+ *   - {% step-strip %} / {% endstep-strip %} (see step-strip.ts)
  *   - {% no-copy %}
  *   - {: .class #id } (Kramdown-style inline attribute lists)
  *

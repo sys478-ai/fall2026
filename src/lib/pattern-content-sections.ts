@@ -76,6 +76,49 @@ function getPlainTextFromHtml(html: string) {
   return decodeHtmlText(html.replace(/<[^>]+>/g, '').trim());
 }
 
+function slugifyForId(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/&amp;/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+export interface PatternSubsectionItem {
+  id: string;
+  label: string;
+  content: string;
+}
+
+export function splitPatternSubsections(content: string): { intro: string; items: PatternSubsectionItem[] } {
+  const headingRegex = /<h3[^>]*>([\s\S]*?)<\/h3>/gi;
+  const items: PatternSubsectionItem[] = [];
+  let intro = '';
+  let currentLabel = '';
+  let currentStart = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const sectionContent = content.slice(currentStart, match.index).trim();
+    if (currentLabel && sectionContent) {
+      items.push({ id: slugifyForId(currentLabel), label: currentLabel, content: sectionContent });
+    } else if (!currentLabel && sectionContent) {
+      intro = sectionContent;
+    }
+    currentLabel = getPlainTextFromHtml(match[1]);
+    currentStart = match.index + match[0].length;
+  }
+
+  const finalContent = content.slice(currentStart).trim();
+  if (currentLabel && finalContent) {
+    items.push({ id: slugifyForId(currentLabel), label: currentLabel, content: finalContent });
+  } else if (!currentLabel && finalContent) {
+    intro = finalContent;
+  }
+
+  return { intro, items };
+}
+
 export function splitPatternContentSections(content: string) {
   const protectedRanges = findProtectedRanges(content);
   const headingRegex = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;

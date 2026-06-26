@@ -23,6 +23,8 @@ priority: high
 
 Data does not simply appear. People, institutions, tools, sensors, categories, and storage systems all shape what becomes data — and what gets left out.
 
+{% step-strip %}
+
 ### 1. Lived Reality / The World
 
 ![A busy city scene with people, vehicles, weather, conversation, and movement happening at once.](/fall2026/images/ethics-field-guide/data/01-lived-reality.png)
@@ -58,6 +60,8 @@ Structured data is useful for analysis because earlier choices have made it legi
 ![A group discussing values and tradeoffs around a system diagram with icons for privacy, fairness, power, care, and efficiency.](/fall2026/images/ethics-field-guide/data/06-human-construct.png)
 
 Data is a human construct. It is shaped by goals, tools, values, institutions, and power. Better data starts with more intentional choices — and better documentation of those choices.
+
+{% endstep-strip %}
 
 ## Questions To Ask
 

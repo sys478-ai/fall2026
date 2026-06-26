@@ -3,6 +3,7 @@
 @import '../styles/flip-cards.css';
 @import '../styles/pattern-case-tabs.css';
 @import '../styles/sequence.css';
+@import '../styles/technical-explainers.css';
 
 /* Tailwind v4: Define custom dark mode variant for class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));

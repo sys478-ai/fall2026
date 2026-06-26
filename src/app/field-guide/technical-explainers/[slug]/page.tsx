@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPostData, getAllPostIds, type PostData } from '@/lib/markdown';
@@ -6,9 +7,23 @@ import ContentLayout from '@/components/ContentLayout';
 import MarkdownContent from '@/components/MarkdownContent';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import StatusBanner from '@/components/StatusBanner';
+import { splitPatternContentSections } from '@/lib/pattern-content-sections';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+function ExplainerSection({ label, children }: { label: string; children: ReactNode }) {
+  if (!label.trim()) {
+    return <div className="min-w-0 space-y-4">{children}</div>;
+  }
+
+  return (
+    <section className="space-y-4 pt-4">
+      <h2 className="m-0 text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">{label}</h2>
+      <div className="min-w-0 [&_li]:my-2 [&_ol]:pl-5! [&_ul]:pl-5!">{children}</div>
+    </section>
+  );
 }
 
 export const dynamicParams = false;
@@ -35,6 +50,7 @@ export default async function TechnicalExplainerDetailPage({ params }: PageProps
   try {
     const postData = await getPostData(slug, 'technical-explainers');
     const subtitle = (postData as PostData & { subtitle?: string }).subtitle;
+    const contentSections = splitPatternContentSections(postData.content);
 
     return (
       <ContentLayout
@@ -70,7 +86,11 @@ export default async function TechnicalExplainerDetailPage({ params }: PageProps
         }
       >
         <div className="space-y-8">
-          <MarkdownContent content={postData.content} />
+          {contentSections.map((section, index) => (
+            <ExplainerSection key={`${section.label || 'intro'}-${index}`} label={section.label}>
+              <MarkdownContent content={section.content} className="technical-explainer-content" />
+            </ExplainerSection>
+          ))}
           <section className="rounded-2xl border border-violet-200 bg-violet-50/70 p-6 dark:border-violet-900 dark:bg-violet-950/20">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
               Field Guide

@@ -135,6 +135,21 @@
   color: var(--flip-card-text);
 }
 
+.prose .flip-card-back a {
+  color: var(--flip-card-heading);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.prose .flip-card-back a:hover {
+  opacity: 0.85;
+}
+
+.prose .flip-card-back strong {
+  color: var(--flip-card-heading);
+}
+
 .prose .flip-card-icon {
   font-size: 2rem;
   line-height: 1;
@@ -143,6 +158,37 @@
 
 .dark .prose .flip-card-icon {
   color: var(--color-white);
+}
+
+.prose .flip-card-grid--field-guide .flip-card-icon {
+  color: var(--color-black);
+}
+
+.dark .prose .flip-card-grid--field-guide .flip-card-icon {
+  color: var(--color-white);
+}
+
+.prose .flip-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.prose .flip-card-tag {
+  border-radius: 0.25rem;
+  background: var(--flip-card-tag-bg);
+  padding: 0.125rem 0.375rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--flip-card-tag-text);
+  text-decoration: none;
+}
+
+.prose a.flip-card-tag:hover {
+  text-decoration: underline;
 }
 
 .prose .flip-card-hint {
@@ -156,6 +202,173 @@
 
 .prose .flip-card.is-flipped .flip-card-hint {
   visibility: hidden;
+}
+
+.prose .flip-card-grid--field-guide {
+  --flip-card-heading: var(--color-gray-900);
+  --flip-card-text: var(--color-gray-700);
+
+  margin: 0;
+}
+
+.dark .prose .flip-card-grid--field-guide {
+  --flip-card-heading: var(--color-gray-100);
+  --flip-card-text: var(--color-gray-300);
+}
+
+/* Deployment patterns — slate blue: observational, “what do you notice?” */
+.prose .flip-card-grid--palette-patterns {
+  --flip-card-bg: var(--color-slate-50);
+  --flip-card-border: var(--color-slate-200);
+  --flip-card-hint: var(--color-slate-600);
+  --flip-card-focus: var(--color-slate-600);
+  --flip-card-accent: var(--color-slate-700);
+  --flip-card-tag-bg: var(--color-slate-100);
+  --flip-card-tag-text: var(--color-slate-700);
+}
+
+.dark .prose .flip-card-grid--palette-patterns {
+  --flip-card-bg: var(--color-slate-950);
+  --flip-card-border: var(--color-slate-800);
+  --flip-card-hint: var(--color-slate-400);
+  --flip-card-focus: var(--color-slate-400);
+  --flip-card-accent: var(--color-slate-300);
+  --flip-card-tag-bg: var(--color-slate-900);
+  --flip-card-tag-text: var(--color-slate-300);
+}
+
+/* STS concepts — muted violet: theoretical, structural */
+.prose .flip-card-grid--palette-sts {
+  --flip-card-bg: var(--color-violet-50);
+  --flip-card-border: var(--color-violet-200);
+  --flip-card-hint: var(--color-violet-600);
+  --flip-card-focus: var(--color-violet-600);
+  --flip-card-accent: var(--color-violet-700);
+  --flip-card-tag-bg: var(--color-violet-100);
+  --flip-card-tag-text: var(--color-violet-700);
+}
+
+.dark .prose .flip-card-grid--palette-sts {
+  --flip-card-bg: var(--color-violet-950);
+  --flip-card-border: var(--color-violet-800);
+  --flip-card-hint: var(--color-violet-400);
+  --flip-card-focus: var(--color-violet-400);
+  --flip-card-accent: var(--color-violet-300);
+  --flip-card-tag-bg: var(--color-violet-900);
+  --flip-card-tag-text: var(--color-violet-300);
+}
+
+/* Examples — warm amber: real cases, history, situated detail */
+.prose .flip-card-grid--palette-examples {
+  --flip-card-bg: var(--color-amber-50);
+  --flip-card-border: var(--color-amber-200);
+  --flip-card-hint: var(--color-amber-700);
+  --flip-card-focus: var(--color-amber-600);
+  --flip-card-accent: var(--color-amber-800);
+  --flip-card-tag-bg: var(--color-amber-100);
+  --flip-card-tag-text: var(--color-amber-800);
+}
+
+.dark .prose .flip-card-grid--palette-examples {
+  --flip-card-bg: var(--color-amber-950);
+  --flip-card-border: var(--color-amber-900);
+  --flip-card-hint: var(--color-amber-400);
+  --flip-card-focus: var(--color-amber-400);
+  --flip-card-accent: var(--color-amber-300);
+  --flip-card-tag-bg: var(--color-amber-900);
+  --flip-card-tag-text: var(--color-amber-300);
+}
+
+/* Ethical frameworks — sage emerald: judgment, evaluation, principles */
+.prose .flip-card-grid--palette-frameworks {
+  --flip-card-bg: var(--color-emerald-50);
+  --flip-card-border: var(--color-emerald-200);
+  --flip-card-hint: var(--color-emerald-700);
+  --flip-card-focus: var(--color-emerald-600);
+  --flip-card-accent: var(--color-emerald-800);
+  --flip-card-tag-bg: var(--color-emerald-100);
+  --flip-card-tag-text: var(--color-emerald-800);
+}
+
+.dark .prose .flip-card-grid--palette-frameworks {
+  --flip-card-bg: var(--color-emerald-950);
+  --flip-card-border: var(--color-emerald-900);
+  --flip-card-hint: var(--color-emerald-400);
+  --flip-card-focus: var(--color-emerald-400);
+  --flip-card-accent: var(--color-emerald-300);
+  --flip-card-tag-bg: var(--color-emerald-900);
+  --flip-card-tag-text: var(--color-emerald-300);
+}
+
+/* Technical explainers — sky cyan: mechanisms, clarity, how-it-works */
+.prose .flip-card-grid--palette-explainers {
+  --flip-card-bg: var(--color-sky-50);
+  --flip-card-border: var(--color-sky-200);
+  --flip-card-hint: var(--color-sky-700);
+  --flip-card-focus: var(--color-sky-600);
+  --flip-card-accent: var(--color-sky-800);
+  --flip-card-tag-bg: var(--color-sky-100);
+  --flip-card-tag-text: var(--color-sky-800);
+}
+
+.dark .prose .flip-card-grid--palette-explainers {
+  --flip-card-bg: var(--color-sky-950);
+  --flip-card-border: var(--color-sky-900);
+  --flip-card-hint: var(--color-sky-400);
+  --flip-card-focus: var(--color-sky-400);
+  --flip-card-accent: var(--color-sky-300);
+  --flip-card-tag-bg: var(--color-sky-900);
+  --flip-card-tag-text: var(--color-sky-300);
+}
+
+.prose .flip-card-grid--field-guide .flip-card-front,
+.prose .flip-card-grid--field-guide .flip-card-back {
+  min-height: 16rem;
+}
+
+.prose .flip-card--missing {
+  --flip-card-bg: #fef2f2;
+  --flip-card-border: #fecaca;
+  --flip-card-heading: #991b1b;
+  --flip-card-text: #7f1d1d;
+  --flip-card-hint: #b91c1c;
+  --flip-card-focus: #dc2626;
+}
+
+.dark .prose .flip-card--missing {
+  --flip-card-bg: rgba(127, 29, 29, 0.2);
+  --flip-card-border: rgba(248, 113, 113, 0.45);
+  --flip-card-heading: #fecaca;
+  --flip-card-text: #fca5a5;
+  --flip-card-hint: #f87171;
+  --flip-card-focus: #f87171;
+}
+
+.prose .flip-card-thumb {
+  width: 100%;
+  height: 5.5rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.prose .flip-card-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--flip-card-hint);
+}
+
+.prose .flip-card-link {
+  margin-top: auto;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--flip-card-heading);
+  text-decoration: none;
+}
+
+.prose .flip-card-link:hover {
+  text-decoration: underline;
 }
 
 @media print {

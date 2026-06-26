@@ -35,6 +35,48 @@ function escapeHtml(text: string): string {
     .replace(/"/g, '&quot;');
 }
 
+function escapeHtmlAttribute(text: string): string {
+  return escapeHtml(text).replace(/'/g, '&#39;');
+}
+
+function sanitizeHref(rawHref: string): string {
+  const href = rawHref.trim();
+
+  if (
+    href.startsWith('/') ||
+    href.startsWith('./') ||
+    href.startsWith('../') ||
+    href.startsWith('http://') ||
+    href.startsWith('https://') ||
+    href.startsWith('#')
+  ) {
+    return href;
+  }
+
+  return '#';
+}
+
+function formatInlineText(text: string): string {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let result = '';
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    const [fullMatch, label, href] = match;
+    const prefix = text.slice(lastIndex, match.index);
+    result += escapeHtml(prefix);
+    result += `<a href="${escapeHtmlAttribute(sanitizeHref(href))}">${escapeHtml(label.trim())}</a>`;
+    lastIndex = match.index + fullMatch.length;
+  }
+
+  result += escapeHtml(text.slice(lastIndex));
+
+  return result
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>');
+}
+
 function parseFlipCardsAttributes(attrString?: string): { tone: string } {
   if (!attrString?.trim()) {
     return { tone: 'default' };
@@ -87,7 +129,7 @@ function formatCardText(text: string): string {
     return '';
   }
 
-  return paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
+  return paragraphs.map(paragraph => `<p>${formatInlineText(paragraph)}</p>`).join('');
 }
 
 function renderFlipCard(icon: string, title: string, front: string, back: string): string {

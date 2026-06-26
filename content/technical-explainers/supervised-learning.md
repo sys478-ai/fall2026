@@ -44,20 +44,27 @@ That is supervised learning: **show the system many examples that have already b
 
 ## How It Works
 
-**Step 1: Label thousands of examples.**
-Specialist doctors reviewed thousands of eye photographs and assigned each one a category. This is called the **training data** — a large collection of examples where the correct answer is already known.
+{% step-strip %}
+
+### 1. Label thousands of examples
 
 <img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised2.png" />
 
-**Step 2: Train the system.**
-The system looks at all the labeled photographs and tries to find patterns — combinations of visual features that tend to appear in each category. It adjusts its internal settings based on those patterns until it can predict labels accurately on the examples it has seen.
+Specialist doctors reviewed thousands of eye photographs and assigned each one a category. This is called the **training data** — a large collection of examples where the correct answer is already known.
+
+### 2. Train the system
 
 <img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised3.png" />
 
-**Step 3: Classify new photographs.**
-When a new, unlabeled photograph comes in, the system assigns it a category — and a confidence score showing how certain it is.
+The system looks at all the labeled photographs and tries to find patterns — combinations of visual features that tend to appear in each category. It adjusts its internal settings based on those patterns until it can predict labels accurately on the examples it has seen.
+
+### 3. Classify new photographs
 
 <img src="/fall2026/images/ethics-field-guide/technical-explainers/supervised/supervised4.png" />
+
+When a new, unlabeled photograph comes in, the system assigns it a category — and a confidence score showing how certain it is.
+
+{% endstep-strip %}
 
 Once trained, the classifier can be used on many new unlabeled eye images, sorting each one into one of the five categories it learned from the labeled examples.
 
@@ -101,8 +108,6 @@ Two important limits of this process:
 
 - The system can only minimize errors on its training data. It has no guarantee of performing well on examples that look different from what it was trained on.
 - Minimizing errors does not mean the system has learned something meaningful about the world. It means it has gotten better at predicting the labels in its training set — whatever those labels encode.
-
-{% endcollapsible %}
 
 ## Critical Bridge
 

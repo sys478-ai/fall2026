@@ -10,6 +10,7 @@ import { preprocessCheckboxes, postprocessCheckboxes } from './markdown-checkbox
 import { preprocessMarkdownTags } from './markdown-tags';
 import { preprocessFlipCards } from './flip-cards';
 import { postprocessSequences, preprocessSequenceTags } from './sequence';
+import { postprocessStepStrips, preprocessStepStripTags } from './step-strip';
 import { preprocessExampleSliderTags, injectExampleSliders } from './example-slider';
 import { preprocessScheduleTags } from './schedule-embed';
 
@@ -282,6 +283,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   // Pre-process custom markdown tags (e.g. {% sequence %}, {% no-copy %}, {% collapsible %}, {% flip-cards %})
   // This rewrites them into HTML comments or HTML blocks that post-processors understand
   markdownContent = preprocessSequenceTags(markdownContent);
+  markdownContent = preprocessStepStripTags(markdownContent);
   markdownContent = preprocessMarkdownTags(markdownContent);
   markdownContent = preprocessFlipCards(markdownContent);
   markdownContent = preprocessExampleSliderTags(markdownContent);
@@ -320,6 +322,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   // Post-process progressive sequence blocks after markdown has rendered
   // so step bodies can contain normal markdown.
   contentHtml = postprocessSequences(contentHtml);
+  contentHtml = postprocessStepStrips(contentHtml);
 
   // Post-process HTML to preserve whitespace in code blocks inside table cells
   // Store original code content in data attribute before any processing

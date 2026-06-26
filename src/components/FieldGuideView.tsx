@@ -7,7 +7,7 @@ type View = 'card' | 'compact';
 const ViewContext = createContext<View>('card');
 
 export function FieldGuideViewProvider({ children }: { children: React.ReactNode }) {
-  const [view, setView] = useState<View>('compact');
+  const [view, setView] = useState<View>('card');
   const base = 'px-3 py-1.5 text-sm transition-colors';
   const active = 'bg-gray-100 font-semibold text-gray-900 dark:bg-gray-800 dark:text-gray-50';
   const inactive = 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200';
