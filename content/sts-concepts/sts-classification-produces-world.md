@@ -3,7 +3,7 @@ title: "Classification systems don't just describe the world — they produce it
 num: '23'
 id: sts-classification-produces-world
 slug: classification-systems-dont-just-describe-the-world-they-produce-it
-excerpt: "Before a system can classify anything, someone has to build the categories. Once deployed, those categories reshape the behavior and reality they were built to describe."
+excerpt: 'Before a system can classify anything, someone has to build the categories. Once deployed, those categories reshape the behavior and reality they were built to describe.'
 field_guide_section: 'sts-concepts'
 field_guide_order: 2
 order: 2
@@ -15,7 +15,7 @@ related_recognition_cards: ['pattern-22', 'pattern-07', 'pattern-08']
 status: verified
 status_reviewer: Maxwell Chalmers
 status_date: 2026-06-14
-status_notes: "Reviewed for conceptual accuracy, accessibility, observational usefulness, and cross-references."
+status_notes: 'Reviewed for conceptual accuracy, accessibility, observational usefulness, and cross-references.'
 priority: high
 ---
 
@@ -40,15 +40,8 @@ A neighborhood classified as high-risk receives more surveillance, which generat
 - What feedback loops exist between the classification and the thing being classified?
 - Who benefits from the current category boundaries staying where they are?
 
-## Why This Matters
-
-This concept supports several other ideas in the field guide. Categories are constructed by people with particular assumptions and goals, and once institutions begin using them, they can reshape the world they were meant to describe. Recognizing both processes helps you ask better questions about how AI systems classify people, behavior, and risk.
-
-In the BRAID neuromorphic case, this shows up in how "anomaly" is defined. The system doesn't detect anomalies in nature — it detects departures from a baseline that was built from prior data. How that baseline was constructed, whose behavior it treats as normal, and what feedback effects the classification produces when acted upon are all classification questions with direct governance consequences.
-
 ## Related Recognition Cards
 
 - [This system treats one group as the default](/fall2026/field-guide/deployment-patterns/this-system-treats-one-group-as-the-default)
 - [Thresholds make uncertainty consequential](/fall2026/field-guide/deployment-patterns/thresholds-make-uncertainty-consequential)
 - [Prediction imports the past](/fall2026/field-guide/deployment-patterns/prediction-imports-the-past)
-

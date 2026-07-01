@@ -27,6 +27,10 @@ interface TopicWorkListProps {
   id?: string;
   topicSlug: string;
   items: TopicWorkItem[];
+  kicker?: string;
+  title?: string;
+  storageNamespace?: 'topic' | 'assignment';
+  trackProgress?: boolean;
 }
 
 const TYPE_LABELS: Record<TopicWorkItemType, string> = {
@@ -37,8 +41,8 @@ const TYPE_LABELS: Record<TopicWorkItemType, string> = {
   due: 'Due',
 };
 
-function storageKey(topicSlug: string, itemId: string) {
-  return `topic-work-${topicSlug}-${itemId}`;
+function storageKey(namespace: 'topic' | 'assignment', scope: string, itemId: string) {
+  return `${namespace}-work-${scope}-${itemId}`;
 }
 
 function readStoredBoolean(key: string) {
@@ -58,7 +62,15 @@ function readStoredBoolean(key: string) {
   }
 }
 
-export default function TopicWorkList({ id, topicSlug, items }: TopicWorkListProps) {
+export default function TopicWorkList({
+  id,
+  topicSlug,
+  items,
+  kicker = 'Topic Work',
+  title = 'What to do for this topic',
+  storageNamespace = 'topic',
+  trackProgress = true,
+}: TopicWorkListProps) {
   const trackedItems = useMemo(() => items.filter(item => !item.optional), [items]);
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
   const [isReady, setIsReady] = useState(false);
@@ -81,7 +93,7 @@ export default function TopicWorkList({ id, topicSlug, items }: TopicWorkListPro
     const nextCheckedItems: Record<string, boolean> = {};
 
     items.forEach(item => {
-      const keys = [storageKey(topicSlug, item.id), ...(item.syncKeys || [])];
+      const keys = [storageKey(storageNamespace, topicSlug, item.id), ...(item.syncKeys || [])];
       nextCheckedItems[item.id] = keys.some(readStoredBoolean);
     });
 
@@ -90,10 +102,10 @@ export default function TopicWorkList({ id, topicSlug, items }: TopicWorkListPro
       trackedItems.length > 0 && trackedItems.every(trackedItem => nextCheckedItems[trackedItem.id]);
     userInteractionRef.current = false;
     setIsReady(true);
-  }, [items, topicSlug, trackedItems]);
+  }, [items, topicSlug, trackedItems, storageNamespace]);
 
   useEffect(() => {
-    if (!isReady) {
+    if (!isReady || !trackProgress) {
       return;
     }
 
@@ -111,10 +123,10 @@ export default function TopicWorkList({ id, topicSlug, items }: TopicWorkListPro
 
     previousCompleteRef.current = isComplete;
     userInteractionRef.current = false;
-  }, [checkedItems, isReady, topicSlug, trackedItems]);
+  }, [checkedItems, isReady, topicSlug, trackedItems, trackProgress]);
 
   function setItemChecked(item: TopicWorkItem, checked: boolean) {
-    const keys = [storageKey(topicSlug, item.id), ...(item.syncKeys || [])];
+    const keys = [storageKey(storageNamespace, topicSlug, item.id), ...(item.syncKeys || [])];
 
     keys.forEach(key => {
       localStorage.setItem(key, JSON.stringify(checked));
@@ -136,10 +148,10 @@ export default function TopicWorkList({ id, topicSlug, items }: TopicWorkListPro
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-800">
         <div>
           <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#0b5d8f] dark:text-[#8fc4ee]">
-            Topic Work
+            {kicker}
           </p>
           <h2 className="m-0! text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-            What to do for this topic
+            {title}
           </h2>
         </div>
         <div className="rounded-full border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 dark:border-gray-800 dark:text-gray-300">

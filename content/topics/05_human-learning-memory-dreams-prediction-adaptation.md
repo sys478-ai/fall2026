@@ -1,6 +1,7 @@
 ---
 title: "What Is Learning, and How Does It Happen?"
-scheduled_day: 5
+slug: what-is-learning-and-how-does-it-happen
+scheduled_day: 6
 module_id: 1
 subtitle: "Explore learning as biological, developmental, social, and tool-mediated rather than only individual or computational."
 status: unverified

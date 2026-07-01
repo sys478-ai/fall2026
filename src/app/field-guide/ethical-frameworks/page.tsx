@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
-import RecognitionPatternCards from '@/components/RecognitionPatternCards';
+import FieldGuideFlipCards from '@/components/FieldGuideFlipCards';
 import { FieldGuideViewProvider, FieldGuideCardSection, FieldGuideCompactSection } from '@/components/FieldGuideView';
 import { getAllPosts, type PostData } from '@/lib/markdown';
 
@@ -42,7 +42,15 @@ export default function EthicalFrameworksPage() {
           <FieldGuideViewProvider>
             <FieldGuideCardSection>
               <section className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16">
-                <RecognitionPatternCards patterns={cards} badgeLabel="Framework" preserveOrder columns={columns} />
+                <FieldGuideFlipCards
+                  items={cards}
+                  preserveOrder
+                  columns={columns}
+                  palette="frameworks"
+                  badgeLabel="Framework"
+                  linkLabel="Open framework →"
+                  iconClass="fa-solid fa-scale-balanced"
+                />
               </section>
             </FieldGuideCardSection>
             <FieldGuideCompactSection

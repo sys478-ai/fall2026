@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
-import RecognitionPatternCards from '@/components/RecognitionPatternCards';
+import FieldGuideFlipCards from '@/components/FieldGuideFlipCards';
 import { FieldGuideViewProvider, FieldGuideCardSection, FieldGuideCompactSection } from '@/components/FieldGuideView';
 import { getAllPosts, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
@@ -150,7 +150,15 @@ export default function DeploymentPatternsPage() {
                       </h2>
                       <p className="mb-0 max-w-5xl text-base leading-7 text-gray-700 dark:text-gray-300">{section.intro}</p>
                     </div>
-                    <RecognitionPatternCards patterns={section.items} badgeLabel="Pattern" preserveOrder columns={columns} />
+                    <FieldGuideFlipCards
+                      items={section.items}
+                      preserveOrder
+                      columns={columns}
+                      palette="patterns"
+                      badgeLabel="Pattern"
+                      linkLabel="Open pattern →"
+                      iconClass="fa-solid fa-magnifying-glass"
+                    />
                   </section>
                 </FieldGuideCardSection>
                 <FieldGuideCompactSection

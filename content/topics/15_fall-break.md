@@ -1,6 +1,7 @@
 ---
 title: "Fall Break"
-module_id: 3
+slug: fall-break
+module_id: 2
 subtitle: "No class."
 holiday: true
 status: unverified

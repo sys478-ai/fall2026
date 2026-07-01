@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostDataBySlug, PostData } from '@/lib/markdown';
 import {
@@ -12,9 +11,10 @@ import ContentLayout from '@/components/ContentLayout';
 import MarkdownContent from '@/components/MarkdownContent';
 import PatternCaseTabs, { type PatternCaseTab } from '@/components/PatternCaseTabs';
 import PatternComicStrip, { type PatternComicStripItem } from '@/components/PatternComicStrip';
-import { getExamplesForCard } from '@/lib/examples';
 import { getReadingsForCard, type Reading } from '@/lib/readings';
 import StatusBanner from '@/components/StatusBanner';
+import { StsConceptSection } from '@/components/sts-concepts';
+import { splitPatternContentSections } from '@/lib/pattern-content-sections';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -67,23 +67,6 @@ function slugifyForId(value: string) {
     .replace(/^-+|-+$/g, '');
 }
 
-function splitPatternContentSections(content: string) {
-  const headingRegex = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
-  const sections: Array<{ label: string; content: string }> = [];
-  let currentLabel = 'Overview';
-  let currentStart = 0;
-  let match: RegExpExecArray | null;
-  while ((match = headingRegex.exec(content)) !== null) {
-    const sectionContent = content.slice(currentStart, match.index).trim();
-    if (sectionContent) sections.push({ label: currentLabel, content: sectionContent });
-    currentLabel = getPlainTextFromHtml(match[1]);
-    currentStart = match.index + match[0].length;
-  }
-  const finalContent = content.slice(currentStart).trim();
-  if (finalContent) sections.push({ label: currentLabel, content: finalContent });
-  return sections;
-}
-
 function splitPatternSubsections(content: string): { intro: string; items: PatternComicStripItem[] } {
   const headingRegex = /<h3[^>]*>([\s\S]*?)<\/h3>/gi;
   const items: PatternComicStripItem[] = [];
@@ -93,13 +76,15 @@ function splitPatternSubsections(content: string): { intro: string; items: Patte
   let match: RegExpExecArray | null;
   while ((match = headingRegex.exec(content)) !== null) {
     const sectionContent = content.slice(currentStart, match.index).trim();
-    if (currentLabel && sectionContent) items.push({ id: slugifyForId(currentLabel), label: currentLabel, content: sectionContent });
+    if (currentLabel && sectionContent)
+      items.push({ id: slugifyForId(currentLabel), label: currentLabel, content: sectionContent });
     else if (!currentLabel && sectionContent) intro = sectionContent;
     currentLabel = getPlainTextFromHtml(match[1]);
     currentStart = match.index + match[0].length;
   }
   const finalContent = content.slice(currentStart).trim();
-  if (currentLabel && finalContent) items.push({ id: slugifyForId(currentLabel), label: currentLabel, content: finalContent });
+  if (currentLabel && finalContent)
+    items.push({ id: slugifyForId(currentLabel), label: currentLabel, content: finalContent });
   else if (!currentLabel && finalContent) intro = finalContent;
   return { intro, items };
 }
@@ -112,30 +97,38 @@ function splitPatternCaseTabs(content: string): PatternCaseTab[] {
   let match: RegExpExecArray | null;
   while ((match = headingRegex.exec(content)) !== null) {
     const caseContent = content.slice(currentStart, match.index).trim();
-    if (currentLabel && caseContent) cases.push({ id: slugifyForId(currentLabel), label: currentLabel, content: caseContent });
+    if (currentLabel && caseContent)
+      cases.push({ id: slugifyForId(currentLabel), label: currentLabel, content: caseContent });
     currentLabel = getPlainTextFromHtml(match[1]);
     currentStart = match.index + match[0].length;
   }
   const finalContent = content.slice(currentStart).trim();
-  if (currentLabel && finalContent) cases.push({ id: slugifyForId(currentLabel), label: currentLabel, content: finalContent });
+  if (currentLabel && finalContent)
+    cases.push({ id: slugifyForId(currentLabel), label: currentLabel, content: finalContent });
   return cases;
 }
 
-function PatternSection({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <section className="space-y-4 pt-4">
-      <h2 className="text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">{label}</h2>
-      <div className="min-w-0 [&_li]:my-2 [&_ol]:pl-5! [&_ul]:pl-5!">{children}</div>
-    </section>
-  );
+function stripDuplicateLeadingHeading(content: string, label: string) {
+  const escapedLabel = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const duplicateHeadingRegex = new RegExp(`^\\s*<h2[^>]*>\\s*${escapedLabel}\\s*<\\/h2>\\s*`, 'i');
+
+  return content.replace(duplicateHeadingRegex, '');
+}
+
+function stripAnyLeadingSectionHeading(content: string) {
+  return content.replace(/^\s*<h2[^>]*>[\s\S]*?<\/h2>\s*/i, '');
 }
 
 function PatternContentSection({ section }: { section: { label: string; content: string } }) {
-  const caseTabs = section.label === 'Examples' ? splitPatternCaseTabs(section.content) : [];
-  const stepGrid = section.label === 'What To Notice' ? splitPatternSubsections(section.content) : null;
+  const contentWithoutMatchingHeading = section.label
+    ? stripDuplicateLeadingHeading(section.content, section.label)
+    : section.content;
+  const cleanedContent = stripAnyLeadingSectionHeading(contentWithoutMatchingHeading);
+  const caseTabs = section.label === 'Examples' ? splitPatternCaseTabs(cleanedContent) : [];
+  const stepGrid = section.label === 'What To Notice' ? splitPatternSubsections(cleanedContent) : null;
   if (stepGrid && stepGrid.items.length > 0) return <PatternComicStrip intro={stepGrid.intro} items={stepGrid.items} />;
   if (caseTabs.length > 0) return <PatternCaseTabs cases={caseTabs} />;
-  return <MarkdownContent content={section.content} />;
+  return <MarkdownContent content={cleanedContent} />;
 }
 
 function FieldGuideReturnSection() {
@@ -144,9 +137,7 @@ function FieldGuideReturnSection() {
       <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
         Field Guide
       </p>
-      <h2 className="m-0 text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-        Browse STS Concepts
-      </h2>
+      <h2 className="m-0 text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">Browse STS Concepts</h2>
       <p className="mb-0 mt-3 max-w-3xl text-sm leading-6 text-gray-700 dark:text-gray-300">
         Return to the full list of STS concepts.
       </p>
@@ -176,7 +167,6 @@ export default async function STSConceptPage({ params }: PageProps) {
     const relatedTopics = getRelatedTopicsForPattern(postData.id);
     const relatedTaggedContent = getRelatedContentForPattern(postData.id);
     const relatedScheduleItems = await getRelatedScheduleItemsForPattern(postData.id);
-    const relatedExamples = await getExamplesForCard(postData.num ?? '', 'sts-concepts');
     const bibliographyReadings = getReadingsForCard(postData.num ?? '');
     const featuredTopics = (postData as PostData & { featured_topics?: string[] }).featured_topics || [];
     const featuredAssignments = (postData as PostData & { featured_assignments?: string[] }).featured_assignments || [];
@@ -186,15 +176,21 @@ export default async function STSConceptPage({ params }: PageProps) {
     const postWithGuideMetadata = postData as PostData & { field_guide_section_title?: string; group?: string };
     const groupLabel = postWithGuideMetadata.field_guide_section_title || formatGroupLabel(postWithGuideMetadata.group);
     const patternContentSections = splitPatternContentSections(postData.content);
-
     return (
       <ContentLayout
         variant="detail-with-toc"
         fullWidth
-        showToc={false}
+        showToc={postData.toc !== false}
+        tocMaxLevel={postData.heading_max_level || 2}
         header={
           <>
-            <StatusBanner status={postData.status} status_reviewer={postData.status_reviewer} status_date={postData.status_date} status_notes={postData.status_notes} contentType="sts-concepts" />
+            <StatusBanner
+              status={postData.status}
+              status_reviewer={postData.status_reviewer}
+              status_date={postData.status_date}
+              status_notes={postData.status_notes}
+              contentType="sts-concepts"
+            />
             <div className="space-y-4 py-6">
               <Breadcrumbs
                 className="px-4 md:px-16"
@@ -210,39 +206,33 @@ export default async function STSConceptPage({ params }: PageProps) {
         }
       >
         <div className="space-y-8">
-          {patternContentSections.map(section => (
-            <PatternSection key={section.label} label={section.label}>
+          {patternContentSections.map((section, index) => (
+            <StsConceptSection key={`${section.label || 'intro'}-${index}`} label={section.label}>
               <PatternContentSection section={section} />
-            </PatternSection>
+            </StsConceptSection>
           ))}
 
-          {relatedExamples.length > 0 && (
-            <PatternSection label="Examples">
-              <PatternCaseTabs
-                cases={relatedExamples.map(ex => ({
-                  id: ex.slug,
-                  label: ex.title,
-                  content: `${ex.content}<div class="mt-5 rounded-lg border border-violet-200 bg-violet-50 p-4 dark:border-violet-800 dark:bg-violet-950/30"><p class="mb-1 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">How this connects</p><p class="mb-0 text-sm leading-6 text-gray-800 dark:text-gray-200">${ex.interpretation}</p></div>`,
-                }))}
-              />
-            </PatternSection>
-          )}
-
           {bibliographyReadings.length > 0 && (
-            <PatternSection label="Readings">
+            <StsConceptSection label="Readings">
               <ul className="list-tight">
                 {bibliographyReadings.map((reading: Reading) => (
                   <li key={reading.id}>
-                    <a href={reading.url} target="_blank" rel="noopener noreferrer">{reading.title}</a>
-                    {reading.authors && <span className="text-sm text-gray-600 dark:text-gray-400"> — {reading.authors}</span>}
-                    {reading.notes && <p className="mb-0 mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">{reading.notes}</p>}
+                    <a href={reading.url} target="_blank" rel="noopener noreferrer">
+                      {reading.title}
+                    </a>
+                    {reading.authors && (
+                      <span className="text-sm text-gray-600 dark:text-gray-400"> — {reading.authors}</span>
+                    )}
+                    {reading.notes && (
+                      <p className="mb-0 mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">{reading.notes}</p>
+                    )}
                   </li>
                 ))}
               </ul>
-            </PatternSection>
+            </StsConceptSection>
           )}
 
-          <PatternSection label="Related Course Topics">
+          <StsConceptSection label="Related Course Topics">
             {relatedTopics.length > 0 ? (
               <ul className="list-tight">
                 {relatedTopics.map(topic => (
@@ -250,7 +240,9 @@ export default async function STSConceptPage({ params }: PageProps) {
                     <Link href={`/topics/${topic.meetingSlug}`}>{topic.meetingTitle}</Link>{' '}
                     <span className="text-sm text-gray-600 dark:text-gray-400">({topic.moduleTitle})</span>
                     {featuredTopics.includes(topic.meetingSlug) && (
-                      <span className="ml-2 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">Featured</span>
+                      <span className="ml-2 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                        Featured
+                      </span>
                     )}
                   </li>
                 ))}
@@ -258,9 +250,9 @@ export default async function STSConceptPage({ params }: PageProps) {
             ) : (
               <p className="text-sm text-gray-600 dark:text-gray-400">No related topics are mapped yet.</p>
             )}
-          </PatternSection>
+          </StsConceptSection>
 
-          <PatternSection label="Related Labs & Activities">
+          <StsConceptSection label="Related Labs & Activities">
             {combinedScheduleItems.length > 0 ? (
               <ul className="list-tight">
                 {combinedScheduleItems.map(item => {
@@ -270,9 +262,14 @@ export default async function STSConceptPage({ params }: PageProps) {
                     <li key={item.href}>
                       <Link href={item.href}>{item.title}</Link>{' '}
                       <span className="text-sm text-gray-600 dark:text-gray-400">
-                        ({item.kind === 'assignments' ? 'Lab / Assignment' : 'Activity'} · {item.moduleTitle} · {item.meetingTitle})
+                        ({item.kind === 'assignments' ? 'Lab / Assignment' : 'Activity'} · {item.moduleTitle} ·{' '}
+                        {item.meetingTitle})
                       </span>
-                      {isFeatured && <span className="ml-2 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">Featured</span>}
+                      {isFeatured && (
+                        <span className="ml-2 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                          Featured
+                        </span>
+                      )}
                     </li>
                   );
                 })}
@@ -280,9 +277,9 @@ export default async function STSConceptPage({ params }: PageProps) {
             ) : (
               <p className="text-sm text-gray-600 dark:text-gray-400">No related labs or activities are mapped yet.</p>
             )}
-          </PatternSection>
+          </StsConceptSection>
 
-          <PatternSection label="Related Resources & Articles">
+          <StsConceptSection label="Related Resources & Articles">
             {resourceItems.length > 0 ? (
               <ul className="list-tight">
                 {resourceItems.map(item => {
@@ -291,16 +288,20 @@ export default async function STSConceptPage({ params }: PageProps) {
                     <li key={item.href}>
                       <Link href={item.href}>{item.title}</Link>
                       {featuredResources.includes(slugFromHref) && (
-                        <span className="ml-2 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">Featured</span>
+                        <span className="ml-2 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                          Featured
+                        </span>
                       )}
                     </li>
                   );
                 })}
               </ul>
             ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-400">No tagged resources or articles are connected yet.</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                No tagged resources or articles are connected yet.
+              </p>
             )}
-          </PatternSection>
+          </StsConceptSection>
 
           <FieldGuideReturnSection />
         </div>

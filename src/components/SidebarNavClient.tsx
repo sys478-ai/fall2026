@@ -9,6 +9,8 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
+  CpuChipIcon,
+  QueueListIcon,
   DocumentTextIcon,
   FolderIcon,
   HomeIcon,
@@ -48,6 +50,7 @@ const FIELD_GUIDE_ITEMS = [
   { label: 'Examples', href: '/field-guide/examples' },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
   { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
+  { label: 'Governance', href: '/field-guide/governance' },
 ];
 
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
@@ -156,6 +159,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
 
   const activeTaxonomy = normalizedPath.startsWith('/planning/taxonomy');
   const activePatternGuide = normalizedPath.startsWith('/field-guide');
+  const activeBraidCaseStudy = normalizedPath.startsWith('/braid-case-study');
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeBibliography = normalizedPath === '/bibliography';
   const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
@@ -251,8 +255,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const activeTopLevelClass = 'bg-slate-200 font-semibold text-slate-950 dark:bg-slate-800 dark:text-slate-50';
   const inactiveTopLevelClass =
     'text-slate-700 hover:font-semibold hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100';
-  const activeNestedClass =
-    'border-l-4 border-b bg-transparent font-semibold';
+  const activeNestedClass = 'border-l-4 border-b bg-transparent font-semibold';
   const inactiveNestedClass =
     'border-l-4 border-transparent text-slate-700 hover:border-slate-300 hover:font-semibold hover:text-slate-950 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:text-slate-100';
 
@@ -462,11 +465,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                 }
 
                                 return (
-                                  <Link
-                                    key={topic.id}
-                                    href={topic.contentHref}
-                                    className={rowClassName}
-                                  >
+                                  <Link key={topic.id} href={topic.contentHref} className={rowClassName}>
                                     {rowContent}
                                   </Link>
                                 );
@@ -502,9 +501,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                   activePatternGuide ? activeTopLevelClass : inactiveTopLevelClass
                 } ${collapsed ? 'justify-center' : 'justify-between'}`}
               >
-                <span className="flex min-w-0 items-center gap-3">
-                  {renderNavContent('Field Guide', ScaleIcon)}
-                </span>
+                <span className="flex min-w-0 items-center gap-3">{renderNavContent('Field Guide', ScaleIcon)}</span>
                 {!collapsed && (
                   <ChevronDownIcon
                     className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
@@ -519,8 +516,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
               <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
                   {FIELD_GUIDE_ITEMS.map(item => {
-                    const isActive =
-                      normalizedPath === item.href || normalizedPath.startsWith(item.href + '/');
+                    const isActive = normalizedPath === item.href || normalizedPath.startsWith(item.href + '/');
                     return (
                       <Link
                         key={item.href}
@@ -539,10 +535,17 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
               </div>
             )}
           </div>
+
+          <Link
+            href="/braid-case-study"
+            className={`${baseLinkClass} ${activeBraidCaseStudy ? activeTopLevelClass : inactiveTopLevelClass} ${collapsed ? 'justify-center' : ''}`}
+          >
+            {renderNavContent('BRAID Case Study', CpuChipIcon)}
+          </Link>
         </nav>
       </div>
 
-      <div className="border-t border-slate-200 px-3 py-2 dark:border-slate-800">
+      <div className="border-t border-slate-200 px-3 py-2 dark:border-slate-800 space-y-0.5">
         <Link
           href="/planning/review-status"
           className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm no-underline! transition-colors ${
@@ -552,8 +555,25 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
           } ${collapsed ? 'justify-center' : ''}`}
         >
           <ClipboardDocumentListIcon className="h-5 w-5 shrink-0" />
-          <span className={`min-w-0 truncate transition-[opacity,width] duration-300 ease-in-out ${collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}>
+          <span
+            className={`min-w-0 truncate transition-[opacity,width] duration-300 ease-in-out ${collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}
+          >
             Review Status
+          </span>
+        </Link>
+        <Link
+          href="/planning/playlist-inventory"
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm no-underline! transition-colors ${
+            normalizedPath === '/planning/playlist-inventory'
+              ? 'font-semibold text-slate-950 dark:text-slate-100'
+              : 'text-slate-500 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300'
+          } ${collapsed ? 'justify-center' : ''}`}
+        >
+          <QueueListIcon className="h-5 w-5 shrink-0" />
+          <span
+            className={`min-w-0 truncate transition-[opacity,width] duration-300 ease-in-out ${collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}
+          >
+            Playlist Inventory
           </span>
         </Link>
       </div>

@@ -1,25 +1,24 @@
 ---
 id: 3
-slug: brain-inspired-computing-and-neuromorphic-systems
-title: 'Brain-Inspired Computing'
+slug: brain-inspired-neuromorphic-and-hardware-level-ai
+title: 'Brain-Inspired, Neuromorphic, and Hardware-Level AI'
 color: emerald
-excerpt: 'This module builds technical grounding in neural networks, spiking systems, and neuromorphic hardware while questioning easy brain metaphors.'
-unit_focus: 'Students build technical grounding in neuroscience concepts, neural network opacity, and neuromorphic architectures without collapsing those systems into myths of human-like intelligence.'
-braid_elsi_arc: 'The unit prepares students to analyze how brain metaphors, material substrates, adaptive hardware, and event-driven computation affect public understanding, trust, and governance.'
+excerpt: 'This module examines how AI borrows from neuroscience, what neural networks cannot explain about themselves, and how neuromorphic hardware represents a fundamentally different computational paradigm.'
+unit_focus: 'In this unit, you will build grounding in anomaly detection, neural network opacity, neuroscience concepts, and neuromorphic architectures while questioning easy brain metaphors and asking who gets to define normality.'
 priority: low
 ---
 
-This module introduces brain-inspired computing without treating the brain as a simple blueprint for AI. Students compare biological neurons, artificial neural networks, spiking neural networks, and neuromorphic architectures while asking what each comparison clarifies and what it can distort.
+This module opens by asking when AI systems define normal, examining how anomaly detection constructs baselines, encodes deviance, and shapes who gets flagged. It then turns to why neural networks can be hard to trust even when they perform well, before situating those systems within neuroscience and exploring how neuromorphic computing represents a different model of machine intelligence.
 
-The technical focus is on mechanisms: neurons, synapses, weights, spikes, timing, event-driven computation, and hardware that stores or processes information differently from conventional architectures. The social focus is on how brain metaphors can shape trust, authority, explanation, and public expectations.
+You will build technical grounding in spiking neural networks, event-driven computation, timing-based processing, and edge AI without treating the brain as a simple blueprint for AI design. The technical focus is on mechanisms: neurons, synapses, weights, spikes, timing, and hardware that stores or processes information differently from conventional architectures. The social focus is on how brain metaphors can shape trust, authority, explanation, and public expectations.
 
-Fall 2026 dates: `Tue, Oct 6 - Thu, Oct 15`
+Fall 2026 dates: `Tue, Oct 13 - Thu, Oct 29`
 
 Meeting sequence:
 
-- `Tue, Oct 6` — `Fall Break`
-- `Thu, Oct 8` — `What Can Neuroscience Tell Us?`
-- `Tue, Oct 13` — `Why Are Neural Networks Hard to Trust?`
-- `Thu, Oct 15` — `How Does Neuromorphic Computing Work?`
+1. `When Does AI Define Normal?`
+2. `Why Are Neural Networks Hard to Trust?`
+3. `What Can Neuroscience Tell Us?`
+4. `How Does Neuromorphic Computing Work?`
 
-For BRAID, this module gives students the vocabulary needed to discuss neuromorphic anomaly detection as a material system. Energy efficiency, opacity, timing, and on-chip learning become questions about governance and accountability, not only engineering performance.
+By the end of this module, you should have a stronger vocabulary for discussing brain-inspired and hardware-level AI as material systems, and for asking how efficiency, opacity, timing, and adaptation shape trust, explanation, and accountability.

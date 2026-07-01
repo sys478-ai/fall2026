@@ -1,6 +1,7 @@
 ---
 title: "How Is AI Changing Healthcare and Biosensing?"
-scheduled_day: 20
+slug: how-is-ai-changing-healthcare-and-biosensing
+scheduled_day: 22
 module_id: 4
 subtitle: "Use clinical decision support, wearables, and biosensing to examine care, risk, monitoring, and vulnerability."
 status: unverified

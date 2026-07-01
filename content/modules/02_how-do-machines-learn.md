@@ -1,19 +1,18 @@
 ---
 id: 2
-slug: how-do-machines-learn
-title: 'How Do Machines Learn?'
+slug: technical-and-social-mechanisms
+title: 'Technical and Social Mechanisms of Machine Learning'
 color: sky
-excerpt: 'This module shows how parts of the world become sensed and measured data, and how machine learning systems turn that data into models, scores, predictions, and decisions.'
-unit_focus: 'Students study how sensing, measurement, categorization, baselines, model training, thresholds, prediction, and feedback loops operationalize human judgments and institutional priorities.'
-braid_elsi_arc: 'This unit prepares students to see that technical choices in sensing, encoding, feature design, thresholds, and prediction shape downstream governance questions long before a system reaches deployment.'
+excerpt: 'This module shows how parts of the world become measured data, and how machine learning systems turn that data into models, scores, predictions, and decisions — with stakes for fairness, accountability, and public trust.'
+unit_focus: 'In this unit, you will explore how sensing, measurement, categorization, baselines, model training, thresholds, prediction, and feedback loops turn parts of the world into machine learning systems shaped by human judgment and institutional priorities.'
 priority: low
 ---
 
-This module explains how messy parts of the world become data for machine learning systems. Students begin with sensing, measurement, categories, baselines, and value-laden feature design, then move into model training, scoring, thresholds, prediction, and feedback loops.
+This module explores how messy parts of the world become data for machine learning systems, and how those systems turn data into models, scores, predictions, and decisions. You begin with sensing, measurement, categories, baselines, and feature design, then move into model training, learning paradigms, scoring, thresholds, prediction, and feedback loops.
 
-The central question is not only whether a model works. It is also how systems operationalize human judgments, what kinds of evidence they privilege, which errors matter most, and why predictive success can so easily be mistaken for intelligence itself.
+Along the way, you will ask who bears the costs of technical choices that can appear neutral: which proxies carry historical bias, which error types fall on which communities, and how feedback loops can reinforce the very patterns they were meant to correct. The module closes by returning to the ethical frameworks introduced in Module 1, now with enough technical vocabulary to apply them to concrete mechanisms.
 
-Fall 2026 dates: `Tue, Sep 8 - Thu, Oct 1`
+Fall 2026 dates: `Thu, Sep 10 - Thu, Oct 8`
 
 Meeting sequence:
 
@@ -23,7 +22,7 @@ Meeting sequence:
 4. `What Kind of Learning Is This?`
 5. `How Do Scores Become Decisions?`
 6. `Who Bears the Cost of Error?`
-7. `When Does Prediction Start to Look Like Intelligence?`
+7. `What Ethical Lenses Help Us Evaluate AI?`
 8. `Are Predictions Ever Neutral?`
 
-For BRAID, this module prepares students to see that sensing, encoding, baselines, and thresholding are governance issues as well as technical ones. A hardware-level anomaly detector still depends on choices about what sensors capture, what counts as a relevant signal, what counts as normal behavior, and how mistakes should be handled.
+By the end of this module, you should be better prepared to see that sensing, encoding, baselines, thresholds, and prediction are never only technical matters. They are also choices about what counts, what gets noticed, and how errors and consequences are distributed.

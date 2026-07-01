@@ -1,7 +1,8 @@
 ---
 title: "What Have We Learned?"
-scheduled_day: 28
-module_id: 6
+slug: what-have-we-learned
+retired: true
+module_id: 5
 subtitle: "Bring together mechanism, stakeholders, risks, and governance questions."
 status: unverified
 status_reviewer:
@@ -10,14 +11,4 @@ status_notes:
 priority: low
 ---
 
-## Topic / Focus
-
-Last day of class synthesis.
-
-## Recognition Patterns
-
-- Emerging technologies require anticipatory governance.
-
-## BRAID / ELSI Connection
-
-Technical mechanism to stakeholder concern to risk to governance question.
+This topic has been retired from the active course schedule.

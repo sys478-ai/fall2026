@@ -74,26 +74,28 @@ export default function TableOfContents({ maxLevel = 2 }: TableOfContentsProps) 
       allHeadings.forEach((heading) => {
         const instructorNotesSection = heading.closest('[data-instructor-notes="true"]');
         const tocExcludedSection = heading.closest('[data-toc-exclude="true"]');
+        const insideCollapsible = heading.closest('details.mb-4');
         const text = heading.textContent?.trim();
-        if (!instructorNotesSection && !tocExcludedSection && text !== 'On This Page') {
+        if (!instructorNotesSection && !tocExcludedSection && !insideCollapsible && text !== 'On This Page') {
           const level = parseInt(heading.tagName.charAt(1));
           headings.push({ element: heading, level });
         }
       });
       
-      // Also find collapsible summary elements (h3 headings converted to details/summary)
-      // These are summary tags inside details elements with mb-4 class
-      if (maxLevel >= 3) {
-        const collapsibleSummaries = searchRoot.querySelectorAll('details.mb-4 > summary');
-        collapsibleSummaries.forEach((summary) => {
-          const details = summary.closest('details');
-          const instructorNotesSection = details?.closest('[data-instructor-notes="true"]');
-          const tocExcludedSection = details?.closest('[data-toc-exclude="true"]');
-          if (!instructorNotesSection && !tocExcludedSection && details) {
-            headings.push({ element: summary, level: 3 });
+      // Collapsible sections become <details><summary>; include the summary in the TOC
+      const collapsibleSummaries = searchRoot.querySelectorAll('details.mb-4 > summary');
+      collapsibleSummaries.forEach((summary) => {
+        const details = summary.closest('details');
+        const instructorNotesSection = details?.closest('[data-instructor-notes="true"]');
+        const tocExcludedSection = details?.closest('[data-toc-exclude="true"]');
+        if (!instructorNotesSection && !tocExcludedSection && details) {
+          const levelMatch = details.className.match(/collapsible-h(\d)/);
+          const level = levelMatch ? parseInt(levelMatch[1], 10) : 3;
+          if (level <= maxLevel) {
+            headings.push({ element: summary, level });
           }
-        });
-      }
+        }
+      });
       
       // Sort headings by their position in the document to maintain correct order
       const sortedHeadings = headings.sort((a, b) => {

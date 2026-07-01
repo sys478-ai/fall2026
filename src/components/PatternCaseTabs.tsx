@@ -23,7 +23,7 @@ export default function PatternCaseTabs({ cases }: PatternCaseTabsProps) {
   const activeCase = cases.find((item) => item.id === activeId) || cases[0];
 
   return (
-    <div className="min-w-0 space-y-5">
+    <div className="min-w-0 space-y-5" data-toc-exclude="true">
       <div className="relative min-w-0 max-w-full">
         {cases.length > 2 && (
           <>

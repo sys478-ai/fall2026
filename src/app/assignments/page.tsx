@@ -4,6 +4,7 @@ import QuickLinksNav from '@/components/QuickLinksNav';
 import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import AssignmentsTabbedList from '@/components/assignments/AssignmentsTabbedList';
 import { getDueDateForScheduledDay } from '@/lib/course-calendar';
+import { getSeriesSummary } from '@/lib/assignment-series';
 import externalAssignments from '../../../content/config/external-assignments.json';
 
 interface AssignmentData {
@@ -23,6 +24,8 @@ interface AssignmentData {
   excluded?: boolean;
   no_render?: number;
   hide_from_list?: number;
+  series_role?: string;
+  series_summary?: string;
 }
 
 
@@ -47,17 +50,24 @@ export default async function AssignmentsPage() {
       excluded: postData.excluded,
       no_render: postData.no_render,
       hide_from_list: postData.hide_from_list,
+      series_role: postData.series_role,
+      series_summary:
+        postData.series_role === 'hub' && postData.assignment_series
+          ? getSeriesSummary(postData.assignment_series)
+          : undefined,
     };
   }));
 
   // Combine markdown assignments with external assignments
   let assignments: AssignmentData[] = [...markdownAssignments, ...externalAssignments];
-  // Filter out excluded assignments, no_render assignments, and explicitly hidden list items.
+  // Filter out excluded assignments, no_render assignments, hidden list items, and series child pages.
   assignments = assignments.filter(
     assignment =>
       !assignment.excluded &&
       assignment.no_render !== 1 &&
-      assignment.hide_from_list !== 1
+      assignment.hide_from_list !== 1 &&
+      assignment.series_role !== 'step' &&
+      assignment.series_role !== 'resource'
   );
 
   // Sort assignments

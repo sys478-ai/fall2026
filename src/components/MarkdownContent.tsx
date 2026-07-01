@@ -2,6 +2,9 @@
 
 import { useRef, useEffect } from 'react';
 import { triggerConfetti } from '@/lib/utils';
+import { useFlipCards } from '@/hooks/useFlipCards';
+import { usePatternCaseTabs } from '@/hooks/usePatternCaseTabs';
+import { useSequences } from '@/hooks/useSequences';
 import hljs from 'highlight.js';
 
 interface MarkdownContentProps {
@@ -12,12 +15,16 @@ interface MarkdownContentProps {
 export default function MarkdownContent({ content, className }: MarkdownContentProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
+  useFlipCards(contentRef, content);
+  useSequences(contentRef, content);
+  usePatternCaseTabs(contentRef, content);
+
   useEffect(() => {
     if (!contentRef.current) return;
 
     // Find all markdown checkboxes
     const checkboxes = contentRef.current.querySelectorAll<HTMLInputElement>('.markdown-checkbox');
-    
+
     // Helper function to update strikethrough styling based on checkbox state
     const updateCheckboxStyling = (checkbox: HTMLInputElement) => {
       const checkboxLine = checkbox.closest('.markdown-checkbox-line');
@@ -34,7 +41,7 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     };
 
     // Load saved state from localStorage and apply styling
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach(checkbox => {
       const checkboxId = checkbox.getAttribute('data-checkbox-id');
       if (checkboxId) {
         const savedState = localStorage.getItem(checkboxId);
@@ -49,7 +56,7 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     // Helper function to check if all checkboxes are checked
     const areAllCheckboxesChecked = (): boolean => {
       if (checkboxes.length === 0) return false;
-      return Array.from(checkboxes).every((checkbox) => checkbox.checked);
+      return Array.from(checkboxes).every(checkbox => checkbox.checked);
     };
 
     // Add event listeners to save state when checkboxes are clicked
@@ -61,7 +68,7 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
       }
       // Update styling when checkbox state changes
       updateCheckboxStyling(target);
-      const wasAllChecked = Array.from(checkboxes).every((checkbox) =>
+      const wasAllChecked = Array.from(checkboxes).every(checkbox =>
         checkbox === target ? !target.checked : checkbox.checked
       );
       const isAllChecked = areAllCheckboxesChecked();
@@ -70,13 +77,13 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
       }
     };
 
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', handleCheckboxChange);
     });
 
     // Cleanup event listeners
     return () => {
-      checkboxes.forEach((checkbox) => {
+      checkboxes.forEach(checkbox => {
         checkbox.removeEventListener('change', handleCheckboxChange);
       });
     };
@@ -87,21 +94,21 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     if (!contentRef.current) return;
 
     const codeBlocks = contentRef.current.querySelectorAll('pre code');
-    
-    codeBlocks.forEach((codeElement) => {
+
+    codeBlocks.forEach(codeElement => {
       const codeEl = codeElement as HTMLElement;
 
       // Allow opting out of the copy button with data-no-copy="true"
       if (codeEl.getAttribute('data-no-copy') === 'true') return;
 
       const preElement = codeElement.parentElement as HTMLElement;
-      
+
       // Skip if we've already added a copy button
       if (preElement.querySelector('.copy-code-button')) return;
-      
+
       // Make pre element relative for absolute positioning of button
       preElement.style.position = 'relative';
-      
+
       // Create copy button
       const copyButton = document.createElement('button');
       copyButton.className = 'copy-code-button';
@@ -115,21 +122,21 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
       `;
       copyButton.setAttribute('aria-label', 'Copy code');
       copyButton.setAttribute('title', 'Copy code');
-      
+
       // Copy functionality
       copyButton.addEventListener('click', async () => {
         const codeText = codeElement.textContent || '';
-        
+
         try {
           await navigator.clipboard.writeText(codeText);
-          
+
           // Update button to show success
           const textSpan = copyButton.querySelector('.copy-code-text');
           if (textSpan) {
             textSpan.textContent = 'Copied!';
             copyButton.classList.add('copied');
           }
-          
+
           // Reset after 2 seconds
           setTimeout(() => {
             if (textSpan) {
@@ -165,7 +172,7 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
           document.body.removeChild(textArea);
         }
       });
-      
+
       // Insert button into pre element
       preElement.appendChild(copyButton);
     });
@@ -176,28 +183,28 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     if (!contentRef.current) return;
 
     const toggleButtons = contentRef.current.querySelectorAll<HTMLButtonElement>('[data-toggle-answer]');
-    
-    toggleButtons.forEach((button) => {
+
+    toggleButtons.forEach(button => {
       // Skip if we've already added the event listener
       if (button.dataset.listenerAdded === 'true') return;
-      
+
       const answerId = button.getAttribute('data-toggle-answer');
       if (!answerId) return;
-      
+
       const answerDiv = contentRef.current?.querySelector(`#${answerId}`) as HTMLElement;
       if (!answerDiv) return;
-      
+
       // Ensure overflow-hidden is always present for the animation
       answerDiv.classList.add('overflow-hidden');
-      
+
       // Set initial hidden state - use a large max-height value via inline style for flexibility
       answerDiv.style.maxHeight = '0px';
       answerDiv.classList.add('opacity-0', 'py-0');
       answerDiv.classList.remove('opacity-100', 'py-4');
-      
+
       button.addEventListener('click', () => {
         const isHidden = answerDiv.style.maxHeight === '0px';
-        
+
         if (isHidden) {
           // Show: set large max-height, remove hidden classes, add visible classes
           answerDiv.style.maxHeight = '2000px';
@@ -210,14 +217,14 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
           answerDiv.classList.add('opacity-0', 'py-0');
         }
       });
-      
+
       // Mark as processed
       button.dataset.listenerAdded = 'true';
     });
-    
+
     // Cleanup event listeners
     return () => {
-      toggleButtons.forEach((button) => {
+      toggleButtons.forEach(button => {
         button.dataset.listenerAdded = '';
       });
     };
@@ -228,7 +235,7 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     if (!contentRef.current) return;
 
     const detailsElements = contentRef.current.querySelectorAll<HTMLDetailsElement>('details.mb-4');
-    
+
     // Generate a unique key for each details element based on page URL and summary text
     const getStorageKey = (details: HTMLDetailsElement, index: number): string => {
       const summary = details.querySelector('summary');
@@ -260,23 +267,23 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     const handleToggle = (event: Event) => {
       const details = event.target as HTMLDetailsElement;
       if (!details.classList.contains('mb-4')) return;
-      
+
       const index = Array.from(detailsElements).indexOf(details);
       const storageKey = getStorageKey(details, index);
       const isOpen = details.hasAttribute('open');
-      
+
       if (typeof window !== 'undefined') {
         localStorage.setItem(storageKey, JSON.stringify(isOpen));
       }
     };
 
-    detailsElements.forEach((details) => {
+    detailsElements.forEach(details => {
       details.addEventListener('toggle', handleToggle);
     });
 
     // Cleanup event listeners
     return () => {
-      detailsElements.forEach((details) => {
+      detailsElements.forEach(details => {
         details.removeEventListener('toggle', handleToggle);
       });
     };
@@ -288,26 +295,26 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     if (!contentRef.current) return;
 
     // Find all code blocks with language classes
-    const codeBlocks = contentRef.current.querySelectorAll<HTMLElement>(
-      'code[class*="language-"]'
-    );
+    const codeBlocks = contentRef.current.querySelectorAll<HTMLElement>('code[class*="language-"]');
 
-    codeBlocks.forEach((codeBlock) => {
+    codeBlocks.forEach(codeBlock => {
       // Check if this code block has already been highlighted
       // (remark-highlight.js adds spans with hljs classes)
-      const hasHighlighting = codeBlock.querySelector('.hljs-keyword, .hljs-string, .hljs-function, .hljs-number, .hljs-variable');
-      
+      const hasHighlighting = codeBlock.querySelector(
+        '.hljs-keyword, .hljs-string, .hljs-function, .hljs-number, .hljs-variable'
+      );
+
       // Only highlight if it hasn't been processed yet
       if (!hasHighlighting) {
         // Extract language from class (e.g., "language-javascript" -> "javascript")
         const classList = Array.from(codeBlock.classList);
-        const languageClass = classList.find((cls) => cls.startsWith('language-'));
+        const languageClass = classList.find(cls => cls.startsWith('language-'));
         const language = languageClass ? languageClass.replace('language-', '') : 'javascript';
 
         try {
           // Get the raw code text - use data attribute if available to preserve whitespace
           let code = '';
-          
+
           // Check if we have the original code stored in a data attribute
           const originalCodeAttr = codeBlock.getAttribute('data-original-code');
           if (originalCodeAttr) {
@@ -329,13 +336,13 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
               code = codeBlock.textContent || '';
             }
           }
-          
+
           // Highlight the code - highlight.js should preserve whitespace in the output
           let highlighted = hljs.highlight(code, {
             language: language,
             ignoreIllegals: true,
           });
-          
+
           // For HTML code blocks, highlight.js escapes HTML entities which breaks display
           // We need to re-highlight with the original code to get proper structure
           if (language === 'html') {
@@ -346,13 +353,13 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
               ignoreIllegals: true,
             });
           }
-          
+
           // Replace the content with highlighted HTML
           codeBlock.innerHTML = highlighted.value;
-          
+
           // Ensure hljs class is present for styling
           codeBlock.classList.add('hljs');
-          
+
           // Ensure the parent pre element preserves whitespace
           const preElement = codeBlock.closest('pre');
           if (preElement) {
@@ -367,10 +374,8 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
     });
   }, [content]);
 
-
-
   return (
-    <div 
+    <div
       ref={contentRef}
       className={`prose prose-lg max-w-none ${className || ''}`}
       dangerouslySetInnerHTML={{ __html: content }}

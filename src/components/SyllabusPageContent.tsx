@@ -6,6 +6,7 @@ import ResourceQuiz from '@/components/ResourceQuiz';
 import QuickLinksNav from '@/components/QuickLinksNav';
 import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import { getTopics } from '@/lib/topics';
+import { splitContentOnScheduleEmbed } from '@/lib/schedule-embed';
 
 type SyllabusTopics = Awaited<ReturnType<typeof getTopics>>;
 
@@ -14,25 +15,6 @@ type SyllabusMeeting = SyllabusTopics[number]['meetings'][number];
 interface RelatedCourseItem {
   label: string;
   href?: string;
-}
-
-function splitContentAfterIntroTable(content: string) {
-  const closingTableTag = '</table>';
-  const tableEndIndex = content.toLowerCase().indexOf(closingTableTag);
-
-  if (tableEndIndex === -1) {
-    return {
-      introContent: content,
-      remainingContent: '',
-    };
-  }
-
-  const splitIndex = tableEndIndex + closingTableTag.length;
-
-  return {
-    introContent: content.slice(0, splitIndex),
-    remainingContent: content.slice(splitIndex),
-  };
 }
 
 function getCompactRelatedItemLabel(label: string, href?: string) {
@@ -102,10 +84,9 @@ function getRelatedCourseItems(meeting: SyllabusMeeting): RelatedCourseItem[] {
   return Array.from(items.values());
 }
 
-function SyllabusTopicList({ topics }: { topics: SyllabusTopics }) {
+export function SyllabusTopicList({ topics }: { topics: SyllabusTopics }) {
   return (
     <div className="mt-6 space-y-6">
-      <h2>Schedule</h2>
       {topics.map(topic => (
         <section key={topic.id}>
           <div className="border-b border-gray-200 pt-1 pb-0 dark:border-gray-800">
@@ -182,7 +163,7 @@ export default async function SyllabusPageContent() {
   const { title, excerpt, heading_max_level } = postData;
   const quizData = getQuizData('syllabus');
   const topics = await getTopics();
-  const { introContent, remainingContent } = splitContentAfterIntroTable(postData.content);
+  const contentParts = splitContentOnScheduleEmbed(postData.content);
 
   return (
     <ContentLayout
@@ -194,9 +175,13 @@ export default async function SyllabusPageContent() {
       header={<TopLevelPageHeader label="Syllabus" title={title} description={excerpt} tone="sky" />}
     >
       <div className="max-w-4xl pr-8 pt-6">
-        <MarkdownContent content={introContent} />
-        <SyllabusTopicList topics={topics} />
-        {remainingContent && <MarkdownContent content={remainingContent} />}
+        {contentParts.map((part, index) =>
+          part.type === 'schedule' ? (
+            <SyllabusTopicList key={`schedule-${index}`} topics={topics} />
+          ) : (
+            part.content.trim() && <MarkdownContent key={`markdown-${index}`} content={part.content} />
+          )
+        )}
 
         {quizData && <ResourceQuiz key="quiz-syllabus" quizData={quizData} resourceSlug="syllabus" variant="desktop" />}
       </div>

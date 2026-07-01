@@ -20,6 +20,7 @@ interface AssignmentData {
   excluded?: boolean;
   no_render?: number;
   hide_from_list?: number;
+  series_summary?: string;
 }
 
 interface AssignmentsTabbedListProps {
@@ -228,6 +229,12 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
                         }`}
                       >
                         {item.excerpt}
+                      </p>
+                    )}
+
+                    {item.series_summary && (
+                      <p className="mb-0 mt-1 text-sm font-medium leading-5 text-[#0b5d8f] dark:text-[#8fc4ee]">
+                        {item.series_summary}
                       </p>
                     )}
                   </div>

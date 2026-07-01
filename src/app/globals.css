@@ -1,5 +1,9 @@
 /* stylelint-disable at-rule-no-unknown */
 @import 'tailwindcss';
+@import '../styles/flip-cards.css';
+@import '../styles/pattern-case-tabs.css';
+@import '../styles/sequence.css';
+@import '../styles/technical-explainers.css';
 
 /* Tailwind v4: Define custom dark mode variant for class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -43,7 +47,17 @@ h2 {
   color: var(--foreground);
 }
 
-h3,
+.sts-concept-section .h2 {
+  @apply mt-0!;
+}
+
+h3 {
+  @apply text-lg md:text-xl mb-2 mt-6 uppercase tracking-wide;
+  font-family: var(--font-outfit), serif;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
 .logo {
   @apply text-lg md:text-xl mb-2 mt-6;
   font-family: var(--font-outfit), serif;
@@ -52,7 +66,7 @@ h3,
 }
 
 h4 {
-  @apply md:text-lg font-bold mb-0 mt-4;
+  @apply md:text-lg font-bold mb-4! mt-4;
   font-family: var(--font-outfit), serif;
   color: var(--foreground);
 }
@@ -63,7 +77,7 @@ h5 {
 }
 
 table {
-  @apply w-full border-collapse mb-20 border;
+  @apply w-full border-collapse mb-8 border;
   border-color: var(--border);
   table-layout: auto;
 }
@@ -670,7 +684,7 @@ html {
     display: none !important;
   }
 
-  .topic-section-panel[data-active="true"] {
+  .topic-section-panel[data-active='true'] {
     display: block !important;
   }
 

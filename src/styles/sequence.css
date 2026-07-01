@@ -1,0 +1,71 @@
+/* Progressive sequence blocks generated from {% sequence %} markdown tags */
+
+.prose .sequence {
+  @apply my-8;
+}
+
+.prose .sequence-progress {
+  @apply mb-4 text-sm font-medium uppercase tracking-wide;
+  color: var(--muted);
+}
+
+.prose .sequence-steps {
+  @apply space-y-4;
+}
+
+.prose .sequence-step {
+  @apply p-0;
+}
+
+.prose .sequence-step[hidden] {
+  display: none;
+}
+
+.prose .sequence-step-header {
+  @apply mb-3;
+}
+
+.prose .sequence-step-kicker {
+  @apply mb-1 text-xs font-semibold uppercase tracking-[0.18em];
+  color: var(--primary);
+}
+
+.prose .sequence-step-title {
+  @apply mt-0 mb-0 text-lg;
+}
+
+.prose .sequence-step-content > *:last-child {
+  @apply mb-0;
+}
+
+.prose .sequence-controls {
+  @apply mt-5 flex flex-wrap justify-center gap-3;
+}
+
+.prose .sequence-button {
+  @apply inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-medium transition;
+  border-color: transparent;
+}
+
+.prose .sequence-button--primary {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.prose .sequence-button--primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.prose .sequence-button--secondary {
+  border-color: var(--border);
+  color: var(--foreground);
+  background: transparent;
+}
+
+.prose .sequence-button--secondary:hover {
+  background: color-mix(in srgb, var(--card) 88%, var(--foreground) 12%);
+}
+
+.prose .sequence-button:disabled {
+  @apply cursor-not-allowed opacity-60;
+}

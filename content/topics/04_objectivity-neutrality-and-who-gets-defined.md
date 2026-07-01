@@ -1,7 +1,8 @@
 ---
 title: 'What Ethical Lenses Help Us Evaluate AI?'
-scheduled_day: 4
-module_id: 1
+slug: what-ethical-lenses-help-us-evaluate-ai
+scheduled_day: 14
+module_id: 2
 subtitle: 'Introduce utilitarianism, care ethics, deontology, and the common good as practical ways to assess AI systems.'
 status: unverified
 status_reviewer:

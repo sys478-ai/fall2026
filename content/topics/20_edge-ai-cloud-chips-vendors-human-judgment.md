@@ -1,6 +1,7 @@
 ---
 title: "How Is AI Reshaping News, Politics, and Public Attention?"
-scheduled_day: 19
+slug: how-is-ai-reshaping-news-politics-and-public-attention
+scheduled_day: 21
 module_id: 4
 subtitle: "Use media, recommendation, and political communication systems to examine visibility, persuasion, and public influence."
 status: unverified

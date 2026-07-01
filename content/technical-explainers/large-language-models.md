@@ -107,12 +107,12 @@ Longer contexts therefore require much more memory and computation. Multiple att
 
 Training a frontier-scale LLM can require:
 
-* Enormous text datasets
-* Large groups of specialized processors
-* Extensive memory and data storage
-* Significant electricity and cooling
-* Weeks or months of coordinated computation
-* Large teams responsible for data, infrastructure, evaluation, and safety
+- Enormous text datasets
+- Large groups of specialized processors
+- Extensive memory and data storage
+- Significant electricity and cooling
+- Weeks or months of coordinated computation
+- Large teams responsible for data, infrastructure, evaluation, and safety
 
 Each individual operation is relatively simple. The extraordinary capability and cost come from performing vast numbers of these operations across billions of parameters and enormous amounts of data.
 

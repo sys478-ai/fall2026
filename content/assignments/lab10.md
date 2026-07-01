@@ -26,13 +26,11 @@ The goal of this lab is not to predict the future perfectly. The goal is to prac
 
 By the end of this lab, you should be able to:
 
-- Explain the basic purpose of the BRAID case study.
 - Identify how technical features of an emerging AI system create governance questions.
-- Analyze potential benefits, harms, uncertainties, and misuse scenarios.
-- Apply concepts from earlier labs to a neuromorphic anomaly detection system.
-- Evaluate stakeholder perspectives and power differences.
-- Develop governance recommendations for a specific use case.
-- Practice anticipatory analysis of an emerging technology.
+- Analyze how a proposed system might affect different stakeholders.
+- Explain how anomaly detection raises questions about normality, error, and accountability.
+- Evaluate possible safeguards, limits, redesigns, or alternatives.
+- Develop a governance recommendation for one possible use case.
 
 ## Key Terms
 
@@ -44,32 +42,15 @@ By the end of this lab, you should be able to:
 | Anomaly detection       | Identifying patterns that differ from what a system has learned to expect.                                                                             |
 | Edge AI                 | AI that runs on or near the device where data is collected.                                                                                            |
 | On-chip learning        | Learning or adaptation that happens directly in hardware rather than only in cloud software.                                                           |
+| Explainability          | The ability to understand why a system produced a particular output or recommendation.                                                                 |
+| Auditability            | The ability to inspect, trace, verify, or reconstruct what a system did, including how it changed over time.                                           |
 | Stakeholder             | A person, group, institution, or community affected by a technology or involved in its design, deployment, governance, or use.                         |
 | Misuse                  | A harmful, coercive, deceptive, or unintended use of a technology.                                                                                     |
 | Governance              | The rules, practices, institutions, and accountability structures that shape how technology is designed, deployed, limited, or refused.                |
 
-## Part 1: Warm-Up Reflection
+---
 
-Individually, respond to the following prompt:
-
-> Think of an emerging technology that seemed exciting at first but later raised serious social, ethical, or political concerns. What might people have asked earlier?
-
-Write 4–6 sentences.
-
-Consider examples such as:
-
-- social media platforms
-- facial recognition
-- predictive policing
-- smart speakers
-- drones
-- workplace monitoring
-- generative AI
-- wearable health tracking
-- biometric identification
-- targeted advertising
-
-## Part 2: Case Study Background
+## Part 1: Case Study Background
 
 The BRAID project explores neuromorphic computing systems inspired by the cerebellum.
 
@@ -95,6 +76,7 @@ Possible concerns include:
 - false negatives
 - surveillance
 - explainability
+- auditability
 - accountability
 - bias
 - privacy
@@ -103,7 +85,13 @@ Possible concerns include:
 - power concentration
 - difficulty auditing hardware-level learning
 
-## Part 3: Technical Feature Inventory
+---
+
+
+Complete the required core first. Use the optional extensions only if they help your group deepen the analysis.
+
+
+## [Requied] Part 2: What Technical Features Matter?
 
 Review the technical features below. For each feature, identify one possible benefit and one governance concern.
 
@@ -118,7 +106,19 @@ Review the technical features below. For each feature, identify one possible ben
 | Ability to detect unfamiliar patterns |                  |                    |
 | Potential use in high-stakes settings |                  |                    |
 
-## Part 4: Choose a Use Case
+After completing the table, choose **two technical features** that seem especially important for governance.
+
+For each one, answer:
+
+- Why does this feature matter?
+- What new capability does it create?
+- What concern does it raise?
+- Who might benefit?
+- Who might be affected or put at risk?
+
+---
+
+## [Requied] Part 3: Choose a Use Case
 
 Your group will choose one use case for deeper analysis.
 
@@ -135,7 +135,9 @@ Select one:
 
 Write your chosen use case:
 
-## Part 5: System Purpose
+---
+
+## [Requied] Part 4: What Is Being Proposed?
 
 Complete the table for your chosen use case.
 
@@ -144,13 +146,19 @@ Complete the table for your chosen use case.
 | What problem is the system supposed to solve?               |                |
 | Who wants this system?                                      |                |
 | Who would use it?                                           |                |
-| Who would be monitored, measured, or affected?              |                |
+| Who would be monitored, measured, assisted, or affected?    |                |
 | What counts as normal?                                      |                |
 | What counts as anomalous?                                   |                |
 | What happens when an anomaly is detected?                   |                |
 | Is the system advisory, semi-automated, or fully automated? |                |
 
-## Part 6: Stakeholder Map
+Then answer:
+
+> What is the most important decision that would need to be made before this system is deployed?
+
+---
+
+## [Requied] Part 5: Who Is Involved?
 
 Identify stakeholders affected by the system.
 
@@ -178,8 +186,153 @@ Discuss:
 - Who has the least control?
 - Who is most likely to be harmed if the system fails?
 - Who may be excluded from design or governance decisions?
+- Who should be involved before deployment?
 
-## Part 7: Apply Earlier Lab Concepts
+---
+
+## [Requied] Part 6: What Could Go Right?
+
+Identify two plausible benefits of this system in your chosen use case.
+
+Try to describe the benefits in their strongest reasonable form. Do not assume the technology is bad. Ask what problem it might genuinely help address.
+
+| Possible Benefit | Who Benefits? | What Technical Feature Enables This Benefit? | What Would Need to Be True for This Benefit to Happen? |
+| ---------------- | ------------- | -------------------------------------------- | ----------------------------------------------------- |
+|                  |               |                                              |                                                       |
+|                  |               |                                              |                                                       |
+
+---
+
+## [Requied] Part 7: What Could Go Wrong — Even If It Works?
+
+Some harms happen because systems fail. Other harms happen even when systems function as designed.
+
+Identify two possible harms or concerns.
+
+| Possible Harm or Concern | Who Could Be Harmed? | What Technical Feature Contributes to the Concern? | Why Could This Happen Even If the System Works? |
+| ------------------------ | -------------------- | -------------------------------------------------- | ---------------------------------------------- |
+|                          |                      |                                                    |                                                |
+|                          |                      |                                                    |                                                |
+
+As you answer, consider:
+
+- Could normal behavior be misread as anomalous?
+- Could rare but legitimate behavior be flagged?
+- Could the system make surveillance easier to justify?
+- Could the system be difficult to audit?
+- Could low-power operation make the system easier to deploy at scale?
+- Could some groups bear more risk than others?
+
+---
+
+## [Requied] Part 8: What Governance Questions Emerge?
+
+Look back at your answers so far. Which concerns appeared more than once?
+
+You may use the following BRAID governance lenses to organize your thinking.
+
+### 1. Normality
+
+If the system detects anomalies, who defines what counts as normal, unusual, or dangerous?
+
+Consider:
+
+- Who sets the baseline?
+- Who sets the threshold for “anomalous enough”?
+- Are rare but legitimate behaviors likely to be flagged?
+- What happens if the system is too sensitive?
+- What happens if it misses something important?
+
+### 2. Auditability
+
+If learning happens in hardware or on-device, can the system’s behavior be traced, reviewed, or challenged?
+
+Consider:
+
+- What should be logged?
+- Who can inspect the system?
+- Can someone reconstruct why something was flagged?
+- Can learning be paused, reset, or reviewed?
+- Can affected people challenge the result?
+
+### 3. Privacy and Surveillance
+
+If processing happens at the edge, does that protect people or make monitoring easier to justify?
+
+Consider:
+
+- What data stays on the device?
+- What data, alerts, summaries, or learned patterns leave the device?
+- What sensitive behavior could still be inferred?
+- Does “on-device” processing make the system easier to deploy in sensitive spaces?
+- Who receives alerts or summaries?
+
+### 4. Efficiency and Scale
+
+If the system is faster and more energy-efficient, where might it spread, who benefits, and who bears the costs?
+
+Consider:
+
+- Who benefits from lower power use?
+- Does energy efficiency make this use socially valuable?
+- Could efficiency make harmful monitoring cheaper or easier to scale?
+- What material, manufacturing, or e-waste costs still matter?
+- Does specialized hardware concentrate power among particular institutions or vendors?
+
+Choose **two governance questions** that seem most important for your use case.
+
+| Governance Question | Why It Matters | Who Is Most Affected? | What Safeguard, Limit, Redesign, or Alternative Should Be Considered? |
+| ------------------- | -------------- | --------------------- | -------------------------------------------------------------------- |
+|                     |                |                       |                                                                      |
+|                     |                |                       |                                                                      |
+
+---
+
+## [Requied] Part 9: What Else Could Address the Problem?
+
+Anticipatory governance is not only about asking whether a proposed system should be regulated. It also asks whether the same problem could be addressed differently.
+
+For your use case, answer:
+
+| Question | Group Response |
+| -------- | -------------- |
+| What problem is the system supposed to solve? | |
+| Could the problem be addressed with a non-AI, lower-tech, policy-based, or human-centered alternative? | |
+| What would be gained by choosing that alternative? | |
+| What would be lost? | |
+| Would the alternative reduce any of the risks you identified? | |
+
+---
+
+## [Requied] Part 10: Final Recommendation
+
+Your group must recommend one of the following:
+
+- **Use as proposed**
+- **Use only with safeguards**
+- **Redesign before use**
+- **Limit to low-stakes contexts**
+- **Prohibit in this context**
+- **Do not deploy until more evidence is available**
+
+Complete the table.
+
+| Recommendation Question                     | Group Response |
+| ------------------------------------------- | -------------- |
+| What is your recommendation?                |                |
+| What is your strongest reason?              |                |
+| What is the biggest unresolved uncertainty? |                |
+| What safeguards are required?               |                |
+| Who must be involved before deployment?     |                |
+| What evidence would change your mind?       |                |
+
+---
+
+Use these only if time allows or if they help your group deepen your final recommendation.
+
+---
+
+## Optional Extension A: Earlier Course Concepts
 
 Use concepts from earlier labs to analyze your chosen system.
 
@@ -195,23 +348,9 @@ Use concepts from earlier labs to analyze your chosen system.
 | Edge AI           | What happens locally, and what leaves the device?           |                |
 | Anomaly detection | Who defines normal and anomalous?                           |                |
 
-## Part 8: Risk and Benefit Analysis
+---
 
-Complete the table.
-
-| Category             | Possible Benefit | Possible Harm | Uncertainty |
-| -------------------- | ---------------- | ------------- | ----------- |
-| Safety               |                  |               |             |
-| Privacy              |                  |               |             |
-| Fairness / bias      |                  |               |             |
-| Explainability       |                  |               |             |
-| Accountability       |                  |               |             |
-| Security / misuse    |                  |               |             |
-| Environmental impact |                  |               |             |
-| Access / inequality  |                  |               |             |
-| Human autonomy       |                  |               |             |
-
-## Part 9: False Positives and False Negatives
+## Optional Extension B: False Positives and False Negatives
 
 Anomaly detection systems can make different kinds of mistakes.
 
@@ -230,24 +369,28 @@ Discuss:
 - What happens if the system is too sensitive?
 - What happens if the system is not sensitive enough?
 
-## Part 10: Explainability and Contestability
+---
 
-A person or institution may need to understand why the system flagged an anomaly.
+## Optional Extension C: Auditability and Contestability
+
+A person or institution may need to understand why the system flagged an anomaly or verify what happened after the fact.
 
 Complete the table.
 
 | Question                                               | Group Response |
 | ------------------------------------------------------ | -------------- |
 | What explanation would an affected person need?        |                |
-| What explanation would a technical auditor need?       |                |
-| What explanation would a regulator need?               |                |
-| What explanation would the deploying institution need? |                |
+| What trace or evidence would a technical auditor need? |                |
+| What documentation would a regulator need?             |                |
+| What record would the deploying institution need?      |                |
 | What should be logged?                                 |                |
 | Who can inspect the logs?                              |                |
 | Who can challenge or appeal an anomaly label?          |                |
-| What happens if the system cannot explain its output?  |                |
+| What happens if the system cannot explain or reconstruct its output? | |
 
-## Part 11: Misuse and Dual Use
+---
+
+## Optional Extension D: Misuse and Dual Use
 
 Emerging technologies can be used in ways different from their original purpose.
 
@@ -264,7 +407,9 @@ Discuss possible misuse scenarios.
 | What safeguards would reduce misuse?                                  |                |
 | Are there uses that should be prohibited?                             |                |
 
-## Part 12: Governance Options
+---
+
+## Optional Extension E: Governance Options
 
 Not every technology should be governed the same way.
 
@@ -285,7 +430,9 @@ For your use case, evaluate the following options.
 | Use restrictions                      |                  |                    |
 | Prohibition in certain contexts       |                  |                    |
 
-## Part 13: Anticipatory Scenarios
+---
+
+## Optional Extension F: Anticipatory Scenarios
 
 Create three possible futures for your use case.
 
@@ -310,29 +457,9 @@ Now answer:
 | What early warning signs should be monitored?                   |                |
 | What safeguards would make the beneficial scenario more likely? |                |
 
-## Part 14: Final Recommendation
+---
 
-Your group must recommend one of the following:
-
-- **Use as proposed**
-- **Use only with safeguards**
-- **Redesign before use**
-- **Limit to low-stakes contexts**
-- **Prohibit in this context**
-- **Do not deploy until more evidence is available**
-
-Complete the table.
-
-| Recommendation Question                     | Group Response |
-| ------------------------------------------- | -------------- |
-| What is your recommendation?                |                |
-| What is your strongest reason?              |                |
-| What is the biggest unresolved uncertainty? |                |
-| What safeguards are required?               |                |
-| Who must be involved before deployment?     |                |
-| What evidence would change your mind?       |                |
-
-## Part 15: Connection to Anticipatory Governance
+## Connection to Anticipatory Governance
 
 Anticipatory governance does not ask only:
 
@@ -351,9 +478,11 @@ Key takeaway:
 
 > Emerging technologies should not be evaluated only after they are already widespread. Anticipatory governance creates space to ask what futures we are building, who gets a voice, and what limits should guide technical development.
 
+---
+
 ## Deliverable: BRAID Anticipatory Governance Memo
 
-Submit a memo evaluating your chosen use case.
+Submit a short memo evaluating your chosen use case.
 
 Your memo should include:
 
@@ -361,12 +490,11 @@ Your memo should include:
 2. The system’s purpose.
 3. The technical features that matter most.
 4. The main stakeholders.
-5. A benefit scenario.
-6. A harm or misuse scenario.
-7. False positive and false negative harms.
-8. Explainability and accountability concerns.
-9. Required safeguards.
-10. A final governance recommendation.
+5. One plausible benefit.
+6. One plausible harm, misuse, or failure mode.
+7. Two important governance questions.
+8. Required safeguards, limits, redesigns, or alternatives.
+9. A final governance recommendation.
 
 ## Suggested Memo Format
 
@@ -384,6 +512,7 @@ What is the system supposed to detect or support?
 ## Technical Features
 
 Which technical features matter most for governance?
+
 Consider edge processing, anomaly detection, on-chip learning, hardware implementation, speed, energy efficiency, and opacity.
 
 ## Stakeholders
@@ -392,43 +521,45 @@ Who benefits?
 Who could be harmed?
 Who has power?
 Who has little control?
+Who should be involved before deployment?
 
-## Benefit Scenario
+## What Could Go Right?
 
-Describe one plausible beneficial use.
+Describe one plausible benefit.
 
-## Harm or Misuse Scenario
+Who benefits?
+What would need to be true for this benefit to happen?
 
-Describe one plausible harmful use, misuse, or failure mode.
+## What Could Go Wrong — Even If It Works?
 
-## Error Analysis
+Describe one plausible harm, misuse, or failure mode.
 
-What would count as a false positive?
 Who could be harmed?
+Which technical feature contributes to the concern?
 
-What would count as a false negative?
-Who could be harmed?
+## Governance Questions
 
-## Explainability and Accountability
+Choose two governance questions that matter most for your use case.
 
-What should be explainable?
-What should be logged?
-Who is responsible if the system causes harm?
+You may use these lenses:
 
-## Safeguards
+- Normality
+- Auditability
+- Privacy and surveillance
+- Efficiency and scale
 
-What safeguards should be required before deployment?
+For each question, explain why it matters and who is affected.
+
+## Safeguards, Limits, Redesigns, or Alternatives
+
+What should be required before deployment?
+What should be limited?
+What should be redesigned?
+What alternative should be considered?
 
 ## Final Recommendation
 
 Should the system be used as proposed, used only with safeguards, redesigned, limited, prohibited in this context, or delayed until more evidence is available?
+
 Explain your reasoning.
 ```
-
-## Exit Ticket
-
-Individually, answer:
-
-1. What is one technical feature of the BRAID case that creates a governance challenge?
-2. What is one stakeholder group that should be included in anticipatory governance discussions?
-3. What is one use of neuromorphic anomaly detection that should be limited, carefully governed, or prohibited?

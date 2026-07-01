@@ -1,6 +1,7 @@
 ---
 title: "What Kind of Learning Is This?"
-scheduled_day: 10
+slug: what-kind-of-learning-is-this
+scheduled_day: 11
 module_id: 2
 subtitle: "Compare supervised, unsupervised, and related learning paradigms without treating them as the same thing."
 status: unverified

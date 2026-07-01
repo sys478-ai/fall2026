@@ -2,9 +2,16 @@ import ContentLayout from '@/components/ContentLayout';
 import ThemedImage from '@/components/ThemedImage';
 import { getPostData, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
+import { getFieldGuideBannerClasses } from '@/lib/field-guide-palettes';
 
 interface Props {
-  contentDir: 'ai-deployment-patterns' | 'sts-concepts' | 'examples' | 'ethical-frameworks' | 'technical-explainers';
+  contentDir:
+    | 'ai-deployment-patterns'
+    | 'sts-concepts'
+    | 'examples'
+    | 'ethical-frameworks'
+    | 'technical-explainers'
+    | 'governance';
   children: (columns: 1 | 2) => React.ReactNode;
 }
 
@@ -18,6 +25,7 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
   const imageDarkSrc = getDarkFeaturedImagePath(rawImage);
   const rawColumns = (indexPost as PostData & { card_columns?: number }).card_columns;
   const columns: 1 | 2 = rawColumns === 2 ? 2 : 1;
+  const banner = getFieldGuideBannerClasses(contentDir);
 
   return (
     <ContentLayout
@@ -26,8 +34,8 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
       contentPadding={false}
       header={
         <>
-          <header className="border-y border-violet-200 bg-violet-50 px-4 py-16 dark:border-violet-900 dark:bg-violet-950/30 md:px-16">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
+          <header className={banner.header}>
+            <p className={`mb-4 text-xs font-semibold uppercase tracking-[0.18em] ${banner.label}`}>
               {sectionLabel}
             </p>
             <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
@@ -44,8 +52,10 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
                 darkSrc={imageDarkSrc}
                 className="w-full my-8"
                 style={{
-                  WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
-                  maskImage: 'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
+                  WebkitMaskImage:
+                    'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
+                  maskImage:
+                    'radial-gradient(ellipse 100% 100% at 50% 50%, black 25%, rgba(0, 0, 0, 0.55) 55%, transparent 78%)',
                 }}
               />
               <div

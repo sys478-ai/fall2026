@@ -122,8 +122,9 @@ function splitPatternCaseTabs(content: string): PatternCaseTab[] {
 }
 
 function PatternSection({ label, children }: { label: string; children: ReactNode }) {
+  const excludeFromToc = label === 'Examples';
   return (
-    <section className="space-y-4 pt-4">
+    <section className="space-y-4 pt-4" {...(excludeFromToc ? { 'data-toc-exclude': 'true' } : {})}>
       <h2 className="text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">{label}</h2>
       <div className="min-w-0 [&_li]:my-2 [&_ol]:pl-5! [&_ul]:pl-5!">{children}</div>
     </section>

@@ -1,6 +1,7 @@
 ---
 title: 'What Counts as Intelligence?'
-scheduled_day: 6
+slug: what-counts-as-intelligence
+scheduled_day: 7
 module_id: 1
 subtitle: 'Compare human, animal, machine, social, and embodied intelligence and ask what each definition leaves out.'
 status: unverified

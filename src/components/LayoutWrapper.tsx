@@ -16,6 +16,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       const isResourcesDetail = normalizedPath.startsWith('/resources/') && normalizedPath !== '/resources';
       const isDetailWithToc = normalizedPath === '/' ||
                               normalizedPath === '/syllabus' ||
+                              normalizedPath === '/braid-case-study' ||
                               (normalizedPath.startsWith('/assignments/') && normalizedPath !== '/assignments') ||
                               (normalizedPath.startsWith('/activities/') && normalizedPath !== '/activities') ||
                               (normalizedPath.startsWith('/exams/') && normalizedPath !== '/exams') ||

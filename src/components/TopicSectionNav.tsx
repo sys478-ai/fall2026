@@ -11,9 +11,18 @@ export interface TopicSectionNavItem {
 interface TopicSectionNavProps {
   items: TopicSectionNavItem[];
   children: ReactNode;
+  ariaLabel?: string;
+  resolveTabIdFromHash?: (hashId: string) => string | undefined;
+  onHashSync?: (hashId: string) => void;
 }
 
-export default function TopicSectionNav({ items, children }: TopicSectionNavProps) {
+export default function TopicSectionNav({
+  items,
+  children,
+  ariaLabel = 'Topic sections',
+  resolveTabIdFromHash,
+  onHashSync,
+}: TopicSectionNavProps) {
   const [activeId, setActiveId] = useState(items[0]?.id || '');
   const panels = useMemo(() => Children.toArray(children), [children]);
 
@@ -41,14 +50,27 @@ export default function TopicSectionNav({ items, children }: TopicSectionNavProp
 
     const syncActiveTabToHash = () => {
       const hashId = window.location.hash.replace(/^#/, '');
+      const resolvedTabId = hashId ? resolveTabIdFromHash?.(hashId) : undefined;
+
+      if (resolvedTabId && items.some(item => item.id === resolvedTabId)) {
+        setActiveId(resolvedTabId);
+        onHashSync?.(hashId);
+        return;
+      }
+
       if (hashId && items.some(item => item.id === hashId)) {
         setActiveId(hashId);
+        onHashSync?.(hashId);
         return;
       }
 
       if (!hashId && items[0]?.id) {
         setActiveId(items[0].id);
+        onHashSync?.('');
+        return;
       }
+
+      onHashSync?.(hashId);
     };
 
     syncActiveTabToHash();
@@ -59,7 +81,7 @@ export default function TopicSectionNav({ items, children }: TopicSectionNavProp
       window.removeEventListener('hashchange', syncActiveTabToHash);
       window.removeEventListener('beforeprint', syncActiveTabToHash);
     };
-  }, [items]);
+  }, [items, onHashSync, resolveTabIdFromHash]);
 
   if (items.length === 0) {
     return null;
@@ -70,7 +92,7 @@ export default function TopicSectionNav({ items, children }: TopicSectionNavProp
       <div
         className="topic-section-tablist sticky top-0 z-10 border-b border-gray-200 bg-white/95 backdrop-blur dark:border-gray-800 dark:bg-black/95"
         role="tablist"
-        aria-label="Topic sections"
+        aria-label={ariaLabel}
       >
         <div className="flex overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden">
           {items.map((item, index) => {

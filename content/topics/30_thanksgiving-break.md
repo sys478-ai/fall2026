@@ -1,6 +1,7 @@
 ---
 title: "Thanksgiving Break"
-module_id: 6
+slug: thanksgiving-break
+module_id: 5
 subtitle: "No class."
 holiday: true
 status: unverified

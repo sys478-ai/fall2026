@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
-import RecognitionPatternCards from '@/components/RecognitionPatternCards';
+import FieldGuideFlipCards from '@/components/FieldGuideFlipCards';
 import { FieldGuideViewProvider, FieldGuideCardSection, FieldGuideCompactSection } from '@/components/FieldGuideView';
 import { getAllPosts, type PostData } from '@/lib/markdown';
 import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/featured-image';
@@ -19,6 +19,7 @@ interface ConceptEntry {
   field_guide_group_order?: number;
   featured_image?: string;
   featured_image_dark?: string;
+  iconClass?: string;
 }
 
 interface GuideSection {
@@ -26,6 +27,22 @@ interface GuideSection {
   intro: string;
   items: ConceptEntry[];
 }
+
+const STS_CONCEPT_ICONS: Record<string, string> = {
+  'sts-data-production': 'fa-solid fa-database',
+  'sts-classification-produces-world': 'fa-solid fa-sitemap',
+  'sts-features-as-values': 'fa-solid fa-sliders',
+  'sts-situated-knowledge': 'fa-solid fa-location-dot',
+  'sts-framing-shapes-governance': 'fa-solid fa-quote-left',
+  'sts-sociotechnical': 'fa-solid fa-users-gear',
+  'sts-materiality': 'fa-solid fa-mountain-sun',
+  'sts-systems-are-reactive': 'fa-solid fa-arrows-rotate',
+  'sts-sociotechnical-imaginaries': 'fa-solid fa-masks-theater',
+  'sts-path-dependency': 'fa-solid fa-road',
+  'sts-governance': 'fa-solid fa-gavel',
+  'sts-knowledge-and-power': 'fa-solid fa-key',
+  'sts-normal-is-constructed': 'fa-solid fa-ruler-horizontal',
+};
 
 function getConceptCards(): ConceptEntry[] {
   return getAllPosts('sts-concepts')
@@ -44,6 +61,7 @@ function getConceptCards(): ConceptEntry[] {
       field_guide_group_order: post.field_guide_group_order,
       featured_image: normalizeFeaturedImagePath(post.featured_image),
       featured_image_dark: getDarkFeaturedImagePath(post.featured_image),
+      iconClass: STS_CONCEPT_ICONS[post.id] ?? 'fa-solid fa-lightbulb',
     }));
 }
 
@@ -90,7 +108,15 @@ export default function STSConceptsPage() {
                       </h2>
                       <p className="mb-0 max-w-5xl text-base leading-7 text-gray-700 dark:text-gray-300">{section.intro}</p>
                     </div>
-                    <RecognitionPatternCards patterns={section.items} badgeLabel="Concept" preserveOrder columns={columns} />
+                    <FieldGuideFlipCards
+                      items={section.items}
+                      preserveOrder
+                      columns={columns}
+                      palette="sts"
+                      badgeLabel="Concept"
+                      linkLabel="Open concept →"
+                      iconClass="fa-solid fa-lightbulb"
+                    />
                   </section>
                 </FieldGuideCardSection>
                 <FieldGuideCompactSection

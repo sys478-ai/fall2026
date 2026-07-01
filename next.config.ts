@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 // NOTE: redirects() is not applied in output: 'export' (static export) mode.
 // These redirects are defined here for reference and for use if the site moves
@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   basePath: '/fall2026',
   assetPrefix: '/fall2026/',
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
   async redirects() {
     return [
@@ -42,12 +42,14 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/fall2026/field-guide/pattern-11',
-        destination: '/fall2026/field-guide/deployment-patterns/ai-can-create-dependency-cognitive-offloading-and-deskilling',
+        destination:
+          '/fall2026/field-guide/deployment-patterns/ai-can-create-dependency-cognitive-offloading-and-deskilling',
         permanent: true,
       },
       {
         source: '/fall2026/field-guide/pattern-12',
-        destination: '/fall2026/field-guide/deployment-patterns/ai-systems-can-encourage-anthropomorphism-aliveness-or-sentience-claims',
+        destination:
+          '/fall2026/field-guide/deployment-patterns/ai-systems-can-encourage-anthropomorphism-aliveness-or-sentience-claims',
         permanent: true,
       },
       {
@@ -72,12 +74,14 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/fall2026/field-guide/pattern-19',
-        destination: '/fall2026/field-guide/deployment-patterns/technical-expertise-can-be-used-to-dismiss-democratic-oversight',
+        destination:
+          '/fall2026/field-guide/deployment-patterns/technical-expertise-can-be-used-to-dismiss-democratic-oversight',
         permanent: true,
       },
       {
         source: '/fall2026/field-guide/pattern-21',
-        destination: '/fall2026/field-guide/deployment-patterns/delay-refusal-and-non-adoption-can-be-responsible-choices',
+        destination:
+          '/fall2026/field-guide/deployment-patterns/delay-refusal-and-non-adoption-can-be-responsible-choices',
         permanent: true,
       },
       {
@@ -154,6 +158,11 @@ const nextConfig: NextConfig = {
       {
         source: '/fall2026/field-guide/pattern-20',
         destination: '/fall2026/field-guide/sts-concepts/governance-is-broader-than-regulation-alone',
+        permanent: true,
+      },
+      {
+        source: '/fall2026/field-guide/sts-concepts/anticipatory-governance',
+        destination: '/fall2026/field-guide/governance/anticipatory-governance',
         permanent: true,
       },
       // Ethical Frameworks (was: /field-guide/frameworks/X)

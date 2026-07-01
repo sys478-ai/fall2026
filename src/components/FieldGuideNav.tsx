@@ -9,6 +9,7 @@ const TABS = [
   { label: 'Example Cards', href: '/field-guide/examples' },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
   { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
+  { label: 'Governance', href: '/field-guide/governance' },
   { label: 'History of AI', href: '/field-guide/ai-history' },
 ];
 

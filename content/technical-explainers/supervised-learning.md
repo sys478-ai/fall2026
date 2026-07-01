@@ -2,8 +2,8 @@
 card_type: technical-explainer
 id: te-supervised-learning
 slug: supervised-learning
-title: "Supervised Learning"
-subtitle: "How machines learn from labeled examples — and how those labels define what the system treats as correct."
+title: 'Supervised Learning'
+subtitle: 'How machines learn from labeled examples — and how those labels define what the system treats as correct.' main
 num: '1'
 order: 1
 related_recognition_cards: ['8', '23', '25', '7']
@@ -17,6 +17,7 @@ status_notes: "Technical explanation reviewed for accuracy and introductory read
 priority: high
 ---
 
+> Maybe we can separate out supervised learning from Neural Networks?
 
 ## What the System Is Trying to Do
 
@@ -107,7 +108,7 @@ Changing the threshold changes the balance between false positives and false neg
 | Technical failure mode                           | Field guide recognition card                                                |
 | ------------------------------------------------ | --------------------------------------------------------------------------- |
 | Training data reproduces historical decisions    | [Prediction imports the past](/field-guide/pattern-08)                      |
-| Labels encode human judgment                     | *Data is produced, not found (not yet published)*                           |
+| Labels encode human judgment                     | _Data is produced, not found (not yet published)_                           |
 | The loss function defines what counts as success | [Changing what gets measured changes what exists](/field-guide/pattern-23)  |
 | Aggregate accuracy hides concentrated failure    | [Concentrated harm is hidden by aggregate benefit](/field-guide/pattern-25) |
 | Decision thresholds create unequal consequences  | [Thresholds make uncertainty consequential](/field-guide/pattern-07)        |
