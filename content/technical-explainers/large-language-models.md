@@ -2,8 +2,8 @@
 card_type: technical-explainer
 id: te-large-language-models
 slug: large-language-models
-title: 'Large Language Models'
-subtitle: 'How language models generate fluent text — and why fluency does not guarantee accuracy, understanding, or trustworthiness.'
+title: "Large Language Models"
+subtitle: "How language models generate fluent text — and why fluency does not guarantee accuracy, understanding, or trustworthiness."
 num: '4'
 order: 4
 related_recognition_cards: ['12', '9', '15', '14', '3', '27', '8', '22']
@@ -27,9 +27,9 @@ Most modern text-generating LLMs are built using a type of deep neural network c
 
 A token’s starting vector contains learned information about how that token is generally used, but words do not have the same meaning in every sentence. Consider the word “bank”:
 
-- “We sat on the bank of the river.”
-- “She deposited money at the bank.”
-- “He made a bank shot off the backboard.”
+* “We sat on the bank of the river.”
+* “She deposited money at the bank.”
+* “He made a bank shot off the backboard.”
 
 The token is the same, but its meaning changes with the surrounding words. A transformer uses a mechanism called **attention** to identify which other tokens provide useful context. In the first sentence, “bank” may draw strongly from “river.” In the second, “deposited” and “money” are more relevant. Attention uses these relationships to create a more context-specific representation of each token.
 

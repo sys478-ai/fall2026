@@ -3,7 +3,7 @@ card_type: technical-explainer
 id: te-supervised-learning
 slug: supervised-learning
 title: 'Supervised Learning'
-subtitle: 'How machines learn from labeled examples — and how those labels define what the system treats as correct.'
+subtitle: 'How machines learn from labeled examples — and how those labels define what the system treats as correct.' main
 num: '1'
 order: 1
 related_recognition_cards: ['8', '23', '25', '7']
