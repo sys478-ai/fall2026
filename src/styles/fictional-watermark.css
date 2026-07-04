@@ -1,0 +1,34 @@
+.fictional-document {
+  position: relative;
+  isolation: isolate;
+}
+
+.fictional-watermark {
+  position: fixed;
+  top: 46%;
+  left: 58%;
+  z-index: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-32deg);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #eee;
+  white-space: nowrap;
+}
+
+.dark .fictional-watermark {
+  color: rgb(156 163 175 / 0.18);
+}
+
+.fictional-document__content {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1023px) {
+  .fictional-watermark {
+    left: 50%;
+    font-size: clamp(2rem, 12vw, 3.5rem);
+  }
+}

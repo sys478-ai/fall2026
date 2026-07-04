@@ -3,6 +3,7 @@ import type { ModuleColorToken } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import { getMeetingAnchorId, getModuleAnchorId } from '@/lib/navigation-helpers';
 import { getTopicModules } from '@/lib/topic-config';
+import { getBraidCaseStudyNavItems } from '@/lib/braid-case-study';
 import SidebarNavClient from './SidebarNavClient';
 
 interface SidebarTopicItem {
@@ -72,6 +73,7 @@ export default async function Navigation() {
     <SidebarNavClient
       courseTitle={`${courseConfig.courseNumber}: ${courseConfig.semester}`}
       modules={modules}
+      braidCaseStudyItems={getBraidCaseStudyNavItems()}
     />
   );
 }

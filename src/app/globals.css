@@ -4,6 +4,7 @@
 @import '../styles/pattern-case-tabs.css';
 @import '../styles/sequence.css';
 @import '../styles/technical-explainers.css';
+@import '../styles/fictional-watermark.css';
 
 /* Tailwind v4: Define custom dark mode variant for class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -1301,4 +1302,34 @@ pre code {
   .print-only {
     @apply block mb-12;
   }
+}
+
+.image-placeholder {
+  margin: 2rem 0;
+  max-width: 42rem;
+}
+
+.image-placeholder__frame {
+  aspect-ratio: 16 / 10;
+  border: 2px dashed var(--border);
+  background: color-mix(in srgb, var(--card) 88%, var(--muted));
+  color: var(--muted);
+}
+
+.image-placeholder__frame svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image-placeholder__caption {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--muted);
+}
+
+.image-placeholder__caption strong {
+  color: var(--foreground);
+  font-weight: 600;
 }

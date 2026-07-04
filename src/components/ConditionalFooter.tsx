@@ -15,6 +15,7 @@ export default function ConditionalFooter() {
                             normalizedPath === '/modules' ||
                             normalizedPath === '/syllabus' ||
                             normalizedPath === '/braid-case-study' ||
+                            normalizedPath.startsWith('/braid-case-study/') ||
                             normalizedPath === '/assignments' ||
                             normalizedPath.startsWith('/assignments/') ||
                             normalizedPath === '/activities' ||

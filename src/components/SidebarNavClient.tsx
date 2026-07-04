@@ -42,6 +42,7 @@ interface SidebarModuleItem {
 interface SidebarNavClientProps {
   courseTitle: string;
   modules: SidebarModuleItem[];
+  braidCaseStudyItems: Array<{ id: string; title: string; href: string }>;
 }
 
 const FIELD_GUIDE_ITEMS = [
@@ -63,7 +64,7 @@ function getTopicSlugFromHref(href: string) {
   return href.match(/\/topics\/([^/#?]+)/)?.[1] || null;
 }
 
-export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
+export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyItems }: SidebarNavClientProps) {
   const pathname = usePathname();
   const router = useRouter();
   const normalizedPath = normalizePath(pathname);
@@ -76,6 +77,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
     normalizedPath.startsWith('/modules') || normalizedPath.startsWith('/topics')
   );
   const [fieldGuideOpen, setFieldGuideOpen] = useState(normalizedPath.startsWith('/field-guide'));
+  const [braidCaseStudyOpen, setBraidCaseStudyOpen] = useState(normalizedPath.startsWith('/braid-case-study'));
   const [openModuleId, setOpenModuleId] = useState<number | null>(() => {
     const activeModule = modules.find(module =>
       module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
@@ -154,6 +156,12 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   useEffect(() => {
     if (normalizedPath.startsWith('/field-guide')) {
       setFieldGuideOpen(true);
+    }
+  }, [normalizedPath]);
+
+  useEffect(() => {
+    if (normalizedPath.startsWith('/braid-case-study')) {
+      setBraidCaseStudyOpen(true);
     }
   }, [normalizedPath]);
 
@@ -536,12 +544,60 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
             )}
           </div>
 
-          <Link
-            href="/braid-case-study"
-            className={`${baseLinkClass} ${activeBraidCaseStudy ? activeTopLevelClass : inactiveTopLevelClass} ${collapsed ? 'justify-center' : ''}`}
-          >
-            {renderNavContent('BRAID Case Study', CpuChipIcon)}
-          </Link>
+          <div className="bg-slate-50 dark:bg-slate-950">
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => setBraidCaseStudyOpen(current => !current)}
+                aria-expanded={braidCaseStudyOpen}
+                className={`${baseLinkClass} w-full ${
+                  activeBraidCaseStudy ? activeTopLevelClass : inactiveTopLevelClass
+                } ${collapsed ? 'justify-center' : 'justify-between'}`}
+              >
+                <span className="flex min-w-0 items-center gap-3">{renderNavContent('BRAID Case Study', CpuChipIcon)}</span>
+                {!collapsed && (
+                  <ChevronDownIcon
+                    className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
+                      braidCaseStudyOpen ? '' : '-rotate-90'
+                    }`}
+                  />
+                )}
+              </button>
+            </div>
+
+            {!collapsed && braidCaseStudyOpen && (
+              <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
+                <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
+                  <Link
+                    href="/braid-case-study"
+                    className={`block py-2 pl-11 pr-6 text-sm no-underline! transition-colors ${
+                      normalizedPath === '/braid-case-study'
+                        ? 'border-l-4 border-violet-500 font-semibold text-violet-800 dark:border-violet-400 dark:text-violet-200'
+                        : inactiveNestedClass
+                    }`}
+                  >
+                    Overview
+                  </Link>
+                  {braidCaseStudyItems.map(item => {
+                    const isActive = normalizedPath === item.href;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`block py-2 pl-11 pr-6 text-sm no-underline! transition-colors ${
+                          isActive
+                            ? 'border-l-4 border-violet-500 font-semibold text-violet-800 dark:border-violet-400 dark:text-violet-200'
+                            : inactiveNestedClass
+                        }`}
+                      >
+                        {item.title}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
       </div>
 
