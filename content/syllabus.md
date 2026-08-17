@@ -19,15 +19,15 @@ title: '“Thinking” Machines, Human Choices: Power & Responsibility in AI Des
   </tr>
   <tr>
     <td><strong>Time & Location</strong></td>
-    <td>Tu & Th, 9:55 AM - 11:35 AM in RRO 239</td>
+    <td>Tu & Th, 3:30 PM - 4:55 PM in RRO 217</td>
   </tr>
   <tr>
     <td><strong>Office Hours</strong></td>
-    <td>Mon, Wed & Fri, 2:30 - 3:30 PM (or by appointment) In Rhoades-Robinson, Rm. 220</td>
+    <td>Mon & Wed, 2:00 - 3:00 PM (or by appointment) In Rhoades-Robinson, Rm. 220</td>
   </tr>
   <tr>
     <td><strong>Texts</strong></td>
-    <td>TBD</td>
+    <td>No required course textbook</td>
   </tr>
 </table>
 

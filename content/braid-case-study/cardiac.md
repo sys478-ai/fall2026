@@ -117,7 +117,7 @@ With the current device, changes generally pass through a clinician review step.
       <line x1="638" y1="2" x2="2" y2="398" stroke="currentColor" stroke-width="3" />
     </svg>
   </div>
-  <figcaption class="image-placeholder__caption"><strong>Placeholder:</strong> A side-by-side architecture diagram. Left: current ICD with fixed rules, clinician review gate, and shock/no-shock output. Right: adaptive ICD with on-device learning loop, logging, rollback path, and the same shock/no-shock output. Label where visibility and accountability differ between the two systems.</figcaption>
+  <figcaption class="image-placeholder__caption"><strong>Placeholder:</strong> A side-by-side architecture diagxqram. Left: current ICD with fixed rules, clinician review gate, and shock/no-shock output. Right: adaptive ICD with on-device learning loop, logging, rollback path, and the same shock/no-shock output. Label where visibility and accountability differ between the two systems.</figcaption>
 </figure>
 
 ## Simulated Pilot Packet
