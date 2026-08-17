@@ -1,9 +1,10 @@
 ---
-title: "What Can Neuroscience Tell Us?"
+title: 'What Can Neuroscience Tell Us?'
+retired: true
 slug: what-can-neuroscience-tell-us
 scheduled_day: 18
 module_id: 3
-subtitle: "Ground brain-inspired computing in basic neuroscience terms and their limits."
+subtitle: 'Ground brain-inspired computing in basic neuroscience terms and their limits.'
 status: unverified
 status_reviewer:
 status_date:

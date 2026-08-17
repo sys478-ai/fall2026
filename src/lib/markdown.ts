@@ -134,6 +134,24 @@ function addHtmlClasses(attributes: string, classNames: string) {
   return setHtmlAttribute(attributes, 'class', mergeClassNames(existingClasses || '', classNames));
 }
 
+function addExternalLinkAttributes(contentHtml: string) {
+  return contentHtml.replace(/<a\b([^>]*)>/gi, (match, attributes) => {
+    const href = getHtmlAttribute(attributes, 'href');
+
+    if (!href || !/^https?:\/\//i.test(href)) {
+      return match;
+    }
+
+    const nextAttributes = setHtmlAttribute(
+      setHtmlAttribute(attributes, 'target', '_blank'),
+      'rel',
+      'noopener noreferrer'
+    );
+
+    return `<a${nextAttributes}>`;
+  });
+}
+
 function addDarkModeImageVariants(contentHtml: string) {
   return contentHtml.replace(/<img\b([^>]*)>/gi, (match, attributes) => {
     const src = getHtmlAttribute(attributes, 'src');
@@ -639,6 +657,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
     '<a$1>$4</a>'
   );
 
+  contentHtml = addExternalLinkAttributes(contentHtml);
   contentHtml = addDarkModeImageVariants(contentHtml);
 
   const cardNum = matterResult.data.num as string | undefined;

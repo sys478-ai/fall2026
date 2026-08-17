@@ -1,7 +1,7 @@
 {
   "statusBanners": {
     "fieldGuide": true,
-    "topicsAndAssignments": true
+    "topicsAndAssignments": false
   },
   "courseNumber": "SYS 478",
   "courseName": "\"Thinking\" Machines, Human Choices: Power & Responsibility in AI Design & Deployment",

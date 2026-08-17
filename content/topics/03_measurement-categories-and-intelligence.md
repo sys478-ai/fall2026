@@ -1,5 +1,6 @@
 ---
 title: 'What Is Knowledge, and How Is It Made?'
+retired: true
 slug: what-is-knowledge-and-how-is-it-made
 scheduled_day: 5
 module_id: 1

@@ -1,8 +1,8 @@
 ---
-title: "Fall Break"
+title: 'Fall Break'
 slug: fall-break
-module_id: 2
-subtitle: "No class."
+module_id: 3
+subtitle: 'No class.'
 holiday: true
 status: unverified
 status_reviewer:

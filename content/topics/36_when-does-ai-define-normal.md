@@ -1,5 +1,6 @@
 ---
 title: 'When Does AI Define Normal?'
+retired: true
 slug: when-does-ai-define-normal
 scheduled_day: 16
 module_id: 3

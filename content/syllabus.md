@@ -6,7 +6,8 @@ title: '“Thinking” Machines, Human Choices: Power & Responsibility in AI Des
   <tr>
     <td><strong>Course</strong></td>
     <td>
-      SYS 478: “Thinking” Machines, Human Choices: Power & Responsibility in AI Design & Deployment
+      SYS 478 003: Senior-Year Seminar<br />
+      “Thinking” Machines, Human Choices: Power & Responsibility in AI Design & Deployment
     </td>
   </tr>
   <tr>
@@ -19,25 +20,47 @@ title: '“Thinking” Machines, Human Choices: Power & Responsibility in AI Des
   </tr>
   <tr>
     <td><strong>Time & Location</strong></td>
-    <td>Tu & Th, 3:30 PM - 4:55 PM in RRO 217</td>
+    <td>Tu & Th, 3:15 PM – 4:55 PM in RRO 217</td>
+  </tr>
+  <tr>
+    <td><strong>Modality</strong></td>
+    <td>Face-to-Face</td>
   </tr>
   <tr>
     <td><strong>Office Hours</strong></td>
-    <td>Mon & Wed, 2:00 - 3:00 PM (or by appointment) In Rhoades-Robinson, Rm. 220</td>
+    <td>Mon & Wed, 2:00 – 3:00 PM (or by appointment) in Rhoades-Robinson, Rm. 220</td>
   </tr>
   <tr>
     <td><strong>Texts</strong></td>
-    <td>No required course textbook</td>
+    <td>None. There are no required textbooks or other materials that students must purchase for this course.</td>
   </tr>
 </table>
 
-## Course Description
+## Catalog Description and Prerequisites
 
-This senior seminar examines AI as both a technical system and a public problem. We will study how systems classify, measure, predict, and detect anomalies, while asking how those technical choices shape surveillance, accountability, labor, infrastructure, environmental impact, and governance. Rather than treating AI as only software, the course approaches it as socio-technical and material: built from data, hardware, institutions, values, supply chains, and stories about what intelligence is supposed to be.
+In the Senior-Year Seminar, SYS 478, students assume the role of global citizens to address an issue or a group of related issues of current and future importance to the world at large. Students will be expected to integrate the knowledge they have acquired through their major with the broader perspectives provided in their core curriculum courses. As such, the Senior-Year Seminar is intended to be taken in the final year. SYS 478 is a topical course taught by faculty from all disciplines. While issues covered by individual sections will vary based on faculty expertise, all sections of SYS 478 intend to raise students’ cognizance of their place in the world and the responsibilities of global citizenry. May not be used to fulfill major or minor requirements. May not be used to fulfill other requirements within the core curriculum. Students may receive credit for only one section of SYS 478. Senior Standing required and must be taken in residency.
+
+## Our SYS Course on AI & Society
+
+This _particular_ senior seminar examines AI as both a technical system and a public problem. We will study how systems classify, measure, predict, and detect anomalies, while asking how those technical choices shape surveillance, accountability, labor, infrastructure, environmental impact, and governance. Rather than treating AI as only software, the course approaches it as socio-technical and material: built from data, hardware, institutions, values, supply chains, and stories about what intelligence is supposed to be.
 
 The course includes a recurring NSF-funded BRAID case study focused on an emerging cerebellum-inspired neuromorphic circuit for anomaly detection in edge computing. This case gives us a chance to apply the course’s guiding questions to a technology that is still under development: What kind of AI is this? How does it work technically? How might it work socially? Where could it be deployed? And what positions should publics, designers, institutions, and regulators take before its uses become settled?
 
 The course also includes a career-readiness strand and a substantial final project. Over the semester, students will build professional goals, communication skills, and reflective career materials that support a final senior-level artifact. That artifact may take the form of a public-facing explainer, governance brief, exhibit, memo set, presentation, or other stakeholder-facing resource that helps non-specialists reason about an emerging AI system and its possible futures.
+
+## Student Learning Outcomes
+
+By the end of the course, students will be able to:
+
+<!-- .list-spaced -->
+
+1. Analyze AI as a socio-technical system, examining how technical systems are shaped by human choices, institutions, values, infrastructure, and material conditions.
+1. Apply ethical and governance frameworks to emerging AI technologies, considering affected stakeholders, possible futures, alternatives, safeguards, and opportunities for intervention.
+1. Communicate technical, social, and ethical dimensions of AI clearly to non-specialist audiences through discussion, writing, visual communication, and public-facing work.
+1. Develop a high-level understanding of selected technical concepts that help explain how contemporary AI systems work and why their design matters.
+1. Develop professional goals and communication practices that connect students' academic experience, interests, and skills to future professional or educational opportunities.
+1. Evaluate the social and ethical implications of AI design and deployment, including questions of power, bias, surveillance, labor, accountability, explainability, environmental impact, and distribution of benefits and harms.
+1. Identify and critically examine the judgments embedded in AI systems, including choices about categories, measurement, datasets, proxies, baselines, predictions, and acceptable error.
 
 ## Guiding Questions: How to Read an AI-Mediated World
 
@@ -58,107 +81,104 @@ This course is organized around five recurring questions. We will return to thes
 5. **Position: What should we think, do, govern, redesign, contest, or refuse?**
    We will develop reasoned judgments about when AI systems should be used, limited, redesigned, governed, contested, refused, or explained differently.
 
-## Learning Objectives
+## Required Materials
 
-By the end of the course, students will be able to:
+None. There are no required textbooks or other materials that students must purchase for this course.
 
-<!-- .list-spaced -->
+Required readings and other course materials, including articles, reports, videos, and other media, will be provided or linked through the course website. No additional purchase is required.
 
-1. Recognize common forms of AI mediation across everyday, institutional, scientific, and infrastructural contexts.
-1. Explain key AI mechanisms such as classification, feature selection, thresholds, prediction, anomaly detection, neural networks, edge AI, and neuromorphic computing in clear, accessible language.
-1. Analyze AI systems as sociotechnical and material systems shaped by institutions, infrastructures, labor, data practices, environmental costs, and power relations.
-1. Identify how categories, datasets, proxies, baselines, thresholds, and definitions of “normal” encode human judgment, institutional values, and historical patterns.
-1. Evaluate how technical design choices shape downstream questions of bias, surveillance, explainability, accountability, contestability, environmental impact, and governance.
-1. Develop reasoned positions about AI systems, including when they should be used, limited, redesigned, governed, contested, or refused.
-1. Communicate technical, ethical, and governance analysis effectively through a final public-facing or professional artifact.
+## Diversity of Intellectual Perspectives
+
+University and college courses engage diverse scholarly perspectives to develop critical thinking, analysis, and debate. Inclusion of a reading does not imply endorsement. Syllabi do not constitute an express or implied contract among the student, faculty, or institution. Rather, syllabi serve as a guide for courses. Syllabi are directed works that are developed within the scope of an instructor’s employment and under institutional direction. The institution is considered the copyright owner of course syllabi, as directed work. As such, syllabi shall be treated as “public records.” Publicly available syllabi are not required to include the location or time of day at which a course is being held. No syllabus shall include any personally identifiable information of students (e.g. race, gender, ethnicity, etc.).
+
+## Grading Scale
+
+| Letter Grade | Percentage Range |
+| ------------ | ---------------- |
+| A            | 93–100%          |
+| A-           | 90–92.9%         |
+| B+           | 87–89.9%         |
+| B            | 83–86.9%         |
+| B-           | 80–82.9%         |
+| C+           | 77–79.9%         |
+| C            | 73–76.9%         |
+| C-           | 70–72.9%         |
+| D+           | 67–69.9%         |
+| D            | 60–66.9%         |
+| F            | &lt;60%          |
+
+## Grading Components
+
+| Assignment                          | Percentage of Grade |
+| ----------------------------------- | ------------------- |
+| Reading Preparation & Responses     | 15%                 |
+| Homework & Labs                     | 35%                 |
+| Professional Development Activities | 25%                 |
+| Applied AI & Society Final Project  | 25%                 |
 
 ## Schedule
 
 {% schedule %}
 
-## Assessment
+## Final Exam Information
 
-1. **Participation and Seminar Engagement**: 20%
-1. **Labs**: 40%
-1. **Final Project**: 40%
+Students will present their final projects during the course’s scheduled final exam period.
 
-### 1. Participation and Seminar Engagement (20%)
+## Attendance Policy
 
-Participation and seminar engagement are worth 20% of the course grade. This category includes attendance, preparation, discussion, and meaningful participation in the career-readiness strand of the course.
+Regular attendance is a required part of this course. This is a discussion-based class, and much of our learning will happen through conversation: asking questions, working through difficult ideas, connecting concepts across readings and cases, and making sense of the material together. Missing class therefore means missing an important part of the learning that cannot always be recreated through readings or assignments alone.
 
-We will use classroom discussion as a form of collaborative sense-making to understand, critique, and interrogate the required readings, case studies, and technical examples. Your timely and engaged attendance at every class is thus very important — both for you and for your classmates. Every student will need to participate thoughtfully and productively in order for these discussions to be effective. Building on and reacting to other participants’ comments is encouraged, and should be done in a respectful tone even if you disagree. In order to participate fully, please do not let your laptop, phone, or other devices distract you or other participants.
+You may miss up to three class meetings without a grade penalty. You do not need to provide documentation or an explanation for these absences; they are intended to provide flexibility for illness, emergencies, appointments, and other circumstances that may arise during the semester.
 
-Participation and seminar engagement also includes the career-readiness strand of the course. These modules are part of the seminar experience, not an unrelated add-on. Completing those activities, reflecting seriously, and contributing to the professional and public-facing dimensions of the course are part of this category.
+Beginning with the fourth absence, each additional missed class meeting will lower your final course grade by one half-letter grade step:
 
-You are allowed two absences during the semester, no questions asked. You should reserve these absences for emergency or illness.
+- 4 absences: A → A−
+- 5 absences: A → B+
+- 6 absences: A → B
+- 7 absences: A → B−
+- and so on.
 
-Because this is a discussion-based senior seminar, attendance also has course-wide significance. After two absences, the attendance policy becomes strict:
+The attendance penalty is applied after your final numerical course grade has been calculated from course assignments and activities.
 
-- the third absence lowers your final course grade by half a letter
-- each additional absence lowers your final course grade by another half letter
+Absences covered by an approved university accommodation or other applicable university policy will be handled in accordance with that policy. If circumstances arise that are likely to result in an extended absence, please contact me as soon as you reasonably can so that we can determine how they affect your ability to complete the course.
 
-Because this is a discussion-based senior seminar, excessive absence does not only affect your own learning. It also affects the quality of the course for everyone else. If you are facing circumstances that may affect attendance in an ongoing way, please communicate with me as early as possible.
+## Participation Policy
 
-### 2. Labs (40%)
+This course depends on active participation and collective sense-making. Many of the ideas we will encounter are complex, contested, or unfamiliar, and we will use class discussion to work through them together. You are expected to come to class having engaged with the assigned materials and prepared to contribute to our work as a learning community.
 
-Labs are a central part of the course. They are designed to make technical systems concrete so that ethical and governance questions do not stay abstract. In labs, you may sort ambiguous cases, trace a tiny neural network, define anomaly baselines, map data flows, compare architectures, analyze hardware constraints, or evaluate governance safeguards for emerging systems.
+Attendance alone does not constitute participation. Meaningful participation can take many forms and does not require being the person who speaks most often. This means:
 
-Labs will be graded according to the following scale (from 0-3 points):
+- Coming to class prepared, having completed the assigned readings or other materials.
+- Bringing questions, observations, connections, or points of confusion to our discussions.
+- Contributing thoughtfully to whole-class discussions, small-group activities, and other course work.
+- Listening carefully to others and seeking to understand perspectives different from your own.
+- Building on, questioning, or complicating one another’s ideas in ways that help the group think more deeply.
+- Making space for others to contribute as well as contributing yourself.
+- Giving classmates the benefit of the doubt about their competence and intentions, and expecting the same in return.
+- Helping create a learning environment characterized by curiosity, respect, professionalism, and consideration for others.
 
-| Points   | Grade         | Description                                                            |
-| -------- | ------------- | ---------------------------------------------------------------------- |
-| **0pts** | Not attempted | Assignment not submitted.                                              |
-| **1pt**  | Check Minus   | Assignment attempted but less than half of it was completed correctly. |
-| **2pts** | Check         | Most of the assignment was completed; works as expected.               |
-| **3pts** | Check Plus    | Assignment completed. Works as expected.                               |
+Participation does not require having a fully formed opinion or arriving at the “right” answer. Asking a useful question, working through uncertainty, making a connection, identifying a tension, changing your mind, or helping the group clarify an idea are all meaningful contributions.
 
-Labs are designed to be completed during class. That said, you may have a week to turn them in. **I do not accept late labs**.
+Disagreement, questions, mistakes, and differing perspectives are welcome. Disrespectful, disruptive, or unethical behavior is not.
 
-### 3. Final Project (40%)
+## Late or Missing Assignments
 
-The final project is the culminating senior-seminar artifact. Students will complete the project in groups and develop a public-facing or stakeholder-facing resource related to AI, governance, and emerging technology. Possible formats may include a governance brief, public explainer, exhibit, memo set, presentation, or other substantial communication artifact.
+- Reading responses are intended to prepare you for class discussion and should be completed before the associated class meeting. Late reading responses will not receive credit. To provide flexibility for illness, busy weeks, and other circumstances, your two lowest reading-response scores will be dropped.
+- Other assignments submitted within one week of the deadline will receive a 20% late penalty. After one week, late work will not be accepted.
+- Some assignments involve presentations, collaborative activities, or other time-sensitive work and may have deadlines that cannot be extended in the same way. Any such expectations will be identified in the assignment instructions.
+- Absences or deadlines covered by an approved university accommodation or other applicable university policy will be handled in accordance with that policy.
 
-Strong final projects will:
+## Use of Technology in the Classroom
 
-- explain a concrete technical system clearly
-- identify relevant stakeholders, risks, and possible benefits
-- connect technical design choices to social and governance consequences
-- use course concepts and ethical recognition patterns precisely
-- communicate effectively to a non-specialist or mixed audience
+Please bring a laptop to every class meeting. We will regularly use class time for in-class activities, research, collaborative work, and exercises that require access to online resources and course materials.
 
-The career-readiness modules are part of the support structure for this final project. They are intended to help you develop goals, stories, and communication practices that strengthen your final work. Project checkpoints, proposal work, drafting, revision, and the final presentation all belong to this category.
+## Use of Artificial Intelligence
 
-## Late Policy
+Use of GenAI in completing course assignments is limited to use with particular assignments and within defined parameters as noted by the instructor, and AI use must be disclosed.
 
-- No late labs or project deliverables will be accepted.
+## Academic Integrity Policy
 
-## Draft Generative AI Policy
-
-To be refined in class...
-
-### Students shall…
-
-- Give credit to AI tools whenever used, even if only to generate ideas rather than usable text or code.
-- When using AI tools on assignments, add an appendix showing:
-  1. The entire exchange, highlighting the most relevant sections
-  2. Description of precisely which AI tools were used (e.g. ChatGPT private subscription version, CoPilot, etc.)
-  3. An explanation of how the AI tools were used (e.g. to generate ideas, understand functions or coding ideas, etc.)
-  4. An account of why AI tools were used (e.g. to save time, to to stimulate thinking, to handle mounting stress, to clarify prose, to experiment for fun, etc.).
-- Not use AI tools during in-class examinations unless explicitly permitted and instructed.
-- Use AI tools wisely and intelligently, aiming to deepen understanding of subject matter and to support learning.
-
-### I (Sarah) shall…
-
-- Seek to understand the strengths and weaknesses or AI tools for teaching and learning, to optimize their value for student learning.
-- Impose a significant penalty for:
-  - Using code that you do not understand and/or cannot clearly explain.
-  - Low-energy or unreflective reuse of material generated by AI tools and/or merely reproducing the output from AI tools.
-
-### This policy recognizes that…
-
-- This policy depends on goodwill, a sense of fairness, and honorable character.
-- This policy takes account of the existence of subscription versions of AI tools, which are not affordable for some students; the policy may need to be revised as the differences between subscription and free versions become better understood.
-- This policy may be revised in light of other policies and novel technological developments in AI tools.
+The university’s policy on academic honesty states that “As a community of scholars dedicated to learning and the pursuit of knowledge UNC Asheville relies on the honesty and academic integrity of all the members of its community. Any act of plagiarism or cheating is academic dishonesty. A person who knowingly assists another in cheating is likewise guilty of cheating. According to the instructor’s view of the gravity of the offense, a student may be punished by a failing grade or a grade of zero for the assignment or test, or a failing grade in the course. If it seems warranted, the instructor may also recommend to the Provost dismissal or other serious university sanction.” I expect that you will exercise integrity in all quizzes, exams, and written assignments. Please email me or come see me during office hours if you have additional questions or need clarification on any point. You can find additional information regarding the policy and potential grievance procedures here: https://studenthandbook.unca.edu/student-conduct/academic-misconduct-and-grievances-procedures/
 
 ## University Policies & Resources
 
@@ -166,9 +186,29 @@ To be refined in class...
 
 UNC Asheville is committed to providing accessible learning environments and equal opportunity to individuals with disabilities in accordance with the <a href="https://www.ada.gov/" target="_blank">Americans with Disabilities Act (ADA)</a> and <a href="https://www.ed.gov/laws-and-policy/individuals-disabilities/section-504" target="_blank">Section 504 of the Rehabilitation Act</a>.
 
-If you are a student experiencing barriers to access or full participation in this course on the basis of a disability, contact the Office of Accessibility (OA) to apply for reasonable accommodations and discuss available resources. You may contact the OA at academicaccess@unca.edu or 828-251-6292 or visit Zageir Hall Room 120.
+If you are a student experiencing barriers to access or full participation in this course on the basis of a disability, contact the Office of Accessibility (OA) to apply for reasonable accommodations and discuss available resources. You may contact the OA at accessibility@unca.edu or 828-251-6292 or visit Zageir Hall Room 120/121.
 
 To discuss approved academic accommodations, please contact me as early in the semester as possible and provide your letter of accommodation (LOA) from the <a href="https://new.unca.edu/iia/accessibility/" target="_blank">OA</a>. I want to ensure that we have adequate time and a confidential setting to discuss and arrange your approved accommodations. Accommodations are not retroactive and will be implemented when the LOA is discussed.
+
+### Academic Alerts
+
+As part of UNC Asheville’s student success efforts, faculty have access to an Academic Alert system. The purpose of this system is to support communication with students about their progress in courses, especially if there are concerns (e.g., academic difficulty, attendance problems). Entering an academic alert is a great way to supplement open conversations between instructors and students about how students can improve their academic performance and to activate a broader support system. An alert should only be entered after the instructor has reached out to the student directly.
+
+When a faculty member submits an alert that expresses a concern, the student receives outreach from their academic advisor or the Student Success Specialists in the Office of Academic Advising. Students are no longer receiving automated notification emails when an alert is submitted. It is in the student's best interest to address the alert quickly, as students who do so are more likely to earn credit for the course. Questions about the Academic Alert system can be directed to Anne Marie Roberts (amrober1@unca.edu) in the <a href="https://www.unca.edu/academics/academic-success/" target="_blank">Academic Success Center</a>.
+
+### Grievance Procedures for Students
+
+A student grievance procedure exists to serve all enrolled students at UNC Asheville in the event that they judge they have been improperly or unfairly treated in academic matters. Written notice of the grievance must be filed with the Faculty Conciliator, who will attempt to resolve the grievance informally to the satisfaction of all parties. When such informal conciliation proves impossible, students have the right to present their grievance to a closed hearing of the Academic Appeals Board. If a grievance is unfounded the Academic Appeals Board shall provide written notification of that fact to the student, the faculty member, and the departmental Chair. If a grievance is deemed valid, the Board shall forward a written account of its deliberations, including its recommendations for redress, to the student, the faculty member, the department Chair, and the Provost. For further information, see the Academic Appeals website.
+
+### Revisions to Course Information
+
+All materials and assignments in this syllabus are subject to change at the discretion of the professor. Any changes will be clearly communicated by email and updated in the course schedule.
+
+### Inclement Weather Policy
+
+In the case of inclement weather, we will follow the policies of the university regarding cancellation, make-up classes, and late start scheduling. Announcements are delivered through the SafeZone App and will include push notifications, email, text and posts on the UNC Asheville homepage. All students, faculty, and staff are automatically registered. Confirm your contact information at Bulldog Alert.
+
+Decisions are made as early as possible and by 6 a.m. when classes are in session. If a delayed opening is announced, only classes starting at or after that time will meet — for example, an 11 a.m. opening means all classes starting before 11 a.m. are cancelled and all classes at 11 a.m. or later proceed as usual.
 
 ### Promoting Gender Equity, Responding to Sexual Misconduct
 
@@ -189,15 +229,3 @@ For guidance or to report concerns, contact Heather Lindkvist, Assistant Vice Ch
 ### Religious Accommodations
 
 UNC Asheville accords students, on an individual basis, the opportunity to observe their traditional religious holy days. Students desiring to observe a religious holy day of special importance must notify me directly (suggested time frames: two weeks of the start of the semester or at least seven business days in advance of the scheduled observance). The request should be made in writing and should state (1) the specific accommodation being requested, (2) the religious practice or belief the student holds, (3) how the requested accommodation enables the student to participate in their religious practice or belief, and (4) the date(s) and/or frequency of the requested accommodation. We will then meet to discuss what reasonable accommodation will be implemented, such as options for missed discussions, exams, or other assignments. You are entitled to make up assignments without penalty due to an excused absence for a religious observance. Students may request a minimum of two excused absences per academic year for religious observances. The Office for Institutional Integrity & Access is available as a resource if students or faculty have questions about this process.
-
-### Academic Alerts
-
-Faculty at UNC Asheville have access to an Academic Alert system. The purpose of this system is to support communication with students about their progress in courses, especially if there are concerns (e.g., academic difficulty, attendance problems). Professors use the Alert system because they are invested in their students’ success. Entering an academic alert is a great way to supplement open conversations between instructors and students about how students can improve their academic performance.
-
-Alerts should not replace your direct outreach to and communication with the student. They are intended to serve as a way to document your concern and outreach and/or activate the larger support system for the student as needed. Hence, an alert should only be entered after the instructor has reached out to the student directly.
-
-When a faculty member submits an alert that expresses a concern, the student receives outreach from their academic advisor or the team in the Office of Academic Advising. Students are no longer receiving automated notification emails when an alert is submitted. It is in the student's best interest to address the alert quickly, as students who do so are more likely to earn credit for the course. Questions about the Academic Alert system can be directed to Anne Marie Roberts (amrober1@unca.edu) in the <a href="https://www.unca.edu/academics/academic-success/" target="_blank">Academic Success Center</a>.
-
-### Academic Honesty
-
-The university’s policy on academic honesty states that “As a community of scholars dedicated to learning and the pursuit of knowledge UNC Asheville relies on the honesty and academic integrity of all the members of its community. Any act of plagiarism or cheating is academic dishonesty. A person who knowingly assists another in cheating is likewise guilty of cheating. According to the instructor’s view of the gravity of the offense, a student may be punished by a failing grade or a grade of zero for the assignment or test, or a failing grade in the course. If it seems warranted, the instructor may also recommend to the Provost dismissal or other serious university sanction.” I expect that you will exercise integrity in all quizzes, exams, and written assignments. Please email me or pop in during student hours if you have additional questions or need clarification on any point. You can find additional information regarding the policy and potential grievance procedures here: https://studenthandbook.unca.edu/student-conduct/academic-misconduct-and-grievances-procedures/

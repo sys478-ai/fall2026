@@ -1,5 +1,6 @@
 ---
 title: 'What Ethical Lenses Help Us Evaluate AI?'
+retired: true
 slug: what-ethical-lenses-help-us-evaluate-ai
 scheduled_day: 14
 module_id: 2

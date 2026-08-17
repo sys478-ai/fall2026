@@ -27,30 +27,17 @@ export default async function Navigation() {
   const topicModules = getTopicModules();
 
   const meetingBySlug = new Map(
-    scheduledTopics.flatMap((module) =>
-      module.meetings
-        .filter((meeting) => meeting.slug)
-        .map((meeting) => [meeting.slug!, meeting] as const)
+    scheduledTopics.flatMap(module =>
+      module.meetings.filter(meeting => meeting.slug).map(meeting => [meeting.slug!, meeting] as const)
     )
   );
 
-  const modules: SidebarModuleItem[] = topicModules.map((module) => ({
+  const modules: SidebarModuleItem[] = topicModules.map(module => ({
     id: module.id,
     title: module.title,
     color: module.color,
     href: module.slug ? `/topics/${module.slug}` : `/#${getModuleAnchorId(module.id)}`,
     topics: [
-      ...(module.slug
-        ? [
-            {
-              id: module.slug,
-              title: `Overview`,
-              date: 'Module overview',
-              contentHref: `/topics/${module.slug}`,
-              isNoClass: false,
-            },
-          ]
-        : []),
       ...module.meetings.map((meeting, index) => {
         const scheduledMeeting = meetingBySlug.get(meeting.slug);
         const contentHref = meeting.slug
@@ -68,10 +55,5 @@ export default async function Navigation() {
     ],
   }));
 
-  return (
-    <SidebarNavClient
-      courseTitle={`${courseConfig.courseNumber}: ${courseConfig.semester}`}
-      modules={modules}
-    />
-  );
+  return <SidebarNavClient courseTitle={`${courseConfig.courseNumber}: ${courseConfig.semester}`} modules={modules} />;
 }

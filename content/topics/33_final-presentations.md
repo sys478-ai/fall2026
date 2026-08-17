@@ -1,11 +1,10 @@
 ---
-title: "What Should Others Understand?"
+title: 'What Should Others Understand?'
 slug: what-should-others-understand
-scheduled_day: 30
-module_id: 6
-subtitle: "Present a public-facing explainer and ELSI analysis."
+module_id: 8
+subtitle: 'Present a public-facing explainer and ELSI analysis.'
 recognition_pattern_notes:
-  - "Student-selected pattern(s)."
+  - 'Student-selected pattern(s).'
 status: unverified
 status_reviewer:
 status_date:

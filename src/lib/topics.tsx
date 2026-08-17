@@ -1,11 +1,24 @@
-import { getAllPosts, PostData, getAllQuizMetadata, QuizMetadata, getQuizData, getQuizCheatsheet, QuizData } from './markdown';
+import {
+  getAllPosts,
+  PostData,
+  getAllQuizMetadata,
+  QuizMetadata,
+  getQuizData,
+  getQuizCheatsheet,
+  QuizData,
+} from './markdown';
 import React from 'react';
 import taxonomyConfig from '../../content/config/taxonomy.json';
 import { courseCalendar } from '../../content/config/schedule';
 import { getCourseConfig } from './config';
 import type { ModuleColorToken } from './module-colors';
 import { getAllModuleMarkdownMetadata, getModuleMarkdownBySlug, type ModuleMarkdownMetadata } from './module-markdown';
-import { getAllTopicMarkdownMetadata, getTopicMarkdownByModule, getTopicMarkdownBySlug, type TopicMarkdownMetadata } from './topic-markdown';
+import {
+  getAllTopicMarkdownMetadata,
+  getTopicMarkdownByModule,
+  getTopicMarkdownBySlug,
+  type TopicMarkdownMetadata,
+} from './topic-markdown';
 import { generateCourseMeetingDates, getDueDateForScheduledDay, type GeneratedMeetingDate } from './course-calendar';
 
 // Type definitions for topics structure
@@ -148,9 +161,7 @@ function getAssignmentTitleShort(assignment: { type?: string; num?: string | num
     return assignment.num ? `Project ${assignment.num}` : 'Project';
   }
 
-  const typeLabel = assignment.type
-    ? assignment.type.charAt(0).toUpperCase() + assignment.type.slice(1)
-    : 'Assignment';
+  const typeLabel = assignment.type ? assignment.type.charAt(0).toUpperCase() + assignment.type.slice(1) : 'Assignment';
 
   return assignment.num ? `${typeLabel} ${assignment.num}` : typeLabel;
 }
@@ -242,7 +253,11 @@ function renderMeetingDescription(meeting: TopicMarkdownMetadata) {
   );
 }
 
-function buildTopicMeeting(module: ModuleMarkdownMetadata, meeting: TopicMarkdownMetadata, meetingDate: GeneratedMeetingDate): BaseMeeting {
+function buildTopicMeeting(
+  module: ModuleMarkdownMetadata,
+  meeting: TopicMarkdownMetadata,
+  meetingDate: GeneratedMeetingDate
+): BaseMeeting {
   return {
     slug: meeting.slug,
     scheduledDay: meeting.scheduledDay,
@@ -257,10 +272,16 @@ function buildTopicMeeting(module: ModuleMarkdownMetadata, meeting: TopicMarkdow
     ethicalPatterns: meeting.ethicalPatterns,
     recognitionPatternNotes: meeting.recognitionPatternNotes,
     themes: meeting.themes,
+    readings: meeting.readings,
+    optionalReadings: meeting.optionalReadings,
   };
 }
 
-function buildHolidayMeeting(module: ModuleMarkdownMetadata, holidayTopic: TopicMarkdownMetadata | null, meetingDate: GeneratedMeetingDate): BaseMeeting {
+function buildHolidayMeeting(
+  module: ModuleMarkdownMetadata,
+  holidayTopic: TopicMarkdownMetadata | null,
+  meetingDate: GeneratedMeetingDate
+): BaseMeeting {
   const title = meetingDate.holiday?.title || holidayTopic?.title || 'No class';
 
   return {
@@ -293,17 +314,24 @@ function buildFinalExamMeeting(module: ModuleMarkdownMetadata, meeting: TopicMar
     ethicalPatterns: meeting.ethicalPatterns,
     recognitionPatternNotes: meeting.recognitionPatternNotes,
     themes: meeting.themes,
+    readings: meeting.readings,
+    optionalReadings: meeting.optionalReadings,
   };
 }
 
 function getModuleForHolidayDate(holidayDate: GeneratedMeetingDate, topics: TopicMarkdownMetadata[]) {
   const sortedScheduledTopics = topics
-    .filter((topic): topic is TopicMarkdownMetadata & { scheduledDay: number } => typeof topic.scheduledDay === 'number')
+    .filter(
+      (topic): topic is TopicMarkdownMetadata & { scheduledDay: number } => typeof topic.scheduledDay === 'number'
+    )
     .sort((a, b) => a.scheduledDay - b.scheduledDay);
 
   const meetingDateByScheduledDay = new Map(
     generateCourseMeetingDates()
-      .filter((meetingDate): meetingDate is GeneratedMeetingDate & { scheduledDay: number } => typeof meetingDate.scheduledDay === 'number')
+      .filter(
+        (meetingDate): meetingDate is GeneratedMeetingDate & { scheduledDay: number } =>
+          typeof meetingDate.scheduledDay === 'number'
+      )
       .map(meetingDate => [meetingDate.scheduledDay, meetingDate.date])
   );
   const nextTopic = sortedScheduledTopics.find(topic => {
@@ -325,13 +353,14 @@ function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
   const meetingDates = generateCourseMeetingDates();
   const meetingDateByScheduledDay = new Map(
     meetingDates
-      .filter((meetingDate): meetingDate is GeneratedMeetingDate & { scheduledDay: number } => typeof meetingDate.scheduledDay === 'number')
+      .filter(
+        (meetingDate): meetingDate is GeneratedMeetingDate & { scheduledDay: number } =>
+          typeof meetingDate.scheduledDay === 'number'
+      )
       .map(meetingDate => [meetingDate.scheduledDay, meetingDate])
   );
   const holidayTopicsByTitle = new Map(
-    allTopics
-      .filter(topic => topic.holiday)
-      .map(topic => [topic.title.toLowerCase(), topic])
+    allTopics.filter(topic => topic.holiday).map(topic => [topic.title.toLowerCase(), topic])
   );
   const topicMeetingsByModule = new Map<string, BaseMeeting[]>();
 
@@ -349,7 +378,9 @@ function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
 
       const meetingDate = meetingDateByScheduledDay.get(topic.scheduledDay);
       if (!meetingDate) {
-        throw new Error(`No generated class meeting for scheduled_day ${topic.scheduledDay} used by topic "${topic.slug}"`);
+        throw new Error(
+          `No generated class meeting for scheduled_day ${topic.scheduledDay} used by topic "${topic.slug}"`
+        );
       }
 
       const meetings = topicMeetingsByModule.get(module.slug) || [];
@@ -386,7 +417,7 @@ function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
     topicMeetingsByModule.set(module.slug, meetings);
   }
 
-  return modules.map((module) => {
+  return modules.map(module => {
     const meetings = topicMeetingsByModule.get(module.slug) || [];
     meetings.sort((a, b) => {
       const dateA = parseMeetingDate(a.date) || '9999-99-99';
@@ -419,22 +450,32 @@ function parseMeetingDate(meetingDate: string): string | null {
   // Format: "Tu, Jan 13" -> "2026-01-13"
   // Get year from course config
   const year = getCourseConfig().year;
-  
+
   const monthMap: Record<string, number> = {
-    'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
-    'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+    Jan: 1,
+    Feb: 2,
+    Mar: 3,
+    Apr: 4,
+    May: 5,
+    Jun: 6,
+    Jul: 7,
+    Aug: 8,
+    Sep: 9,
+    Oct: 10,
+    Nov: 11,
+    Dec: 12,
   };
-  
+
   const match = meetingDate.match(/(\w+), (\w+) (\d+)/);
   if (!match) return null;
-  
+
   const [, , monthAbbr, day] = match;
   const month = monthMap[monthAbbr];
   if (!month) return null;
-  
+
   const monthStr = String(month).padStart(2, '0');
   const dayStr = String(parseInt(day)).padStart(2, '0');
-  
+
   return `${year}-${monthStr}-${dayStr}`;
 }
 
@@ -451,13 +492,13 @@ function normalizeDate(dateStr: string | undefined): string | null {
 function formatDateForMeeting(dateStr: string): string | null {
   const date = new Date(dateStr + 'T00:00:00');
   if (isNaN(date.getTime())) return null;
-  
+
   const dayAbbr = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
   const dayOfWeek = dayAbbr[date.getDay()];
   const monthAbbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const month = monthAbbr[date.getMonth()];
   const day = date.getDate();
-  
+
   return `${dayOfWeek}, ${month} ${day}`;
 }
 
@@ -467,24 +508,28 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
   const allActivities = getAllPosts('activities');
   const allAssignments = getAllPosts('assignments');
   const allQuizzes = getAllQuizMetadata();
-  
+
   // Filter scheduled activities and assignments by scheduled_day.
-  const scheduledActivities = allActivities.filter(a => typeof getScheduledDay(a.scheduled_day) === 'number' && !a.excluded);
-  const scheduledAssignments = allAssignments.filter(a => typeof getScheduledDay(a.scheduled_day) === 'number' && a.hide_from_list !== 1);
+  const scheduledActivities = allActivities.filter(
+    a => typeof getScheduledDay(a.scheduled_day) === 'number' && !a.excluded
+  );
+  const scheduledAssignments = allAssignments.filter(
+    a => typeof getScheduledDay(a.scheduled_day) === 'number' && a.hide_from_list !== 1
+  );
   const assignmentsWithAssignedDate = allAssignments.filter(a => a.assigned_date && a.hide_from_list !== 1);
   const assignmentsWithDueDate = allAssignments.filter(a => {
     const dueDate = getDueDateForScheduledDay(a.scheduled_day) || a.due_date;
     return Boolean(dueDate && a.hide_from_list !== 1);
   });
   const quizzesWithDates = allQuizzes.filter(q => q.start_date);
-  
+
   // Create maps for quick lookup by scheduled day/date
   const activitiesByScheduledDay = new Map<number, PostData[]>();
   const assignmentsByScheduledDay = new Map<number, PostData[]>();
   const assignmentsByAssignedDate = new Map<string, PostData[]>();
   const assignmentsByDueDate = new Map<string, PostData[]>();
   const quizzesByDate = new Map<string, QuizMetadata[]>();
-  
+
   scheduledActivities.forEach(activity => {
     const scheduledDay = getScheduledDay(activity.scheduled_day);
     if (typeof scheduledDay === 'number') {
@@ -504,7 +549,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       assignmentsByScheduledDay.get(scheduledDay)!.push(assignment);
     }
   });
-  
+
   assignmentsWithAssignedDate.forEach(assignment => {
     const date = normalizeDate(assignment.assigned_date);
     if (date) {
@@ -514,7 +559,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       assignmentsByAssignedDate.get(date)!.push(assignment);
     }
   });
-  
+
   assignmentsWithDueDate.forEach(assignment => {
     const date = normalizeDate(getDueDateForScheduledDay(assignment.scheduled_day) || assignment.due_date);
     if (date) {
@@ -524,7 +569,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       assignmentsByDueDate.get(date)!.push(assignment);
     }
   });
-  
+
   quizzesWithDates.forEach(quiz => {
     const date = normalizeDate(quiz.start_date!);
     if (date) {
@@ -534,7 +579,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       quizzesByDate.get(date)!.push(quiz);
     }
   });
-  
+
   // Clone generated base topics to avoid mutating the original
   // We need to preserve React elements in descriptions, so we do a shallow copy
   // Cast topics to allow quizzes to be (Quiz | Reading)[] initially
@@ -553,17 +598,21 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
         recognitionPatternNotes: markdownTopic?.recognitionPatternNotes || meeting.recognitionPatternNotes,
         themes: markdownTopic?.themes || meeting.themes,
         activities: meeting.activities ? [...meeting.activities] : undefined,
-        assigned: meeting.assigned ? (typeof meeting.assigned === 'object' ? { ...meeting.assigned } : meeting.assigned) : undefined,
+        assigned: meeting.assigned
+          ? typeof meeting.assigned === 'object'
+            ? { ...meeting.assigned }
+            : meeting.assigned
+          : undefined,
       };
-    }) as Meeting[]
+    }) as Meeting[],
   }));
-  
+
   // Enrich each meeting
-  enrichedTopics.forEach((topic) => {
-    topic.meetings.forEach((meeting) => {
+  enrichedTopics.forEach(topic => {
+    topic.meetings.forEach(meeting => {
       const meetingDateStr = parseMeetingDate(meeting.date);
       if (!meetingDateStr) return;
-      
+
       // Check if meeting has schedule quizzes from schedule.tsx
       // These can be either Reading (citation) or ScheduleQuiz (quizName/url) format
       // Note: meeting.quizzes can contain Quiz, Reading, or ScheduleQuizInput types from schedule.tsx
@@ -572,22 +621,22 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
         const isScheduleQuiz = (q: Quiz | Reading | ScheduleQuizInput): q is ScheduleQuizInput => {
           return 'quizName' in q && 'url' in q && !('title' in q) && !('slug' in q) && !('citation' in q);
         };
-        
+
         // Type guard: check if item is a Reading (has citation, no title/slug/quizName)
         const isCitationQuiz = (q: Quiz | Reading | ScheduleQuizInput): q is Reading => {
           return 'citation' in q && !('title' in q) && !('slug' in q) && !('quizName' in q);
         };
-        
+
         // Type guard: check if item is a Quiz (has title/slug, no citation/quizName)
         const isQuiz = (q: Quiz | Reading | ScheduleQuizInput): q is Quiz => {
           return 'title' in q && 'slug' in q && !('citation' in q) && !('quizName' in q);
         };
-        
+
         // Cast to union type to allow filtering
         const quizzesArray = meeting.quizzes as (Quiz | Reading | ScheduleQuizInput)[];
         const scheduleQuizzes = quizzesArray.filter(isScheduleQuiz);
         const citationQuizzes = quizzesArray.filter(isCitationQuiz);
-        
+
         // Combine schedule quizzes (new format) and citation quizzes (old format) into scheduleQuizzes
         if (scheduleQuizzes.length > 0 || citationQuizzes.length > 0) {
           // Convert ScheduleQuizInput to ScheduleQuiz format
@@ -600,7 +649,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
               // If citation is React element, extract text from children
               let quizName = '';
               let url = q.url || '';
-              
+
               if (typeof q.citation === 'string') {
                 quizName = q.citation;
               } else if (React.isValidElement(q.citation)) {
@@ -610,65 +659,65 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
                 if (typeof children === 'string') {
                   quizName = children;
                 } else if (Array.isArray(children)) {
-                  quizName = children.map((c: unknown) => typeof c === 'string' ? c : '').join('');
+                  quizName = children.map((c: unknown) => (typeof c === 'string' ? c : '')).join('');
                 }
                 // Try to extract url from anchor tag if present
                 if (props?.href) {
                   url = props.href;
                 }
               }
-              
+
               return { quizName: quizName || 'Quiz', url: url || '#' };
-            })
+            }),
           ];
-          
+
           meeting.scheduleQuizzes = convertedScheduleQuizzes;
-          
-        // Keep only Quiz objects (with title/slug) in quizzes array
-        const manualQuizzes = quizzesArray.filter(isQuiz);
-        // Enrich manual quizzes with quizData and cheatsheetContent if not already present
-        meeting.quizzes = manualQuizzes.map((quiz: Quiz) => {
-          if (!quiz.quizData && quiz.slug) {
-            const quizData = getQuizData(quiz.slug);
-            const cheatsheetContent = getQuizCheatsheet(quizData, quiz.slug);
-            return {
-              ...quiz,
-              quizData: quizData || undefined,
-              cheatsheetContent: cheatsheetContent || undefined
-            };
+
+          // Keep only Quiz objects (with title/slug) in quizzes array
+          const manualQuizzes = quizzesArray.filter(isQuiz);
+          // Enrich manual quizzes with quizData and cheatsheetContent if not already present
+          meeting.quizzes = manualQuizzes.map((quiz: Quiz) => {
+            if (!quiz.quizData && quiz.slug) {
+              const quizData = getQuizData(quiz.slug);
+              const cheatsheetContent = getQuizCheatsheet(quizData, quiz.slug);
+              return {
+                ...quiz,
+                quizData: quizData || undefined,
+                cheatsheetContent: cheatsheetContent || undefined,
+              };
+            }
+            // If quizData exists but cheatsheetContent doesn't, load it
+            if (quiz.quizData && !quiz.cheatsheetContent && quiz.slug) {
+              const cheatsheetContent = getQuizCheatsheet(quiz.quizData, quiz.slug);
+              return {
+                ...quiz,
+                cheatsheetContent: cheatsheetContent || undefined,
+              };
+            }
+            return quiz;
+          });
+          // If no Quiz objects remain, set to undefined
+          if (meeting.quizzes.length === 0) {
+            meeting.quizzes = undefined;
           }
-          // If quizData exists but cheatsheetContent doesn't, load it
-          if (quiz.quizData && !quiz.cheatsheetContent && quiz.slug) {
-            const cheatsheetContent = getQuizCheatsheet(quiz.quizData, quiz.slug);
-            return {
-              ...quiz,
-              cheatsheetContent: cheatsheetContent || undefined
-            };
-          }
-          return quiz;
-        });
-        // If no Quiz objects remain, set to undefined
-        if (meeting.quizzes.length === 0) {
-          meeting.quizzes = undefined;
-        }
         }
       }
-      
+
       // Find matching activities and assignments by scheduled_day
       const matchingScheduledActivities =
         typeof meeting.scheduledDay === 'number' ? activitiesByScheduledDay.get(meeting.scheduledDay) || [] : [];
       const matchingScheduledAssignments =
         typeof meeting.scheduledDay === 'number' ? assignmentsByScheduledDay.get(meeting.scheduledDay) || [] : [];
-      
+
       // Find matching assignments by assigned_date
       const matchingAssignmentsByAssigned = assignmentsByAssignedDate.get(meetingDateStr) || [];
-      
+
       // Find matching assignments by due_date
       const matchingAssignmentsByDue = assignmentsByDueDate.get(meetingDateStr) || [];
-      
+
       // Find matching quizzes
       const matchingQuizzes = quizzesByDate.get(meetingDateStr) || [];
-      
+
       // Create auto-populated activity entries (excluding excluded activities)
       const autoActivities = matchingScheduledActivities
         .filter((activity: PostData) => !activity.excluded)
@@ -677,7 +726,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           url: `/activities/${activity.id}/`,
           draft: activity.draft || 0,
           excluded: activity.excluded ? 1 : 0,
-          order: activity.ordering ?? activity.order
+          order: activity.ordering ?? activity.order,
         }));
 
       const autoScheduledAssignmentsAsActivities = matchingScheduledAssignments.map((assignment: PostData) => ({
@@ -688,9 +737,9 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       }));
 
       const autoScheduledActivities = [...autoActivities, ...autoScheduledAssignmentsAsActivities];
-      
+
       // Create auto-populated assignment entries for assigned (all matches, including drafts)
-      const autoAssignedAssignments = matchingAssignmentsByAssigned.map((assignment) => {
+      const autoAssignedAssignments = matchingAssignmentsByAssigned.map(assignment => {
         const titleShort = getAssignmentTitleShort(assignment);
         return {
           titleShort: titleShort,
@@ -698,12 +747,12 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           url: `/assignments/${assignment.id}/`,
           draft: assignment.draft || 0,
           order: assignment.order,
-          type: assignment.type
+          type: assignment.type,
         };
       });
-      
+
       // Create auto-populated assignment entries for due (all matches, including drafts)
-      const autoDueAssignments = matchingAssignmentsByDue.map((assignment) => {
+      const autoDueAssignments = matchingAssignmentsByDue.map(assignment => {
         const titleShort = getAssignmentTitleShort(assignment);
         return {
           titleShort: titleShort,
@@ -711,10 +760,10 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           url: `/assignments/${assignment.id}/`,
           draft: assignment.draft || 0,
           order: assignment.order,
-          type: assignment.type
+          type: assignment.type,
         };
       });
-      
+
       // Create auto-populated quiz entries (include full quiz data for client-side rendering)
       const autoQuizzes = matchingQuizzes.map((quiz: QuizMetadata) => {
         const quizData = getQuizData(quiz.slug);
@@ -724,10 +773,10 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           slug: quiz.slug,
           quizData: quizData || undefined,
           cheatsheetContent: cheatsheetContent || undefined,
-          draft: 0
+          draft: 0,
         };
       });
-      
+
       // Merge activities: keep manual entries, add auto-populated ones
       if (autoScheduledActivities.length > 0) {
         const existingActivities = meeting.activities || [];
@@ -747,25 +796,24 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           return a.title.localeCompare(b.title);
         });
       }
-      
+
       // Merge assigned assignments: add all auto-populated ones (including drafts)
       if (autoAssignedAssignments.length > 0) {
         if (!meeting.assigned) {
           // If no manual assigned items, set to array of auto-populated ones
-          meeting.assigned = autoAssignedAssignments.length === 1 ? autoAssignedAssignments[0] : autoAssignedAssignments;
+          meeting.assigned =
+            autoAssignedAssignments.length === 1 ? autoAssignedAssignments[0] : autoAssignedAssignments;
         } else if (Array.isArray(meeting.assigned)) {
           // If already an array, merge (avoid duplicates by URL)
           const existingUrls = new Set(
-            meeting.assigned
-              .filter((a): a is Assignment => typeof a !== 'string')
-              .map((a) => a.url)
+            meeting.assigned.filter((a): a is Assignment => typeof a !== 'string').map(a => a.url)
           );
-          const newAssignedAssignments = autoAssignedAssignments.filter((a) => !existingUrls.has(a.url));
+          const newAssignedAssignments = autoAssignedAssignments.filter(a => !existingUrls.has(a.url));
           meeting.assigned = [...meeting.assigned, ...newAssignedAssignments];
         } else {
           // If single item, convert to array and merge
           const existingUrl = typeof meeting.assigned === 'object' ? meeting.assigned.url : null;
-          const newAssignedAssignments = autoAssignedAssignments.filter((a) => a.url !== existingUrl);
+          const newAssignedAssignments = autoAssignedAssignments.filter(a => a.url !== existingUrl);
           if (newAssignedAssignments.length > 0) {
             meeting.assigned = [meeting.assigned, ...newAssignedAssignments];
           }
@@ -783,7 +831,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           });
         }
       }
-      
+
       // Merge quizzes: keep manual entries, add auto-populated ones
       if (autoQuizzes.length > 0) {
         const existingQuizzes = meeting.quizzes || [];
@@ -796,7 +844,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           meeting.quizzes = existingQuizzes;
         }
       }
-      
+
       // Merge due assignments: add all auto-populated ones (including drafts)
       if (autoDueAssignments.length > 0) {
         if (!meeting.due) {
@@ -805,16 +853,14 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
         } else if (Array.isArray(meeting.due)) {
           // If already an array, merge (avoid duplicates by URL)
           const existingUrls = new Set(
-            meeting.due
-              .filter((d): d is Assignment => typeof d !== 'string')
-              .map((d) => d.url)
+            meeting.due.filter((d): d is Assignment => typeof d !== 'string').map(d => d.url)
           );
-          const newDueAssignments = autoDueAssignments.filter((a) => !existingUrls.has(a.url));
+          const newDueAssignments = autoDueAssignments.filter(a => !existingUrls.has(a.url));
           meeting.due = [...meeting.due, ...newDueAssignments];
         } else {
           // If single item, convert to array and merge
           const existingUrl = typeof meeting.due === 'object' ? meeting.due.url : null;
-          const newDueAssignments = autoDueAssignments.filter((a) => a.url !== existingUrl);
+          const newDueAssignments = autoDueAssignments.filter(a => a.url !== existingUrl);
           if (newDueAssignments.length > 0) {
             meeting.due = [meeting.due, ...newDueAssignments];
           }
@@ -834,18 +880,18 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       }
     });
   });
-  
+
   // Find all assignment dates that don't have corresponding meetings
   const allMeetingDates = new Set<string>();
-  enrichedTopics.forEach((topic) => {
-    topic.meetings.forEach((meeting) => {
+  enrichedTopics.forEach(topic => {
+    topic.meetings.forEach(meeting => {
       const meetingDateStr = parseMeetingDate(meeting.date);
       if (meetingDateStr) {
         allMeetingDates.add(meetingDateStr);
       }
     });
   });
-  
+
   // Find assignments with assigned_date that don't have meetings
   const orphanedAssignments = new Map<string, PostData[]>();
   assignmentsByAssignedDate.forEach((assignments, dateStr) => {
@@ -853,29 +899,29 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       orphanedAssignments.set(dateStr, assignments);
     }
   });
-  
+
   // Create new meetings for orphaned assignments
   if (orphanedAssignments.size > 0) {
     // Find the appropriate topic for each orphaned assignment based on date
     orphanedAssignments.forEach((assignments, dateStr) => {
       const formattedDate = formatDateForMeeting(dateStr);
       if (!formattedDate) return;
-      
+
       // Find the topic that this date should belong to
       // Look for the topic with the latest date that is still before or equal to the assignment date
       let targetTopic: Topic | null = null;
       let latestTopicDate = '';
-      
-      enrichedTopics.forEach((topic) => {
+
+      enrichedTopics.forEach(topic => {
         // Get all dates in this topic
         const topicDates: string[] = [];
-        topic.meetings.forEach((meeting) => {
+        topic.meetings.forEach(meeting => {
           const meetingDateStr = parseMeetingDate(meeting.date);
           if (meetingDateStr) {
             topicDates.push(meetingDateStr);
           }
         });
-        
+
         if (topicDates.length > 0) {
           // Find the latest date in this topic that is <= assignment date
           const datesBeforeOrEqual = topicDates.filter(d => d <= dateStr).sort();
@@ -888,12 +934,12 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           }
         }
       });
-      
+
       // If no topic found with dates before/equal, use the first topic as fallback
       if (!targetTopic) {
         targetTopic = enrichedTopics[0];
       }
-      
+
       if (targetTopic) {
         // Determine topic name based on assignment type
         const isTutorial = assignments.some(a => a.type === 'tutorial');
@@ -909,28 +955,28 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
         } else if (isProject && !isTutorial && !isHomework) {
           topicName = 'Project';
         }
-        
+
         // Create auto-populated assignment entries
-        const autoAssignedAssignments = assignments.map((assignment) => {
+        const autoAssignedAssignments = assignments.map(assignment => {
           const titleShort = getAssignmentTitleShort(assignment);
           return {
             titleShort: titleShort,
             title: assignment.title,
             url: `/assignments/${assignment.id}/`,
             draft: assignment.draft || 0,
-            type: assignment.type
+            type: assignment.type,
           };
         });
-        
+
         const newMeeting: Meeting = {
           date: formattedDate,
           topic: topicName,
-          assigned: autoAssignedAssignments.length === 1 ? autoAssignedAssignments[0] : autoAssignedAssignments
+          assigned: autoAssignedAssignments.length === 1 ? autoAssignedAssignments[0] : autoAssignedAssignments,
         };
-        
+
         // Add to the end of the topic's meetings (will be sorted below)
         targetTopic.meetings.push(newMeeting);
-        
+
         // Sort all meetings in the topic by date
         targetTopic.meetings.sort((a, b) => {
           const dateA = parseMeetingDate(a.date);
@@ -941,7 +987,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
       }
     });
   }
-  
+
   return enrichedTopics;
 }
 
@@ -954,7 +1000,7 @@ export async function getTopicMeetingBySlug(slug: string) {
   const topics = await getTopics();
 
   for (const topic of topics) {
-    const meetingIndex = topic.meetings.findIndex((meeting) => meeting.slug === slug);
+    const meetingIndex = topic.meetings.findIndex(meeting => meeting.slug === slug);
 
     if (meetingIndex !== -1) {
       return {

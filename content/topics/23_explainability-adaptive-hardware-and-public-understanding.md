@@ -1,9 +1,10 @@
 ---
-title: "How Do AI Systems Redistribute Power and Control?"
+title: 'How Do AI Systems Redistribute Power and Control?'
+retired: true
 slug: how-do-ai-systems-redistribute-power-and-control
 scheduled_day: 24
 module_id: 4
-subtitle: "Examine platforms, chips, cloud vendors, standards, and repair pathways as sites where power can shift, pool, or become harder to contest."
+subtitle: 'Examine platforms, chips, cloud vendors, standards, and repair pathways as sites where power can shift, pool, or become harder to contest.'
 status: unverified
 status_reviewer:
 status_date:

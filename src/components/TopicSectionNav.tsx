@@ -87,6 +87,16 @@ export default function TopicSectionNav({
     return null;
   }
 
+  if (items.length === 1) {
+    return (
+      <div className="topic-section-nav space-y-8">
+        <div id={`${items[0].id}-panel`} className="topic-section-panel">
+          {panels[0]}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="topic-section-nav space-y-8">
       <div

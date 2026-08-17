@@ -1,9 +1,10 @@
 ---
-title: "How Should We Govern Emerging AI?"
+title: 'How Should We Govern Emerging AI?'
+retired: true
 slug: how-should-we-govern-emerging-ai
 scheduled_day: 29
 module_id: 5
-subtitle: "Use NIST, the EU AI Act, OECD, and IEEE to sharpen governance questions."
+subtitle: 'Use NIST, the EU AI Act, OECD, and IEEE to sharpen governance questions.'
 status: unverified
 status_reviewer:
 status_date:

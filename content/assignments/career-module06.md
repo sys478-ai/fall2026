@@ -1,6 +1,6 @@
 ---
 title: 'Career Module 6: Making Connections'
-scheduled_day: 17
+scheduled_day: 22
 num: '6'
 type: 'career module'
 excerpt: 'Professional presence, networking, and informational interview practice.'

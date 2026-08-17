@@ -1,9 +1,10 @@
 ---
-title: "How Does the World Become Data?"
+title: 'How Does the World Become Data?'
+retired: true
 slug: how-does-the-world-become-data
 scheduled_day: 8
 module_id: 2
-subtitle: "Introduce sensing, measurement, categories, baselines, proxies, and features as the first step in machine learning."
+subtitle: 'Introduce sensing, measurement, categories, baselines, proxies, and features as the first step in machine learning.'
 status: unverified
 status_reviewer:
 status_date:

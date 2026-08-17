@@ -1,6 +1,6 @@
 export const courseCalendar = {
   startDate: '2026-08-18',
-  endDate: '2026-12-03',
+  endDate: '2026-12-01',
   meetingDays: ['Tuesday', 'Thursday'],
   holidays: [
     { date: '2026-10-06', title: 'Fall Break' },

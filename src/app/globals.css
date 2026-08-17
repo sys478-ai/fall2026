@@ -48,15 +48,21 @@ h2 {
   color: var(--foreground);
 }
 
+.prose h2 {
+  @apply mt-8 mb-4 text-2xl font-bold text-black md:text-3xl border-b-2 border-black pb-2.5 dark:text-gray-50 dark:border-gray-100;
+}
+
 .sts-concept-section .h2 {
   @apply mt-0!;
 }
 
 h3 {
-  @apply text-lg md:text-xl mb-2 mt-6 uppercase tracking-wide;
+  @apply text-xl md:text-2xl mb-2 mt-6 font-semibold normal-case tracking-normal text-gray-800 dark:text-gray-300;
   font-family: var(--font-outfit), serif;
-  font-weight: 600;
-  color: var(--foreground);
+}
+
+.prose h3 {
+  @apply text-xl md:text-2xl font-semibold normal-case tracking-normal text-gray-800 border-b border-gray-300 pb-1.5 dark:text-gray-300 dark:border-gray-600;
 }
 
 .logo {
@@ -67,9 +73,13 @@ h3 {
 }
 
 h4 {
-  @apply md:text-lg font-bold mb-4! mt-4;
+  @apply text-lg md:text-xl font-semibold mb-3! mt-4;
   font-family: var(--font-outfit), serif;
   color: var(--foreground);
+}
+
+.prose h4 {
+  @apply text-lg md:text-xl font-semibold;
 }
 
 h5 {
@@ -1116,7 +1126,6 @@ pre code {
 .embedded-topic-content > h1:first-child,
 .embedded-topic-content > h2:first-child,
 .embedded-topic-content > h3:first-child {
-  color: inherit;
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
@@ -1224,15 +1233,15 @@ pre code {
 }
 
 .prose details.collapsible-h2 > summary {
-  @apply text-xl md:text-2xl font-bold;
+  @apply text-2xl md:text-3xl font-bold text-black dark:text-gray-50;
 }
 
 .prose details.collapsible-h3 > summary {
-  @apply text-lg md:text-xl font-bold;
+  @apply text-xl md:text-2xl font-semibold normal-case tracking-normal text-gray-800 dark:text-gray-300;
 }
 
 .prose details.collapsible-h4 > summary {
-  @apply md:text-lg font-bold;
+  @apply text-lg md:text-xl font-semibold;
 }
 
 .prose details.collapsible-h5 > summary {

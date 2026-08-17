@@ -1,5 +1,6 @@
 ---
 title: 'What Is AI Supposed to Help Us Do?'
+retired: true
 slug: what-is-ai-supposed-to-help-us-do
 scheduled_day: 3
 module_id: 1

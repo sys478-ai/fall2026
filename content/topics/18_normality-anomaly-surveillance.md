@@ -1,9 +1,10 @@
 ---
-title: "How Does Neuromorphic Computing Work?"
+title: 'How Does Neuromorphic Computing Work?'
+retired: true
 slug: how-does-neuromorphic-computing-work
 scheduled_day: 19
 module_id: 3
-subtitle: "Introduce neuromorphic computing through spiking neural networks, event-driven signals, and timing."
+subtitle: 'Introduce neuromorphic computing through spiking neural networks, event-driven signals, and timing.'
 status: unverified
 status_reviewer:
 status_date:

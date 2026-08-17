@@ -1,5 +1,6 @@
 ---
 title: 'What Tools Will Help Us Take a Position?'
+retired: true
 slug: what-tools-will-help-us-take-a-position
 scheduled_day: 4
 module_id: 1

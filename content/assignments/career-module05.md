@@ -1,6 +1,6 @@
 ---
 title: 'Career Module 5: Career Storytelling and Interview Introductions'
-scheduled_day: 12
+scheduled_day: 19
 num: '5'
 type: 'career module'
 excerpt: 'Telling career stories, practicing introductions, and interview preparation.'

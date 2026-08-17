@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ContentLayout from '@/components/ContentLayout';
 import HorizontalCardStrip from '@/components/HorizontalCardStrip';
@@ -29,19 +28,23 @@ interface TopicPageProps {
 export const dynamicParams = false;
 
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
-  return getTopicModules().flatMap(module => [
-    { slug: module.slug },
-    ...module.meetings.map(meeting => ({
+  return getTopicModules().flatMap(module =>
+    module.meetings.map(meeting => ({
       slug: meeting.slug,
-    })),
-  ]);
+    }))
+  );
 }
 
 function renderReading(citation: string | ReactElement, url?: string) {
   if (typeof citation === 'string') {
     if (url) {
       return (
-        <Link href={url} className="text-blue-600 hover:underline dark:text-blue-400">
+        <Link
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline dark:text-blue-400"
+        >
           {citation}
         </Link>
       );
@@ -136,11 +139,28 @@ function splitSlideCards(content: string): {
   return { intro, items };
 }
 
+// Hidden for now: these sections exist in the source markdown but aren't shown to students yet.
+const HIDDEN_OVERVIEW_SECTION_LABELS = new Set(['career / braid integration', 'field guide & resources']);
+
+function removeHiddenOverviewSections(content: string): string {
+  const rawSections = splitHtmlByHeading(content, 2);
+
+  if (!rawSections.some(section => HIDDEN_OVERVIEW_SECTION_LABELS.has(section.label.toLowerCase()))) {
+    return content;
+  }
+
+  return rawSections
+    .filter(section => !HIDDEN_OVERVIEW_SECTION_LABELS.has(section.label.toLowerCase()))
+    .map(section => `${section.headingHtml}${section.content}`)
+    .join('');
+}
+
 function TopicOverviewMarkdown({ content }: { content: string }) {
-  const sections = splitHtmlByHeading(content, 2);
+  const visibleContent = removeHiddenOverviewSections(content);
+  const sections = splitHtmlByHeading(visibleContent, 2);
 
   if (!sections.some(section => section.label.toLowerCase() === 'slides')) {
-    return <MarkdownContent content={content} />;
+    return <MarkdownContent content={visibleContent} />;
   }
 
   return (
@@ -177,6 +197,7 @@ function EditorialSection({
   title,
   titleClassName,
   labelClassName,
+  borderless,
   children,
 }: {
   id?: string;
@@ -184,12 +205,15 @@ function EditorialSection({
   title?: string;
   titleClassName?: string;
   labelClassName?: string;
+  borderless?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <section
       id={id}
-      className="scroll-mt-24 grid gap-8 border-t border-gray-200 pt-7 dark:border-gray-800"
+      className={`scroll-mt-24 grid gap-8 ${
+        borderless ? 'pt-10' : 'border-t border-gray-200 pt-7 dark:border-gray-800'
+      }`}
     >
       <div>
         {title && (
@@ -229,41 +253,24 @@ interface EmbeddedTopicContent {
   postData: PostData | null;
 }
 
-function getModuleOverviewNumber(topic: Topic) {
-  return `${topic.id}.1`;
-}
-
 function getMeetingTopicNumber(topic: Topic, meetingIndex: number) {
-  return `${topic.id}.${meetingIndex + 2}`;
+  return `${topic.id}.${meetingIndex + 1}`;
 }
 
 function getTopicNavigationItems(topics: Topic[]): TopicNavigationItem[] {
-  return topics.flatMap(topic => {
-    const overviewItem = topic.slug
-      ? [
-          {
-            slug: topic.slug,
-            title: `${topic.title} Overview`,
-            number: getModuleOverviewNumber(topic),
-          },
-        ]
-      : [];
-
-    return [
-      ...overviewItem,
-      ...topic.meetings.flatMap((meeting, index) =>
-        meeting.slug
-          ? [
-              {
-                slug: meeting.slug,
-                title: meeting.topic,
-                number: getMeetingTopicNumber(topic, index),
-              },
-            ]
-          : []
-      ),
-    ];
-  });
+  return topics.flatMap(topic =>
+    topic.meetings.flatMap((meeting, index) =>
+      meeting.slug
+        ? [
+            {
+              slug: meeting.slug,
+              title: meeting.topic,
+              number: getMeetingTopicNumber(topic, index),
+            },
+          ]
+        : []
+    )
+  );
 }
 
 function findTopicMeeting(topics: Topic[], slug: string) {
@@ -280,6 +287,34 @@ function findTopicMeeting(topics: Topic[], slug: string) {
   }
 
   return null;
+}
+
+function getNextClassMeeting(topics: Topic[], currentSlug: string) {
+  const navigationItems = getTopicNavigationItems(topics);
+  const currentIndex = navigationItems.findIndex(item => item.slug === currentSlug);
+
+  for (let index = currentIndex + 1; index < navigationItems.length; index += 1) {
+    const result = findTopicMeeting(topics, navigationItems[index].slug);
+
+    if (result && !result.meeting.holiday) {
+      return result.meeting;
+    }
+  }
+
+  return null;
+}
+
+function buildNextClassReadingItems(meeting: Topic['meetings'][number]): TopicWorkItem[] {
+  const meetingKey = getMeetingKey(meeting.date, meeting.topic);
+  const topicSlug = meeting.slug || '';
+
+  return (meeting.readings || []).map((reading, index) => ({
+    id: `${topicSlug}-reading-${index}`,
+    type: 'reading' as const,
+    title: getReadingTitle(reading.citation, index, 'Assigned reading'),
+    href: reading.url,
+    syncKeys: [`${meetingKey}-reading-${index}`],
+  }));
 }
 
 function getMeetingKey(date: string, topicTitle: string) {
@@ -336,6 +371,11 @@ function toDisplayLabel(value: string) {
 function getEmbeddedContentShortTitle(postData: PostData | null, fallbackType: EmbeddedTopicContent['type']) {
   if (postData?.type) {
     const typeLabel = toDisplayLabel(postData.type);
+
+    if (postData.type.toLowerCase() === 'activity') {
+      return typeLabel;
+    }
+
     return postData.num ? `${typeLabel} ${postData.num}` : typeLabel;
   }
 
@@ -361,17 +401,6 @@ function buildTopicWorkItems({
       title: getReadingTitle(reading.citation, index, 'Assigned reading'),
       href: reading.url,
       syncKeys: [`${meetingKey}-reading-${index}`],
-    });
-  });
-
-  (meeting.optionalReadings || []).forEach((reading, index) => {
-    items.push({
-      id: `optional-reading-${index}`,
-      type: 'optional-reading',
-      title: getReadingTitle(reading.citation, index, 'Optional reading'),
-      href: reading.url,
-      optional: true,
-      syncKeys: [`${meetingKey}-optional-reading-${index}`],
     });
   });
 
@@ -532,15 +561,13 @@ async function getEmbeddedTopicContent(meeting: Topic['meetings'][number]): Prom
 
 function EmbeddedTopicContentSection({
   item,
-  accentClassName,
 }: {
   item: EmbeddedTopicContent;
-  accentClassName: string;
 }) {
   return (
-    <EditorialSection id={item.id} label={item.shortTitle}>
+    <EditorialSection id={item.id} label={item.shortTitle} borderless>
       {item.postData ? (
-        <MarkdownContent content={item.postData.content} className={`embedded-topic-content ${accentClassName}`} />
+        <MarkdownContent content={item.postData.content} className="embedded-topic-content" />
       ) : (
         <p className="mb-0 text-gray-700 dark:text-gray-300">
           This item has a standalone page, but it could not be embedded here.
@@ -574,7 +601,9 @@ function TopicHeader({
       <div
         className={`flex flex-col justify-center border-b pb-4 ${moduleColor.border} md:border-b-0 md:border-r md:pb-0 md:pr-5`}
       >
-        <p className="mt-0! text-xl text-center font-bold uppercase tracking-wide text-gray-600 dark:text-gray-400">{date ? date : 'Overview'}</p>
+        <p className="mt-0! text-xl text-center font-bold uppercase tracking-wide text-gray-600 dark:text-gray-400">
+          {date ? date : 'Overview'}
+        </p>
       </div>
       <div>
         <div className="mb-4 text-xs font-semibold uppercase tracking-wide">
@@ -585,59 +614,11 @@ function TopicHeader({
         <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
           {title}
         </h1>
-        {subtitle && <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{subtitle}</p>}
+        {subtitle && (
+          <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{subtitle}</p>
+        )}
       </div>
     </header>
-  );
-}
-
-function ModuleTopicsList({ topic }: { topic: Topic }) {
-  return (
-    <EditorialSection label="Sequence" title="Topics In This Module">
-      <div className="grid gap-3">
-        {topic.meetings.map((meeting, index) => {
-          const topicNumber = getMeetingTopicNumber(topic, index);
-          const description = typeof meeting.description === 'string' ? meeting.description : undefined;
-          const content = (
-            <>
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="text-sm font-semibold text-[#0b5d8f] dark:text-[#8fc4ee]">{topicNumber}</span>
-                <span className="text-base font-semibold text-gray-950 dark:text-gray-50">{meeting.topic}</span>
-                {meeting.date && (
-                  <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    {meeting.date}
-                  </span>
-                )}
-              </div>
-              {description && (
-                <p className="mb-0 mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">{description}</p>
-              )}
-            </>
-          );
-
-          if (!meeting.slug) {
-            return (
-              <div
-                key={`${topic.slug || topic.id}-${topicNumber}`}
-                className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-black"
-              >
-                {content}
-              </div>
-            );
-          }
-
-          return (
-            <Link
-              key={meeting.slug}
-              href={`/topics/${meeting.slug}`}
-              className="rounded-xl border border-gray-200 bg-white p-4 no-underline transition-colors hover:border-[#0b5d8f]/40 hover:bg-gray-50 dark:border-gray-800 dark:bg-black dark:hover:border-[#8fc4ee]/40 dark:hover:bg-gray-950"
-            >
-              {content}
-            </Link>
-          );
-        })}
-      </div>
-    </EditorialSection>
   );
 }
 
@@ -653,42 +634,27 @@ function TopicSequenceNav({
   }
 
   return (
-    <nav
-      className="flex flex-col gap-4 border-t border-gray-200 pt-8 dark:border-gray-800 sm:flex-row sm:justify-between"
-      aria-label="Topic navigation"
-    >
+    <nav className="flex items-start justify-between gap-8 border-t border-gray-200 pt-8 dark:border-gray-800" aria-label="Topic navigation">
       {previousTopic ? (
         <Link
           href={`/topics/${previousTopic.slug}`}
-          className="group flex min-w-0 max-w-full items-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 no-underline transition-all hover:border-blue-500 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-600 dark:hover:bg-gray-800 sm:max-w-md"
+          className="min-w-0 max-w-[48%] text-sm text-gray-600 no-underline hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50"
         >
-          <ChevronLeftIcon className="h-5 w-5 shrink-0 text-gray-600 group-hover:text-[#0b5d8f] dark:text-gray-300 dark:group-hover:text-[#8fc4ee]" />
-          <div className="flex min-w-0 flex-1 flex-col">
-            <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">
-              Previous
-            </span>
-            <span className="block wrap-break-word font-medium text-gray-900 group-hover:text-[#0b5d8f] dark:text-gray-100 dark:group-hover:text-[#8fc4ee]">
-              {previousTopic.number} {previousTopic.title}
-            </span>
-          </div>
+          ← {previousTopic.title}
         </Link>
       ) : (
-        <div className="hidden sm:block" />
+        <span />
       )}
 
-      {nextTopic && (
+      {nextTopic ? (
         <Link
           href={`/topics/${nextTopic.slug}`}
-          className="group flex min-w-0 max-w-full items-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 no-underline transition-all hover:border-blue-500 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-600 dark:hover:bg-gray-800 sm:ml-auto sm:max-w-md sm:text-right"
+          className="min-w-0 max-w-[48%] text-right text-sm text-gray-600 no-underline hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50"
         >
-          <div className="flex min-w-0 flex-1 flex-col">
-            <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">Next</span>
-            <span className="block wrap-break-word font-medium text-gray-900 group-hover:text-[#0b5d8f] dark:text-gray-100 dark:group-hover:text-[#8fc4ee]">
-              {nextTopic.number} {nextTopic.title}
-            </span>
-          </div>
-          <ChevronRightIcon className="ml-auto h-5 w-5 shrink-0 text-gray-600 group-hover:text-[#0b5d8f] dark:text-gray-300 dark:group-hover:text-[#8fc4ee] sm:ml-0" />
+          {nextTopic.title} →
         </Link>
+      ) : (
+        <span />
       )}
     </nav>
   );
@@ -698,9 +664,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
   const { slug } = await params;
   const topics = await getTopics();
   const result = findTopicMeeting(topics, slug);
-  const overviewTopic = result ? null : topics.find(topic => topic.slug === slug);
 
-  if (!result && !overviewTopic) {
+  if (!result) {
     notFound();
   }
 
@@ -711,57 +676,6 @@ export default async function TopicPage({ params }: TopicPageProps) {
     currentTopicIndex !== -1 && currentTopicIndex < topicNavigationItems.length - 1
       ? topicNavigationItems[currentTopicIndex + 1]
       : null;
-
-  if (overviewTopic) {
-    let overviewData: Awaited<ReturnType<typeof getPostData>>;
-
-    try {
-      overviewData = await getPostData(overviewTopic.moduleContentId || overviewTopic.slug || slug, 'modules');
-    } catch {
-      notFound();
-    }
-
-    const overviewNumber = getModuleOverviewNumber(overviewTopic);
-    const moduleColor = getModuleColorClasses(overviewTopic.color);
-
-    return (
-      <ContentLayout variant="detail-with-toc" fullWidth showToc={false} contentPadding={false}>
-        <div className="space-y-8">
-          <Breadcrumbs
-            className="px-4 md:px-16"
-            items={[
-              { label: 'Modules', href: '/modules' },
-              { label: `${overviewTopic.id}. ${overviewTopic.title}` },
-              { label: `${overviewNumber} Overview` },
-            ]}
-          />
-
-          <TopicHeader
-            moduleColor={moduleColor}
-            number={overviewNumber}
-            moduleId={overviewTopic.id}
-            moduleTitle={overviewTopic.title}
-            title={overviewData.title}
-          subtitle={overviewData.excerpt}
-          />
-
-          <div className="space-y-10 px-4 md:px-16">
-            <div className="max-w-4xl">
-              <MarkdownContent content={overviewData.content} />
-            </div>
-
-            <ModuleTopicsList topic={overviewTopic} />
-
-            <TopicSequenceNav previousTopic={previousTopic} nextTopic={nextTopic} />
-          </div>
-        </div>
-      </ContentLayout>
-    );
-  }
-
-  if (!result) {
-    notFound();
-  }
 
   const { topic, meeting, meetingIndex } = result;
   const topicNumber = getMeetingTopicNumber(topic, meetingIndex);
@@ -785,6 +699,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
     meeting,
     anchorByHref,
   });
+  const nextClassMeeting = getNextClassMeeting(topics, meeting.slug || slug);
+  const nextClassReadingItems = nextClassMeeting ? buildNextClassReadingItems(nextClassMeeting) : [];
   const topicSections: Array<{
     navItem: TopicSectionNavItem;
     panel: ReactElement;
@@ -793,15 +709,15 @@ export default async function TopicPage({ params }: TopicPageProps) {
   topicSections.push({
     navItem: { id: 'topic-overview', label: 'Overview' },
     panel: (
-        <div className="max-w-4xl">
-          {topicPostData?.content.trim() ? (
-            <TopicOverviewMarkdown content={topicPostData.content} />
-          ) : typeof meeting.description === 'string' ? (
-            <p className="mb-0 text-lg leading-8 text-gray-800 dark:text-gray-200">{meeting.description}</p>
-          ) : (
-            meeting.description
-          )}
-        </div>
+      <div className="max-w-4xl">
+        {topicPostData?.content.trim() ? (
+          <TopicOverviewMarkdown content={topicPostData.content} />
+        ) : typeof meeting.description === 'string' ? (
+          <p className="mb-0 text-lg leading-8 text-gray-800 dark:text-gray-200">{meeting.description}</p>
+        ) : (
+          meeting.description
+        )}
+      </div>
     ),
   });
 
@@ -814,7 +730,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             {readings.length > 0 && (
               <div className="space-y-3">
                 <EditorialLabel>Assigned Readings</EditorialLabel>
-                <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
+                <ul className="m-0! list-disc divide-y divide-gray-200 pl-8! dark:divide-gray-800">
                   {readings.map((reading, index) => (
                     <li
                       key={`${meeting.slug}-reading-${index}`}
@@ -830,7 +746,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             {optionalReadings.length > 0 && (
               <div className="space-y-3">
                 <EditorialLabel>Optional Or Recommended</EditorialLabel>
-                <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
+                <ul className="m-0! list-disc divide-y divide-gray-200 pl-8! dark:divide-gray-800">
                   {optionalReadings.map((reading, index) => (
                     <li
                       key={`${meeting.slug}-optional-reading-${index}`}
@@ -845,7 +761,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             {bibliographyReadings.length > 0 && (
               <div className="space-y-3">
                 <EditorialLabel>Field Guide Bibliography</EditorialLabel>
-                <ul className="m-0! list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
+                <ul className="m-0! list-disc divide-y divide-gray-200 pl-8! dark:divide-gray-800">
                   {bibliographyReadings.map((reading: Reading) => (
                     <li key={reading.id} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
                       <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
@@ -871,14 +787,26 @@ export default async function TopicPage({ params }: TopicPageProps) {
         id: item.id,
         label: item.shortTitle,
       },
-      panel: <EmbeddedTopicContentSection key={item.id} item={item} accentClassName={moduleColor.accent} />,
+      panel: <EmbeddedTopicContentSection key={item.id} item={item} />,
     });
   });
 
-  if (topicWorkItems.length > 0) {
+  if (topicWorkItems.length > 0 || nextClassReadingItems.length > 0) {
     topicSections.push({
       navItem: { id: 'topic-work', label: 'Checklist' },
-      panel: <TopicWorkList key="topic-work" topicSlug={meeting.slug || slug} items={topicWorkItems} />,
+      panel: (
+        <TopicWorkList
+          key="topic-work"
+          topicSlug={meeting.slug || slug}
+          items={topicWorkItems}
+          upcomingItems={nextClassReadingItems}
+          upcomingDescription={
+            nextClassMeeting
+              ? `${nextClassMeeting.topic}${nextClassMeeting.date ? ` · ${nextClassMeeting.date}` : ''}`
+              : undefined
+          }
+        />
+      ),
     });
   }
 
@@ -887,8 +815,20 @@ export default async function TopicPage({ params }: TopicPageProps) {
       variant="detail-with-toc"
       fullWidth
       showToc={false}
+      showFooter={false}
       contentPadding={false}
-      header={topicPostData ? <StatusBanner section="topicsAndAssignments" status={topicPostData.status} status_reviewer={topicPostData.status_reviewer} status_date={topicPostData.status_date} status_notes={topicPostData.status_notes} contentType="topics" /> : undefined}
+      header={
+        topicPostData ? (
+          <StatusBanner
+            section="topicsAndAssignments"
+            status={topicPostData.status}
+            status_reviewer={topicPostData.status_reviewer}
+            status_date={topicPostData.status_date}
+            status_notes={topicPostData.status_notes}
+            contentType="topics"
+          />
+        ) : undefined
+      }
     >
       <div className="space-y-8">
         <Breadcrumbs

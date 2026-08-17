@@ -1,8 +1,8 @@
 ---
-title: "Thanksgiving Break"
+title: 'Thanksgiving Break'
 slug: thanksgiving-break
-module_id: 5
-subtitle: "No class."
+module_id: 6
+subtitle: 'No class.'
 holiday: true
 status: unverified
 status_reviewer:

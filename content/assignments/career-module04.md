@@ -1,6 +1,6 @@
 ---
 title: 'Career Module 4: Strengths, Accomplishments, and Durable Skills'
-scheduled_day: 8
+scheduled_day: 14
 num: '4'
 type: 'career module'
 excerpt: 'Naming strengths, mapping accomplishments, and identifying durable skills.'

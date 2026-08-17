@@ -1,9 +1,10 @@
 ---
-title: "What Gets Built Into the Data?"
+title: 'What Gets Built Into the Data?'
+retired: true
 slug: what-gets-built-into-the-data
 scheduled_day: 9
 module_id: 2
-subtitle: "Use datasets, proxies, and feature design to ask what assumptions and exclusions are carried into a system."
+subtitle: 'Use datasets, proxies, and feature design to ask what assumptions and exclusions are carried into a system.'
 status: unverified
 status_reviewer:
 status_date:

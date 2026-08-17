@@ -1,6 +1,6 @@
 ---
 title: 'Career Module 8: Career Readiness Synthesis Presentation'
-scheduled_day: 26
+scheduled_day: 28
 num: '8'
 type: 'career module'
 excerpt: 'Synthesis and presentation of the semester’s career-readiness work.'

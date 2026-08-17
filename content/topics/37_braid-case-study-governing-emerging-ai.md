@@ -1,5 +1,6 @@
 ---
 title: 'BRAID Case Study: How Can We Govern an Emerging AI Before Its Uses Are Settled?'
+retired: true
 slug: braid-case-study-governing-emerging-ai
 scheduled_day: 25
 module_id: 5

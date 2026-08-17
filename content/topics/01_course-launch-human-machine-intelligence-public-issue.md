@@ -1,9 +1,10 @@
 ---
-title: "Why Is AI a Public and Ethical Issue?"
+title: 'Why Is AI a Public and Ethical Issue?'
+retired: true
 slug: why-is-ai-a-public-and-ethical-issue
 scheduled_day: 2
 module_id: 1
-subtitle: "Frame AI as a technical project shaped by public values, institutions, and ethical choices."
+subtitle: 'Frame AI as a technical project shaped by public values, institutions, and ethical choices.'
 status: unverified
 status_reviewer:
 status_date:

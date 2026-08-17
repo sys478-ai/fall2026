@@ -1,9 +1,10 @@
 ---
-title: "Who Bears the Cost of Error?"
+title: 'Who Bears the Cost of Error?'
+retired: true
 slug: who-bears-the-cost-of-error
 scheduled_day: 13
 module_id: 2
-subtitle: "Examine how false positives, false negatives, and threshold choices distribute harm and accountability."
+subtitle: 'Examine how false positives, false negatives, and threshold choices distribute harm and accountability.'
 status: unverified
 status_reviewer:
 status_date:

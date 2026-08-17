@@ -1,9 +1,10 @@
 ---
-title: "How Do Machines Learn from Data?"
+title: 'How Do Machines Learn from Data?'
+retired: true
 slug: how-do-machines-learn-from-data
 scheduled_day: 10
 module_id: 2
-subtitle: "Introduce models, training, inference, and the basic machine learning pipeline."
+subtitle: 'Introduce models, training, inference, and the basic machine learning pipeline.'
 status: unverified
 status_reviewer:
 status_date:

@@ -1,9 +1,10 @@
 ---
-title: "What Alternatives Are Still Possible?"
+title: 'What Alternatives Are Still Possible?'
+retired: true
 slug: what-alternatives-are-still-possible
 scheduled_day: 28
 module_id: 5
-subtitle: "Consider redesign, repair, democratic governance, and the option to say no."
+subtitle: 'Consider redesign, repair, democratic governance, and the option to say no.'
 status: unverified
 status_reviewer:
 status_date:

@@ -1,5 +1,6 @@
 ---
 title: 'What Counts as Intelligence?'
+retired: true
 slug: what-counts-as-intelligence
 scheduled_day: 7
 module_id: 1

@@ -1,9 +1,10 @@
 ---
-title: "How Do Scores Become Decisions?"
+title: 'How Do Scores Become Decisions?'
+retired: true
 slug: how-do-scores-become-decisions
 scheduled_day: 12
 module_id: 2
-subtitle: "Trace how model outputs become scores, rankings, thresholds, and institutional action."
+subtitle: 'Trace how model outputs become scores, rankings, thresholds, and institutional action.'
 status: unverified
 status_reviewer:
 status_date:

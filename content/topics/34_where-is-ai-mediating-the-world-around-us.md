@@ -1,5 +1,6 @@
 ---
 title: 'Where Is AI Mediating the World Around Us?'
+retired: true
 slug: where-is-ai-mediating-the-world-around-us
 scheduled_day: 1
 module_id: 1

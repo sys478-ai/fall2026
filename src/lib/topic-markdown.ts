@@ -5,6 +5,11 @@ import { getModuleMarkdownById } from './module-markdown';
 
 const topicsDirectory = path.join(process.cwd(), 'content', 'topics');
 
+export interface TopicReading {
+  citation: string;
+  url?: string;
+}
+
 export interface TopicMarkdownMetadata {
   id: string;
   order: number;
@@ -19,6 +24,8 @@ export interface TopicMarkdownMetadata {
   recognitionPatternNotes?: string[];
   themes: string[];
   braidElsiConnection: string;
+  readings: TopicReading[];
+  optionalReadings: TopicReading[];
   holiday?: boolean;
   retired?: boolean;
 }
@@ -29,6 +36,32 @@ function asStringArray(value: unknown): string[] {
   }
 
   return value.filter((item): item is string => typeof item === 'string');
+}
+
+function asReadingArray(value: unknown): TopicReading[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .map((item): TopicReading | null => {
+      if (!item || typeof item !== 'object') {
+        return null;
+      }
+
+      const citation = (item as Record<string, unknown>).citation;
+      const url = (item as Record<string, unknown>).url;
+
+      if (typeof citation !== 'string' || citation.trim() === '') {
+        return null;
+      }
+
+      return {
+        citation,
+        url: typeof url === 'string' && url.trim() !== '' ? url : undefined,
+      };
+    })
+    .filter((reading): reading is TopicReading => reading !== null);
 }
 
 function asString(value: unknown, fallback = '') {
@@ -95,6 +128,8 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     recognitionPatternNotes: asStringArray(data.recognition_pattern_notes),
     themes: asStringArray(data.themes),
     braidElsiConnection: asString(data.braid_elsi_connection),
+    readings: asReadingArray(data.readings),
+    optionalReadings: asReadingArray(data.optional_readings),
     holiday: data.holiday === true,
     retired: data.retired === true,
   };
@@ -117,5 +152,5 @@ export function getTopicMarkdownBySlug(slug: string) {
 }
 
 export function getTopicMarkdownByModule(moduleSlug: string) {
-  return getAllTopicMarkdownMetadata().filter(topic => topic.module === moduleSlug);
+  return getAllTopicMarkdownMetadata().filter(topic => topic.module === moduleSlug && !topic.retired);
 }

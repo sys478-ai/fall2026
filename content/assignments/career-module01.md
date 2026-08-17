@@ -1,6 +1,6 @@
 ---
 title: 'Career Module 1: Career Quiz, Values, and Coaching Access'
-scheduled_day: 2
+scheduled_day: 4
 num: '1'
 type: 'career module'
 excerpt: 'Helping you identify your values and interests'
@@ -21,6 +21,7 @@ This first career module helps you take stock of where you are now, what you val
 Use the <a href="https://docs.google.com/document/d/1IP1o-88e02J4DU-Z51R1OU7dBo4aDdifW79pIiGUGzQ/edit?tab=t.0" target="_blank" rel="noopener noreferrer">PathwayU access instructions</a> to log in and complete the PathwayU assessments:
 
 <!-- .compact -->
+
 - Interests
 - Values
 - Personality

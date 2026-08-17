@@ -1,6 +1,6 @@
 ---
 title: 'Career Module 3: Life After College'
-scheduled_day: 6
+scheduled_day: 10
 num: '3'
 type: 'career module'
 excerpt: 'Post-college realities, budgeting, salary context, and negotiation.'

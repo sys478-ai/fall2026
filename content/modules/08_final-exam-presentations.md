@@ -1,8 +1,8 @@
 ---
-id: 6
+id: 8
 slug: final-public-explainers
 title: 'Final Public Explainers and ELSI Presentations'
-color: teal
+color: orange
 excerpt: 'This module is the course culmination, where students present public-facing technical explainers and ELSI analyses of an AI system of their choice.'
 unit_focus: 'In this final unit, you will bring together technical explanation, stakeholder analysis, ethical reasoning, and governance recommendations in a clear public-facing presentation.'
 priority: low

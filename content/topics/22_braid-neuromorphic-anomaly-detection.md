@@ -1,9 +1,10 @@
 ---
-title: "How Is AI Entering Schools and Other Social Institutions?"
+title: 'How Is AI Entering Schools and Other Social Institutions?'
+retired: true
 slug: how-is-ai-entering-schools-and-other-social-institutions
 scheduled_day: 23
 module_id: 4
-subtitle: "Use schools and other institutional settings to examine tutoring, proctoring, monitoring, and administrative triage."
+subtitle: 'Use schools and other institutional settings to examine tutoring, proctoring, monitoring, and administrative triage.'
 status: unverified
 status_reviewer:
 status_date:
