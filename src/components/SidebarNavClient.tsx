@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Bars3Icon,
@@ -9,13 +9,9 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
-  CpuChipIcon,
-  QueueListIcon,
   DocumentTextIcon,
-  FolderIcon,
   HomeIcon,
   MoonIcon,
-  ScaleIcon,
   SunIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
@@ -42,17 +38,7 @@ interface SidebarModuleItem {
 interface SidebarNavClientProps {
   courseTitle: string;
   modules: SidebarModuleItem[];
-  braidCaseStudyItems: Array<{ id: string; title: string; href: string }>;
 }
-
-const FIELD_GUIDE_ITEMS = [
-  { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns' },
-  { label: 'STS Concepts', href: '/field-guide/sts-concepts' },
-  { label: 'Examples', href: '/field-guide/examples' },
-  { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
-  { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
-  { label: 'Governance', href: '/field-guide/governance' },
-];
 
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
 
@@ -64,9 +50,8 @@ function getTopicSlugFromHref(href: string) {
   return href.match(/\/topics\/([^/#?]+)/)?.[1] || null;
 }
 
-export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyItems }: SidebarNavClientProps) {
+export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const normalizedPath = normalizePath(pathname);
   const isDark = useDarkMode();
   const [mounted, setMounted] = useState(false);
@@ -76,8 +61,6 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
   const [modulesOpen, setModulesOpen] = useState(
     normalizedPath.startsWith('/modules') || normalizedPath.startsWith('/topics')
   );
-  const [fieldGuideOpen, setFieldGuideOpen] = useState(normalizedPath.startsWith('/field-guide'));
-  const [braidCaseStudyOpen, setBraidCaseStudyOpen] = useState(normalizedPath.startsWith('/braid-case-study'));
   const [openModuleId, setOpenModuleId] = useState<number | null>(() => {
     const activeModule = modules.find(module =>
       module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
@@ -153,21 +136,6 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
     }
   }, [modules, normalizedPath]);
 
-  useEffect(() => {
-    if (normalizedPath.startsWith('/field-guide')) {
-      setFieldGuideOpen(true);
-    }
-  }, [normalizedPath]);
-
-  useEffect(() => {
-    if (normalizedPath.startsWith('/braid-case-study')) {
-      setBraidCaseStudyOpen(true);
-    }
-  }, [normalizedPath]);
-
-  const activeTaxonomy = normalizedPath.startsWith('/planning/taxonomy');
-  const activePatternGuide = normalizedPath.startsWith('/field-guide');
-  const activeBraidCaseStudy = normalizedPath.startsWith('/braid-case-study');
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeBibliography = normalizedPath === '/bibliography';
   const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
@@ -179,14 +147,8 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
       { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
       { label: 'Bibliography', href: '/bibliography', icon: DocumentTextIcon, active: activeBibliography },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
-      {
-        label: 'Taxonomy',
-        href: '/planning/taxonomy',
-        icon: FolderIcon,
-        active: activeTaxonomy,
-      },
     ],
-    [activeAssignments, activeBibliography, activeHome, activeModules, activeTaxonomy]
+    [activeAssignments, activeBibliography, activeHome, activeModules]
   );
 
   const toggleDarkMode = () => {
@@ -207,7 +169,6 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
 
     if (newValue) {
       setModulesOpen(false);
-      setFieldGuideOpen(false);
       setOpenModuleId(null);
     }
   };
@@ -218,7 +179,6 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
       localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
       setModulesOpen(true);
       setOpenModuleId(modules[0]?.id ?? null);
-      router.push('/modules');
       return;
     }
 
@@ -227,27 +187,10 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
         setOpenModuleId(modules[0]?.id ?? null);
       }
       setModulesOpen(true);
-      router.push('/modules');
       return;
     }
 
     setModulesOpen(false);
-  };
-
-  const toggleFieldGuide = () => {
-    if (collapsed) {
-      setCollapsed(false);
-      localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
-      setFieldGuideOpen(true);
-      router.push('/field-guide');
-      return;
-    }
-    if (!fieldGuideOpen) {
-      setFieldGuideOpen(true);
-      router.push('/field-guide');
-      return;
-    }
-    setFieldGuideOpen(false);
   };
 
   const toggleModule = (moduleId: number) => {
@@ -360,6 +303,16 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
             {!collapsed && modulesOpen && (
               <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
+                  <Link
+                    href="/modules"
+                    className={`group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
+                      normalizedPath === '/modules'
+                        ? 'bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50'
+                        : 'bg-transparent text-slate-800 hover:font-semibold hover:text-slate-950 dark:text-slate-200 dark:hover:text-slate-100'
+                    }`}
+                  >
+                    <span className="line-clamp-2 min-w-0 ml-5 leading-snug">Overview</span>
+                  </Link>
                   {modules.map(module => {
                     const isOpen = openModuleId === module.id;
                     const moduleColor = getModuleColorClasses(module.color);
@@ -499,139 +452,7 @@ export default function SidebarNavClient({ courseTitle, modules, braidCaseStudyI
             </Link>
           ))}
 
-          <div className="bg-slate-50 dark:bg-slate-950">
-            <div className="flex items-center gap-1">
-              <button
-                type="button"
-                onClick={toggleFieldGuide}
-                aria-expanded={fieldGuideOpen}
-                className={`${baseLinkClass} w-full ${
-                  activePatternGuide ? activeTopLevelClass : inactiveTopLevelClass
-                } ${collapsed ? 'justify-center' : 'justify-between'}`}
-              >
-                <span className="flex min-w-0 items-center gap-3">{renderNavContent('Field Guide', ScaleIcon)}</span>
-                {!collapsed && (
-                  <ChevronDownIcon
-                    className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
-                      fieldGuideOpen ? '' : '-rotate-90'
-                    }`}
-                  />
-                )}
-              </button>
-            </div>
-
-            {!collapsed && fieldGuideOpen && (
-              <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
-                <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
-                  {FIELD_GUIDE_ITEMS.map(item => {
-                    const isActive = normalizedPath === item.href || normalizedPath.startsWith(item.href + '/');
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`block py-2 pl-11 pr-6 text-sm no-underline! transition-colors ${
-                          isActive
-                            ? 'border-l-4 border-violet-500 font-semibold text-violet-800 dark:border-violet-400 dark:text-violet-200'
-                            : inactiveNestedClass
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="bg-slate-50 dark:bg-slate-950">
-            <div className="flex items-center gap-1">
-              <button
-                type="button"
-                onClick={() => setBraidCaseStudyOpen(current => !current)}
-                aria-expanded={braidCaseStudyOpen}
-                className={`${baseLinkClass} w-full ${
-                  activeBraidCaseStudy ? activeTopLevelClass : inactiveTopLevelClass
-                } ${collapsed ? 'justify-center' : 'justify-between'}`}
-              >
-                <span className="flex min-w-0 items-center gap-3">{renderNavContent('BRAID Case Study', CpuChipIcon)}</span>
-                {!collapsed && (
-                  <ChevronDownIcon
-                    className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
-                      braidCaseStudyOpen ? '' : '-rotate-90'
-                    }`}
-                  />
-                )}
-              </button>
-            </div>
-
-            {!collapsed && braidCaseStudyOpen && (
-              <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
-                <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
-                  <Link
-                    href="/braid-case-study"
-                    className={`block py-2 pl-11 pr-6 text-sm no-underline! transition-colors ${
-                      normalizedPath === '/braid-case-study'
-                        ? 'border-l-4 border-violet-500 font-semibold text-violet-800 dark:border-violet-400 dark:text-violet-200'
-                        : inactiveNestedClass
-                    }`}
-                  >
-                    Overview
-                  </Link>
-                  {braidCaseStudyItems.map(item => {
-                    const isActive = normalizedPath === item.href;
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`block py-2 pl-11 pr-6 text-sm no-underline! transition-colors ${
-                          isActive
-                            ? 'border-l-4 border-violet-500 font-semibold text-violet-800 dark:border-violet-400 dark:text-violet-200'
-                            : inactiveNestedClass
-                        }`}
-                      >
-                        {item.title}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
         </nav>
-      </div>
-
-      <div className="border-t border-slate-200 px-3 py-2 dark:border-slate-800 space-y-0.5">
-        <Link
-          href="/planning/review-status"
-          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm no-underline! transition-colors ${
-            normalizedPath === '/planning/review-status'
-              ? 'font-semibold text-slate-950 dark:text-slate-100'
-              : 'text-slate-500 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300'
-          } ${collapsed ? 'justify-center' : ''}`}
-        >
-          <ClipboardDocumentListIcon className="h-5 w-5 shrink-0" />
-          <span
-            className={`min-w-0 truncate transition-[opacity,width] duration-300 ease-in-out ${collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}
-          >
-            Review Status
-          </span>
-        </Link>
-        <Link
-          href="/planning/playlist-inventory"
-          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm no-underline! transition-colors ${
-            normalizedPath === '/planning/playlist-inventory'
-              ? 'font-semibold text-slate-950 dark:text-slate-100'
-              : 'text-slate-500 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300'
-          } ${collapsed ? 'justify-center' : ''}`}
-        >
-          <QueueListIcon className="h-5 w-5 shrink-0" />
-          <span
-            className={`min-w-0 truncate transition-[opacity,width] duration-300 ease-in-out ${collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'}`}
-          >
-            Playlist Inventory
-          </span>
-        </Link>
       </div>
 
       <div className="border-t border-slate-200 px-3 py-3 dark:border-slate-800">
