@@ -1,6 +1,6 @@
 ---
 id: 2
-draft: 0
+draft: 1
 slug: machines-data-and-ai
 title: 'Machines, Data, and AI'
 color: sky

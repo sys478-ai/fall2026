@@ -834,8 +834,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
         <Breadcrumbs
           className="px-4 md:px-16"
           items={[
-            { label: 'Modules', href: '/modules' },
-            { label: `${topic.id}. ${topic.title}` },
+            { label: 'Course Schedule', href: '/modules' },
+            { label: `${topic.id}. ${topic.title}`, href: `/modules/${topic.id}` },
             { label: `${topicNumber} ${meeting.topic}` },
           ]}
         />

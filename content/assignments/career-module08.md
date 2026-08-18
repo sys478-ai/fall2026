@@ -4,7 +4,7 @@ scheduled_day: 28
 num: '8'
 type: 'career module'
 excerpt: 'Synthesis and presentation of the semester’s career-readiness work.'
-draft: 0
+draft: 1
 status: unverified
 status_reviewer:
 status_date:

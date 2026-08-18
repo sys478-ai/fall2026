@@ -9,7 +9,6 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
-  DocumentTextIcon,
   HomeIcon,
   LockClosedIcon,
   MoonIcon,
@@ -53,8 +52,9 @@ function getTopicSlugFromHref(href: string) {
   return href.match(/\/topics\/([^/#?]+)/)?.[1] || null;
 }
 
-function getFirstUnlockedModuleId(modules: SidebarModuleItem[]) {
-  return modules.find(module => !module.isDraft)?.id ?? null;
+function getModuleIdFromPath(path: string) {
+  const match = path.match(/^\/modules\/(\d+)$/);
+  return match ? Number.parseInt(match[1], 10) : null;
 }
 
 export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
@@ -65,17 +65,10 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [topicProgress, setTopicProgress] = useState<Record<string, TopicProgressStatus>>({});
-  const [modulesOpen, setModulesOpen] = useState(
-    normalizedPath.startsWith('/modules') || normalizedPath.startsWith('/topics')
-  );
-  const [openModuleId, setOpenModuleId] = useState<number | null>(() => {
-    const activeModule = modules.find(module =>
-      module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
-    );
-    return activeModule && !activeModule.isDraft
-      ? activeModule.id
-      : getFirstUnlockedModuleId(modules);
-  });
+  const showModules =
+    normalizedPath === '/modules' ||
+    getModuleIdFromPath(normalizedPath) !== null ||
+    normalizedPath.startsWith('/topics/');
 
   useEffect(() => {
     setMounted(true);
@@ -134,30 +127,17 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
     setMobileOpen(false);
   }, [pathname]);
 
-  useEffect(() => {
-    const activeModule = modules.find(module =>
-      module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
-    );
-
-    if (activeModule && !activeModule.isDraft) {
-      setOpenModuleId(activeModule.id);
-      setModulesOpen(true);
-    }
-  }, [modules, normalizedPath]);
-
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
-  const activeBibliography = normalizedPath === '/bibliography';
-  const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
+  const activeModules = normalizedPath === '/modules';
   const activeHome = normalizedPath === '/' || normalizedPath === '/syllabus';
 
   const navItems = useMemo(
     () => [
       { label: 'Syllabus', href: '/', icon: HomeIcon, active: activeHome },
       { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
-      { label: 'Bibliography', href: '/bibliography', icon: DocumentTextIcon, active: activeBibliography },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
     ],
-    [activeAssignments, activeBibliography, activeHome, activeModules]
+    [activeAssignments, activeHome, activeModules]
   );
 
   const toggleDarkMode = () => {
@@ -175,45 +155,6 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
     const newValue = !collapsed;
     setCollapsed(newValue);
     localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(newValue));
-
-    if (newValue) {
-      setModulesOpen(false);
-      setOpenModuleId(null);
-    }
-  };
-
-  const toggleModules = () => {
-    if (collapsed) {
-      setCollapsed(false);
-      localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
-      setModulesOpen(true);
-      setOpenModuleId(getFirstUnlockedModuleId(modules));
-      return;
-    }
-
-    if (!modulesOpen) {
-      if (openModuleId === null) {
-        setOpenModuleId(getFirstUnlockedModuleId(modules));
-      }
-      setModulesOpen(true);
-      return;
-    }
-
-    setModulesOpen(false);
-  };
-
-  const toggleModule = (moduleId: number) => {
-    const target = modules.find(module => module.id === moduleId);
-    if (target?.isDraft) {
-      return;
-    }
-
-    setOpenModuleId(current => {
-      if (current === moduleId) {
-        return null;
-      }
-      return moduleId;
-    });
   };
 
   const baseLinkClass = 'flex items-center gap-3 px-3 py-2 text-sm transition-colors !no-underline !border-0';
@@ -292,46 +233,36 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
           ))}
 
           <div className="bg-slate-50 dark:bg-slate-950">
-            <div className="flex items-center gap-1">
-              <button
-                type="button"
-                onClick={toggleModules}
-                aria-expanded={modulesOpen}
-                className={`${baseLinkClass} w-full ${
-                  activeModules ? activeTopLevelClass : inactiveTopLevelClass
-                } ${collapsed ? 'justify-center' : 'justify-between'}`}
-              >
-                <span className="flex min-w-0 items-center gap-3">
-                  {renderNavContent('Course Schedule', CalendarDaysIcon)}
-                </span>
-                {!collapsed && (
-                  <ChevronDownIcon
-                    className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
-                      modulesOpen ? '' : '-rotate-90'
-                    }`}
-                  />
-                )}
-              </button>
-            </div>
+            <Link
+              href="/modules"
+              className={`${baseLinkClass} w-full ${
+                activeModules ? activeTopLevelClass : inactiveTopLevelClass
+              } ${collapsed ? 'justify-center' : 'justify-between'}`}
+            >
+              <span className="flex min-w-0 items-center gap-3">
+                {renderNavContent('Course Schedule', CalendarDaysIcon)}
+              </span>
+              {!collapsed && (
+                <ChevronDownIcon
+                  className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
+                    showModules ? '' : '-rotate-90'
+                  }`}
+                />
+              )}
+            </Link>
 
-            {!collapsed && modulesOpen && (
+            {!collapsed && showModules && (
               <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
-                  <Link
-                    href="/modules"
-                    className={`group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
-                      normalizedPath === '/modules'
-                        ? 'bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50'
-                        : 'bg-transparent text-slate-800 hover:font-semibold hover:text-slate-950 dark:text-slate-200 dark:hover:text-slate-100'
-                    }`}
-                  >
-                    <span className="line-clamp-2 min-w-0 ml-5 leading-snug">Overview</span>
-                  </Link>
                   {modules.map(module => {
                     const isDraft = module.isDraft === true;
-                    const isOpen = !isDraft && openModuleId === module.id;
+                    const isModulePage = getModuleIdFromPath(normalizedPath) === module.id;
+                    const isTopicInModule = module.topics.some(
+                      topic => normalizePath(topic.contentHref) === normalizedPath
+                    );
+                    const isOpen = !isDraft && (isModulePage || isTopicInModule);
                     const moduleColor = getModuleColorClasses(module.color);
-                    const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm transition-colors ${
+                    const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
                       isDraft
                         ? 'cursor-default bg-transparent text-slate-500 dark:text-slate-500'
                         : isOpen
@@ -353,12 +284,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                               />
                             </div>
                           ) : (
-                            <button
-                              type="button"
-                              onClick={() => toggleModule(module.id)}
-                              aria-expanded={isOpen}
-                              className={moduleHeaderClass}
-                            >
+                            <Link href={module.href} className={moduleHeaderClass}>
                               <span className="line-clamp-2 min-w-0 ml-5 leading-snug">
                                 {module.id}. {module.title}
                               </span>
@@ -367,7 +293,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                   isOpen ? '' : '-rotate-90'
                                 }`}
                               />
-                            </button>
+                            </Link>
                           )}
                         </div>
 

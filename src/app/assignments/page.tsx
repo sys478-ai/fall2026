@@ -46,7 +46,7 @@ export default async function AssignmentsPage() {
       assigned: postData.assigned,
       scheduled_day: postData.scheduled_day,
       notes: postData.notes,
-      draft: postData.draft,
+      draft: postData.draft === 0 || postData.draft === false ? 0 : 1,
       excluded: postData.excluded,
       no_render: postData.no_render,
       hide_from_list: postData.hide_from_list,
@@ -88,7 +88,7 @@ export default async function AssignmentsPage() {
   });
 
   const pageDescription =
-    'Labs, career modules, and other assignment-type course materials. Unless otherwise noted, submitted work is due at 11:59pm ET on the listed date.';
+    'Reflections, labs, homework, and career modules. Unless otherwise noted, submitted work is due at 11:59pm ET on the listed date.';
 
   return (
     <ContentLayout

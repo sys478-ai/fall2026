@@ -1,7 +1,7 @@
 import { getCourseConfig } from '@/lib/config';
 import type { ModuleColorToken } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
-import { getMeetingAnchorId, getModuleAnchorId } from '@/lib/navigation-helpers';
+import { getMeetingAnchorId } from '@/lib/navigation-helpers';
 import SidebarNavClient from './SidebarNavClient';
 
 interface SidebarTopicItem {
@@ -30,7 +30,7 @@ export default async function Navigation() {
     id: module.id,
     title: module.title,
     color: module.color,
-    href: module.slug ? `/topics/${module.slug}` : `/#${getModuleAnchorId(module.id)}`,
+    href: `/modules/${module.id}`,
     isDraft: module.draft === 1,
     topics: module.meetings.map((meeting, index) => {
       const contentHref = meeting.slug

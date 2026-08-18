@@ -4,7 +4,7 @@ scheduled_day: 19
 num: '5'
 type: 'career module'
 excerpt: 'Telling career stories, practicing introductions, and interview preparation.'
-draft: 0
+draft: 1
 status: unverified
 status_reviewer:
 status_date:
