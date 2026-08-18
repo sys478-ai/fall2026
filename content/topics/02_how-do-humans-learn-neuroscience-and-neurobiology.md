@@ -15,6 +15,13 @@ readings:
 optional_readings:
   - citation: 'Kelly, D. A. (2022, November 30). Neurons and glia: Basic components of the nervous system. BrainFacts. https://www.brainfacts.org/brain-anatomy-and-function/cells-and-circuits/2022/neurons-and-glia-113022'
     url: 'https://www.brainfacts.org/brain-anatomy-and-function/cells-and-circuits/2022/neurons-and-glia-113022'
+discussion_assignments:
+  - title: 'Initial Thoughts on AI'
+    notes: 'Canvas Discussion Forum'
+    url: 'https://unca.instructure.com/courses/1907/discussion_topics/71706'
+    due_date: '2026-08-20'
+    due_time: '3:00PM'
+    type: 'discussion'
 ---
 
 ## Topic / Focus

@@ -10,6 +10,14 @@ export interface TopicReading {
   url?: string;
 }
 
+export interface TopicDiscussionAssignment {
+  title: string;
+  notes?: string;
+  url?: string;
+  dueDate?: string;
+  dueTime?: string;
+}
+
 export interface TopicMarkdownMetadata {
   id: string;
   order: number;
@@ -26,6 +34,7 @@ export interface TopicMarkdownMetadata {
   braidElsiConnection: string;
   readings: TopicReading[];
   optionalReadings: TopicReading[];
+  discussionAssignments: TopicDiscussionAssignment[];
   holiday?: boolean;
   retired?: boolean;
   draft: number;
@@ -63,6 +72,43 @@ function asReadingArray(value: unknown): TopicReading[] {
       };
     })
     .filter((reading): reading is TopicReading => reading !== null);
+}
+
+function asDiscussionAssignmentArray(value: unknown): TopicDiscussionAssignment[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .map((item): TopicDiscussionAssignment | null => {
+      if (typeof item === 'string' && item.trim() !== '') {
+        return { title: item.trim() };
+      }
+
+      if (!item || typeof item !== 'object') {
+        return null;
+      }
+
+      const record = item as Record<string, unknown>;
+      const title = typeof record.title === 'string' ? record.title.trim() : '';
+      const notes = typeof record.notes === 'string' ? record.notes.trim() : '';
+      const url = typeof record.url === 'string' ? record.url.trim() : '';
+      const dueDate = typeof record.due_date === 'string' ? record.due_date.trim() : '';
+      const dueTime = typeof record.due_time === 'string' ? record.due_time.trim() : '';
+
+      if (!title) {
+        return null;
+      }
+
+      return {
+        title,
+        notes: notes || undefined,
+        url: url || undefined,
+        dueDate: dueDate || undefined,
+        dueTime: dueTime || undefined,
+      };
+    })
+    .filter((item): item is TopicDiscussionAssignment => item !== null);
 }
 
 function asString(value: unknown, fallback = '') {
@@ -131,6 +177,7 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     braidElsiConnection: asString(data.braid_elsi_connection),
     readings: asReadingArray(data.readings),
     optionalReadings: asReadingArray(data.optional_readings),
+    discussionAssignments: asDiscussionAssignmentArray(data.discussion_assignments),
     holiday: data.holiday === true,
     retired: data.retired === true,
     draft: data.draft === 0 || data.draft === false ? 0 : 1,
@@ -155,4 +202,34 @@ export function getTopicMarkdownBySlug(slug: string) {
 
 export function getTopicMarkdownByModule(moduleSlug: string) {
   return getAllTopicMarkdownMetadata().filter(topic => topic.module === moduleSlug && !topic.retired);
+}
+
+export interface DiscussionAssignmentIndexItem {
+  id: string;
+  title: string;
+  notes?: string;
+  url?: string;
+  dueDate?: string;
+  dueTime?: string;
+  scheduledDay?: number;
+  topicSlug: string;
+  draft: number;
+}
+
+export function getDiscussionAssignmentIndexItems(): DiscussionAssignmentIndexItem[] {
+  return getAllTopicMarkdownMetadata()
+    .filter(topic => !topic.retired && !topic.holiday)
+    .flatMap(topic =>
+      topic.discussionAssignments.map((item, index) => ({
+        id: `discussion-${topic.slug}-${index}`,
+        title: item.title,
+        notes: item.notes,
+        url: item.url,
+        dueDate: item.dueDate,
+        dueTime: item.dueTime,
+        scheduledDay: topic.scheduledDay,
+        topicSlug: topic.slug,
+        draft: topic.draft,
+      }))
+    );
 }

@@ -39,6 +39,14 @@ interface Assignment {
   type?: string;
 }
 
+export interface DiscussionAssignment {
+  title: string;
+  notes?: string;
+  url?: string;
+  dueDate?: string;
+  dueTime?: string;
+}
+
 export interface Reading {
   citation: string | React.ReactElement;
   url?: string;
@@ -81,6 +89,7 @@ export interface Meeting {
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
+  discussionAssignments?: DiscussionAssignment[];
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
@@ -125,6 +134,7 @@ interface BaseMeeting {
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
+  discussionAssignments?: DiscussionAssignment[];
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
@@ -278,6 +288,7 @@ function buildTopicMeeting(
     themes: meeting.themes,
     readings: meeting.readings,
     optionalReadings: meeting.optionalReadings,
+    discussionAssignments: meeting.discussionAssignments,
     draft: meeting.draft ?? 1,
   };
 }
@@ -321,6 +332,7 @@ function buildFinalExamMeeting(module: ModuleMarkdownMetadata, meeting: TopicMar
     themes: meeting.themes,
     readings: meeting.readings,
     optionalReadings: meeting.optionalReadings,
+    discussionAssignments: meeting.discussionAssignments,
     draft: meeting.draft ?? 1,
   };
 }

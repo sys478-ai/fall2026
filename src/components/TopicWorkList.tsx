@@ -66,6 +66,10 @@ function readStoredBoolean(key: string) {
 }
 
 function getWorkItemMeta(item: TopicWorkItem) {
+  if (item.type === 'activity') {
+    return item.meta || '(Completed during class)';
+  }
+
   const parts = [
     item.assignedDate ? `Assigned: ${item.assignedDate}` : null,
     item.dueDate ? `Due: ${item.dueDate}` : null,
@@ -77,6 +81,45 @@ function getWorkItemMeta(item: TopicWorkItem) {
   }
 
   return item.meta || '';
+}
+
+function UpcomingCategory({
+  heading,
+  items,
+}: {
+  heading: string;
+  items: TopicWorkItem[];
+}) {
+  return (
+    <div>
+      <h4 className="m-0! text-base font-medium tracking-tight text-gray-950 dark:text-gray-50">{heading}</h4>
+      {items.length > 0 ? (
+        <ul className="mt-3 list-disc space-y-3 pl-5 text-base leading-7 text-gray-800 dark:text-gray-200">
+          {items.map(item => (
+            <li key={item.id}>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  {...(/^https?:\/\//i.test(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="text-gray-950 no-underline hover:text-[#0b5d8f] dark:text-gray-50 dark:hover:text-[#8fc4ee]"
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                item.title
+              )}
+              {item.dueDate && (
+                <p className="mb-0 mt-1 text-sm font-medium text-gray-800 dark:text-gray-200">Due {item.dueDate}</p>
+              )}
+              {item.meta && <p className="mb-0 mt-0.5 text-sm text-gray-500 dark:text-gray-400">{item.meta}</p>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mb-0 mt-2 text-sm text-gray-500 dark:text-gray-400">None</p>
+      )}
+    </div>
+  );
 }
 
 export default function TopicWorkList({
@@ -159,6 +202,11 @@ export default function TopicWorkList({
   }
 
   const isPlain = variant === 'plain';
+  const upcomingReadings = upcomingItems.filter(
+    item => item.type === 'reading' || item.type === 'optional-reading'
+  );
+  const upcomingDueItems = upcomingItems.filter(item => item.type === 'due' || item.type === 'assignment');
+  const showUpcomingCategories = Boolean(upcomingDescription) || upcomingItems.length > 0;
 
   function renderWorkItem(item: TopicWorkItem) {
     const isChecked = checkedItems[item.id] || false;
@@ -239,27 +287,14 @@ export default function TopicWorkList({
 
       <div className={isPlain ? 'mt-10 border-t border-gray-200 pt-8 dark:border-gray-800' : 'mt-8 border-t border-gray-200 pt-5 dark:border-gray-800'}>
         <h3 className={`m-0! font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${isPlain ? 'text-xl' : 'text-lg'}`}>{upcomingTitle}</h3>
-        {upcomingDescription && (
+        {/* {upcomingDescription && (
           <p className="mb-0 mt-1 text-sm text-gray-500 dark:text-gray-400">{upcomingDescription}</p>
-        )}
-        {upcomingItems.length > 0 ? (
-          <ul className="mt-3 list-disc space-y-3 pl-5 text-base leading-7 text-gray-800 dark:text-gray-200">
-            {upcomingItems.map(item => (
-              <li key={item.id}>
-                {item.href ? (
-                  <Link
-                    href={item.href}
-                    {...(/^https?:\/\//i.test(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="text-gray-950 no-underline hover:text-[#0b5d8f] dark:text-gray-50 dark:hover:text-[#8fc4ee]"
-                  >
-                    {item.title}
-                  </Link>
-                ) : (
-                  item.title
-                )}
-              </li>
-            ))}
-          </ul>
+        )} */}
+        {showUpcomingCategories ? (
+          <div className="mt-6 space-y-8">
+            <UpcomingCategory heading="Readings" items={upcomingReadings} />
+            <UpcomingCategory heading="Assignment Due" items={upcomingDueItems} />
+          </div>
         ) : (
           <p className="mb-0 mt-3 text-sm text-gray-500 dark:text-gray-400">Nothing yet</p>
         )}

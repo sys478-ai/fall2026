@@ -54,6 +54,25 @@ function formatDate(dateString: string): string {
     const day = date.getDate();
     return `${dayOfWeek}, ${month} ${day}`;
   }
+
+function formatDueTime(time: string): string {
+  const match = time.trim().match(/^(\d{1,2}:\d{2})\s*(a\.?m\.?|p\.?m\.?)$/i);
+
+  if (!match) {
+    return time.trim();
+  }
+
+  const meridiem = /a/i.test(match[2]) ? 'AM' : 'PM';
+  return `${match[1]} ${meridiem}`;
+}
+
+function formatDueDateTime(dateLabel: string, dueTime?: string): string {
+  if (!dueTime) {
+    return dateLabel;
+  }
+
+  return `${dateLabel} at ${formatDueTime(dueTime)}`;
+}
   
 function getWeek(dateString: string): string {
   return `Week ${getWeekNumber(dateString)}`;
@@ -64,4 +83,4 @@ function getWeek(dateString: string): string {
  */
 export const SCROLL_OFFSET_PX = 20;
 
-export { formatDate, getWeek };
+export { formatDate, formatDueTime, formatDueDateTime, getWeek };

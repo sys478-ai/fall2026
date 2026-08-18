@@ -18,7 +18,7 @@ import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
 import { getReadingsForTopic, type Reading } from '@/lib/readings';
 import { getTopicModules } from '@/lib/topic-config';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatDueDateTime } from '@/lib/utils';
 import StatusBanner from '@/components/StatusBanner';
 
 interface TopicPageProps {
@@ -267,23 +267,25 @@ function getNextClassMeeting(topics: Topic[], currentSlug: string) {
   return null;
 }
 
+function getDiscussionDueLabel(item: { dueDate?: string; dueTime?: string }, meetingDate: string) {
+  const dateLabel =
+    item.dueDate && /^\d{4}-\d{2}-\d{2}$/.test(item.dueDate) ? formatDate(item.dueDate) : item.dueDate || meetingDate;
+
+  return formatDueDateTime(dateLabel, item.dueTime);
+}
+
 function buildNextClassPrepItems(meeting: Topic['meetings'][number]): TopicWorkItem[] {
-  const meetingKey = getMeetingKey(meeting.date, meeting.topic);
   const topicSlug = meeting.slug || '';
   const items: TopicWorkItem[] = (meeting.readings || []).map((reading, index) => ({
     id: `${topicSlug}-reading-${index}`,
     type: 'reading' as const,
     title: getReadingTitle(reading.citation, index, 'Assigned reading'),
     href: reading.url,
-    assignedDate: meeting.date,
-    dueDate: meeting.date,
-    submissionMethod: 'N/A — discussion only',
-    syncKeys: [`${meetingKey}-reading-${index}`],
   }));
 
   const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
   dueItems.forEach((item, index) => {
-    if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
+    if (typeof item === 'string' || item.draft === 1) {
       return;
     }
 
@@ -293,10 +295,18 @@ function buildNextClassPrepItems(meeting: Topic['meetings'][number]): TopicWorkI
       title: getAssignmentTitle(item),
       label: getAssignmentWorkLabel(item),
       href: item.url,
-      assignedDate: meeting.date,
       dueDate: meeting.date,
-      submissionMethod: 'Canvas',
-      syncKeys: [`${meetingKey}-due-${index}`],
+    });
+  });
+
+  (meeting.discussionAssignments || []).forEach((item, index) => {
+    items.push({
+      id: `${topicSlug}-discussion-${index}`,
+      type: 'due',
+      title: item.title,
+      href: item.url,
+      dueDate: getDiscussionDueLabel(item, meeting.date),
+      meta: item.notes,
     });
   });
 
@@ -428,9 +438,7 @@ async function buildTopicWorkItems({
       title: activity.title,
       label: getAssignmentWorkLabel(activity),
       href: getScopedHref(activity.url, anchorByHref),
-      assignedDate: meeting.date,
-      dueDate: meeting.date,
-      submissionMethod: 'In class',
+      meta: '(Completed during class)',
       syncKeys: [`${meetingKey}-activity-${index}`],
     });
   });
@@ -487,6 +495,17 @@ async function buildTopicWorkItems({
       ],
     });
   }
+
+  (meeting.discussionAssignments || []).forEach((item, index) => {
+    items.push({
+      id: `discussion-${index}`,
+      type: 'due',
+      title: item.title,
+      href: item.url,
+      dueDate: getDiscussionDueLabel(item, meeting.date),
+      syncKeys: [`${meetingKey}-discussion-${index}`],
+    });
+  });
 
   return items.map(item => ({
     ...item,
@@ -617,7 +636,7 @@ function TopicClassWorkPanel({
   readings: Topic['meetings'][number]['readings'];
   optionalReadings: Topic['meetings'][number]['optionalReadings'];
   bibliographyReadings: Reading[];
-  prepAssignments: Array<{ title: string; href?: string }>;
+  prepAssignments: Array<{ title: string; href?: string; dueDate?: string; notes?: string }>;
   embeddedTopicContent: EmbeddedTopicContent[];
   meetingSlug?: string;
 }) {
@@ -700,6 +719,12 @@ function TopicClassWorkPanel({
                         </Link>
                       ) : (
                         item.title
+                      )}
+                      {item.dueDate && (
+                        <p className="mb-0 mt-1 text-sm font-medium text-gray-800 dark:text-gray-200">Due {item.dueDate}</p>
+                      )}
+                      {item.notes && (
+                        <p className="mb-0 mt-0.5 text-sm text-gray-500 dark:text-gray-400">{item.notes}</p>
                       )}
                     </li>
                   ))}
@@ -862,13 +887,21 @@ export default async function TopicPage({ params }: TopicPageProps) {
   const nextClassMeeting = getNextClassMeeting(topics, meeting.slug || slug);
   const nextClassPrepItems = nextClassMeeting ? buildNextClassPrepItems(nextClassMeeting) : [];
   const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
-  const prepAssignments = dueItems.flatMap(item => {
-    if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
-      return [];
-    }
+  const prepAssignments = [
+    ...dueItems.flatMap(item => {
+      if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
+        return [];
+      }
 
-    return [{ title: getAssignmentTitle(item), href: item.url }];
-  });
+      return [{ title: getAssignmentTitle(item), href: item.url, dueDate: meeting.date }];
+    }),
+    ...(meeting.discussionAssignments || []).map(item => ({
+      title: item.title,
+      href: item.url,
+      dueDate: getDiscussionDueLabel(item, meeting.date),
+      notes: item.notes,
+    })),
+  ];
   const topicSections: Array<{
     navItem: TopicSectionNavItem;
     panel: ReactElement;
@@ -914,7 +947,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
           items={topicWorkItems}
           upcomingItems={nextClassPrepItems}
           thisClassTitle="For this class"
-          upcomingTitle="Coming up"
+          upcomingTitle="For next class"
           upcomingDescription={
             nextClassMeeting
               ? `${nextClassMeeting.topic}${nextClassMeeting.date ? ` · ${nextClassMeeting.date}` : ''}`

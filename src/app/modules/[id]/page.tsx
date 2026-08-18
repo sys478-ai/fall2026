@@ -74,8 +74,8 @@ export default async function ModulePage({ params }: ModulePageProps) {
 
         {scheduledModule && scheduledModule.meetings.length > 0 && (
           <section>
-            <h2 className="mt-0 mb-4 text-xl font-semibold text-gray-950 dark:text-gray-50">Meetings</h2>
-            <ol className="m-0 list-none divide-y divide-gray-200 p-0 dark:divide-gray-800">
+            <h2 className="mt-0 mb-4 text-xl font-semibold text-gray-950 dark:text-gray-50">Topics</h2>
+            <ol className="m-0 p-0! list-none divide-y divide-gray-200 dark:divide-gray-800">
               {scheduledModule.meetings.map((meeting, index) => {
                 const isNoClass = meeting.holiday === true;
                 const isDraft = meeting.draft === 1;

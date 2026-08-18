@@ -13,8 +13,8 @@ export default async function ModulesPage() {
       header={
         <TopLevelPageHeader
           label="Course Schedule"
-          title="Modules"
-          description="A semester overview of the course modules, meeting dates, assigned readings, and due work."
+          title="Course Schedule"
+          description="A semester overview of the course topics, meeting dates, readings, and assignments."
           tone="indigo"
         />
       }

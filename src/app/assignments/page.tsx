@@ -3,8 +3,9 @@ import ContentLayout from '@/components/ContentLayout';
 import QuickLinksNav from '@/components/QuickLinksNav';
 import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import AssignmentsTabbedList from '@/components/assignments/AssignmentsTabbedList';
-import { getDueDateForScheduledDay } from '@/lib/course-calendar';
 import { getSeriesSummary } from '@/lib/assignment-series';
+import { getDateForScheduledDay, getDueDateForScheduledDay } from '@/lib/course-calendar';
+import { getDiscussionAssignmentIndexItems } from '@/lib/topic-markdown';
 import externalAssignments from '../../../content/config/external-assignments.json';
 
 interface AssignmentData {
@@ -14,6 +15,7 @@ interface AssignmentData {
   excerpt?: string;
   date?: string;
   due_date?: string;
+  due_time?: string;
   type?: string;
   assigned?: string;
   scheduled_day?: number;
@@ -26,6 +28,7 @@ interface AssignmentData {
   hide_from_list?: number;
   series_role?: string;
   series_summary?: string;
+  topic_slug?: string;
 }
 
 
@@ -58,8 +61,22 @@ export default async function AssignmentsPage() {
     };
   }));
 
-  // Combine markdown assignments with external assignments
-  let assignments: AssignmentData[] = [...markdownAssignments, ...externalAssignments];
+  const discussionAssignments: AssignmentData[] = getDiscussionAssignmentIndexItems().map(item => ({
+    id: item.id,
+    title: item.title,
+    notes: item.notes,
+    type: 'discussion',
+    external_type: 'discussion',
+    external_url: item.url,
+    due_date: item.dueDate || getDateForScheduledDay(item.scheduledDay),
+    due_time: item.dueTime,
+    scheduled_day: item.scheduledDay,
+    draft: item.draft,
+    topic_slug: item.topicSlug,
+  }));
+
+  // Combine markdown assignments with external assignments and discussion assignments from topics
+  let assignments: AssignmentData[] = [...markdownAssignments, ...externalAssignments, ...discussionAssignments];
   // Filter out excluded assignments, no_render assignments, hidden list items, and series child pages.
   assignments = assignments.filter(
     assignment =>
@@ -88,7 +105,7 @@ export default async function AssignmentsPage() {
   });
 
   const pageDescription =
-    'Reflections, labs, homework, and career modules. Unless otherwise noted, submitted work is due at 11:59pm ET on the listed date.';
+    'Reflections, labs, homework, discussions, and career modules. Unless otherwise noted, submitted work is due at 11:59pm ET on the listed date.';
 
   return (
     <ContentLayout
