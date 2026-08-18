@@ -14,6 +14,9 @@ export interface TopicWorkItem {
   label?: string;
   href?: string;
   meta?: string;
+  assignedDate?: string;
+  dueDate?: string;
+  submissionMethod?: string;
   optional?: boolean;
   syncKeys?: string[];
 }
@@ -25,8 +28,10 @@ interface TopicWorkListProps {
   upcomingItems?: TopicWorkItem[];
   upcomingTitle?: string;
   upcomingDescription?: string;
+  thisClassTitle?: string;
   kicker?: string;
   title?: string;
+  variant?: 'default' | 'plain';
   storageNamespace?: 'topic' | 'assignment';
   trackProgress?: boolean;
 }
@@ -60,20 +65,35 @@ function readStoredBoolean(key: string) {
   }
 }
 
+function getWorkItemMeta(item: TopicWorkItem) {
+  const parts = [
+    item.assignedDate ? `Assigned: ${item.assignedDate}` : null,
+    item.dueDate ? `Due: ${item.dueDate}` : null,
+    item.submissionMethod ? `Submit via: ${item.submissionMethod}` : null,
+  ].filter((part): part is string => Boolean(part));
+
+  if (parts.length > 0) {
+    return parts.join(' · ');
+  }
+
+  return item.meta || '';
+}
+
 export default function TopicWorkList({
   id,
   topicSlug,
   items,
   upcomingItems = [],
-  upcomingTitle = 'For next class, make sure you read…',
+  upcomingTitle = 'Coming Up',
   upcomingDescription,
-  kicker = 'Topic Work',
+  thisClassTitle = 'For This Class',
+  kicker = 'Checklist',
   title = 'What to do for this topic',
+  variant = 'default',
   storageNamespace = 'topic',
   trackProgress = true,
 }: TopicWorkListProps) {
   const trackedItems = useMemo(() => items.filter(item => !item.optional), [items]);
-  const allItems = useMemo(() => [...items, ...upcomingItems], [items, upcomingItems]);
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
   const [isReady, setIsReady] = useState(false);
   const previousCompleteRef = useRef(false);
@@ -92,7 +112,7 @@ export default function TopicWorkList({
   useEffect(() => {
     const nextCheckedItems: Record<string, boolean> = {};
 
-    allItems.forEach(item => {
+    items.forEach(item => {
       const keys = [storageKey(storageNamespace, topicSlug, item.id), ...(item.syncKeys || [])];
       nextCheckedItems[item.id] = keys.some(readStoredBoolean);
     });
@@ -102,7 +122,7 @@ export default function TopicWorkList({
       trackedItems.length > 0 && trackedItems.every(trackedItem => nextCheckedItems[trackedItem.id]);
     userInteractionRef.current = false;
     setIsReady(true);
-  }, [allItems, topicSlug, trackedItems, storageNamespace]);
+  }, [items, topicSlug, trackedItems, storageNamespace]);
 
   useEffect(() => {
     if (!isReady || !trackProgress) {
@@ -138,12 +158,11 @@ export default function TopicWorkList({
     }));
   }
 
-  if (items.length === 0 && upcomingItems.length === 0) {
-    return null;
-  }
+  const isPlain = variant === 'plain';
 
   function renderWorkItem(item: TopicWorkItem) {
     const isChecked = checkedItems[item.id] || false;
+    const meta = getWorkItemMeta(item);
 
     return (
       <div key={item.id} className={`flex gap-3 py-4 ${isChecked ? 'opacity-65' : ''}`}>
@@ -155,13 +174,14 @@ export default function TopicWorkList({
           className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-2 border-gray-300 accent-[#0b5d8f] dark:border-gray-600 dark:accent-[#8fc4ee]"
         />
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-600 dark:border-gray-800 dark:text-gray-400">
-              {item.label || TYPE_LABELS[item.type]}
-            </span>
-            {item.meta && <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{item.meta}</span>}
-          </div>
-          <div className={`mt-1 text-base font-medium ${isChecked ? 'line-through' : ''}`}>
+          {!isPlain && (
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-600 dark:border-gray-800 dark:text-gray-400">
+                {item.label || TYPE_LABELS[item.type]}
+              </span>
+            </div>
+          )}
+          <div className={`text-base font-medium ${isPlain ? '' : 'mt-1'} ${isChecked ? 'line-through' : ''}`}>
             {item.href ? (
               <Link
                 href={item.href}
@@ -174,39 +194,76 @@ export default function TopicWorkList({
               <span className="text-gray-950 dark:text-gray-50">{item.title}</span>
             )}
           </div>
+          {meta && <p className="mb-0 mt-1 text-sm text-gray-500 dark:text-gray-400">{meta}</p>}
         </div>
       </div>
     );
   }
 
+  const completionText = `${completion} of ${trackedItems.length}`;
+
   return (
     <section
       id={id}
-      className="scroll-mt-24 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-black"
+      className={
+        isPlain
+          ? 'scroll-mt-24 max-w-4xl'
+          : 'scroll-mt-24 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-black'
+      }
     >
-      <div className="flex flex-wrap items-start justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-800">
-        <div>
-          <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#0b5d8f] dark:text-[#8fc4ee]">
-            {kicker}
-          </p>
-          <h2 className="m-0! text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">{title}</h2>
-        </div>
-        <div className="rounded-full border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 dark:border-gray-800 dark:text-gray-300">
-          {completion} / {trackedItems.length} complete · {completionLabel}
-        </div>
-      </div>
-
-      {items.length > 0 && <div className="mt-4 divide-y divide-gray-200 dark:divide-gray-800">{items.map(renderWorkItem)}</div>}
-
-      {upcomingItems.length > 0 && (
-        <div className={`${items.length > 0 ? 'mt-8 border-t border-gray-200 pt-5 dark:border-gray-800' : 'mt-4'}`}>
-          <h3 className="m-0! text-lg font-semibold tracking-tight text-gray-950 dark:text-gray-50">{upcomingTitle}</h3>
-          {upcomingDescription && (
-            <p className="mb-0 mt-1 text-sm text-gray-500 dark:text-gray-400">{upcomingDescription}</p>
-          )}
-          <div className="mt-3 divide-y divide-gray-200 dark:divide-gray-800">{upcomingItems.map(renderWorkItem)}</div>
+      {!isPlain && (
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-800">
+          <div>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#0b5d8f] dark:text-[#8fc4ee]">
+              {kicker}
+            </p>
+            <h2 className="m-0! text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">{title}</h2>
+          </div>
+          <div className="rounded-full border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 dark:border-gray-800 dark:text-gray-300">
+            {completion} / {trackedItems.length} complete · {completionLabel}
+          </div>
         </div>
       )}
+
+      <div className={isPlain ? '' : 'mt-6'}>
+        <div className="flex items-baseline justify-between gap-4">
+          <h3 className={`m-0! font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${isPlain ? 'text-xl' : 'text-lg'}`}>{thisClassTitle}</h3>
+          {isPlain && <p className="mb-0 text-sm text-gray-500 dark:text-gray-400">{completionText}</p>}
+        </div>
+        {items.length > 0 ? (
+          <div className="mt-3 divide-y divide-gray-200 dark:divide-gray-800">{items.map(renderWorkItem)}</div>
+        ) : (
+          <p className="mb-0 mt-3 text-sm text-gray-500 dark:text-gray-400">Nothing yet</p>
+        )}
+      </div>
+
+      <div className={isPlain ? 'mt-10 border-t border-gray-200 pt-8 dark:border-gray-800' : 'mt-8 border-t border-gray-200 pt-5 dark:border-gray-800'}>
+        <h3 className={`m-0! font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${isPlain ? 'text-xl' : 'text-lg'}`}>{upcomingTitle}</h3>
+        {upcomingDescription && (
+          <p className="mb-0 mt-1 text-sm text-gray-500 dark:text-gray-400">{upcomingDescription}</p>
+        )}
+        {upcomingItems.length > 0 ? (
+          <ul className="mt-3 list-disc space-y-3 pl-5 text-base leading-7 text-gray-800 dark:text-gray-200">
+            {upcomingItems.map(item => (
+              <li key={item.id}>
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    {...(/^https?:\/\//i.test(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="text-gray-950 no-underline hover:text-[#0b5d8f] dark:text-gray-50 dark:hover:text-[#8fc4ee]"
+                  >
+                    {item.title}
+                  </Link>
+                ) : (
+                  item.title
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mb-0 mt-3 text-sm text-gray-500 dark:text-gray-400">Nothing yet</p>
+        )}
+      </div>
     </section>
   );
 }

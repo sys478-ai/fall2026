@@ -1,6 +1,7 @@
 'use client';
 
 import { Children, ReactNode, useEffect, useMemo, useState } from 'react';
+import { resolveAssignmentTabIdFromHash } from '@/lib/assignment-series-hash';
 
 export interface TopicSectionNavItem {
   id: string;
@@ -12,15 +13,27 @@ interface TopicSectionNavProps {
   items: TopicSectionNavItem[];
   children: ReactNode;
   ariaLabel?: string;
-  resolveTabIdFromHash?: (hashId: string) => string | undefined;
+  variant?: 'default' | 'plain';
   onHashSync?: (hashId: string) => void;
+}
+
+function resolveTabIdFromHash(hashId: string) {
+  if (
+    hashId === 'read-watch' ||
+    hashId.startsWith('topic-work-assignment-') ||
+    hashId.startsWith('topic-work-activity-')
+  ) {
+    return 'topic-class-work';
+  }
+
+  return resolveAssignmentTabIdFromHash(hashId);
 }
 
 export default function TopicSectionNav({
   items,
   children,
   ariaLabel = 'Topic sections',
-  resolveTabIdFromHash,
+  variant = 'default',
   onHashSync,
 }: TopicSectionNavProps) {
   const [activeId, setActiveId] = useState(items[0]?.id || '');
@@ -50,7 +63,7 @@ export default function TopicSectionNav({
 
     const syncActiveTabToHash = () => {
       const hashId = window.location.hash.replace(/^#/, '');
-      const resolvedTabId = hashId ? resolveTabIdFromHash?.(hashId) : undefined;
+      const resolvedTabId = hashId ? resolveTabIdFromHash(hashId) : undefined;
 
       if (resolvedTabId && items.some(item => item.id === resolvedTabId)) {
         setActiveId(resolvedTabId);
@@ -81,7 +94,7 @@ export default function TopicSectionNav({
       window.removeEventListener('hashchange', syncActiveTabToHash);
       window.removeEventListener('beforeprint', syncActiveTabToHash);
     };
-  }, [items, onHashSync, resolveTabIdFromHash]);
+  }, [items, onHashSync]);
 
   if (items.length === 0) {
     return null;
@@ -107,6 +120,7 @@ export default function TopicSectionNav({
         <div className="flex overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden">
           {items.map((item, index) => {
             const isActive = activeId === item.id;
+            const isPlain = variant === 'plain';
 
             return (
               <button
@@ -117,21 +131,31 @@ export default function TopicSectionNav({
                 aria-selected={isActive}
                 aria-controls={`${item.id}-panel`}
                 onClick={() => activateTab(item.id)}
-                className={`relative -mb-px flex shrink-0 items-center gap-2 whitespace-nowrap border-b-3 px-4 py-2 text-sm font-semibold transition-colors ${
-                  isActive
-                    ? 'border-[#0b5d8f] text-[#0b5d8f] dark:border-[#8fc4ee] dark:text-[#8fc4ee]'
-                    : 'border-transparent text-gray-600 hover:border-gray-300 hover:text-[#0b5d8f] dark:text-gray-400 dark:hover:border-gray-700 dark:hover:text-[#8fc4ee]'
-                }`}
+                className={
+                  isPlain
+                    ? `relative -mb-px shrink-0 whitespace-nowrap border-b px-5 py-3 text-[15px] transition-colors ${
+                        isActive
+                          ? 'border-gray-950 font-medium text-gray-950 dark:border-gray-50 dark:text-gray-50'
+                          : 'border-transparent font-normal text-gray-500 hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50'
+                      }`
+                    : `relative -mb-px flex shrink-0 items-center gap-2 whitespace-nowrap border-b-3 px-4 py-2 text-sm font-semibold transition-colors ${
+                        isActive
+                          ? 'border-[#0b5d8f] text-[#0b5d8f] dark:border-[#8fc4ee] dark:text-[#8fc4ee]'
+                          : 'border-transparent text-gray-600 hover:border-gray-300 hover:text-[#0b5d8f] dark:text-gray-400 dark:hover:border-gray-700 dark:hover:text-[#8fc4ee]'
+                      }`
+                }
               >
-                <span
-                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
-                    isActive
-                      ? 'bg-[#0b5d8f]/10 text-[#0b5d8f] dark:bg-[#8fc4ee]/15 dark:text-[#8fc4ee]'
-                      : 'bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400'
-                  }`}
-                >
-                  {index + 1}
-                </span>
+                {!isPlain && (
+                  <span
+                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
+                      isActive
+                        ? 'bg-[#0b5d8f]/10 text-[#0b5d8f] dark:bg-[#8fc4ee]/15 dark:text-[#8fc4ee]'
+                        : 'bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400'
+                    }`}
+                  >
+                    {index + 1}
+                  </span>
+                )}
                 <span>
                   {item.label}
                   {typeof item.count === 'number' && <span className="ml-1 opacity-75">({item.count})</span>}

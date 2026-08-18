@@ -1130,6 +1130,23 @@ pre code {
   padding-top: 0 !important;
 }
 
+.topic-page .prose h2 {
+  @apply mt-10 mb-3 border-b-0 pb-0 text-xl font-semibold tracking-tight text-gray-950 md:text-2xl dark:border-transparent dark:text-gray-50;
+}
+
+.topic-page .prose h3 {
+  @apply mt-8 mb-2 border-b-0 pb-0 text-lg font-medium tracking-tight text-gray-800 md:text-xl dark:border-transparent dark:text-gray-200;
+}
+
+.topic-page .prose h4 {
+  @apply mt-6 mb-2 text-base font-medium tracking-tight text-gray-600 dark:text-gray-400;
+}
+
+.topic-page .prose > h2:first-child,
+.topic-page .prose > h3:first-child {
+  @apply mt-0;
+}
+
 .cheatsheet-content table.cheatsheet-table {
   @apply w-full border-collapse mt-4;
 }

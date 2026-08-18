@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { Fragment, type ReactElement } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -12,11 +12,13 @@ import TopicWorkList from '@/components/TopicWorkList';
 import type { TopicWorkItem } from '@/components/TopicWorkList';
 import { getPostData } from '@/lib/markdown';
 import type { PostData } from '@/lib/markdown';
+import { getDateForScheduledDay, getDueDateForScheduledDay } from '@/lib/course-calendar';
 import { getModuleColorClasses, type ModuleColorClasses } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
 import { getReadingsForTopic, type Reading } from '@/lib/readings';
 import { getTopicModules } from '@/lib/topic-config';
+import { formatDate } from '@/lib/utils';
 import StatusBanner from '@/components/StatusBanner';
 
 interface TopicPageProps {
@@ -191,50 +193,12 @@ function TopicOverviewMarkdown({ content }: { content: string }) {
   );
 }
 
-function EditorialSection({
-  id,
-  label,
-  title,
-  titleClassName,
-  labelClassName,
-  borderless,
-  children,
-}: {
-  id?: string;
-  label: string;
-  title?: string;
-  titleClassName?: string;
-  labelClassName?: string;
-  borderless?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <section
-      id={id}
-      className={`scroll-mt-24 grid gap-8 ${
-        borderless ? 'pt-10' : 'border-t border-gray-200 pt-7 dark:border-gray-800'
-      }`}
-    >
-      <div>
-        {title && (
-          <h2
-            className={`m-0! mb-4! text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${titleClassName || ''}`}
-          >
-            {title}
-          </h2>
-        )}
-        {children}
-      </div>
-    </section>
-  );
+function ClassWorkSubhead({ children }: { children: React.ReactNode }) {
+  return <h3 className="m-0! mb-3 text-base font-medium text-gray-950 dark:text-gray-50">{children}</h3>;
 }
 
-function EditorialLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="m-0! text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
-      {children}
-    </h3>
-  );
+function ClassWorkList({ children }: { children: React.ReactNode }) {
+  return <ul className="m-0! list-none space-y-3 p-0!">{children}</ul>;
 }
 
 interface TopicNavigationItem {
@@ -247,7 +211,6 @@ interface EmbeddedTopicContent {
   id: string;
   type: 'assignment' | 'activity';
   title: string;
-  shortTitle: string;
   sourceHref: string;
   contentHref: string;
   postData: PostData | null;
@@ -304,17 +267,40 @@ function getNextClassMeeting(topics: Topic[], currentSlug: string) {
   return null;
 }
 
-function buildNextClassReadingItems(meeting: Topic['meetings'][number]): TopicWorkItem[] {
+function buildNextClassPrepItems(meeting: Topic['meetings'][number]): TopicWorkItem[] {
   const meetingKey = getMeetingKey(meeting.date, meeting.topic);
   const topicSlug = meeting.slug || '';
-
-  return (meeting.readings || []).map((reading, index) => ({
+  const items: TopicWorkItem[] = (meeting.readings || []).map((reading, index) => ({
     id: `${topicSlug}-reading-${index}`,
     type: 'reading' as const,
     title: getReadingTitle(reading.citation, index, 'Assigned reading'),
     href: reading.url,
+    assignedDate: meeting.date,
+    dueDate: meeting.date,
+    submissionMethod: 'N/A — discussion only',
     syncKeys: [`${meetingKey}-reading-${index}`],
   }));
+
+  const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
+  dueItems.forEach((item, index) => {
+    if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
+      return;
+    }
+
+    items.push({
+      id: `${topicSlug}-due-${index}`,
+      type: 'due',
+      title: getAssignmentTitle(item),
+      label: getAssignmentWorkLabel(item),
+      href: item.url,
+      assignedDate: meeting.date,
+      dueDate: meeting.date,
+      submissionMethod: 'Canvas',
+      syncKeys: [`${meetingKey}-due-${index}`],
+    });
+  });
+
+  return items;
 }
 
 function getMeetingKey(date: string, topicTitle: string) {
@@ -357,32 +343,42 @@ function getAssignmentWorkLabel(item: { type?: string; url?: string }) {
     return 'Lab';
   }
 
+  if (normalizedType === 'homework' || normalizedType === 'assignment' || assignmentSlug.startsWith('hw')) {
+    return 'Homework';
+  }
+
   return undefined;
 }
 
-function toDisplayLabel(value: string) {
-  return value
-    .split(/[\s-]+/)
-    .filter(Boolean)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+function isPrepAssignment(item: { type?: string; url?: string }) {
+  const label = getAssignmentWorkLabel(item);
+  return label === 'Homework';
 }
 
-function getEmbeddedContentShortTitle(postData: PostData | null, fallbackType: EmbeddedTopicContent['type']) {
-  if (postData?.type) {
-    const typeLabel = toDisplayLabel(postData.type);
-
-    if (postData.type.toLowerCase() === 'activity') {
-      return typeLabel;
-    }
-
-    return postData.num ? `${typeLabel} ${postData.num}` : typeLabel;
+async function getAssignmentScheduleDates(url?: string) {
+  const slug = getSlugFromUrl(url, 'assignments');
+  if (!slug) {
+    return { assignedDate: undefined as string | undefined, dueDate: undefined as string | undefined };
   }
 
-  return fallbackType === 'assignment' ? 'Assignment' : 'Activity';
+  try {
+    const post = await getPostData(slug, 'assignments');
+    const assignedIso = getDateForScheduledDay(post.scheduled_day);
+    const dueIso = getDueDateForScheduledDay(post.scheduled_day) || post.due_date;
+    return {
+      assignedDate: assignedIso ? formatDate(assignedIso) : undefined,
+      dueDate: dueIso ? formatDate(dueIso) : undefined,
+    };
+  } catch {
+    return { assignedDate: undefined as string | undefined, dueDate: undefined as string | undefined };
+  }
 }
 
-function buildTopicWorkItems({
+function contentStartsWithHeading(html: string | undefined) {
+  return Boolean(html?.trim().match(/^<h[1-3]\b/i));
+}
+
+async function buildTopicWorkItems({
   topicSlug,
   meeting,
   anchorByHref = new Map<string, string>(),
@@ -390,7 +386,7 @@ function buildTopicWorkItems({
   topicSlug: string;
   meeting: Topic['meetings'][number];
   anchorByHref?: Map<string, string>;
-}): TopicWorkItem[] {
+}): Promise<TopicWorkItem[]> {
   const meetingKey = getMeetingKey(meeting.date, meeting.topic);
   const items: TopicWorkItem[] = [];
 
@@ -400,7 +396,24 @@ function buildTopicWorkItems({
       type: 'reading',
       title: getReadingTitle(reading.citation, index, 'Assigned reading'),
       href: reading.url,
+      assignedDate: meeting.date,
+      dueDate: meeting.date,
+      submissionMethod: 'N/A — discussion only',
       syncKeys: [`${meetingKey}-reading-${index}`],
+    });
+  });
+
+  (meeting.optionalReadings || []).forEach((reading, index) => {
+    items.push({
+      id: `optional-reading-${index}`,
+      type: 'optional-reading',
+      title: getReadingTitle(reading.citation, index, 'Optional reading'),
+      href: reading.url,
+      assignedDate: meeting.date,
+      dueDate: meeting.date,
+      submissionMethod: 'N/A — discussion only',
+      optional: true,
+      syncKeys: [`${meetingKey}-optional-reading-${index}`],
     });
   });
 
@@ -415,18 +428,22 @@ function buildTopicWorkItems({
       title: activity.title,
       label: getAssignmentWorkLabel(activity),
       href: getScopedHref(activity.url, anchorByHref),
+      assignedDate: meeting.date,
+      dueDate: meeting.date,
+      submissionMethod: 'In class',
       syncKeys: [`${meetingKey}-activity-${index}`],
     });
   });
 
   const assignedItems = Array.isArray(meeting.assigned) ? meeting.assigned : meeting.assigned ? [meeting.assigned] : [];
 
-  assignedItems.forEach((item, index) => {
+  for (const [index, item] of assignedItems.entries()) {
     if (typeof item === 'string' || item.draft === 1) {
-      return;
+      continue;
     }
 
     const assignmentSlug = getSlugFromUrl(item.url, 'assignments');
+    const dates = await getAssignmentScheduleDates(item.url);
 
     items.push({
       id: `assigned-${index}`,
@@ -434,22 +451,26 @@ function buildTopicWorkItems({
       title: getAssignmentTitle(item),
       label: getAssignmentWorkLabel(item),
       href: getScopedHref(item.url, anchorByHref),
+      assignedDate: dates.assignedDate || meeting.date,
+      dueDate: dates.dueDate || meeting.date,
+      submissionMethod: 'Canvas',
       optional: true,
       syncKeys: [
         `${meetingKey}-assigned-${index}`,
         ...(assignmentSlug ? [`assignment-${assignmentSlug}`, `assignments-${assignmentSlug}`] : []),
       ],
     });
-  });
+  }
 
   const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
 
-  dueItems.forEach((item, index) => {
+  for (const [index, item] of dueItems.entries()) {
     if (typeof item === 'string' || item.draft === 1) {
-      return;
+      continue;
     }
 
     const assignmentSlug = getSlugFromUrl(item.url, 'assignments');
+    const dates = await getAssignmentScheduleDates(item.url);
 
     items.push({
       id: `due-${index}`,
@@ -457,13 +478,15 @@ function buildTopicWorkItems({
       title: getAssignmentTitle(item),
       label: getAssignmentWorkLabel(item),
       href: getScopedHref(item.url, anchorByHref),
-      meta: meeting.date,
+      assignedDate: dates.assignedDate || meeting.date,
+      dueDate: dates.dueDate || meeting.date,
+      submissionMethod: 'Canvas',
       syncKeys: [
         `${meetingKey}-due-${index}`,
         ...(assignmentSlug ? [`assignment-${assignmentSlug}`, `assignments-${assignmentSlug}`] : []),
       ],
     });
-  });
+  }
 
   return items.map(item => ({
     ...item,
@@ -550,7 +573,6 @@ async function getEmbeddedTopicContent(meeting: Topic['meetings'][number]): Prom
         id,
         type: candidate.type,
         title: postData?.title || candidate.title,
-        shortTitle: getEmbeddedContentShortTitle(postData, candidate.type),
         sourceHref: candidate.href,
         contentHref: `#${id}`,
         postData,
@@ -564,8 +586,15 @@ function EmbeddedTopicContentSection({
 }: {
   item: EmbeddedTopicContent;
 }) {
+  const showTitle = Boolean(item.title) && !contentStartsWithHeading(item.postData?.content);
+
   return (
-    <EditorialSection id={item.id} label={item.shortTitle} borderless>
+    <section id={item.id} className="scroll-mt-24 space-y-4">
+      {showTitle && (
+        <h3 className="m-0! text-xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
+          {item.title}
+        </h3>
+      )}
       {item.postData ? (
         <MarkdownContent content={item.postData.content} className="embedded-topic-content" />
       ) : (
@@ -573,13 +602,141 @@ function EmbeddedTopicContentSection({
           This item has a standalone page, but it could not be embedded here.
         </p>
       )}
-    </EditorialSection>
+    </section>
+  );
+}
+
+function TopicClassWorkPanel({
+  readings,
+  optionalReadings,
+  bibliographyReadings,
+  prepAssignments,
+  embeddedTopicContent,
+  meetingSlug,
+}: {
+  readings: Topic['meetings'][number]['readings'];
+  optionalReadings: Topic['meetings'][number]['optionalReadings'];
+  bibliographyReadings: Reading[];
+  prepAssignments: Array<{ title: string; href?: string }>;
+  embeddedTopicContent: EmbeddedTopicContent[];
+  meetingSlug?: string;
+}) {
+  const assignedReadings = readings || [];
+  const extraReadings = optionalReadings || [];
+  const hasBeforeClass =
+    assignedReadings.length > 0 || extraReadings.length > 0 || bibliographyReadings.length > 0 || prepAssignments.length > 0;
+  const hasInClass = true;
+
+  return (
+    <div className="max-w-4xl space-y-12">
+      {hasBeforeClass && (
+        <section>
+          <h2 className="mt-0 mb-5 text-xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
+            Before class
+          </h2>
+          <div className="space-y-8">
+            {assignedReadings.length > 0 && (
+              <div>
+                <ClassWorkSubhead>Assigned readings</ClassWorkSubhead>
+                <ClassWorkList>
+                  {assignedReadings.map((reading, index) => (
+                    <li
+                      key={`${meetingSlug}-reading-${index}`}
+                      className="text-base leading-7 text-gray-800 dark:text-gray-200"
+                    >
+                      {renderReading(reading.citation, reading.url)}
+                    </li>
+                  ))}
+                </ClassWorkList>
+              </div>
+            )}
+
+            {extraReadings.length > 0 && (
+              <div>
+                <ClassWorkSubhead>Optional</ClassWorkSubhead>
+                <ClassWorkList>
+                  {extraReadings.map((reading, index) => (
+                    <li
+                      key={`${meetingSlug}-optional-reading-${index}`}
+                      className="text-base leading-7 text-gray-800 dark:text-gray-200"
+                    >
+                      {renderReading(reading.citation, reading.url)}
+                    </li>
+                  ))}
+                </ClassWorkList>
+              </div>
+            )}
+
+            {bibliographyReadings.length > 0 && (
+              <div>
+                <ClassWorkSubhead>Field Guide bibliography</ClassWorkSubhead>
+                <ClassWorkList>
+                  {bibliographyReadings.map((reading: Reading) => (
+                    <li key={reading.id} className="text-base leading-7 text-gray-800 dark:text-gray-200">
+                      <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
+                        {reading.title}
+                      </a>
+                      {reading.authors && (
+                        <span className="text-gray-500 dark:text-gray-400"> — {reading.authors}</span>
+                      )}
+                    </li>
+                  ))}
+                </ClassWorkList>
+              </div>
+            )}
+
+            {prepAssignments.length > 0 && (
+              <div>
+                <ClassWorkSubhead>Due before class</ClassWorkSubhead>
+                <ClassWorkList>
+                  {prepAssignments.map((item, index) => (
+                    <li
+                      key={`${meetingSlug}-prep-${index}`}
+                      className="text-base leading-7 text-gray-800 dark:text-gray-200"
+                    >
+                      {item.href ? (
+                        <Link href={item.href} className="text-gray-950 no-underline hover:underline dark:text-gray-50">
+                          {item.title}
+                        </Link>
+                      ) : (
+                        item.title
+                      )}
+                    </li>
+                  ))}
+                </ClassWorkList>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {hasInClass && (
+        <section>
+          {hasBeforeClass && (
+            <h2 className="mt-0 mb-5 text-xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
+              In class
+            </h2>
+          )}
+          {embeddedTopicContent.length > 0 ? (
+            <div className="space-y-12">
+              {embeddedTopicContent.map(item => (
+                <EmbeddedTopicContentSection key={item.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <p className="mb-0 text-lg leading-8 text-gray-600 dark:text-gray-400">
+              This meeting is a seminar discussion. Use the Overview tab for the day&apos;s focus, guiding questions, and
+              plan.
+            </p>
+          )}
+        </section>
+      )}
+    </div>
   );
 }
 
 function TopicHeader({
   moduleColor,
-  number,
   date,
   moduleId,
   moduleTitle,
@@ -587,7 +744,6 @@ function TopicHeader({
   subtitle,
 }: {
   moduleColor: ModuleColorClasses;
-  number: string;
   date?: string;
   moduleId: number;
   moduleTitle: string;
@@ -634,13 +790,19 @@ function TopicSequenceNav({
   }
 
   return (
-    <nav className="flex items-start justify-between gap-8 border-t border-gray-200 pt-8 dark:border-gray-800" aria-label="Topic navigation">
+    <nav
+      className="mt-16 flex items-start justify-between gap-8 border-t border-gray-200 pt-10 dark:border-gray-800"
+      aria-label="Topic navigation"
+    >
       {previousTopic ? (
         <Link
           href={`/topics/${previousTopic.slug}`}
-          className="min-w-0 max-w-[48%] text-sm text-gray-600 no-underline hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50"
+          className="group min-w-0 max-w-[48%] no-underline"
         >
-          ← {previousTopic.title}
+          <span className="block text-sm text-gray-500 dark:text-gray-400">Previous</span>
+          <span className="mt-1 block text-base font-medium text-gray-950 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
+            {previousTopic.title}
+          </span>
         </Link>
       ) : (
         <span />
@@ -649,9 +811,12 @@ function TopicSequenceNav({
       {nextTopic ? (
         <Link
           href={`/topics/${nextTopic.slug}`}
-          className="min-w-0 max-w-[48%] text-right text-sm text-gray-600 no-underline hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50"
+          className="group min-w-0 max-w-[48%] text-right no-underline"
         >
-          {nextTopic.title} →
+          <span className="block text-sm text-gray-500 dark:text-gray-400">Next</span>
+          <span className="mt-1 block text-base font-medium text-gray-950 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
+            {nextTopic.title}
+          </span>
         </Link>
       ) : (
         <span />
@@ -681,26 +846,29 @@ export default async function TopicPage({ params }: TopicPageProps) {
   const topicNumber = getMeetingTopicNumber(topic, meetingIndex);
   const moduleColor = getModuleColorClasses(topic.color);
 
-  const assignedItems = Array.isArray(meeting.assigned) ? meeting.assigned : meeting.assigned ? [meeting.assigned] : [];
-
-  const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
-
   const readings = meeting.readings || [];
   const optionalReadings = meeting.optionalReadings || [];
   const bibliographyReadings = getReadingsForTopic(meeting.scheduledDay);
-  const activities = (meeting.activities || []).filter(activity => activity.excluded !== 1);
   const topicPostData = meeting.topicContentId
     ? await getPostData(meeting.topicContentId, 'topics').catch(() => null)
     : null;
   const embeddedTopicContent = await getEmbeddedTopicContent(meeting);
   const anchorByHref = new Map(embeddedTopicContent.map(item => [normalizeHref(item.sourceHref), item.contentHref]));
-  const topicWorkItems = buildTopicWorkItems({
+  const topicWorkItems = await buildTopicWorkItems({
     topicSlug: meeting.slug || slug,
     meeting,
     anchorByHref,
   });
   const nextClassMeeting = getNextClassMeeting(topics, meeting.slug || slug);
-  const nextClassReadingItems = nextClassMeeting ? buildNextClassReadingItems(nextClassMeeting) : [];
+  const nextClassPrepItems = nextClassMeeting ? buildNextClassPrepItems(nextClassMeeting) : [];
+  const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
+  const prepAssignments = dueItems.flatMap(item => {
+    if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
+      return [];
+    }
+
+    return [{ title: getAssignmentTitle(item), href: item.url }];
+  });
   const topicSections: Array<{
     navItem: TopicSectionNavItem;
     panel: ReactElement;
@@ -721,85 +889,32 @@ export default async function TopicPage({ params }: TopicPageProps) {
     ),
   });
 
-  if (readings.length > 0 || optionalReadings.length > 0 || bibliographyReadings.length > 0) {
+  if (!meeting.holiday) {
     topicSections.push({
-      navItem: { id: 'read-watch', label: 'Read / Watch' },
+      navItem: { id: 'topic-class-work', label: 'Class Work' },
       panel: (
-        <EditorialSection key="read-watch" label="Materials" title="Readings">
-          <div className="space-y-6">
-            {readings.length > 0 && (
-              <div className="space-y-3">
-                <EditorialLabel>Assigned Readings</EditorialLabel>
-                <ul className="m-0! list-disc divide-y divide-gray-200 pl-8! dark:divide-gray-800">
-                  {readings.map((reading, index) => (
-                    <li
-                      key={`${meeting.slug}-reading-${index}`}
-                      className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200"
-                    >
-                      {renderReading(reading.citation, reading.url)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {optionalReadings.length > 0 && (
-              <div className="space-y-3">
-                <EditorialLabel>Optional Or Recommended</EditorialLabel>
-                <ul className="m-0! list-disc divide-y divide-gray-200 pl-8! dark:divide-gray-800">
-                  {optionalReadings.map((reading, index) => (
-                    <li
-                      key={`${meeting.slug}-optional-reading-${index}`}
-                      className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200"
-                    >
-                      {renderReading(reading.citation, reading.url)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {bibliographyReadings.length > 0 && (
-              <div className="space-y-3">
-                <EditorialLabel>Field Guide Bibliography</EditorialLabel>
-                <ul className="m-0! list-disc divide-y divide-gray-200 pl-8! dark:divide-gray-800">
-                  {bibliographyReadings.map((reading: Reading) => (
-                    <li key={reading.id} className="py-3 text-sm leading-6 text-gray-800 dark:text-gray-200">
-                      <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
-                        {reading.title}
-                      </a>
-                      {reading.authors && (
-                        <span className="text-gray-600 dark:text-gray-400"> — {reading.authors}</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </EditorialSection>
+        <TopicClassWorkPanel
+          readings={readings}
+          optionalReadings={optionalReadings}
+          bibliographyReadings={bibliographyReadings}
+          prepAssignments={prepAssignments}
+          embeddedTopicContent={embeddedTopicContent}
+          meetingSlug={meeting.slug}
+        />
       ),
     });
-  }
 
-  embeddedTopicContent.forEach(item => {
-    topicSections.push({
-      navItem: {
-        id: item.id,
-        label: item.shortTitle,
-      },
-      panel: <EmbeddedTopicContentSection key={item.id} item={item} />,
-    });
-  });
-
-  if (topicWorkItems.length > 0 || nextClassReadingItems.length > 0) {
     topicSections.push({
       navItem: { id: 'topic-work', label: 'Checklist' },
       panel: (
         <TopicWorkList
           key="topic-work"
+          variant="plain"
           topicSlug={meeting.slug || slug}
           items={topicWorkItems}
-          upcomingItems={nextClassReadingItems}
+          upcomingItems={nextClassPrepItems}
+          thisClassTitle="For this class"
+          upcomingTitle="Coming up"
           upcomingDescription={
             nextClassMeeting
               ? `${nextClassMeeting.topic}${nextClassMeeting.date ? ` · ${nextClassMeeting.date}` : ''}`
@@ -830,7 +945,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         ) : undefined
       }
     >
-      <div className="space-y-8">
+      <div className="space-y-8 pb-16">
         <Breadcrumbs
           className="px-4 md:px-16"
           items={[
@@ -842,7 +957,6 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
         <TopicHeader
           moduleColor={moduleColor}
-          number={topicNumber}
           date={meeting.date}
           moduleId={topic.id}
           moduleTitle={topic.title}
@@ -850,9 +964,11 @@ export default async function TopicPage({ params }: TopicPageProps) {
           subtitle={meeting.subtitle}
         />
 
-        <div className="space-y-10 px-4 md:px-16">
-          <TopicSectionNav items={topicSections.map(section => section.navItem)}>
-            {topicSections.map(section => section.panel)}
+        <div className="topic-page space-y-10 px-4 md:px-16">
+          <TopicSectionNav variant="plain" items={topicSections.map(section => section.navItem)}>
+            {topicSections.map(section => (
+              <Fragment key={section.navItem.id}>{section.panel}</Fragment>
+            ))}
           </TopicSectionNav>
 
           <div id="topic-sequence" className="scroll-mt-24">

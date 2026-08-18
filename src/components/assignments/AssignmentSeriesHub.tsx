@@ -5,10 +5,7 @@ import TopicSectionNav, { type TopicSectionNavItem } from '@/components/TopicSec
 import AssignmentScenarioCards, { type AssignmentScenarioCardItem } from '@/components/assignments/AssignmentScenarioCards';
 import TopicWorkList, { type TopicWorkItem } from '@/components/TopicWorkList';
 import MarkdownContent from '@/components/MarkdownContent';
-import {
-  resolveAssignmentTabIdFromHash,
-  resolveTopicCardIdFromHash,
-} from '@/lib/assignment-series-hash';
+import { resolveTopicCardIdFromHash } from '@/lib/assignment-series-hash';
 
 interface AssignmentSeriesHubProps {
   navItems: TopicSectionNavItem[];
@@ -72,7 +69,6 @@ export default function AssignmentSeriesHub({
     <TopicSectionNav
       items={navItems}
       ariaLabel="Assignment sections"
-      resolveTabIdFromHash={resolveAssignmentTabIdFromHash}
       onHashSync={handleHashSync}
     >
       {panels}
