@@ -1,4 +1,4 @@
-import { Fragment, type ReactElement } from 'react';
+import { Fragment, type ReactElement, type ReactNode } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -37,25 +37,35 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   );
 }
 
-function renderReading(citation: string | ReactElement, url?: string) {
-  if (typeof citation === 'string') {
-    if (url) {
-      return (
-        <Link
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:underline dark:text-blue-400"
-        >
-          {citation}
-        </Link>
-      );
-    }
+const READING_LINK_CLASS =
+  'text-[#0b5d8f] underline decoration-[#0b5d8f] underline-offset-2 dark:text-[#8fc4ee] dark:decoration-[#8fc4ee]';
 
+function getCitationText(citation: string | ReactElement) {
+  return typeof citation === 'string' ? citation.trim() : '';
+}
+
+function stripTrailingUrl(citation: string) {
+  return citation.replace(/\s*https?:\/\/\S+\s*$/i, '').trim();
+}
+
+function renderReading(citation: string | ReactElement, url?: string) {
+  if (typeof citation !== 'string') {
     return citation;
   }
 
-  return citation;
+  const label = stripTrailingUrl(citation) || citation;
+  if (!url) {
+    return label;
+  }
+
+  return (
+    <>
+      {label}{' '}
+      <Link href={url} target="_blank" rel="noopener noreferrer" className={READING_LINK_CLASS}>
+        Link
+      </Link>
+    </>
+  );
 }
 
 function decodeHtmlText(text: string) {
@@ -193,12 +203,17 @@ function TopicOverviewMarkdown({ content }: { content: string }) {
   );
 }
 
-function ClassWorkSubhead({ children }: { children: React.ReactNode }) {
-  return <h3 className="m-0! mb-3 text-base font-medium text-gray-950 dark:text-gray-50">{children}</h3>;
-}
-
-function ClassWorkList({ children }: { children: React.ReactNode }) {
-  return <ul className="m-0! list-none space-y-3 p-0!">{children}</ul>;
+function PrepGroup({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div>
+      <p className="mb-2 mt-0 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500 dark:text-gray-400">
+        {label}
+      </p>
+      <ul className="mb-0 mt-0 list-disc space-y-2 pl-5 text-base leading-7 text-gray-800 dark:text-gray-200">
+        {children}
+      </ul>
+    </div>
+  );
 }
 
 interface TopicNavigationItem {
@@ -334,7 +349,11 @@ function getScopedHref(href: string | undefined, anchorByHref: Map<string, strin
 }
 
 function getReadingTitle(citation: string | ReactElement, index: number, fallback: string) {
-  return typeof citation === 'string' ? citation : `${fallback} ${index + 1}`;
+  if (typeof citation !== 'string') {
+    return `${fallback} ${index + 1}`;
+  }
+
+  return stripTrailingUrl(getCitationText(citation)) || citation;
 }
 
 function getAssignmentTitle(item: { titleShort?: string; title: string }) {
@@ -399,33 +418,6 @@ async function buildTopicWorkItems({
 }): Promise<TopicWorkItem[]> {
   const meetingKey = getMeetingKey(meeting.date, meeting.topic);
   const items: TopicWorkItem[] = [];
-
-  (meeting.readings || []).forEach((reading, index) => {
-    items.push({
-      id: `reading-${index}`,
-      type: 'reading',
-      title: getReadingTitle(reading.citation, index, 'Assigned reading'),
-      href: reading.url,
-      assignedDate: meeting.date,
-      dueDate: meeting.date,
-      submissionMethod: 'N/A — discussion only',
-      syncKeys: [`${meetingKey}-reading-${index}`],
-    });
-  });
-
-  (meeting.optionalReadings || []).forEach((reading, index) => {
-    items.push({
-      id: `optional-reading-${index}`,
-      type: 'optional-reading',
-      title: getReadingTitle(reading.citation, index, 'Optional reading'),
-      href: reading.url,
-      assignedDate: meeting.date,
-      dueDate: meeting.date,
-      submissionMethod: 'N/A — discussion only',
-      optional: true,
-      syncKeys: [`${meetingKey}-optional-reading-${index}`],
-    });
-  });
 
   (meeting.activities || []).forEach((activity, index) => {
     if (activity.excluded === 1 || activity.draft === 1) {
@@ -625,137 +617,100 @@ function EmbeddedTopicContentSection({
   );
 }
 
-function TopicClassWorkPanel({
+function TopicOverviewMaterials({
   readings,
   optionalReadings,
   bibliographyReadings,
   prepAssignments,
-  embeddedTopicContent,
   meetingSlug,
 }: {
   readings: Topic['meetings'][number]['readings'];
   optionalReadings: Topic['meetings'][number]['optionalReadings'];
   bibliographyReadings: Reading[];
   prepAssignments: Array<{ title: string; href?: string; dueDate?: string; notes?: string }>;
-  embeddedTopicContent: EmbeddedTopicContent[];
   meetingSlug?: string;
 }) {
   const assignedReadings = readings || [];
   const extraReadings = optionalReadings || [];
-  const hasBeforeClass =
+  const hasContent =
     assignedReadings.length > 0 || extraReadings.length > 0 || bibliographyReadings.length > 0 || prepAssignments.length > 0;
-  const hasInClass = true;
+
+  if (!hasContent) {
+    return null;
+  }
 
   return (
+    <section
+      id="topic-before-class"
+      className="mb-10 scroll-mt-24 space-y-6 border-b border-gray-200 pb-10 dark:border-gray-800"
+    >
+      <h2 className="mt-0 mb-0 text-xl font-semibold tracking-tight text-gray-950 md:text-2xl dark:text-gray-50">
+        Before class
+      </h2>
+      {assignedReadings.length > 0 && (
+        <PrepGroup label="Readings">
+          {assignedReadings.map((reading, index) => (
+            <li key={`${meetingSlug}-reading-${index}`}>{renderReading(reading.citation, reading.url)}</li>
+          ))}
+        </PrepGroup>
+      )}
+      {extraReadings.length > 0 && (
+        <PrepGroup label="Optional">
+          {extraReadings.map((reading, index) => (
+            <li key={`${meetingSlug}-optional-reading-${index}`}>{renderReading(reading.citation, reading.url)}</li>
+          ))}
+        </PrepGroup>
+      )}
+      {bibliographyReadings.length > 0 && (
+        <PrepGroup label="Field Guide bibliography">
+          {bibliographyReadings.map((reading: Reading) => (
+            <li key={reading.id}>
+              <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
+                {reading.title}
+              </a>
+              {reading.authors && <span className="text-gray-500 dark:text-gray-400"> — {reading.authors}</span>}
+            </li>
+          ))}
+        </PrepGroup>
+      )}
+      {prepAssignments.length > 0 && (
+        <PrepGroup label="Due">
+          {prepAssignments.map((item, index) => (
+            <li key={`${meetingSlug}-prep-${index}`}>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  {...(/^https?:\/\//i.test(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="text-blue-600 hover:underline dark:text-blue-400"
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                item.title
+              )}
+              {(item.dueDate || item.notes) && (
+                <span className="mt-1 block text-sm text-gray-500 dark:text-gray-400">
+                  {[item.dueDate ? `Due ${item.dueDate}` : null, item.notes].filter(Boolean).join(' · ')}
+                </span>
+              )}
+            </li>
+          ))}
+        </PrepGroup>
+      )}
+    </section>
+  );
+}
+
+function TopicClassWorkPanel({
+  embeddedTopicContent,
+}: {
+  embeddedTopicContent: EmbeddedTopicContent[];
+}) {
+  return (
     <div className="max-w-4xl space-y-12">
-      {hasBeforeClass && (
-        <section>
-          <h2 className="mt-0 mb-5 text-xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-            Before class
-          </h2>
-          <div className="space-y-8">
-            {assignedReadings.length > 0 && (
-              <div>
-                <ClassWorkSubhead>Assigned readings</ClassWorkSubhead>
-                <ClassWorkList>
-                  {assignedReadings.map((reading, index) => (
-                    <li
-                      key={`${meetingSlug}-reading-${index}`}
-                      className="text-base leading-7 text-gray-800 dark:text-gray-200"
-                    >
-                      {renderReading(reading.citation, reading.url)}
-                    </li>
-                  ))}
-                </ClassWorkList>
-              </div>
-            )}
-
-            {extraReadings.length > 0 && (
-              <div>
-                <ClassWorkSubhead>Optional</ClassWorkSubhead>
-                <ClassWorkList>
-                  {extraReadings.map((reading, index) => (
-                    <li
-                      key={`${meetingSlug}-optional-reading-${index}`}
-                      className="text-base leading-7 text-gray-800 dark:text-gray-200"
-                    >
-                      {renderReading(reading.citation, reading.url)}
-                    </li>
-                  ))}
-                </ClassWorkList>
-              </div>
-            )}
-
-            {bibliographyReadings.length > 0 && (
-              <div>
-                <ClassWorkSubhead>Field Guide bibliography</ClassWorkSubhead>
-                <ClassWorkList>
-                  {bibliographyReadings.map((reading: Reading) => (
-                    <li key={reading.id} className="text-base leading-7 text-gray-800 dark:text-gray-200">
-                      <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
-                        {reading.title}
-                      </a>
-                      {reading.authors && (
-                        <span className="text-gray-500 dark:text-gray-400"> — {reading.authors}</span>
-                      )}
-                    </li>
-                  ))}
-                </ClassWorkList>
-              </div>
-            )}
-
-            {prepAssignments.length > 0 && (
-              <div>
-                <ClassWorkSubhead>Due before class</ClassWorkSubhead>
-                <ClassWorkList>
-                  {prepAssignments.map((item, index) => (
-                    <li
-                      key={`${meetingSlug}-prep-${index}`}
-                      className="text-base leading-7 text-gray-800 dark:text-gray-200"
-                    >
-                      {item.href ? (
-                        <Link href={item.href} className="text-gray-950 no-underline hover:underline dark:text-gray-50">
-                          {item.title}
-                        </Link>
-                      ) : (
-                        item.title
-                      )}
-                      {item.dueDate && (
-                        <p className="mb-0 mt-1 text-sm font-medium text-gray-800 dark:text-gray-200">Due {item.dueDate}</p>
-                      )}
-                      {item.notes && (
-                        <p className="mb-0 mt-0.5 text-sm text-gray-500 dark:text-gray-400">{item.notes}</p>
-                      )}
-                    </li>
-                  ))}
-                </ClassWorkList>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
-
-      {hasInClass && (
-        <section>
-          {hasBeforeClass && (
-            <h2 className="mt-0 mb-5 text-xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-              In class
-            </h2>
-          )}
-          {embeddedTopicContent.length > 0 ? (
-            <div className="space-y-12">
-              {embeddedTopicContent.map(item => (
-                <EmbeddedTopicContentSection key={item.id} item={item} />
-              ))}
-            </div>
-          ) : (
-            <p className="mb-0 text-lg leading-8 text-gray-600 dark:text-gray-400">
-              This meeting is a seminar discussion. Use the Overview tab for the day&apos;s focus, guiding questions, and
-              plan.
-            </p>
-          )}
-        </section>
-      )}
+      {embeddedTopicContent.map(item => (
+        <EmbeddedTopicContentSection key={item.id} item={item} />
+      ))}
     </div>
   );
 }
@@ -911,6 +866,13 @@ export default async function TopicPage({ params }: TopicPageProps) {
     navItem: { id: 'topic-overview', label: 'Overview' },
     panel: (
       <div className="max-w-4xl">
+        <TopicOverviewMaterials
+          readings={readings}
+          optionalReadings={optionalReadings}
+          bibliographyReadings={bibliographyReadings}
+          prepAssignments={prepAssignments}
+          meetingSlug={meeting.slug}
+        />
         {topicPostData?.content.trim() ? (
           <TopicOverviewMarkdown content={topicPostData.content} />
         ) : typeof meeting.description === 'string' ? (
@@ -918,23 +880,32 @@ export default async function TopicPage({ params }: TopicPageProps) {
         ) : (
           meeting.description
         )}
+        {!meeting.holiday && embeddedTopicContent.length === 0 && nextClassPrepItems.length > 0 && (
+          <div className="mt-12">
+            <TopicWorkList
+              variant="plain"
+              showThisClass={false}
+              topicSlug={meeting.slug || slug}
+              items={[]}
+              upcomingItems={nextClassPrepItems}
+              upcomingTitle="For next class"
+              upcomingDescription={
+                nextClassMeeting
+                  ? `${nextClassMeeting.topic}${nextClassMeeting.date ? ` · ${nextClassMeeting.date}` : ''}`
+                  : undefined
+              }
+              trackProgress={false}
+            />
+          </div>
+        )}
       </div>
     ),
   });
 
-  if (!meeting.holiday) {
+  if (!meeting.holiday && embeddedTopicContent.length > 0) {
     topicSections.push({
       navItem: { id: 'topic-class-work', label: 'Class Work' },
-      panel: (
-        <TopicClassWorkPanel
-          readings={readings}
-          optionalReadings={optionalReadings}
-          bibliographyReadings={bibliographyReadings}
-          prepAssignments={prepAssignments}
-          embeddedTopicContent={embeddedTopicContent}
-          meetingSlug={meeting.slug}
-        />
-      ),
+      panel: <TopicClassWorkPanel embeddedTopicContent={embeddedTopicContent} />,
     });
 
     topicSections.push({

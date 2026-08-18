@@ -26,7 +26,7 @@ discussion_assignments:
 
 ## Topic / Focus
 
-Before asking how machines learn, we ask how you do. Today introduces the neuroscience and neurobiology of learning: brains, neurons, networks, and plasticity, as a foundation for later comparisons with machine learning and neuromorphic computing.
+Before asking how machines learn, it is useful to take some time to consider how humans learn. Today, we're going to begin that exploration by examining the biological foundations of learning, knowing, and doing: brains, neurons, networks, and plasticity. Understanding these concepts will provide an important foundation for later comparisons with machine learning and neuromorphic computing.
 
 ## Guiding Questions
 
@@ -34,20 +34,3 @@ Before asking how machines learn, we ask how you do. Today introduces the neuros
 - What is plasticity, and why does it matter for learning?
 - Which brain metaphors help explain machine learning, and which mislead?
 
-## In This Class
-
-In this meeting, we will:
-
-- walk through a plain-language primer on neurons, synapses, and plasticity
-- identify brain metaphors already in circulation for AI systems
-- flag where those metaphors risk anthropomorphizing machines
-
-## Career / BRAID Integration
-
-No dedicated career module today.
-
-## Field Guide & Resources
-
-The BRAID Case Study's neuroscience primer covers brain metaphors, situated knowledge, and anthropomorphism.
-
-- [BRAID Case Study](/braid-case-study)

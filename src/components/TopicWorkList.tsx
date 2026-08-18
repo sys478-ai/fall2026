@@ -32,6 +32,7 @@ interface TopicWorkListProps {
   kicker?: string;
   title?: string;
   variant?: 'default' | 'plain';
+  showThisClass?: boolean;
   storageNamespace?: 'topic' | 'assignment';
   trackProgress?: boolean;
 }
@@ -133,6 +134,7 @@ export default function TopicWorkList({
   kicker = 'Checklist',
   title = 'What to do for this topic',
   variant = 'default',
+  showThisClass = true,
   storageNamespace = 'topic',
   trackProgress = true,
 }: TopicWorkListProps) {
@@ -273,19 +275,29 @@ export default function TopicWorkList({
         </div>
       )}
 
-      <div className={isPlain ? '' : 'mt-6'}>
-        <div className="flex items-baseline justify-between gap-4">
-          <h3 className={`m-0! font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${isPlain ? 'text-xl' : 'text-lg'}`}>{thisClassTitle}</h3>
-          {isPlain && <p className="mb-0 text-sm text-gray-500 dark:text-gray-400">{completionText}</p>}
+      {showThisClass && (
+        <div className={isPlain ? '' : 'mt-6'}>
+          <div className="flex items-baseline justify-between gap-4">
+            <h3 className={`m-0! font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${isPlain ? 'text-xl' : 'text-lg'}`}>{thisClassTitle}</h3>
+            {isPlain && <p className="mb-0 text-sm text-gray-500 dark:text-gray-400">{completionText}</p>}
+          </div>
+          {items.length > 0 ? (
+            <div className="mt-3 divide-y divide-gray-200 dark:divide-gray-800">{items.map(renderWorkItem)}</div>
+          ) : (
+            <p className="mb-0 mt-3 text-sm text-gray-500 dark:text-gray-400">Nothing yet</p>
+          )}
         </div>
-        {items.length > 0 ? (
-          <div className="mt-3 divide-y divide-gray-200 dark:divide-gray-800">{items.map(renderWorkItem)}</div>
-        ) : (
-          <p className="mb-0 mt-3 text-sm text-gray-500 dark:text-gray-400">Nothing yet</p>
-        )}
-      </div>
+      )}
 
-      <div className={isPlain ? 'mt-10 border-t border-gray-200 pt-8 dark:border-gray-800' : 'mt-8 border-t border-gray-200 pt-5 dark:border-gray-800'}>
+      <div
+        className={
+          showThisClass
+            ? isPlain
+              ? 'mt-10 border-t border-gray-200 pt-8 dark:border-gray-800'
+              : 'mt-8 border-t border-gray-200 pt-5 dark:border-gray-800'
+            : ''
+        }
+      >
         <h3 className={`m-0! font-semibold tracking-tight text-gray-950 dark:text-gray-50 ${isPlain ? 'text-xl' : 'text-lg'}`}>{upcomingTitle}</h3>
         {/* {upcomingDescription && (
           <p className="mb-0 mt-1 text-sm text-gray-500 dark:text-gray-400">{upcomingDescription}</p>
