@@ -11,6 +11,7 @@ import {
   ClipboardDocumentListIcon,
   DocumentTextIcon,
   HomeIcon,
+  LockClosedIcon,
   MoonIcon,
   SunIcon,
   XMarkIcon,
@@ -25,6 +26,7 @@ interface SidebarTopicItem {
   date: string;
   contentHref: string;
   isNoClass?: boolean;
+  isDraft?: boolean;
 }
 
 interface SidebarModuleItem {
@@ -32,6 +34,7 @@ interface SidebarModuleItem {
   title: string;
   color: ModuleColorToken;
   href: string;
+  isDraft?: boolean;
   topics: SidebarTopicItem[];
 }
 
@@ -50,6 +53,10 @@ function getTopicSlugFromHref(href: string) {
   return href.match(/\/topics\/([^/#?]+)/)?.[1] || null;
 }
 
+function getFirstUnlockedModuleId(modules: SidebarModuleItem[]) {
+  return modules.find(module => !module.isDraft)?.id ?? null;
+}
+
 export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
   const pathname = usePathname();
   const normalizedPath = normalizePath(pathname);
@@ -65,7 +72,9 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
     const activeModule = modules.find(module =>
       module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
     );
-    return activeModule?.id ?? modules[0]?.id ?? null;
+    return activeModule && !activeModule.isDraft
+      ? activeModule.id
+      : getFirstUnlockedModuleId(modules);
   });
 
   useEffect(() => {
@@ -130,7 +139,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
       module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
     );
 
-    if (activeModule) {
+    if (activeModule && !activeModule.isDraft) {
       setOpenModuleId(activeModule.id);
       setModulesOpen(true);
     }
@@ -143,7 +152,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
 
   const navItems = useMemo(
     () => [
-      { label: 'Home', href: '/', icon: HomeIcon, active: activeHome },
+      { label: 'Syllabus', href: '/', icon: HomeIcon, active: activeHome },
       { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
       { label: 'Bibliography', href: '/bibliography', icon: DocumentTextIcon, active: activeBibliography },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
@@ -178,13 +187,13 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
       setCollapsed(false);
       localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
       setModulesOpen(true);
-      setOpenModuleId(modules[0]?.id ?? null);
+      setOpenModuleId(getFirstUnlockedModuleId(modules));
       return;
     }
 
     if (!modulesOpen) {
       if (openModuleId === null) {
-        setOpenModuleId(modules[0]?.id ?? null);
+        setOpenModuleId(getFirstUnlockedModuleId(modules));
       }
       setModulesOpen(true);
       return;
@@ -194,6 +203,11 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   };
 
   const toggleModule = (moduleId: number) => {
+    const target = modules.find(module => module.id === moduleId);
+    if (target?.isDraft) {
+      return;
+    }
+
     setOpenModuleId(current => {
       if (current === moduleId) {
         return null;
@@ -314,31 +328,47 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                     <span className="line-clamp-2 min-w-0 ml-5 leading-snug">Overview</span>
                   </Link>
                   {modules.map(module => {
-                    const isOpen = openModuleId === module.id;
+                    const isDraft = module.isDraft === true;
+                    const isOpen = !isDraft && openModuleId === module.id;
                     const moduleColor = getModuleColorClasses(module.color);
+                    const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm transition-colors ${
+                      isDraft
+                        ? 'cursor-default bg-transparent text-slate-500 dark:text-slate-500'
+                        : isOpen
+                          ? 'bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50'
+                          : 'bg-transparent text-slate-800 hover:font-semibold hover:text-slate-950 dark:text-slate-200 dark:hover:text-slate-100'
+                    }`;
 
                     return (
                       <section key={module.id} className="bg-slate-50/20 transition-colors dark:bg-transparent">
                         <div className="flex items-center">
-                          <button
-                            type="button"
-                            onClick={() => toggleModule(module.id)}
-                            aria-expanded={isOpen}
-                            className={`group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm transition-colors ${
-                              isOpen
-                                ? 'bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50'
-                                : 'bg-transparent text-slate-800 hover:font-semibold hover:text-slate-950 dark:text-slate-200 dark:hover:text-slate-100'
-                            }`}
-                          >
-                            <span className="line-clamp-2 min-w-0 ml-5 leading-snug">
-                              {module.id}. {module.title}
-                            </span>
-                            <ChevronDownIcon
-                              className={`ml-auto h-3.5 w-3.5 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
-                                isOpen ? '' : '-rotate-90'
-                              }`}
-                            />
-                          </button>
+                          {isDraft ? (
+                            <div className={moduleHeaderClass}>
+                              <span className="line-clamp-2 min-w-0 ml-5 leading-snug">
+                                {module.id}. {module.title}
+                              </span>
+                              <LockClosedIcon
+                                className="ml-auto h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
+                                aria-hidden="true"
+                              />
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => toggleModule(module.id)}
+                              aria-expanded={isOpen}
+                              className={moduleHeaderClass}
+                            >
+                              <span className="line-clamp-2 min-w-0 ml-5 leading-snug">
+                                {module.id}. {module.title}
+                              </span>
+                              <ChevronDownIcon
+                                className={`ml-auto h-3.5 w-3.5 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
+                                  isOpen ? '' : '-rotate-90'
+                                }`}
+                              />
+                            </button>
+                          )}
                         </div>
 
                         <div
@@ -350,7 +380,10 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                             <div className="divide-y divide-slate-100 pt-0 pb-4 dark:divide-slate-900">
                               {module.topics.map(topic => {
                                 const isNoClass = topic.isNoClass === true;
-                                const isTopicActive = !isNoClass && normalizePath(topic.contentHref) === normalizedPath;
+                                const isDraft = topic.isDraft === true;
+                                const isLocked = isNoClass || isDraft;
+                                const isTopicActive =
+                                  !isLocked && normalizePath(topic.contentHref) === normalizedPath;
                                 const topicSlug = getTopicSlugFromHref(topic.contentHref);
                                 const currentTopicProgress = topicSlug ? topicProgress[topicSlug] : 'not-started';
                                 const isCompleted = currentTopicProgress === 'complete';
@@ -358,7 +391,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                 const isModuleOverview = topic.date === 'Module overview';
                                 const showDate = !isModuleOverview && Boolean(topic.date);
                                 const rowClassName = `block py-2 pl-15 pr-6 transition-colors no-underline! ${
-                                  isNoClass
+                                  isLocked
                                     ? 'border-l-4 border-transparent text-slate-500 dark:text-slate-500'
                                     : isTopicActive
                                       ? `${activeNestedClass} ${moduleColor.sidebarActive}`
@@ -368,6 +401,12 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                   <span className="flex min-w-0 items-start gap-2">
                                     {isNoClass ? (
                                       <span className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                                    ) : isDraft ? (
+                                      <LockClosedIcon
+                                        className="mt-0.5 h-4 w-4 shrink-0 text-slate-400 dark:text-slate-500"
+                                        aria-hidden="true"
+                                        title="Draft"
+                                      />
                                     ) : isModuleOverview ? (
                                       <i
                                         className="fas fa-book-open mt-0.5 h-4 w-4 shrink-0 text-slate-500 dark:text-slate-400"
@@ -402,7 +441,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                         >
                                           {topic.title}
                                         </span>
-                                        {!isNoClass && showDate && (
+                                        {showDate && (
                                           <span className="whitespace-nowrap text-[11px] font-medium uppercase tracking-wide text-slate-400 dark:text-slate-600">
                                             {topic.date}
                                           </span>
@@ -417,7 +456,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                   </span>
                                 );
 
-                                if (isNoClass) {
+                                if (isLocked) {
                                   return (
                                     <div key={topic.id} className={rowClassName}>
                                       {rowContent}

@@ -3,6 +3,7 @@ title: 'What Responsibilities Do We Have as Professionals and Global Citizens?'
 slug: what-responsibilities-do-we-have-as-professionals-and-global-citizens
 scheduled_day: 28
 module_id: 7
+draft: 1
 subtitle: 'Your career readiness synthesis presentation and closing reflection.'
 status: unverified
 status_reviewer:

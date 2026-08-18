@@ -14,6 +14,7 @@ export interface ModuleMarkdownMetadata {
   excerpt?: string;
   unitFocus: string;
   braidElsiArc?: string;
+  draft: number;
 }
 
 function asString(value: unknown, fallback = '') {
@@ -51,6 +52,7 @@ function readModuleMarkdownMetadata(fileName: string, fallbackOrder: number): Mo
     excerpt: asString(data.excerpt) || undefined,
     unitFocus: asString(data.unit_focus),
     braidElsiArc: asString(data.braid_elsi_arc) || undefined,
+    draft: data.draft === 0 || data.draft === false ? 0 : 1,
   };
 }
 

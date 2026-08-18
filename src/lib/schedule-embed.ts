@@ -5,8 +5,8 @@
  *
  * {% schedule %}
  *
- * Place the tag anywhere in markdown. On the syllabus page, it renders the
- * module/meeting schedule list. On other pages the marker is inert.
+ * The live course schedule now lives on `/modules`. This tag is kept so older
+ * markdown can still mark a schedule insertion point without rendering raw text.
  */
 
 export const SCHEDULE_EMBED_COMMENT = '<!-- schedule-embed -->';

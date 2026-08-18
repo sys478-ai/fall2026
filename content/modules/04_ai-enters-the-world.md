@@ -1,5 +1,6 @@
 ---
 id: 4
+draft: 1
 slug: ai-enters-the-world
 title: 'AI Enters the World'
 color: amber

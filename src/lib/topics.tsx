@@ -77,6 +77,7 @@ export interface Meeting {
   readings?: Reading[];
   optionalReadings?: Reading[];
   holiday?: boolean;
+  draft?: number;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
@@ -96,6 +97,7 @@ export interface Topic {
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
+  draft?: number;
 }
 
 // Allows quizzes to be either Quiz, Reading (citation), or ScheduleQuiz (quizName/url).
@@ -119,6 +121,7 @@ interface BaseMeeting {
   readings?: Reading[];
   optionalReadings?: Reading[];
   holiday?: boolean;
+  draft?: number;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
@@ -138,6 +141,7 @@ interface BaseTopic {
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
+  draft?: number;
 }
 
 type TopicsArray = Topic[];
@@ -274,6 +278,7 @@ function buildTopicMeeting(
     themes: meeting.themes,
     readings: meeting.readings,
     optionalReadings: meeting.optionalReadings,
+    draft: meeting.draft ?? 1,
   };
 }
 
@@ -316,6 +321,7 @@ function buildFinalExamMeeting(module: ModuleMarkdownMetadata, meeting: TopicMar
     themes: meeting.themes,
     readings: meeting.readings,
     optionalReadings: meeting.optionalReadings,
+    draft: meeting.draft ?? 1,
   };
 }
 
@@ -441,6 +447,7 @@ function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
       recognitionPatternNotes: moduleMetadata.recognitionPatternNotes,
       themes: moduleMetadata.themes,
       meetings,
+      draft: module.draft ?? 1,
     };
   });
 }

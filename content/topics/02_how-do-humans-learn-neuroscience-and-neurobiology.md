@@ -1,31 +1,25 @@
 ---
 title: 'How Do Humans Learn? Neuroscience and Neurobiology'
-slug: how-do-humans-learn-neuroscience-and-neurobiology
+slug: biological-foundations
 scheduled_day: 2
 module_id: 1
+draft: 0
 subtitle: 'Brains, neurons, networks, and plasticity as a foundation for thinking about learning before we turn to machines.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
 readings:
-  - citation: 'A New Type of Neuroplasticity Rewires the Brain After a Single Experience — Quanta Magazine'
-    url: 'https://www.quantamagazine.org/a-new-type-of-neuroplasticity-rewires-the-brain-after-a-single-experience-20260424'
-  - citation: 'Identity: The Stories We Tell Ourselves — Your Brain Can Change (video)'
+  - citation: 'Saplakoglu, Y. (2026, April 24). A new type of neuroplasticity rewires the brain after a single experience. Quanta Magazine. https://www.quantamagazine.org/a-new-type-of-neuroplasticity-rewires-the-brain-after-a-single-experience-20260424/'
+    url: 'https://www.quantamagazine.org/a-new-type-of-neuroplasticity-rewires-the-brain-after-a-single-experience-20260424/'
+  - citation: "Vignola, N. (2024). A neuroscientist's guide to reclaiming your brain [Video]. Big Think. https://www.youtube.com/watch?v=tcbxIoERm6w"
     url: 'https://www.youtube.com/watch?v=tcbxIoERm6w'
-  - citation: '2-Minute "You Can Rewire Your Brain" — Neuroplasticity (video)'
+  - citation: 'Sentis. (2012). Neuroplasticity [Video]. YouTube. https://www.youtube.com/watch?v=ELpfYCZa87g'
     url: 'https://www.youtube.com/watch?v=ELpfYCZa87g'
 optional_readings:
-  - citation: 'Neurons and Glia — BrainFacts.org'
+  - citation: 'Kelly, D. A. (2022, November 30). Neurons and glia: Basic components of the nervous system. BrainFacts. https://www.brainfacts.org/brain-anatomy-and-function/cells-and-circuits/2022/neurons-and-glia-113022'
     url: 'https://www.brainfacts.org/brain-anatomy-and-function/cells-and-circuits/2022/neurons-and-glia-113022'
 ---
 
 ## Topic / Focus
 
 Before asking how machines learn, we ask how you do. Today introduces the neuroscience and neurobiology of learning: brains, neurons, networks, and plasticity, as a foundation for later comparisons with machine learning and neuromorphic computing.
-
-_Format: Full class · Lesson template: Concept + Lab_
 
 ## Guiding Questions
 

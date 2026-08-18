@@ -3,6 +3,7 @@ title: 'Domain A: What Changes When AI Enters?'
 slug: domain-a-what-changes-when-ai-enters
 scheduled_day: 18
 module_id: 4
+draft: 1
 subtitle: 'Apply the BRAID framework: capability, deployment conditions, and stakeholders.'
 status: unverified
 status_reviewer:

@@ -3,6 +3,7 @@ title: 'Domain B: What Changes When AI Enters?'
 slug: domain-b-what-changes-when-ai-enters
 scheduled_day: 20
 module_id: 4
+draft: 1
 subtitle: 'Distinguish technical mechanism from institutional consequence in the second domain.'
 status: unverified
 status_reviewer:

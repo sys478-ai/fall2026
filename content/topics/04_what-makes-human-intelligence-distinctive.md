@@ -1,8 +1,9 @@
 ---
 title: 'What Makes Human Intelligence Distinctive?'
-slug: what-makes-human-intelligence-distinctive
+slug: sociocultural-foundations
 scheduled_day: 4
 module_id: 1
+draft: 1
 subtitle: 'Knowledge, meaning, culture, and social learning as features of intelligence that are hard to reduce to computation.'
 status: unverified
 status_reviewer:

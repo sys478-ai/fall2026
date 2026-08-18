@@ -28,6 +28,7 @@ export interface TopicMarkdownMetadata {
   optionalReadings: TopicReading[];
   holiday?: boolean;
   retired?: boolean;
+  draft: number;
 }
 
 function asStringArray(value: unknown): string[] {
@@ -132,6 +133,7 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     optionalReadings: asReadingArray(data.optional_readings),
     holiday: data.holiday === true,
     retired: data.retired === true,
+    draft: data.draft === 0 || data.draft === false ? 0 : 1,
   };
 }
 

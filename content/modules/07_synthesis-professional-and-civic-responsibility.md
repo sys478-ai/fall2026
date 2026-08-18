@@ -1,5 +1,6 @@
 ---
 id: 7
+draft: 1
 slug: synthesis-professional-and-civic-responsibility
 title: 'Synthesis: Professional and Civic Responsibility'
 color: teal

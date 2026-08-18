@@ -3,6 +3,7 @@ title: 'Are Predictions Ever Neutral? Norms, Bias, and Technological Solutionism
 slug: are-predictions-ever-neutral-norms-bias-and-solutionism
 scheduled_day: 16
 module_id: 3
+draft: 1
 subtitle: 'Norms, bias, categories, power, and technological solutionism, and your introduction to the full anticipatory case-study framework.'
 status: unverified
 status_reviewer:

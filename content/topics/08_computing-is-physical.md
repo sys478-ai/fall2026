@@ -3,6 +3,7 @@ title: 'Computing Is Physical'
 slug: computing-is-physical
 scheduled_day: 8
 module_id: 2
+draft: 1
 subtitle: 'Data centers, energy, water, minerals, and supply chains behind every AI system.'
 status: unverified
 status_reviewer:

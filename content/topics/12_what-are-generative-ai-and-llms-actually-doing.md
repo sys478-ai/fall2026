@@ -3,6 +3,7 @@ title: 'What Are Generative AI and LLMs Actually Doing?'
 slug: what-are-generative-ai-and-llms-actually-doing
 scheduled_day: 12
 module_id: 2
+draft: 1
 subtitle: 'Prediction, tokens, generation, and uncertainty.'
 status: unverified
 status_reviewer:

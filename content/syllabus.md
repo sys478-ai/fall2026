@@ -91,34 +91,19 @@ Required readings and other course materials, including articles, reports, video
 
 University and college courses engage diverse scholarly perspectives to develop critical thinking, analysis, and debate. Inclusion of a reading does not imply endorsement. Syllabi do not constitute an express or implied contract among the student, faculty, or institution. Rather, syllabi serve as a guide for courses. Syllabi are directed works that are developed within the scope of an instructor’s employment and under institutional direction. The institution is considered the copyright owner of course syllabi, as directed work. As such, syllabi shall be treated as “public records.” Publicly available syllabi are not required to include the location or time of day at which a course is being held. No syllabus shall include any personally identifiable information of students (e.g. race, gender, ethnicity, etc.).
 
-## Grading Scale
 
-| Letter Grade | Percentage Range |
-| ------------ | ---------------- |
-| A            | 93–100%          |
-| A-           | 90–92.9%         |
-| B+           | 87–89.9%         |
-| B            | 83–86.9%         |
-| B-           | 80–82.9%         |
-| C+           | 77–79.9%         |
-| C            | 73–76.9%         |
-| C-           | 70–72.9%         |
-| D+           | 67–69.9%         |
-| D            | 60–66.9%         |
-| F            | &lt;60%          |
-
-## Grading Components
+## Grading 
 
 | Assignment                          | Percentage of Grade |
 | ----------------------------------- | ------------------- |
-| Reading Preparation & Responses     | 15%                 |
+| Reading Preparation & Participation | 15%                 |
 | Homework & Labs                     | 35%                 |
 | Professional Development Activities | 25%                 |
 | Applied AI & Society Final Project  | 25%                 |
 
 ## Schedule
 
-{% schedule %}
+The meeting-by-meeting course schedule, including assigned readings and due work, is on the [Course Schedule](/fall2026/modules) page.
 
 ## Final Exam Information
 

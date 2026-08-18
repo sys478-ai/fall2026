@@ -1,8 +1,9 @@
 ---
 title: 'Judgment, Ethics, and Theory of Mind'
-slug: judgment-ethics-and-theory-of-mind
+slug: ethics-foundations
 scheduled_day: 5
 module_id: 1
+draft: 1
 subtitle: 'What can machines imitate, and what might they lack?'
 status: unverified
 status_reviewer:

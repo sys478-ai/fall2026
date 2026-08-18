@@ -3,6 +3,7 @@ title: 'How Do Computers Compute?'
 slug: how-do-computers-compute
 scheduled_day: 7
 module_id: 2
+draft: 1
 subtitle: 'Materials, electricity, transistors, chips, architecture, and logic.'
 status: unverified
 status_reviewer:

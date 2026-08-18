@@ -3,6 +3,7 @@ title: 'Domain A: How Does This Institution Already Work?'
 slug: domain-a-how-does-this-institution-already-work
 scheduled_day: 17
 module_id: 4
+draft: 1
 subtitle: 'Establish domain literacy before we turn to AI: values, institutions, authority, labor, and existing inequalities.'
 status: unverified
 status_reviewer:

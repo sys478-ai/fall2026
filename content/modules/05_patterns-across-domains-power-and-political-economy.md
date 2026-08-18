@@ -1,5 +1,6 @@
 ---
 id: 5
+draft: 1
 slug: patterns-across-domains-power-and-political-economy
 title: 'Patterns Across Domains: AI, Power, and Political Economy'
 color: rose

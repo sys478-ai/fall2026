@@ -3,6 +3,7 @@ title: 'How Are Opportunity and Professional Life Shaped by Networks and AI Tool
 slug: opportunity-professional-life-networks-and-ai-tools
 scheduled_day: 22
 module_id: 4
+draft: 1
 subtitle: 'Social capital, networking, and emerging AI tools in your professional life.'
 status: unverified
 status_reviewer:

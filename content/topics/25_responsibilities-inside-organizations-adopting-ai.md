@@ -3,6 +3,7 @@ title: 'What Responsibilities Do People Have Inside Organizations Adopting AI?'
 slug: responsibilities-inside-organizations-adopting-ai
 scheduled_day: 25
 module_id: 5
+draft: 1
 subtitle: 'Fit, power, boundaries, and solutionism from the inside, paired with a career reflection on how you want to show up.'
 status: unverified
 status_reviewer:

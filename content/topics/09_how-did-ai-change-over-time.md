@@ -3,6 +3,7 @@ title: 'How Did AI Change Over Time?'
 slug: how-did-ai-change-over-time
 scheduled_day: 9
 module_id: 2
+draft: 1
 subtitle: 'Rules, symbolic AI, representation, and the history of computing.'
 status: unverified
 status_reviewer:

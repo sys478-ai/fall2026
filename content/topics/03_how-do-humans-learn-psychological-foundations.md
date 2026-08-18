@@ -1,8 +1,9 @@
 ---
 title: 'How Do Humans Learn? Psychological Foundations'
-slug: how-do-humans-learn-psychological-foundations
+slug: psychological-foundations
 scheduled_day: 3
 module_id: 1
+draft: 1
 subtitle: 'Skinner, Piaget, and Vygotsky as three influential accounts of how learning happens.'
 status: unverified
 status_reviewer:

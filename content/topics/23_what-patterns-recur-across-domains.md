@@ -3,6 +3,7 @@ title: 'What Patterns Recur Across Domains?'
 slug: what-patterns-recur-across-domains
 scheduled_day: 23
 module_id: 5
+draft: 1
 subtitle: "Labor, expertise, authority, dependency, and risk across the domains you've studied so far."
 status: unverified
 status_reviewer:

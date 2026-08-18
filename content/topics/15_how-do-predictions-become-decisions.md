@@ -3,6 +3,7 @@ title: 'How Do Predictions Become Decisions?'
 slug: how-do-predictions-become-decisions
 scheduled_day: 15
 module_id: 3
+draft: 1
 subtitle: 'Scores, thresholds, classifications, error, and accountability.'
 status: unverified
 status_reviewer:

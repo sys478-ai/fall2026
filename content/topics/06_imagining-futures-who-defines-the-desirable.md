@@ -1,8 +1,9 @@
 ---
 title: 'Imagining Futures: Who Gets to Define the Desirable?'
-slug: imagining-futures-who-defines-the-desirable
+slug: sociopolitical-foundations
 scheduled_day: 6
 module_id: 1
+draft: 1
 subtitle: 'What futures do technologies promise, and who gets to define a desirable future?'
 status: unverified
 status_reviewer:

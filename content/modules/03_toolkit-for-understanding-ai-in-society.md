@@ -1,5 +1,6 @@
 ---
 id: 3
+draft: 1
 slug: toolkit-for-understanding-ai-in-society
 title: 'A Toolkit for Understanding AI in Society'
 color: emerald

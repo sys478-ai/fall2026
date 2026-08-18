@@ -3,6 +3,7 @@ title: 'Domain B: How Does This Institution Already Work?'
 slug: domain-b-how-does-this-institution-already-work
 scheduled_day: 19
 module_id: 4
+draft: 1
 subtitle: 'A second domain, paired with your own career storytelling and interview introductions.'
 status: unverified
 status_reviewer:

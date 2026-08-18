@@ -3,6 +3,7 @@ title: 'How Can We Govern an Emerging Technology Before Its Uses Are Settled?'
 slug: how-can-we-govern-an-emerging-technology-before-its-uses-are-settled
 scheduled_day: 27
 module_id: 6
+draft: 1
 subtitle: 'A full anticipatory case-study exercise: deployment conditions, domains, scenarios, and governance.'
 status: unverified
 status_reviewer:

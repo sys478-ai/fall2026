@@ -1,5 +1,6 @@
 ---
 id: 1
+draft: 0
 slug: humans-intelligence-and-judgment
 title: 'Humans, Intelligence, and Judgment'
 color: indigo

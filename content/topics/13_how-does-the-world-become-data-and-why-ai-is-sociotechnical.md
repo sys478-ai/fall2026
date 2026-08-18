@@ -3,6 +3,7 @@ title: 'How Does the World Become Data, and Why Is AI a Sociotechnical System?'
 slug: how-does-the-world-become-data-and-why-ai-is-sociotechnical
 scheduled_day: 13
 module_id: 3
+draft: 1
 subtitle: 'Classification, measurement, representation, and proxies as your first step toward understanding AI as a sociotechnical system.'
 status: unverified
 status_reviewer:

@@ -3,6 +3,7 @@ title: 'Transfer Lab: How Does a Different Institution Work Before AI?'
 slug: transfer-lab-how-does-a-different-institution-work-before-ai
 scheduled_day: 21
 module_id: 4
+draft: 1
 subtitle: 'A comparative domain analysis: which existing tensions matter most?'
 status: unverified
 status_reviewer:

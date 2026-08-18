@@ -3,6 +3,7 @@ title: 'Who Controls AI?'
 slug: who-controls-ai
 scheduled_day: 24
 module_id: 5
+draft: 1
 subtitle: 'Firms, infrastructure, data, compute, labor, concentration, and rents.'
 status: unverified
 status_reviewer:

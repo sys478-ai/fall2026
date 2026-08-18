@@ -3,6 +3,7 @@ title: 'What Counts as Skill and Expertise?'
 slug: what-counts-as-skill-and-expertise
 scheduled_day: 14
 module_id: 3
+draft: 1
 subtitle: 'Human judgment, durable skills, automation, and changing work.'
 status: unverified
 status_reviewer:

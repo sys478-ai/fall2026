@@ -3,6 +3,7 @@ title: 'What Changed With Machine Learning and Neural Networks?'
 slug: what-changed-with-machine-learning-and-neural-networks
 scheduled_day: 11
 module_id: 2
+draft: 1
 subtitle: 'From programmed rules to learned patterns: training data, models, prediction, and GPUs.'
 status: unverified
 status_reviewer:

@@ -3,6 +3,7 @@ title: 'What Is Technically Different About Neuromorphic Computing?'
 slug: what-is-technically-different-about-neuromorphic-computing
 scheduled_day: 26
 module_id: 6
+draft: 1
 subtitle: 'Ground brain-inspired hardware in its mechanism before we turn to anticipatory governance.'
 status: unverified
 status_reviewer:
