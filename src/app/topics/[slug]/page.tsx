@@ -8,11 +8,8 @@ import type { HorizontalCardStripItem } from '@/components/HorizontalCardStrip';
 import MarkdownContent from '@/components/MarkdownContent';
 import TopicSectionNav from '@/components/TopicSectionNav';
 import type { TopicSectionNavItem } from '@/components/TopicSectionNav';
-import TopicWorkList from '@/components/TopicWorkList';
-import type { TopicWorkItem } from '@/components/TopicWorkList';
 import { getPostData } from '@/lib/markdown';
 import type { PostData } from '@/lib/markdown';
-import { getDateForScheduledDay, getDueDateForScheduledDay } from '@/lib/course-calendar';
 import { getModuleColorClasses, type ModuleColorClasses } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
@@ -206,9 +203,9 @@ function TopicOverviewMarkdown({ content }: { content: string }) {
 function PrepGroup({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
-      <p className="mb-2 mt-0 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500 dark:text-gray-400">
+      <h2 className="mt-0 mb-3 text-xl font-semibold tracking-tight text-gray-950 md:text-2xl dark:text-gray-50">
         {label}
-      </p>
+      </h2>
       <ul className="mb-0 mt-0 list-disc space-y-2 pl-5 text-base leading-7 text-gray-800 dark:text-gray-200">
         {children}
       </ul>
@@ -289,47 +286,52 @@ function getDiscussionDueLabel(item: { dueDate?: string; dueTime?: string }, mee
   return formatDueDateTime(dateLabel, item.dueTime);
 }
 
-function buildNextClassPrepItems(meeting: Topic['meetings'][number]): TopicWorkItem[] {
-  const topicSlug = meeting.slug || '';
-  const items: TopicWorkItem[] = (meeting.readings || []).map((reading, index) => ({
-    id: `${topicSlug}-reading-${index}`,
-    type: 'reading' as const,
-    title: getReadingTitle(reading.citation, index, 'Assigned reading'),
-    href: reading.url,
-  }));
-
+function getPrepAssignments(meeting: Topic['meetings'][number]) {
   const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
-  dueItems.forEach((item, index) => {
-    if (typeof item === 'string' || item.draft === 1) {
-      return;
-    }
 
-    items.push({
-      id: `${topicSlug}-due-${index}`,
-      type: 'due',
-      title: getAssignmentTitle(item),
-      label: getAssignmentWorkLabel(item),
-      href: item.url,
-      dueDate: meeting.date,
-    });
-  });
+  return [
+    ...dueItems.flatMap(item => {
+      if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
+        return [];
+      }
 
-  (meeting.discussionAssignments || []).forEach((item, index) => {
-    items.push({
-      id: `${topicSlug}-discussion-${index}`,
-      type: 'due',
+      return [{ title: getAssignmentTitle(item), href: item.url, dueDate: meeting.date }];
+    }),
+    ...(meeting.discussionAssignments || []).map(item => ({
       title: item.title,
       href: item.url,
       dueDate: getDiscussionDueLabel(item, meeting.date),
-      meta: item.notes,
-    });
-  });
-
-  return items;
+      notes: item.notes,
+    })),
+  ];
 }
 
-function getMeetingKey(date: string, topicTitle: string) {
-  return `meeting-${date}-${topicTitle.replace(/\s+/g, '-').toLowerCase()}`;
+function hasPrepMaterials(
+  meeting: Topic['meetings'][number],
+  bibliographyReadings: Reading[] = []
+) {
+  return (
+    (meeting.readings || []).length > 0 ||
+    (meeting.optionalReadings || []).length > 0 ||
+    bibliographyReadings.length > 0 ||
+    getPrepAssignments(meeting).length > 0
+  );
+}
+
+function TopicWorkflowSection({
+  id,
+  label,
+  children,
+}: {
+  id: string;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} aria-label={label} className="scroll-mt-28">
+      <div className="max-w-4xl">{children}</div>
+    </section>
+  );
 }
 
 function getSlugFromUrl(url: string | undefined, contentType: 'assignments' | 'activities') {
@@ -338,22 +340,6 @@ function getSlugFromUrl(url: string | undefined, contentType: 'assignments' | 'a
 
 function normalizeHref(href: string | undefined) {
   return href?.replace(/^\/fall2026/, '').replace(/\/$/, '') || '';
-}
-
-function getScopedHref(href: string | undefined, anchorByHref: Map<string, string>) {
-  if (!href) {
-    return undefined;
-  }
-
-  return anchorByHref.get(normalizeHref(href)) || href;
-}
-
-function getReadingTitle(citation: string | ReactElement, index: number, fallback: string) {
-  if (typeof citation !== 'string') {
-    return `${fallback} ${index + 1}`;
-  }
-
-  return stripTrailingUrl(getCitationText(citation)) || citation;
 }
 
 function getAssignmentTitle(item: { titleShort?: string; title: string }) {
@@ -384,125 +370,8 @@ function isPrepAssignment(item: { type?: string; url?: string }) {
   return label === 'Homework';
 }
 
-async function getAssignmentScheduleDates(url?: string) {
-  const slug = getSlugFromUrl(url, 'assignments');
-  if (!slug) {
-    return { assignedDate: undefined as string | undefined, dueDate: undefined as string | undefined };
-  }
-
-  try {
-    const post = await getPostData(slug, 'assignments');
-    const assignedIso = getDateForScheduledDay(post.scheduled_day);
-    const dueIso = getDueDateForScheduledDay(post.scheduled_day) || post.due_date;
-    return {
-      assignedDate: assignedIso ? formatDate(assignedIso) : undefined,
-      dueDate: dueIso ? formatDate(dueIso) : undefined,
-    };
-  } catch {
-    return { assignedDate: undefined as string | undefined, dueDate: undefined as string | undefined };
-  }
-}
-
 function contentStartsWithHeading(html: string | undefined) {
   return Boolean(html?.trim().match(/^<h[1-3]\b/i));
-}
-
-async function buildTopicWorkItems({
-  topicSlug,
-  meeting,
-  anchorByHref = new Map<string, string>(),
-}: {
-  topicSlug: string;
-  meeting: Topic['meetings'][number];
-  anchorByHref?: Map<string, string>;
-}): Promise<TopicWorkItem[]> {
-  const meetingKey = getMeetingKey(meeting.date, meeting.topic);
-  const items: TopicWorkItem[] = [];
-
-  (meeting.activities || []).forEach((activity, index) => {
-    if (activity.excluded === 1 || activity.draft === 1) {
-      return;
-    }
-
-    items.push({
-      id: `activity-${index}`,
-      type: 'activity',
-      title: activity.title,
-      label: getAssignmentWorkLabel(activity),
-      href: getScopedHref(activity.url, anchorByHref),
-      meta: '(Completed during class)',
-      syncKeys: [`${meetingKey}-activity-${index}`],
-    });
-  });
-
-  const assignedItems = Array.isArray(meeting.assigned) ? meeting.assigned : meeting.assigned ? [meeting.assigned] : [];
-
-  for (const [index, item] of assignedItems.entries()) {
-    if (typeof item === 'string' || item.draft === 1) {
-      continue;
-    }
-
-    const assignmentSlug = getSlugFromUrl(item.url, 'assignments');
-    const dates = await getAssignmentScheduleDates(item.url);
-
-    items.push({
-      id: `assigned-${index}`,
-      type: 'assignment',
-      title: getAssignmentTitle(item),
-      label: getAssignmentWorkLabel(item),
-      href: getScopedHref(item.url, anchorByHref),
-      assignedDate: dates.assignedDate || meeting.date,
-      dueDate: dates.dueDate || meeting.date,
-      submissionMethod: 'Canvas',
-      optional: true,
-      syncKeys: [
-        `${meetingKey}-assigned-${index}`,
-        ...(assignmentSlug ? [`assignment-${assignmentSlug}`, `assignments-${assignmentSlug}`] : []),
-      ],
-    });
-  }
-
-  const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
-
-  for (const [index, item] of dueItems.entries()) {
-    if (typeof item === 'string' || item.draft === 1) {
-      continue;
-    }
-
-    const assignmentSlug = getSlugFromUrl(item.url, 'assignments');
-    const dates = await getAssignmentScheduleDates(item.url);
-
-    items.push({
-      id: `due-${index}`,
-      type: 'due',
-      title: getAssignmentTitle(item),
-      label: getAssignmentWorkLabel(item),
-      href: getScopedHref(item.url, anchorByHref),
-      assignedDate: dates.assignedDate || meeting.date,
-      dueDate: dates.dueDate || meeting.date,
-      submissionMethod: 'Canvas',
-      syncKeys: [
-        `${meetingKey}-due-${index}`,
-        ...(assignmentSlug ? [`assignment-${assignmentSlug}`, `assignments-${assignmentSlug}`] : []),
-      ],
-    });
-  }
-
-  (meeting.discussionAssignments || []).forEach((item, index) => {
-    items.push({
-      id: `discussion-${index}`,
-      type: 'due',
-      title: item.title,
-      href: item.url,
-      dueDate: getDiscussionDueLabel(item, meeting.date),
-      syncKeys: [`${meetingKey}-discussion-${index}`],
-    });
-  });
-
-  return items.map(item => ({
-    ...item,
-    id: `${topicSlug}-${item.id}`,
-  }));
 }
 
 function collectEmbeddedContentCandidates(meeting: Topic['meetings'][number]) {
@@ -640,13 +509,7 @@ function TopicOverviewMaterials({
   }
 
   return (
-    <section
-      id="topic-before-class"
-      className="mb-10 scroll-mt-24 space-y-6 border-b border-gray-200 pb-10 dark:border-gray-800"
-    >
-      <h2 className="mt-0 mb-0 text-xl font-semibold tracking-tight text-gray-950 md:text-2xl dark:text-gray-50">
-        Before class
-      </h2>
+    <div className="space-y-10">
       {assignedReadings.length > 0 && (
         <PrepGroup label="Readings">
           {assignedReadings.map((reading, index) => (
@@ -697,7 +560,7 @@ function TopicOverviewMaterials({
           ))}
         </PrepGroup>
       )}
-    </section>
+    </div>
   );
 }
 
@@ -707,7 +570,7 @@ function TopicClassWorkPanel({
   embeddedTopicContent: EmbeddedTopicContent[];
 }) {
   return (
-    <div className="max-w-4xl space-y-12">
+    <div className="space-y-12">
       {embeddedTopicContent.map(item => (
         <EmbeddedTopicContentSection key={item.id} item={item} />
       ))}
@@ -833,98 +696,75 @@ export default async function TopicPage({ params }: TopicPageProps) {
     ? await getPostData(meeting.topicContentId, 'topics').catch(() => null)
     : null;
   const embeddedTopicContent = await getEmbeddedTopicContent(meeting);
-  const anchorByHref = new Map(embeddedTopicContent.map(item => [normalizeHref(item.sourceHref), item.contentHref]));
-  const topicWorkItems = await buildTopicWorkItems({
-    topicSlug: meeting.slug || slug,
-    meeting,
-    anchorByHref,
-  });
   const nextClassMeeting = getNextClassMeeting(topics, meeting.slug || slug);
-  const nextClassPrepItems = nextClassMeeting ? buildNextClassPrepItems(nextClassMeeting) : [];
-  const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
-  const prepAssignments = [
-    ...dueItems.flatMap(item => {
-      if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
-        return [];
-      }
-
-      return [{ title: getAssignmentTitle(item), href: item.url, dueDate: meeting.date }];
-    }),
-    ...(meeting.discussionAssignments || []).map(item => ({
-      title: item.title,
-      href: item.url,
-      dueDate: getDiscussionDueLabel(item, meeting.date),
-      notes: item.notes,
-    })),
-  ];
+  const prepAssignments = getPrepAssignments(meeting);
+  const nextClassPrepAssignments = nextClassMeeting ? getPrepAssignments(nextClassMeeting) : [];
+  const todayContent = topicPostData?.content.trim()
+    ? topicPostData.content
+    : null;
   const topicSections: Array<{
     navItem: TopicSectionNavItem;
     panel: ReactElement;
   }> = [];
 
-  topicSections.push({
-    navItem: { id: 'topic-overview', label: 'Overview' },
-    panel: (
-      <div className="max-w-4xl">
-        <TopicOverviewMaterials
-          readings={readings}
-          optionalReadings={optionalReadings}
-          bibliographyReadings={bibliographyReadings}
-          prepAssignments={prepAssignments}
-          meetingSlug={meeting.slug}
-        />
-        {topicPostData?.content.trim() ? (
-          <TopicOverviewMarkdown content={topicPostData.content} />
-        ) : typeof meeting.description === 'string' ? (
-          <p className="mb-0 text-lg leading-8 text-gray-800 dark:text-gray-200">{meeting.description}</p>
-        ) : (
-          meeting.description
-        )}
-        {!meeting.holiday && embeddedTopicContent.length === 0 && nextClassPrepItems.length > 0 && (
-          <div className="mt-12">
-            <TopicWorkList
-              variant="plain"
-              showThisClass={false}
-              topicSlug={meeting.slug || slug}
-              items={[]}
-              upcomingItems={nextClassPrepItems}
-              upcomingTitle="For next class"
-              upcomingDescription={
-                nextClassMeeting
-                  ? `${nextClassMeeting.topic}${nextClassMeeting.date ? ` · ${nextClassMeeting.date}` : ''}`
-                  : undefined
-              }
-              trackProgress={false}
-            />
-          </div>
-        )}
-      </div>
-    ),
-  });
+  if (!meeting.holiday && hasPrepMaterials(meeting, bibliographyReadings)) {
+    topicSections.push({
+      navItem: { id: 'topic-before-class', label: 'Before class' },
+      panel: (
+        <TopicWorkflowSection id="topic-before-class" label="Before class">
+          <TopicOverviewMaterials
+            readings={readings}
+            optionalReadings={optionalReadings}
+            bibliographyReadings={bibliographyReadings}
+            prepAssignments={prepAssignments}
+            meetingSlug={meeting.slug}
+          />
+        </TopicWorkflowSection>
+      ),
+    });
+  }
+
+  if (todayContent || meeting.description) {
+    topicSections.push({
+      navItem: { id: 'topic-overview', label: "Today's materials" },
+      panel: (
+        <TopicWorkflowSection id="topic-overview" label="Today's materials">
+          {todayContent ? (
+            <TopicOverviewMarkdown content={todayContent} />
+          ) : typeof meeting.description === 'string' ? (
+            <p className="mb-0 text-lg leading-8 text-gray-800 dark:text-gray-200">{meeting.description}</p>
+          ) : (
+            meeting.description
+          )}
+        </TopicWorkflowSection>
+      ),
+    });
+  }
 
   if (!meeting.holiday && embeddedTopicContent.length > 0) {
     topicSections.push({
-      navItem: { id: 'topic-class-work', label: 'Class Work' },
-      panel: <TopicClassWorkPanel embeddedTopicContent={embeddedTopicContent} />,
-    });
-
-    topicSections.push({
-      navItem: { id: 'topic-work', label: 'Checklist' },
+      navItem: { id: 'topic-class-work', label: 'Class work' },
       panel: (
-        <TopicWorkList
-          key="topic-work"
-          variant="plain"
-          topicSlug={meeting.slug || slug}
-          items={topicWorkItems}
-          upcomingItems={nextClassPrepItems}
-          thisClassTitle="For this class"
-          upcomingTitle="For next class"
-          upcomingDescription={
-            nextClassMeeting
-              ? `${nextClassMeeting.topic}${nextClassMeeting.date ? ` · ${nextClassMeeting.date}` : ''}`
-              : undefined
-          }
-        />
+        <TopicWorkflowSection id="topic-class-work" label="Class work">
+          <TopicClassWorkPanel embeddedTopicContent={embeddedTopicContent} />
+        </TopicWorkflowSection>
+      ),
+    });
+  }
+
+  if (!meeting.holiday && nextClassMeeting && hasPrepMaterials(nextClassMeeting)) {
+    topicSections.push({
+      navItem: { id: 'topic-next', label: 'For next time' },
+      panel: (
+        <TopicWorkflowSection id="topic-next" label="For next time">
+          <TopicOverviewMaterials
+            readings={nextClassMeeting.readings}
+            optionalReadings={nextClassMeeting.optionalReadings}
+            bibliographyReadings={[]}
+            prepAssignments={nextClassPrepAssignments}
+            meetingSlug={nextClassMeeting.slug}
+          />
+        </TopicWorkflowSection>
       ),
     });
   }

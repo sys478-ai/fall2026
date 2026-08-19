@@ -1,5 +1,5 @@
 ---
-title: 'How Do Humans Learn? Neuroscience and Neurobiology'
+title: 'How Do Humans Learn? Biological Foundations'
 slug: biological-foundations
 scheduled_day: 2
 module_id: 1
