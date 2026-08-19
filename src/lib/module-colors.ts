@@ -16,6 +16,7 @@ export interface ModuleColorClasses {
   border: string;
   accent: string;
   sidebarActive: string;
+  stepFill: string;
 }
 
 export const DEFAULT_MODULE_COLOR: ModuleColorToken = 'indigo';
@@ -27,6 +28,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-indigo-700 dark:text-indigo-300',
     sidebarActive:
       'border-l-indigo-400 border-b-indigo-200 text-indigo-950 dark:border-l-indigo-500 dark:border-b-indigo-900 dark:text-indigo-100',
+    stepFill: 'bg-indigo-600 dark:bg-indigo-500',
   },
   sky: {
     background: 'bg-sky-50 dark:bg-sky-950/30',
@@ -34,6 +36,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-sky-700 dark:text-sky-300',
     sidebarActive:
       'border-l-sky-400 border-b-sky-200 text-sky-950 dark:border-l-sky-500 dark:border-b-sky-900 dark:text-sky-100',
+    stepFill: 'bg-sky-600 dark:bg-sky-500',
   },
   emerald: {
     background: 'bg-emerald-50 dark:bg-emerald-950/30',
@@ -41,6 +44,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-emerald-700 dark:text-emerald-300',
     sidebarActive:
       'border-l-emerald-400 border-b-emerald-200 text-emerald-950 dark:border-l-emerald-500 dark:border-b-emerald-900 dark:text-emerald-100',
+    stepFill: 'bg-emerald-600 dark:bg-emerald-500',
   },
   amber: {
     background: 'bg-amber-50 dark:bg-amber-950/30',
@@ -48,6 +52,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-amber-700 dark:text-amber-300',
     sidebarActive:
       'border-l-amber-400 border-b-amber-200 text-amber-950 dark:border-l-amber-500 dark:border-b-amber-900 dark:text-amber-100',
+    stepFill: 'bg-amber-600 dark:bg-amber-500',
   },
   rose: {
     background: 'bg-rose-50 dark:bg-rose-950/30',
@@ -55,6 +60,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-rose-700 dark:text-rose-300',
     sidebarActive:
       'border-l-rose-400 border-b-rose-200 text-rose-950 dark:border-l-rose-500 dark:border-b-rose-900 dark:text-rose-100',
+    stepFill: 'bg-rose-600 dark:bg-rose-500',
   },
   violet: {
     background: 'bg-violet-50 dark:bg-violet-950/30',
@@ -62,6 +68,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-violet-700 dark:text-violet-300',
     sidebarActive:
       'border-l-violet-400 border-b-violet-200 text-violet-950 dark:border-l-violet-500 dark:border-b-violet-900 dark:text-violet-100',
+    stepFill: 'bg-violet-600 dark:bg-violet-500',
   },
   teal: {
     background: 'bg-teal-50 dark:bg-teal-950/30',
@@ -69,6 +76,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-teal-700 dark:text-teal-300',
     sidebarActive:
       'border-l-teal-400 border-b-teal-200 text-teal-950 dark:border-l-teal-500 dark:border-b-teal-900 dark:text-teal-100',
+    stepFill: 'bg-teal-600 dark:bg-teal-500',
   },
   orange: {
     background: 'bg-orange-50 dark:bg-orange-950/30',
@@ -76,6 +84,7 @@ const MODULE_COLOR_CLASSES: Record<ModuleColorToken, ModuleColorClasses> = {
     accent: 'text-orange-700 dark:text-orange-300',
     sidebarActive:
       'border-l-orange-400 border-b-orange-200 text-orange-950 dark:border-l-orange-500 dark:border-b-orange-900 dark:text-orange-100',
+    stepFill: 'bg-orange-600 dark:bg-orange-500',
   },
 };
 

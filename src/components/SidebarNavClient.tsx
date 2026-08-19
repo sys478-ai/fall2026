@@ -232,6 +232,16 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
             </Link>
           ))}
 
+          {navItems.slice(2).map(item => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${baseLinkClass} ${getTopLevelItemClass(item)} ${collapsed ? 'justify-center' : ''}`}
+            >
+              {renderNavContent(item.label, item.icon)}
+            </Link>
+          ))}
+
           <div className="bg-slate-50 dark:bg-slate-950">
             <Link
               href="/modules"
@@ -406,17 +416,6 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
               </div>
             )}
           </div>
-
-          {navItems.slice(2).map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`${baseLinkClass} ${getTopLevelItemClass(item)} ${collapsed ? 'justify-center' : ''}`}
-            >
-              {renderNavContent(item.label, item.icon)}
-            </Link>
-          ))}
-
         </nav>
       </div>
 

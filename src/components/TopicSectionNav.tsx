@@ -2,6 +2,7 @@
 
 import { Children, ReactNode, useEffect, useMemo, useState } from 'react';
 import { resolveAssignmentTabIdFromHash } from '@/lib/assignment-series-hash';
+import type { ModuleColorClasses } from '@/lib/module-colors';
 
 export interface TopicSectionNavItem {
   id: string;
@@ -13,9 +14,11 @@ interface TopicSectionNavProps {
   items: TopicSectionNavItem[];
   children: ReactNode;
   ariaLabel?: string;
-  variant?: 'default' | 'plain';
+  variant?: 'default' | 'plain' | 'stepper';
   layout?: 'tabs' | 'scroll';
   onHashSync?: (hashId: string) => void;
+  /** Used by the 'stepper' variant to color the active step with the topic's module accent. */
+  moduleColor?: ModuleColorClasses;
 }
 
 function resolveTabIdFromHash(hashId: string) {
@@ -104,6 +107,7 @@ export default function TopicSectionNav({
   variant = 'default',
   layout = 'tabs',
   onHashSync,
+  moduleColor,
 }: TopicSectionNavProps) {
   const [activeId, setActiveId] = useState(items[0]?.id || '');
   const panels = useMemo(() => Children.toArray(children), [children]);
@@ -268,53 +272,93 @@ export default function TopicSectionNav({
         role="tablist"
         aria-label={ariaLabel}
       >
-        <div className="flex overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden">
-          {items.map((item, index) => {
-            const isActive = activeId === item.id;
-            const isPlain = variant === 'plain';
+        {variant === 'stepper' ? (
+          <div className="flex items-center gap-6 overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden">
+            {items.map((item, index) => {
+              const isActive = activeId === item.id;
 
-            return (
-              <button
-                key={item.id}
-                id={`${item.id}-tab`}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`${item.id}-panel`}
-                onClick={() => activateTab(item.id)}
-                className={
-                  isPlain
-                    ? `relative -mb-px shrink-0 whitespace-nowrap border-b px-5 py-3 text-[15px] transition-colors ${
-                        isActive
-                          ? 'border-gray-950 font-medium text-gray-950 dark:border-gray-50 dark:text-gray-50'
-                          : 'border-transparent font-normal text-gray-500 hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50'
-                      }`
-                    : `relative -mb-px flex shrink-0 items-center gap-2 whitespace-nowrap border-b-3 px-4 py-2 text-sm font-semibold transition-colors ${
-                        isActive
-                          ? 'border-[#0b5d8f] text-[#0b5d8f] dark:border-[#8fc4ee] dark:text-[#8fc4ee]'
-                          : 'border-transparent text-gray-600 hover:border-gray-300 hover:text-[#0b5d8f] dark:text-gray-400 dark:hover:border-gray-700 dark:hover:text-[#8fc4ee]'
-                      }`
-                }
-              >
-                {!isPlain && (
+              return (
+                <button
+                  key={item.id}
+                  id={`${item.id}-tab`}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`${item.id}-panel`}
+                  onClick={() => activateTab(item.id)}
+                  className="flex shrink-0 items-center gap-2 whitespace-nowrap py-3 text-[15px] transition-colors"
+                >
                   <span
-                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
+                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors ${
                       isActive
-                        ? 'bg-[#0b5d8f]/10 text-[#0b5d8f] dark:bg-[#8fc4ee]/15 dark:text-[#8fc4ee]'
+                        ? `${moduleColor?.stepFill ?? 'bg-gray-900 dark:bg-gray-100'} text-white dark:text-gray-950`
                         : 'bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400'
                     }`}
                   >
                     {index + 1}
                   </span>
-                )}
-                <span>
-                  {item.label}
-                  {typeof item.count === 'number' && <span className="ml-1 opacity-75">({item.count})</span>}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                  <span
+                    className={
+                      isActive
+                        ? `font-semibold ${moduleColor?.accent ?? 'text-gray-950 dark:text-gray-50'}`
+                        : 'font-normal text-gray-500 hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50'
+                    }
+                  >
+                    {item.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex overflow-x-auto overflow-y-hidden scrollbar-none [&::-webkit-scrollbar]:hidden">
+            {items.map((item, index) => {
+              const isActive = activeId === item.id;
+              const isPlain = variant === 'plain';
+
+              return (
+                <button
+                  key={item.id}
+                  id={`${item.id}-tab`}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`${item.id}-panel`}
+                  onClick={() => activateTab(item.id)}
+                  className={
+                    isPlain
+                      ? `relative -mb-px shrink-0 whitespace-nowrap border-b px-5 py-3 text-[15px] transition-colors ${
+                          isActive
+                            ? 'border-gray-950 font-medium text-gray-950 dark:border-gray-50 dark:text-gray-50'
+                            : 'border-transparent font-normal text-gray-500 hover:text-gray-950 dark:text-gray-400 dark:hover:text-gray-50'
+                        }`
+                      : `relative -mb-px flex shrink-0 items-center gap-2 whitespace-nowrap border-b-3 px-4 py-2 text-sm font-semibold transition-colors ${
+                          isActive
+                            ? 'border-[#0b5d8f] text-[#0b5d8f] dark:border-[#8fc4ee] dark:text-[#8fc4ee]'
+                            : 'border-transparent text-gray-600 hover:border-gray-300 hover:text-[#0b5d8f] dark:text-gray-400 dark:hover:border-gray-700 dark:hover:text-[#8fc4ee]'
+                        }`
+                  }
+                >
+                  {!isPlain && (
+                    <span
+                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
+                        isActive
+                          ? 'bg-[#0b5d8f]/10 text-[#0b5d8f] dark:bg-[#8fc4ee]/15 dark:text-[#8fc4ee]'
+                          : 'bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400'
+                      }`}
+                    >
+                      {index + 1}
+                    </span>
+                  )}
+                  <span>
+                    {item.label}
+                    {typeof item.count === 'number' && <span className="ml-1 opacity-75">({item.count})</span>}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {items.map((item, index) => {

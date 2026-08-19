@@ -1,13 +1,9 @@
 ---
 title: 'Learning, Memory, and Biological Metaphors'
-num: '16'
+scheduled_day: 2
+num: '1'
 type: 'lab'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: medium
+draft: 0
 ---
 
 How brain-inspired language helps explain AI systems, and how it can mislead us.

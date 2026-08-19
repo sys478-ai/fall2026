@@ -809,7 +809,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         />
 
         <div className="topic-page space-y-10 px-4 md:px-16">
-          <TopicSectionNav variant="plain" items={topicSections.map(section => section.navItem)}>
+          <TopicSectionNav variant="stepper" moduleColor={moduleColor} items={topicSections.map(section => section.navItem)}>
             {topicSections.map(section => (
               <Fragment key={section.navItem.id}>{section.panel}</Fragment>
             ))}
