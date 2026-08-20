@@ -1,7 +1,7 @@
 import React from 'react';
 import { getAllPosts, getAllPostIds, getPostData } from '@/lib/markdown';
 import { getTopics } from '@/lib/topics';
-import { getDueDateForScheduledDay } from '@/lib/course-calendar';
+import { resolveDueDate } from '@/lib/course-calendar';
 import QuickLinksNavClient from './QuickLinksNavClient';
 import externalAssignments from '../../content/config/external-assignments.json';
 
@@ -72,7 +72,7 @@ export default async function QuickLinksNav() {
       id: params.id,
       num: postData.num,
       title: postData.title,
-      due_date: getDueDateForScheduledDay(postData.scheduled_day) || postData.due_date,
+      due_date: resolveDueDate(postData),
       scheduled_day: postData.scheduled_day,
       type: postData.type,
       draft: postData.draft,

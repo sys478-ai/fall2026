@@ -19,7 +19,7 @@ import {
   getTopicMarkdownBySlug,
   type TopicMarkdownMetadata,
 } from './topic-markdown';
-import { generateCourseMeetingDates, getDueDateForScheduledDay, type GeneratedMeetingDate } from './course-calendar';
+import { generateCourseMeetingDates, resolveDueDate, type GeneratedMeetingDate } from './course-calendar';
 
 // Type definitions for topics structure
 interface Activity {
@@ -37,6 +37,9 @@ interface Assignment {
   draft?: number;
   order?: number;
   type?: string;
+  dueDate?: string;
+  dueTime?: string;
+  notes?: string;
 }
 
 export interface DiscussionAssignment {
@@ -47,9 +50,17 @@ export interface DiscussionAssignment {
   dueTime?: string;
 }
 
+export interface BeforeClassReminder {
+  title: string;
+  notes: string;
+  url?: string;
+}
+
 export interface Reading {
   citation: string | React.ReactElement;
   url?: string;
+  notes?: string;
+  pickOne?: boolean;
 }
 
 export interface Quiz {
@@ -90,6 +101,7 @@ export interface Meeting {
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
   discussionAssignments?: DiscussionAssignment[];
+  beforeClassReminders?: BeforeClassReminder[];
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
@@ -135,6 +147,7 @@ interface BaseMeeting {
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
   discussionAssignments?: DiscussionAssignment[];
+  beforeClassReminders?: BeforeClassReminder[];
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
@@ -537,7 +550,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
   );
   const assignmentsWithAssignedDate = allAssignments.filter(a => a.assigned_date && a.hide_from_list !== 1);
   const assignmentsWithDueDate = allAssignments.filter(a => {
-    const dueDate = getDueDateForScheduledDay(a.scheduled_day) || a.due_date;
+    const dueDate = resolveDueDate(a);
     return Boolean(dueDate && a.hide_from_list !== 1);
   });
   const quizzesWithDates = allQuizzes.filter(q => q.start_date);
@@ -580,7 +593,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
   });
 
   assignmentsWithDueDate.forEach(assignment => {
-    const date = normalizeDate(getDueDateForScheduledDay(assignment.scheduled_day) || assignment.due_date);
+    const date = normalizeDate(resolveDueDate(assignment));
     if (date) {
       if (!assignmentsByDueDate.has(date)) {
         assignmentsByDueDate.set(date, []);
@@ -757,6 +770,16 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
 
       const autoScheduledActivities = [...autoActivities, ...autoScheduledAssignmentsAsActivities];
 
+      // Create auto-populated "before class" reminders from assignments scheduled on this day
+      // that carry reminder_notes frontmatter.
+      const autoBeforeClassReminders: BeforeClassReminder[] = matchingScheduledAssignments
+        .filter((assignment: PostData) => assignment.draft !== 1 && Boolean(assignment.reminder_notes?.trim()))
+        .map((assignment: PostData) => ({
+          title: assignment.title,
+          notes: assignment.reminder_notes!.trim(),
+          url: `/assignments/${assignment.id}/`,
+        }));
+
       // Create auto-populated assignment entries for assigned (all matches, including drafts)
       const autoAssignedAssignments = matchingAssignmentsByAssigned.map(assignment => {
         const titleShort = getAssignmentTitleShort(assignment);
@@ -780,6 +803,9 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           draft: assignment.draft || 0,
           order: assignment.order,
           type: assignment.type,
+          dueDate: resolveDueDate(assignment),
+          dueTime: assignment.due_time,
+          notes: assignment.submission_notes,
         };
       });
 
@@ -848,6 +874,18 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
             }
             return a.title.localeCompare(b.title);
           });
+        }
+      }
+
+      // Merge before-class reminders: keep manual entries, add auto-populated ones
+      if (autoBeforeClassReminders.length > 0) {
+        const existingReminders = meeting.beforeClassReminders || [];
+        const existingUrls = new Set(existingReminders.map(r => r.url));
+        const newAutoReminders = autoBeforeClassReminders.filter(r => !existingUrls.has(r.url));
+        if (newAutoReminders.length > 0) {
+          meeting.beforeClassReminders = [...existingReminders, ...newAutoReminders];
+        } else if (existingReminders.length > 0) {
+          meeting.beforeClassReminders = existingReminders;
         }
       }
 

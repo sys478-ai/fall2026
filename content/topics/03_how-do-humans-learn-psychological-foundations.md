@@ -1,43 +1,39 @@
 ---
 title: 'How Do Humans Learn? Psychological Foundations'
+subtitle: 'Individual Learning: Behaviorism and Constructivism'
 slug: psychological-foundations
 scheduled_day: 3
 module_id: 1
-draft: 1
-subtitle: 'Skinner, Piaget, and Vygotsky as three influential accounts of how learning happens.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+draft: 0
+readings:
+  - citation: 'Sawyer, R. K. (2014). Introduction: The new science of learning. In R. K. Sawyer (Ed.), The Cambridge handbook of the learning sciences (2nd ed., pp. 1–18). Cambridge University Press.'
+    url: 'https://drive.google.com/file/d/1ntvJwTD-QQ6MKY0Jaw3R9FfBmbZ2ryAj/view?usp=sharing'
+    notes: "Available via the Ramsey Library. Please log in via your UNCA Account"
+  - citation: 'Wikipedia contributors. (n.d.). Jean Piaget. In Wikipedia.'
+    url: 'https://en.wikipedia.org/wiki/Jean_Piaget'
+    pick_one: true
+  - citation: 'Wikipedia contributors. (n.d.). B. F. Skinner. In Wikipedia.'
+    url: 'https://en.wikipedia.org/wiki/B._F._Skinner'
+    pick_one: true
+optional_readings:
+  - citation: 'AI Warehouse. (2023). AI learns to walk (deep reinforcement learning) [Video]. YouTube.'
+    url: 'https://www.youtube.com/watch?v=L_4BPjLBF4E'
+discussion_assignments:
+  - title: 'Biological Intelligence Reflection'
+    notes: 'Canvas Discussion Forum'
+    url: 'https://unca.instructure.com/courses/1907/assignments/8714'
+    due_date: '2026-08-25'
+    due_time: '3:00PM'
+    type: 'reading response'
 ---
 
 ## Topic / Focus
 
-Today complements the neuroscience primer with psychological foundations of learning: behaviorist, developmental, and sociocultural accounts from Skinner, Piaget, and Vygotsky. These theories bridge individual learning and social and cultural accounts of knowledge.
+Today complements the neuroscience primer with some psychological accounts of how learning happens -- namely: behaviorist, developmental accounts from Skinner & Piaget. 
 
-_Format: Full class · Lesson template: Concept + Lab_
 
 ## Guiding Questions
 
-- How do behaviorist, developmental, and sociocultural theories differ?
+- How do behaviorist and developmental learning theories differ?
 - What does each theory assume about where learning happens?
-- How does situated knowledge bridge individual learning and social context?
-
-## In This Class
-
-In this meeting, we will:
-
-- compare Skinner, Piaget, and Vygotsky as accounts of learning
-- connect situated knowledge to how technologies get described and governed
-- preview why these accounts matter once we turn to machine learning
-
-## Career / BRAID Integration
-
-No dedicated career module today.
-
-## Field Guide & Resources
-
-STS's account of situated knowledge is a useful bridge from individual learning to social and cultural accounts of knowledge.
-
-- [STS Concepts](/field-guide/sts-concepts)
+- What kind of inspiration has AI taken from these learning models?

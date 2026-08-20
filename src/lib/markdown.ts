@@ -211,6 +211,10 @@ export interface PostData {
   start_date?: string;
   assigned_date?: string;
   due_date?: string;
+  due_days_after?: number;
+  due_time?: string;
+  reminder_notes?: string;
+  submission_notes?: string;
   content: string;
   excerpt?: string;
   type?: string;

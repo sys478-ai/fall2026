@@ -5,11 +5,6 @@ scheduled_day: 5
 module_id: 1
 draft: 1
 subtitle: 'What can machines imitate, and what might they lack?'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
 ---
 
 ## Topic / Focus

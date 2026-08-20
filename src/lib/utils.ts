@@ -83,4 +83,9 @@ function getWeek(dateString: string): string {
  */
 export const SCROLL_OFFSET_PX = 20;
 
+/**
+ * Default due time shown when an assignment doesn't set an explicit due_time.
+ */
+export const DEFAULT_DUE_TIME_LABEL = '11:59 PM';
+
 export { formatDate, formatDueTime, formatDueDateTime, getWeek };

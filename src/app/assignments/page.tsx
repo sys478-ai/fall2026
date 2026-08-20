@@ -4,7 +4,7 @@ import QuickLinksNav from '@/components/QuickLinksNav';
 import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import AssignmentsTabbedList from '@/components/assignments/AssignmentsTabbedList';
 import { getSeriesSummary } from '@/lib/assignment-series';
-import { getDateForScheduledDay, getDueDateForScheduledDay } from '@/lib/course-calendar';
+import { getDateForScheduledDay, resolveDueDate } from '@/lib/course-calendar';
 import { getDiscussionAssignmentIndexItems } from '@/lib/topic-markdown';
 import externalAssignments from '../../../content/config/external-assignments.json';
 
@@ -44,7 +44,8 @@ export default async function AssignmentsPage() {
       title: postData.title,
       excerpt: postData.excerpt,
       date: postData.date,
-      due_date: getDueDateForScheduledDay(postData.scheduled_day) || postData.due_date,
+      due_date: resolveDueDate(postData),
+      due_time: postData.due_time,
       type: postData.type,
       assigned: postData.assigned,
       scheduled_day: postData.scheduled_day,
@@ -105,7 +106,7 @@ export default async function AssignmentsPage() {
   });
 
   const pageDescription =
-    'Reflections, labs, homework, discussions, and career modules. Unless otherwise noted, submitted work is due at 11:59pm ET on the listed date.';
+    'Reflections, labs, homework, discussions, and career modules. Unless otherwise noted, submitted work is due at 11:59 PM ET on the listed date.';
 
   return (
     <ContentLayout

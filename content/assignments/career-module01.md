@@ -3,18 +3,15 @@ title: 'Career Module 1: Career Quiz, Values, and Coaching Access'
 scheduled_day: 4
 num: '1'
 type: 'career module'
-excerpt: 'Helping you identify your values and interests'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+excerpt: 'This first career module helps you take stock of where you are now, what you value, and what next step or resource could help you move forward.'
+reminder_notes: 'Before you come to class, complete the PathwayU assessments: Interests, Values, Personality, and Workplace Preferences.'
+submission_notes: 'PathwayU reflection'
+due_days_after: 5
+due_time: '3:00PM'
+
+draft: 0
 ---
 
-## Overview
-
-This first career module helps you take stock of where you are now, what you value, and what next step or resource could help you move forward.
 
 ## Before Class
 
@@ -29,7 +26,7 @@ Use the <a href="https://docs.google.com/document/d/1IP1o-88e02J4DU-Z51R1OU7dBo4
 
 If you've done these assessments already in a past course, please review your prior assessment and/or take the assessment again. If you have trouble accessing PathwayU, email career@unca.edu or contact the Career Center.
 
-## In-Class Activities
+## During Class (we will do this together)
 
 ### 1. Where Are You Now?
 
@@ -55,7 +52,7 @@ Use the blue **Explore Careers** button in PathwayU to review career areas you m
 
 ## What To Submit
 
-After class, submit a short reflection, about 300-500 words, that includes:
+Submit a short reflection, about 300-500 words, by the due date shown above. It should include:
 
 1. Where you are right now in thinking about life after graduation.
 1. Two or three values that feel important to your next step.

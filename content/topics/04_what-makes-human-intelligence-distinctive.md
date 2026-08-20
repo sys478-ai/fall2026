@@ -1,15 +1,20 @@
 ---
-title: 'What Makes Human Intelligence Distinctive?'
+title: 'How Do Humans Learn? Sociocultural Foundations'
 slug: sociocultural-foundations
 scheduled_day: 4
 module_id: 1
 draft: 1
-subtitle: 'Knowledge, meaning, culture, and social learning as features of intelligence that are hard to reduce to computation.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: 'Social and Political Learning: Vygotsky and Freire'
+readings:
+  - citation: 'Teachers College, Columbia University. (n.d.). Convocation Masters III: Medalist Luis C. Moll [Video]. YouTube.'
+    url: 'https://www.youtube.com/watch?v=VfjelQPEkHM'
+    notes: (start at around minute 6).
+  - citation: 'National Academies of Sciences, Engineering, and Medicine. (2018). Context and culture. In How people learn II: Learners, contexts, and cultures. The National Academies Press.'
+    url: 'https://www.nationalacademies.org/read/24783/chapter/4'
+    pick_one: true
+  - citation: 'Freire, P. (1970). Chapter 2. In Pedagogy of the oppressed. Continuum.'
+    url: '/fall2026/documents/module01/Freire%20-%20Pedagogy%20of%20the%20Oppressed%20-%20Chapter%202.pdf'
+    pick_one: true
 ---
 
 ## Topic / Focus

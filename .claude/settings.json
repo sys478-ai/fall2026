@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"/Users/svanwart/Downloads/1573678742-Philosophy-of-Education-Chapter-2_-Pedagogy-of-the-Oppressed.pdf\" 2>&1; ls /Users/svanwart/unca/sys478/course-website/public/documents/module01/)",
+      "Read(//Users/svanwart/Downloads/**)",
+      "Bash(mkdir -p /Users/svanwart/unca/sys478/course-website/public/documents/module01 *)",
+      "WebFetch(domain:www.nationalacademies.org)",
+      "Bash(command -v yt-dlp)",
+      "Bash(yt-dlp --skip-download --print \"%\\(title\\)s|||%\\(uploader\\)s|||%\\(upload_date\\)s|||%\\(description\\)s\" \"https://www.youtube.com/watch?v=VfjelQPEkHM\")",
+      "Bash(curl -s \"https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=VfjelQPEkHM&format=json\")",
+      "Bash(node -e ' *)",
+      "Bash(cat > *)",
+      "Bash(npx tsx -e ' *)",
+      "Bash(npx tsx *)",
+      "Bash(rm -f /Users/svanwart/unca/sys478/course-website/content/assignments/zzz-scratch-test*.md /tmp/check_due_dates.mjs /tmp/check_resolve.mjs /tmp/check_date4.mjs *)",
+      "Bash(npm run *)"
+    ],
+    "additionalDirectories": [
+      "/Users/svanwart/Downloads",
+      "/tmp",
+      "/Users/svanwart/unca/sys478/course-website/content/assignments"
+    ]
+  }
+}

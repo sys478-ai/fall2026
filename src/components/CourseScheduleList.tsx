@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactElement } from 'react';
 import { getReadingsForTopic } from '@/lib/readings';
+import { groupReadingsByPickOne } from '@/lib/reading-groups';
 import { getTopics } from '@/lib/topics';
 
 type ScheduleTopics = Awaited<ReturnType<typeof getTopics>>;
@@ -10,6 +11,8 @@ interface ScheduleListItem {
   label: string;
   href?: string;
   external?: boolean;
+  pickOne?: boolean;
+  notes?: string;
 }
 
 const ROW_COLS =
@@ -58,7 +61,13 @@ function getCompactRelatedItemLabel(label: string, href?: string) {
   return trimmedLabel;
 }
 
-function addListItem(items: Map<string, ScheduleListItem>, label: string, href?: string) {
+function addListItem(
+  items: Map<string, ScheduleListItem>,
+  label: string,
+  href?: string,
+  pickOne?: boolean,
+  notes?: string
+) {
   const normalizedLabel = label.trim();
   if (!normalizedLabel) return;
 
@@ -68,6 +77,8 @@ function addListItem(items: Map<string, ScheduleListItem>, label: string, href?:
       label: normalizedLabel,
       href,
       external: Boolean(href && /^https?:\/\//i.test(href)),
+      pickOne,
+      notes: notes?.trim() || undefined,
     });
   }
 }
@@ -139,13 +150,13 @@ function getAssignedReadings(meeting: ScheduleMeeting): ScheduleListItem[] {
   (meeting.readings || []).forEach(reading => {
     const label = stripTrailingUrl(getCitationText(reading.citation));
     if (!label) return;
-    addListItem(items, label, reading.url);
+    addListItem(items, label, reading.url, reading.pickOne, reading.notes);
   });
 
   getReadingsForTopic(meeting.scheduledDay).forEach(reading => {
     const label = stripTrailingUrl(reading.title.trim());
     if (!label) return;
-    addListItem(items, label, reading.url || undefined);
+    addListItem(items, label, reading.url || undefined, undefined, reading.notes);
   });
 
   return Array.from(items.values());
@@ -170,6 +181,7 @@ function ScheduleReadingItem({ item }: { item: ScheduleListItem }) {
           </Link>
         </>
       )}
+      {item.notes && <div className="text-sm italic text-gray-500 dark:text-gray-400">{item.notes}</div>}
     </span>
   );
 }
@@ -267,11 +279,24 @@ export default function CourseScheduleList({ topics }: { topics: ScheduleTopics 
                       <div>
                         <ReadingsHeaderLabel className="mb-1 block text-xs font-semibold uppercase tracking-[0.14em] text-gray-500 lg:hidden dark:text-gray-400" />
                         <ul className="m-0! mb-0! list-disc space-y-1 pl-5!">
-                          {readings.map(item => (
-                            <li key={`${item.href || item.label}`} className="text-sm leading-5 mb-2!">
-                              <ScheduleReadingItem item={item} />
-                            </li>
-                          ))}
+                          {groupReadingsByPickOne(readings).map((group, groupIndex) =>
+                            group.kind === 'single' ? (
+                              <li key={`${group.reading.href || group.reading.label}`} className="text-sm leading-5 mb-2!">
+                                <ScheduleReadingItem item={group.reading} />
+                              </li>
+                            ) : (
+                              <li key={`pick-one-${groupIndex}`} className="text-sm leading-5 mb-2!">
+                                Pick one
+                                <ul className="m-0! mt-1 list-disc space-y-1 pl-5!">
+                                  {group.options.map(item => (
+                                    <li key={`${item.href || item.label}`} className="text-sm leading-5 mb-2!">
+                                      <ScheduleReadingItem item={item} />
+                                    </li>
+                                  ))}
+                                </ul>
+                              </li>
+                            )
+                          )}
                         </ul>
                       </div>
                     )}

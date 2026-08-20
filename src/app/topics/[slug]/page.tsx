@@ -14,6 +14,7 @@ import { getModuleColorClasses, type ModuleColorClasses } from '@/lib/module-col
 import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
 import { getReadingsForTopic, type Reading } from '@/lib/readings';
+import { groupReadingsByPickOne } from '@/lib/reading-groups';
 import { getTopicModules } from '@/lib/topic-config';
 import { formatDate, formatDueDateTime } from '@/lib/utils';
 import StatusBanner from '@/components/StatusBanner';
@@ -45,14 +46,23 @@ function stripTrailingUrl(citation: string) {
   return citation.replace(/\s*https?:\/\/\S+\s*$/i, '').trim();
 }
 
-function renderReading(citation: string | ReactElement, url?: string) {
+function renderReading(citation: string | ReactElement, url?: string, notes?: string) {
   if (typeof citation !== 'string') {
     return citation;
   }
 
   const label = stripTrailingUrl(citation) || citation;
+  const notesEl = notes ? (
+    <div className="text-sm italic text-gray-500 dark:text-gray-400">{notes}</div>
+  ) : null;
+
   if (!url) {
-    return label;
+    return (
+      <>
+        {label}
+        {notesEl}
+      </>
+    );
   }
 
   return (
@@ -61,6 +71,7 @@ function renderReading(citation: string | ReactElement, url?: string) {
       <Link href={url} target="_blank" rel="noopener noreferrer" className={READING_LINK_CLASS}>
         Link
       </Link>
+      {notesEl}
     </>
   );
 }
@@ -291,11 +302,21 @@ function getPrepAssignments(meeting: Topic['meetings'][number]) {
 
   return [
     ...dueItems.flatMap(item => {
-      if (typeof item === 'string' || item.draft === 1 || !isPrepAssignment(item)) {
+      if (typeof item === 'string' || item.draft === 1) {
         return [];
       }
 
-      return [{ title: getAssignmentTitle(item), href: item.url, dueDate: meeting.date }];
+      const dateLabel =
+        item.dueDate && /^\d{4}-\d{2}-\d{2}$/.test(item.dueDate) ? formatDate(item.dueDate) : meeting.date;
+
+      return [
+        {
+          title: getAssignmentTitle(item),
+          href: item.url,
+          dueDate: formatDueDateTime(dateLabel, item.dueTime),
+          notes: item.notes,
+        },
+      ];
     }),
     ...(meeting.discussionAssignments || []).map(item => ({
       title: item.title,
@@ -314,7 +335,8 @@ function hasPrepMaterials(
     (meeting.readings || []).length > 0 ||
     (meeting.optionalReadings || []).length > 0 ||
     bibliographyReadings.length > 0 ||
-    getPrepAssignments(meeting).length > 0
+    getPrepAssignments(meeting).length > 0 ||
+    (meeting.beforeClassReminders || []).length > 0
   );
 }
 
@@ -346,29 +368,6 @@ function getAssignmentTitle(item: { titleShort?: string; title: string }) {
   return item.titleShort ? `${item.titleShort}: ${item.title}` : item.title;
 }
 
-function getAssignmentWorkLabel(item: { type?: string; url?: string }) {
-  const normalizedType = item.type?.toLowerCase();
-  const assignmentSlug = getSlugFromUrl(item.url, 'assignments') || '';
-
-  if (normalizedType === 'career module' || assignmentSlug.startsWith('career-module')) {
-    return 'Career Module';
-  }
-
-  if (normalizedType === 'lab' || assignmentSlug.startsWith('lab')) {
-    return 'Lab';
-  }
-
-  if (normalizedType === 'homework' || normalizedType === 'assignment' || assignmentSlug.startsWith('hw')) {
-    return 'Homework';
-  }
-
-  return undefined;
-}
-
-function isPrepAssignment(item: { type?: string; url?: string }) {
-  const label = getAssignmentWorkLabel(item);
-  return label === 'Homework';
-}
 
 function contentStartsWithHeading(html: string | undefined) {
   return Boolean(html?.trim().match(/^<h[1-3]\b/i));
@@ -486,23 +485,57 @@ function EmbeddedTopicContentSection({
   );
 }
 
+function renderReadingItems(
+  readings: Topic['meetings'][number]['readings'],
+  keyPrefix: string
+) {
+  return groupReadingsByPickOne(readings || []).map((group, index) => {
+    if (group.kind === 'single') {
+      const { reading } = group;
+      return (
+        <li key={`${keyPrefix}-${index}`}>{renderReading(reading.citation, reading.url, reading.notes)}</li>
+      );
+    }
+
+    return (
+      <li key={`${keyPrefix}-${index}`}>
+        Pick one
+        <ul className="mt-2 list-disc space-y-2 pl-5">
+          {group.options.map((reading, optionIndex) => (
+            <li key={`${keyPrefix}-${index}-${optionIndex}`}>
+              {renderReading(reading.citation, reading.url, reading.notes)}
+            </li>
+          ))}
+        </ul>
+      </li>
+    );
+  });
+}
+
 function TopicOverviewMaterials({
   readings,
   optionalReadings,
   bibliographyReadings,
   prepAssignments,
+  beforeClassReminders,
   meetingSlug,
 }: {
   readings: Topic['meetings'][number]['readings'];
   optionalReadings: Topic['meetings'][number]['optionalReadings'];
   bibliographyReadings: Reading[];
   prepAssignments: Array<{ title: string; href?: string; dueDate?: string; notes?: string }>;
+  beforeClassReminders?: Topic['meetings'][number]['beforeClassReminders'];
   meetingSlug?: string;
 }) {
   const assignedReadings = readings || [];
   const extraReadings = optionalReadings || [];
+  const reminders = beforeClassReminders || [];
   const hasContent =
-    assignedReadings.length > 0 || extraReadings.length > 0 || bibliographyReadings.length > 0 || prepAssignments.length > 0;
+    assignedReadings.length > 0 ||
+    extraReadings.length > 0 ||
+    bibliographyReadings.length > 0 ||
+    prepAssignments.length > 0 ||
+    reminders.length > 0;
 
   if (!hasContent) {
     return null;
@@ -510,18 +543,30 @@ function TopicOverviewMaterials({
 
   return (
     <div className="space-y-10">
-      {assignedReadings.length > 0 && (
-        <PrepGroup label="Readings">
-          {assignedReadings.map((reading, index) => (
-            <li key={`${meetingSlug}-reading-${index}`}>{renderReading(reading.citation, reading.url)}</li>
+      {reminders.length > 0 && (
+        <PrepGroup label="Reminders">
+          {reminders.map((reminder, index) => (
+            <li key={`${meetingSlug}-reminder-${index}`}>
+              {reminder.url ? (
+                <Link href={reminder.url} className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+                  {reminder.title}
+                </Link>
+              ) : (
+                reminder.title
+              )}
+              <span className="mt-1 block text-sm text-gray-500 dark:text-gray-400">{reminder.notes}</span>
+            </li>
           ))}
         </PrepGroup>
       )}
+      {assignedReadings.length > 0 && (
+        <PrepGroup label="Readings">
+          {renderReadingItems(assignedReadings, `${meetingSlug}-reading`)}
+        </PrepGroup>
+      )}
       {extraReadings.length > 0 && (
-        <PrepGroup label="Optional">
-          {extraReadings.map((reading, index) => (
-            <li key={`${meetingSlug}-optional-reading-${index}`}>{renderReading(reading.citation, reading.url)}</li>
-          ))}
+        <PrepGroup label="Optional Readings">
+          {renderReadingItems(extraReadings, `${meetingSlug}-optional-reading`)}
         </PrepGroup>
       )}
       {bibliographyReadings.length > 0 && (
@@ -717,6 +762,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             optionalReadings={optionalReadings}
             bibliographyReadings={bibliographyReadings}
             prepAssignments={prepAssignments}
+            beforeClassReminders={meeting.beforeClassReminders}
             meetingSlug={meeting.slug}
           />
         </TopicWorkflowSection>
@@ -762,6 +808,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             optionalReadings={nextClassMeeting.optionalReadings}
             bibliographyReadings={[]}
             prepAssignments={nextClassPrepAssignments}
+            beforeClassReminders={nextClassMeeting.beforeClassReminders}
             meetingSlug={nextClassMeeting.slug}
           />
         </TopicWorkflowSection>

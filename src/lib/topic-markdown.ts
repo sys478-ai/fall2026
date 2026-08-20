@@ -8,6 +8,8 @@ const topicsDirectory = path.join(process.cwd(), 'content', 'topics');
 export interface TopicReading {
   citation: string;
   url?: string;
+  notes?: string;
+  pickOne?: boolean;
 }
 
 export interface TopicDiscussionAssignment {
@@ -61,6 +63,8 @@ function asReadingArray(value: unknown): TopicReading[] {
 
       const citation = (item as Record<string, unknown>).citation;
       const url = (item as Record<string, unknown>).url;
+      const notes = (item as Record<string, unknown>).notes;
+      const pickOne = (item as Record<string, unknown>).pick_one;
 
       if (typeof citation !== 'string' || citation.trim() === '') {
         return null;
@@ -69,6 +73,8 @@ function asReadingArray(value: unknown): TopicReading[] {
       return {
         citation,
         url: typeof url === 'string' && url.trim() !== '' ? url : undefined,
+        notes: typeof notes === 'string' && notes.trim() !== '' ? notes : undefined,
+        pickOne: pickOne === true ? true : undefined,
       };
     })
     .filter((reading): reading is TopicReading => reading !== null);

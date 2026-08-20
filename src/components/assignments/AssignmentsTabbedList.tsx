@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
-import { formatDate, formatDueTime } from '@/lib/utils';
+import { formatDate, formatDueTime, DEFAULT_DUE_TIME_LABEL } from '@/lib/utils';
 
 interface AssignmentData {
   id: string;
@@ -92,7 +92,7 @@ function getDueTimeLabel(dueDate?: string, dueTime?: string) {
     return '';
   }
 
-  return formatDueTime(dueTime || '11:59 PM');
+  return formatDueTime(dueTime || DEFAULT_DUE_TIME_LABEL);
 }
 
 function isDraft(item: AssignmentData) {

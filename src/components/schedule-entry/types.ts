@@ -4,6 +4,8 @@ import { QuizData } from '@/components/quiz/types';
 export interface Reading {
   citation: string | React.ReactElement;
   url?: string;
+  notes?: string;
+  pickOne?: boolean;
 }
 
 export interface ScheduleQuiz {

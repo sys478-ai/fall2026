@@ -101,3 +101,20 @@ export function getDueDateForScheduledDay(scheduledDay: number | string | undefi
 
   return formatIsoDate(dueDate);
 }
+
+export interface DueDateSource {
+  scheduled_day?: number | string;
+  due_date?: string;
+  due_days_after?: number;
+}
+
+// Resolves an assignment's effective due date: an explicit due_date always wins;
+// otherwise the due date is computed as due_days_after (default 6) days after the
+// scheduled_day's class meeting.
+export function resolveDueDate(source: DueDateSource): string | undefined {
+  if (typeof source.due_date === 'string' && source.due_date.trim() !== '') {
+    return source.due_date.trim();
+  }
+
+  return getDueDateForScheduledDay(source.scheduled_day, source.due_days_after);
+}

@@ -6,11 +6,6 @@ scheduled_day: 1
 date: '2026-08-18'
 excerpt: 'Practice telling descriptive, normative, and political claims about AI apart — and noticing when they are mixed together.'
 draft: 0
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: medium
 ---
 
 ## Activity 1: What Kind of Claim Is This?

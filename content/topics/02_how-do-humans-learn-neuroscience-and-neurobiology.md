@@ -26,11 +26,16 @@ discussion_assignments:
 
 ## Topic / Focus
 
-Before asking how machines learn, it is useful to take some time to consider how humans learn. Today, we're going to begin that exploration by examining the biological foundations of learning, knowing, and doing: brains, neurons, networks, and plasticity. Understanding these concepts will provide an important foundation for later comparisons with machine learning and neuromorphic computing.
+Before asking how machines learn, it is useful to take some time to consider how humans learn. Today, we're going to begin that exploration by examining the biological foundations of learning, knowing, and doing: brains, neurons, networks, and plasticity. Learning physically changes your brain, and many machine learning algorithms are (loosely) based on the idea of "synaptic plasticity." Therefore, understanding some of these basic concepts will provide an important foundation for later comparisons with machine learning and emerging approaches in AI.
+
+## Slides
+* <a href="https://docs.google.com/presentation/d/133Vm5k_vjHtiqKKyMR2u3N2kwR1A6hbIUC9x8AVxR7I/edit?usp=sharing" target="_blank">Biological foundations of learning</a>
+
 
 ## Guiding Questions
 
-- What do neurons, synapses, and networks actually do when the brain learns?
-- What is plasticity, and why does it matter for learning?
-- Which brain metaphors help explain machine learning, and which mislead?
-
+- What does it mean for a biological system to learn?
+- How can experience change neurons, synapses, networks, and behavior?
+- Why is biological learning not one single process?
+- What role do the body, environment, emotion, and experience play in learning?
+- What do biological accounts of learning help us understand – and complicate – when we talk about machine “learning”?

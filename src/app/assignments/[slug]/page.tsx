@@ -9,7 +9,8 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import StatusBanner from '@/components/StatusBanner';
 import AssignmentSeriesHub from '@/components/assignments/AssignmentSeriesHub';
 import AssignmentSeriesClientRedirect from '@/components/assignments/AssignmentSeriesClientRedirect';
-import { getDueDateForScheduledDay } from '@/lib/course-calendar';
+import { resolveDueDate } from '@/lib/course-calendar';
+import { formatDueTime, DEFAULT_DUE_TIME_LABEL } from '@/lib/utils';
 import {
   buildHw01ChecklistItems,
   getAssignmentSeries,
@@ -77,7 +78,8 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
     const isStyleGuideDemo = slug === 'style-guide-demo';
     const isTutorial02 = slug === 'tutorial02';
     const contentType = slug.startsWith('lab') ? 'labs' : slug.startsWith('career') ? 'career-modules' : undefined;
-    const dueDate = getDueDateForScheduledDay(postData.scheduled_day) || postData.due_date;
+    const dueDate = resolveDueDate(postData);
+    const dueTimeLabel = formatDueTime(postData.due_time || DEFAULT_DUE_TIME_LABEL);
 
     const isSeriesHub = postData.series_role === 'hub' && postData.assignment_series;
     const series = isSeriesHub ? getAssignmentSeries(postData.assignment_series!) : null;
@@ -146,7 +148,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
           <div className="space-y-6 px-4 pb-10 md:px-16">
             {dueDate && (
               <p className="mt-0 text-lg font-bold">
-                Due {formatDate(dueDate)} at 11:59pm
+                Due {formatDate(dueDate)} at {dueTimeLabel}
               </p>
             )}
             <AssignmentSeriesHub
@@ -196,7 +198,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         <div className={`assignment-page max-w-4xl pr-8 pt-6${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
           {dueDate && (
             <p className="mt-0 text-lg font-bold">
-              Due {formatDate(dueDate)} at 11:59pm
+              Due {formatDate(dueDate)} at {dueTimeLabel}
             </p>
           )}
           {isStyleGuideDemo && <StyleGuideStyles />}
