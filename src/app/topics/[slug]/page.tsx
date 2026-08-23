@@ -20,7 +20,11 @@ import { formatDate, formatDueDateTime } from '@/lib/utils';
 import StatusBanner from '@/components/StatusBanner';
 import AssignmentDueMeta from '@/components/topics/AssignmentDueMeta';
 import AssignmentTypeBadge from '@/components/assignments/AssignmentTypeBadge';
-import type { AssignmentBadgeKind } from '@/lib/assignment-badges';
+import {
+  ASSIGNMENT_BADGE_BASE_CLASS,
+  ASSIGNMENT_BADGE_CLASSES,
+  type AssignmentBadgeKind,
+} from '@/lib/assignment-badges';
 
 interface TopicPageProps {
   params: Promise<{
@@ -40,6 +44,9 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
 
 const READING_LINK_CLASS =
   'text-[#0b5d8f] underline decoration-[#0b5d8f] underline-offset-2 dark:text-[#8fc4ee] dark:decoration-[#8fc4ee]';
+
+const NEXT_TIME_DETAILS_BUTTON_CLASS =
+  'inline-flex items-center rounded-lg border border-[#0b5d8f]/35 bg-transparent px-2.5 py-1 text-sm font-medium text-[#0b5d8f] no-underline transition-colors hover:bg-[#0b5d8f]/10 dark:border-[#8fc4ee]/35 dark:text-[#8fc4ee] dark:hover:bg-[#8fc4ee]/10';
 
 function getCitationText(citation: string | ReactElement) {
   return typeof citation === 'string' ? citation.trim() : '';
@@ -279,7 +286,7 @@ function getPrepBadgeKindFromAssignment(input: {
     return 'reflection';
   }
 
-  if (raw === 'career' || raw === 'career module' || haystack.includes('career-module') || haystack.includes('pathwayu')) {
+  if (raw === 'career' || raw === 'Career Module' || haystack.includes('career-module') || haystack.includes('pathwayu')) {
     return 'career';
   }
 
@@ -434,6 +441,49 @@ function hasPrepMaterials(
     bibliographyReadings.length > 0 ||
     getPrepAssignments(meeting).length > 0 ||
     (meeting.beforeClassReminders || []).length > 0
+  );
+}
+
+function countRequiredReadingGroups(readings: Topic['meetings'][number]['readings']) {
+  return groupReadingsByPickOne(readings || []).length;
+}
+
+type NextTimeCategory = 'prep' | 'assignments';
+
+const NEXT_TIME_CATEGORY_LABELS: Record<NextTimeCategory, string> = {
+  prep: 'Class prep',
+  assignments: 'Assignments',
+};
+
+const NEXT_TIME_CATEGORY_CLASSES: Record<NextTimeCategory, string> = {
+  prep: ASSIGNMENT_BADGE_CLASSES.reading,
+  assignments: ASSIGNMENT_BADGE_CLASSES.homework,
+};
+
+function NextTimeCategoryTag({
+  category,
+  assignmentBadgeKind,
+}: {
+  category: NextTimeCategory;
+  assignmentBadgeKind?: AssignmentBadgeKind;
+}) {
+  if (category === 'assignments' && assignmentBadgeKind) {
+    return <AssignmentTypeBadge kind={assignmentBadgeKind} />;
+  }
+
+  return (
+    <span className={`${ASSIGNMENT_BADGE_BASE_CLASS} ${NEXT_TIME_CATEGORY_CLASSES[category]}`}>
+      {NEXT_TIME_CATEGORY_LABELS[category]}
+    </span>
+  );
+}
+
+function NextTimeDetailsLink({ href, linkText = 'View' }: { href: string; linkText?: string }) {
+  return (
+    <Link href={href} className={`${NEXT_TIME_DETAILS_BUTTON_CLASS} gap-1.5`}>
+      <i aria-hidden="true" className="fas fa-link text-xs" />
+      {linkText}
+    </Link>
   );
 }
 
@@ -743,6 +793,126 @@ function TopicOverviewMaterials({
   );
 }
 
+function getClassPrepSummary(
+  readingCount: number,
+  taskCount: number,
+  reminders: NonNullable<Topic['meetings'][number]['beforeClassReminders']>
+) {
+  const parts: string[] = [];
+
+  if (readingCount > 0 && taskCount > 0) {
+    parts.push(
+      `${readingCount} reading${readingCount === 1 ? '' : 's'}`,
+      `${taskCount} task${taskCount === 1 ? '' : 's'}`
+    );
+    return parts.join(' · ');
+  }
+
+  if (readingCount > 0) {
+    return `${readingCount} to complete`;
+  }
+
+  if (taskCount > 0) {
+    return `${taskCount} task${taskCount === 1 ? '' : 's'}`;
+  }
+
+  if (reminders.length === 1 && reminders[0].title) {
+    const title = reminders[0].title.trim();
+    return title.length > 72 ? `${title.slice(0, 69).trimEnd()}…` : title;
+  }
+
+  if (reminders.length > 0) {
+    return `${reminders.length} reminder${reminders.length === 1 ? '' : 's'}`;
+  }
+
+  return 'Prep work';
+}
+
+function TopicForNextTimePanel({
+  nextMeeting,
+  prepAssignments,
+  nextTopicNavItem,
+}: {
+  nextMeeting: Topic['meetings'][number];
+  prepAssignments: Array<{
+    title: string;
+    dueDate?: string;
+    badgeKind: AssignmentBadgeKind;
+  }>;
+  nextTopicNavItem: TopicNavigationItem | null;
+}) {
+  const readingCount = countRequiredReadingGroups(nextMeeting.readings);
+  const taskCount = (nextMeeting.otherPreparation || []).length;
+  const reminders = nextMeeting.beforeClassReminders || [];
+  const hasClassPrep = readingCount > 0 || taskCount > 0 || reminders.length > 0;
+  const isDraft = nextTopicNavItem?.draft === 1;
+  const beforeClassHref =
+    nextMeeting.slug && !isDraft ? `/topics/${nextMeeting.slug}#topic-before-class` : null;
+
+  const rows: Array<{
+    key: string;
+    category: NextTimeCategory;
+    summary: string;
+    href: string | null;
+    assignmentBadgeKind?: AssignmentBadgeKind;
+  }> = [];
+
+  if (hasClassPrep) {
+    rows.push({
+      key: 'prep',
+      category: 'prep',
+      summary: getClassPrepSummary(readingCount, taskCount, reminders),
+      href: beforeClassHref,
+    });
+  }
+
+  prepAssignments.forEach((assignment, index) => {
+    rows.push({
+      key: `assignment-${index}`,
+      category: 'assignments',
+      summary: assignment.title,
+      href: '/assignments',
+      assignmentBadgeKind: assignment.badgeKind,
+    });
+  });
+
+  if (rows.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-4 text-base leading-7 text-gray-800 dark:text-gray-200">
+      <h2 className="mt-0 mb-0 text-xl font-semibold tracking-tight text-gray-950 md:text-2xl dark:text-gray-50">
+        Before next class
+      </h2>
+      <table className="next-time-checklist w-auto! min-w-xl max-w-full border-collapse text-left">
+        <tbody>
+          {rows.map(row => (
+            <tr key={row.key}>
+              <td className="whitespace-nowrap align-top">
+                <NextTimeCategoryTag
+                  category={row.category}
+                  assignmentBadgeKind={row.assignmentBadgeKind}
+                />
+              </td>
+              <td className="wrap-break-word align-top text-gray-800 dark:text-gray-200">
+                {row.summary}
+              </td>
+              <td className="whitespace-nowrap text-right align-top">
+                {row.href ? (
+                  <NextTimeDetailsLink href={row.href} />
+                ) : (
+                  <span className="text-sm text-gray-500 dark:text-gray-400">Not yet available</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function TopicClassWorkPanel({
   embeddedTopicContent,
 }: {
@@ -887,6 +1057,9 @@ export default async function TopicPage({ params }: TopicPageProps) {
     : null;
   const embeddedTopicContent = await getEmbeddedTopicContent(meeting);
   const nextClassMeeting = getNextClassMeeting(topics, meeting.slug || slug);
+  const nextTopicNavItem = nextClassMeeting?.slug
+    ? topicNavigationItems.find(item => item.slug === nextClassMeeting.slug) ?? null
+    : null;
   const prepAssignments = getPrepAssignments(meeting);
   const nextClassPrepAssignments = nextClassMeeting ? getPrepAssignments(nextClassMeeting) : [];
   const todayContent = topicPostData?.content.trim()
@@ -949,15 +1122,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
       navItem: { id: 'topic-next', label: 'For next time' },
       panel: (
         <TopicWorkflowSection id="topic-next" label="For next time">
-          <TopicOverviewMaterials
-            readings={nextClassMeeting.readings}
-            optionalReadings={nextClassMeeting.optionalReadings}
-            otherPreparation={nextClassMeeting.otherPreparation}
-            bibliographyReadings={[]}
+          <TopicForNextTimePanel
+            nextMeeting={nextClassMeeting}
             prepAssignments={nextClassPrepAssignments}
-            beforeClassReminders={nextClassMeeting.beforeClassReminders}
-            meetingSlug={nextClassMeeting.slug}
-            classDate={nextClassMeeting.date}
+            nextTopicNavItem={nextTopicNavItem}
           />
         </TopicWorkflowSection>
       ),

@@ -122,7 +122,7 @@ tr {
 
 th,
 td {
-  @apply border-b p-2 border-gray-900 dark:border-gray-100;
+  @apply border-t border-b p-2 border-gray-900 dark:border-gray-100;
   background: var(--background);
   /* border-color: var(--border); */
   color: var(--foreground);
@@ -1145,6 +1145,43 @@ pre code {
 .topic-page .prose > h2:first-child,
 .topic-page .prose > h3:first-child {
   @apply mt-0;
+}
+
+/* For next time checklist: override global near-black table borders */
+table.next-time-checklist {
+  @apply mb-0 w-auto;
+  border: 0;
+}
+
+table.next-time-checklist td {
+  @apply bg-transparent py-3;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: inherit;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dark table.next-time-checklist td {
+  border-bottom-color: #374151;
+}
+
+table.next-time-checklist td:first-child {
+  padding-right: 1rem;
+}
+
+table.next-time-checklist td:nth-child(2) {
+  padding-right: 1.5rem;
+}
+
+table.next-time-checklist tbody tr:first-child td {
+  border-top: 1px solid #e5e7eb;
+}
+
+.dark table.next-time-checklist tbody tr:first-child td {
+  border-top-color: #374151;
 }
 
 .cheatsheet-content table.cheatsheet-table {
