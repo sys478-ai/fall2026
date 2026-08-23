@@ -10,6 +10,7 @@ import StatusBanner from '@/components/StatusBanner';
 import AssignmentSeriesHub from '@/components/assignments/AssignmentSeriesHub';
 import AssignmentSeriesClientRedirect from '@/components/assignments/AssignmentSeriesClientRedirect';
 import { resolveDueDate } from '@/lib/course-calendar';
+import { getCareerModuleDisplayTitle } from '@/lib/assignment-display';
 import { formatDueTime, DEFAULT_DUE_TIME_LABEL } from '@/lib/utils';
 import {
   buildHw01ChecklistItems,
@@ -42,6 +43,13 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
       notFound();
     }
 
+    const assignmentDisplayTitle = getCareerModuleDisplayTitle({
+      id: slug,
+      num: postData.num,
+      title: postData.title,
+      type: postData.type,
+    });
+
     const seriesRedirect = getSeriesRedirectTarget(slug, postData);
     if (seriesRedirect) {
       return (
@@ -56,19 +64,19 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
                 className="px-4 md:px-16"
                 items={[
                   { label: 'Assignments', href: '/assignments' },
-                  { label: postData.title },
+                  { label: assignmentDisplayTitle },
                 ]}
               />
               <TopLevelPageHeader
                 label={postData.type || 'Assignment'}
-                title={postData.title}
+                title={assignmentDisplayTitle}
                 tone="sky"
               />
             </div>
           }
         >
           <div className="assignment-page max-w-4xl px-4 pt-6 md:px-16">
-            <AssignmentSeriesClientRedirect href={seriesRedirect} title={postData.title} />
+            <AssignmentSeriesClientRedirect href={seriesRedirect} title={assignmentDisplayTitle} />
           </div>
         </ContentLayout>
       );
@@ -182,12 +190,12 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
                 className="px-4 md:px-16"
                 items={[
                   { label: 'Assignments', href: '/assignments' },
-                  { label: postData.title },
+                  { label: assignmentDisplayTitle },
                 ]}
               />
               <TopLevelPageHeader
                 label={postData.type || 'Assignment'}
-                title={postData.title}
+                title={assignmentDisplayTitle}
                 description={postData.excerpt}
                 tone="sky"
               />

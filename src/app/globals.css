@@ -88,8 +88,8 @@ h5 {
 }
 
 table {
-  @apply w-full border-collapse mb-8 border;
-  border-color: var(--border);
+  @apply w-full border-collapse border-0 mb-8 border-gray-900 dark:border-gray-100;
+  /* border-color: var(--border); */
   table-layout: auto;
 }
 
@@ -122,18 +122,18 @@ tr {
 
 th,
 td {
-  @apply border-b p-2;
+  @apply border-b p-2 border-gray-900 dark:border-gray-100;
   background: var(--background);
-  border-color: var(--border);
+  /* border-color: var(--border); */
   color: var(--foreground);
   word-wrap: break-word;
-  vertical-align: top;
+  /* vertical-align: top; */
 }
 
 th {
-  @apply text-left border-b;
-  border-color: var(--border);
-  background: var(--table-header);
+  @apply text-left border-0 border-t-2 border-b-2 border-gray-900 dark:border-gray-100;
+  /* border-color: var(--border); */
+  /* background: var(--table-header); */
   color: var(--foreground);
 }
 

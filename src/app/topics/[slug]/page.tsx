@@ -18,6 +18,9 @@ import { groupReadingsByPickOne } from '@/lib/reading-groups';
 import { getTopicModules } from '@/lib/topic-config';
 import { formatDate, formatDueDateTime } from '@/lib/utils';
 import StatusBanner from '@/components/StatusBanner';
+import AssignmentDueMeta from '@/components/topics/AssignmentDueMeta';
+import AssignmentTypeBadge from '@/components/assignments/AssignmentTypeBadge';
+import type { AssignmentBadgeKind } from '@/lib/assignment-badges';
 
 interface TopicPageProps {
   params: Promise<{
@@ -211,23 +214,97 @@ function TopicOverviewMarkdown({ content }: { content: string }) {
   );
 }
 
+function PrepBeforeClassBanner({ classDate }: { classDate?: string }) {
+  if (!classDate) {
+    return null;
+  }
+
+  return (
+    <div
+      className="border-0 border-l-8 border-indigo-600 bg-indigo-50 px-4 pt-4 pb-0.5 dark:border-indigo-900/80 dark:bg-indigo-950/35"
+      role="note"
+    >
+      <p className="mb-0 text leading-6 text-indigo-950 dark:text-indigo-100">
+        <i aria-hidden="true" className="far text-2xl fa-calendar mr-1.5 text-indigo-700 dark:text-indigo-300" />
+        Please complete the tasks and readings listed below before class on{' '}
+        <span className="font-semibold">{classDate}</span>.
+      </p>
+    </div>
+  );
+}
+
 function PrepGroup({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
       <h2 className="mt-0 mb-3 text-xl font-semibold tracking-tight text-gray-950 md:text-2xl dark:text-gray-50">
         {label}
       </h2>
-      <ul className="mb-0 mt-0 list-disc space-y-2 pl-5 text-base leading-7 text-gray-800 dark:text-gray-200">
-        {children}
-      </ul>
+      <div className="space-y-3">{children}</div>
     </div>
   );
+}
+
+type PrepBadgeKind = AssignmentBadgeKind;
+
+function PrepItemBadge({ kind }: { kind: PrepBadgeKind }) {
+  return <AssignmentTypeBadge kind={kind} className="mt-0.5" />;
+}
+
+function PrepItemRow({ kind, children }: { kind: PrepBadgeKind; children: ReactNode }) {
+  return (
+    <div className="flex items-start gap-3 text-base leading-7 text-gray-800 dark:text-gray-200">
+      <PrepItemBadge kind={kind} />
+      <div className="min-w-0">{children}</div>
+    </div>
+  );
+}
+
+function getPrepBadgeKindFromAssignment(input: {
+  type?: string;
+  title?: string;
+  href?: string;
+}): PrepBadgeKind {
+  const raw = (input.type || '').toLowerCase().trim();
+  const haystack = `${raw} ${input.title || ''} ${input.href || ''}`.toLowerCase();
+
+  if (raw === 'quiz' || haystack.includes('/quizzes/')) {
+    return 'quiz';
+  }
+
+  if (raw === 'discussion' || haystack.includes('discussion')) {
+    return 'discussion';
+  }
+
+  if (raw === 'reflection') {
+    return 'reflection';
+  }
+
+  if (raw === 'career' || raw === 'career module' || haystack.includes('career-module') || haystack.includes('pathwayu')) {
+    return 'career';
+  }
+
+  if (raw === 'lab') {
+    return 'lab';
+  }
+
+  return 'homework';
+}
+
+function getTaskBadgeKind(citation: string | ReactElement): PrepBadgeKind {
+  const text = getCitationText(citation).toLowerCase();
+
+  if (text.includes('pathwayu') || text.includes('career')) {
+    return 'career';
+  }
+
+  return 'homework';
 }
 
 interface TopicNavigationItem {
   slug: string;
   title: string;
   number: string;
+  draft?: number;
 }
 
 interface EmbeddedTopicContent {
@@ -252,6 +329,7 @@ function getTopicNavigationItems(topics: Topic[]): TopicNavigationItem[] {
               slug: meeting.slug,
               title: meeting.topic,
               number: getMeetingTopicNumber(topic, index),
+              draft: meeting.draft,
             },
           ]
         : []
@@ -297,6 +375,10 @@ function getDiscussionDueLabel(item: { dueDate?: string; dueTime?: string }, mee
   return formatDueDateTime(dateLabel, item.dueTime);
 }
 
+function getPrepAssignmentDueDateIso(dueDate?: string) {
+  return dueDate && /^\d{4}-\d{2}-\d{2}$/.test(dueDate) ? dueDate : undefined;
+}
+
 function getPrepAssignments(meeting: Topic['meetings'][number]) {
   const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
 
@@ -314,15 +396,29 @@ function getPrepAssignments(meeting: Topic['meetings'][number]) {
           title: getAssignmentTitle(item),
           href: item.url,
           dueDate: formatDueDateTime(dateLabel, item.dueTime),
+          dueDateIso: getPrepAssignmentDueDateIso(item.dueDate),
+          dueTime: item.dueTime,
           notes: item.notes,
+          badgeKind: getPrepBadgeKindFromAssignment({
+            type: item.type,
+            title: getAssignmentTitle(item),
+            href: item.url,
+          }),
         },
       ];
     }),
-    ...(meeting.discussionAssignments || []).map(item => ({
+    ...(meeting.assignments || []).map(item => ({
       title: item.title,
       href: item.url,
       dueDate: getDiscussionDueLabel(item, meeting.date),
+      dueDateIso: getPrepAssignmentDueDateIso(item.dueDate),
+      dueTime: item.dueTime,
       notes: item.notes,
+      badgeKind: getPrepBadgeKindFromAssignment({
+        type: item.type,
+        title: item.title,
+        href: item.url,
+      }),
     })),
   ];
 }
@@ -334,6 +430,7 @@ function hasPrepMaterials(
   return (
     (meeting.readings || []).length > 0 ||
     (meeting.optionalReadings || []).length > 0 ||
+    (meeting.otherPreparation || []).length > 0 ||
     bibliographyReadings.length > 0 ||
     getPrepAssignments(meeting).length > 0 ||
     (meeting.beforeClassReminders || []).length > 0
@@ -493,21 +590,28 @@ function renderReadingItems(
     if (group.kind === 'single') {
       const { reading } = group;
       return (
-        <li key={`${keyPrefix}-${index}`}>{renderReading(reading.citation, reading.url, reading.notes)}</li>
+        <PrepItemRow key={`${keyPrefix}-${index}`} kind="reading">
+          {renderReading(reading.citation, reading.url, reading.notes)}
+        </PrepItemRow>
       );
     }
 
     return (
-      <li key={`${keyPrefix}-${index}`}>
-        Pick one
-        <ul className="mt-2 list-disc space-y-2 pl-5">
-          {group.options.map((reading, optionIndex) => (
-            <li key={`${keyPrefix}-${index}-${optionIndex}`}>
-              {renderReading(reading.citation, reading.url, reading.notes)}
-            </li>
-          ))}
-        </ul>
-      </li>
+      <PrepItemRow key={`${keyPrefix}-${index}`} kind="reading">
+        <div>
+          <span className="font-medium text-gray-900 dark:text-gray-100">Pick one</span>
+          <div className="mt-2 space-y-2 border-l-2 border-gray-200 pl-4 dark:border-gray-700">
+            {group.options.map((reading, optionIndex) => (
+              <div key={`${keyPrefix}-${index}-${optionIndex}`} className="flex items-start gap-2">
+                <span className="mt-0.5 shrink-0 text-sm font-semibold tabular-nums text-gray-500 dark:text-gray-400">
+                  {optionIndex + 1}.
+                </span>
+                <div className="min-w-0">{renderReading(reading.citation, reading.url, reading.notes)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </PrepItemRow>
     );
   });
 }
@@ -515,24 +619,38 @@ function renderReadingItems(
 function TopicOverviewMaterials({
   readings,
   optionalReadings,
+  otherPreparation,
   bibliographyReadings,
   prepAssignments,
   beforeClassReminders,
   meetingSlug,
+  classDate,
 }: {
   readings: Topic['meetings'][number]['readings'];
   optionalReadings: Topic['meetings'][number]['optionalReadings'];
+  otherPreparation?: Topic['meetings'][number]['otherPreparation'];
   bibliographyReadings: Reading[];
-  prepAssignments: Array<{ title: string; href?: string; dueDate?: string; notes?: string }>;
+  prepAssignments: Array<{
+    title: string;
+    href?: string;
+    dueDate?: string;
+    dueDateIso?: string;
+    dueTime?: string;
+    notes?: string;
+    badgeKind: PrepBadgeKind;
+  }>;
   beforeClassReminders?: Topic['meetings'][number]['beforeClassReminders'];
   meetingSlug?: string;
+  classDate?: string;
 }) {
   const assignedReadings = readings || [];
   const extraReadings = optionalReadings || [];
+  const otherPrep = otherPreparation || [];
   const reminders = beforeClassReminders || [];
   const hasContent =
     assignedReadings.length > 0 ||
     extraReadings.length > 0 ||
+    otherPrep.length > 0 ||
     bibliographyReadings.length > 0 ||
     prepAssignments.length > 0 ||
     reminders.length > 0;
@@ -543,10 +661,11 @@ function TopicOverviewMaterials({
 
   return (
     <div className="space-y-10">
+      <PrepBeforeClassBanner classDate={classDate} />
       {reminders.length > 0 && (
         <PrepGroup label="Reminders">
           {reminders.map((reminder, index) => (
-            <li key={`${meetingSlug}-reminder-${index}`}>
+            <div key={`${meetingSlug}-reminder-${index}`} className="text-base leading-7 text-gray-800 dark:text-gray-200">
               {reminder.url ? (
                 <Link href={reminder.url} className="font-medium text-blue-600 hover:underline dark:text-blue-400">
                   {reminder.title}
@@ -555,12 +674,21 @@ function TopicOverviewMaterials({
                 reminder.title
               )}
               <span className="mt-1 block text-sm text-gray-500 dark:text-gray-400">{reminder.notes}</span>
-            </li>
+            </div>
+          ))}
+        </PrepGroup>
+      )}
+      {otherPrep.length > 0 && (
+        <PrepGroup label="Tasks">
+          {otherPrep.map((item, index) => (
+            <PrepItemRow key={`${meetingSlug}-other-prep-${index}`} kind={getTaskBadgeKind(item.citation)}>
+              {renderReading(item.citation, item.url, item.notes)}
+            </PrepItemRow>
           ))}
         </PrepGroup>
       )}
       {assignedReadings.length > 0 && (
-        <PrepGroup label="Readings">
+        <PrepGroup label="Required Readings">
           {renderReadingItems(assignedReadings, `${meetingSlug}-reading`)}
         </PrepGroup>
       )}
@@ -572,36 +700,42 @@ function TopicOverviewMaterials({
       {bibliographyReadings.length > 0 && (
         <PrepGroup label="Field Guide bibliography">
           {bibliographyReadings.map((reading: Reading) => (
-            <li key={reading.id}>
-              <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
-                {reading.title}
-              </a>
-              {reading.authors && <span className="text-gray-500 dark:text-gray-400"> — {reading.authors}</span>}
-            </li>
+            <PrepItemRow key={reading.id} kind="reading">
+              <span>
+                <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
+                  {reading.title}
+                </a>
+                {reading.authors && <span className="text-gray-500 dark:text-gray-400"> — {reading.authors}</span>}
+              </span>
+            </PrepItemRow>
           ))}
         </PrepGroup>
       )}
       {prepAssignments.length > 0 && (
-        <PrepGroup label="Due">
+        <PrepGroup label="Submit to Canvas">
           {prepAssignments.map((item, index) => (
-            <li key={`${meetingSlug}-prep-${index}`}>
-              {item.href ? (
-                <Link
-                  href={item.href}
-                  {...(/^https?:\/\//i.test(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="text-blue-600 hover:underline dark:text-blue-400"
-                >
-                  {item.title}
-                </Link>
-              ) : (
-                item.title
-              )}
-              {(item.dueDate || item.notes) && (
-                <span className="mt-1 block text-sm text-gray-500 dark:text-gray-400">
-                  {[item.dueDate ? `Due ${item.dueDate}` : null, item.notes].filter(Boolean).join(' · ')}
-                </span>
-              )}
-            </li>
+            <PrepItemRow key={`${meetingSlug}-prep-${index}`} kind={item.badgeKind}>
+              <span>
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    {...(/^https?:\/\//i.test(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="text-blue-600 hover:underline dark:text-blue-400"
+                  >
+                    {item.title}
+                  </Link>
+                ) : (
+                  item.title
+                )}
+                {(item.dueDate || item.dueDateIso) && (
+                  <AssignmentDueMeta
+                    dueDateLabel={item.dueDate}
+                    dueDateIso={item.dueDateIso}
+                    dueTime={item.dueTime}
+                  />
+                )}
+              </span>
+            </PrepItemRow>
           ))}
         </PrepGroup>
       )}
@@ -666,6 +800,40 @@ function TopicHeader({
   );
 }
 
+function TopicSequenceNavLink({
+  direction,
+  item,
+}: {
+  direction: 'previous' | 'next';
+  item: TopicNavigationItem;
+}) {
+  const isDraft = item.draft === 1;
+  const label = direction === 'previous' ? 'Previous' : 'Next';
+  const alignClass = direction === 'next' ? 'text-right' : '';
+
+  if (isDraft) {
+    return (
+      <span
+        className={`min-w-0 max-w-[48%] ${alignClass}`}
+        aria-disabled="true"
+        title="Draft — not yet available"
+      >
+        <span className="block text-sm text-gray-400 dark:text-gray-600">{label}</span>
+        <span className="mt-1 block text-base font-medium text-gray-400 dark:text-gray-600">{item.title}</span>
+      </span>
+    );
+  }
+
+  return (
+    <Link href={`/topics/${item.slug}`} className={`group min-w-0 max-w-[48%] no-underline ${alignClass}`}>
+      <span className="block text-sm text-gray-500 dark:text-gray-400">{label}</span>
+      <span className="mt-1 block text-base font-medium text-gray-950 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
+        {item.title}
+      </span>
+    </Link>
+  );
+}
+
 function TopicSequenceNav({
   previousTopic,
   nextTopic,
@@ -682,33 +850,9 @@ function TopicSequenceNav({
       className="mt-16 flex items-start justify-between gap-8 border-t border-gray-200 pt-10 dark:border-gray-800"
       aria-label="Topic navigation"
     >
-      {previousTopic ? (
-        <Link
-          href={`/topics/${previousTopic.slug}`}
-          className="group min-w-0 max-w-[48%] no-underline"
-        >
-          <span className="block text-sm text-gray-500 dark:text-gray-400">Previous</span>
-          <span className="mt-1 block text-base font-medium text-gray-950 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
-            {previousTopic.title}
-          </span>
-        </Link>
-      ) : (
-        <span />
-      )}
+      {previousTopic ? <TopicSequenceNavLink direction="previous" item={previousTopic} /> : <span />}
 
-      {nextTopic ? (
-        <Link
-          href={`/topics/${nextTopic.slug}`}
-          className="group min-w-0 max-w-[48%] text-right no-underline"
-        >
-          <span className="block text-sm text-gray-500 dark:text-gray-400">Next</span>
-          <span className="mt-1 block text-base font-medium text-gray-950 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
-            {nextTopic.title}
-          </span>
-        </Link>
-      ) : (
-        <span />
-      )}
+      {nextTopic ? <TopicSequenceNavLink direction="next" item={nextTopic} /> : <span />}
     </nav>
   );
 }
@@ -736,6 +880,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
   const readings = meeting.readings || [];
   const optionalReadings = meeting.optionalReadings || [];
+  const otherPreparation = meeting.otherPreparation || [];
   const bibliographyReadings = getReadingsForTopic(meeting.scheduledDay);
   const topicPostData = meeting.topicContentId
     ? await getPostData(meeting.topicContentId, 'topics').catch(() => null)
@@ -760,6 +905,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
           <TopicOverviewMaterials
             readings={readings}
             optionalReadings={optionalReadings}
+            otherPreparation={otherPreparation}
             bibliographyReadings={bibliographyReadings}
             prepAssignments={prepAssignments}
             beforeClassReminders={meeting.beforeClassReminders}
@@ -806,10 +952,12 @@ export default async function TopicPage({ params }: TopicPageProps) {
           <TopicOverviewMaterials
             readings={nextClassMeeting.readings}
             optionalReadings={nextClassMeeting.optionalReadings}
+            otherPreparation={nextClassMeeting.otherPreparation}
             bibliographyReadings={[]}
             prepAssignments={nextClassPrepAssignments}
             beforeClassReminders={nextClassMeeting.beforeClassReminders}
             meetingSlug={nextClassMeeting.slug}
+            classDate={nextClassMeeting.date}
           />
         </TopicWorkflowSection>
       ),
@@ -836,7 +984,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         ) : undefined
       }
     >
-      <div className="space-y-8 pb-16">
+      <div className="space-y-8 pb-4">
         <Breadcrumbs
           className="px-4 md:px-16"
           items={[

@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
+import { getCareerModuleDisplayTitle } from '@/lib/assignment-display';
+import type { AssignmentBadgeKind } from '@/lib/assignment-badges';
+import AssignmentTypeBadge from '@/components/assignments/AssignmentTypeBadge';
 import { formatDate, formatDueTime, DEFAULT_DUE_TIME_LABEL } from '@/lib/utils';
 
 interface AssignmentData {
@@ -29,14 +32,10 @@ interface AssignmentsTabbedListProps {
   items: AssignmentData[];
 }
 
-const ASSIGNMENT_TAGS = ['reflection', 'lab', 'homework', 'career', 'discussion'] as const;
-
-type AssignmentTag = (typeof ASSIGNMENT_TAGS)[number];
-
-function getAssignmentTag(item: AssignmentData): AssignmentTag {
+function getAssignmentTag(item: AssignmentData): AssignmentBadgeKind {
   const raw = (item.external_type || item.type || '').toLowerCase().trim();
 
-  if (raw === 'discussion' || item.id.startsWith('discussion-')) {
+  if (raw === 'discussion') {
     return 'discussion';
   }
 
@@ -52,11 +51,15 @@ function getAssignmentTag(item: AssignmentData): AssignmentTag {
     return 'reflection';
   }
 
-  return 'homework';
-}
+  if (raw === 'quiz' || item.id.startsWith('quiz')) {
+    return 'quiz';
+  }
 
-function getTagLabel(tag: AssignmentTag) {
-  return tag.charAt(0).toUpperCase() + tag.slice(1);
+  if (item.id.startsWith('discussion-')) {
+    return 'discussion';
+  }
+
+  return 'homework';
 }
 
 function getDaysLeftLabel(dueDate?: string) {
@@ -73,7 +76,7 @@ function getDaysLeftLabel(dueDate?: string) {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   if (diffDays < 0) {
-    return 'Overdue';
+    return 'Deadline passed';
   }
 
   if (diffDays === 0) {
@@ -113,14 +116,14 @@ function getHref(item: AssignmentData) {
 
 export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListProps) {
   return (
-    <table className="m-0 w-full max-w-5xl border-collapse text-left">
+    <table className="mt-8 w-full max-w-5xl border-collapse text-left">
       <thead>
         <tr className="border-b border-gray-200 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500 dark:border-gray-800 dark:text-gray-400">
-          <th className="w-[6.5rem] px-2 py-2 font-semibold">Due</th>
-          <th className="w-[5.5rem] px-2 py-2 font-semibold">Time</th>
-          <th className="w-[7.5rem] px-2 py-2 font-semibold">Type</th>
+          <th className="w-[6.5rem] px-2 pt-2 font-semibold">Due</th>
+          <th className="w-[5.5rem] px-2 pt-2 font-semibold">Time</th>
+          <th className="w-[7.5rem] px-2 pt-2 font-semibold">Type</th>
           <th className="px-2 py-2 font-semibold">Assignment</th>
-          <th className="hidden w-[8.5rem] px-2 py-2 text-right font-semibold sm:table-cell">Days left</th>
+          <th className="hidden w-[8.5rem] px-2 pt-2 text-right font-semibold sm:table-cell">Days left</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
@@ -130,7 +133,7 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
           const tag = getAssignmentTag(item);
           const daysLeftLabel = getDaysLeftLabel(item.due_date);
           const dueTimeLabel = getDueTimeLabel(item.due_date, item.due_time);
-          const titleContent = <span>{item.title}</span>;
+          const titleContent = <span>{getCareerModuleDisplayTitle(item)}</span>;
 
           return (
             <tr key={item.id} className="align-top">
@@ -140,10 +143,8 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
               <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-600 dark:text-gray-400">
                 {dueTimeLabel || '—'}
               </td>
-              <td className="px-2 py-3">
-                <span className="inline-flex rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-700 dark:border-gray-800 dark:text-gray-300">
-                  {getTagLabel(tag)}
-                </span>
+              <td className="whitespace-nowrap px-2 py-3">
+                <AssignmentTypeBadge kind={tag} isDraft={draft} />
               </td>
               <td className="px-2 py-3">
                 {item.notes && (
@@ -153,16 +154,16 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
                 )}
 
                 {draft ? (
-                  <span className="flex items-start gap-2 text-md text-gray-500 dark:text-gray-500">
-                    <LockClosedIcon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span className="flex items-start gap-2 text-md leading-snug text-gray-500 dark:text-gray-500">
                     {titleContent}
+                    <LockClosedIcon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" title="Draft" />
                   </span>
                 ) : item.external_url ? (
                   <a
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-md text-[#0b5d8f] no-underline hover:underline dark:text-[#8fc4ee]"
+                    className="block text-md leading-snug text-[#0b5d8f] no-underline hover:underline dark:text-[#8fc4ee]"
                   >
                     {titleContent}
                     <span className="ml-1 text-xs">↗</span>
@@ -170,7 +171,7 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
                 ) : (
                   <Link
                     href={href}
-                    className="block text-md text-[#0b5d8f] no-underline hover:underline dark:text-[#8fc4ee]"
+                    className="block text-md leading-snug text-[#0b5d8f] no-underline hover:underline dark:text-[#8fc4ee]"
                   >
                     {titleContent}
                   </Link>

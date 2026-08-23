@@ -12,12 +12,13 @@ export interface TopicReading {
   pickOne?: boolean;
 }
 
-export interface TopicDiscussionAssignment {
+export interface TopicAssignment {
   title: string;
   notes?: string;
   url?: string;
   dueDate?: string;
   dueTime?: string;
+  type?: string;
 }
 
 export interface TopicMarkdownMetadata {
@@ -36,7 +37,8 @@ export interface TopicMarkdownMetadata {
   braidElsiConnection: string;
   readings: TopicReading[];
   optionalReadings: TopicReading[];
-  discussionAssignments: TopicDiscussionAssignment[];
+  otherPreparation: TopicReading[];
+  assignments: TopicAssignment[];
   holiday?: boolean;
   retired?: boolean;
   draft: number;
@@ -80,13 +82,13 @@ function asReadingArray(value: unknown): TopicReading[] {
     .filter((reading): reading is TopicReading => reading !== null);
 }
 
-function asDiscussionAssignmentArray(value: unknown): TopicDiscussionAssignment[] {
+function asTopicAssignmentArray(value: unknown): TopicAssignment[] {
   if (!Array.isArray(value)) {
     return [];
   }
 
   return value
-    .map((item): TopicDiscussionAssignment | null => {
+    .map((item): TopicAssignment | null => {
       if (typeof item === 'string' && item.trim() !== '') {
         return { title: item.trim() };
       }
@@ -101,6 +103,7 @@ function asDiscussionAssignmentArray(value: unknown): TopicDiscussionAssignment[
       const url = typeof record.url === 'string' ? record.url.trim() : '';
       const dueDate = typeof record.due_date === 'string' ? record.due_date.trim() : '';
       const dueTime = typeof record.due_time === 'string' ? record.due_time.trim() : '';
+      const type = typeof record.type === 'string' ? record.type.trim() : '';
 
       if (!title) {
         return null;
@@ -112,9 +115,10 @@ function asDiscussionAssignmentArray(value: unknown): TopicDiscussionAssignment[
         url: url || undefined,
         dueDate: dueDate || undefined,
         dueTime: dueTime || undefined,
+        type: type || undefined,
       };
     })
-    .filter((item): item is TopicDiscussionAssignment => item !== null);
+    .filter((item): item is TopicAssignment => item !== null);
 }
 
 function asString(value: unknown, fallback = '') {
@@ -183,7 +187,8 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     braidElsiConnection: asString(data.braid_elsi_connection),
     readings: asReadingArray(data.readings),
     optionalReadings: asReadingArray(data.optional_readings),
-    discussionAssignments: asDiscussionAssignmentArray(data.discussion_assignments),
+    otherPreparation: asReadingArray(data.pre_class_tasks ?? data.other_preparation),
+    assignments: asTopicAssignmentArray(data.assignments ?? data.discussion_assignments),
     holiday: data.holiday === true,
     retired: data.retired === true,
     draft: data.draft === 0 || data.draft === false ? 0 : 1,
@@ -210,7 +215,7 @@ export function getTopicMarkdownByModule(moduleSlug: string) {
   return getAllTopicMarkdownMetadata().filter(topic => topic.module === moduleSlug && !topic.retired);
 }
 
-export interface DiscussionAssignmentIndexItem {
+export interface TopicAssignmentIndexItem {
   id: string;
   title: string;
   notes?: string;
@@ -220,22 +225,28 @@ export interface DiscussionAssignmentIndexItem {
   scheduledDay?: number;
   topicSlug: string;
   draft: number;
+  type?: string;
 }
 
-export function getDiscussionAssignmentIndexItems(): DiscussionAssignmentIndexItem[] {
+export function getTopicAssignmentIndexItems(): TopicAssignmentIndexItem[] {
   return getAllTopicMarkdownMetadata()
     .filter(topic => !topic.retired && !topic.holiday)
     .flatMap(topic =>
-      topic.discussionAssignments.map((item, index) => ({
-        id: `discussion-${topic.slug}-${index}`,
-        title: item.title,
-        notes: item.notes,
-        url: item.url,
-        dueDate: item.dueDate,
-        dueTime: item.dueTime,
-        scheduledDay: topic.scheduledDay,
-        topicSlug: topic.slug,
-        draft: topic.draft,
-      }))
+      topic.assignments.map((item, index) => {
+        const typeSlug = (item.type || 'assignment').toLowerCase().replace(/\s+/g, '-');
+
+        return {
+          id: `${typeSlug}-${topic.slug}-${index}`,
+          title: item.title,
+          notes: item.notes,
+          url: item.url,
+          dueDate: item.dueDate,
+          dueTime: item.dueTime,
+          scheduledDay: topic.scheduledDay,
+          topicSlug: topic.slug,
+          draft: topic.draft,
+          type: item.type,
+        };
+      })
     );
 }

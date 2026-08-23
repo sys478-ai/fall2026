@@ -18,13 +18,12 @@ readings:
 optional_readings:
   - citation: 'AI Warehouse. (2023). AI learns to walk (deep reinforcement learning) [Video]. YouTube.'
     url: 'https://www.youtube.com/watch?v=L_4BPjLBF4E'
-discussion_assignments:
+assignments:
   - title: 'Biological Intelligence Reflection'
-    notes: 'Canvas Discussion Forum'
     url: 'https://unca.instructure.com/courses/1907/assignments/8714'
     due_date: '2026-08-25'
     due_time: '3:00PM'
-    type: 'reading response'
+    type: 'reflection'
 ---
 
 ## Topic / Focus

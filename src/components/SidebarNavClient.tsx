@@ -17,7 +17,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import { getModuleColorClasses, type ModuleColorToken } from '@/lib/module-colors';
-import { readTopicProgressStatus, TOPIC_PROGRESS_EVENT, type TopicProgressStatus } from '@/lib/topic-progress';
 
 interface SidebarTopicItem {
   id: string;
@@ -48,10 +47,6 @@ function normalizePath(path: string) {
   return path.replace(/^\/fall2026/, '').replace(/\/$/, '') || '/';
 }
 
-function getTopicSlugFromHref(href: string) {
-  return href.match(/\/topics\/([^/#?]+)/)?.[1] || null;
-}
-
 function getModuleIdFromPath(path: string) {
   const match = path.match(/^\/modules\/(\d+)$/);
   return match ? Number.parseInt(match[1], 10) : null;
@@ -64,7 +59,6 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const [mounted, setMounted] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [topicProgress, setTopicProgress] = useState<Record<string, TopicProgressStatus>>({});
   const showModules =
     normalizedPath === '/modules' ||
     getModuleIdFromPath(normalizedPath) !== null ||
@@ -79,48 +73,8 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const refreshTopicProgress = () => {
-      const nextTopicProgress: Record<string, TopicProgressStatus> = {};
-
-      modules.forEach(module => {
-        module.topics.forEach(topic => {
-          const topicSlug = getTopicSlugFromHref(topic.contentHref);
-          if (topicSlug) {
-            nextTopicProgress[topicSlug] = readTopicProgressStatus(topicSlug);
-          }
-        });
-      });
-
-      setTopicProgress(nextTopicProgress);
-    };
-
-    const handleTopicProgressChanged = () => {
-      refreshTopicProgress();
-    };
-
-    const handleStorage = (event: StorageEvent) => {
-      if (event.key?.startsWith('topic-complete-') || event.key?.startsWith('topic-progress-')) {
-        refreshTopicProgress();
-      }
-    };
-
-    refreshTopicProgress();
-    window.addEventListener(TOPIC_PROGRESS_EVENT, handleTopicProgressChanged as EventListener);
-    window.addEventListener('storage', handleStorage);
-
-    return () => {
-      window.removeEventListener(TOPIC_PROGRESS_EVENT, handleTopicProgressChanged as EventListener);
-      window.removeEventListener('storage', handleStorage);
-    };
-  }, [modules]);
-
-  useEffect(() => {
     if (typeof document === 'undefined') return;
-    document.documentElement.style.setProperty('--app-sidebar-width', collapsed ? '5rem' : '18rem');
+    document.documentElement.style.setProperty('--app-sidebar-width', collapsed ? '5rem' : '16rem');
   }, [collapsed]);
 
   useEffect(() => {
@@ -161,7 +115,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const activeTopLevelClass = 'bg-slate-200 font-semibold text-slate-950 dark:bg-slate-800 dark:text-slate-50';
   const inactiveTopLevelClass =
     'text-slate-700 hover:font-semibold hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100';
-  const activeNestedClass = 'border-l-4 border-b bg-transparent font-semibold';
+  const activeNestedClass = 'border-l-4 border-b font-semibold';
   const inactiveNestedClass =
     'border-l-4 border-transparent text-slate-700 hover:border-slate-300 hover:font-semibold hover:text-slate-950 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:text-slate-100';
 
@@ -191,7 +145,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
   const sidebarInner = (
     <div
       className={`flex h-full flex-col border-r border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950 ${
-        collapsed ? 'w-20' : 'w-80'
+        collapsed ? 'w-20' : 'w-64'
       } transition-[width] duration-300 ease-in-out`}
     >
       <div className="flex items-center justify-between border-b border-slate-200 px-4 py-4 dark:border-slate-800">
@@ -320,77 +274,60 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                 const isLocked = isNoClass || isDraft;
                                 const isTopicActive =
                                   !isLocked && normalizePath(topic.contentHref) === normalizedPath;
-                                const topicSlug = getTopicSlugFromHref(topic.contentHref);
-                                const currentTopicProgress = topicSlug ? topicProgress[topicSlug] : 'not-started';
-                                const isCompleted = currentTopicProgress === 'complete';
-                                const isPartiallyCompleted = currentTopicProgress === 'partial';
                                 const isModuleOverview = topic.date === 'Module overview';
                                 const showDate = !isModuleOverview && Boolean(topic.date);
-                                const rowClassName = `block py-2 pl-15 pr-6 transition-colors no-underline! ${
+                                const rowClassName = `block py-2 pl-6 pr-6 transition-colors no-underline! ${
                                   isLocked
                                     ? 'border-l-4 border-transparent text-slate-500 dark:text-slate-500'
                                     : isTopicActive
-                                      ? `${activeNestedClass} ${moduleColor.sidebarActive}`
+                                      ? `${activeNestedClass} ${moduleColor.background} ${moduleColor.sidebarActive}`
                                       : inactiveNestedClass
                                 }`;
-                                const rowContent = (
-                                  <span className="flex min-w-0 items-start gap-2">
-                                    {isNoClass ? (
-                                      <span className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                                    ) : isDraft ? (
+                                const topicText = (
+                                  <>
+                                    <span className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                                      <span
+                                        className={`min-w-0 text-sm leading-snug ${
+                                          isTopicActive ? 'font-semibold' : 'font-normal'
+                                        }`}
+                                      >
+                                        {topic.title}
+                                      </span>
+                                      {showDate && (
+                                        <span className="whitespace-nowrap text-[11px] font-medium uppercase tracking-wide text-slate-400 dark:text-slate-600">
+                                          {topic.date}
+                                        </span>
+                                      )}
+                                    </span>
+                                    {isNoClass && (
+                                      <span className="mt-0.5 block text-xs font-medium text-slate-400 dark:text-slate-600">
+                                        No class
+                                      </span>
+                                    )}
+                                  </>
+                                );
+                                const rowContent =
+                                  isDraft ? (
+                                    <span className="flex min-w-0 items-start">
+                                      <span className="ml-5 min-w-0">{topicText}</span>
                                       <LockClosedIcon
-                                        className="mt-0.5 h-4 w-4 shrink-0 text-slate-400 dark:text-slate-500"
+                                        className="ml-auto mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
                                         aria-hidden="true"
                                         title="Draft"
                                       />
-                                    ) : isModuleOverview ? (
+                                    </span>
+                                  ) : isModuleOverview ? (
+                                    <span className="ml-5 flex min-w-0 items-start gap-2">
                                       <i
                                         className="fas fa-book-open mt-0.5 h-4 w-4 shrink-0 text-slate-500 dark:text-slate-400"
                                         aria-label="Module overview"
                                         title="Module overview"
                                       />
-                                    ) : isCompleted ? (
-                                      <i
-                                        className="fa-solid fa-check mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
-                                        aria-label="Completed"
-                                        title="Completed"
-                                      />
-                                    ) : isPartiallyCompleted ? (
-                                      <i
-                                        className="fa-solid fa-circle-half-stroke mt-0.5 h-4 w-4 shrink-0 text-slate-500 dark:text-slate-400"
-                                        aria-label="Partially completed"
-                                        title="Partially completed"
-                                      />
-                                    ) : (
-                                      <i
-                                        className="fa-regular fa-circle mt-0.5 h-4 w-4 shrink-0 text-slate-400 dark:text-slate-500"
-                                        aria-label="Not completed"
-                                        title="Not completed"
-                                      />
-                                    )}
-                                    <span className="min-w-0">
-                                      <span className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                                        <span
-                                          className={`min-w-0 text-sm leading-snug ${
-                                            isTopicActive ? 'font-semibold' : 'font-normal'
-                                          }`}
-                                        >
-                                          {topic.title}
-                                        </span>
-                                        {showDate && (
-                                          <span className="whitespace-nowrap text-[11px] font-medium uppercase tracking-wide text-slate-400 dark:text-slate-600">
-                                            {topic.date}
-                                          </span>
-                                        )}
-                                      </span>
-                                      {isNoClass && (
-                                        <span className="mt-0.5 block text-xs font-medium text-slate-400 dark:text-slate-600">
-                                          No class
-                                        </span>
-                                      )}
+                                      <span className="min-w-0">{topicText}</span>
                                     </span>
-                                  </span>
-                                );
+                                  ) : (
+                                    <span className="ml-5 block min-w-0">{topicText}</span>
+                                  );
 
                                 if (isLocked) {
                                   return (

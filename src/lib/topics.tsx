@@ -42,12 +42,13 @@ interface Assignment {
   notes?: string;
 }
 
-export interface DiscussionAssignment {
+export interface TopicAssignment {
   title: string;
   notes?: string;
   url?: string;
   dueDate?: string;
   dueTime?: string;
+  type?: string;
 }
 
 export interface BeforeClassReminder {
@@ -95,12 +96,13 @@ export interface Meeting {
   scheduleQuizzes?: ScheduleQuiz[]; // Quizzes from schedule.tsx with quizName and url
   readings?: Reading[];
   optionalReadings?: Reading[];
+  otherPreparation?: Reading[];
   holiday?: boolean;
   draft?: number;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
-  discussionAssignments?: DiscussionAssignment[];
+  assignments?: TopicAssignment[];
   beforeClassReminders?: BeforeClassReminder[];
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
@@ -141,12 +143,13 @@ interface BaseMeeting {
   quizzes?: (Quiz | Reading | ScheduleQuizInput)[]; // Can contain Quiz, Reading (citation), or ScheduleQuiz (quizName/url) from schedule.tsx
   readings?: Reading[];
   optionalReadings?: Reading[];
+  otherPreparation?: Reading[];
   holiday?: boolean;
   draft?: number;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
-  discussionAssignments?: DiscussionAssignment[];
+  assignments?: TopicAssignment[];
   beforeClassReminders?: BeforeClassReminder[];
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
@@ -301,7 +304,8 @@ function buildTopicMeeting(
     themes: meeting.themes,
     readings: meeting.readings,
     optionalReadings: meeting.optionalReadings,
-    discussionAssignments: meeting.discussionAssignments,
+    otherPreparation: meeting.otherPreparation,
+    assignments: meeting.assignments,
     draft: meeting.draft ?? 1,
   };
 }
@@ -345,7 +349,8 @@ function buildFinalExamMeeting(module: ModuleMarkdownMetadata, meeting: TopicMar
     themes: meeting.themes,
     readings: meeting.readings,
     optionalReadings: meeting.optionalReadings,
-    discussionAssignments: meeting.discussionAssignments,
+    otherPreparation: meeting.otherPreparation,
+    assignments: meeting.assignments,
     draft: meeting.draft ?? 1,
   };
 }
@@ -761,7 +766,9 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
           order: activity.ordering ?? activity.order,
         }));
 
-      const autoScheduledAssignmentsAsActivities = matchingScheduledAssignments.map((assignment: PostData) => ({
+      const autoScheduledAssignmentsAsActivities = matchingScheduledAssignments
+        .filter((assignment: PostData) => assignment.type?.toLowerCase() !== 'career module')
+        .map((assignment: PostData) => ({
         title: assignment.title,
         url: `/assignments/${assignment.id}/`,
         draft: assignment.draft || 0,

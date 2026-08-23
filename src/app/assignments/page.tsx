@@ -5,7 +5,7 @@ import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import AssignmentsTabbedList from '@/components/assignments/AssignmentsTabbedList';
 import { getSeriesSummary } from '@/lib/assignment-series';
 import { getDateForScheduledDay, resolveDueDate } from '@/lib/course-calendar';
-import { getDiscussionAssignmentIndexItems } from '@/lib/topic-markdown';
+import { getTopicAssignmentIndexItems } from '@/lib/topic-markdown';
 import externalAssignments from '../../../content/config/external-assignments.json';
 
 interface AssignmentData {
@@ -62,12 +62,12 @@ export default async function AssignmentsPage() {
     };
   }));
 
-  const discussionAssignments: AssignmentData[] = getDiscussionAssignmentIndexItems().map(item => ({
+  const topicAssignments: AssignmentData[] = getTopicAssignmentIndexItems().map(item => ({
     id: item.id,
     title: item.title,
     notes: item.notes,
-    type: 'discussion',
-    external_type: 'discussion',
+    type: item.type || 'homework',
+    external_type: item.type || 'homework',
     external_url: item.url,
     due_date: item.dueDate || getDateForScheduledDay(item.scheduledDay),
     due_time: item.dueTime,
@@ -76,8 +76,8 @@ export default async function AssignmentsPage() {
     topic_slug: item.topicSlug,
   }));
 
-  // Combine markdown assignments with external assignments and discussion assignments from topics
-  let assignments: AssignmentData[] = [...markdownAssignments, ...externalAssignments, ...discussionAssignments];
+  // Combine markdown assignments with external assignments and topic-frontmatter assignments
+  let assignments: AssignmentData[] = [...markdownAssignments, ...externalAssignments, ...topicAssignments];
   // Filter out excluded assignments, no_render assignments, hidden list items, and series child pages.
   assignments = assignments.filter(
     assignment =>

@@ -3,8 +3,12 @@ title: 'How Do Humans Learn? Sociocultural Foundations'
 slug: sociocultural-foundations
 scheduled_day: 4
 module_id: 1
-draft: 1
+draft: 0
 subtitle: 'Social and Political Learning: Vygotsky and Freire'
+pre_class_tasks:
+  - citation: 'PathwayU. Complete the Interests, Values, Personality, and Workplace Preferences assessments before class. Use the access instructions.'
+    url: 'https://docs.google.com/document/d/1IP1o-88e02J4DU-Z51R1OU7dBo4aDdifW79pIiGUGzQ/edit?tab=t.0'
+    notes: 'If you have done these assessments in a past course, review your prior results and/or take them again. Email career@unca.edu if you need help accessing PathwayU.'
 readings:
   - citation: 'Teachers College, Columbia University. (n.d.). Convocation Masters III: Medalist Luis C. Moll [Video]. YouTube.'
     url: 'https://www.youtube.com/watch?v=VfjelQPEkHM'

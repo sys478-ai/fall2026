@@ -73,6 +73,106 @@ function formatDueDateTime(dateLabel: string, dueTime?: string): string {
 
   return `${dateLabel} at ${formatDueTime(dueTime)}`;
 }
+
+function parseDueTime(time: string): { hours: number; minutes: number } | null {
+  const match = time.trim().match(/^(\d{1,2}):(\d{2})\s*(a\.?m\.?|p\.?m\.?)$/i);
+
+  if (!match) {
+    return null;
+  }
+
+  let hours = Number.parseInt(match[1], 10);
+  const minutes = Number.parseInt(match[2], 10);
+  const isPm = /p/i.test(match[3]);
+
+  if (hours === 12) {
+    hours = isPm ? 12 : 0;
+  } else if (isPm) {
+    hours += 12;
+  }
+
+  return { hours, minutes };
+}
+
+function parseDueDateTime(dueDateIso: string, dueTime?: string): Date | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dueDateIso)) {
+    return null;
+  }
+
+  const [year, month, day] = dueDateIso.split('-').map(Number);
+  const parsedTime = parseDueTime(dueTime || DEFAULT_DUE_TIME_LABEL);
+
+  if (!parsedTime) {
+    return null;
+  }
+
+  return new Date(year, month - 1, day, parsedTime.hours, parsedTime.minutes, 0, 0);
+}
+
+export interface DueCountdownParts {
+  status: 'remaining' | 'soon' | 'past-due';
+  days: number;
+  hours: number;
+}
+
+function getDueCountdownParts(dueAt: Date, now: Date = new Date()): DueCountdownParts {
+  const msRemaining = dueAt.getTime() - now.getTime();
+
+  if (msRemaining <= 0) {
+    return { status: 'past-due', days: 0, hours: 0 };
+  }
+
+  const totalMinutes = Math.floor(msRemaining / (1000 * 60));
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const status = days === 0 && hours < 24 ? 'soon' : 'remaining';
+
+  return { status, days, hours };
+}
+
+function formatDueCountdown(dueAt: Date, now: Date = new Date()): string {
+  const { status, days, hours } = getDueCountdownParts(dueAt, now);
+
+  if (status === 'past-due') {
+    return 'Deadline passed';
+  }
+
+  if (days > 0 && hours > 0) {
+    return `${days} ${days === 1 ? 'day' : 'days'}, ${hours} ${hours === 1 ? 'hour' : 'hours'} remaining`;
+  }
+
+  if (days > 0) {
+    return `${days} ${days === 1 ? 'day' : 'days'} remaining`;
+  }
+
+  if (hours > 0) {
+    return `${hours} ${hours === 1 ? 'hour' : 'hours'} remaining`;
+  }
+
+  return 'Less than 1 hour remaining';
+}
+
+function formatDueCountdownBadge(parts: DueCountdownParts): string {
+  if (parts.status === 'past-due') {
+    return 'Deadline passed';
+  }
+
+  if (parts.days === 0 && parts.hours === 0) {
+    return 'Due in <1h';
+  }
+
+  const segments: string[] = [];
+
+  if (parts.days > 0) {
+    segments.push(`${parts.days}d`);
+  }
+
+  if (parts.hours > 0 || parts.days === 0) {
+    segments.push(`${parts.hours}h`);
+  }
+
+  return `Due in ${segments.join(' ')}`;
+}
   
 function getWeek(dateString: string): string {
   return `Week ${getWeekNumber(dateString)}`;
@@ -88,4 +188,4 @@ export const SCROLL_OFFSET_PX = 20;
  */
 export const DEFAULT_DUE_TIME_LABEL = '11:59 PM';
 
-export { formatDate, formatDueTime, formatDueDateTime, getWeek };
+export { formatDate, formatDueTime, formatDueDateTime, formatDueCountdown, formatDueCountdownBadge, getDueCountdownParts, parseDueDateTime, getWeek };

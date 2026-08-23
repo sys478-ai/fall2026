@@ -2,7 +2,21 @@
 
 ## Two deadlines on one assignment: prep vs. reflection
 
-Some assignments (career modules especially) have two distinct deadlines: prep work due **before** a class meeting, and a reflection or submission due **after** it, at a different date/time. Use these frontmatter fields together — don't hardcode either deadline in prose.
+### Split career modules (preferred)
+
+When a career module has distinct before-class prep, in-class work, and a post-class submission, split it into three artifacts instead of one combined assignment:
+
+1. **Before class** — add prep to the meeting's topic `readings` (or optional readings).
+2. **Class work** — `content/activities/` file with `scheduled_day` set to the meeting.
+3. **Submit** — slim `content/assignments/` file with `due_days_after`, `due_time`, and `## What To Submit` only.
+
+Career module assignments are not auto-linked as in-class activities; the activity file handles class work.
+
+See `content/activities/career-module01-in-class.md`, `content/assignments/career-module01.md`, and topic `04_what-makes-human-intelligence-distinctive.md` for this pattern.
+
+### Combined assignment (legacy)
+
+Some assignments still combine prep and reflection in one file. Use these fields together — don't hardcode either deadline in prose.
 
 ### Before class
 
@@ -41,4 +55,4 @@ due_days_after: 7
 due_time: '11:59PM'
 ```
 
-See `content/assignments/career-module01.md` for this pattern applied to a real assignment.
+See `content/assignments/career-module02.md` for the combined-assignment pattern.
