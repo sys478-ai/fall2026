@@ -14,7 +14,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     if (mainElement) {
       // Determine layout type based on pathname
       const isResourcesDetail = normalizedPath.startsWith('/resources/') && normalizedPath !== '/resources';
-      const isDetailWithToc = normalizedPath === '/' ||
+      const isDetailWithToc =
+                              normalizedPath === '/' ||
                               normalizedPath === '/syllabus' ||
                               normalizedPath === '/braid-case-study' ||
                               normalizedPath.startsWith('/braid-case-study/') ||

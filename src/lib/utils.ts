@@ -138,18 +138,18 @@ function formatDueCountdown(dueAt: Date, now: Date = new Date()): string {
   }
 
   if (days > 0 && hours > 0) {
-    return `${days} ${days === 1 ? 'day' : 'days'}, ${hours} ${hours === 1 ? 'hour' : 'hours'} remaining`;
+    return `${days}d, ${hours}h`;
   }
 
   if (days > 0) {
-    return `${days} ${days === 1 ? 'day' : 'days'} remaining`;
+    return `${days}d`;
   }
 
   if (hours > 0) {
-    return `${hours} ${hours === 1 ? 'hour' : 'hours'} remaining`;
+    return `${hours}h`;
   }
 
-  return 'Less than 1 hour remaining';
+  return 'Less than 1h';
 }
 
 function formatDueCountdownBadge(parts: DueCountdownParts): string {

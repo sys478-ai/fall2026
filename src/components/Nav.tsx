@@ -1,4 +1,6 @@
 import { getCourseConfig } from '@/lib/config';
+import { flattenCourseMeetings } from '@/lib/course-dashboard';
+import { getDashboardAssignments } from '@/lib/dashboard-assignments';
 import type { ModuleColorToken } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import { getMeetingAnchorId } from '@/lib/navigation-helpers';
@@ -17,7 +19,6 @@ interface SidebarModuleItem {
   id: number;
   title: string;
   color: ModuleColorToken;
-  href: string;
   isDraft?: boolean;
   topics: SidebarTopicItem[];
 }
@@ -25,17 +26,18 @@ interface SidebarModuleItem {
 export default async function Navigation() {
   const courseConfig = getCourseConfig();
   const scheduledTopics = await getTopics();
+  const meetings = flattenCourseMeetings(scheduledTopics);
+  const assignments = await getDashboardAssignments();
 
   const modules: SidebarModuleItem[] = scheduledTopics.map(module => ({
     id: module.id,
     title: module.title,
     color: module.color,
-    href: `/modules/${module.id}`,
     isDraft: module.draft === 1,
     topics: module.meetings.map((meeting, index) => {
       const contentHref = meeting.slug
         ? `/topics/${meeting.slug}`
-        : `/#${getMeetingAnchorId(module.id, index, meeting.topic)}`;
+        : `/modules#${getMeetingAnchorId(module.id, index, meeting.topic)}`;
 
       return {
         id: meeting.slug || getMeetingAnchorId(module.id, index, meeting.topic),
@@ -48,5 +50,12 @@ export default async function Navigation() {
     }),
   }));
 
-  return <SidebarNavClient courseTitle={`${courseConfig.courseNumber}: ${courseConfig.semester}`} modules={modules} />;
+  return (
+    <SidebarNavClient
+      courseTitle={`${courseConfig.courseNumber}: ${courseConfig.semester}`}
+      modules={modules}
+      meetings={meetings}
+      assignments={assignments}
+    />
+  );
 }

@@ -9,13 +9,16 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
-  HomeIcon,
+  DocumentTextIcon,
   LockClosedIcon,
   MoonIcon,
   SunIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import CourseReminder from '@/components/dashboard/CourseReminder';
 import { useDarkMode } from '@/hooks/useDarkMode';
+import type { TimelineMeeting } from '@/lib/course-dashboard';
+import type { DashboardAssignmentInput } from '@/lib/dashboard-assignments';
 import { getModuleColorClasses, type ModuleColorToken } from '@/lib/module-colors';
 
 interface SidebarTopicItem {
@@ -31,7 +34,6 @@ interface SidebarModuleItem {
   id: number;
   title: string;
   color: ModuleColorToken;
-  href: string;
   isDraft?: boolean;
   topics: SidebarTopicItem[];
 }
@@ -39,6 +41,8 @@ interface SidebarModuleItem {
 interface SidebarNavClientProps {
   courseTitle: string;
   modules: SidebarModuleItem[];
+  meetings: TimelineMeeting[];
+  assignments: DashboardAssignmentInput[];
 }
 
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
@@ -47,22 +51,20 @@ function normalizePath(path: string) {
   return path.replace(/^\/fall2026/, '').replace(/\/$/, '') || '/';
 }
 
-function getModuleIdFromPath(path: string) {
-  const match = path.match(/^\/modules\/(\d+)$/);
-  return match ? Number.parseInt(match[1], 10) : null;
-}
-
-export default function SidebarNavClient({ courseTitle, modules }: SidebarNavClientProps) {
+export default function SidebarNavClient({
+  courseTitle,
+  modules,
+  meetings,
+  assignments,
+}: SidebarNavClientProps) {
   const pathname = usePathname();
   const normalizedPath = normalizePath(pathname);
   const isDark = useDarkMode();
   const [mounted, setMounted] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const showModules =
-    normalizedPath === '/modules' ||
-    getModuleIdFromPath(normalizedPath) !== null ||
-    normalizedPath.startsWith('/topics/');
+  const [expandedModuleIds, setExpandedModuleIds] = useState<number[]>([]);
+  const showModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
 
   useEffect(() => {
     setMounted(true);
@@ -81,18 +83,35 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
     setMobileOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const moduleWithActiveTopic = modules.find(module =>
+      module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
+    );
+    if (!moduleWithActiveTopic) return;
+
+    setExpandedModuleIds(prev =>
+      prev.includes(moduleWithActiveTopic.id) ? prev : [...prev, moduleWithActiveTopic.id]
+    );
+  }, [modules, normalizedPath]);
+
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
-  const activeModules = normalizedPath === '/modules';
-  const activeHome = normalizedPath === '/' || normalizedPath === '/syllabus';
+  const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
+  const activeSyllabus = normalizedPath === '/' || normalizedPath === '/syllabus';
 
   const navItems = useMemo(
     () => [
-      { label: 'Syllabus', href: '/', icon: HomeIcon, active: activeHome },
-      { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
+      { label: 'Syllabus', href: '/', icon: DocumentTextIcon, active: activeSyllabus },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
+      { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
     ],
-    [activeAssignments, activeHome, activeModules]
+    [activeAssignments, activeModules, activeSyllabus]
   );
+
+  function toggleModuleExpanded(moduleId: number) {
+    setExpandedModuleIds(prev =>
+      prev.includes(moduleId) ? prev.filter(id => id !== moduleId) : [...prev, moduleId]
+    );
+  }
 
   const toggleDarkMode = () => {
     const newDarkMode = !isDark;
@@ -176,25 +195,19 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
 
       <div className="flex-1 overflow-y-auto py-4 scrollbar-none [&::-webkit-scrollbar]:hidden">
         <nav className="divide-y divide-slate-200 overflow-hidden border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
-          {navItems.slice(0, 1).map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`${baseLinkClass} ${getTopLevelItemClass(item)} ${collapsed ? 'justify-center' : ''}`}
-            >
-              {renderNavContent(item.label, item.icon)}
-            </Link>
-          ))}
+          <Link
+            href="/"
+            className={`${baseLinkClass} ${getTopLevelItemClass(navItems[0])} ${collapsed ? 'justify-center' : ''}`}
+          >
+            {renderNavContent('Syllabus', DocumentTextIcon)}
+          </Link>
 
-          {navItems.slice(2).map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`${baseLinkClass} ${getTopLevelItemClass(item)} ${collapsed ? 'justify-center' : ''}`}
-            >
-              {renderNavContent(item.label, item.icon)}
-            </Link>
-          ))}
+          <Link
+            href="/assignments"
+            className={`${baseLinkClass} ${getTopLevelItemClass(navItems[1])} ${collapsed ? 'justify-center' : ''}`}
+          >
+            {renderNavContent('Assignments', ClipboardDocumentListIcon)}
+          </Link>
 
           <div className="bg-slate-50 dark:bg-slate-950">
             <Link
@@ -220,11 +233,11 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                 <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
                   {modules.map(module => {
                     const isDraft = module.isDraft === true;
-                    const isModulePage = getModuleIdFromPath(normalizedPath) === module.id;
                     const isTopicInModule = module.topics.some(
                       topic => normalizePath(topic.contentHref) === normalizedPath
                     );
-                    const isOpen = !isDraft && (isModulePage || isTopicInModule);
+                    const isOpen =
+                      !isDraft && (isTopicInModule || expandedModuleIds.includes(module.id));
                     const moduleColor = getModuleColorClasses(module.color);
                     const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
                       isDraft
@@ -248,7 +261,12 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                               />
                             </div>
                           ) : (
-                            <Link href={module.href} className={moduleHeaderClass}>
+                            <button
+                              type="button"
+                              onClick={() => toggleModuleExpanded(module.id)}
+                              className={moduleHeaderClass}
+                              aria-expanded={isOpen}
+                            >
                               <span className="line-clamp-2 min-w-0 ml-5 leading-snug">
                                 {module.id}. {module.title}
                               </span>
@@ -257,7 +275,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                   isOpen ? '' : '-rotate-90'
                                 }`}
                               />
-                            </Link>
+                            </button>
                           )}
                         </div>
 
@@ -270,8 +288,8 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                             <div className="divide-y divide-slate-100 pt-0 pb-4 dark:divide-slate-900">
                               {module.topics.map(topic => {
                                 const isNoClass = topic.isNoClass === true;
-                                const isDraft = topic.isDraft === true;
-                                const isLocked = isNoClass || isDraft;
+                                const isDraftTopic = topic.isDraft === true;
+                                const isLocked = isNoClass || isDraftTopic;
                                 const isTopicActive =
                                   !isLocked && normalizePath(topic.contentHref) === normalizedPath;
                                 const isModuleOverview = topic.date === 'Module overview';
@@ -307,7 +325,7 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
                                   </>
                                 );
                                 const rowContent =
-                                  isDraft ? (
+                                  isDraftTopic ? (
                                     <span className="flex min-w-0 items-start">
                                       <span className="ml-5 min-w-0">{topicText}</span>
                                       <LockClosedIcon
@@ -389,7 +407,13 @@ export default function SidebarNavClient({ courseTitle, modules }: SidebarNavCli
         <Link href="/" className="text-sm font-medium text-slate-900 dark:text-slate-100 no-underline! border-0!">
           {courseTitle}
         </Link>
-        <div className="w-10" aria-hidden="true" />
+        <CourseReminder meetings={meetings} assignments={assignments} panelPlacement="bottom" />
+      </div>
+
+      <div className="pointer-events-none fixed top-4 right-4 z-40 hidden md:block">
+        <div className="pointer-events-auto rounded-xl border border-slate-200/80 bg-white/90 p-0.5 shadow-sm backdrop-blur dark:border-slate-700/80 dark:bg-slate-950/90">
+          <CourseReminder meetings={meetings} assignments={assignments} panelPlacement="bottom" />
+        </div>
       </div>
 
       <aside className="hidden md:block md:h-screen md:shrink-0">{sidebarInner}</aside>

@@ -1184,6 +1184,11 @@ table.next-time-checklist tbody tr:first-child td {
   border-top-color: #374151;
 }
 
+.course-dashboard .next-time-checklist {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
 .cheatsheet-content table.cheatsheet-table {
   @apply w-full border-collapse mt-4;
 }

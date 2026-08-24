@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import taxonomyConfig from '../../content/config/taxonomy.json';
 import { courseCalendar } from '../../content/config/schedule';
-import { getCourseConfig } from './config';
+import { parseMeetingDate } from './meeting-dates';
 import type { ModuleColorToken } from './module-colors';
 import { getAllModuleMarkdownMetadata, getModuleMarkdownBySlug, type ModuleMarkdownMetadata } from './module-markdown';
 import {
@@ -480,40 +480,6 @@ function buildBaseTopicsFromMarkdown(): BaseTopicsArray {
       draft: module.draft ?? 1,
     };
   });
-}
-
-// Date parsing utilities
-function parseMeetingDate(meetingDate: string): string | null {
-  // Format: "Tu, Jan 13" -> "2026-01-13"
-  // Get year from course config
-  const year = getCourseConfig().year;
-
-  const monthMap: Record<string, number> = {
-    Jan: 1,
-    Feb: 2,
-    Mar: 3,
-    Apr: 4,
-    May: 5,
-    Jun: 6,
-    Jul: 7,
-    Aug: 8,
-    Sep: 9,
-    Oct: 10,
-    Nov: 11,
-    Dec: 12,
-  };
-
-  const match = meetingDate.match(/(\w+), (\w+) (\d+)/);
-  if (!match) return null;
-
-  const [, , monthAbbr, day] = match;
-  const month = monthMap[monthAbbr];
-  if (!month) return null;
-
-  const monthStr = String(month).padStart(2, '0');
-  const dayStr = String(parseInt(day)).padStart(2, '0');
-
-  return `${year}-${monthStr}-${dayStr}`;
 }
 
 function normalizeDate(dateStr: string | undefined): string | null {
