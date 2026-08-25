@@ -55,6 +55,19 @@ function formatDate(dateString: string): string {
     return `${dayOfWeek}, ${month} ${day}`;
   }
 
+/** Two-letter weekday abbreviation from YYYY-MM-DD (e.g. "Tu"). */
+function formatWeekdayAbbr(dateString: string): string {
+  const date = new Date(dateString + 'T00:00:00');
+  return date.toLocaleDateString('en-US', { weekday: 'short' }).substring(0, 2);
+}
+
+/** Month + day from YYYY-MM-DD (e.g. "Aug 25"). */
+function formatMonthDay(dateString: string): string {
+  const date = new Date(dateString + 'T00:00:00');
+  const month = date.toLocaleDateString('en-US', { month: 'short' });
+  return `${month} ${date.getDate()}`;
+}
+
 function formatDueTime(time: string): string {
   const match = time.trim().match(/^(\d{1,2}:\d{2})\s*(a\.?m\.?|p\.?m\.?)$/i);
 
@@ -188,4 +201,4 @@ export const SCROLL_OFFSET_PX = 20;
  */
 export const DEFAULT_DUE_TIME_LABEL = '11:59 PM';
 
-export { formatDate, formatDueTime, formatDueDateTime, formatDueCountdown, formatDueCountdownBadge, getDueCountdownParts, parseDueDateTime, getWeek };
+export { formatDate, formatWeekdayAbbr, formatMonthDay, formatDueTime, formatDueDateTime, formatDueCountdown, formatDueCountdownBadge, getDueCountdownParts, parseDueDateTime, getWeek };

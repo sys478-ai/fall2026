@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { BellIcon } from '@heroicons/react/24/outline';
 import {
   getAssignmentsInWindow,
@@ -10,9 +10,26 @@ import {
   type TimelineMeeting,
 } from '@/lib/course-dashboard';
 import type { DashboardAssignmentInput } from '@/lib/dashboard-assignments';
-import { formatDate, formatDueCountdown, parseDueDateTime } from '@/lib/utils';
+import { formatMonthDay, formatWeekdayAbbr, formatDueCountdown, parseDueDateTime } from '@/lib/utils';
 
 const DUE_SOON_LIMIT = 5;
+
+function ReminderDayRow({
+  dateIso,
+  children,
+}: {
+  dateIso: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-3 leading-snug justify-center">
+      <span className="pt-0.5 text-2xl font-bold tabular-nums text-slate-300 dark:text-slate-500">
+        {formatWeekdayAbbr(dateIso)}
+      </span>
+      <div className="min-w-0">{children}</div>
+    </div>
+  );
+}
 
 export default function CourseReminder({
   meetings,
@@ -107,7 +124,7 @@ export default function CourseReminder({
 
           <div className="divide-y divide-slate-200 text-sm dark:divide-slate-700">
             <section className="pb-4">
-              <h4 className="m-0! mb-1 text-base! font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <h4 className="m-0! mb-2! text-base! font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                 Today
               </h4>
               {todayIsOpenClass && today && todayHref ? (
@@ -124,16 +141,18 @@ export default function CourseReminder({
             </section>
 
             <section className="py-4">
-              <h4 className="m-0! mb-1 text-base! font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <h4 className="m-0! mb-2! text-base! font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                 Upcoming Class Prep / Readings
               </h4>
               {prepMeetings.length === 0 ? (
                 <p className="mb-0 text-slate-600 dark:text-slate-400">No upcoming class prep yet.</p>
               ) : (
-                <ul className="m-0! list-disc space-y-2 py-0! pl-5! pr-0!">
+                <div className="space-y-3">
                   {prepMeetings.map(({ meeting, prepRows, beforeClassHref }) => (
-                    <li key={`${meeting.dateIso}-${meeting.slug}`} className="leading-snug">
-                      <span className="tabular-nums text-slate-600 dark:text-slate-400">{meeting.dateLabel}</span>
+                    <ReminderDayRow key={`${meeting.dateIso}-${meeting.slug}`} dateIso={meeting.dateIso}>
+                      <span className="tabular-nums text-slate-600 dark:text-slate-400">
+                        {formatMonthDay(meeting.dateIso)}
+                      </span>
                       {' · '}
                       {beforeClassHref ? (
                         <Link
@@ -157,27 +176,27 @@ export default function CourseReminder({
                           No readings or prep listed yet.
                         </span>
                       )}
-                    </li>
+                    </ReminderDayRow>
                   ))}
-                </ul>
+                </div>
               )}
             </section>
 
             <section className="pt-4">
-              <h4 className="m-0! mb-1 text-base! font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <h4 className="m-0! mb-2! text-base! font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                 Due soon
               </h4>
               {dueSoon.length === 0 ? (
                 <p className="mb-0 text-slate-600 dark:text-slate-400">No assignments due in the next 2 weeks.</p>
               ) : (
-                <ul className="m-0! list-disc space-y-1.5 py-0! pl-5! pr-0!">
+                <div className="space-y-3">
                   {dueSoon.map(item => {
                     const dueAt = parseDueDateTime(item.dueDate, item.dueTime);
                     const countdown =
                       dueAt && referenceDate ? formatDueCountdown(dueAt, referenceDate) : null;
 
                     return (
-                      <li key={item.id} className="leading-snug">
+                      <ReminderDayRow key={item.id} dateIso={item.dueDate}>
                         <Link
                           href={item.href}
                           className="font-medium text-[#0b5d8f] no-underline hover:underline dark:text-[#8fc4ee]"
@@ -186,14 +205,14 @@ export default function CourseReminder({
                           {item.title}
                         </Link>
                         <span className="mt-0.5 block text-xs tabular-nums text-slate-500 dark:text-slate-400">
-                          Due {formatDate(item.dueDate)}
+                          Due {formatMonthDay(item.dueDate)}
                           {item.dueTime ? ` · ${item.dueTime}` : ''}
                           {countdown ? ` (${countdown})` : ''}
                         </span>
-                      </li>
+                      </ReminderDayRow>
                     );
                   })}
-                </ul>
+                </div>
               )}
               {dueSoonTotal > DUE_SOON_LIMIT ? (
                 <Link

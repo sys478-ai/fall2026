@@ -2,8 +2,8 @@
 title: 'How Do Humans Learn? Sociocultural Foundations'
 slug: sociocultural-foundations
 scheduled_day: 4
-module_id: 1
-draft: 0
+module_id: 0
+draft: 1
 subtitle: 'Social and Political Learning: Vygotsky and Freire'
 pre_class_tasks:
   - citation: 'PathwayU. Complete the Interests, Values, Personality, and Workplace Preferences assessments before class. Use the access instructions.'
@@ -25,28 +25,8 @@ readings:
 
 Today you ask what makes human intelligence distinctive: knowledge, meaning, culture, and social learning. A career bridge on values, interests, and coaching access connects self-knowledge to the course's broader questions about what intelligence is for.
 
-_Format: Career ~40-50 min + course ~50-60 min · Lesson template: Career + Course Bridge_
-
 ## Guiding Questions
 
 - What features of human intelligence resist reduction to computation?
 - How do knowledge, meaning, and culture shape what counts as intelligent behavior?
 - How does the way a technology is described shape how it is governed?
-
-## In This Class
-
-In this meeting, we will:
-
-- discuss knowledge, meaning, culture, and social learning as features of intelligence
-- complete Career 1: Values, Interests, and Coaching Access
-- connect self-knowledge to how we evaluate claims about machine intelligence
-
-## Career / BRAID Integration
-
-Career 1: Values, Interests, Coaching Access, paired with today's question about what makes intelligence distinctive.
-
-## Field Guide & Resources
-
-STS's account of situated knowledge shows how a technology's description shapes how it is governed.
-
-- [STS Concepts](/field-guide/sts-concepts)

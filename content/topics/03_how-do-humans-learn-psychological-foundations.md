@@ -30,6 +30,11 @@ assignments:
 
 Today complements the neuroscience primer with some psychological accounts of how learning happens -- namely: behaviorist, developmental accounts from Skinner & Piaget. 
 
+## Slides
+* <a href="https://docs.google.com/presentation/d/16i9VCMfRHbagzhKDl57CS9uW9GGNoXhu5PNwDHQvW8Y/edit?usp=sharing" target="_blank">Psychological foundations of learning</a>
+
+
+
 
 ## Guiding Questions
 

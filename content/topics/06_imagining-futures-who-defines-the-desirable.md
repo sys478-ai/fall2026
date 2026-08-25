@@ -5,11 +5,6 @@ scheduled_day: 6
 module_id: 1
 draft: 1
 subtitle: 'What futures do technologies promise, and who gets to define a desirable future?'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
 ---
 
 ## Topic / Focus
