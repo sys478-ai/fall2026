@@ -1,6 +1,6 @@
 ---
 title: 'How Are Opportunity and Professional Life Shaped by Networks and AI Tools?'
-slug: opportunity-professional-life-networks-and-ai-tools
+slug: 22
 scheduled_day: 22
 module_id: 4
 draft: 1

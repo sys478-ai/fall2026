@@ -1,7 +1,7 @@
 ---
 title: 'How Do Humans Learn? Psychological Foundations'
 subtitle: 'Individual Learning: Behaviorism and Constructivism'
-slug: psychological-foundations
+slug: 03
 scheduled_day: 3
 module_id: 1
 draft: 0
@@ -32,8 +32,6 @@ Today complements the neuroscience primer with some psychological accounts of ho
 
 ## Slides
 * <a href="https://docs.google.com/presentation/d/16i9VCMfRHbagzhKDl57CS9uW9GGNoXhu5PNwDHQvW8Y/edit?usp=sharing" target="_blank">Psychological foundations of learning</a>
-
-
 
 
 ## Guiding Questions

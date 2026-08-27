@@ -10,6 +10,12 @@ due_time: '3:00PM'
 draft: 0
 ---
 
+This is the **after-class submission** for Career Module 1.
+
+If you need the in-class prompts and worksheets, use the paired activity page:
+
+- [Career Module 1 in-class activity](/fall2026/activities/career-module01-in-class)
+
 Please submit a short reflection, about 300-500 words, by the due date shown above. It should include:
 
 1. Where you are right now in thinking about life after graduation.

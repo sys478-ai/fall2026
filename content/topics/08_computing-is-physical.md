@@ -1,6 +1,6 @@
 ---
 title: 'Computing Is Physical'
-slug: computing-is-physical
+slug: 08
 scheduled_day: 8
 module_id: 2
 draft: 1

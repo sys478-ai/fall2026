@@ -1,6 +1,6 @@
 ---
 title: 'How Do Computers Compute?'
-slug: how-do-computers-compute
+slug: 07
 scheduled_day: 7
 module_id: 2
 draft: 0

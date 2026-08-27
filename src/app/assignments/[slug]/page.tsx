@@ -34,6 +34,14 @@ function formatDate(dateString: string): string {
   return `${dayOfWeek}, ${month}/${day}`;
 }
 
+function formatAssignmentDueMeta(dueDate?: string, dueTimeLabel?: string): string | undefined {
+  if (!dueDate) {
+    return undefined;
+  }
+
+  return dueTimeLabel ? `Due ${formatDate(dueDate)} at ${dueTimeLabel}` : `Due ${formatDate(dueDate)}`;
+}
+
 export default async function AssignmentPage({ params }: AssignmentPageProps) {
   try {
     const { slug } = await params;
@@ -88,6 +96,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
     const contentType = slug.startsWith('lab') ? 'labs' : slug.startsWith('career') ? 'career-modules' : undefined;
     const dueDate = resolveDueDate(postData);
     const dueTimeLabel = formatDueTime(postData.due_time || DEFAULT_DUE_TIME_LABEL);
+    const dueMeta = formatAssignmentDueMeta(dueDate, dueTimeLabel);
 
     const isSeriesHub = postData.series_role === 'hub' && postData.assignment_series;
     const series = isSeriesHub ? getAssignmentSeries(postData.assignment_series!) : null;
@@ -147,6 +156,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
                   label={hubPost.type || 'Assignment'}
                   title={hubPost.title}
                   description={hubPost.excerpt}
+                  meta={dueMeta}
                   tone="sky"
                 />
               </div>
@@ -154,11 +164,6 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
           }
         >
           <div className="space-y-6 px-4 pb-10 md:px-16">
-            {dueDate && (
-              <p className="mt-0 text-lg font-bold">
-                Due {formatDate(dueDate)} at {dueTimeLabel}
-              </p>
-            )}
             <AssignmentSeriesHub
               navItems={navItems}
               overviewContent={hubPost.content}
@@ -197,6 +202,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
                 label={postData.type || 'Assignment'}
                 title={assignmentDisplayTitle}
                 description={postData.excerpt}
+                meta={dueMeta}
                 tone="sky"
               />
             </div>
@@ -204,11 +210,6 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         }
       >
         <div className={`assignment-page max-w-4xl pr-8 pt-6${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
-          {dueDate && (
-            <p className="mt-0 text-lg font-bold">
-              Due {formatDate(dueDate)} at {dueTimeLabel}
-            </p>
-          )}
           {isStyleGuideDemo && <StyleGuideStyles />}
           <MarkdownContent content={postData.content} className="[&_a]:underline [&_a]:underline-offset-2" />
         </div>

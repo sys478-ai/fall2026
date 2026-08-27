@@ -1,6 +1,6 @@
 ---
 title: 'Domain B: What Changes When AI Enters?'
-slug: domain-b-what-changes-when-ai-enters
+slug: 20
 scheduled_day: 20
 module_id: 4
 draft: 1

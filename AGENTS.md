@@ -1,184 +1,252 @@
-# AGENTS.md
+# Instructions for Working on SYS 478
 
-## Additional Context Found In @content-notes
+Before making substantial changes to this course, read `COURSE_CONTEXT.md`.
 
-## Project
+## Primary Goal
 
-This repository contains the website for a SYS course / BRAID educational resource on AI, society, neuromorphic computing, and anticipatory governance.
+Help develop a coherent, engaging senior seminar about AI, human learning, society, power, ethics, and emerging technology.
 
-The site should support two related but distinct purposes:
+Do not treat this as a machine learning, programming, neuroscience, philosophy, or policy survey course.
 
-1. A semester-long SYS course about AI as a technical, social, political, and environmental system.
-2. A BRAID case-study / resource hub focused on neuromorphic hardware-level anomaly detection and its ethical, legal, and societal implications.
+The course's main intellectual task is:
 
-## Design principle
+> Analyze AI systems through multiple lenses and understand what each lens reveals or obscures.
 
-Do not treat this as a generic AI ethics course site.
+## Preserve the Course Spine
 
-The central design idea is:
+Whenever proposing:
+- lessons
+- readings
+- labs
+- activities
+- assignments
+- cases
+- slides
+- discussion questions
 
-> Students learn AI ethics, ELSI, and anticipatory governance through hands-on labs that make technical systems concrete.
+connect them where possible to the recurring lenses:
 
-The website should help users move between:
+1. Biological
+2. Psychological
+3. Social / Political
+4. Moral
 
-- technical mechanisms
-- social and ethical implications
-- governance questions
-- course assignments
-- BRAID-specific resources
+Also reuse the distinction among:
 
-## Audience
+- descriptive claims
+- normative claims
+- political / institutional claims
 
-Primary audience:
+Do not introduce a new conceptual framework unless it adds something clearly missing.
 
-- Undergraduate students in a SYS course
+## Prefer Coherence Over Coverage
 
-Secondary audiences:
+The instructor does not need to “cover everything.”
 
-- Instructors
-- BRAID project stakeholders
-- Non-specialists interested in neuromorphic AI governance
-- Undergraduate researchers helping maintain the materials
+Prioritize:
+- a few memorable ideas
+- recurring concepts
+- strong examples
+- opportunities for application
+- synthesis across classes
 
-Assume readers are smart but may not have deep technical background.
+Recommend removing material when it does not serve the course spine.
 
-## Tone and style
+## Class Design
 
-Use clear, accessible language.
-Avoid hype.
-Avoid unnecessary jargon.
-Do not oversimplify technical mechanisms.
-When technical terms are necessary, define them plainly.
-Prioritize ethical, legal, and societal implications.
-Connect technical features to downstream governance questions.
+SYS meets twice per week for approximately 100 minutes.
 
-## Core course themes
+Avoid building class sessions that depend primarily on lecture.
 
-The course explores:
+Prefer roughly:
 
-- AI as a technical and social system
-- objectivity and neutrality
-- classification and categories
-- data, representation, and institutional bias
-- technological solutionism
-- thresholds, errors, and responsibility
-- prediction, history, and feedback loops
-- opacity, explainability, and contestability
-- surveillance and datafication
-- anomaly detection and “normal”
-- edge AI, privacy, and accountability
-- ideology, anthropomorphism, aliveness, and sentience claims
-- dependency, cognitive offloading, and deskilling
-- environmental impacts of AI
-- centralization of power and political economy
-- progress narratives and technological inevitability
-- anticipatory governance of emerging technologies
+- 15–25 minutes of framing
+- hands-on activity, experiment, or case
+- small-group work
+- whole-class synthesis
+- Closing Reflection
 
-## BRAID-specific focus
+Whenever possible, propose activities in which students first **experience or investigate something**, then encounter the formal concept.
 
-The BRAID case study focuses on cerebellum-inspired neuromorphic computing for efficient anomaly detection.
+Examples:
+- reinforcement game before behaviorism
+- collaborative puzzle before Vygotsky
+- ethical dilemma before moral-framework terminology
+- classifier experiment before explaining model generalization
 
-When working on BRAID pages, emphasize:
+## Reading Selection
 
-- hardware-level anomaly detection
-- edge/on-device AI
-- spiking neural networks
-- timing and event-driven computation
-- on-chip learning
-- memory as physical state
-- energy efficiency and environmental tradeoffs
-- auditability, patching, traceability, and accountability
-- risks of surveillance, misuse, power concentration, and weak explainability
+Students are mostly non-specialists.
 
-## Frameworks to connect when relevant
+Prefer:
+- short readings
+- accessible journalism
+- explainers
+- videos
+- interactive material
+- brief primary-source excerpts
 
-When appropriate, map implications to:
+Aim for approximately one substantive reading per week.
 
-- NIST AI Risk Management Framework
-- EU AI Act
-- IEEE Ethically Aligned Design
-- OECD AI Principles
+Do not recommend long canonical texts solely because they are academically important.
 
-Do not force these frameworks into every page. Use them where they clarify governance.
+For every proposed reading, consider:
 
-## Site organization
+1. What specific idea does this reading teach?
+2. Why does the student need to read this rather than hear a 5-minute explanation?
+3. What will students do with it in class?
 
-Prefer organizing the site around:
+If these questions do not have strong answers, recommend dropping the reading.
 
-1. Course home
-2. Weekly schedule
-3. Labs
-4. Critical lenses
-5. BRAID case study
-6. Final project
-7. Instructor / facilitator resources
+## Assignments
 
-Do not duplicate the same content across many pages. Link to reusable modules instead.
+Prefer a small number of cumulative assignments rather than frequent disconnected homework.
 
-## Lab design pattern
+Assignments should require students to:
+- compare lenses
+- analyze concrete systems
+- distinguish evidence from values
+- identify power and institutional decisions
+- reason under uncertainty
+- communicate clearly
 
-Labs generally follow this structure:
+Avoid assignments that primarily reward summary or recall.
 
-1. Overview
-2. Core learning goals
-3. Key terms
-4. Warm-up reflection
-5. Scenario or setup
-6. Hands-on activity
-7. Technical translation
-8. Social and ethical questions
-9. Connection to BRAID, if relevant
-10. Deliverable
-11. Exit ticket
+## AI System Analysis
 
-When editing labs, preserve this pedagogical pattern unless explicitly asked to change it.
+When designing a case activity, default to this structure:
 
-## Course structure
+### Purpose
+What is the system supposed to do?
 
-The course meets twice per week for 100 minutes.
+### Mechanism
+What goes in?
+What is learned or calculated?
+What comes out?
 
-The preferred rhythm is:
+### Decision
+How does the output become consequential?
 
-- Meeting 1: critical lens / seminar / reading discussion
-- Meeting 2: lab / applied activity / synthesis
+### People and Institutions
+Who builds, owns, deploys, regulates, uses, or experiences the system?
 
-The core SYS lab sequence is:
+### Claims
+What is descriptive?
+What is normative?
+What is political / institutional?
 
-1. Classification Is Not Neutral
-2. Training Data Shapes Learning
-3. Features Are Value Choices
-4. Thresholds and the Cost of Error
-5. Prediction and Historical Data
-6. Neural Networks and Opacity
-7. Sensors Translate the World into Data
-8. Anomaly Detection and Normal
-9. Edge AI, Privacy, and Accountability
-10. BRAID Anticipatory Governance Lab
+### Lenses
+What does each relevant human-centered lens reveal?
 
-The additional BRAID / hardware modules are: 11. Memory as Physical State 12. Von Neumann vs. Neuromorphic Architectures 13. Spikes, Timing, and Event-Driven Computation 14. Hardware Governance Lab 15. Energy and Computation 16. Learning, Memory, and Biological Metaphors 17. Electricity as Information 18. How Circuits Do Math
+### Uncertainty
+What do we not know?
 
-## Implementation guidance
+## AI Technical Depth
 
-Before making structural changes:
+Technical concepts should support social and ethical analysis.
 
-- inspect the existing site framework
-- preserve frontmatter conventions
-- preserve existing URL patterns unless asked otherwise
-- avoid breaking existing links
-- prefer reusable components or layouts for lab pages
-- keep Markdown clean and readable
+Students should eventually understand ideas such as:
+- data
+- features / representations
+- labels
+- training
+- models
+- prediction
+- thresholds
+- reinforcement
+- neural networks
+- inference
 
-If the site uses a static site generator, follow the project’s conventions for frontmatter, collections, navigation, and page templates.
+Do not add unnecessary equations or implementation details.
 
-## Good Codex tasks for this repo
+When explaining a technical mechanism:
 
-Examples of useful tasks:
+1. Explain the intuition.
+2. Use a concrete example.
+3. Connect the mechanism to consequences.
+4. Only then introduce terminology.
 
-- Create a lab index page organized by SYS core labs and BRAID extension labs.
-- Create a weekly schedule page from the course plan.
-- Add a critical lenses section.
-- Create a BRAID case-study landing page.
-- Add previous/next navigation for lab pages.
-- Add an attribution footer to all lab pages.
-- Create reusable components for learning goals, key terms, deliverables, and exit tickets.
-- Create a final project page that draws from the lab sequence.
+## Neuromorphic Computing
+
+The neuromorphic module connects to an NSF/BRAID research pilot.
+
+Do not frame neuromorphic computing as inherently:
+- more ethical
+- more intelligent
+- more human
+- more sustainable
+
+Treat those as claims requiring evidence.
+
+Help students distinguish between:
+- biological inspiration as metaphor
+- biological inspiration as mechanism
+- engineering implementation
+- marketing claims
+
+## Research / BRAID
+
+Activities connected to BRAID should support anticipatory analysis.
+
+A useful structure is:
+
+1. Value proposition
+2. Technical mechanism
+3. Deployment conditions
+4. Stakeholders
+5. Potential benefits and harms
+6. Governance questions
+7. Evidence level
+8. Remaining uncertainty
+
+Avoid overclaiming speculative future impacts.
+
+## Tone and Writing
+
+Course language should be:
+- concise
+- direct
+- accessible
+- intellectually serious
+- non-preachy
+
+Avoid:
+- unnecessary throat-clearing
+- inflated academic language
+- false binaries such as “AI good vs. AI bad”
+- implying that technical systems determine social outcomes automatically
+
+Prefer declarative openings.
+
+Use spaced en dashes rather than em dashes.
+
+Use the term **Closing Reflection**, not **Exit Ticket**.
+
+## When Revising Existing Course Materials
+
+Preserve useful existing structure rather than rewriting for novelty.
+
+Look first for:
+- unnecessary repetition
+- lecture density
+- unclear learning purpose
+- too many concepts
+- weak transitions
+- places an activity could replace explanation
+- opportunities to reconnect to earlier lenses
+
+When suggesting revisions, explain what should be:
+- kept
+- cut
+- moved
+- converted into an activity
+
+## Current Design Priority
+
+The most important near-term goal is to make the course feel grounded and coherent.
+
+Favor proposals that make students repeatedly practice the same analytical habits across different content.
+
+The desired student reaction by mid-semester is:
+
+> “I know how to approach a new AI system even if I have never seen it before.”

@@ -1,6 +1,6 @@
 ---
 title: 'Who Controls AI?'
-slug: who-controls-ai
+slug: 24
 scheduled_day: 24
 module_id: 5
 draft: 1

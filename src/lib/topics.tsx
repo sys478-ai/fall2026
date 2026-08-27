@@ -20,6 +20,7 @@ import {
   type TopicMarkdownMetadata,
 } from './topic-markdown';
 import { generateCourseMeetingDates, resolveDueDate, type GeneratedMeetingDate } from './course-calendar';
+import { isCareerModuleAssignment } from './assignment-display';
 
 // Type definitions for topics structure
 interface Activity {
@@ -178,7 +179,7 @@ const patternTitleBySlug = Object.fromEntries(
   ((taxonomyConfig.ethicalPatterns || []) as PatternConfig[]).map(pattern => [pattern.slug, pattern.title])
 ) as Record<string, string>;
 
-function getAssignmentTitleShort(assignment: { type?: string; num?: string | number }): string {
+function getAssignmentTitleShort(assignment: { type?: string; num?: string | number; id?: string }): string {
   if (assignment.type === 'homework') {
     return `HW ${assignment.num}`;
   }
@@ -189,6 +190,10 @@ function getAssignmentTitleShort(assignment: { type?: string; num?: string | num
 
   if (assignment.type === 'project') {
     return assignment.num ? `Project ${assignment.num}` : 'Project';
+  }
+
+  if (isCareerModuleAssignment(assignment)) {
+    return assignment.num ? `Career Module ${assignment.num}` : 'Career Module';
   }
 
   const typeLabel = assignment.type ? assignment.type.charAt(0).toUpperCase() + assignment.type.slice(1) : 'Assignment';

@@ -1,6 +1,6 @@
 ---
 title: 'Transfer Lab: How Does a Different Institution Work Before AI?'
-slug: transfer-lab-how-does-a-different-institution-work-before-ai
+slug: 21
 scheduled_day: 21
 module_id: 4
 draft: 1

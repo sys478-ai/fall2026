@@ -1,6 +1,6 @@
 ---
 title: 'How Can We Govern an Emerging Technology Before Its Uses Are Settled?'
-slug: how-can-we-govern-an-emerging-technology-before-its-uses-are-settled
+slug: 27
 scheduled_day: 27
 module_id: 6
 draft: 1

@@ -22,11 +22,19 @@ interface TopicSectionNavProps {
 }
 
 function resolveTabIdFromHash(hashId: string) {
+  if (hashId === 'topic-career') {
+    return 'topic-career';
+  }
+
   if (
     hashId === 'read-watch' ||
     hashId.startsWith('topic-work-assignment-') ||
     hashId.startsWith('topic-work-activity-')
   ) {
+    if (hashId.includes('career-module')) {
+      return 'topic-career';
+    }
+
     return 'topic-class-work';
   }
 
@@ -38,11 +46,19 @@ function resolveScrollIdFromHash(hashId: string, itemIds: string[]) {
     return itemIds.includes('topic-before-class') ? 'topic-before-class' : undefined;
   }
 
+  if (hashId === 'topic-career') {
+    return itemIds.includes('topic-career') ? 'topic-career' : undefined;
+  }
+
   if (hashId === 'topic-today') {
     return itemIds.includes('topic-overview') ? 'topic-overview' : undefined;
   }
 
   if (hashId.startsWith('topic-work-assignment-') || hashId.startsWith('topic-work-activity-')) {
+    if (hashId.includes('career-module')) {
+      return itemIds.includes('topic-career') ? 'topic-career' : undefined;
+    }
+
     return itemIds.includes('topic-class-work') ? 'topic-class-work' : undefined;
   }
 

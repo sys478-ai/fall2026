@@ -1,6 +1,6 @@
 ---
 title: 'What Counts as Skill and Expertise?'
-slug: what-counts-as-skill-and-expertise
+slug: 14
 scheduled_day: 14
 module_id: 3
 draft: 1

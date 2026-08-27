@@ -1,4 +1,5 @@
 import type { AssignmentBadgeKind } from '@/lib/assignment-badges';
+import { parseMeetingDate } from '@/lib/meeting-dates';
 import { groupReadingsByPickOne } from '@/lib/reading-groups';
 import type { Topic } from '@/lib/topics';
 import { formatDate, formatDueDateTime } from '@/lib/utils';
@@ -76,7 +77,16 @@ function getPrepAssignmentDueDateIso(dueDate?: string) {
   return dueDate && /^\d{4}-\d{2}-\d{2}$/.test(dueDate) ? dueDate : undefined;
 }
 
+function isAssignmentDueOnOrBeforeMeeting(dueDateIso: string | undefined, meetingDateIso: string | null) {
+  if (!dueDateIso || !meetingDateIso) {
+    return false;
+  }
+
+  return dueDateIso <= meetingDateIso;
+}
+
 export function getPrepAssignments(meeting: Topic['meetings'][number]): PrepAssignmentItem[] {
+  const meetingDateIso = parseMeetingDate(meeting.date);
   const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
 
   return [
@@ -104,19 +114,23 @@ export function getPrepAssignments(meeting: Topic['meetings'][number]): PrepAssi
         },
       ];
     }),
-    ...(meeting.assignments || []).map(item => ({
-      title: item.title,
-      href: item.url,
-      dueDate: getDiscussionDueLabel(item, meeting.date),
-      dueDateIso: getPrepAssignmentDueDateIso(item.dueDate),
-      dueTime: item.dueTime,
-      notes: item.notes,
-      badgeKind: getPrepBadgeKindFromAssignment({
-        type: item.type,
+    ...(meeting.assignments || [])
+      .filter(item =>
+        isAssignmentDueOnOrBeforeMeeting(getPrepAssignmentDueDateIso(item.dueDate), meetingDateIso)
+      )
+      .map(item => ({
         title: item.title,
         href: item.url,
-      }),
-    })),
+        dueDate: getDiscussionDueLabel(item, meeting.date),
+        dueDateIso: getPrepAssignmentDueDateIso(item.dueDate),
+        dueTime: item.dueTime,
+        notes: item.notes,
+        badgeKind: getPrepBadgeKindFromAssignment({
+          type: item.type,
+          title: item.title,
+          href: item.url,
+        }),
+      })),
   ];
 }
 

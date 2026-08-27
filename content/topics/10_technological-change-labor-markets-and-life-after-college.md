@@ -1,6 +1,6 @@
 ---
 title: 'How Do Technological Change and Labor Markets Shape Life After College?'
-slug: technological-change-labor-markets-and-life-after-college
+slug: 10
 scheduled_day: 10
 module_id: 2
 draft: 1

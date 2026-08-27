@@ -35,13 +35,30 @@ export function preprocessMarkdownTags(markdown: string): string {
   // {% no-copy %} -> <!-- no-copy-button -->
   result = result.replace(/{%\s*no-copy\s*%}/gi, '<!-- no-copy-button -->');
 
-  // {: .class #id } -> <!-- ATTR-BLOCK: .class #id -->
+  // {: .class #id } / {:.class} / {:. class} -> <!-- .class --> (consumed by markdown post-processor)
   // Matches Kramdown-style inline attribute lists on their own line
-  // Supports both "before" (marker before element) and "after" (marker after element) placement
-  result = result.replace(/^\s*\{\:\s+([^}]+)\}\s*$/gm, (match, attrs) => {
-    // Preserve the attributes, trimming whitespace
-    const trimmedAttrs = attrs.trim();
-    return `<!-- ATTR-BLOCK: ${trimmedAttrs} -->`;
+  result = result.replace(/^\s*\{\:\s*([^}]+)\}\s*$/gm, (_match, attrs: string) => {
+    const tokens = attrs.trim().split(/\s+/).filter(Boolean);
+    const classes: string[] = [];
+
+    for (const token of tokens) {
+      if (token.startsWith('.')) {
+        const cls = token.slice(1);
+        if (cls) classes.push(cls);
+      } else if (token.startsWith('#')) {
+        // IDs are ignored by the class comment handler; skip for now
+        continue;
+      } else {
+        // Bare token from quirks like `{:. table-simple}` → ".", "table-simple"
+        classes.push(token);
+      }
+    }
+
+    if (classes.length === 0) {
+      return _match;
+    }
+
+    return classes.map(cls => `<!-- .${cls} -->`).join('\n');
   });
 
   return result;

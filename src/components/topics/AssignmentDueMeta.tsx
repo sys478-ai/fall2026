@@ -41,12 +41,11 @@ export default function AssignmentDueMeta({
     () => (dueDateIso ? parseDueDateTime(dueDateIso, dueTime) : null),
     [dueDateIso, dueTime]
   );
-  const [countdownParts, setCountdownParts] = useState<DueCountdownParts | null>(() =>
-    dueAt ? getDueCountdownParts(dueAt) : null
-  );
+  const [countdownParts, setCountdownParts] = useState<DueCountdownParts | null>(null);
 
   useEffect(() => {
     if (!dueAt) {
+      setCountdownParts(null);
       return;
     }
 

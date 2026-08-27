@@ -1,6 +1,6 @@
 ---
 title: 'How Do Humans Learn? Biological Foundations'
-slug: biological-foundations
+slug: 02
 scheduled_day: 2
 module_id: 1
 draft: 0

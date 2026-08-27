@@ -21,19 +21,19 @@ Move through the materials in roughly this order:
 
 These module pages provide the broad frame for the BRAID exercise.
 
-- [How Do Machines Learn?](/modules)
-- [Brain-Inspired, Neuromorphic, and Hardware-Level AI](/topics/brain-inspired-neuromorphic-and-hardware-level-ai)
-- [AI in Institutions: Domains, Power, and Solutionism](/topics/ai-in-institutions)
-- [Governance, Alternatives, and Emerging Futures](/topics/governance-alternatives-and-emerging-futures)
+- [Course Schedule](/modules)
+- [What Is Technically Different About Neuromorphic Computing?](/topics/26)
+- [How Can We Govern an Emerging Technology Before Its Uses Are Settled?](/topics/27)
+- [What Responsibilities Do We Have as Professionals and Global Citizens?](/topics/28)
 
 ## 2. Related Course Topics
 
-- [Neuroscience Primer: Neurons, Synapses, Weights, Plasticity](/topics/neuroscience-primer-neurons-synapses-weights-plasticity)
-- [Neuromorphic Computing, SNNs, Spikes, Timing](/topics/neuromorphic-computing-snns-spikes-timing)
-- [BRAID: Neuromorphic Anomaly Detection](/topics/braid-neuromorphic-anomaly-detection)
-- [When Does AI Define Normal?](/topics/when-does-ai-define-normal)
-- [Edge AI, Cloud, Chips, Vendors, Human Judgment](/topics/edge-ai-cloud-chips-vendors-human-judgment)
-- [BRAID Case Study: How Can We Govern an Emerging AI Before Its Uses Are Settled?](/topics/braid-case-study-governing-emerging-ai)
+- [How Do Humans Learn? Neuroscience and Neurobiology](/topics/02)
+- [What Is Technically Different About Neuromorphic Computing?](/topics/26)
+- [How Can We Govern an Emerging Technology Before Its Uses Are Settled?](/topics/27)
+- [Are Predictions Ever Neutral?](/topics/16)
+- [Who Controls AI?](/topics/24)
+- [Responsibilities Inside Organizations Adopting AI](/topics/25)
 
 ## 3. Suggested Exercise Flow
 

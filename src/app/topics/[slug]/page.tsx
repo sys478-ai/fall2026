@@ -20,6 +20,7 @@ import StatusBanner from '@/components/StatusBanner';
 import AssignmentDueMeta from '@/components/topics/AssignmentDueMeta';
 import AssignmentTypeBadge from '@/components/assignments/AssignmentTypeBadge';
 import NextTimeChecklist from '@/components/topics/NextTimeChecklist';
+import { resolveDueDate } from '@/lib/course-calendar';
 import {
   getDashboardPrepRows,
   getPrepAssignments,
@@ -105,6 +106,19 @@ function slugifyForId(value: string) {
     .replace(/&amp;/g, 'and')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+function formatInlineDate(dateStr: string | undefined) {
+  if (!dateStr) {
+    return undefined;
+  }
+
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+  const dayAbbr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const monthAbbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  return `${dayAbbr[date.getDay()]}, ${monthAbbr[date.getMonth()]} ${date.getDate()}`;
 }
 
 function splitHtmlByHeading(content: string, headingLevel: 2 | 3) {
@@ -288,6 +302,20 @@ interface EmbeddedTopicContent {
   sourceHref: string;
   contentHref: string;
   postData: PostData | null;
+}
+
+function isCareerEmbeddedContent(item: EmbeddedTopicContent) {
+  const title = item.title.toLowerCase();
+  const sourceHref = item.sourceHref.toLowerCase();
+  const contentHref = item.contentHref.toLowerCase();
+  const postType = item.postData?.type?.toLowerCase() || '';
+
+  return (
+    postType === 'career module' ||
+    title.includes('career module') ||
+    sourceHref.includes('career-module') ||
+    contentHref.includes('career-module')
+  );
 }
 
 function getMeetingTopicNumber(topic: Topic, meetingIndex: number) {
@@ -586,7 +614,7 @@ function TopicOverviewMaterials({
           {reminders.map((reminder, index) => (
             <div key={`${meetingSlug}-reminder-${index}`} className="text-base leading-7 text-gray-800 dark:text-gray-200">
               {reminder.url ? (
-                <Link href={reminder.url} className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+                <Link href={reminder.url} className={`font-medium ${READING_LINK_CLASS}`}>
                   {reminder.title}
                 </Link>
               ) : (
@@ -621,7 +649,7 @@ function TopicOverviewMaterials({
           {bibliographyReadings.map((reading: Reading) => (
             <PrepItemRow key={reading.id} kind="reading">
               <span>
-                <a href={reading.url} target="_blank" rel="noopener noreferrer" className="font-medium">
+                <a href={reading.url} target="_blank" rel="noopener noreferrer" className={`font-medium ${READING_LINK_CLASS}`}>
                   {reading.title}
                 </a>
                 {reading.authors && <span className="text-gray-500 dark:text-gray-400"> — {reading.authors}</span>}
@@ -639,7 +667,7 @@ function TopicOverviewMaterials({
                   <Link
                     href={item.href}
                     {...(/^https?:\/\//i.test(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="text-blue-600 hover:underline dark:text-blue-400"
+                    className={READING_LINK_CLASS}
                   >
                     {item.title}
                   </Link>
@@ -683,6 +711,69 @@ function TopicClassWorkPanel({
       {embeddedTopicContent.map(item => (
         <EmbeddedTopicContentSection key={item.id} item={item} />
       ))}
+    </div>
+  );
+}
+
+function TopicCareerPanel({
+  careerContent,
+}: {
+  careerContent: EmbeddedTopicContent[];
+}) {
+  const inClass = careerContent.filter(item => item.type === 'activity');
+  const afterClass = careerContent.filter(item => item.type === 'assignment');
+  const firstAfterClass = afterClass[0];
+  const fallbackHomeworkHref = inClass[0]?.sourceHref
+    ?.replace('/activities/', '/assignments/')
+    .replace(/-in-class\/?$/, '');
+  const homeworkHref = firstAfterClass?.sourceHref || fallbackHomeworkHref;
+  const homeworkPost = firstAfterClass?.postData || null;
+  const homeworkDueDate = homeworkPost
+    ? resolveDueDate({
+        scheduled_day: homeworkPost.scheduled_day as number | string | undefined,
+        due_date: homeworkPost.due_date as string | undefined,
+        due_days_after: homeworkPost.due_days_after as number | undefined,
+      })
+    : undefined;
+  const homeworkDueLabel = formatInlineDate(homeworkDueDate);
+  const homeworkDueTime =
+    typeof homeworkPost?.due_time === 'string' && homeworkPost.due_time.trim() !== ''
+      ? homeworkPost.due_time.trim()
+      : undefined;
+  const homeworkExcerpt =
+    typeof homeworkPost?.excerpt === 'string' && homeworkPost.excerpt.trim() !== ''
+      ? homeworkPost.excerpt.trim()
+      : 'complete the paired career-module homework';
+
+  return (
+    <div className="space-y-12">
+      {inClass.length > 0 && (
+        <section className="space-y-6">
+          <div className="space-y-12">
+            {inClass.map(item => (
+              <EmbeddedTopicContentSection key={item.id} item={item} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {homeworkHref && (
+        <section className="space-y-4 border-t border-gray-200 pt-6 dark:border-gray-800">
+          <h3 className="m-0! text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">What to Submit</h3>
+          <p className="mb-0 text-base leading-7 text-gray-700 dark:text-gray-300">
+            {homeworkExcerpt}.{' '}
+            <Link href={homeworkHref} className={READING_LINK_CLASS}>
+              Open the homework
+            </Link>
+          </p>
+          {(homeworkDueLabel || homeworkDueTime) && (
+            <p className="mb-0 text-sm leading-6 text-gray-500 dark:text-gray-400">
+              Submit by {homeworkDueLabel || 'the listed due date'}
+              {homeworkDueTime ? ` at ${homeworkDueTime}` : ''}
+            </p>
+          )}
+        </section>
+      )}
     </div>
   );
 }
@@ -777,7 +868,7 @@ function TopicSequenceNav({
 
   return (
     <nav
-      className="mt-16 flex items-start justify-between gap-8 border-t border-gray-200 pt-10 dark:border-gray-800"
+      className="topic-sequence-nav mt-16 flex items-start justify-between gap-8 border-t border-gray-200 pt-10 dark:border-gray-800"
       aria-label="Topic navigation"
     >
       {previousTopic ? <TopicSequenceNavLink direction="previous" item={previousTopic} /> : <span />}
@@ -816,6 +907,17 @@ export default async function TopicPage({ params }: TopicPageProps) {
     ? await getPostData(meeting.topicContentId, 'topics').catch(() => null)
     : null;
   const embeddedTopicContent = await getEmbeddedTopicContent(meeting);
+  const careerTopicContent = embeddedTopicContent.filter(isCareerEmbeddedContent);
+  const hasCareerActivity = careerTopicContent.some(item => item.type === 'activity');
+  const hasOnlyCareerHomework =
+    !hasCareerActivity &&
+    embeddedTopicContent.length > 0 &&
+    embeddedTopicContent.every(item => isCareerEmbeddedContent(item) && item.type === 'assignment');
+  const regularTopicContent = hasCareerActivity
+    ? embeddedTopicContent.filter(item => !isCareerEmbeddedContent(item))
+    : hasOnlyCareerHomework
+      ? []
+      : embeddedTopicContent;
   const nextClassMeeting = getNextClassMeeting(topics, meeting.slug || slug);
   const nextTopicNavItem = nextClassMeeting?.slug
     ? topicNavigationItems.find(item => item.slug === nextClassMeeting.slug) ?? null
@@ -865,12 +967,23 @@ export default async function TopicPage({ params }: TopicPageProps) {
     });
   }
 
-  if (!meeting.holiday && embeddedTopicContent.length > 0) {
+  if (!meeting.holiday && hasCareerActivity) {
+    topicSections.push({
+      navItem: { id: 'topic-career', label: 'Career' },
+      panel: (
+        <TopicWorkflowSection id="topic-career" label="Career">
+          <TopicCareerPanel careerContent={careerTopicContent} />
+        </TopicWorkflowSection>
+      ),
+    });
+  }
+
+  if (!meeting.holiday && regularTopicContent.length > 0) {
     topicSections.push({
       navItem: { id: 'topic-class-work', label: 'Class work' },
       panel: (
         <TopicWorkflowSection id="topic-class-work" label="Class work">
-          <TopicClassWorkPanel embeddedTopicContent={embeddedTopicContent} />
+          <TopicClassWorkPanel embeddedTopicContent={regularTopicContent} />
         </TopicWorkflowSection>
       ),
     });

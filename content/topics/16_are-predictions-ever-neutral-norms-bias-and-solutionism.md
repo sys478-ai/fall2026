@@ -1,6 +1,6 @@
 ---
 title: 'Are Predictions Ever Neutral? Norms, Bias, and Technological Solutionism'
-slug: are-predictions-ever-neutral-norms-bias-and-solutionism
+slug: 16
 scheduled_day: 16
 module_id: 3
 draft: 1

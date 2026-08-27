@@ -1,6 +1,6 @@
 ---
 title: 'What Are Generative AI and LLMs Actually Doing?'
-slug: what-are-generative-ai-and-llms-actually-doing
+slug: 12
 scheduled_day: 12
 module_id: 2
 draft: 1

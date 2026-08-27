@@ -1,6 +1,6 @@
 ---
 title: 'What Responsibilities Do We Have as Professionals and Global Citizens?'
-slug: what-responsibilities-do-we-have-as-professionals-and-global-citizens
+slug: 28
 scheduled_day: 28
 module_id: 7
 draft: 1

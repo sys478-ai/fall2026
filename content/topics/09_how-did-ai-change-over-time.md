@@ -1,6 +1,6 @@
 ---
 title: 'How Did AI Change Over Time?'
-slug: how-did-ai-change-over-time
+slug: 09
 scheduled_day: 9
 module_id: 2
 draft: 1

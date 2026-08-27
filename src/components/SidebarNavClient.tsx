@@ -63,8 +63,10 @@ export default function SidebarNavClient({
   const [mounted, setMounted] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scheduleOpen, setScheduleOpen] = useState(
+    () => normalizedPath === '/modules' || normalizedPath.startsWith('/topics/')
+  );
   const [expandedModuleIds, setExpandedModuleIds] = useState<number[]>([]);
-  const showModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
 
   useEffect(() => {
     setMounted(true);
@@ -82,6 +84,12 @@ export default function SidebarNavClient({
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (normalizedPath === '/modules' || normalizedPath.startsWith('/topics/')) {
+      setScheduleOpen(true);
+    }
+  }, [normalizedPath]);
 
   useEffect(() => {
     const moduleWithActiveTopic = modules.find(module =>
@@ -107,6 +115,17 @@ export default function SidebarNavClient({
     [activeAssignments, activeModules, activeSyllabus]
   );
 
+  function toggleScheduleOpen() {
+    if (collapsed) {
+      setCollapsed(false);
+      localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
+      setScheduleOpen(true);
+      return;
+    }
+
+    setScheduleOpen(prev => !prev);
+  }
+
   function toggleModuleExpanded(moduleId: number) {
     setExpandedModuleIds(prev =>
       prev.includes(moduleId) ? prev.filter(id => id !== moduleId) : [...prev, moduleId]
@@ -128,6 +147,10 @@ export default function SidebarNavClient({
     const newValue = !collapsed;
     setCollapsed(newValue);
     localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(newValue));
+
+    if (newValue) {
+      setScheduleOpen(false);
+    }
   };
 
   const baseLinkClass = 'flex items-center gap-3 px-3 py-2 text-sm transition-colors !no-underline !border-0';
@@ -210,8 +233,10 @@ export default function SidebarNavClient({
           </Link>
 
           <div className="bg-slate-50 dark:bg-slate-950">
-            <Link
-              href="/modules"
+            <button
+              type="button"
+              onClick={toggleScheduleOpen}
+              aria-expanded={scheduleOpen}
               className={`${baseLinkClass} w-full ${
                 activeModules ? activeTopLevelClass : inactiveTopLevelClass
               } ${collapsed ? 'justify-center' : 'justify-between'}`}
@@ -222,15 +247,25 @@ export default function SidebarNavClient({
               {!collapsed && (
                 <ChevronDownIcon
                   className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
-                    showModules ? '' : '-rotate-90'
+                    scheduleOpen ? '' : '-rotate-90'
                   }`}
                 />
               )}
-            </Link>
+            </button>
 
-            {!collapsed && showModules && (
+            {!collapsed && scheduleOpen && (
               <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
+                  <Link
+                    href="/modules"
+                    className={`group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
+                      normalizedPath === '/modules'
+                        ? 'bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50'
+                        : 'bg-transparent text-slate-800 hover:font-semibold hover:text-slate-950 dark:text-slate-200 dark:hover:text-slate-100'
+                    }`}
+                  >
+                    <span className="line-clamp-2 min-w-0 ml-5 leading-snug">Overview</span>
+                  </Link>
                   {modules.map(module => {
                     const isDraft = module.isDraft === true;
                     const isTopicInModule = module.topics.some(
@@ -281,7 +316,7 @@ export default function SidebarNavClient({
 
                         <div
                           className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-                            isOpen ? 'max-h-168 opacity-100' : 'max-h-0 opacity-0'
+                            isOpen ? 'max-h-400 opacity-100' : 'max-h-0 opacity-0'
                           }`}
                         >
                           <div className="border-t border-slate-200/80 bg-white dark:border-slate-800 dark:bg-black">

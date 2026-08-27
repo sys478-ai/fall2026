@@ -1,6 +1,6 @@
 ---
 title: 'Why Does AI Matter as a Public and Ethical Issue?'
-slug: why-is-ai-a-public-and-ethical-issue
+slug: 01
 scheduled_day: 1
 module_id: 1
 draft: 0

@@ -1,6 +1,6 @@
 ---
 title: 'What Responsibilities Do People Have Inside Organizations Adopting AI?'
-slug: responsibilities-inside-organizations-adopting-ai
+slug: 25
 scheduled_day: 25
 module_id: 5
 draft: 1

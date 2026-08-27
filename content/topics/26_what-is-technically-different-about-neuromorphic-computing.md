@@ -1,6 +1,6 @@
 ---
 title: 'What Is Technically Different About Neuromorphic Computing?'
-slug: what-is-technically-different-about-neuromorphic-computing
+slug: 26
 scheduled_day: 26
 module_id: 6
 draft: 1

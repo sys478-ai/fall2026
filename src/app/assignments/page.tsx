@@ -76,8 +76,18 @@ export default async function AssignmentsPage() {
     topic_slug: item.topicSlug,
   }));
 
+  const markdownAssignmentRouteSet = new Set(markdownAssignments.map(item => `/assignments/${item.id}`));
+  const dedupedTopicAssignments = topicAssignments.filter(item => {
+    if (!item.external_url) {
+      return true;
+    }
+
+    const normalizedExternalUrl = item.external_url.replace(/^\/fall2026/, '').replace(/\/$/, '');
+    return !markdownAssignmentRouteSet.has(normalizedExternalUrl);
+  });
+
   // Combine markdown assignments with external assignments and topic-frontmatter assignments
-  let assignments: AssignmentData[] = [...markdownAssignments, ...externalAssignments, ...topicAssignments];
+  let assignments: AssignmentData[] = [...markdownAssignments, ...externalAssignments, ...dedupedTopicAssignments];
   // Filter out excluded assignments, no_render assignments, hidden list items, and series child pages.
   assignments = assignments.filter(
     assignment =>

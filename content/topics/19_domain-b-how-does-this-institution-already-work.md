@@ -1,6 +1,6 @@
 ---
 title: 'Domain B: How Does This Institution Already Work?'
-slug: domain-b-how-does-this-institution-already-work
+slug: 19
 scheduled_day: 19
 module_id: 4
 draft: 1

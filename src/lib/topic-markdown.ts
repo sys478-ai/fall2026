@@ -145,7 +145,7 @@ function getOrderFromFilename(fileName: string, fallback: number) {
 
 function getTopicSlug(id: string, scheduledDay?: number) {
   if (typeof scheduledDay === 'number') {
-    return `topic-${String(scheduledDay).padStart(2, '0')}`;
+    return String(scheduledDay).padStart(2, '0');
   }
 
   return id.replace(/^\d+_/, '');
@@ -158,7 +158,11 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
   const matterResult = matter(fileContents);
   const data = matterResult.data;
   const scheduledDay = asNumber(data.scheduled_day);
-  const slug = asString(data.slug) || getTopicSlug(id, scheduledDay);
+  // Canonical URL slug is the zero-padded scheduled day (e.g. "01"), not a descriptive kebab string.
+  const slug =
+    typeof scheduledDay === 'number'
+      ? getTopicSlug(id, scheduledDay)
+      : asString(data.slug) || getTopicSlug(id, scheduledDay);
   const subtitle = asString(data.subtitle, asString(data.focus));
   const moduleId = asNumber(data.module_id);
 

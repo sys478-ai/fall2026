@@ -152,6 +152,116 @@ function addExternalLinkAttributes(contentHtml: string) {
   });
 }
 
+/**
+ * Wrap content after <!-- .box --> into a bordered slide-like <div class="box">.
+ * Includes the following p/ul/ol/blockquote/table blocks until the next box,
+ * heading, or a trailing paragraph after a list.
+ */
+function wrapMarkdownBoxes(contentHtml: string): string {
+  const boxCommentRegex = /<!--\s*\.box\s*-->/gi;
+  const matches: Array<{ index: number; length: number }> = [];
+  let match: RegExpExecArray | null;
+
+  while ((match = boxCommentRegex.exec(contentHtml)) !== null) {
+    matches.push({ index: match.index, length: match[0].length });
+  }
+
+  if (matches.length === 0) {
+    return contentHtml;
+  }
+
+  const findElementEnd = (html: string, startIndex: number, tagName: string): number => {
+    const openTag = new RegExp(`<${tagName}\\b[^>]*>`, 'i');
+    const closeTag = new RegExp(`</${tagName}\\s*>`, 'i');
+    let depth = 0;
+    let cursor = startIndex;
+
+    while (cursor < html.length) {
+      const remaining = html.slice(cursor);
+      const nextOpen = remaining.search(openTag);
+      const nextClose = remaining.search(closeTag);
+
+      if (nextClose === -1) {
+        return html.length;
+      }
+
+      if (nextOpen !== -1 && nextOpen < nextClose) {
+        depth += 1;
+        cursor += nextOpen + remaining.slice(nextOpen).match(openTag)![0].length;
+        continue;
+      }
+
+      depth -= 1;
+      const closeMatch = remaining.slice(nextClose).match(closeTag)!;
+      cursor += nextClose + closeMatch[0].length;
+      if (depth <= 0) {
+        return cursor;
+      }
+    }
+
+    return html.length;
+  };
+
+  // Process in reverse so earlier indices stay stable.
+  for (let i = matches.length - 1; i >= 0; i--) {
+    const { index: commentIndex, length: commentLength } = matches[i];
+    const afterComment = contentHtml.substring(commentIndex + commentLength);
+    const firstElementMatch = afterComment.match(/<(p|ul|ol|blockquote|table|pre|div)\b[^>]*>/i);
+
+    if (!firstElementMatch || firstElementMatch.index === undefined) {
+      contentHtml =
+        contentHtml.substring(0, commentIndex) + contentHtml.substring(commentIndex + commentLength);
+      continue;
+    }
+
+    let cursor = commentIndex + commentLength + firstElementMatch.index;
+    let includedList = false;
+    let boxEnd = cursor;
+
+    while (cursor < contentHtml.length) {
+      const remaining = contentHtml.substring(cursor);
+      const leadingWhitespace = remaining.match(/^\s*/)?.[0].length || 0;
+      const next = remaining.slice(leadingWhitespace);
+
+      if (!next) {
+        break;
+      }
+
+      if (/^<!--\s*\.box\s*-->/i.test(next) || /^<h[1-6]\b/i.test(next) || /^<hr\b/i.test(next)) {
+        break;
+      }
+
+      const elementMatch = next.match(/^<(p|ul|ol|blockquote|table|pre)\b[^>]*>/i);
+      if (!elementMatch) {
+        break;
+      }
+
+      const tagName = elementMatch[1].toLowerCase();
+      if (tagName === 'p' && includedList) {
+        break;
+      }
+
+      const elementStart = cursor + leadingWhitespace;
+      const elementEnd = findElementEnd(contentHtml, elementStart, tagName);
+      boxEnd = elementEnd;
+      cursor = elementEnd;
+
+      if (tagName === 'ul' || tagName === 'ol') {
+        includedList = true;
+      }
+    }
+
+    const boxInner = contentHtml.substring(commentIndex + commentLength, boxEnd).trim();
+    // Use slide-box (not "box") — Tailwind's CSS pipeline was dropping the .box rules.
+    const wrapped = `<div class="slide-box">\n${boxInner}\n</div>`;
+
+    contentHtml =
+      contentHtml.substring(0, commentIndex) + wrapped + contentHtml.substring(boxEnd);
+  }
+
+  return contentHtml;
+}
+
 function addDarkModeImageVariants(contentHtml: string) {
   return contentHtml.replace(/<img\b([^>]*)>/gi, (match, attributes) => {
     const src = getHtmlAttribute(attributes, 'src');
@@ -446,11 +556,15 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   // The placeholders were inserted before GFM processing to avoid disabled checkboxes
   contentHtml = await postprocessCheckboxes(contentHtml, id);
 
+  // Wrap {: .box } sections in a bordered slide-like container.
+  // Takes the following block(s) until the next box, heading, or trailing paragraph after a list.
+  contentHtml = wrapMarkdownBoxes(contentHtml);
+
   // Post-process HTML to add classes to elements based on markdown comments
   // Generic handler: any comment like <!-- .class-name --> (with dot prefix) will add that class to the next HTML element
   // Examples: <!-- .list-tight -->, <!-- .list-spaced -->, <!-- .info -->, etc.
   // Matches valid CSS class names (alphanumeric, hyphens, underscores) with required dot prefix
-  // Excludes "collapsible" which is handled separately
+  // Excludes "collapsible" and "box" which are handled separately
   const classCommentRegex = /<!--\s*\.([a-zA-Z0-9_-]+)\s*-->/gi;
   const classMatches: Array<{ index: number; className: string; length: number }> = [];
   let classCommentMatch;
@@ -468,6 +582,10 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   for (let i = classMatches.length - 1; i >= 0; i--) {
     const { index: commentIndex, className, length: commentLength } = classMatches[i];
 
+    if (className === 'box') {
+      continue;
+    }
+
     // Find the next HTML element after this comment (any tag)
     // Skip over whitespace, <p> tags, and other inline elements
     const afterComment = contentHtml.substring(commentIndex + commentLength);
@@ -476,7 +594,6 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
     if (elementMatch && elementMatch.index !== undefined) {
       const elementIndex = commentIndex + commentLength + elementMatch.index;
       const elementTag = elementMatch[0];
-      const tagName = elementMatch[1];
 
       // Add the class to the element
       let newElementTag: string;

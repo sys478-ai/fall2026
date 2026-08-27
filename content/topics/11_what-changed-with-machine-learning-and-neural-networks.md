@@ -1,6 +1,6 @@
 ---
 title: 'What Changed With Machine Learning and Neural Networks?'
-slug: what-changed-with-machine-learning-and-neural-networks
+slug: 11
 scheduled_day: 11
 module_id: 2
 draft: 1

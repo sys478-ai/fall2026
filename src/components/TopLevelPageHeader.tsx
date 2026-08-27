@@ -2,6 +2,8 @@ interface TopLevelPageHeaderProps {
   label: string;
   title: string;
   description?: string;
+  /** Secondary line under the title (e.g. assignment due date). */
+  meta?: string;
   tone?: 'sky' | 'indigo' | 'violet' | 'slate';
 }
 
@@ -32,6 +34,7 @@ export default function TopLevelPageHeader({
   label,
   title,
   description,
+  meta,
   tone = 'sky',
 }: TopLevelPageHeaderProps) {
   const classes = toneClasses[tone];
@@ -43,8 +46,13 @@ export default function TopLevelPageHeader({
         {title}
       </h1>
       {description && (
-        <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{description}</p>
+        <p className={`mb-1! max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300 ${meta ? 'mt-4' : 'mt-5'}`}>
+          {description}
+        </p>
       )}
+      {meta ? (
+        <p className={`my-0! text-base font-semibold tabular-nums ${classes.accent}`}>{meta}</p>
+      ) : null}
     </header>
   );
 }

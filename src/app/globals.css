@@ -137,6 +137,97 @@ th {
   color: var(--foreground);
 }
 
+/* Soft, Apple-like table — must beat global th/td and .prose table rules */
+.prose table.table-simple,
+table.table-simple {
+  width: 100% !important;
+  margin-bottom: 1.5rem !important;
+  border: 1px !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fbfbfd !important;
+  table-layout: auto !important;
+}
+
+.prose table.table-simple th,
+.prose table.table-simple td,
+table.table-simple th,
+table.table-simple td {
+  /* border-width: 0 !important; */
+  border-style: solid !important;
+  border-color: transparent !important;
+  border-bottom: 1px solid #e8e8ed !important;
+  padding: 0.875rem 1.125rem !important;
+  background: transparent !important;
+  color: inherit !important;
+  vertical-align: top !important;
+  text-align: left !important;
+}
+
+.prose table.table-simple th,
+table.table-simple th {
+  background: #f5f5f7 !important;
+}
+
+.prose table.table-simple tbody tr:last-child td,
+table.table-simple tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+
+
+.dark .prose table.table-simple,
+.dark table.table-simple {
+  background: #1c1c1e !important;
+}
+
+.dark .prose table.table-simple th,
+.dark .prose table.table-simple td,
+.dark table.table-simple th,
+.dark table.table-simple td {
+  border-bottom-color: #38383a !important;
+}
+
+.dark .prose table.table-simple th,
+.dark table.table-simple th {
+  background: #2c2c2e !important;
+  color: #a1a1a6 !important;
+}
+
+.dark .prose table.table-simple tbody tr:hover td,
+.dark table.table-simple tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Slide-like bordered box for markdown {: .box } sections */
+.prose .slide-box,
+.slide-box {
+  display: block !important;
+  border: 1px solid #111 !important;
+  padding: 1rem 1.25rem !important;
+  margin: 1.25rem 0 !important;
+  background: #fff !important;
+  min-height: 200px;
+}
+
+.prose .slide-box > :first-child,
+.slide-box > :first-child {
+  margin-top: 0 !important;
+}
+
+.prose .slide-box > :last-child,
+.slide-box > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.dark .prose .slide-box,
+.dark .slide-box {
+  border-color: #ededed !important;
+  background: transparent !important;
+}
+
 .wireframe-rules-table td,
 .wireframe-rules-table th {
   border-left: solid 1px var(--border) !important;
@@ -1145,6 +1236,23 @@ pre code {
 .topic-page .prose > h2:first-child,
 .topic-page .prose > h3:first-child {
   @apply mt-0;
+}
+
+/* Document hyperlinks on topic pages */
+.topic-page a[href] {
+  color: #0b5d8f;
+}
+
+.dark .topic-page a[href] {
+  color: #8fc4ee;
+}
+
+.topic-page .topic-sequence-nav a[href] {
+  color: inherit;
+}
+
+.topic-section-panel[hidden] {
+  display: none !important;
 }
 
 /* For next time checklist: override global near-black table borders */

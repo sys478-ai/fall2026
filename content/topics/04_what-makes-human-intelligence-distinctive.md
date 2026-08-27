@@ -1,9 +1,9 @@
 ---
 title: 'How Do Humans Learn? Sociocultural Foundations'
-slug: sociocultural-foundations
+slug: 04
 scheduled_day: 4
-module_id: 0
-draft: 1
+module_id: 1
+draft: 0
 subtitle: 'Social and Political Learning: Vygotsky and Freire'
 pre_class_tasks:
   - citation: 'PathwayU. Complete the Interests, Values, Personality, and Workplace Preferences assessments before class. Use the access instructions.'
@@ -24,6 +24,10 @@ readings:
 ## Topic / Focus
 
 Today you ask what makes human intelligence distinctive: knowledge, meaning, culture, and social learning. A career bridge on values, interests, and coaching access connects self-knowledge to the course's broader questions about what intelligence is for.
+
+## Slides
+
+* <a href="https://docs.google.com/presentation/d/1FQRPhUgEA7P3w3F2wpt6Q82mkrh1uM2tVHn5EVP6_k8/edit?usp=sharing" target="_blank">Sociocultural and socio-political foundations of learning</a>
 
 ## Guiding Questions
 

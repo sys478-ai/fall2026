@@ -27,7 +27,7 @@ interface ContentLayoutProps {
 
 /**
  * Shared layout component that ensures consistent content positioning across all pages.
- * 
+ *
  * Layout variants:
  * - resources-detail: Content + TOC
  * - detail-with-toc: Content + TOC
@@ -46,54 +46,35 @@ export default function ContentLayout({
 }: ContentLayoutProps) {
   const isResourcesDetail = variant === 'resources-detail';
   const isDetailWithToc = variant === 'detail-with-toc';
-  
-  // All pages use full-height scrollable containers
+
   const hasToc = (isResourcesDetail || isDetailWithToc) && showToc;
-  const desktopContentWidthClass = fullWidth ? 'max-w-none' : hasToc ? 'max-w-5xl' : 'max-w-4xl';
-  
+  const contentWidthClass = fullWidth
+    ? 'max-w-none'
+    : hasToc
+      ? 'mx-auto max-w-4xl lg:mx-0 lg:max-w-5xl'
+      : 'mx-auto max-w-4xl lg:mx-0';
+
   return (
-    <div className="relative lg:h-screen lg:overflow-hidden -mx-4 lg:-mx-8">
-      {/* Mobile: Stacked layout */}
-      <div className="lg:hidden">
-        {leftNav && (
-          <div className="w-full px-4 pt-4">
-            {leftNav}
-          </div>
-        )}
-        <div className="w-full">
-          {header}
-          <div className={`${fullWidth ? 'max-w-none' : 'max-w-4xl mx-auto'} ${contentPadding ? 'px-4 md:px-16' : ''}`}>
-            <div className="space-y-6 py-6">
-              {children}
-              {showFooter && <Footer />}
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Desktop: Content column with optional right TOC */}
-      <div className="hidden lg:flex h-full">
-        <div 
-          id="main-content-scroll"
-          className="flex-1 min-w-0 overflow-y-auto"
-        >
-          {header}
-          <div className={contentPadding ? 'px-16' : ''}>
-            <div className={hasToc ? 'grid grid-cols-[minmax(0,1fr)_13rem] gap-6' : ''}>
-              <div className={desktopContentWidthClass}>
-                <div className="space-y-6 py-6">
-                  {children}
-                  {showFooter && <Footer />}
-                </div>
+    <div className="relative -mx-4 lg:-mx-8 lg:h-screen lg:overflow-hidden">
+      <div id="main-content-scroll" className="lg:h-full lg:overflow-y-auto">
+        {leftNav && <div className="w-full px-4 pt-4 lg:hidden">{leftNav}</div>}
+
+        {header}
+
+        <div className={contentPadding ? 'px-4 md:px-16 lg:px-16' : ''}>
+          <div className={hasToc ? 'lg:grid lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-6' : ''}>
+            <div className={contentWidthClass}>
+              <div className="space-y-6 py-6">
+                {children}
+                {showFooter && <Footer />}
               </div>
-              {hasToc && (
-                <aside
-                  className="sticky top-[20px] self-start max-h-[calc(100vh-20px)] overflow-y-auto"
-                >
-                  <TableOfContents maxLevel={tocMaxLevel} />
-                </aside>
-              )}
             </div>
+
+            {hasToc && (
+              <aside className="sticky top-[20px] hidden max-h-[calc(100vh-20px)] self-start overflow-y-auto lg:block">
+                <TableOfContents maxLevel={tocMaxLevel} />
+              </aside>
+            )}
           </div>
         </div>
       </div>

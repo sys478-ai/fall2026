@@ -1,6 +1,6 @@
 ---
 title: 'How Do Predictions Become Decisions?'
-slug: how-do-predictions-become-decisions
+slug: 15
 scheduled_day: 15
 module_id: 3
 draft: 1
