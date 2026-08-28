@@ -34,7 +34,9 @@ export default async function Navigation() {
     title: module.title,
     color: module.color,
     isDraft: module.draft === 1,
-    topics: module.meetings.map((meeting, index) => {
+    topics: module.meetings
+      .filter(meeting => !meeting.scheduleOnly)
+      .map((meeting, index) => {
       const contentHref = meeting.slug
         ? `/topics/${meeting.slug}`
         : `/modules#${getMeetingAnchorId(module.id, index, meeting.topic)}`;

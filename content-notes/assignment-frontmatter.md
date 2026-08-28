@@ -34,7 +34,7 @@ If both are set, `due_date` wins outright. If neither is set, the 6-day default 
 
 - `submission_notes` (optional) — a short note describing *what's* due (e.g. "PathwayU reflection"), shown next to the due date/time in the topic page's "Due" section. Mirrors `reminder_notes` on the before-class side.
 
-The resolved due date/time is what shows up everywhere a due date is displayed: the assignment's own page, the `/assignments` listing, and the "Due" section of whichever topic page falls on that date. If a due date doesn't land on any scheduled class meeting, it still appears on `/assignments` but won't attach to a topic page's "Due" section — that's a known, accepted limitation, not a bug.
+The resolved due date/time is what shows up everywhere a due date is displayed: the assignment's own page, the `/assignments` listing, the course schedule, and the "Due" section of whichever topic page falls on that date. If a due date does not land on a class meeting, the course schedule adds a separate **Deadline** row on that date.
 
 ### Body heading convention
 

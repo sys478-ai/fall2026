@@ -5,8 +5,8 @@ num: '1'
 type: 'career module'
 excerpt: 'Submit a short reflection on PathwayU results, values, and next steps after Career Module 1.'
 submission_notes: 'PathwayU reflection'
-due_days_after: 5
-due_time: '3:00PM'
+due_date: '2026-09-03'
+due_time: '11:59PM'
 draft: 0
 ---
 

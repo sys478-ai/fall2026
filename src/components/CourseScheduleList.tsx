@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import { getReadingsForTopic } from '@/lib/readings';
 import { groupReadingsByPickOne } from '@/lib/reading-groups';
 import { getTopics } from '@/lib/topics';
+import { DEFAULT_DUE_TIME_LABEL, formatDueTime } from '@/lib/utils';
 
 type ScheduleTopics = Awaited<ReturnType<typeof getTopics>>;
 type ScheduleMeeting = ScheduleTopics[number]['meetings'][number];
@@ -13,6 +14,8 @@ interface ScheduleListItem {
   external?: boolean;
   pickOne?: boolean;
   notes?: string;
+  dueTime?: string;
+  showDefaultDueTime?: boolean;
 }
 
 const ROW_COLS =
@@ -66,7 +69,9 @@ function addListItem(
   label: string,
   href?: string,
   pickOne?: boolean,
-  notes?: string
+  notes?: string,
+  dueTime?: string,
+  showDefaultDueTime?: boolean
 ) {
   const normalizedLabel = label.trim();
   if (!normalizedLabel) return;
@@ -79,6 +84,8 @@ function addListItem(
       external: Boolean(href && /^https?:\/\//i.test(href)),
       pickOne,
       notes: notes?.trim() || undefined,
+      dueTime: dueTime?.trim() || undefined,
+      showDefaultDueTime,
     });
   }
 }
@@ -100,23 +107,14 @@ function getDueItems(meeting: ScheduleMeeting): ScheduleListItem[] {
       return;
     }
 
-    addListItem(items, getCompactRelatedItemLabel(item.titleShort || item.title, item.url), item.url);
-  });
-
-  (meeting.activities || []).forEach(activity => {
-    if (activity.draft === 1 || activity.excluded === 1) return;
-
-    const label = activity.title?.trim();
-    if (!label) return;
-
-    const looksLikeRelevantItem =
-      /^lab\b/i.test(label) || /^career module\b/i.test(label) || activity.url?.includes('/assignments/');
-
-    if (!looksLikeRelevantItem) {
-      return;
-    }
-
-    addListItem(items, getCompactRelatedItemLabel(label, activity.url), activity.url);
+    addListItem(
+      items,
+      getCompactRelatedItemLabel(item.titleShort || item.title, item.url),
+      item.url,
+      undefined,
+      undefined,
+      item.dueTime
+    );
   });
 
   toAssignmentArray(meeting.due).forEach(item => {
@@ -126,7 +124,15 @@ function getDueItems(meeting: ScheduleMeeting): ScheduleListItem[] {
     }
 
     if (item.draft === 1) return;
-    addListItem(items, getCompactRelatedItemLabel(item.titleShort || item.title, item.url), item.url);
+    addListItem(
+      items,
+      getCompactRelatedItemLabel(item.titleShort || item.title, item.url),
+      item.url,
+      undefined,
+      undefined,
+      item.dueTime,
+      true
+    );
   });
 
   return Array.from(items.values());
@@ -186,19 +192,45 @@ function ScheduleReadingItem({ item }: { item: ScheduleListItem }) {
   );
 }
 
+function getScheduleDueTimeLabel(item: ScheduleListItem) {
+  if (item.dueTime) {
+    return formatDueTime(item.dueTime);
+  }
+
+  if (item.showDefaultDueTime) {
+    return DEFAULT_DUE_TIME_LABEL;
+  }
+
+  return null;
+}
+
 function ScheduleItemLink({ item, className }: { item: ScheduleListItem; className: string }) {
+  const dueTimeLabel = getScheduleDueTimeLabel(item);
+
   if (!item.href) {
-    return <span className={`${className} text-gray-700 dark:text-gray-300`}>{item.label}</span>;
+    return (
+      <span className={`${className} text-gray-700 dark:text-gray-300`}>
+        {item.label}
+        {dueTimeLabel ? (
+          <span className="mt-0.5 block text-xs tabular-nums text-gray-500 dark:text-gray-400">{dueTimeLabel}</span>
+        ) : null}
+      </span>
+    );
   }
 
   return (
-    <Link
-      href={item.href}
-      className={`${className} ${LINK_CLASS}`}
-      {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-    >
-      {item.label}
-    </Link>
+    <span className="block">
+      <Link
+        href={item.href}
+        className={`${className} ${LINK_CLASS}`}
+        {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        {item.label}
+      </Link>
+      {dueTimeLabel ? (
+        <span className="mt-0.5 block text-xs tabular-nums text-gray-500 dark:text-gray-400">{dueTimeLabel}</span>
+      ) : null}
+    </span>
   );
 }
 
@@ -231,11 +263,15 @@ export default function CourseScheduleList({ topics }: { topics: ScheduleTopics 
           <ol className="m-0 list-none divide-y divide-gray-200 p-0! dark:divide-gray-800">
             {topic.meetings.map((meeting, index) => {
               const isNoClass = meeting.holiday === true;
-              const topicNumber = isNoClass ? null : getMeetingTopicNumber(topic.id, index);
+              const isScheduleOnly = meeting.scheduleOnly === true;
+              const topicNumber =
+                isNoClass || isScheduleOnly ? null : getMeetingTopicNumber(topic.id, index);
               const topicTitle = topicNumber ? `${topicNumber} ${meeting.topic}` : meeting.topic;
               const topicHref =
-                meeting.slug && !isNoClass && meeting.draft !== 1 ? `/topics/${meeting.slug}` : undefined;
-              const readings = isNoClass ? [] : getAssignedReadings(meeting);
+                meeting.slug && !isNoClass && !isScheduleOnly && meeting.draft !== 1
+                  ? `/topics/${meeting.slug}`
+                  : undefined;
+              const readings = isNoClass || isScheduleOnly ? [] : getAssignedReadings(meeting);
               const dueItems = isNoClass ? [] : getDueItems(meeting);
 
               return (
@@ -266,7 +302,12 @@ export default function CourseScheduleList({ topics }: { topics: ScheduleTopics 
                             No class
                           </span>
                         )}
-                        {!isNoClass && meeting.subtitle && (
+                        {/* {isScheduleOnly && (
+                          <span className="mt-0.5 block text-sm leading-5 text-gray-500 dark:text-gray-500">
+                            --
+                          </span>
+                        )} */}
+                        {!isNoClass && !isScheduleOnly && meeting.subtitle && (
                           <span className="mt-0.5 block text-sm leading-5 text-gray-500 dark:text-gray-500">
                             {meeting.subtitle}
                           </span>

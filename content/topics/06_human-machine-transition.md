@@ -3,7 +3,7 @@ title: 'From Human Learning to Machine Learning'
 slug: 06
 scheduled_day: 6
 module_id: 1
-draft: 1
+draft: 0
 subtitle: 'Review the four lenses, compare what they reveal, and launch the first synthesis homework.'
 assignments:
   - title: 'Module 1 Synthesis: One Thing, Two Lenses'

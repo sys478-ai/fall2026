@@ -43,19 +43,29 @@ export default function CourseReminder({
 }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [referenceDate, setReferenceDate] = useState<Date | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+    setReferenceDate(new Date());
   }, []);
 
-  const referenceDate = useMemo(() => (mounted ? new Date() : null), [mounted]);
+  function handleToggle() {
+    setOpen(current => {
+      const next = !current;
+      if (next) {
+        setReferenceDate(new Date());
+      }
+      return next;
+    });
+  }
   const timeline = useMemo(
     () => (referenceDate ? getCourseTimeline(meetings, referenceDate) : null),
     [meetings, referenceDate]
   );
   const prepMeetings = useMemo(
-    () => (referenceDate ? getUpcomingPrepMeetings(meetings, referenceDate, 2) : []),
+    () => (referenceDate ? getUpcomingPrepMeetings(meetings, referenceDate) : []),
     [meetings, referenceDate]
   );
   const dueSoonAll = useMemo(
@@ -100,7 +110,7 @@ export default function CourseReminder({
     <div ref={rootRef} className="relative">
       <button
         type="button"
-        onClick={() => setOpen(value => !value)}
+        onClick={handleToggle}
         className="relative flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 hover:font-semibold hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100"
         aria-label="What's next"
         aria-expanded={open}

@@ -73,6 +73,10 @@ function buildClassPrepRows(meeting: TimelineMeeting): DashboardPrepRow[] {
 export function flattenCourseMeetings(topics: Topic[]): TimelineMeeting[] {
   return topics.flatMap(topic =>
     topic.meetings.flatMap((meeting, meetingIndex) => {
+      if (meeting.scheduleOnly) {
+        return [];
+      }
+
       const dateIso = parseMeetingDate(meeting.date);
       if (!dateIso) {
         return [];
@@ -179,17 +183,17 @@ export function getAssignmentsInWindow(
 export function getUpcomingPrepMeetings(
   meetings: TimelineMeeting[],
   referenceDate: Date = new Date(),
-  count = 2
+  days = 7
 ): UpcomingPrepMeeting[] {
   const todayIso = formatIsoDateLocal(referenceDate);
+  const endIso = addDaysToIsoDate(todayIso, days);
   const openMeetings = [...meetings]
     .filter(isOpenClassMeeting)
     .sort((a, b) => a.dateIso.localeCompare(b.dateIso));
 
-  // Always the next open meetings after today (if today is a class day, skip it).
+  // Open class meetings after today through the next `days` calendar days (inclusive).
   return openMeetings
-    .filter(item => item.dateIso > todayIso)
-    .slice(0, count)
+    .filter(item => item.dateIso > todayIso && item.dateIso <= endIso)
     .map(meeting => ({
       meeting,
       prepRows: buildClassPrepRows(meeting),

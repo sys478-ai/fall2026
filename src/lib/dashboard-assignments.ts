@@ -3,6 +3,12 @@ import { getAllPostIds, getPostData } from '@/lib/markdown';
 import { getTopicAssignmentIndexItems } from '@/lib/topic-markdown';
 import externalAssignments from '../../content/config/external-assignments.json';
 
+function getAssignmentSlugFromUrl(url?: string) {
+  const normalized = url?.replace(/^\/fall2026/, '').replace(/\/$/, '') || '';
+  const match = normalized.match(/^\/assignments\/([^/]+)$/);
+  return match?.[1] || null;
+}
+
 export type DashboardAssignmentInput = {
   id: string;
   title: string;
@@ -28,14 +34,25 @@ export async function getDashboardAssignments(): Promise<DashboardAssignmentInpu
     })
   );
 
-  const topicAssignments = getTopicAssignmentIndexItems().map(item => ({
-    id: item.id,
-    title: item.title,
-    due_date: item.dueDate || getDateForScheduledDay(item.scheduledDay),
-    due_time: item.dueTime,
-    draft: item.draft,
-    external_url: item.url,
-  }));
+  const assignmentDraftById = new Map(
+    markdownAssignments.map(assignment => [assignment.id, assignment.draft ?? 1])
+  );
+
+  const topicAssignments = getTopicAssignmentIndexItems().map(item => {
+    const linkedAssignmentSlug = getAssignmentSlugFromUrl(item.url);
+    const linkedAssignmentDraft = linkedAssignmentSlug
+      ? assignmentDraftById.get(linkedAssignmentSlug)
+      : undefined;
+
+    return {
+      id: item.id,
+      title: item.title,
+      due_date: item.dueDate || getDateForScheduledDay(item.scheduledDay),
+      due_time: item.dueTime,
+      draft: linkedAssignmentDraft ?? item.draft,
+      external_url: item.url,
+    };
+  });
 
   const external = (
     externalAssignments as Array<{

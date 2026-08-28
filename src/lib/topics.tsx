@@ -100,6 +100,8 @@ export interface Meeting {
   otherPreparation?: Reading[];
   holiday?: boolean;
   draft?: number;
+  /** Synthetic row on /modules for deadlines that fall on non-class days. */
+  scheduleOnly?: boolean;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
@@ -147,6 +149,8 @@ interface BaseMeeting {
   otherPreparation?: Reading[];
   holiday?: boolean;
   draft?: number;
+  /** Synthetic row on /modules for deadlines that fall on non-class days. */
+  scheduleOnly?: boolean;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
   due?: Assignment | string | (Assignment | string)[];
@@ -510,12 +514,219 @@ function formatDateForMeeting(dateStr: string): string | null {
   return `${dayOfWeek}, ${month} ${day}`;
 }
 
+function collectAllMeetingDates(topics: Topic[]): Set<string> {
+  const dates = new Set<string>();
+
+  topics.forEach(topic => {
+    topic.meetings.forEach(meeting => {
+      const meetingDateStr = parseMeetingDate(meeting.date);
+      if (meetingDateStr) {
+        dates.add(meetingDateStr);
+      }
+    });
+  });
+
+  return dates;
+}
+
+function findTargetTopicForOrphanDate(topics: Topic[], dateStr: string): Topic {
+  let targetTopic: Topic | null = null;
+  let latestTopicDate = '';
+
+  topics.forEach(topic => {
+    const topicDates: string[] = [];
+
+    topic.meetings.forEach(meeting => {
+      const meetingDateStr = parseMeetingDate(meeting.date);
+      if (meetingDateStr) {
+        topicDates.push(meetingDateStr);
+      }
+    });
+
+    if (topicDates.length > 0) {
+      const datesBeforeOrEqual = topicDates.filter(date => date <= dateStr).sort();
+      if (datesBeforeOrEqual.length > 0) {
+        const latestDate = datesBeforeOrEqual[datesBeforeOrEqual.length - 1];
+        if (latestDate > latestTopicDate) {
+          latestTopicDate = latestDate;
+          targetTopic = topic;
+        }
+      }
+    }
+  });
+
+  return targetTopic || topics[0];
+}
+
+function findMeetingByDateIso(topics: Topic[], dateIso: string): Meeting | null {
+  for (const topic of topics) {
+    for (const meeting of topic.meetings) {
+      if (parseMeetingDate(meeting.date) === dateIso) {
+        return meeting;
+      }
+    }
+  }
+
+  return null;
+}
+
+function sortTopicMeetings(topic: Topic) {
+  topic.meetings.sort((a, b) => {
+    const dateA = parseMeetingDate(a.date);
+    const dateB = parseMeetingDate(b.date);
+    if (!dateA || !dateB) return 0;
+    return dateA.localeCompare(dateB);
+  });
+}
+
+function normalizeAssignmentUrl(url?: string) {
+  return url?.replace(/^\/fall2026/, '').replace(/\/$/, '') || '';
+}
+
+function getAssignmentSlugFromUrl(url?: string) {
+  const normalized = normalizeAssignmentUrl(url);
+  const match = normalized.match(/^\/assignments\/([^/]+)$/);
+  return match?.[1] || null;
+}
+
+function buildAssignmentDraftById(assignments: PostData[]) {
+  return new Map<string, number>(
+    assignments.map(assignment => [assignment.id as string, assignment.draft === 0 ? 0 : 1])
+  );
+}
+
+function isDraftAssignmentUrl(url: string | undefined, assignmentDraftById: Map<string, number>) {
+  const slug = getAssignmentSlugFromUrl(url);
+  return Boolean(slug && assignmentDraftById.get(slug) === 1);
+}
+
+function mapTopicAssignmentToDueEntry(
+  item: TopicAssignment,
+  assignmentDraftById: Map<string, number>
+): Assignment | null {
+  if (isDraftAssignmentUrl(item.url, assignmentDraftById)) {
+    return null;
+  }
+
+  const slug = getAssignmentSlugFromUrl(item.url);
+
+  return {
+    titleShort: item.title,
+    title: item.title,
+    url: item.url,
+    draft: slug ? (assignmentDraftById.get(slug) ?? 0) : 0,
+    type: item.type,
+    dueDate: item.dueDate,
+    dueTime: item.dueTime,
+    notes: item.notes,
+  };
+}
+
+function collectTopicFrontmatterDueByDate(
+  topics: Topic[],
+  assignmentDraftById: Map<string, number>
+): Map<string, Assignment[]> {
+  const byDate = new Map<string, Assignment[]>();
+
+  topics.forEach(topic => {
+    topic.meetings.forEach(meeting => {
+      (meeting.assignments || []).forEach(item => {
+        const dueDate = normalizeDate(item.dueDate);
+        if (!dueDate) {
+          return;
+        }
+
+        const entry = mapTopicAssignmentToDueEntry(item, assignmentDraftById);
+        if (!entry) {
+          return;
+        }
+
+        const existing = byDate.get(dueDate) || [];
+        byDate.set(dueDate, [...existing, entry]);
+      });
+    });
+  });
+
+  return byDate;
+}
+
+function mapAssignmentToDueEntry(assignment: PostData): Assignment | null {
+  if (assignment.draft === 1) {
+    return null;
+  }
+
+  const titleShort = getAssignmentTitleShort(assignment);
+
+  return {
+    titleShort,
+    title: assignment.title,
+    url: `/assignments/${assignment.id}/`,
+    draft: 0,
+    order: assignment.order,
+    type: assignment.type,
+    dueDate: resolveDueDate(assignment),
+    dueTime: assignment.due_time,
+    notes: assignment.submission_notes,
+  };
+}
+
+function mergeDueAssignments(meeting: Meeting, incoming: Assignment[]) {
+  const published = incoming.filter(item => item.draft !== 1);
+  if (published.length === 0) {
+    return;
+  }
+
+  const existing = meeting.due
+    ? Array.isArray(meeting.due)
+      ? meeting.due
+      : [meeting.due]
+    : [];
+  const existingUrls = new Set(
+    existing
+      .filter((item): item is Assignment => typeof item !== 'string')
+      .map(item => normalizeAssignmentUrl(item.url))
+  );
+  const newItems = published.filter(item => !existingUrls.has(normalizeAssignmentUrl(item.url)));
+
+  if (newItems.length === 0) {
+    return;
+  }
+
+  const merged = [...existing, ...newItems];
+  meeting.due = merged.length === 1 ? merged[0] : merged;
+}
+
+function getOrphanAssignedTopicName(assignments: PostData[]) {
+  const isTutorial = assignments.some(assignment => assignment.type === 'tutorial');
+  const isHomework = assignments.some(assignment => assignment.type === 'homework');
+  const isProject = assignments.some(assignment => assignment.type === 'project');
+
+  if (isTutorial && !isHomework) {
+    return 'Tutorial';
+  }
+
+  if (isHomework && !isTutorial) {
+    return 'Homework';
+  }
+
+  if (isTutorial && isHomework) {
+    return 'Tutorial & Homework';
+  }
+
+  if (isProject && !isTutorial && !isHomework) {
+    return 'Project';
+  }
+
+  return 'Assignment';
+}
+
 // Enrichment function
 async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<TopicsArray> {
   // Read all activities, assignments, and quizzes
   const allActivities = getAllPosts('activities');
   const allAssignments = getAllPosts('assignments');
   const allQuizzes = getAllQuizMetadata();
+  const assignmentDraftById = buildAssignmentDraftById(allAssignments);
 
   // Filter scheduled activities and assignments by scheduled_day.
   const scheduledActivities = allActivities.filter(
@@ -526,8 +737,12 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
   );
   const assignmentsWithAssignedDate = allAssignments.filter(a => a.assigned_date && a.hide_from_list !== 1);
   const assignmentsWithDueDate = allAssignments.filter(a => {
+    if (a.draft === 1 || a.hide_from_list === 1) {
+      return false;
+    }
+
     const dueDate = resolveDueDate(a);
-    return Boolean(dueDate && a.hide_from_list !== 1);
+    return Boolean(dueDate);
   });
   const quizzesWithDates = allQuizzes.filter(q => q.start_date);
 
@@ -771,21 +986,10 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
         };
       });
 
-      // Create auto-populated assignment entries for due (all matches, including drafts)
-      const autoDueAssignments = matchingAssignmentsByDue.map(assignment => {
-        const titleShort = getAssignmentTitleShort(assignment);
-        return {
-          titleShort: titleShort,
-          title: assignment.title,
-          url: `/assignments/${assignment.id}/`,
-          draft: assignment.draft || 0,
-          order: assignment.order,
-          type: assignment.type,
-          dueDate: resolveDueDate(assignment),
-          dueTime: assignment.due_time,
-          notes: assignment.submission_notes,
-        };
-      });
+      // Create auto-populated assignment entries for due (published assignments only)
+      const autoDueAssignments = matchingAssignmentsByDue
+        .map(mapAssignmentToDueEntry)
+        .filter((assignment): assignment is Assignment => assignment !== null);
 
       // Create auto-populated quiz entries (include full quiz data for client-side rendering)
       const autoQuizzes = matchingQuizzes.map((quiz: QuizMetadata) => {
@@ -880,7 +1084,7 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
         }
       }
 
-      // Merge due assignments: add all auto-populated ones (including drafts)
+      // Merge due assignments: add auto-populated published assignments only
       if (autoDueAssignments.length > 0) {
         if (!meeting.due) {
           // If no manual due items, set to array of auto-populated ones
@@ -916,112 +1120,106 @@ async function enrichTopicsWithMarkdown(baseTopics: BaseTopicsArray): Promise<To
     });
   });
 
-  // Find all assignment dates that don't have corresponding meetings
-  const allMeetingDates = new Set<string>();
-  enrichedTopics.forEach(topic => {
-    topic.meetings.forEach(meeting => {
-      const meetingDateStr = parseMeetingDate(meeting.date);
-      if (meetingDateStr) {
-        allMeetingDates.add(meetingDateStr);
-      }
-    });
-  });
+  // Add schedule rows for assignment dates that don't fall on a class meeting.
+  const topicFrontmatterDueByDate = collectTopicFrontmatterDueByDate(enrichedTopics, assignmentDraftById);
+  const allMeetingDates = collectAllMeetingDates(enrichedTopics);
 
-  // Find assignments with assigned_date that don't have meetings
-  const orphanedAssignments = new Map<string, PostData[]>();
-  assignmentsByAssignedDate.forEach((assignments, dateStr) => {
+  topicFrontmatterDueByDate.forEach((entries, dateStr) => {
     if (!allMeetingDates.has(dateStr)) {
-      orphanedAssignments.set(dateStr, assignments);
+      return;
+    }
+
+    const existingMeeting = findMeetingByDateIso(enrichedTopics, dateStr);
+    if (existingMeeting) {
+      mergeDueAssignments(existingMeeting, entries);
     }
   });
 
-  // Create new meetings for orphaned assignments
-  if (orphanedAssignments.size > 0) {
-    // Find the appropriate topic for each orphaned assignment based on date
-    orphanedAssignments.forEach((assignments, dateStr) => {
-      const formattedDate = formatDateForMeeting(dateStr);
-      if (!formattedDate) return;
+  const orphanedAssignedByDate = new Map<string, PostData[]>();
+  assignmentsByAssignedDate.forEach((assignments, dateStr) => {
+    if (!allMeetingDates.has(dateStr)) {
+      orphanedAssignedByDate.set(dateStr, assignments);
+    }
+  });
 
-      // Find the topic that this date should belong to
-      // Look for the topic with the latest date that is still before or equal to the assignment date
-      let targetTopic: Topic | null = null;
-      let latestTopicDate = '';
+  orphanedAssignedByDate.forEach((assignments, dateStr) => {
+    const formattedDate = formatDateForMeeting(dateStr);
+    if (!formattedDate) return;
 
-      enrichedTopics.forEach(topic => {
-        // Get all dates in this topic
-        const topicDates: string[] = [];
-        topic.meetings.forEach(meeting => {
-          const meetingDateStr = parseMeetingDate(meeting.date);
-          if (meetingDateStr) {
-            topicDates.push(meetingDateStr);
-          }
-        });
-
-        if (topicDates.length > 0) {
-          // Find the latest date in this topic that is <= assignment date
-          const datesBeforeOrEqual = topicDates.filter(d => d <= dateStr).sort();
-          if (datesBeforeOrEqual.length > 0) {
-            const latestDate = datesBeforeOrEqual[datesBeforeOrEqual.length - 1];
-            if (latestDate > latestTopicDate) {
-              latestTopicDate = latestDate;
-              targetTopic = topic;
-            }
-          }
-        }
-      });
-
-      // If no topic found with dates before/equal, use the first topic as fallback
-      if (!targetTopic) {
-        targetTopic = enrichedTopics[0];
-      }
-
-      if (targetTopic) {
-        // Determine topic name based on assignment type
-        const isTutorial = assignments.some(a => a.type === 'tutorial');
-        const isHomework = assignments.some(a => a.type === 'homework');
-        const isProject = assignments.some(a => a.type === 'project');
-        let topicName = 'Assignment';
-        if (isTutorial && !isHomework) {
-          topicName = 'Tutorial';
-        } else if (isHomework && !isTutorial) {
-          topicName = 'Homework';
-        } else if (isTutorial && isHomework) {
-          topicName = 'Tutorial & Homework';
-        } else if (isProject && !isTutorial && !isHomework) {
-          topicName = 'Project';
-        }
-
-        // Create auto-populated assignment entries
-        const autoAssignedAssignments = assignments.map(assignment => {
-          const titleShort = getAssignmentTitleShort(assignment);
-          return {
-            titleShort: titleShort,
-            title: assignment.title,
-            url: `/assignments/${assignment.id}/`,
-            draft: assignment.draft || 0,
-            type: assignment.type,
-          };
-        });
-
-        const newMeeting: Meeting = {
-          date: formattedDate,
-          topic: topicName,
-          assigned: autoAssignedAssignments.length === 1 ? autoAssignedAssignments[0] : autoAssignedAssignments,
-        };
-
-        // Add to the end of the topic's meetings (will be sorted below)
-        targetTopic.meetings.push(newMeeting);
-
-        // Sort all meetings in the topic by date
-        targetTopic.meetings.sort((a, b) => {
-          const dateA = parseMeetingDate(a.date);
-          const dateB = parseMeetingDate(b.date);
-          if (!dateA || !dateB) return 0;
-          return dateA.localeCompare(dateB);
-        });
-      }
+    const targetTopic = findTargetTopicForOrphanDate(enrichedTopics, dateStr);
+    const autoAssignedAssignments = assignments.map(assignment => {
+      const titleShort = getAssignmentTitleShort(assignment);
+      return {
+        titleShort,
+        title: assignment.title,
+        url: `/assignments/${assignment.id}/`,
+        draft: assignment.draft || 0,
+        type: assignment.type,
+      };
     });
-  }
+
+    const newMeeting: Meeting = {
+      date: formattedDate,
+      topic: getOrphanAssignedTopicName(assignments),
+      scheduleOnly: true,
+      assigned:
+        autoAssignedAssignments.length === 1 ? autoAssignedAssignments[0] : autoAssignedAssignments,
+    };
+
+    targetTopic.meetings.push(newMeeting);
+    sortTopicMeetings(targetTopic);
+    allMeetingDates.add(dateStr);
+  });
+
+  const orphanedDueByDate = new Map<string, Assignment[]>();
+  assignmentsByDueDate.forEach((assignments, dateStr) => {
+    if (!allMeetingDates.has(dateStr)) {
+      const published = assignments
+        .map(mapAssignmentToDueEntry)
+        .filter((assignment): assignment is Assignment => assignment !== null);
+      if (published.length > 0) {
+        orphanedDueByDate.set(dateStr, published);
+      }
+    }
+  });
+
+  topicFrontmatterDueByDate.forEach((entries, dateStr) => {
+    if (allMeetingDates.has(dateStr)) {
+      return;
+    }
+
+    const existing = orphanedDueByDate.get(dateStr) || [];
+    orphanedDueByDate.set(dateStr, [...existing, ...entries]);
+  });
+
+  orphanedDueByDate.forEach((autoDueAssignments, dateStr) => {
+    const published = autoDueAssignments.filter(item => item.draft !== 1);
+    if (published.length === 0) {
+      return;
+    }
+
+    const formattedDate = formatDateForMeeting(dateStr);
+    if (!formattedDate) return;
+
+    const existingMeeting = findMeetingByDateIso(enrichedTopics, dateStr);
+
+    if (existingMeeting) {
+      mergeDueAssignments(existingMeeting, published);
+      return;
+    }
+
+    const targetTopic = findTargetTopicForOrphanDate(enrichedTopics, dateStr);
+    const newMeeting: Meeting = {
+      date: formattedDate,
+      topic: '',
+      scheduleOnly: true,
+      due: published.length === 1 ? published[0] : published,
+    };
+
+    targetTopic.meetings.push(newMeeting);
+    sortTopicMeetings(targetTopic);
+    allMeetingDates.add(dateStr);
+  });
 
   return enrichedTopics;
 }
