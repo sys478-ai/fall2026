@@ -13,7 +13,7 @@ priority: medium
 
 > Note. This is a lot like the anomaly detection lab in terms of substance. it would be good to think of some examples of categories (like 5 per set).
 >
-> Classification sorts examples into predefined categories. Anomaly detection compares examples to an expected pattern and flags those that differ enough from that pattern. In practice, anomaly detection often produces a classification-like label — normal or anomalous — but the underlying question is different: not “Which category is this?” but “Does this depart from what the system has learned to expect?”
+> Classification sorts examples into predefined categories. Anomaly detection compares examples to an expected pattern and flags those that differ enough from that pattern. In practice, anomaly detection often produces a classification-like label – normal or anomalous – but the underlying question is different: not “Which category is this?” but “Does this depart from what the system has learned to expect?”
 
 How categories become technical, social, and moral decisions.
 

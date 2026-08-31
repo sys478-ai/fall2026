@@ -3,7 +3,7 @@ card_type: technical-explainer
 id: te-large-language-models
 slug: large-language-models
 title: "Large Language Models"
-subtitle: "How language models generate fluent text — and why fluency does not guarantee accuracy, understanding, or trustworthiness."
+subtitle: "How language models generate fluent text – and why fluency does not guarantee accuracy, understanding, or trustworthiness."
 num: '4'
 order: 4
 related_recognition_cards: ['12', '9', '15', '14', '3', '27', '8', '22']

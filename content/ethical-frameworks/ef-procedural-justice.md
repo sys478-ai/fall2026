@@ -19,40 +19,93 @@ priority: high
 
 ## The Core Idea
 
-Procedural justice holds that the legitimacy of an outcome depends not just on what was decided but on how the decision was made. A fair process includes voice, transparency, consistency, and the ability to contest decisions. Even a system that produces acceptable outcomes can be illegitimate if the process that created it excluded affected communities, lacked transparency, or offered no recourse.
+Procedural justice asks whether the process that creates or uses a system is fair. It holds that legitimacy depends not only on what was decided, but also on how the decision was made.
 
-This framework is especially important for AI governance, where technical complexity is often used to limit who gets to participate in decisions.
+Procedural justice emphasizes three ideas:
 
-## The Diagnostic Question
+1. **People need a meaningful voice.** People affected by a system should have opportunities to participate before important decisions are fixed.
+2. **Decisions must be understandable and contestable.** People need enough information to understand a decision and a real way to challenge it.
+3. **Procedures should be consistent and accountable.** Similar cases should be treated by clear standards, and decision-makers should be answerable for how those standards are used.
 
-**Does this system come from a design and deployment process in which affected communities had a meaningful voice?**
+In AI ethics, this means asking whether affected people had meaningful influence over a system and whether they can question or contest its decisions.
 
-## Questions To Ask
+<div class="diagnostic-question diagnostic-question--emerald">
+  <p class="diagnostic-question-eyebrow">Diagnostic Question</p>
+  <p class="diagnostic-question-text">Does this system come from a design and deployment process in which affected communities had a meaningful voice?</p>
+</div>
 
-- Who had a seat at the table when this system was designed?
-- Were affected communities consulted before key decisions were made, or after?
-- Is there a meaningful process for contesting the system's decisions?
-- Is the system's decision-making transparent enough for affected people to understand and challenge?
-- Who is allowed to raise concerns, and through what channels?
-- Are the same procedures and standards applied consistently across people and cases?
+## How This Framework Is Often Applied
 
-## Tensions and Limits
+This framework is often used to evaluate public decision-making, organizational governance, and legal processes. In AI, it applies to who participates in design and procurement, what notice and explanation people receive, how decisions can be appealed, and whether there is independent oversight when systems cause harm.
 
-Procedural justice doesn't guarantee good outcomes — a fair process can still produce a harmful system. Genuine participation takes time and resources, and organizations can easily create the appearance of consultation without giving affected communities real influence. But it provides something outcome-based frameworks miss: a way to evaluate the legitimacy of a system independent of its results. A system that produces acceptable outcomes through an illegitimate process is still a problem.
+Procedural justice is especially important where technical complexity can be used to limit participation. A system may be accurate or efficient while still being illegitimate if affected communities were excluded, decisions are opaque, or people have no meaningful recourse. Consultation after a system is already designed is not the same as having influence over its goals, data, or deployment conditions.
+
+## Strengths and Weaknesses
+
+### What This Lens Reveals
+
+Procedural justice is especially strong at identifying questions of:
+
+- **Voice** – who can participate in decisions and whether their participation can affect the result.
+- **Transparency and explanation** – whether people can understand how a consequential decision was made.
+- **Contestability** – whether people can challenge errors, raise concerns, and obtain meaningful review.
+- **Legitimacy and accountability** – whether decision-makers follow clear standards and answer for their choices.
+
+In AI ethics, this lens is useful for evaluating the governance around a system, not only the model's outputs.
+
+### What It Can Miss
+
+Procedural justice is less well suited to questions about:
+
+- **Outcomes** – a fair process can still produce harmful or unequal results.
+- **Token participation** – organizations can create the appearance of consultation without giving people real influence.
+- **Resources and power** – meaningful participation takes time, expertise, and support that are not distributed equally.
+- **Underlying injustice** – fair procedures may leave untouched unjust institutions, social conditions, or distributions of power.
+
+Procedural fairness is not a substitute for good outcomes or substantive rights. It is one necessary way to evaluate whether a system is legitimate.
 
 ## Key Thinkers
 
-**Jürgen Habermas** (1929–) developed discourse ethics — the view that norms are legitimate only if they could be agreed to by all affected parties in conditions of free and equal deliberation. His _Theory of Communicative Action_ (1981) and _Between Facts and Norms_ (1992) ground procedural legitimacy in communicative rationality rather than outcomes.
+<div class="thinker-entry">
+  <div class="thinker-avatar-wrap">
+    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/ethics/habermas.jpg" alt="Portrait of Jürgen Habermas">
+    <span class="thinker-avatar-caption">CC BY-SA 3.0, Wikimedia</span>
+  </div>
+  <p><strong>Jürgen Habermas</strong> (1929–) developed discourse ethics – the view that norms are legitimate only if they could be agreed to by all affected parties in conditions of free and equal deliberation. His <em>Theory of Communicative Action</em> (1981) and <em>Between Facts and Norms</em> (1992) ground procedural legitimacy in communicative rationality rather than outcomes.</p>
+</div>
 
-**John Rawls** (1921–2002) distinguished between pure procedural justice (a fair process makes the outcome just), perfect procedural justice (the right outcome can be specified in advance), and imperfect procedural justice (a fair process is the best we can do). These distinctions are analytically useful when evaluating AI governance processes.
+<div class="thinker-entry">
+  <div class="thinker-avatar-wrap">
+    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/ethics/rawls.jpg" alt="Portrait of John Rawls">
+    <span class="thinker-avatar-caption">Public domain</span>
+  </div>
+  <p><strong>John Rawls</strong> (1921–2002) distinguished between pure procedural justice (a fair process makes the outcome just), perfect procedural justice (the right outcome can be specified in advance), and imperfect procedural justice (a fair process is the best we can do). These distinctions are analytically useful when evaluating AI governance processes.</p>
+</div>
 
-**Tom Tyler** (1950–) approaches procedural justice empirically rather than normatively, studying why people accept decisions as legitimate. His research finds that perceived fairness of process — being heard, being treated with respect, having decisions explained — strongly predicts compliance and trust, independent of outcomes. His _Why People Obey the Law_ (1990) is foundational.
+<div class="thinker-entry">
+  <div class="thinker-avatar-wrap">
+    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/ethics/tyler.jpg" alt="Portrait of Tom Tyler">
+    <span class="thinker-avatar-caption">Photo: Yale Psychology. Unconfirmed license.</span>
+  </div>
+  <p><strong>Tom Tyler</strong> (1950–) approaches procedural justice empirically rather than normatively, studying why people accept decisions as legitimate. His research finds that perceived fairness of process – being heard, being treated with respect, having decisions explained – strongly predicts compliance and trust, independent of outcomes. His <em>Why People Obey the Law</em> (1990) is foundational.</p>
+</div>
 
-**Amy Gutmann** (1949–) and **Dennis Thompson** (1940–) developed deliberative democracy theory in _Democracy and Disagreement_ (1996), arguing that legitimate political decisions require genuine public reasoning among equals — a framework with direct applications to participatory design and AI governance.
+<div class="thinker-entry">
+  <div class="thinker-avatar-wrap">
+    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/ethics/gutmann.jpg" alt="Portrait of Amy Gutmann">
+    <span class="thinker-avatar-caption">Public domain (U.S. government work)</span>
+  </div>
+  <p><strong>Amy Gutmann</strong> (1949–) developed deliberative democracy theory with Dennis Thompson in <em>Democracy and Disagreement</em> (1996), arguing that legitimate political decisions require genuine public reasoning among equals – a framework with direct applications to participatory design and AI governance.</p>
+</div>
 
-## Connected Field Guide Cards
+**Dennis Thompson** (1940–2025) co-developed the same theory, bringing decades of work on political ethics and institutional accountability to the argument that democratic legitimacy depends on the quality of public reasoning, not just its outcomes.
 
-- The people most affected had no voice in the design 
-- Consent was obtained but wasn't meaningful
-- Governance is often framed as a barrier to innovation.
-- Delay, refusal, and non-adoption can be responsible choices.
+## Sources
+
+- Tom R. Tyler, _Why People Obey the Law_ (New Haven: Yale University Press, 1990).
+- Jürgen Habermas, _Between Facts and Norms_, trans. William Rehg (Cambridge, MA: MIT Press, 1996; orig. 1992).
+- Stanford Encyclopedia of Philosophy, ["Political Legitimacy."](https://plato.stanford.edu/entries/legitimacy/)
+
+**Further Reading (More Accessible):**
+
+- Ethics Unwrapped (UT Austin), ["Justice"](https://ethicsunwrapped.utexas.edu/glossary/justice) (covers procedural justice specifically).

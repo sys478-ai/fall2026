@@ -137,7 +137,7 @@ function renderFlipCard(icon: string, title: string, front: string, back: string
   const frontHtml = formatCardText(front);
   const backHtml = formatCardText(back);
 
-  return `<div class="flip-card" aria-label="${safeTitle} — click to flip">
+  return `<div class="flip-card" aria-label="${safeTitle} – click to flip">
   <div class="flip-card-inner">
     <div class="flip-card-front">
       <div class="flip-card-icon"><i class="${escapeHtml(icon)}" aria-hidden="true"></i></div>

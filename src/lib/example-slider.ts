@@ -10,7 +10,7 @@
  * the markdown body.
  *
  * Optional attributes:
- * - `section="sts-concepts"` — override the field guide section used to match
+ * - `section="sts-concepts"` – override the field guide section used to match
  *   connected_cards (defaults to the content subdirectory being rendered).
  */
 

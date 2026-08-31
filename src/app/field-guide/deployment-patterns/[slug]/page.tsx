@@ -15,6 +15,7 @@ import PatternComicStrip, { type PatternComicStripItem } from '@/components/Patt
 import { getExamplesForCard } from '@/lib/examples';
 import { getReadingsForCard, type Reading } from '@/lib/readings';
 import StatusBanner from '@/components/StatusBanner';
+import { contentHasStepStrip } from '@/lib/pattern-content-sections';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -133,7 +134,10 @@ function PatternSection({ label, children }: { label: string; children: ReactNod
 
 function PatternContentSection({ section }: { section: { label: string; content: string } }) {
   const caseTabs = section.label === 'Examples' ? splitPatternCaseTabs(section.content) : [];
-  const stepGrid = section.label === 'What To Notice' ? splitPatternSubsections(section.content) : null;
+  const stepGrid =
+    section.label === 'What To Notice' && !contentHasStepStrip(section.content)
+      ? splitPatternSubsections(section.content)
+      : null;
   if (stepGrid && stepGrid.items.length > 0) return <PatternComicStrip intro={stepGrid.intro} items={stepGrid.items} />;
   if (caseTabs.length > 0) return <PatternCaseTabs cases={caseTabs} />;
   return <MarkdownContent content={section.content} />;
@@ -235,7 +239,7 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
                 {bibliographyReadings.map((reading: Reading) => (
                   <li key={reading.id}>
                     <a href={reading.url} target="_blank" rel="noopener noreferrer">{reading.title}</a>
-                    {reading.authors && <span className="text-sm text-gray-600 dark:text-gray-400"> — {reading.authors}</span>}
+                    {reading.authors && <span className="text-sm text-gray-600 dark:text-gray-400"> – {reading.authors}</span>}
                     {reading.notes && <p className="mb-0 mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">{reading.notes}</p>}
                   </li>
                 ))}

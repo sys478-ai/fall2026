@@ -28,13 +28,13 @@ _Format: Career ~65-75 min + integrated discussion ~25-35 min · Lesson template
 
 In this meeting, we will:
 
-- complete Career 6: Making Connections — networking and informational interviews
+- complete Career 6: Making Connections – networking and informational interviews
 - discuss labor and professional examples such as Amazon hiring, speech recognition, and workplace wellness tools
 - connect the dependency/offloading/deskilling pattern to professional life
 
 ## Career / BRAID Integration
 
-Career 6: Making Connections — networking and informational interviews.
+Career 6: Making Connections – networking and informational interviews.
 
 ## Field Guide & Resources
 

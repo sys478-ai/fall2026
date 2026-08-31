@@ -36,4 +36,4 @@ In this first meeting, we will:
 
 ## Looking Ahead
 
-The next class asks why AI has become a public and ethical issue — not just a technical one. The rest of Module 1 builds conceptual tools before we examine any technical mechanisms directly.
+The next class asks why AI has become a public and ethical issue – not just a technical one. The rest of Module 1 builds conceptual tools before we examine any technical mechanisms directly.

@@ -1,9 +1,9 @@
 # Course Playlist Inventory
 
-Resource assignments for each topic. All non-lab assignments are **suggested** — not yet committed to frontmatter.
+Resource assignments for each topic. All non-lab assignments are **suggested** – not yet committed to frontmatter.
 
 **Legend:**
-- `lab` `sts` `pattern` `explainer` `example` `framework` `governance` `history` — resource type
+- `lab` `sts` `pattern` `explainer` `example` `framework` `governance` `history` – resource type
 - ⚠ = gap or needs review
 
 ---
@@ -18,7 +18,7 @@ _Survey the kinds of decisions, inferences, classifications, and nudges that AI 
 
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
-- `sts` **sts-sociotechnical** — AI systems are socio-technical systems.
+- `sts` **sts-sociotechnical** – AI systems are socio-technical systems.
 - `pattern` ⚠ none
 - `example` ⚠ none
 
@@ -28,8 +28,8 @@ _Frame AI as a technical project shaped by public values, institutions, and ethi
 
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
-- `sts` **sts-sociotechnical** — AI systems are socio-technical systems.
-- `sts` **sts-sociotechnical-imaginaries** — Sociotechnical imaginaries.
+- `sts` **sts-sociotechnical** – AI systems are socio-technical systems.
+- `sts` **sts-sociotechnical-imaginaries** – Sociotechnical imaginaries.
 - `pattern` ⚠ none
 - `example` ⚠ none
 
@@ -38,10 +38,10 @@ _Frame AI as a technical project shaped by public values, institutions, and ethi
 _Examine how ideas about safety, care, efficiency, creativity, and improvement shape what AI is imagined to be for._
 
 - `lab` ⚠ none assigned
-- `explainer` **large-language-models** — Large Language Models
+- `explainer` **large-language-models** – Large Language Models
 - `sts` ⚠ none
 - `pattern` ⚠ none
-- `example` **chatgpt-release** — The ChatGPT Release
+- `example` **chatgpt-release** – The ChatGPT Release
 
 ### Day 4 · What Tools Will Help Us Take a Position?
 
@@ -57,11 +57,11 @@ _Preview the five course guiding questions as analytical tools, and introduce et
 
 _Examine how evidence, interpretation, institutions, and authority shape what comes to count as knowledge._
 
-- `lab` **lab01a** — Classification Is Not Neutral
+- `lab` **lab01a** – Classification Is Not Neutral
   - _old day 3 → new day 5 ✓ content still fits (classification/epistemology)_
 - `explainer` ⚠ none
-- `sts` **sts-situated-knowledge** — Situated knowledge.
-- `sts` **sts-knowledge-and-power** — Knowledge and power are co-produced.
+- `sts` **sts-situated-knowledge** – Situated knowledge.
+- `sts` **sts-knowledge-and-power** – Knowledge and power are co-produced.
 - `pattern` ⚠ none
 - `example` ⚠ none
 
@@ -69,7 +69,7 @@ _Examine how evidence, interpretation, institutions, and authority shape what co
 
 _Explore learning as biological, developmental, social, and tool-mediated rather than only individual or computational._
 
-- `lab` **lab02** — Training Data Shapes Learning
+- `lab` **lab02** – Training Data Shapes Learning
   - _old day 5 → new day 6 ✓ content still fits (human learning)_
 - `explainer` ⚠ none
 - `sts` ⚠ none
@@ -83,71 +83,71 @@ _Compare human, animal, machine, social, and embodied intelligence and ask what 
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
 - `sts` ⚠ none
-- `pattern` **dp-anthropomorphism** — AI systems can encourage anthropomorphism, aliveness, or sentience claims.
-- `example` **eliza** — ELIZA and the Illusion of Understanding
-- `history` **turing-on-computable-numbers** — Turing's \"On Computable Numbers\
-- `history` **turing-test** — The Turing Test
-- `history` **deep-blue** — Deep Blue Defeats Kasparov
+- `pattern` **dp-anthropomorphism** – AI systems can encourage anthropomorphism, aliveness, or sentience claims.
+- `example` **eliza** – ELIZA and the Illusion of Understanding
+- `history` **turing-on-computable-numbers** – Turing's \"On Computable Numbers\
+- `history` **turing-test** – The Turing Test
+- `history` **deep-blue** – Deep Blue Defeats Kasparov
 
 ---
 
 ## Module 2: Technical and Social Mechanisms of Machine Learning
 
-_This module shows how parts of the world become measured data, and how machine learning systems turn that data into models, scores, predictions, and decisions — with stakes for fairness, accountability, and public trust._
+_This module shows how parts of the world become measured data, and how machine learning systems turn that data into models, scores, predictions, and decisions – with stakes for fairness, accountability, and public trust._
 
 ### Day 8 · How Does the World Become Data?
 
 _Introduce sensing, measurement, categories, baselines, proxies, and features as the first step in machine learning._
 
-- `lab` **lab03** — Features Are Value Choices
+- `lab` **lab03** – Features Are Value Choices
   - _old day 7 → new day 8 ✓ content still fits (world → data, features)_
-- `lab` **lab07** — Sensors Translate the World into Data
-  - _no prior day — 'Sensors Translate the World into Data' fits day 8_
+- `lab` **lab07** – Sensors Translate the World into Data
+  - _no prior day – 'Sensors Translate the World into Data' fits day 8_
 - `explainer` ⚠ none
-- `sts` **sts-data-production** — Data is produced, not found.
-- `pattern` **dp-baseline-and-categories** — This system's baseline and categories were chosen, not given.
-- `pattern` **dp-measurement-effects** — Changing what gets measured changes what exists.
-- `example` **blood-pressure-reclassification** — Blood pressure and the overnight epidemic
-- `example` **boston-street-bump** — Boston Street Bump app
+- `sts` **sts-data-production** – Data is produced, not found.
+- `pattern` **dp-baseline-and-categories** – This system's baseline and categories were chosen, not given.
+- `pattern` **dp-measurement-effects** – Changing what gets measured changes what exists.
+- `example` **blood-pressure-reclassification** – Blood pressure and the overnight epidemic
+- `example` **boston-street-bump** – Boston Street Bump app
 
 ### Day 9 · What Gets Built Into the Data?
 
 _Use datasets, proxies, and feature design to ask what assumptions and exclusions are carried into a system._
 
-- `lab` **lab01b** — Categorization Lab
-  - _no prior day — Categorization Lab fits day 9_
+- `lab` **lab01b** – Categorization Lab
+  - _no prior day – Categorization Lab fits day 9_
 - `explainer` ⚠ none
-- `sts` **sts-features-as-values** — Features are value choices.
-- `sts` **sts-classification-produces-world** — Classification systems don't just describe the world — they produce it.
-- `pattern` **dp-repurposed-data** — Data collected for one purpose gets used for another.
-- `pattern` **dp-meaningless-consent** — Consent was obtained but wasn't meaningful.
-- `pattern` **dp-default-group** — This system treats one group as the default.
-- `pattern` **dp-categories-contested** — Categories in this system are contested or unstable.
-- `example` **facial-recognition-accuracy-gaps** — Facial recognition accuracy gaps (Gender Shades)
-- `example` **speech-recognition-accent** — Automated speech recognition and accent
-- `example` **pulse-oximeters-skin-tone** — Pulse oximeters and skin tone
+- `sts` **sts-features-as-values** – Features are value choices.
+- `sts` **sts-classification-produces-world** – Classification systems don't just describe the world – they produce it.
+- `pattern` **dp-repurposed-data** – Data collected for one purpose gets used for another.
+- `pattern` **dp-meaningless-consent** – Consent was obtained but wasn't meaningful.
+- `pattern` **dp-default-group** – This system treats one group as the default.
+- `pattern` **dp-categories-contested** – Categories in this system are contested or unstable.
+- `example` **facial-recognition-accuracy-gaps** – Facial recognition accuracy gaps (Gender Shades)
+- `example` **speech-recognition-accent** – Automated speech recognition and accent
+- `example` **pulse-oximeters-skin-tone** – Pulse oximeters and skin tone
 
 ### Day 10 · How Do Machines Learn from Data?
 
 _Introduce models, training, inference, and the basic machine learning pipeline._
 
-- `lab` **lab04** — Thresholds and the Cost of Error
+- `lab` **lab04** – Thresholds and the Cost of Error
   - _old day 9 → new day 10 ✓ content still fits (machine learning)_
-- `explainer` **supervised-learning** — Supervised Learning
+- `explainer` **supervised-learning** – Supervised Learning
 - `sts` ⚠ none
 - `pattern` ⚠ none
-- `example` **netflix-prize** — The Netflix Prize
-- `history` **perceptron** — The Perceptron
-- `history` **backpropagation** — Backpropagation
+- `example` **netflix-prize** – The Netflix Prize
+- `history` **perceptron** – The Perceptron
+- `history` **backpropagation** – Backpropagation
 
 ### Day 11 · What Kind of Learning Is This?
 
 _Compare supervised, unsupervised, and related learning paradigms without treating them as the same thing._
 
-- `lab` **lab01c** — Clustering Lab
-  - _no prior day — Clustering Lab fits day 11 (unsupervised learning)_
-- `explainer` **unsupervised-learning** — Unsupervised Learning
-- `explainer` **reinforcement-learning** — Reinforcement Learning
+- `lab` **lab01c** – Clustering Lab
+  - _no prior day – Clustering Lab fits day 11 (unsupervised learning)_
+- `explainer` **unsupervised-learning** – Unsupervised Learning
+- `explainer` **reinforcement-learning** – Reinforcement Learning
 - `sts` ⚠ none
 - `pattern` ⚠ none
 - `example` ⚠ none
@@ -159,10 +159,10 @@ _Trace how model outputs become scores, rankings, thresholds, and institutional 
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
 - `sts` ⚠ none
-- `pattern` **dp-thresholds** — Thresholds make uncertainty consequential.
-- `example` **actuarial-risk-tools** — Actuarial Risk Tools in Criminal Sentencing
-- `example` **fico-score-cutoff** — The FICO score cutoff
-- `example` **credit-invisibles** — Credit invisibles and the thin-file trap
+- `pattern` **dp-thresholds** – Thresholds make uncertainty consequential.
+- `example` **actuarial-risk-tools** – Actuarial Risk Tools in Criminal Sentencing
+- `example` **fico-score-cutoff** – The FICO score cutoff
+- `example` **credit-invisibles** – Credit invisibles and the thin-file trap
 
 ### Day 13 · Who Bears the Cost of Error?
 
@@ -171,10 +171,10 @@ _Examine how false positives, false negatives, and threshold choices distribute 
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
 - `sts` ⚠ none
-- `pattern` **dp-concentrated-harm** — Concentrated harm is hidden by aggregate benefit.
-- `pattern` **dp-test-case** — A vulnerable population is being used as a test case.
-- `example` **compas-machine-bias** — ProPublica Publishes "Machine Bias
-- `example` **face-recognition-wrongful-arrests** — Face recognition match thresholds and wrongful arrests
+- `pattern` **dp-concentrated-harm** – Concentrated harm is hidden by aggregate benefit.
+- `pattern` **dp-test-case** – A vulnerable population is being used as a test case.
+- `example` **compas-machine-bias** – ProPublica Publishes "Machine Bias
+- `example` **face-recognition-wrongful-arrests** – Face recognition match thresholds and wrongful arrests
 
 ### Day 14 · What Ethical Lenses Help Us Evaluate AI?
 
@@ -191,13 +191,13 @@ _Introduce utilitarianism, care ethics, deontology, and the common good as pract
 
 _Explore how prediction systems reuse history, reinforce patterns, and help shape the futures they claim to forecast._
 
-- `lab` **lab05** — Prediction & Historical Data
+- `lab` **lab05** – Prediction & Historical Data
   - _old day 11 → new day 12 by mapping, but 'Prediction & Historical Data' fits day 15 better_
 - `explainer` ⚠ none
-- `sts` **sts-systems-are-reactive** — Systems are reactive: they change what they measure.
-- `pattern` **dp-prediction-imports-past** — Prediction imports the past.
-- `example` **google-flu-trends** — Google Flu Trends
-- `example` **predictive-policing-drug-data** — Predictive policing and drug-crime data
+- `sts` **sts-systems-are-reactive** – Systems are reactive: they change what they measure.
+- `pattern` **dp-prediction-imports-past** – Prediction imports the past.
+- `example` **google-flu-trends** – Google Flu Trends
+- `example` **predictive-policing-drug-data** – Predictive policing and drug-crime data
 
 ---
 
@@ -209,35 +209,35 @@ _This module examines how AI borrows from neuroscience, what neural networks can
 
 _Use anomaly detection to examine how baselines and thresholds construct normality, deviance, risk, and contestability._
 
-- `lab` **lab08** — Anomaly Detection and Normal
+- `lab` **lab08** – Anomaly Detection and Normal
   - _old day 16 → new day 17 by mapping, but 'Anomaly Detection and Normal' fits day 16 better_
-- `explainer` **anomaly-detection** — Anomaly Detection
-- `sts` **sts-normal-is-constructed** — \"Normal\" is constructed.
-- `pattern` **dp-surveillance-changes-normal** — Being watched changes what counts as normal behavior.
-- `pattern` **dp-systems-change-behavior** — This system changes the behavior of the people it watches.
+- `explainer` **anomaly-detection** – Anomaly Detection
+- `sts` **sts-normal-is-constructed** – \"Normal\" is constructed.
+- `pattern` **dp-surveillance-changes-normal** – Being watched changes what counts as normal behavior.
+- `pattern` **dp-systems-change-behavior** – This system changes the behavior of the people it watches.
 - `example` ⚠ none
 
 ### Day 17 · Why Are Neural Networks Hard to Trust?
 
 _Connect neural networks to opacity, contestability, trust, and over-reliance._
 
-- `lab` **lab06** — Neural Networks & Opacity
-  - _old day 13 (retired) — 'Neural Networks & Opacity' fits day 17_
-- `explainer` **neural-networks** — Neural Networks
+- `lab` **lab06** – Neural Networks & Opacity
+  - _old day 13 (retired) – 'Neural Networks & Opacity' fits day 17_
+- `explainer` **neural-networks** – Neural Networks
 - `sts` ⚠ none
-- `pattern` **dp-accountability-gap** — Automation changes accountability.
-- `pattern` **dp-opacity** — Opacity shifts authority.
+- `pattern` **dp-accountability-gap** – Automation changes accountability.
+- `pattern` **dp-opacity** – Opacity shifts authority.
 - `example` ⚠ none
-- `history` **alexnet** — AlexNet and the Deep Learning Breakthrough
+- `history` **alexnet** – AlexNet and the Deep Learning Breakthrough
 
 ### Day 18 · What Can Neuroscience Tell Us?
 
 _Ground brain-inspired computing in basic neuroscience terms and their limits._
 
-- `lab` **lab11** — Memory as Physical State
-  - _no prior day — 'Memory as Physical State' fits day 18 (neuroscience)_
-- `lab` **lab16** — Learning, Memory, and Biological Metaphors
-  - _no prior day — 'Learning, Memory, Biological Metaphors' fits day 18 (neuroscience)_
+- `lab` **lab11** – Memory as Physical State
+  - _no prior day – 'Memory as Physical State' fits day 18 (neuroscience)_
+- `lab` **lab16** – Learning, Memory, and Biological Metaphors
+  - _no prior day – 'Learning, Memory, Biological Metaphors' fits day 18 (neuroscience)_
 - `explainer` ⚠ none
 - `sts` ⚠ none
 - `pattern` ⚠ none
@@ -247,20 +247,20 @@ _Ground brain-inspired computing in basic neuroscience terms and their limits._
 
 _Introduce neuromorphic computing through spiking neural networks, event-driven signals, and timing._
 
-- `lab` **lab09** — Edge AI, Privacy, and Accountability
+- `lab` **lab09** – Edge AI, Privacy, and Accountability
   - _old day 18 → new day 20 by mapping, but 'Edge AI, Privacy, Accountability' fits day 19 better_
-- `lab` **lab12** — Von Neumann vs. Neuromorphic Architectures
+- `lab` **lab12** – Von Neumann vs. Neuromorphic Architectures
   - _old day 20 → new day 22 by mapping, but 'Von Neumann vs. Neuromorphic' fits day 19 better_
-- `lab` **lab13** — Spikes, Timing, and Event-Driven Computation
+- `lab` **lab13** – Spikes, Timing, and Event-Driven Computation
   - _old day 15 → new day 18 by mapping, but 'Spikes, Timing, Event-Driven' fits day 19 better_
-- `lab` **lab15** — Energy and Computation
-  - _no prior day — 'Energy and Computation' fits day 19 (neuromorphic)_
-- `lab` **lab17** — Electricity as Information
-  - _no prior day — 'Electricity as Information' fits day 19 (neuromorphic)_
-- `lab` **lab18** — How Circuits Do Math
-  - _no prior day — 'How Circuits Do Math' fits day 19 (neuromorphic)_
-- `explainer` **neuromorphic-computing** — Neuromorphic Computing
-- `sts` **sts-materiality** — AI is material: it depends on energy, water, chips, labor, mining, and waste.
+- `lab` **lab15** – Energy and Computation
+  - _no prior day – 'Energy and Computation' fits day 19 (neuromorphic)_
+- `lab` **lab17** – Electricity as Information
+  - _no prior day – 'Electricity as Information' fits day 19 (neuromorphic)_
+- `lab` **lab18** – How Circuits Do Math
+  - _no prior day – 'How Circuits Do Math' fits day 19 (neuromorphic)_
+- `explainer` **neuromorphic-computing** – Neuromorphic Computing
+- `sts` **sts-materiality** – AI is material: it depends on energy, water, chips, labor, mining, and waste.
 - `pattern` ⚠ none
 - `example` ⚠ none
 
@@ -277,10 +277,10 @@ _Examine hiring, monitoring, productivity systems, and algorithmic management as
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
 - `sts` ⚠ none
-- `pattern` **dp-deskilling** — AI can create dependency, cognitive offloading, and deskilling.
-- `pattern` **dp-invisible-labor** — Invisible labor makes the system possible.
-- `example` **amazon-hiring-tool** — Amazon's Algorithmic Hiring Tool
-- `example` **sag-wga-strikes** — SAG-AFTRA and WGA Strikes
+- `pattern` **dp-deskilling** – AI can create dependency, cognitive offloading, and deskilling.
+- `pattern` **dp-invisible-labor** – Invisible labor makes the system possible.
+- `example` **amazon-hiring-tool** – Amazon's Algorithmic Hiring Tool
+- `example` **sag-wga-strikes** – SAG-AFTRA and WGA Strikes
 
 ### Day 21 · How Is AI Reshaping News, Politics, and Public Attention?
 
@@ -289,10 +289,10 @@ _Use media, recommendation, and political communication systems to examine visib
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
 - `sts` ⚠ none
-- `pattern` **dp-asymmetric-visibility** — This system creates asymmetric visibility.
-- `example` **haugen-facebook** — Facebook, Frances Haugen, and the Limits of Engagement Metrics
-- `example` **cambridge-analytica** — Facebook data and Cambridge Analytica
-- `example` **clearview-ai** — Clearview AI
+- `pattern` **dp-asymmetric-visibility** – This system creates asymmetric visibility.
+- `example` **haugen-facebook** – Facebook, Frances Haugen, and the Limits of Engagement Metrics
+- `example` **cambridge-analytica** – Facebook data and Cambridge Analytica
+- `example` **clearview-ai** – Clearview AI
 
 ### Day 22 · How Is AI Changing Healthcare and Biosensing?
 
@@ -302,9 +302,9 @@ _Use clinical decision support, wearables, and biosensing to examine care, risk,
 - `explainer` ⚠ none
 - `sts` ⚠ none
 - `pattern` ⚠ none
-- `example` **workplace-wellness-insurance** — Workplace wellness programs and insurance
-- `example` **mount-sinai-gender-records-subpoena** — Mount Sinai patient records subpoenaed for gender care investigation
-- `example` **period-tracking-law-enforcement** — Period tracking apps and law enforcement
+- `example` **workplace-wellness-insurance** – Workplace wellness programs and insurance
+- `example` **mount-sinai-gender-records-subpoena** – Mount Sinai patient records subpoenaed for gender care investigation
+- `example` **period-tracking-law-enforcement** – Period tracking apps and law enforcement
 
 ### Day 23 · How Is AI Entering Schools and Other Social Institutions?
 
@@ -314,21 +314,21 @@ _Use schools and other institutional settings to examine tutoring, proctoring, m
 - `explainer` ⚠ none
 - `sts` ⚠ none
 - `pattern` ⚠ none
-- `example` **allegheny-family-screening** — The Allegheny Family Screening Tool
+- `example` **allegheny-family-screening** – The Allegheny Family Screening Tool
 
 ### Day 24 · How Do AI Systems Redistribute Power and Control?
 
 _Examine platforms, chips, cloud vendors, standards, and repair pathways as sites where power can shift, pool, or become harder to contest._
 
-- `lab` **lab14** — Hardware Governance Lab
-  - _no prior day — 'Hardware Governance Lab' fits day 24 (power and control)_
+- `lab` **lab14** – Hardware Governance Lab
+  - _no prior day – 'Hardware Governance Lab' fits day 24 (power and control)_
 - `explainer` ⚠ none
-- `sts` **sts-path-dependency** — Early choices can shape future benefits and harms.
-- `pattern` **dp-infrastructure-power** — Power can concentrate in infrastructure.
-- `pattern` **dp-material-costs-hidden** — This system's material costs are hidden.
-- `example` **sidewalk-toronto** — Sidewalk Toronto
-- `example` **prism-surveillance** — The NSA PRISM Surveillance Program
-- `example` **patriot-act** — The USA PATRIOT Act and the Architecture of Data Surveillance
+- `sts` **sts-path-dependency** – Early choices can shape future benefits and harms.
+- `pattern` **dp-infrastructure-power** – Power can concentrate in infrastructure.
+- `pattern` **dp-material-costs-hidden** – This system's material costs are hidden.
+- `example` **sidewalk-toronto** – Sidewalk Toronto
+- `example` **prism-surveillance** – The NSA PRISM Surveillance Program
+- `example` **patriot-act** – The USA PATRIOT Act and the Architecture of Data Surveillance
 
 ---
 
@@ -340,14 +340,14 @@ _This module applies anticipatory governance: mapping stakeholders and harms, co
 
 _Apply anticipatory governance to neuromorphic anomaly detection, drawing on domain cases to ground the analysis in real institutional contexts._
 
-- `lab` **lab10** — BRAID Anticipatory Governance Lab
-  - _no prior day — 'BRAID Anticipatory Governance Lab' fits day 25_
-- `explainer` **anomaly-detection** — Anomaly Detection
-- `sts` ~~sts-anticipatory-governance~~ (stub — content moved to governance section)
+- `lab` **lab10** – BRAID Anticipatory Governance Lab
+  - _no prior day – 'BRAID Anticipatory Governance Lab' fits day 25_
+- `explainer` **anomaly-detection** – Anomaly Detection
+- `sts` ~~sts-anticipatory-governance~~ (stub – content moved to governance section)
 - `pattern` ⚠ none
 - `example` ⚠ none
-- `governance` **anticipatory-governance** — Anticipatory Governance
-- `governance` **how-to-use-anticipatory-governance** — How to Use Anticipatory Governance
+- `governance` **anticipatory-governance** – Anticipatory Governance
+- `governance` **how-to-use-anticipatory-governance** – How to Use Anticipatory Governance
 
 ### Day 26 · When Does AI Become Technological Solutionism?
 
@@ -355,8 +355,8 @@ _Use domain cases to ask when AI is being asked to solve problems that are also 
 
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
-- `sts` **sts-framing-shapes-governance** — How a technology is described shapes how it is governed.
-- `pattern` **dp-extraction-as-innovation** — Extraction can be disguised as innovation.
+- `sts` **sts-framing-shapes-governance** – How a technology is described shapes how it is governed.
+- `pattern` **dp-extraction-as-innovation** – Extraction can be disguised as innovation.
 - `example` ⚠ none
 
 ### Day 27 · Who Is Affected?
@@ -366,8 +366,8 @@ _Map benefits, risks, and governance questions around an emerging AI system._
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
 - `sts` ⚠ none
-- `pattern` **dp-no-voice** — The people most affected had no voice in the design.
-- `example` **ice-30-day-reporting** — ICE and the 30-day reporting window
+- `pattern` **dp-no-voice** – The people most affected had no voice in the design.
+- `example` **ice-30-day-reporting** – ICE and the 30-day reporting window
 
 ### Day 28 · What Alternatives Are Still Possible?
 
@@ -376,8 +376,8 @@ _Consider redesign, repair, democratic governance, and the option to say no._
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
 - `sts` ⚠ none
-- `pattern` **dp-foreclosed-alternatives** — Alternatives can be foreclosed.
-- `pattern` **dp-refusal** — Delay, refusal, and non-adoption can be responsible choices.
+- `pattern` **dp-foreclosed-alternatives** – Alternatives can be foreclosed.
+- `pattern` **dp-refusal** – Delay, refusal, and non-adoption can be responsible choices.
 - `example` ⚠ none
 
 ### Day 29 · How Should We Govern Emerging AI?
@@ -386,12 +386,12 @@ _Use NIST, the EU AI Act, OECD, and IEEE to sharpen governance questions._
 
 - `lab` ⚠ none assigned
 - `explainer` ⚠ none
-- `sts` **sts-governance** — Governance is broader than regulation alone.
-- `pattern` **dp-governance-as-barrier** — Governance is often framed as a barrier to innovation.
-- `pattern` **dp-expertise-as-dismissal** — Technical expertise can be used to dismiss democratic oversight.
-- `example` **asilomar-conference** — The Asilomar Conference on Recombinant DNA (1975)
-- `example` **eu-ai-act** — The EU AI Act
-- `governance` **anticipatory-governance** — Anticipatory Governance
+- `sts` **sts-governance** – Governance is broader than regulation alone.
+- `pattern` **dp-governance-as-barrier** – Governance is often framed as a barrier to innovation.
+- `pattern` **dp-expertise-as-dismissal** – Technical expertise can be used to dismiss democratic oversight.
+- `example` **asilomar-conference** – The Asilomar Conference on Recombinant DNA (1975)
+- `example` **eu-ai-act** – The EU AI Act
+- `governance` **anticipatory-governance** – Anticipatory Governance
 
 ---
 
@@ -413,8 +413,8 @@ _Present a public-facing explainer and ELSI analysis._
 
 ## ⚠ Unassigned Labs (need review)
 
-- **lab19** — (no title) — no day, no title — ⚠ UNKNOWN, needs review
-- **lab20** — (no title) — no day, no title — ⚠ UNKNOWN, needs review
+- **lab19** – (no title) – no day, no title – ⚠ UNKNOWN, needs review
+- **lab20** – (no title) – no day, no title – ⚠ UNKNOWN, needs review
 
 ---
 

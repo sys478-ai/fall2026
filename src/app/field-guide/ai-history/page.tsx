@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { getAllPosts, type PostData } from '@/lib/markdown';
 
 export const metadata: Metadata = {
-  title: 'History of AI — AI Field Guide',
+  title: 'History of AI – AI Field Guide',
   description:
     'An interactive timeline of AI from Turing to today, linking key moments to field guide recognition cards.',
 };
@@ -22,6 +22,7 @@ interface TimelineEntry {
   contested?: string;
   cards: TimelineCard[];
   exampleSlug?: string;
+  historySlug?: string;
 }
 
 type PostWithExtras = PostData & {
@@ -32,7 +33,7 @@ type PostWithExtras = PostData & {
 };
 
 function getTimelineEntries(): TimelineEntry[] {
-  const toEntry = (post: PostData, exampleSlug?: string): TimelineEntry => {
+  const toEntry = (post: PostData, opts?: { exampleSlug?: string; historySlug?: string }): TimelineEntry => {
     const p = post as PostWithExtras;
     return {
       year: String(p.year ?? ''),
@@ -40,16 +41,18 @@ function getTimelineEntries(): TimelineEntry[] {
       description: String(p.excerpt ?? ''),
       contested: p.contested,
       cards: p.timeline_cards ?? [],
-      exampleSlug,
+      exampleSlug: opts?.exampleSlug,
+      historySlug: opts?.historySlug,
     };
   };
 
   const historyPosts = getAllPosts('ai-history').filter(p => !p.hide_from_list);
   const examplePosts = getAllPosts('examples').filter(p => !!(p as PostWithExtras).show_in_timeline);
 
-  return [...historyPosts.map(p => toEntry(p)), ...examplePosts.map(p => toEntry(p, p.id))].sort(
-    (a, b) => parseInt(a.year, 10) - parseInt(b.year, 10)
-  );
+  return [
+    ...historyPosts.map(p => toEntry(p, { historySlug: p.id })),
+    ...examplePosts.map(p => toEntry(p, { exampleSlug: p.id })),
+  ].sort((a, b) => parseInt(a.year, 10) - parseInt(b.year, 10));
 }
 
 function CardChip({ card }: { card: TimelineCard }) {
@@ -111,7 +114,16 @@ export default function AIHistoryPage() {
                 </div>
                 <div className="mb-1 text-sm font-bold text-violet-700 dark:text-violet-300">{entry.year}</div>
                 <h2 className="m-0! mb-2 text-xl font-semibold leading-snug text-gray-950 dark:text-gray-50">
-                  {entry.title}
+                  {entry.historySlug ? (
+                    <Link
+                      href={`/field-guide/ai-history/${entry.historySlug}`}
+                      className="text-inherit no-underline hover:text-violet-700 dark:hover:text-violet-300"
+                    >
+                      {entry.title}
+                    </Link>
+                  ) : (
+                    entry.title
+                  )}
                 </h2>
                 <p className="mb-3 text-base leading-7 text-gray-700 dark:text-gray-300">{entry.description}</p>
                 {entry.exampleSlug && (

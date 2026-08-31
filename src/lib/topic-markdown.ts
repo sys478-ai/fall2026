@@ -42,6 +42,8 @@ export interface TopicMarkdownMetadata {
   holiday?: boolean;
   retired?: boolean;
   draft: number;
+  showEthicalFrameworksPreview?: boolean;
+  learningTheoryPreviewCards?: string[];
 }
 
 function asStringArray(value: unknown): string[] {
@@ -196,6 +198,8 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     holiday: data.holiday === true,
     retired: data.retired === true,
     draft: data.draft === 0 || data.draft === false ? 0 : 1,
+    showEthicalFrameworksPreview: data.show_ethical_frameworks_preview === true,
+    learningTheoryPreviewCards: asStringArray(data.learning_theory_preview_cards),
   };
 }
 

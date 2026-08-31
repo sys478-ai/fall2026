@@ -9,7 +9,8 @@ export type FieldGuideFlipCardPalette =
   | 'sts'
   | 'examples'
   | 'frameworks'
-  | 'explainers';
+  | 'explainers'
+  | 'learning';
 
 export interface FieldGuideFlipCardItem {
   slug?: string;
@@ -61,7 +62,7 @@ function FieldGuideFlipCard({
   return (
     <div
       className={`flip-card${flipped ? ' is-flipped' : ''}${item.isMissing ? ' flip-card--missing' : ''}`}
-      aria-label={`${item.title} — click to flip`}
+      aria-label={`${item.title} – click to flip`}
       role="button"
       tabIndex={0}
       aria-pressed={flipped}

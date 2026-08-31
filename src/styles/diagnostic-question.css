@@ -1,0 +1,65 @@
+/* Pull-quote styling for the "Diagnostic Question" block on ethical-frameworks and
+   theories-of-learning pages. Matches the framing-question quote treatment on technical
+   explainers (see technical-explainers.css) – large opening quote mark, italic text, no
+   callout background. Eyebrow + quote color follow the section palette via
+   .field-guide-content--frameworks or .field-guide-content--learning on the prose wrapper. */
+
+.prose .diagnostic-question {
+  margin: 2rem 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.prose .diagnostic-question-eyebrow {
+  @apply mb-3 mt-0 text-xs font-semibold uppercase tracking-[0.18em];
+}
+
+.prose .diagnostic-question-text {
+  position: relative;
+  margin: 0 !important;
+  padding: 0.125rem 0 0.125rem 2.25rem !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  font-style: italic;
+  font-weight: 400;
+  color: #374151;
+}
+
+.prose .diagnostic-question-text::before {
+  content: '“';
+  position: absolute;
+  left: 0;
+  top: -0.2rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 3.25rem;
+  line-height: 1;
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.45;
+}
+
+.dark .prose .diagnostic-question-text {
+  color: #e5e7eb;
+}
+
+/* Section palette – matches index page heading (emerald / indigo) */
+.prose.field-guide-content--frameworks .diagnostic-question-eyebrow {
+  @apply text-emerald-800 dark:text-emerald-300;
+}
+
+.prose.field-guide-content--frameworks .diagnostic-question-text::before {
+  @apply text-emerald-700 dark:text-emerald-400;
+  opacity: 0.5;
+}
+
+.prose.field-guide-content--learning .diagnostic-question-eyebrow {
+  @apply text-indigo-700 dark:text-indigo-300;
+}
+
+.prose.field-guide-content--learning .diagnostic-question-text::before {
+  @apply text-indigo-600 dark:text-indigo-400;
+  opacity: 0.5;
+}

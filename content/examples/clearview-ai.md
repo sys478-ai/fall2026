@@ -4,15 +4,15 @@ id: ex-clearview-ai
 slug: clearview-ai
 year: '2019'
 show_in_timeline: true
-excerpt: "Clearview AI scrapes billions of images from public websites to build a facial recognition database used by law enforcement — testing the claim that publicly accessible data is available for any use."
+excerpt: "Clearview AI scrapes billions of images from public websites to build a facial recognition database used by law enforcement – testing the claim that publicly accessible data is available for any use."
 domains: ['criminal-justice-and-policing', 'platform-and-consumer']
 tags: ['criminal-justice', 'governance']
 contested: >-
   Courts and regulators have reached different conclusions about Clearview's liability. The FTC's
   2022 settlement restricted commercial use but not law enforcement use. European data protection
   authorities imposed fines and ordered data deletion; Clearview has appealed some rulings and
-  continued operating. The underlying legal question — whether aggregating publicly accessible
-  images for a new purpose falls within privacy law protections — is not settled in US federal
+  continued operating. The underlying legal question – whether aggregating publicly accessible
+  images for a new purpose falls within privacy law protections – is not settled in US federal
   law. Several states have passed biometric privacy statutes (Illinois BIPA, Texas CUBI) that have
   imposed liability; federal law does not resolve the question. Law enforcement use sits in a
   particular gap: privacy regulations that apply to commercial contexts often include broad law
@@ -29,11 +29,11 @@ timeline_cards:
 connected_cards:
   - num: '24'
     section: 'sts-concepts'
-    interpretation: "Clearview described its facial recognition database using the language of open-source intelligence (OSINT), a category familiar to law enforcement with established norms about appropriate use. That framing determined which governance questions seemed applicable: if the images were publicly available, using them felt analogous to any investigative use of public records, and the frameworks that would have applied to a novel biometric surveillance system did not seem obviously relevant. By the time regulators began asking hard governance questions, the technology was embedded in hundreds of law enforcement workflows and years of adoption decisions had already been shaped by the framing. This is what Latour means by inscription: the description 'open-source intelligence' was not just a label — it was built into how the product was marketed, how customers understood what they were doing, and therefore which legal questions agencies' counsel thought to ask."
+    interpretation: "Clearview described its facial recognition database using the language of open-source intelligence (OSINT), a category familiar to law enforcement with established norms about appropriate use. That framing determined which governance questions seemed applicable: if the images were publicly available, using them felt analogous to any investigative use of public records, and the frameworks that would have applied to a novel biometric surveillance system did not seem obviously relevant. By the time regulators began asking hard governance questions, the technology was embedded in hundreds of law enforcement workflows and years of adoption decisions had already been shaped by the framing. This is what Latour means by inscription: the description 'open-source intelligence' was not just a label – it was built into how the product was marketed, how customers understood what they were doing, and therefore which legal questions agencies' counsel thought to ask."
   - num: '03'
-    interpretation: "Billions of images were posted publicly — for social purposes, professional profiles, news coverage, personal expression. Clearview scraped them without consent into a law enforcement identification database. The context of original posting bore no resemblance to the context of use. 'Publicly accessible' and 'available for any use' are not the same thing."
+    interpretation: "Billions of images were posted publicly – for social purposes, professional profiles, news coverage, personal expression. Clearview scraped them without consent into a law enforcement identification database. The context of original posting bore no resemblance to the context of use. 'Publicly accessible' and 'available for any use' are not the same thing."
   - num: '14'
-    interpretation: "Clearview framed its product as a new capability: a tool that makes public information useful for law enforcement in new ways. What it actually did was aggregate data that individuals had made available in fragmented public contexts and centralize it into a searchable surveillance database — extracting value from data produced by others, without their knowledge or compensation."
+    interpretation: "Clearview framed its product as a new capability: a tool that makes public information useful for law enforcement in new ways. What it actually did was aggregate data that individuals had made available in fragmented public contexts and centralize it into a searchable surveillance database – extracting value from data produced by others, without their knowledge or compensation."
   - num: '26'
     section: 'ai-deployment-patterns'
     interpretation: "Images posted publicly are technically accessible. Accessibility in a given context does not constitute consent to all possible uses. A photo posted on a professional networking site is public in that context. Its inclusion in a facial recognition database used for law enforcement identification is a categorically different use that the original context did not disclose or anticipate."
@@ -51,6 +51,6 @@ In January 2020, _The New York Times_ reported on Clearview AI, a company that h
 
 Clearview's legal argument was that publicly posted images are public, and that collecting publicly available information is lawful. Several major platforms sent cease-and-desist letters arguing that scraping violated their terms of service. Illinois and Texas brought lawsuits under biometric privacy laws. Clearview was banned from commercial use in the US by a settlement with the ACLU and restricted or banned in several EU countries.
 
-The case focuses a question that recurs throughout debates about AI training data: is data that is technically accessible therefore available for any purpose? "Public" is not a single context — it is a range of contexts, each with different expectations. The contextual expectations under which data was shared are not transferred when it is aggregated into a new database for a different purpose.
+The case focuses a question that recurs throughout debates about AI training data: is data that is technically accessible therefore available for any purpose? "Public" is not a single context – it is a range of contexts, each with different expectations. The contextual expectations under which data was shared are not transferred when it is aggregated into a new database for a different purpose.
 
 **Source:** Kashmir Hill, "The Secretive Company That Might End Privacy as We Know It," _The New York Times_, January 18, 2020.

@@ -29,11 +29,11 @@ priority: high
     }
 </style>
 
-> **Course connection:** This explainer connects directly to the course's capstone case — a neuromorphic chip designed for edge-based anomaly detection. The technical failure modes here are the same ones the capstone analysis asks you to evaluate prospectively.
+> **Course connection:** This explainer connects directly to the course's capstone case – a neuromorphic chip designed for edge-based anomaly detection. The technical failure modes here are the same ones the capstone analysis asks you to evaluate prospectively.
 
 # Anomaly Detection
 
-**How AI systems learn what usually happens — and why “unusual” does not always mean “wrong.”**
+**How AI systems learn what usually happens – and why “unusual” does not always mean “wrong.”**
 
 ## The Basic Idea
 

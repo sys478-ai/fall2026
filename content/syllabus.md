@@ -204,7 +204,7 @@ A student grievance procedure exists to serve all enrolled students at UNC Ashev
 
 In the case of inclement weather, we will follow the policies of the university regarding cancellation, make-up classes, and late start scheduling. Announcements are delivered through the SafeZone App and will include push notifications, email, text and posts on the UNC Asheville homepage. All students, faculty, and staff are automatically registered. Confirm your contact information at Bulldog Alert.
 
-Decisions are made as early as possible and by 6 a.m. when classes are in session. If a delayed opening is announced, only classes starting at or after that time will meet — for example, an 11 a.m. opening means all classes starting before 11 a.m. are cancelled and all classes at 11 a.m. or later proceed as usual.
+Decisions are made as early as possible and by 6 a.m. when classes are in session. If a delayed opening is announced, only classes starting at or after that time will meet – for example, an 11 a.m. opening means all classes starting before 11 a.m. are cancelled and all classes at 11 a.m. or later proceed as usual.
 
 ### Gender Equity / Sexual Misconduct
 

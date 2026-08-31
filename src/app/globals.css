@@ -3,6 +3,8 @@
 @import '../styles/flip-cards.css';
 @import '../styles/pattern-case-tabs.css';
 @import '../styles/sequence.css';
+@import '../styles/diagnostic-question.css';
+@import '../styles/thinker-avatar.css';
 @import '../styles/technical-explainers.css';
 @import '../styles/fictional-watermark.css';
 
@@ -137,7 +139,7 @@ th {
   color: var(--foreground);
 }
 
-/* Soft, Apple-like table — must beat global th/td and .prose table rules */
+/* Soft, Apple-like table – must beat global th/td and .prose table rules */
 .prose table.table-simple,
 table.table-simple {
   width: 100% !important;

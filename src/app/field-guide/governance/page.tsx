@@ -31,7 +31,7 @@ function getGovernanceCards(): GovernanceEntry[] {
 }
 
 export const metadata: Metadata = {
-  title: 'Governance — AI Field Guide',
+  title: 'Governance – AI Field Guide',
   description:
     'Concepts and practice pages for shaping emerging technologies before they become difficult to challenge or reverse.',
 };

@@ -1,4 +1,4 @@
-/* Flip card grids — generated from {% flip-cards %} markdown tags */
+/* Flip card grids – generated from {% flip-cards %} markdown tags */
 
 .prose .flip-card-grid {
   --flip-card-bg: var(--color-violet-50);
@@ -216,7 +216,7 @@
   --flip-card-text: var(--color-gray-300);
 }
 
-/* Deployment patterns — slate blue: observational, “what do you notice?” */
+/* Deployment patterns – slate blue: observational, “what do you notice?” */
 .prose .flip-card-grid--palette-patterns {
   --flip-card-bg: var(--color-slate-50);
   --flip-card-border: var(--color-slate-200);
@@ -237,7 +237,7 @@
   --flip-card-tag-text: var(--color-slate-300);
 }
 
-/* STS concepts — muted violet: theoretical, structural */
+/* STS concepts – muted violet: theoretical, structural */
 .prose .flip-card-grid--palette-sts {
   --flip-card-bg: var(--color-violet-50);
   --flip-card-border: var(--color-violet-200);
@@ -258,7 +258,7 @@
   --flip-card-tag-text: var(--color-violet-300);
 }
 
-/* Examples — warm amber: real cases, history, situated detail */
+/* Examples – warm amber: real cases, history, situated detail */
 .prose .flip-card-grid--palette-examples {
   --flip-card-bg: var(--color-amber-50);
   --flip-card-border: var(--color-amber-200);
@@ -279,7 +279,7 @@
   --flip-card-tag-text: var(--color-amber-300);
 }
 
-/* Ethical frameworks — sage emerald: judgment, evaluation, principles */
+/* Ethical frameworks – sage emerald: judgment, evaluation, principles */
 .prose .flip-card-grid--palette-frameworks {
   --flip-card-bg: var(--color-emerald-50);
   --flip-card-border: var(--color-emerald-200);
@@ -300,7 +300,7 @@
   --flip-card-tag-text: var(--color-emerald-300);
 }
 
-/* Technical explainers — sky cyan: mechanisms, clarity, how-it-works */
+/* Technical explainers – sky cyan: mechanisms, clarity, how-it-works */
 .prose .flip-card-grid--palette-explainers {
   --flip-card-bg: var(--color-sky-50);
   --flip-card-border: var(--color-sky-200);
@@ -319,6 +319,27 @@
   --flip-card-accent: var(--color-sky-300);
   --flip-card-tag-bg: var(--color-sky-900);
   --flip-card-tag-text: var(--color-sky-300);
+}
+
+/* Theories of Learning – indigo: cognition, development, the mind at work */
+.prose .flip-card-grid--palette-learning {
+  --flip-card-bg: var(--color-indigo-50);
+  --flip-card-border: var(--color-indigo-200);
+  --flip-card-hint: var(--color-indigo-700);
+  --flip-card-focus: var(--color-indigo-600);
+  --flip-card-accent: var(--color-indigo-800);
+  --flip-card-tag-bg: var(--color-indigo-100);
+  --flip-card-tag-text: var(--color-indigo-800);
+}
+
+.dark .prose .flip-card-grid--palette-learning {
+  --flip-card-bg: var(--color-indigo-950);
+  --flip-card-border: var(--color-indigo-900);
+  --flip-card-hint: var(--color-indigo-400);
+  --flip-card-focus: var(--color-indigo-400);
+  --flip-card-accent: var(--color-indigo-300);
+  --flip-card-tag-bg: var(--color-indigo-900);
+  --flip-card-tag-text: var(--color-indigo-300);
 }
 
 .prose .flip-card-grid--field-guide .flip-card-front,

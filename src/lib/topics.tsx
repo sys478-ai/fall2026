@@ -110,6 +110,8 @@ export interface Meeting {
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
+  showEthicalFrameworksPreview?: boolean;
+  learningTheoryPreviewCards?: string[];
 }
 
 export interface Topic {
@@ -159,6 +161,8 @@ interface BaseMeeting {
   ethicalPatterns?: string[];
   recognitionPatternNotes?: string[];
   themes?: string[];
+  showEthicalFrameworksPreview?: boolean;
+  learningTheoryPreviewCards?: string[];
 }
 
 interface BaseTopic {
@@ -316,6 +320,8 @@ function buildTopicMeeting(
     otherPreparation: meeting.otherPreparation,
     assignments: meeting.assignments,
     draft: meeting.draft ?? 1,
+    showEthicalFrameworksPreview: meeting.showEthicalFrameworksPreview,
+    learningTheoryPreviewCards: meeting.learningTheoryPreviewCards,
   };
 }
 

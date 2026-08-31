@@ -139,7 +139,7 @@ Then determine whether the result is:
 - **True negative:** not flagged and did not need urgent support
 - **False negative:** not flagged but actually needed urgent support
 
-## Part 5: Threshold 1 — Flag Scores 80 and Above
+## Part 5: Threshold 1 – Flag Scores 80 and Above
 
 | Student | Score | Actually Needed Support? | Flagged? | Result Type |
 | ------- | ----: | ------------------------ | -------- | ----------- |
@@ -173,7 +173,7 @@ Then determine whether the result is:
 | True negatives  |       |
 | False negatives |       |
 
-## Part 6: Threshold 2 — Flag Scores 60 and Above
+## Part 6: Threshold 2 – Flag Scores 60 and Above
 
 | Student | Score | Actually Needed Support? | Flagged? | Result Type |
 | ------- | ----: | ------------------------ | -------- | ----------- |
@@ -207,7 +207,7 @@ Then determine whether the result is:
 | True negatives  |       |
 | False negatives |       |
 
-## Part 7: Threshold 3 — Flag Scores 40 and Above
+## Part 7: Threshold 3 – Flag Scores 40 and Above
 
 | Student | Score | Actually Needed Support? | Flagged? | Result Type |
 | ------- | ----: | ------------------------ | -------- | ----------- |

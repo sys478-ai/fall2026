@@ -14,9 +14,9 @@ timeline_cards:
     href: '/field-guide/pattern-15'
 connected_cards:
   - num: '14'
-    interpretation: 'Netflix publicly released 100 million movie ratings from 480,000 users for competitors to train on. The framing was a competition: $1 million prize, clear rules, open participation. What actually happened was that Netflix crowdsourced algorithmic R&D — obtaining modeling work it would otherwise have had to fund itself, in exchange for prize money worth a fraction of the commercial value of the resulting improvements. The innovation framing obscured that participants were doing work that primarily benefited Netflix.'
+    interpretation: 'Netflix publicly released 100 million movie ratings from 480,000 users for competitors to train on. The framing was a competition: $1 million prize, clear rules, open participation. What actually happened was that Netflix crowdsourced algorithmic R&D – obtaining modeling work it would otherwise have had to fund itself, in exchange for prize money worth a fraction of the commercial value of the resulting improvements. The innovation framing obscured that participants were doing work that primarily benefited Netflix.'
   - num: '15'
-    interpretation: "The recommendation system is the layer through which content reaches viewers. At platform scale, whoever controls that layer controls what gets seen, what doesn't, and under what conditions. The Netflix Prize accelerated development of that layer and established recommendation infrastructure as a source of concentrated power over information flow — including decisions about which films, shows, and creators become visible to which audiences."
+    interpretation: "The recommendation system is the layer through which content reaches viewers. At platform scale, whoever controls that layer controls what gets seen, what doesn't, and under what conditions. The Netflix Prize accelerated development of that layer and established recommendation infrastructure as a source of concentrated power over information flow – including decisions about which films, shows, and creators become visible to which audiences."
 field_guide_section: 'examples'
 status: unverified
 status_reviewer:

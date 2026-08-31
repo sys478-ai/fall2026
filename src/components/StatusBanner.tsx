@@ -44,7 +44,7 @@ export default async function StatusBanner({
           <span className="leading-none">✅</span>
           <span>
             <strong>VERIFIED</strong>
-            {' — '}
+            {' – '}
             This card has been reviewed for accuracy and completeness.
             {reviewerLine(status_reviewer, dateStr)}
           </span>

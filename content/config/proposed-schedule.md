@@ -28,7 +28,7 @@
 
 - **Week 4 | Tue, Sep 8 | What Counts as Intelligence?**
   Compare human, animal, social, embodied, and machine intelligence while asking what each definition emphasizes or leaves out.
-  *Rationale: Moved into Module 1. This is a definitional question in the same register as "What Is Knowledge?" and "What Is Learning?" — all three ask students to examine a concept they think they already understand. Module 2 then opens cleanly with a technical question.*
+  *Rationale: Moved into Module 1. This is a definitional question in the same register as "What Is Knowledge?" and "What Is Learning?" – all three ask students to examine a concept they think they already understand. Module 2 then opens cleanly with a technical question.*
 
 ---
 
@@ -62,7 +62,7 @@
   Apply utilitarianism, care ethics, deontology, and the common good to concrete AI mechanisms students now understand: error, thresholds, training data, and scores.
   *Rationale: Moved here from Week 2. Students now have enough knowledge of mechanism, error, and thresholds to apply ethical frameworks to real cases. This is when the frameworks grip something concrete. The prediction-as-intelligence topic from this slot folds into Week 8 Thu.*
 
-- **Week 8 | Thu, Oct 8 | Are Predictions Ever Neutral?** *(Fall Break Tue — no class)*
+- **Week 8 | Thu, Oct 8 | Are Predictions Ever Neutral?** *(Fall Break Tue – no class)*
   Analyze how prediction systems reuse history, reinforce patterns, and appear to make systems smarter than they are. This session absorbs the prediction-as-apparent-intelligence topic from Week 7.
   *Rationale: Keep as proposed. Finishes Module 2 after the break. Module 3 begins Week 9.*
 
@@ -92,7 +92,7 @@
 
 - **Week 11 | Tue, Oct 27 | How Is AI Changing Work and Employment?**
   Examine hiring, monitoring, productivity scoring, and algorithmic management as systems that classify workers and redistribute workplace power.
-  *Rationale: Changed. Move BRAID case study to Week 13 Thu after students have seen domain cases. Start Module 4 domain sequence here with work and employment — the most familiar institutional context for most students.*
+  *Rationale: Changed. Move BRAID case study to Week 13 Thu after students have seen domain cases. Start Module 4 domain sequence here with work and employment – the most familiar institutional context for most students.*
 
 - **Week 11 | Thu, Oct 29 | How Is AI Reshaping News, Politics, and Public Attention?**
   Use recommendation, generation, targeting, and ranking systems to examine visibility, persuasion, attention, and public influence.
@@ -118,7 +118,7 @@
   Apply anticipatory governance to neuromorphic anomaly detection, drawing on domain cases to ground the analysis in real institutional contexts students have now encountered.
   *Rationale: Moved here from Week 11 Tue. Students have now seen four domain cases and a power/control synthesis. They can do more grounded anticipatory governance because they understand how AI actually lands in institutions. BRAID opens the governance unit rather than interrupting the domain sequence.*
 
-- **Week 14 | Thu, Nov 19 | When Does AI Become Technological Solutionism?** *(Senior Symposium Tue — no class)*
+- **Week 14 | Thu, Nov 19 | When Does AI Become Technological Solutionism?** *(Senior Symposium Tue – no class)*
   Use domain cases to ask when AI reframes political, institutional, or social problems as technical optimization problems.
   *Rationale: Keep as proposed. Solutionism is a strong pivot from domain analysis to governance.*
 
@@ -126,7 +126,7 @@
   Map stakeholders, benefits, burdens, missing publics, and governance questions around an AI system or emerging technology.
   *Rationale: Keep as proposed.*
 
-- **Week 16 | Tue, Dec 1 | What Alternatives Are Still Possible?** *(Thanksgiving Thu — no class)*
+- **Week 16 | Tue, Dec 1 | What Alternatives Are Still Possible?** *(Thanksgiving Thu – no class)*
   Consider redesign, repair, slower deployment, democratic governance, non-AI interventions, and the option to refuse use.
   *Rationale: Keep as proposed.*
 

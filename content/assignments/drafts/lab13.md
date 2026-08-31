@@ -136,7 +136,7 @@ Each event can produce a spike.
 | N          | Normal login            | No spike           |
 | R          | Routine activity        | No spike           |
 
-## Part 4: Simulation Round 1 — Single Events
+## Part 4: Simulation Round 1 – Single Events
 
 Read the following timeline.
 
@@ -164,7 +164,7 @@ Discuss:
 
 Write your group’s response:
 
-## Part 5: Simulation Round 2 — Timing Window
+## Part 5: Simulation Round 2 – Timing Window
 
 Now use a timing window.
 
@@ -194,7 +194,7 @@ Discuss:
 - What does this rule capture that Round 1 missed?
 - What false positives could this rule create?
 
-## Part 6: Simulation Round 3 — Repetition and Bursts
+## Part 6: Simulation Round 3 – Repetition and Bursts
 
 Now consider repeated events.
 

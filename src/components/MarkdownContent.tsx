@@ -5,6 +5,7 @@ import { triggerConfetti } from '@/lib/utils';
 import { useFlipCards } from '@/hooks/useFlipCards';
 import { usePatternCaseTabs } from '@/hooks/usePatternCaseTabs';
 import { useSequences } from '@/hooks/useSequences';
+import { useResourcePopovers } from '@/hooks/useResourcePopovers';
 import hljs from 'highlight.js';
 
 interface MarkdownContentProps {
@@ -18,6 +19,7 @@ export default function MarkdownContent({ content, className }: MarkdownContentP
   useFlipCards(contentRef, content);
   useSequences(contentRef, content);
   usePatternCaseTabs(contentRef, content);
+  useResourcePopovers(contentRef, content);
 
   useEffect(() => {
     if (!contentRef.current) return;

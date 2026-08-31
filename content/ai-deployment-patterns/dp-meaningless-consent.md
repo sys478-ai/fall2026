@@ -3,7 +3,7 @@ title: "Consent was obtained but wasn't meaningful."
 num: '26'
 id: dp-meaningless-consent
 slug: consent-was-obtained-but-wasnt-meaningful
-excerpt: "Formal consent — a checkbox, a terms-of-service agreement, a signature — does not guarantee that people understood what they agreed to or had a real choice."
+excerpt: "Formal consent – a checkbox, a terms-of-service agreement, a signature – does not guarantee that people understood what they agreed to or had a real choice."
 field_guide_section: 'deployment-patterns'
 field_guide_group: 'how-data-is-made-and-used'
 subtheme: 'how-data-is-made-and-used'
@@ -27,12 +27,12 @@ Look for: consent obtained through fine print; opt-out structures rather than op
 
 ## Questions To Ask
 
-- Was this consent informed — did people actually understand what they were agreeing to?
+- Was this consent informed – did people actually understand what they were agreeing to?
 - Was there a real option to refuse, or would refusal carry significant costs?
 - How much power did the person have relative to the institution asking for consent?
 - Was the consent given in a situation of vulnerability, urgency, or dependency?
-- What were people told the data would be used for — and how does that match what it was actually used for?
+- What were people told the data would be used for – and how does that match what it was actually used for?
 
 ## Why This Matters
 
-The legal fiction of consent can be used to transfer risk and responsibility from institutions to individuals. When consent is used as a shield against accountability rather than as a genuine mechanism for respecting autonomy, it undermines both trust and protection. This card often pairs with "Data collected for one purpose gets used for another" — the consent that was technically obtained usually covered the original use, not the secondary one.
+The legal fiction of consent can be used to transfer risk and responsibility from institutions to individuals. When consent is used as a shield against accountability rather than as a genuine mechanism for respecting autonomy, it undermines both trust and protection. This card often pairs with "Data collected for one purpose gets used for another" – the consent that was technically obtained usually covered the original use, not the secondary one.

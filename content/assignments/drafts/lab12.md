@@ -121,7 +121,7 @@ Assign students to the following roles:
 
 Your instructor may assign only some roles depending on class size.
 
-## Part 4: Simulation A — Von Neumann Bottleneck
+## Part 4: Simulation A – Von Neumann Bottleneck
 
 In this simulation, the system must classify incoming messages as either:
 
@@ -149,7 +149,7 @@ In this simulation, the system must classify incoming messages as either:
 | What parts of the system were easy to inspect?  |                |
 | What logs or records could this system keep?    |                |
 
-## Part 5: Simulation B — Neuromorphic-Style Event Processing
+## Part 5: Simulation B – Neuromorphic-Style Event Processing
 
 In this simulation, the system responds only when certain patterns occur.
 

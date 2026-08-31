@@ -1,53 +1,70 @@
-const PROTECTED_BLOCK_ATTRS = ['data-pattern-case-tabs', 'data-sequence'];
+interface ProtectedBlockSpec {
+  tag: 'div' | 'section';
+  attr: string;
+}
 
-function findBalancedDivBlock(html: string, openIndex: number) {
+const PROTECTED_BLOCKS: ProtectedBlockSpec[] = [
+  { tag: 'div', attr: 'data-pattern-case-tabs' },
+  { tag: 'div', attr: 'data-sequence' },
+  { tag: 'section', attr: 'data-footnotes' },
+];
+
+function findBalancedTagBlock(html: string, openIndex: number, tagName: string) {
   const openTagEnd = html.indexOf('>', openIndex);
   if (openTagEnd === -1) {
     return null;
   }
 
+  const openPattern = new RegExp(`<${tagName}\\b`, 'gi');
+  const closeTag = `</${tagName}>`;
+  const closePattern = new RegExp(closeTag, 'gi');
   let depth = 1;
   let i = openTagEnd + 1;
 
   while (i < html.length && depth > 0) {
-    const nextOpen = html.slice(i).search(/<div\b/i);
-    const nextClose = html.slice(i).search(/<\/div>/i);
+    const slice = html.slice(i);
+    const nextOpenMatch = slice.match(openPattern);
+    const nextCloseMatch = slice.match(closePattern);
 
-    if (nextClose === -1) {
+    if (!nextCloseMatch) {
       return null;
     }
 
-    const nextOpenIndex = nextOpen === -1 ? -1 : i + nextOpen;
-    const nextCloseIndex = i + nextClose;
+    const nextOpenIndex = nextOpenMatch ? i + slice.indexOf(nextOpenMatch[0]) : -1;
+    const nextCloseIndex = i + slice.indexOf(nextCloseMatch[0]);
 
-    if (nextOpenIndex !== -1 && nextOpenIndex < nextCloseIndex) {
+    if (nextOpenIndex !== -1 && nextOpenMatch && nextOpenIndex < nextCloseIndex) {
       depth += 1;
-      i = nextOpenIndex + 4;
+      i = nextOpenIndex + nextOpenMatch[0].length;
     } else {
       depth -= 1;
       if (depth === 0) {
         return {
           start: openIndex,
-          end: nextCloseIndex + 6,
+          end: nextCloseIndex + closeTag.length,
         };
       }
-      i = nextCloseIndex + 6;
+      i = nextCloseIndex + closeTag.length;
     }
   }
 
   return null;
 }
 
+function findBalancedDivBlock(html: string, openIndex: number) {
+  return findBalancedTagBlock(html, openIndex, 'div');
+}
+
 function findProtectedRanges(html: string): Array<{ start: number; end: number }> {
   const ranges: Array<{ start: number; end: number }> = [];
 
-  for (const attr of PROTECTED_BLOCK_ATTRS) {
-    const openPattern = new RegExp(`<div\\b[^>]*\\b${attr}\\b[^>]*>`, 'gi');
+  for (const { tag, attr } of PROTECTED_BLOCKS) {
+    const openPattern = new RegExp(`<${tag}\\b[^>]*\\b${attr}\\b[^>]*>`, 'gi');
     let match: RegExpExecArray | null;
 
     openPattern.lastIndex = 0;
     while ((match = openPattern.exec(html)) !== null) {
-      const block = findBalancedDivBlock(html, match.index);
+      const block = findBalancedTagBlock(html, match.index, tag);
       if (block) {
         ranges.push(block);
       }
@@ -97,6 +114,10 @@ export interface PatternSubsectionItem {
   id: string;
   label: string;
   content: string;
+}
+
+export function contentHasStepStrip(content: string): boolean {
+  return /\bdata-step-strip\b/i.test(content);
 }
 
 export function splitPatternSubsections(content: string): { intro: string; items: PatternSubsectionItem[] } {

@@ -4,7 +4,7 @@ import ContentLayout from '@/components/ContentLayout';
 import { getAllTags } from '@/lib/examples';
 
 export const metadata: Metadata = {
-  title: 'Browse by Topic — AI Field Guide',
+  title: 'Browse by Topic – AI Field Guide',
   description: 'Browse example cases by topic.',
 };
 

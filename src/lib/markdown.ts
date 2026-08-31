@@ -13,6 +13,7 @@ import { postprocessSequences, preprocessSequenceTags } from './sequence';
 import { postprocessStepStrips, preprocessStepStripTags } from './step-strip';
 import { preprocessExampleSliderTags, injectExampleSliders } from './example-slider';
 import { preprocessScheduleTags } from './schedule-embed';
+import { preprocessResourcePopoverTags, injectResourcePopovers } from './resource-popover';
 
 const postsDirectory = path.join(process.cwd(), 'content');
 const quizzesDirectory = path.join(process.cwd(), 'content', 'quizzes');
@@ -252,7 +253,7 @@ function wrapMarkdownBoxes(contentHtml: string): string {
     }
 
     const boxInner = contentHtml.substring(commentIndex + commentLength, boxEnd).trim();
-    // Use slide-box (not "box") — Tailwind's CSS pipeline was dropping the .box rules.
+    // Use slide-box (not "box") – Tailwind's CSS pipeline was dropping the .box rules.
     const wrapped = `<div class="slide-box">\n${boxInner}\n</div>`;
 
     contentHtml =
@@ -288,6 +289,7 @@ export interface PostData {
   slug?: string;
   num?: string;
   title: string;
+  subtitle?: string;
   topics?: string[];
   themes?: string[];
   ethical_patterns?: string[];
@@ -426,6 +428,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   markdownContent = preprocessFlipCards(markdownContent);
   markdownContent = preprocessExampleSliderTags(markdownContent);
   markdownContent = preprocessScheduleTags(markdownContent);
+  markdownContent = preprocessResourcePopoverTags(markdownContent);
 
   // Pre-process checkboxes: replace [ ] patterns with placeholders
   // This prevents GFM from converting them into disabled task list items
@@ -446,7 +449,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
     .use(gfm) // Add GitHub Flavored Markdown support
     // @ts-expect-error - remark-highlight.js has type conflicts but works correctly at runtime
     .use(highlight) // Add syntax highlighting
-    .use(smartypants, { dashes: 'oldschool' }) // Convert -- to en-dash (–) and --- to em-dash (—)
+    .use(smartypants, { dashes: 'oldschool' }) // Convert -- to en-dash (–) and --- to em-dash (–)
     .use(html, { sanitize: false }) // Allow HTML without sanitization
     .process(markdownContent);
   let contentHtml = processedContent.toString();
@@ -785,6 +788,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   if (cardNum && subdirectory) {
     contentHtml = await injectExampleSliders(contentHtml, String(cardNum), subdirectory);
   }
+  contentHtml = await injectResourcePopovers(contentHtml);
 
   const sectionDefaults = subdirectory ? loadSectionDefaults(directory) : {};
   const groupMap = subdirectory ? loadGroupMap(directory) : new Map();

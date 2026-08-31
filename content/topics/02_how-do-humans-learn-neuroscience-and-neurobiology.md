@@ -5,6 +5,7 @@ scheduled_day: 2
 module_id: 1
 draft: 0
 subtitle: 'Brains, neurons, networks, and plasticity as a foundation for thinking about learning before we turn to machines.'
+learning_theory_preview_cards: ['tl-biological']
 readings:
   - citation: 'Saplakoglu, Y. (2026, April 24). A new type of neuroplasticity rewires the brain after a single experience. Quanta Magazine. https://www.quantamagazine.org/a-new-type-of-neuroplasticity-rewires-the-brain-after-a-single-experience-20260424/'
     url: 'https://www.quantamagazine.org/a-new-type-of-neuroplasticity-rewires-the-brain-after-a-single-experience-20260424/'

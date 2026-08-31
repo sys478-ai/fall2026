@@ -2,12 +2,11 @@
 title: 'Electricity as Information'
 num: '17'
 type: 'lab'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: medium
+draft: 0
+scheduled_day: 7
+due_date: '2026-09-15'
+due_time: '11:59PM'
+
 ---
 
 How physical signals become bits, data, and decisions.

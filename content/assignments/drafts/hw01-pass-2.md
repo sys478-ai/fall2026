@@ -98,7 +98,7 @@ For each selected category, answer:
 | ----------------------------------------------------------------------------- | ---------- | ---------- | ---------- |
 | What is the concern?                                                          |            |            |            |
 | What technical feature of the chip makes this concern more serious?           |            |            |            |
-| How does the learning mode — fixed, adaptive, or hybrid — affect the concern? |            |            |            |
+| How does the learning mode – fixed, adaptive, or hybrid – affect the concern? |            |            |            |
 | Who is most affected?                                                         |            |            |            |
 | What evidence, documentation, or oversight would be needed?                   |            |            |            |
 | What would make this risk acceptable, unacceptable, or uncertain?             |            |            |            |

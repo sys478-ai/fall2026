@@ -1,7 +1,7 @@
 ---
 title: 'Fictional Pilot Packet'
 nav_label: 'Fictional Packet'
-subtitle: 'Fictional evidence and governance materials for the Adaptive Cardiac Devices case. For classroom analysis only — not a real device approval record.'
+subtitle: 'Fictional evidence and governance materials for the Adaptive Cardiac Devices case. For classroom analysis only – not a real device approval record.'
 case_parent: cardiac
 fictional_watermark: true
 hide_from_list: 1

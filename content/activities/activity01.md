@@ -4,7 +4,7 @@ num: '1'
 type: 'activity'
 scheduled_day: 1
 date: '2026-08-18'
-excerpt: 'Practice telling descriptive, normative, and political claims about AI apart — and noticing when they are mixed together.'
+excerpt: 'Practice telling descriptive, normative, and political claims about AI apart – and noticing when they are mixed together.'
 draft: 0
 ---
 
@@ -35,9 +35,9 @@ Choose several statements to analyze.
 
 Is it:
 
-- **Descriptive / predictive** — a claim about what is happening, what a system can do, or what might happen?
-- **Normative** — a claim about what should happen, what is desirable, or what is acceptable?
-- **Political / institutional** — a claim about who has power or authority, who gets to decide, or how decisions are made?
+- **Descriptive / predictive** – a claim about what is happening, what a system can do, or what might happen?
+- **Normative** – a claim about what should happen, what is desirable, or what is acceptable?
+- **Political / institutional** – a claim about who has power or authority, who gets to decide, or how decisions are made?
 
 Some claims may belong to more than one category.
 

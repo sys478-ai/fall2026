@@ -28,13 +28,13 @@ _Format: Career ~65-75 min + course bridge ~25-35 min · Lesson template: Career
 
 In this meeting, we will:
 
-- complete Career 3: Life After College — budgeting, salary context, negotiation
+- complete Career 3: Life After College – budgeting, salary context, negotiation
 - discuss optional labor examples such as Amazon's hiring tool and entertainment-industry strikes
 - bridge technological change to the economic realities of life after college
 
 ## Career / BRAID Integration
 
-Career 3: Life After College — budgeting, salary context, negotiation.
+Career 3: Life After College – budgeting, salary context, negotiation.
 
 ## Field Guide & Resources
 

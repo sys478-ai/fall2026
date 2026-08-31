@@ -4,7 +4,8 @@ slug: 05
 scheduled_day: 5
 module_id: 1
 draft: 0
-subtitle: 'Moral lenses, theory of mind, and what human judgment adds beyond pattern-matching.'
+subtitle: 'A shared case and seven moral lenses: what human judgment adds beyond fluent performance.'
+show_ethical_frameworks_preview: true
 readings:
   - citation: 'Markkula Center for Applied Ethics. (n.d.). A framework for ethical decision making. Santa Clara University.'
     url: 'https://www.scu.edu/ethics/ethics-resources/ethical-decision-making/a-framework-for-ethical-decision-making/'
@@ -12,25 +13,56 @@ readings:
 
 ## Topic / Focus
 
-Today turns from learning to judgment. We ask what judgment adds beyond learning, and why moral reasoning, interpretation, and theory of mind matter for human social life. Ethical frameworks give us a practical vocabulary for comparing what different moral lenses notice, while theory of mind helps us ask what humans infer about one another when they try to understand intentions, beliefs, and responsibilities.
+Today turns from learning to judgment. Once someone can act competently, what does it take to judge whether that action is *right*? We use a shared scenario to test several moral frameworks against each other, asking what each one notices, what it leaves out, and why people who agree on the facts of a case can still disagree about what should be done.
 
-## Guiding Questions
+The field guide's ethical frameworks are previewed at the bottom of this page. Today we work with several of the seven; you will use all of them across the rest of the semester.
 
-- What is the difference between learning, intelligence, and judgment?
-- What does theory of mind help explain about human interaction and social life?
-- How do different moral lenses foreground different features of the same situation?
-- Why do moral disagreement and interpretation matter when we try to decide what someone should do?
+## Activity: Applying a Moral Framework
 
-## In This Class
+Your table is assigned one framework. You will hold it against three scenarios, one at a time. Each scenario is designed to sound reasonable, even beneficial, at first read – it was built or marketed to help someone. Your job is not to decide whether it's "good" or "bad" in general. Your job is to find out where your framework agrees with the reasonable-sounding pitch, and where it doesn't.
 
-In this meeting, we will:
+### Your Framework
 
-- use a shared scenario to compare consequence-based, rights-based, fairness, common-good, and care-centered reasoning
-- distinguish technical skill or competent performance from judgment, responsibility, and ethical reasoning
-- connect moral disagreement to the broader course question of what each lens reveals and obscures
+- **{% resource ethical-frameworks/ef-kantian %}Kantian{% endresource %}** – Does this respect people as persons, rather than simply using them to achieve a goal?
 
-## Field Guide & Resources
+- **{% resource ethical-frameworks/ef-libertarian %}Libertarian{% endresource %}** – Does this respect individual freedom and voluntary choice?
 
-Use the ethical frameworks section to compare different ways of moving from description to judgment.
+- **{% resource ethical-frameworks/ef-rawlsian %}Rawlsian{% endresource %}** – Would this still seem fair if you didn't know which position you would occupy?
 
-- [Ethical Frameworks](/field-guide/ethical-frameworks)
+- **{% resource ethical-frameworks/ef-utilitarian %}Utilitarian{% endresource %}** – Does this produce the greatest overall benefit while minimizing harm?
+
+For each scenario below, answer the same four questions from your framework's point of view:
+
+1. What does your framework notice first about this scenario?
+2. Using the "Questions to Ask" for your framework, what do you still need to know that isn't in the scenario?
+3. What verdict does your framework point toward, and how confident is it?
+4. What is your framework built to miss here? What would a different lens catch that yours won't?
+
+Be ready to give the rest of the class: your framework, one scenario's verdict, and the one thing your framework doesn't ask about.
+
+### Scenario 1: Disaster Relief Allocation
+
+After a major hurricane, a county has fewer temporary housing units than displaced households.
+
+Local officials create a priority system using several factors, including medical needs, household size, age, and the extent of property damage. The goal is to direct limited housing to people who are likely to need it most.
+
+Households with lower priority remain eligible, but may have to wait until more units become available.
+
+### Scenario 2: Health-Risk Prediction
+
+A health system uses an algorithm to identify patients who may benefit from additional care-management services.
+
+The system reviews information such as diagnoses, prior hospital visits, medications, and healthcare use, then assigns each patient a risk score. Patients with higher scores may receive additional outreach, follow-up appointments, or support from care coordinators.
+
+The goal is to focus limited staff and resources on patients who appear most likely to need additional help.
+
+
+### Report Back
+
+
+## Share Out (Whole Class)
+
+Examine each table's analysis framework's one-sentence verdict on that scenario, so the room hears all four verdicts on the same case back to back.
+
+- Where did the frameworks agree? Where did they split?
+- Did any single scenario change your mind about which framework you'd want deciding it, if you had to pick one?

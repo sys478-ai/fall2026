@@ -11,6 +11,8 @@
     "stylelint": "stylelint \"**/*.css\" --ignore-path .gitignore",
     "format": "prettier --write \"**/*.{md,mdx,html,css,js,jsx,ts,tsx,json,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{md,mdx,html,css,js,jsx,ts,tsx,json,yml,yaml}\"",
+    "replace-em-dashes": "node scripts/replace-em-dashes.mjs",
+    "replace-em-dashes:write": "node scripts/replace-em-dashes.mjs --write",
     "export": "next build",
     "deploy": "npm run build && touch out/.nojekyll"
   },

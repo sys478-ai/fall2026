@@ -8,8 +8,11 @@ import type { HorizontalCardStripItem } from '@/components/HorizontalCardStrip';
 import MarkdownContent from '@/components/MarkdownContent';
 import TopicSectionNav from '@/components/TopicSectionNav';
 import type { TopicSectionNavItem } from '@/components/TopicSectionNav';
-import { getPostData } from '@/lib/markdown';
+import { getAllPosts, getPostData } from '@/lib/markdown';
 import type { PostData } from '@/lib/markdown';
+import FieldGuideCardPreview from '@/components/FieldGuideCardPreview';
+import { getFieldGuidePreviewItems } from '@/lib/field-guide-preview';
+import { getFieldGuideBannerClasses } from '@/lib/field-guide-palettes';
 import { getModuleColorClasses, type ModuleColorClasses } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
@@ -652,7 +655,7 @@ function TopicOverviewMaterials({
                 <a href={reading.url} target="_blank" rel="noopener noreferrer" className={`font-medium ${READING_LINK_CLASS}`}>
                   {reading.title}
                 </a>
-                {reading.authors && <span className="text-gray-500 dark:text-gray-400"> — {reading.authors}</span>}
+                {reading.authors && <span className="text-gray-500 dark:text-gray-400"> – {reading.authors}</span>}
               </span>
             </PrepItemRow>
           ))}
@@ -837,7 +840,7 @@ function TopicSequenceNavLink({
       <span
         className={`min-w-0 max-w-[48%] ${alignClass}`}
         aria-disabled="true"
-        title="Draft — not yet available"
+        title="Draft – not yet available"
       >
         <span className="block text-sm text-gray-400 dark:text-gray-600">{label}</span>
         <span className="mt-1 block text-base font-medium text-gray-400 dark:text-gray-600">{item.title}</span>
@@ -948,6 +951,54 @@ export default async function TopicPage({ params }: TopicPageProps) {
         </TopicWorkflowSection>
       ),
     });
+  }
+
+  if (!meeting.holiday && meeting.showEthicalFrameworksPreview) {
+    const ethicalFrameworks = await getFieldGuidePreviewItems('ethical-frameworks', 'ethical-framework');
+    if (ethicalFrameworks.length > 0) {
+      topicSections.push({
+        navItem: { id: 'topic-ethical-frameworks', label: 'Ethical Frameworks' },
+        panel: (
+          <TopicWorkflowSection id="topic-ethical-frameworks" label="Ethical Frameworks">
+            <FieldGuideCardPreview
+              intro="Markkula's framework gives you a general process for moving from analysis to judgment. Each card below unpacks one specific ethical tradition you can plug into that process – click a card to preview it, or open the full page for the complete write-up."
+              items={ethicalFrameworks}
+              badgeLabel="Ethical Framework"
+              linkBasePath="/field-guide/ethical-frameworks"
+              moreLinkLabel="More theories of ethics"
+              banner={getFieldGuideBannerClasses('ethical-frameworks')}
+              sheetTitleId="ethical-framework-sheet-title"
+            />
+          </TopicWorkflowSection>
+        ),
+      });
+    }
+  }
+
+  if (!meeting.holiday && meeting.learningTheoryPreviewCards && meeting.learningTheoryPreviewCards.length > 0) {
+    const learningTheories = await getFieldGuidePreviewItems(
+      'theories-of-learning',
+      'learning-theory',
+      meeting.learningTheoryPreviewCards
+    );
+    if (learningTheories.length > 0) {
+      topicSections.push({
+        navItem: { id: 'topic-theories-of-learning', label: 'Theories of Learning' },
+        panel: (
+          <TopicWorkflowSection id="topic-theories-of-learning" label="Theories of Learning">
+            <FieldGuideCardPreview
+              intro="Each card below unpacks one account of how learning actually happens. Click a card to preview it, or open the full page for the complete write-up – worth holding up against whatever an AI system's makers mean when they say it 'learns.'"
+              items={learningTheories}
+              badgeLabel="Theory of Learning"
+              linkBasePath="/field-guide/theories-of-learning"
+              moreLinkLabel="More theories of learning"
+              banner={getFieldGuideBannerClasses('theories-of-learning')}
+              sheetTitleId="learning-theory-sheet-title"
+            />
+          </TopicWorkflowSection>
+        ),
+      });
+    }
   }
 
   if (todayContent || meeting.description) {

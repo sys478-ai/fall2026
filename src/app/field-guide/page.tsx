@@ -7,7 +7,7 @@ import { normalizeFeaturedImagePath, getDarkFeaturedImagePath } from '@/lib/feat
 import { getFieldGuideBannerClassesByPalette, type FieldGuidePalette } from '@/lib/field-guide-palettes';
 
 export const metadata: Metadata = {
-  title: 'Field Guide — AI & Society',
+  title: 'Field Guide – AI & Society',
   description: 'Tools for noticing, analyzing, and making sense of AI in everyday life.',
 };
 
@@ -18,6 +18,7 @@ const sections: { label: string; href: string; contentDir: string; palette: Fiel
   { label: 'STS Concepts', href: '/field-guide/sts-concepts', contentDir: 'sts-concepts', palette: 'sts' },
   { label: 'Examples', href: '/field-guide/examples', contentDir: 'examples', palette: 'examples' },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks', contentDir: 'ethical-frameworks', palette: 'frameworks' },
+  { label: 'Theories of Learning', href: '/field-guide/theories-of-learning', contentDir: 'theories-of-learning', palette: 'learning' },
   { label: 'Technical Explainers', href: '/field-guide/technical-explainers', contentDir: 'technical-explainers', palette: 'explainers' },
   { label: 'Governance', href: '/field-guide/governance', contentDir: 'governance', palette: 'sts' },
 ];

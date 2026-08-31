@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Inter, Abril_Fatface, Outfit } from "next/font/google";
 import Navigation from "@/components/Nav";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import ConditionalFooter from "@/components/ConditionalFooter";
+import ThemeInit from "@/components/ThemeInit";
+import ResourcePopover from "@/components/ResourcePopover";
 import { getCourseConfig } from "@/lib/config";
 import "./globals.css";
 
@@ -48,7 +49,8 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
       </head>
       <body className={`${inter.className} ${abril.variable} ${outfit.variable}`}>
-        <Script src="/theme-init.js" strategy="beforeInteractive" />
+        <ThemeInit />
+        <ResourcePopover />
         <div className="min-h-screen md:flex">
           <Navigation />
           <div className="min-w-0 flex-1">

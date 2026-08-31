@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const tag = getAllTags().find(t => t.id === slug);
   return {
-    title: `${tag?.title ?? slug} — AI Field Guide`,
+    title: `${tag?.title ?? slug} – AI Field Guide`,
     description: tag?.description,
   };
 }

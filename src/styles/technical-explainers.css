@@ -1,4 +1,4 @@
-/* Technical explainer typography — scoped via .technical-explainer-content on the page */
+/* Technical explainer typography – scoped via .technical-explainer-content on the page */
 
 .prose.technical-explainer-content > h2 {
   @apply mb-5 mt-14 border-0 bg-transparent p-0 text-3xl font-semibold leading-tight tracking-tight text-gray-950 dark:text-gray-50;
@@ -19,4 +19,51 @@
 
 .prose.technical-explainer-content ol > li a::after {
   content: ' →';
+}
+
+/* Framing question – pull-quote style, not callout */
+.prose.technical-explainer-content blockquote.framing-question {
+  position: relative;
+  margin: 1.75rem 0 2rem !important;
+  padding: 0.125rem 0 0.125rem 2.25rem !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  font-style: italic;
+  font-weight: 400;
+  color: #374151;
+}
+
+.prose.technical-explainer-content blockquote.framing-question::before {
+  content: '“';
+  position: absolute;
+  left: 0;
+  top: -0.2rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 3.25rem;
+  line-height: 1;
+  font-style: normal;
+  font-weight: 400;
+  color: #0b5d8f;
+  opacity: 0.45;
+}
+
+.prose.technical-explainer-content blockquote.framing-question p {
+  margin: 0 !important;
+}
+
+.prose.technical-explainer-content blockquote.framing-question > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.dark .prose.technical-explainer-content blockquote.framing-question {
+  background: transparent !important;
+  border: none !important;
+  color: #e5e7eb;
+}
+
+.dark .prose.technical-explainer-content blockquote.framing-question::before {
+  color: #8fc4ee;
+  opacity: 0.5;
 }

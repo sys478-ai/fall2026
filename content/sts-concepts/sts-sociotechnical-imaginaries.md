@@ -3,7 +3,7 @@ title: "Sociotechnical imaginaries."
 num: '25'
 id: sts-sociotechnical-imaginaries
 slug: sociotechnical-imaginaries
-excerpt: "Technologies embody visions of what society should look like — and those visions do political work before the technology is ever deployed."
+excerpt: "Technologies embody visions of what society should look like – and those visions do political work before the technology is ever deployed."
 field_guide_section: 'sts-concepts'
 field_guide_order: 13
 order: 13
@@ -20,11 +20,11 @@ priority: low
 
 ## What This Means
 
-Technologies are never just tools for solving problems. They embody visions — collectively held ideas about what problems are worth solving, what the future should look like, and what kinds of people or institutions should be in charge of shaping it. Sheila Jasanoff and Sang-Hyun Kim call these sociotechnical imaginaries: shared frameworks, often implicit, that connect technical systems to pictures of desirable social orders.
+Technologies are never just tools for solving problems. They embody visions – collectively held ideas about what problems are worth solving, what the future should look like, and what kinds of people or institutions should be in charge of shaping it. Sheila Jasanoff and Sang-Hyun Kim call these sociotechnical imaginaries: shared frameworks, often implicit, that connect technical systems to pictures of desirable social orders.
 
-Imaginaries are not just rhetoric or marketing. They shape research agendas by defining which problems seem important. They shape funding priorities by determining which applications seem promising. They shape governance frameworks by establishing which outcomes need to be prevented and which can be assumed to be beneficial. A technology built within a particular imaginary — say, one that imagines anomaly detection as a neutral security tool — will have different design choices, different deployment contexts, and different governance frameworks than one built within an imaginary that treats detection as an exercise of social control requiring democratic accountability.
+Imaginaries are not just rhetoric or marketing. They shape research agendas by defining which problems seem important. They shape funding priorities by determining which applications seem promising. They shape governance frameworks by establishing which outcomes need to be prevented and which can be assumed to be beneficial. A technology built within a particular imaginary – say, one that imagines anomaly detection as a neutral security tool – will have different design choices, different deployment contexts, and different governance frameworks than one built within an imaginary that treats detection as an exercise of social control requiring democratic accountability.
 
-Imaginaries are also distributed unevenly. The imaginary held by the researchers and engineers who build a system is often not the same as the imaginary held by the communities the system affects. This mismatch is not incidental — it is a structural feature of who is at the table when technologies are designed and whose visions get built in.
+Imaginaries are also distributed unevenly. The imaginary held by the researchers and engineers who build a system is often not the same as the imaginary held by the communities the system affects. This mismatch is not incidental – it is a structural feature of who is at the table when technologies are designed and whose visions get built in.
 
 ## Questions To Ask
 
@@ -37,7 +37,7 @@ Imaginaries are also distributed unevenly. The imaginary held by the researchers
 
 ## Why This Matters
 
-Sociotechnical imaginaries matter because they shape what questions get asked before a technology is built — which means they determine a great deal about what kinds of critique are possible after the technology is deployed. If the imaginary behind a system is never made explicit, it is very difficult to challenge the assumptions built into it.
+Sociotechnical imaginaries matter because they shape what questions get asked before a technology is built – which means they determine a great deal about what kinds of critique are possible after the technology is deployed. If the imaginary behind a system is never made explicit, it is very difficult to challenge the assumptions built into it.
 
-This card is a theoretical foundation for the course capstone. The capstone asks you to reason about a technology before it is widely deployed — while choices are still open and futures are still contestable. Doing that well requires making the imaginaries behind the technology visible: what vision of the future is this system building toward, and is that a vision worth building?
+This card is a theoretical foundation for the course capstone. The capstone asks you to reason about a technology before it is widely deployed – while choices are still open and futures are still contestable. Doing that well requires making the imaginaries behind the technology visible: what vision of the future is this system building toward, and is that a vision worth building?
 

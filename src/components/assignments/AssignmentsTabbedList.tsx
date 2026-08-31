@@ -141,7 +141,7 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
                 {item.due_date ? formatDate(item.due_date) : 'TBD'}
               </td>
               <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-600 dark:text-gray-400">
-                {dueTimeLabel || '—'}
+                {dueTimeLabel || '–'}
               </td>
               <td className="whitespace-nowrap px-2 py-3">
                 <AssignmentTypeBadge kind={tag} isDraft={draft} />

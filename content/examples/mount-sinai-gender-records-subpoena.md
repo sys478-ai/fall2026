@@ -2,13 +2,13 @@
 title: 'Mount Sinai patient records subpoenaed for gender care investigation'
 id: ex-mount-sinai-gender-records-subpoena
 slug: mount-sinai-gender-records-subpoena
-excerpt: 'Medical records collected for adolescent healthcare were subpoenaed by a federal grand jury investigating gender-related treatments — the second Manhattan hospital system to face such a demand.'
+excerpt: 'Medical records collected for adolescent healthcare were subpoenaed by a federal grand jury investigating gender-related treatments – the second Manhattan hospital system to face such a demand.'
 domains: ['healthcare-and-medicine', 'criminal-justice-and-policing']
 tags: ['healthcare', 'governance']
 contested: >-
   The legal authority behind these subpoenas is actively being contested in court. Several hospitals
   in other jurisdictions successfully challenged similar demands, with judges finding they were
-  issued for an improper purpose — to identify individuals for prosecution — rather than a
+  issued for an improper purpose – to identify individuals for prosecution – rather than a
   legitimate investigative purpose. The underlying conflict about whether states can prohibit
   gender-affirming care for minors, and whether federal law enforcement can investigate such care in
   states where it remains legal, is unresolved, with courts in multiple states blocking enforcement
@@ -17,7 +17,7 @@ contested: >-
   disputes, not settled law. See: Goldstein, _New York Times_, June 5, 2026.
 connected_cards:
   - num: '5'
-    interpretation: "Adolescent patients shared sensitive health information with Mount Sinai for a medical purpose: receiving gender-related care. That data was then subpoenaed by a federal grand jury in Texas as part of a criminal investigation. The records hadn't changed — what changed was the institutional context they could now flow into. Patients consented to treatment, not to federal disclosure. The hospital's plan to produce only 'de-identified' information was contested by families who argued the government could still identify individuals from the records. This is a case where the secondary use was not just unanticipated but actively harmful to the people whose data was at stake."
+    interpretation: "Adolescent patients shared sensitive health information with Mount Sinai for a medical purpose: receiving gender-related care. That data was then subpoenaed by a federal grand jury in Texas as part of a criminal investigation. The records hadn't changed – what changed was the institutional context they could now flow into. Patients consented to treatment, not to federal disclosure. The hospital's plan to produce only 'de-identified' information was contested by families who argued the government could still identify individuals from the records. This is a case where the secondary use was not just unanticipated but actively harmful to the people whose data was at stake."
 field_guide_section: 'examples'
 status: unverified
 status_reviewer:
@@ -38,6 +38,6 @@ Mount Sinai's spokeswoman said the hospital intended to provide only "de-identif
 
 New York law required the hospital to notify affected patients in the event that records were produced.
 
-In some earlier cases, hospitals successfully challenged subpoenas, with judges finding they had been issued for an improper purpose. But those rulings tended to favor hospitals in states where the treatments remained legal. Because the Mount Sinai subpoena came from a Texas grand jury, any legal challenge would have to be litigated in Texas — a significant barrier.
+In some earlier cases, hospitals successfully challenged subpoenas, with judges finding they had been issued for an improper purpose. But those rulings tended to favor hospitals in states where the treatments remained legal. Because the Mount Sinai subpoena came from a Texas grand jury, any legal challenge would have to be litigated in Texas – a significant barrier.
 
 **Source:** Joseph Goldstein, ["Trump Administration Investigating Gender Treatments at Mount Sinai,"](https://www.nytimes.com/2026/06/05/nyregion/trump-administration-investigating-gender-treatments-at-mount-sinai.html) _The New York Times_, June 5, 2026.

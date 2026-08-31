@@ -1,10 +1,10 @@
 ---
-title: 'How Do Computers Compute?'
+title: 'How do physical signals become information?'
 slug: 07
 scheduled_day: 7
 module_id: 2
 draft: 0
-subtitle: 'Materials, electricity, transistors, chips, architecture, and logic.'
+subtitle: 'Electricity, Binary, and Encoding: How Physical Signals Become Information'
 status: unverified
 status_reviewer:
 status_date:

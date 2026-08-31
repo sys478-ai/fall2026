@@ -20,9 +20,9 @@ priority: medium
 
 ## What To Notice
 
-A recurring rhetorical move in debates about AI: accountability requirements — safety testing, impact assessments, disclosure requirements, independent audits, regulatory review — are framed as bureaucratic drag, as obstacles that will cause the US (or another actor) to fall behind, as the enemy of beneficial progress.
+A recurring rhetorical move in debates about AI: accountability requirements – safety testing, impact assessments, disclosure requirements, independent audits, regulatory review – are framed as bureaucratic drag, as obstacles that will cause the US (or another actor) to fall behind, as the enemy of beneficial progress.
 
-This framing positions oversight and innovation as opposites. They aren't. Safety requirements exist in aviation, pharmaceuticals, nuclear power, food, and many other domains without preventing development. The question is not whether oversight slows things down — it may — but what kinds of accountability are being avoided, and whose interests are served by avoiding them.
+This framing positions oversight and innovation as opposites. They aren't. Safety requirements exist in aviation, pharmaceuticals, nuclear power, food, and many other domains without preventing development. The question is not whether oversight slows things down – it may – but what kinds of accountability are being avoided, and whose interests are served by avoiding them.
 
 Look for: urgency arguments that preclude deliberation; international competition invoked to dismiss domestic accountability requirements; technical complexity used to argue that outsiders cannot evaluate risks; "move fast" language applied to high-stakes systems.
 
@@ -36,4 +36,4 @@ Look for: urgency arguments that preclude deliberation; international competitio
 
 ## Why This Matters
 
-Framing oversight as a barrier is itself a governance move — it shapes which accountability mechanisms are seen as legitimate and which are dismissed before the substantive questions can be asked. This card pairs with "Refusal and non-adoption are legitimate choices": both ask you to take seriously the possibility that slowing down, reviewing carefully, or declining to deploy is sometimes the right answer rather than a failure of ambition.
+Framing oversight as a barrier is itself a governance move – it shapes which accountability mechanisms are seen as legitimate and which are dismissed before the substantive questions can be asked. This card pairs with "Refusal and non-adoption are legitimate choices": both ask you to take seriously the possibility that slowing down, reviewing carefully, or declining to deploy is sometimes the right answer rather than a failure of ambition.

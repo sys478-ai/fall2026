@@ -203,7 +203,7 @@ Try to describe the benefits in their strongest reasonable form. Do not assume t
 
 ---
 
-## [Requied] Part 7: What Could Go Wrong — Even If It Works?
+## [Requied] Part 7: What Could Go Wrong – Even If It Works?
 
 Some harms happen because systems fail. Other harms happen even when systems function as designed.
 
@@ -530,7 +530,7 @@ Describe one plausible benefit.
 Who benefits?
 What would need to be true for this benefit to happen?
 
-## What Could Go Wrong — Even If It Works?
+## What Could Go Wrong – Even If It Works?
 
 Describe one plausible harm, misuse, or failure mode.
 

@@ -49,7 +49,7 @@ export default function StatusBannerClient({
           <span className="leading-none">{cfg.icon}</span>
           <span>
             <strong>{cfg.label}</strong>
-            {' — '}
+            {' – '}
             {cfg.message}
             {reviewerLine}
           </span>

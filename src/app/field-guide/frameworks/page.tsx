@@ -28,7 +28,7 @@ function getFrameworkCards(): FrameworkEntry[] {
 }
 
 export const metadata: Metadata = {
-  title: 'Ethical Frameworks — AI Field Guide',
+  title: 'Ethical Frameworks – AI Field Guide',
   description: "Tools for evaluating what you've found. Use these to move from analysis to judgment.",
 };
 

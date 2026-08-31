@@ -238,7 +238,7 @@ export default async function ReviewStatusPage() {
     <ContentLayout variant="list" leftNav={<QuickLinksNav />} fullWidth>
       <div className="mb-10 space-y-2">
         <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">
-          Internal — Planning
+          Internal – Planning
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
           Content Review Status

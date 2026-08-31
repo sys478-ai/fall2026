@@ -164,7 +164,7 @@ export default function QuizzesListClient({ quizzes }: QuizzesListClientProps) {
               >
                 <td className="py-3 px-4 hidden md:table-cell text-sm text-gray-600 dark:text-gray-400">
                   {quiz.weekNumber ? `Week ${quiz.weekNumber}` : (
-                    <span className="text-gray-400 dark:text-gray-500">—</span>
+                    <span className="text-gray-400 dark:text-gray-500">–</span>
                   )}
                 </td>
                 <td className="py-3 px-4">
@@ -176,7 +176,7 @@ export default function QuizzesListClient({ quizzes }: QuizzesListClientProps) {
                   {quiz.quizData ? (
                     `${quiz.quizData.questions.length} question${quiz.quizData.questions.length !== 1 ? 's' : ''}`
                   ) : (
-                    <span className="text-gray-400 dark:text-gray-500">—</span>
+                    <span className="text-gray-400 dark:text-gray-500">–</span>
                   )}
                 </td>
                 <td className="py-3 px-4 hidden md:table-cell text-sm text-gray-600 dark:text-gray-400">
@@ -190,12 +190,12 @@ export default function QuizzesListClient({ quizzes }: QuizzesListClientProps) {
                       day: 'numeric' 
                     });
                   })() : (
-                    <span className="text-gray-400 dark:text-gray-500">—</span>
+                    <span className="text-gray-400 dark:text-gray-500">–</span>
                   )}
                 </td>
                 <td className="py-3 px-4 hidden md:table-cell text-sm text-gray-600 dark:text-gray-400">
                   {!mounted ? (
-                    <span className="text-gray-400 dark:text-gray-500">—</span>
+                    <span className="text-gray-400 dark:text-gray-500">–</span>
                   ) : status && status.completed ? (
                     // Rule 1: If taken, show score
                     `${status.score} / ${status.total} (${status.total > 0 ? Math.round((status.score / status.total) * 100) : 0}%)`
@@ -209,7 +209,7 @@ export default function QuizzesListClient({ quizzes }: QuizzesListClientProps) {
                       <span className="text-red-600 dark:text-red-400">Overdue</span>
                     )
                   ) : (
-                    <span className="text-gray-400 dark:text-gray-500">—</span>
+                    <span className="text-gray-400 dark:text-gray-500">–</span>
                   )}
                 </td>
                 <td className="py-3 px-4">

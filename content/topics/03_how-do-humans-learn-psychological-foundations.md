@@ -5,6 +5,7 @@ slug: 03
 scheduled_day: 3
 module_id: 1
 draft: 0
+learning_theory_preview_cards: ['tl-behaviorism', 'tl-constructivism']
 readings:
   - citation: 'Sawyer, R. K. (2014). Introduction: The new science of learning. In R. K. Sawyer (Ed.), The Cambridge handbook of the learning sciences (2nd ed., pp. 1–18). Cambridge University Press.'
     url: 'https://drive.google.com/file/d/1ntvJwTD-QQ6MKY0Jaw3R9FfBmbZ2ryAj/view?usp=sharing'

@@ -3,7 +3,7 @@ title: 'Field Guide: Ethical Frameworks'
 subtitle: 'Tools for evaluating what you''ve found. Use these to move from analysis to judgment.'
 type: 'landing'
 section_label: 'Ethical Frameworks'
-featured_image: 'fall2026/images/ethics-field-guide/ethics/scales-banner.png'
+# featured_image: 'fall2026/images/ethics-field-guide/ethics/scales-banner.png'
 thumb_image: 'fall2026/images/ethics-field-guide/ethics/scales-landscape.png'
 priority: low
 field_guide_section_title: 'Ethical Frameworks'

@@ -39,7 +39,7 @@ In this meeting, we will:
 
 ## Looking Ahead
 
-The next class asks when AI becomes technological solutionism — a pattern where political and social problems get reframed as technical optimization problems. The final module prepares students to bring all of this analysis into public-facing work.
+The next class asks when AI becomes technological solutionism – a pattern where political and social problems get reframed as technical optimization problems. The final module prepares students to bring all of this analysis into public-facing work.
 
 ## BRAID / ELSI Connection
 

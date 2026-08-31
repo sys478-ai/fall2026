@@ -8,6 +8,7 @@ const TABS = [
   { label: 'STS Concepts', href: '/field-guide/sts-concepts' },
   { label: 'Example Cards', href: '/field-guide/examples' },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
+  { label: 'Theories of Learning', href: '/field-guide/theories-of-learning' },
   { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
   { label: 'Governance', href: '/field-guide/governance' },
   { label: 'History of AI', href: '/field-guide/ai-history' },

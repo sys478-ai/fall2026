@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Bars3Icon,
+  BookOpenIcon,
   CalendarDaysIcon,
   ChevronDownIcon,
   ChevronRightIcon,
@@ -47,6 +48,30 @@ interface SidebarNavClientProps {
 
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
 
+const RESOURCE_NAV_ITEMS = [
+  // Temporarily hidden from Resources nav:
+  // { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
+  // { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns' },
+  // { label: 'Examples', href: '/field-guide/examples' },
+  { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
+  { label: 'Theories of Learning', href: '/field-guide/theories-of-learning' },
+  // { label: 'STS Concepts', href: '/field-guide/sts-concepts' },
+] as const;
+
+const HIDDEN_RESOURCE_PATHS = [
+  '/field-guide/technical-explainers',
+  '/field-guide/deployment-patterns',
+  '/field-guide/examples',
+  '/field-guide/sts-concepts',
+] as const;
+
+function isResourcePath(path: string) {
+  return (
+    RESOURCE_NAV_ITEMS.some(item => path === item.href || path.startsWith(`${item.href}/`)) ||
+    HIDDEN_RESOURCE_PATHS.some(item => path === item || path.startsWith(`${item}/`))
+  );
+}
+
 function normalizePath(path: string) {
   return path.replace(/^\/fall2026/, '').replace(/\/$/, '') || '/';
 }
@@ -66,6 +91,7 @@ export default function SidebarNavClient({
   const [scheduleOpen, setScheduleOpen] = useState(
     () => normalizedPath === '/modules' || normalizedPath.startsWith('/topics/')
   );
+  const [resourcesOpen, setResourcesOpen] = useState(() => isResourcePath(normalizedPath));
   const [expandedModuleIds, setExpandedModuleIds] = useState<number[]>([]);
 
   useEffect(() => {
@@ -92,6 +118,12 @@ export default function SidebarNavClient({
   }, [normalizedPath]);
 
   useEffect(() => {
+    if (isResourcePath(normalizedPath)) {
+      setResourcesOpen(true);
+    }
+  }, [normalizedPath]);
+
+  useEffect(() => {
     const moduleWithActiveTopic = modules.find(module =>
       module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
     );
@@ -104,6 +136,7 @@ export default function SidebarNavClient({
 
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
+  const activeResources = isResourcePath(normalizedPath);
   const activeSyllabus = normalizedPath === '/' || normalizedPath === '/syllabus';
 
   const navItems = useMemo(
@@ -124,6 +157,17 @@ export default function SidebarNavClient({
     }
 
     setScheduleOpen(prev => !prev);
+  }
+
+  function toggleResourcesOpen() {
+    if (collapsed) {
+      setCollapsed(false);
+      localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
+      setResourcesOpen(true);
+      return;
+    }
+
+    setResourcesOpen(prev => !prev);
   }
 
   function toggleModuleExpanded(moduleId: number) {
@@ -150,6 +194,7 @@ export default function SidebarNavClient({
 
     if (newValue) {
       setScheduleOpen(false);
+      setResourcesOpen(false);
     }
   };
 
@@ -400,6 +445,53 @@ export default function SidebarNavClient({
                           </div>
                         </div>
                       </section>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="bg-slate-50 dark:bg-slate-950">
+            <button
+              type="button"
+              onClick={toggleResourcesOpen}
+              aria-expanded={resourcesOpen}
+              className={`${baseLinkClass} w-full ${
+                activeResources ? activeTopLevelClass : inactiveTopLevelClass
+              } ${collapsed ? 'justify-center' : 'justify-between'}`}
+            >
+              <span className="flex min-w-0 items-center gap-3">
+                {renderNavContent('Resources', BookOpenIcon)}
+              </span>
+              {!collapsed && (
+                <ChevronDownIcon
+                  className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
+                    resourcesOpen ? '' : '-rotate-90'
+                  }`}
+                />
+              )}
+            </button>
+
+            {!collapsed && resourcesOpen && (
+              <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
+                <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
+                  {RESOURCE_NAV_ITEMS.map(item => {
+                    const isItemActive =
+                      normalizedPath === item.href || normalizedPath.startsWith(`${item.href}/`);
+
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`block py-2 pl-6 pr-6 text-sm transition-colors no-underline! ${
+                          isItemActive
+                            ? `${activeNestedClass} bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50 border-slate-300 dark:border-slate-600`
+                            : inactiveNestedClass
+                        }`}
+                      >
+                        <span className="ml-5 block min-w-0 leading-snug">{item.label}</span>
+                      </Link>
                     );
                   })}
                 </div>

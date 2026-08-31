@@ -4,7 +4,7 @@ scheduled_day: 6
 num: '1'
 type: 'homework'
 excerpt: 'Choose one example of learning, judgment, or behavior and analyze it through two Module 1 lenses.'
-due_days_after: 11
+due_date: '2026-09-08'
 due_time: '11:59PM'
 draft: 1
 ---

@@ -1,0 +1,26 @@
+/* Small inline headshot next to each named thinker's bio paragraph, on the
+   ethical-frameworks and theories-of-learning "Key Thinkers" sections. Every named
+   thinker gets one where a usable photo exists (nothing shown, no placeholder, where
+   one doesn't) rather than one figure getting an outsized portrait and everyone else
+   getting none. A short caption under each photo credits the source; photos pulled
+   from an institutional/press page rather than a confirmed-license source say so. */
+
+.prose .thinker-entry {
+  @apply my-5 flex items-start gap-4;
+}
+
+.prose .thinker-avatar-wrap {
+  @apply w-24 shrink-0;
+}
+
+.prose .thinker-avatar {
+  @apply m-0 h-24 w-24 rounded-lg object-cover object-top;
+}
+
+.prose .thinker-avatar-caption {
+  @apply mt-1 block text-center text-[10px] leading-tight text-gray-500 dark:text-gray-400;
+}
+
+.prose .thinker-entry p {
+  @apply m-0;
+}

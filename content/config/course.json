@@ -1,6 +1,6 @@
 {
   "statusBanners": {
-    "fieldGuide": true,
+    "fieldGuide": false,
     "topicsAndAssignments": false
   },
   "courseNumber": "SYS 478",

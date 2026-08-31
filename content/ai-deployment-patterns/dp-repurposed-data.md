@@ -21,11 +21,11 @@ priority: high
 
 ## What To Notice
 
-When data is gathered, it is gathered in a specific context — for a specific purpose, by a specific institution, with a specific relationship between the person who produces the data and the organization that collects it. That context shapes what people understood they were agreeing to, what they could reasonably anticipate, and what felt acceptable.
+When data is gathered, it is gathered in a specific context – for a specific purpose, by a specific institution, with a specific relationship between the person who produces the data and the organization that collects it. That context shapes what people understood they were agreeing to, what they could reasonably anticipate, and what felt acceptable.
 
-Repurposing breaks that context. The data flows somewhere it was not originally intended to go — from a fitness app to a health insurer, from a school platform to a marketing company, from a fertility tracker to a law enforcement investigation. The original collection often felt harmless; the repurposing often feels like a violation.
+Repurposing breaks that context. The data flows somewhere it was not originally intended to go – from a fitness app to a health insurer, from a school platform to a marketing company, from a fertility tracker to a law enforcement investigation. The original collection often felt harmless; the repurposing often feels like a violation.
 
-The key question is not whether repurposing is technically permitted. Terms of service often authorize it in fine print. The question is whether the people who generated the data could reasonably have anticipated these uses — and whether they had any practical ability to refuse.
+The key question is not whether repurposing is technically permitted. Terms of service often authorize it in fine print. The question is whether the people who generated the data could reasonably have anticipated these uses – and whether they had any practical ability to refuse.
 
 ## Questions To Ask
 
@@ -37,4 +37,4 @@ The key question is not whether repurposing is technically permitted. Terms of s
 
 ## Why This Matters
 
-Contextual integrity — the principle that information should flow in ways that match the norms of the context in which it was shared — is a useful diagnostic. It helps you identify why a repurposing that is technically lawful can still constitute a violation, and why fine-print terms of service that technically authorize reuse do not equal meaningful consent.
+Contextual integrity – the principle that information should flow in ways that match the norms of the context in which it was shared – is a useful diagnostic. It helps you identify why a repurposing that is technically lawful can still constitute a violation, and why fine-print terms of service that technically authorize reuse do not equal meaningful consent.

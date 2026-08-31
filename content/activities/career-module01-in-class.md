@@ -2,7 +2,7 @@
 title: 'Career Module 1: Values, Interests, and Coaching Access'
 num: '1'
 type: 'activity'
-scheduled_day: 4
+scheduled_day: 5
 order: 1
 excerpt: 'In-class prompts on where you are now, values, and PathwayU results.'
 draft: 0

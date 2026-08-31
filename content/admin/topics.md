@@ -1,5 +1,5 @@
 ---
-title: Verification Guide — Topics
+title: Verification Guide – Topics
 ---
 
 ## What to check
@@ -7,12 +7,12 @@ title: Verification Guide — Topics
 **Frontmatter**
 
 - `title`, `scheduled_day`, `module_id`, `subtitle`, `status`, `priority` all set
-- `subtitle` is a concise framing statement — it appears as the topic's one-line description in the schedule
+- `subtitle` is a concise framing statement – it appears as the topic's one-line description in the schedule
 
 **Required sections**
 
-- **Topic / Focus** — explains what the class session covers and why; a student reading this before class should understand what the meeting is for
-- **Guiding Questions** — bulleted list of questions that structure the session; these are what students should be able to engage with by the end
+- **Topic / Focus** – explains what the class session covers and why; a student reading this before class should understand what the meeting is for
+- **Guiding Questions** – bulleted list of questions that structure the session; these are what students should be able to engage with by the end
 
 **If the topic page has a readings / activities list**
 
@@ -22,7 +22,7 @@ title: Verification Guide — Topics
 
 **Content quality**
 
-- The topic connects to the course arc — AI, ethics, governance, and the social dimensions of technical systems
+- The topic connects to the course arc – AI, ethics, governance, and the social dimensions of technical systems
 - No placeholder text, draft notes, or bracketed TODOs left in
 
 **Note on priority**

@@ -127,7 +127,7 @@ function getFieldGuideSections(patterns: TaxonomyEntry[]): GuideSection[] {
 }
 
 export const metadata: Metadata = {
-  title: 'AI Deployment Patterns — AI Field Guide',
+  title: 'AI Deployment Patterns – AI Field Guide',
   description: 'Recurring patterns in how AI systems are deployed in the world.',
 };
 

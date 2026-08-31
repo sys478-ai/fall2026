@@ -14,7 +14,7 @@ import PatternComicStrip, { type PatternComicStripItem } from '@/components/Patt
 import { getReadingsForCard, type Reading } from '@/lib/readings';
 import StatusBanner from '@/components/StatusBanner';
 import { StsConceptSection } from '@/components/sts-concepts';
-import { splitPatternContentSections } from '@/lib/pattern-content-sections';
+import { splitPatternContentSections, contentHasStepStrip } from '@/lib/pattern-content-sections';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -125,7 +125,10 @@ function PatternContentSection({ section }: { section: { label: string; content:
     : section.content;
   const cleanedContent = stripAnyLeadingSectionHeading(contentWithoutMatchingHeading);
   const caseTabs = section.label === 'Examples' ? splitPatternCaseTabs(cleanedContent) : [];
-  const stepGrid = section.label === 'What To Notice' ? splitPatternSubsections(cleanedContent) : null;
+  const stepGrid =
+    section.label === 'What To Notice' && !contentHasStepStrip(cleanedContent)
+      ? splitPatternSubsections(cleanedContent)
+      : null;
   if (stepGrid && stepGrid.items.length > 0) return <PatternComicStrip intro={stepGrid.intro} items={stepGrid.items} />;
   if (caseTabs.length > 0) return <PatternCaseTabs cases={caseTabs} />;
   return <MarkdownContent content={cleanedContent} />;
@@ -221,7 +224,7 @@ export default async function STSConceptPage({ params }: PageProps) {
                       {reading.title}
                     </a>
                     {reading.authors && (
-                      <span className="text-sm text-gray-600 dark:text-gray-400"> — {reading.authors}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400"> – {reading.authors}</span>
                     )}
                     {reading.notes && (
                       <p className="mb-0 mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">{reading.notes}</p>

@@ -8,7 +8,7 @@ excerpt: 'Data collected through a personality quiz for academic research was us
 domains: ['platform-and-consumer']
 tags: ['governance', 'media-platforms']
 contested: >-
-  Cambridge Analytica's actual influence on election outcomes is heavily disputed — including by
+  Cambridge Analytica's actual influence on election outcomes is heavily disputed – including by
   political scientists who study advertising effects and by former CA employees who suggest the
   company overstated its capabilities to clients for business reasons. The data harvest was a genuine
   privacy violation. Whether the psychographic targeting actually moved votes is a separate question
@@ -23,7 +23,7 @@ timeline_cards:
     href: '/field-guide/pattern-14'
 connected_cards:
   - num: '5'
-    interpretation: "Facebook users provided personal data through a third-party quiz app in what appeared to be an academic research context. That data was then used by a political consulting firm to build personality profiles and target political advertising. The collection and repurposing were separated by multiple layers — Facebook's API, a researcher, and a consulting firm — none of which were visible to users. The context of the original collection bore no resemblance to the context of its eventual use."
+    interpretation: "Facebook users provided personal data through a third-party quiz app in what appeared to be an academic research context. That data was then used by a political consulting firm to build personality profiles and target political advertising. The collection and repurposing were separated by multiple layers – Facebook's API, a researcher, and a consulting firm – none of which were visible to users. The context of the original collection bore no resemblance to the context of its eventual use."
 field_guide_section: 'examples'
 status: unverified
 status_reviewer:
@@ -36,7 +36,7 @@ priority: high
 
 In 2018, reporting revealed that Cambridge Analytica, a political consulting firm, had obtained personal data from approximately 87 million Facebook users without their knowledge or consent.
 
-The data was collected through a third-party personality quiz app called "thisisyourdigitallife," built by researcher Aleksandr Kogan. Users who installed the app consented to data collection for what they understood to be academic research purposes. Facebook's platform rules at the time also allowed the app to collect data on users' Facebook friends — meaning the vast majority of affected users had never installed the app at all.
+The data was collected through a third-party personality quiz app called "thisisyourdigitallife," built by researcher Aleksandr Kogan. Users who installed the app consented to data collection for what they understood to be academic research purposes. Facebook's platform rules at the time also allowed the app to collect data on users' Facebook friends – meaning the vast majority of affected users had never installed the app at all.
 
 Cambridge Analytica used the data to build detailed psychographic profiles, which it claimed could be used to target political messages based on personality type. The firm worked on the 2016 Brexit referendum and the Trump presidential campaign.
 

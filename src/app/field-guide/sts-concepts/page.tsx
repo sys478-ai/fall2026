@@ -85,7 +85,7 @@ function getGroupedSections(cards: ConceptEntry[]): GuideSection[] {
 }
 
 export const metadata: Metadata = {
-  title: 'STS Concepts — AI Field Guide',
+  title: 'STS Concepts – AI Field Guide',
   description: 'The STS frameworks and theoretical foundations underlying the field guide recognition patterns.',
 };
 

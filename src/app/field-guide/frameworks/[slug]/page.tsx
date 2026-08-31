@@ -5,6 +5,7 @@ import { getPostData, getAllPostIds, type PostData } from '@/lib/markdown';
 import ContentLayout from '@/components/ContentLayout';
 import MarkdownContent from '@/components/MarkdownContent';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { getFieldGuideBannerClasses, getFieldGuideContentClass } from '@/lib/field-guide-palettes';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   try {
     const postData = await getPostData(slug, 'ethical-frameworks');
-    return { title: `${postData.title} — Ethical Frameworks` };
+    return { title: `${postData.title} – Ethical Frameworks` };
   } catch {
     return { title: 'Ethical Framework' };
   }
@@ -34,6 +35,7 @@ export default async function EthicalFrameworkDetailPage({ params }: PageProps) 
   try {
     const postData = await getPostData(slug, 'ethical-frameworks');
     const subtitle = (postData as PostData & { subtitle?: string }).subtitle;
+    const banner = getFieldGuideBannerClasses('ethical-frameworks');
 
     return (
       <ContentLayout
@@ -50,8 +52,8 @@ export default async function EthicalFrameworkDetailPage({ params }: PageProps) 
                 { label: postData.title },
               ]}
             />
-            <header className="border-y border-violet-200 bg-violet-50 px-4 py-16 dark:border-violet-900 dark:bg-violet-950/30 md:px-16">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
+            <header className={banner.header}>
+              <p className={`mb-4 text-xs font-semibold uppercase tracking-[0.18em] ${banner.label}`}>
                 Ethical Framework
               </p>
               <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
@@ -65,9 +67,9 @@ export default async function EthicalFrameworkDetailPage({ params }: PageProps) 
         }
       >
         <div className="space-y-8">
-          <MarkdownContent content={postData.content} />
-          <section className="rounded-2xl border border-violet-200 bg-violet-50/70 p-6 dark:border-violet-900 dark:bg-violet-950/20">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
+          <MarkdownContent content={postData.content} className={getFieldGuideContentClass('ethical-frameworks')} />
+          <section className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-6 dark:border-emerald-900 dark:bg-emerald-950/20">
+            <p className={`mb-2 text-xs font-semibold uppercase tracking-[0.18em] ${banner.label}`}>
               Field Guide
             </p>
             <h2 className="m-0 text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
@@ -78,7 +80,7 @@ export default async function EthicalFrameworkDetailPage({ params }: PageProps) 
             </p>
             <Link
               href="/field-guide/frameworks"
-              className="mt-5 inline-flex items-center rounded-full bg-violet-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-violet-800 dark:bg-violet-500 dark:hover:bg-violet-400"
+              className="mt-5 inline-flex items-center rounded-full bg-emerald-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-emerald-800 dark:bg-emerald-500 dark:hover:bg-emerald-400"
             >
               Back to Ethical Frameworks
             </Link>

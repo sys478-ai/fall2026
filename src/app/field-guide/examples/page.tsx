@@ -42,7 +42,7 @@ function getExampleCards(): ExampleEntry[] {
 }
 
 export const metadata: Metadata = {
-  title: 'Example Cards — AI Field Guide',
+  title: 'Example Cards – AI Field Guide',
   description: 'Real situations where AI patterns appear.',
 };
 

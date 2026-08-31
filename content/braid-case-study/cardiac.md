@@ -43,7 +43,7 @@ If an ICD is too quick to shock, patients may receive painful and frightening tr
 
 > **Can an adaptive ICD reduce inappropriate shocks without increasing the risk that the device will miss a true life-threatening arrhythmia?**
 
-The manufacturer's pitch is essentially win-win: fewer false positives, with no increase in false negatives. Your task is to decide whether the evidence and safeguards in the pilot packet make that promise credible enough for your hospital to participate — or whether the same tradeoff has simply moved somewhere harder to see.
+The manufacturer's pitch is essentially win-win: fewer false positives, with no increase in false negatives. Your task is to decide whether the evidence and safeguards in the pilot packet make that promise credible enough for your hospital to participate – or whether the same tradeoff has simply moved somewhere harder to see.
 
 ## What We Know About Current ICDs
 
@@ -51,7 +51,7 @@ The manufacturer's pitch is essentially win-win: fewer false positives, with no 
 
 In one large cohort of 811 heart-failure patients with ICDs, 141 patients, or 17.4%, received at least one inappropriate shock during follow-up.[^2] Inappropriate shocks are also associated with greater all-cause mortality.[^3]
 
-The common thread across causes is that the device misreads a signal that isn't actually dangerous — muscle noise, or a fast-but-not-lethal heart rhythm — as ventricular fibrillation.
+The common thread across causes is that the device misreads a signal that isn't actually dangerous – muscle noise, or a fast-but-not-lethal heart rhythm – as ventricular fibrillation.
 
 ### False negatives: failure to treat a real arrhythmia
 
@@ -63,7 +63,7 @@ The most common cause was misclassification in the other direction: the device r
 
 ### The tradeoff is already built in
 
-Current ICDs use rate- and pattern-based rules to decide whether a fast rhythm is dangerous.[^5] Making those rules more skeptical reduces inappropriate shocks — but that same skepticism is the leading documented cause of failing to treat a real emergency.[^4] In other words, current ICDs already make this tradeoff. Tightening detection in one direction loosens it in the other.
+Current ICDs use rate- and pattern-based rules to decide whether a fast rhythm is dangerous.[^5] Making those rules more skeptical reduces inappropriate shocks – but that same skepticism is the leading documented cause of failing to treat a real emergency.[^4] In other words, current ICDs already make this tradeoff. Tightening detection in one direction loosens it in the other.
 
 <figure class="image-placeholder">
   <div class="image-placeholder__frame" aria-hidden="true">
@@ -78,7 +78,7 @@ Current ICDs use rate- and pattern-based rules to decide whether a fast rhythm i
 
 ## How Current ICDs Are Adjusted
 
-Current ICDs do not usually change their own detection rules in the field. Adjustment happens through a clinician, during in-office interrogation or remote review, generally every 3–12 months.[^6] But one study found that only about 6% of scheduled in-office follow-up visits resulted in reprogramming or another management change.[^7] Between clinical checkpoints, the device runs on a fixed, human-set rule set — even if that rule set no longer fits the patient well.
+Current ICDs do not usually change their own detection rules in the field. Adjustment happens through a clinician, during in-office interrogation or remote review, generally every 3–12 months.[^6] But one study found that only about 6% of scheduled in-office follow-up visits resulted in reprogramming or another management change.[^7] Between clinical checkpoints, the device runs on a fixed, human-set rule set – even if that rule set no longer fits the patient well.
 
 <figure class="image-placeholder">
   <div class="image-placeholder__frame" aria-hidden="true">
@@ -93,9 +93,9 @@ Current ICDs do not usually change their own detection rules in the field. Adjus
 
 ## The Proposed Adaptive Device
 
-The proposed device in this case is a hypothetical adaptive-learning ICD being evaluated for a limited clinical pilot. Unlike current ICDs, which rely on clinician-programmed settings, this device would update part of its detection model after implantation — for example, learning to distinguish a patient's harmless muscle noise from true ventricular fibrillation, which could help prevent another inappropriate shock like the one in the triggering case.
+The proposed device in this case is a hypothetical adaptive-learning ICD being evaluated for a limited clinical pilot. Unlike current ICDs, which rely on clinician-programmed settings, this device would update part of its detection model after implantation – for example, learning to distinguish a patient's harmless muscle noise from true ventricular fibrillation, which could help prevent another inappropriate shock like the one in the triggering case.
 
-But that same adaptive feature is the source of the governance problem. If the device updates its model using incomplete or misleading data, its sense of "normal" could shift in an unsafe direction — and later decisions could become harder for clinicians to interpret, audit, or challenge.
+But that same adaptive feature is the source of the governance problem. If the device updates its model using incomplete or misleading data, its sense of "normal" could shift in an unsafe direction – and later decisions could become harder for clinicians to interpret, audit, or challenge.
 
 The question for your committee is not whether adaptive learning sounds more accurate. It is what evidence, logging, review, and rollback procedures would be necessary before a hospital allows an implanted device to change its own detection behavior after deployment.
 
@@ -134,7 +134,7 @@ Assign these three roles within your group before you begin:
 
 - **The electrophysiologist** cares most about whether the device reduces harm to the patient in front of them. They want to know: does this device plausibly prevent the next inappropriate shock, or the next missed arrhythmia, for this patient?
 
-- **The hospital risk/compliance officer** cares most about what happens when something goes wrong. They want to know: if this device makes a decision no one can fully explain six months from now, who is answerable — the hospital, the manufacturer, or the implanting physician?
+- **The hospital risk/compliance officer** cares most about what happens when something goes wrong. They want to know: if this device makes a decision no one can fully explain six months from now, who is answerable – the hospital, the manufacturer, or the implanting physician?
 
 - **The patient advocate** cares most about informed consent. They want to know: does the patient understand that this device's model of "normal" may keep changing after implantation, and that neither they nor their doctor may know exactly how?
 
@@ -142,9 +142,9 @@ Your final recommendation should not read like three separate opinions. It shoul
 
 ## Real-World Comparisons to Draw On
 
-Find at least **2 analogous, real-world comparisons**, either from the examples we've already explored in the course ([link](#)) or ones you find on your own ([link](#)). A comparison does not need to involve ICDs or medical devices — it should help you reason about what happens when a system learns from data after deployment, makes high-stakes classifications, or becomes difficult to audit after something goes wrong.
+Find at least **2 analogous, real-world comparisons**, either from the examples we've already explored in the course ([link](#)) or ones you find on your own ([link](#)). A comparison does not need to involve ICDs or medical devices – it should help you reason about what happens when a system learns from data after deployment, makes high-stakes classifications, or becomes difficult to audit after something goes wrong.
 
-Use each comparison carefully. Do not just say, "This is like self-driving cars." Explain the specific similarity that matters — for example, whether it's about who is responsible when automation fails, or about whether people can contest a decision.
+Use each comparison carefully. Do not just say, "This is like self-driving cars." Explain the specific similarity that matters – for example, whether it's about who is responsible when automation fails, or about whether people can contest a decision.
 
 ## Your Task
 
@@ -152,7 +152,7 @@ Write a 2-page committee recommendation that answers this question:
 
 > **Should your hospital participate in a limited clinical pilot of this adaptive ICD for patients like the one described in this case?**
 
-Your recommendation should take one of three positions: participate in the pilot; participate only with conditions; or decline to participate at this stage. Make a clear argument — don't simply list possible benefits and harms.
+Your recommendation should take one of three positions: participate in the pilot; participate only with conditions; or decline to participate at this stage. Make a clear argument – don't simply list possible benefits and harms.
 
 ### 1. State your decision in the first sentence
 
@@ -177,7 +177,7 @@ If you recommend participating with conditions, those conditions must be specifi
 
 ### 5. Use at least two real-world comparisons
 
-Explain what each comparison helps your committee see about the adaptive ICD pilot — don't just name another technology.
+Explain what each comparison helps your committee see about the adaptive ICD pilot – don't just name another technology.
 
 ## Deliverable
 
@@ -192,13 +192,13 @@ This case has two parts: a written recommendation and a short presentation defen
 
 ### Part 2: 3-slide presentation
 
-Build a 3-slide deck from your written recommendation and present it to the class (about 5 minutes, plus questions). The slides should carry the argument, not decorate it — each one maps to a specific part of your written recommendation:
+Build a 3-slide deck from your written recommendation and present it to the class (about 5 minutes, plus questions). The slides should carry the argument, not decorate it – each one maps to a specific part of your written recommendation:
 
 1. **Position + tradeoff.** Your recommendation (participate / participate with conditions / decline) and, in a sentence or two, whether the adaptive device escapes the false-positive/false-negative tradeoff or just relocates it.
 2. **Pivot point.** The single cited fact that drove your decision, and what would have had to be different for your committee to land somewhere else.
 3. **Conditions + comparisons.** Your concrete condition(s) for participation, and how your real-world comparison(s) helped you see why they matter.
 
-Be ready to defend your pivot point under questions from the rest of the class. If someone pushes on it and you can't hold your position, that's useful information for your written recommendation too — you're welcome to revise Part 1 afterward if the defense changes your thinking.
+Be ready to defend your pivot point under questions from the rest of the class. If someone pushes on it and you can't hold your position, that's useful information for your written recommendation too – you're welcome to revise Part 1 afterward if the defense changes your thinking.
 
 ## Success Criteria
 

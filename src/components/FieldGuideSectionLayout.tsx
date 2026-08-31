@@ -11,7 +11,8 @@ interface Props {
     | 'examples'
     | 'ethical-frameworks'
     | 'technical-explainers'
-    | 'governance';
+    | 'governance'
+    | 'theories-of-learning';
   children: (columns: 1 | 2) => React.ReactNode;
 }
 

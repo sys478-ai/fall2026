@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   try {
     const postData = await getPostData(slug, 'technical-explainers');
-    return { title: `${postData.title} — Technical Explainers` };
+    return { title: `${postData.title} – Technical Explainers` };
   } catch {
     return { title: 'Technical Explainer' };
   }
