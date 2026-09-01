@@ -961,7 +961,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         panel: (
           <TopicWorkflowSection id="topic-ethical-frameworks" label="Ethical Frameworks">
             <FieldGuideCardPreview
-              intro="Markkula's framework gives you a general process for moving from analysis to judgment. Each card below unpacks one specific ethical tradition you can plug into that process – click a card to preview it, or open the full page for the complete write-up."
+              intro="Markkula's framework gives you a general process for moving from analysis to judgment. Each card below unpacks one specific ethical tradition you can plug into that process - click a card to preview it."
               items={ethicalFrameworks}
               badgeLabel="Ethical Framework"
               linkBasePath="/field-guide/ethical-frameworks"

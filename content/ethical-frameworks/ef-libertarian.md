@@ -23,7 +23,7 @@ Libertarian ethics asks whether people are free to make their own choices withou
 
 Libertarianism emphasizes three ideas:
 
-1. **Individual freedom matters.** People should generally be free to make their own choices.
+1. **Individual freedom matters.** People should generally be free to make their own choices (typically against "moral legislation").
 2. **Consent should be voluntary.** Agreements are legitimate when people enter them freely rather than through force or coercion.
 3. **Property and personal rights place limits on others.** Individuals have claims over their bodies, labor, property, and resources that should not be overridden simply to produce a better social outcome.
 

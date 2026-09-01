@@ -16,30 +16,37 @@ status_date: 2026-06-13
 status_notes: "Reviewed for conceptual accuracy, accessibility, diagnostic usefulness, limitations, and cross-references."
 priority: high
 ---
-
 ## The Core Idea
 
-Kantian ethics asks whether an action is right in principle, not just whether it produces good consequences. It focuses on the duties we have toward other people and the rules we use to justify our actions.
+Kantian ethics is a **deontological** framework: it asks whether an action is right in principle, not just whether it produces good consequences. It focuses on **duties, motives, and the rules behind our actions**.
+
 Kantian ethics emphasizes two ideas:
 
-1. **Treat people as ends in themselves, not merely as means.** People have dignity and should not be used simply as tools for someone else’s goals.
-2. **Act according to rules you could accept for everyone.** Kant’s **categorical imperative** asks whether the rule behind an action – its maxim – could be consistently applied as a universal rule.
+1. **Treat people as ends in themselves, not merely as means.** People have dignity and should not be used simply as tools for someone else's goals.
 
-Unlike utilitarianism, Kantian ethics holds that some actions may be wrong even when they produce good outcomes. The focus is on whether an action respects persons and follows a morally defensible principle.
+2. **Act according to rules you could accept for everyone.** Kant's **categorical imperative** asks whether the rule behind an action – its **maxim** – could be consistently applied as a universal rule.
 
-In AI ethics, this means asking both how people are being treated and whether the rules guiding a system are ones we would accept if they were applied broadly.
+For Kant, **why we act matters as well as what happens**. An action is not morally right simply because it produces a good result; it should be guided by a principle or duty that is itself morally defensible.
+
+In AI ethics, this means asking how people are being treated, what principles guide a system or policy, and whether those principles could be accepted if they were applied broadly.
 
 <div class="diagnostic-question diagnostic-question--indigo">
+
   <p class="diagnostic-question-eyebrow">Diagnostic Questions</p>
+
   <p class="diagnostic-question-text"><strong>Respect for persons:</strong> Does this system treat anyone merely as a means to an end rather than as a person with dignity and autonomy?
+
   <br><br><strong>Universalization:</strong> Could I accept the rule behind this system if every similar actor or system followed it?</p>
+
 </div>
 
 ## How This Framework Is Often Applied
 
-This framework is often used to set moral limits on actions and policies that might otherwise be defended by their useful results. In AI, it is especially relevant to deceptive design, manipulation, surveillance, data collection, and forms of labor or testing that use people without meaningful consent or regard for their own purposes.
+Kantian ethics is often used to identify **moral duties and limits** that should not be overridden simply because doing so would produce useful results.
 
-Kantian reasoning also asks whether a proposed rule could be accepted as a rule for everyone. For example, a company may claim that collecting data without informed consent improves a product. A Kantian analysis asks whether a general practice of collecting data this way would undermine the trust and agency that make consent meaningful. The focus is not only on a system's outcome, but on whether its guiding principle respects persons.
+It asks whether people are being respected as persons and whether the **principle or intention behind an action** is morally defensible. A policy may produce a desirable outcome, for example, while still relying on deception, coercion, or treating people merely as instruments.
+
+Kantian reasoning also asks whether the underlying rule could be accepted as a rule for everyone. In AI ethics, this can apply to practices involving consent, surveillance, manipulation, data collection, or the use of people's labor and information.
 
 ## Strengths and Weaknesses
 
@@ -49,10 +56,11 @@ Kantian ethics is especially strong at identifying questions of:
 
 - **Dignity** – whether people are treated as ends in themselves.
 - **Autonomy** – whether people can make meaningful choices.
+- **Motive and principle** – whether an action is guided by a morally defensible reason, rather than merely producing a desirable outcome.
 - **Consistency** – whether the rule behind an action could apply to everyone.
 - **Duties and limits** – whether some actions are wrong even when they produce good outcomes.
 
-In AI ethics, this lens helps ask whether systems respect people’s agency and follow principles we would accept more broadly.
+In AI ethics, this lens helps ask whether systems respect people's agency and whether the principles guiding them are morally defensible.
 
 ### What It Can Miss
 
@@ -62,7 +70,6 @@ Kantian ethics is less well suited to questions about:
 - **Tradeoffs** – how to compare competing harms.
 - **Distribution** – who benefits and who bears the burdens.
 - **Conflicting duties** – what to do when moral obligations point in different directions.
-
 
 ## Key Thinkers
 
