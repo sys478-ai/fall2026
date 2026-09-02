@@ -94,7 +94,7 @@ export default function AIHistoryPage() {
           <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
             History of AI
           </h1>
-          <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">
+          <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">
             Key moments in AI history, linked to field guide recognition cards. Purple chips link to published cards;
             gray chips are connections to cards not yet published. Case study entries link to full example cards.
           </p>

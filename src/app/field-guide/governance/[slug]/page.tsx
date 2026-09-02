@@ -69,7 +69,7 @@ export default async function GovernanceDetailPage({ params }: PageProps) {
                   {postData.title}
                 </h1>
                 {(subtitle || postData.excerpt) && (
-                  <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">
+                  <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">
                     {subtitle ?? postData.excerpt}
                   </p>
                 )}

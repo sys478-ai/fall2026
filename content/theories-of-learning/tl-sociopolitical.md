@@ -16,15 +16,23 @@ priority: high
 
 ## The Core Idea
 
-The sociopolitical tradition extends sociocultural theory's insight – that learning is social – into an explicit argument about power. Paulo Freire's foundational critique targeted what he called "banking education": the model where a teacher deposits knowledge into passive students, which he argued treats people as objects to be filled rather than subjects capable of critical thought, and which reproduces the power relations of the society around it rather than questioning them. His alternative, problem-posing education, treats learners as co-investigators of their own reality, capable of naming and acting on the conditions that shape their lives.
+Sociopolitical accounts of learning ask how learning is shaped not only by other people and cultures, but also by institutions, power, and inequality. They examine who gets to define what counts as knowledge, intelligence, achievement, or appropriate behavior – and how those definitions affect what people are taught, how they are evaluated, and what opportunities are available to them.
 
-Later scholars extended this into the specifics of identity, race, and institutional design. Kris Gutiérrez's concept of the "third space" describes how official and unofficial knowledge collide productively in classrooms – and how institutions can either open or foreclose that space. Na'ilah Suad Nasir's research on racialized identity shows that whether a student is recognized as "smart" or "capable" is never a neutral technical judgment; it's shaped by racialized narratives embedded in schools and institutions long before any individual assessment happens. Applied to AI, this framework asks a question that goes beyond whether a system works: whose knowledge does it recognize as legitimate, whose does it erase, and who gets to decide what "learning," "achievement," or "capability" even mean inside it?
+From this perspective, learning is never completely separate from the social structures in which it occurs. Schools, workplaces, technologies, and other institutions organize knowledge in particular ways, privilege some forms of expertise over others, and assign people to categories that can shape how they understand themselves and how others respond to them.
+
+Paulo Freire offers one influential version of this tradition. He criticized “banking education,” in which teachers deposit knowledge into passive students, and proposed problem-posing education, in which learners participate in questioning and interpreting the conditions of their own lives. His work makes especially explicit the idea that education can either reproduce existing power relations or create opportunities to question them.
 
 ## Example: Explaining Learning
 
 A bilingual student brings knowledge and language practices from home into a writing assignment. A standardized assessment may treat those practices only as errors because they do not match its preferred version of academic English. A teacher might instead use the student's knowledge as a resource, inviting the student to compare rhetorical choices across contexts and participate in defining what strong writing can do.
 
 The sociopolitical account explains the difference not as a change in the student's ability alone, but as a change in whose knowledge is recognized and who has authority to define success. It asks how institutional categories can position a learner as capable or deficient, and how learners can participate in questioning those categories.
+
+## Why This Matters for AI
+
+AI systems used in education, hiring, or assessment do not simply measure ability. They classify, score, and recommend according to categories that people and institutions have chosen. This framework asks who defined those categories, whose knowledge fits them easily, and who is treated as deficient when they do not.
+
+Kris Gutiérrez's work on "third space" helps explain why learning environments should allow official knowledge and learners' everyday knowledge to meet rather than forcing one to disappear. Na'ilah Suad Nasir's research on racialized identities shows how school contexts shape whether young people are recognized as capable learners. Both are appropriate sources here because they connect learning directly to institutional recognition, identity, and power.
 
 <div class="diagnostic-question diagnostic-question--amber">
   <p class="diagnostic-question-eyebrow">The Diagnostic Question</p>
@@ -33,15 +41,14 @@ The sociopolitical account explains the difference not as a change in the studen
 
 ## Questions To Ask
 
-- Who defined the categories this system uses to measure "learning," "achievement," or "capability" – and whose knowledge or ways of knowing don't fit those categories?
-- Does this system treat learners as passive recipients of content (Freire's "banking" model), or does it create space for them to question and act on their own circumstances?
-- Whose racialized, gendered, or cultural assumptions about who counts as a capable learner are embedded in how this system was trained or evaluated?
-- Is there a "third space" here – room for a learner's own knowledge and the institution's official knowledge to productively meet – or does the system only recognize one and discard the other?
-- Who benefits from how this system defines success, and who is positioned as deficient by the same definition?
+- Who defined the categories this system uses to measure learning, achievement, or capability?
+- Whose knowledge, language, or ways of knowing fit those categories, and whose do not?
+- Does the system give learners a meaningful role in questioning how they are classified or evaluated?
+- Who benefits from the system's definition of success, and who is positioned as deficient by it?
 
 ## Tensions and Limits
 
-Sociopolitical accounts of learning can be harder to translate into concrete design decisions than more mechanistic theories – naming a power dynamic doesn't by itself specify what to build differently. Critics also argue that a framework this explicitly political risks reading power struggles into every interaction, even ones better explained by simpler accounts. But the tradition's central claim is difficult to dismiss when evaluating AI specifically: systems that sort, score, or recommend based on "learning" or "achievement" are making judgments that were never neutral to begin with, and a framework built to ask who those judgments serve is doing necessary work that the other four cards on this page don't fully cover.
+Sociopolitical accounts are especially useful for explaining how learning is shaped by institutions, authority, inequality, and judgments about whose knowledge counts. But they are less well suited to explaining the cognitive or biological mechanisms through which an individual actually learns something.
 
 ## Key Thinkers
 
@@ -55,10 +62,18 @@ Sociopolitical accounts of learning can be harder to translate into concrete des
 
 <div class="thinker-entry">
   <div class="thinker-avatar-wrap">
+    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/delpit.jpg" alt="Portrait of Lisa Delpit">
+    <span class="thinker-avatar-caption">Photo: Harvard Graduate School of Education. License unconfirmed.</span>
+  </div>
+  <p><strong>Lisa Delpit</strong> examines how race, language, and power shape classroom learning. In <em>Other People's Children</em> (1995), she argues that schools should respect students' home languages and cultural knowledge while also teaching the often-unspoken rules that powerful institutions reward. Her work asks who already knows those rules, who is excluded from them, and how teachers can make them visible without treating them as naturally superior.</p>
+</div>
+
+<div class="thinker-entry">
+  <div class="thinker-avatar-wrap">
     <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/gutierrez.jpg" alt="Portrait of Kris Gutiérrez">
     <span class="thinker-avatar-caption">Photo: UC Berkeley. Unconfirmed license.</span>
   </div>
-  <p><strong>Kris Gutiérrez</strong> (contemporary) developed the concept of the sociocritical "third space" through empirical studies of classrooms and youth programs, arguing in works including "Developing a Sociocritical Literacy in the Third Space" (2008) that learning environments can either productively join official and everyday knowledge or suppress the latter entirely.</p>
+  <p><strong>Kris Gutiérrez</strong> studies what happens when students' everyday knowledge meets the official knowledge of school. Her idea of a sociocritical "third space" describes a learning environment where both can be taken seriously and used together, rather than asking students to leave their own experience at the door. Her work helps us ask whether a system makes room for learners' knowledge or recognizes only the institution's version of it.</p>
 </div>
 
 <div class="thinker-entry">
@@ -66,12 +81,13 @@ Sociopolitical accounts of learning can be harder to translate into concrete des
     <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/nasir.jpg" alt="Portrait of Na'ilah Suad Nasir">
     <span class="thinker-avatar-caption">Photo: Learning Policy Institute. Unconfirmed license.</span>
   </div>
-  <p><strong>Na'ilah Suad Nasir</strong> (contemporary) studies how racial identity and academic identity intersect, showing in <em>Racialized Identities: Race and Achievement Among African American Youth</em> (2011) that being recognized as capable in a learning environment is shaped by racialized institutional narratives, not determined by ability alone.</p>
+  <p><strong>Na'ilah Suad Nasir</strong> studies how school settings shape whether young people are recognized as capable learners. In <em>Racialized Identities</em> (2011), she shows that students' racial identities and academic identities develop through everyday interactions, expectations, and opportunities in and beyond school. Her work challenges the idea that achievement simply reveals an ability that existed beforehand.</p>
 </div>
 
 ## Sources
 
 - Paulo Freire, _Pedagogy of the Oppressed_ (New York: Continuum, 1970).
+- Lisa Delpit, _Other People's Children: Cultural Conflict in the Classroom_ (New York: New Press, 1995).
 - Kris D. Gutiérrez, ["Developing a Sociocritical Literacy in the Third Space,"](https://doi.org/10.1598/RRQ.43.2.3) _Reading Research Quarterly_ 43, no. 2 (2008): 148–164.
 - Na'ilah Suad Nasir, _Racialized Identities: Race and Achievement Among African American Youth_ (Stanford, CA: Stanford University Press, 2011).
 - Internet Encyclopedia of Philosophy, ["Paulo Freire."](https://iep.utm.edu/freire/)

@@ -31,7 +31,7 @@ Donald Hebb proposed a foundational mechanism in 1949: when one neuron repeatedl
 
 The changes can involve how strongly neurons communicate, how responsive a pathway becomes, or, over longer periods, the physical structure of the connections between neurons.
 
-## How Biological Learning Works
+## Example: Explaining Learning
 
 Research by Eric Kandel and his collaborators provided concrete examples of how experience can change neural signaling.
 
@@ -83,13 +83,10 @@ Therefore, the biological lineage is real, but the analogy breaks down in specif
 
 ## Questions To Ask
 
-- What changes in this system when it learns: its weights, its structure, its behavior, or something else?
-- Is the change persistent, or does it disappear when the system is reset?
+- What changes in this system when it learns, and does that change persist?
 - What mechanism produces the change?
-- When a company says its AI learns "like the brain," what specific biological mechanism is it claiming?
-- Does the system actually implement that mechanism, or is "brain-like" mainly a metaphor?
-- What does the biological metaphor clarify about this system?
-- What might the metaphor obscure or overstate?
+- When a company says its AI learns "like the brain," what specific biological mechanism is it claiming, and does the system actually implement it?
+- What does the biological metaphor clarify, and what might it obscure or overstate?
 
 ## Key Thinkers
 
@@ -97,9 +94,9 @@ Therefore, the biological lineage is real, but the analogy breaks down in specif
 
   <div class="thinker-avatar-wrap">
 
-    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/hebb.jpg" alt="Portrait of Donald Hebb">
+<img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/hebb.jpg" alt="Portrait of Donald Hebb">
 
-    <span class="thinker-avatar-caption">Photo: McGill University. Unconfirmed license.</span>
+<span class="thinker-avatar-caption">Photo: McGill University. Unconfirmed license.</span>
 
   </div>
 
@@ -111,9 +108,9 @@ Therefore, the biological lineage is real, but the analogy breaks down in specif
 
   <div class="thinker-avatar-wrap">
 
-    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/kandel.jpg" alt="Portrait of Eric Kandel">
+<img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/kandel.jpg" alt="Portrait of Eric Kandel">
 
-    <span class="thinker-avatar-caption">CC BY-SA 4.0, Wikimedia</span>
+<span class="thinker-avatar-caption">CC BY-SA 4.0, Wikimedia</span>
 
   </div>
 
@@ -125,9 +122,9 @@ Therefore, the biological lineage is real, but the analogy breaks down in specif
 
   <div class="thinker-avatar-wrap">
 
-    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/bliss-lomo.jpg" alt="Photo of Timothy Bliss and Terje Lømo">
+<img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/bliss-lomo.jpg" alt="Photo of Timothy Bliss and Terje Lømo">
 
-    <span class="thinker-avatar-caption">Photo: BrainFacts.org (Tim Vernimmen). Unconfirmed license.</span>
+<span class="thinker-avatar-caption">Photo: BrainFacts.org (Tim Vernimmen). Unconfirmed license.</span>
 
   </div>
 

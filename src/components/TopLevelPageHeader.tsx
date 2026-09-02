@@ -46,7 +46,7 @@ export default function TopLevelPageHeader({
         {title}
       </h1>
       {description && (
-        <p className={`mb-1! max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300 ${meta ? 'mt-4' : 'mt-5'}`}>
+        <p className={`mb-1! max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300 ${meta ? 'mt-4' : 'mt-5'}`}>
           {description}
         </p>
       )}

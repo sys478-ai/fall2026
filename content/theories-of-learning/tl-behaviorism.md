@@ -27,7 +27,7 @@ B. F. Skinner's work on **operant conditioning** describes how behavior is shape
 
 This makes behaviorism especially relevant to AI. **Reinforcement learning (RL)** uses a related structure: an agent takes actions, receives reward signals, and updates its behavior or policy in ways that tend to increase future reward. RL was influenced by behaviorist ideas, but it is not simply operant conditioning translated directly into software. The analogy is useful precisely because it raises a question: **when an AI system is shaped by rewards, does that tell us what it has learned—or only how its behavior has been shaped?**
 
-## How Behaviorist Learning Works
+## Example: Explaining Learning
 
 ### Reinforcement: Making a Behavior More Likely
 
@@ -39,19 +39,13 @@ Importantly, reinforcement does not necessarily mean "reward" in the everyday se
 
 ### Punishment: Making a Behavior Less Likely
 
-Behaviorism also studies consequences that reduce the likelihood of a behavior recurring. If a behavior is followed by a consequence that makes that behavior less likely in the future, that consequence functions as **punishment**.
-
-The distinction is behavioral rather than moral: reinforcement increases a behavior's future frequency; punishment decreases it.
+Behaviorism also studies consequences that reduce the likelihood of a behavior recurring. If a behavior is followed by a consequence that makes that behavior less likely in the future, that consequence functions as **punishment**. The distinction is behavioral rather than moral: reinforcement increases a behavior's future frequency; punishment decreases it.
 
 ### Schedules of Reinforcement
 
-Skinner also showed that **how and when reinforcement is delivered matters**. Different reinforcement schedules can produce different, predictable patterns of responding.
+Skinner also showed that **how and when reinforcement is delivered matters**. Different reinforcement schedules can produce different, predictable patterns of responding. A behavior does not therefore become "learned" simply because it was rewarded once. The pattern of consequences surrounding a behavior can shape how persistent, frequent, or resistant to extinction that behavior becomes.
 
-A behavior does not therefore become "learned" simply because it was rewarded once. The pattern of consequences surrounding a behavior can shape how persistent, frequent, or resistant to extinction that behavior becomes.
-
-This gives behaviorism a particularly concrete account of learning:
-
-> **Change the consequences, and you can change the behavior.**
+This gives behaviorism a particularly concrete account of learning: **Change the consequences, and you can change the behavior.**
 
 
 ## Why This Matters for AI
@@ -69,7 +63,7 @@ The comparison is nevertheless useful because it separates two questions that ar
 - How was the system's behavior shaped?
 - What (if anything) does the system represent or understand internally?
 
-A reinforcement signal can explain why a system tends to produce certain outputs without necessarily telling us what those outputs mean to the system—or whether they mean anything to it at all.
+A reinforcement signal can explain why a system tends to produce certain outputs without necessarily telling us what those outputs mean to the system — or whether they mean anything to it at all.
 
 ## Tensions and Limits
 
@@ -79,11 +73,7 @@ The **cognitive revolution** of the 1950s and 1960s challenged strict behavioris
 
 A similar tension appears in AI. Describing a language model or reinforcement-learning system in terms of rewards and behavioral changes can be useful, but it may leave out the internal representations and computational processes that produce those behaviors.
 
-At the same time, the behaviorist discipline remains valuable. It forces us to ask:
-
-> **What was actually reinforced, under what conditions, and what behavior changed as a result?**
-
-That question can expose problems that a vague claim that a system "learned" or "understood" might conceal.
+At the same time, the behaviorist discipline remains valuable by encouraging learning processes to attend to the specifics: *What was actually reinforced, under what conditions, and what behavior changed as a result?* That question can expose problems that a vague claim that a system "learned" or "understood" might conceal.
 
 In AI, this matters particularly when the reward signal is only a proxy for what developers actually want. A system can become highly effective at maximizing a reward while exploiting weaknesses in the way that reward was defined—a phenomenon often described as **reward hacking** or **specification gaming**.
 
@@ -96,12 +86,10 @@ The behaviorist perspective therefore gives us a useful warning:
 
 ## Questions To Ask
 
-- What behavior is changing?
-- What reward or consequence is shaping that behavior?
-- Who defined the reward, and what was it supposed to represent?
-- Does the behavior actually match the intended goal?
-- What does the system’s training history explain well?
-- What might behaviorism miss by focusing only on observable behavior and reinforcement?
+- What behavior is changing, and what consequence is shaping it?
+- Who defined the reward, and what was it meant to represent?
+- Does the rewarded behavior actually match the intended goal, or is the system exploiting the reward signal?
+- What might this account miss by focusing on observable behavior and reinforcement?
 
 
 ## Key Thinkers

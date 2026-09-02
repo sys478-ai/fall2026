@@ -404,7 +404,22 @@ function TopicWorkflowSection({
 }
 
 function getSlugFromUrl(url: string | undefined, contentType: 'assignments' | 'activities') {
-  return url?.match(new RegExp(`/${contentType}/([^/]+)/?`))?.[1];
+  if (!url) {
+    return undefined;
+  }
+
+  let pathname = url;
+  try {
+    if (/^https?:\/\//i.test(url)) {
+      pathname = new URL(url).pathname;
+    }
+  } catch {
+    return undefined;
+  }
+
+  // Only local course routes count as embeddable (e.g. /assignments/lab01 or /fall2026/assignments/lab01).
+  // Canvas URLs like /courses/1907/assignments/8714 must not match.
+  return pathname.match(new RegExp(`^(?:/fall2026)?/${contentType}/([^/]+)/?$`))?.[1];
 }
 
 function normalizeHref(href: string | undefined) {
@@ -817,7 +832,7 @@ function TopicHeader({
           {title}
         </h1>
         {subtitle && (
-          <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{subtitle}</p>
+          <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">{subtitle}</p>
         )}
       </div>
     </header>
@@ -1009,7 +1024,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
           {todayContent ? (
             <TopicOverviewMarkdown content={todayContent} />
           ) : typeof meeting.description === 'string' ? (
-            <p className="mb-0 text-lg leading-8 text-gray-800 dark:text-gray-200">{meeting.description}</p>
+            <p className="mb-0 text-lg leading-6 text-gray-800 dark:text-gray-200">{meeting.description}</p>
           ) : (
             meeting.description
           )}

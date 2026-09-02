@@ -16,15 +16,21 @@ priority: high
 
 ## The Core Idea
 
-Sociocultural theory holds that learning is fundamentally social before it is individual. Lev Vygotsky argued that a child doesn't develop higher mental functions alone – they first appear in interaction with a more knowledgeable other (a parent, a teacher, a peer) and only later become internalized as independent thought. His "zone of proximal development" names the gap between what a learner can do alone and what they can do with support; learning happens in that gap, scaffolded by other people.
+Sociocultural theory holds that learning is fundamentally social before it is individual. Lev Vygotsky argued that higher mental functions first appear in interaction with other people and only later become internalized as independent thought. His "zone of proximal development" names the gap between what a learner can do alone and what they can do with support; learning happens in that gap, scaffolded by other people.
 
-Later work extended this insight in two directions that matter directly for AI. Luis Moll's "funds of knowledge" showed that households and communities – not just schools – hold rich, usable knowledge that formal education routinely fails to recognize or draw on. Jean Lave and Etienne Wenger's situated learning showed that expertise develops through participation in a "community of practice," not through absorbing information in isolation from where it's used. Across all three, the claim is the same: learning is not a private, individual event. It happens between people, embedded in relationships, culture, and practice – which raises a real question about what a system trained alone on scraped text, with no relationship to anyone, is actually doing when it's said to "learn."
+Later work extended this insight. Luis Moll's "funds of knowledge" showed that households and communities – not just schools – hold rich, usable knowledge. Jean Lave and Etienne Wenger argued that expertise develops through participation in a community of practice, not through absorbing information in isolation from where it is used. Across these accounts, learning happens between people, embedded in relationships, culture, and practice.
 
 ## Example: Explaining Learning
 
 A child cannot complete a puzzle alone, but can complete it when an older sibling points out a strategy, demonstrates one move, and gradually offers less help. Later, the child completes a similar puzzle independently.
 
 Sociocultural theory explains the change through the relationship, not only through an individual mind. The sibling provides scaffolding in the child's zone of proximal development: the space between what the child can do alone and what the child can do with support. What begins in interaction can later become an independent capability.
+
+## Why This Matters for AI
+
+This lens asks what is lost when a system is described as learning from data alone. Training data can contain traces of human knowledge, but it is not the same as participating in a relationship, receiving responsive guidance, or becoming accountable to a community of practice.
+
+It also helps analyze AI used in education. If a student turns to an AI tutor instead of a teacher, peer, or mentor, what kind of scaffolding does the system provide? Whose cultural knowledge does it recognize, and whose does it treat as unfamiliar or incorrect?
 
 <div class="diagnostic-question diagnostic-question--rose">
   <p class="diagnostic-question-eyebrow">The Diagnostic Question</p>
@@ -33,15 +39,14 @@ Sociocultural theory explains the change through the relationship, not only thro
 
 ## Questions To Ask
 
-- Whose knowledge and culture is this system's training data drawn from, and whose funds of knowledge – the kind Moll described – are missing from it entirely?
-- Is there anything in this system's training that resembles a "more knowledgeable other" providing scaffolded support, or is it closer to isolated absorption of text?
-- Does the system participate in anything like a community of practice, or does it simulate the outputs of expertise without any of the apprenticeship that sociocultural theory says produces it?
-- When people use this system as a substitute for a human "more knowledgeable other," what relational scaffolding are they losing along with the substitution?
-- Whose cultural context counts as the default in how this system was built and evaluated, and whose is treated as a special case or left out?
+- Whose knowledge and cultural experience does this system draw on, and what might be missing from its data or evaluation?
+- Does the system provide responsive scaffolding, or does it only deliver information or feedback?
+- Does the system participate in a practice or community, or does it only reproduce the outputs of people who do?
+- When the system substitutes for a teacher, peer, or mentor, what relationships or forms of support may be lost?
 
 ## Tensions and Limits
 
-Sociocultural theory can be hard to operationalize – "culture" and "community of practice" are powerful as diagnostic lenses but resist the kind of precise measurement more individualist theories offer. It also risks a version of its own critique of Piaget: a purely social account can underweight what an individual mind actually does with what it's given. But for evaluating AI specifically, the framework's core move is hard to avoid: any system trained on text is trained on the residue of countless human communities' funds of knowledge, unevenly represented, with no ongoing relationship to any of them – a very different situation from what Vygotsky, Moll, or Lave and Wenger were describing.
+Sociocultural theory can be hard to operationalize: culture, relationships, and communities of practice resist simple measurement. It can also understate what an individual learner does with the support they receive. But it provides an important update to theories of learning that treat knowledge as something an isolated individual or system simply absorbs. A system trained on text draws on uneven traces of many human communities without participating in an ongoing relationship with any of them.
 
 ## Key Thinkers
 
@@ -67,14 +72,6 @@ Sociocultural theory can be hard to operationalize – "culture" and "community 
     <span class="thinker-avatar-caption">CC BY-SA 2.0, Wikimedia</span>
   </div>
   <p><strong>Jean Lave</strong> (contemporary, anthropologist) and <strong>Etienne Wenger</strong> (contemporary, computer scientist) argued in <em>Situated Learning</em> (1991) that expertise develops through "legitimate peripheral participation" in a community of practice – newcomers learn by doing real, if initially minor, work alongside more experienced members, gradually taking on fuller participation.</p>
-</div>
-
-<div class="thinker-entry">
-  <div class="thinker-avatar-wrap">
-    <img class="thinker-avatar" src="/fall2026/images/ethics-field-guide/theories-of-learning/wenger.jpg" alt="Portrait of Etienne Wenger">
-    <span class="thinker-avatar-caption">CC BY 2.0, Wikimedia</span>
-  </div>
-  <p>Wenger has since continued developing the concept through the Wenger-Trayner consultancy, applying communities of practice to organizational and professional learning well beyond the classroom.</p>
 </div>
 
 ## Sources

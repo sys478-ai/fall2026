@@ -43,7 +43,7 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
               {title}
             </h1>
             {subtitle && (
-              <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{subtitle}</p>
+              <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">{subtitle}</p>
             )}
           </header>
           {imageSrc && (
@@ -84,7 +84,7 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
         {indexPost.content && (
           //   <section className="max-w-6xl px-4 md:px-16 grid grid-cols-1 gap-6 md:grid-cols-[3fr_3fr]">
           //     <div
-          //       className="mb-0 text-gray-700 leading-8 dark:text-gray-300 prose prose-gray dark:prose-invert max-w-none"
+          //       className="mb-0 text-gray-700 leading-6 dark:text-gray-300 prose prose-gray dark:prose-invert max-w-none"
           //       dangerouslySetInnerHTML={{ __html: indexPost.content }}
           //     />
           //     {imageSrc && (
@@ -100,7 +100,7 @@ export default async function FieldGuideSectionLayout({ contentDir, children }: 
               </div>
             )} */}
             <div
-              className="mb-0 text-gray-700 leading-8 dark:text-gray-300 prose prose-gray dark:prose-invert max-w-none"
+              className="mb-0 text-gray-700 leading-6 dark:text-gray-300 prose prose-gray dark:prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: indexPost.content }}
             />
           </section>

@@ -62,7 +62,7 @@ export default async function TagPage({ params }: PageProps) {
             {tag?.title ?? slug}
           </h1>
           {tag?.description && (
-            <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{tag.description}</p>
+            <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">{tag.description}</p>
           )}
         </header>
       }

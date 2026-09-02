@@ -63,7 +63,7 @@ export default async function LearningTheoryDetailPage({ params }: PageProps) {
                   {postData.title}
                 </h1>
                 {subtitle && (
-                  <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">{subtitle}</p>
+                  <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">{subtitle}</p>
                 )}
               </header>
             </div>

@@ -10,11 +10,6 @@ related_recognition_cards: []
 related_concept_cards: []
 related_example_cards: []
 field_guide_section: 'ethical-frameworks'
-status: verified
-status_reviewer: Maxwell Chalmers
-status_date: 2026-06-13
-status_notes: "Reviewed for conceptual accuracy, accessibility, diagnostic usefulness, limitations, and cross-references."
-priority: high
 ---
 
 ## The Core Idea

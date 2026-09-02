@@ -16,32 +16,40 @@ priority: high
 
 ## The Core Idea
 
-Constructivism holds that learners are not passive recipients of information – they actively build their own understanding by interacting with the world and revising the mental models they already hold. Jean Piaget described this as a cycle of assimilation (fitting new information into an existing framework) and accommodation (changing the framework when new information won't fit). A child doesn't absorb the concept of "number"; they construct it, through repeated encounters with objects, quantities, and error.
+Constructivism holds that learners are not passive recipients of information – they actively build their own understanding by interacting with the world and revising the ***mental models*** they already hold. Jean Piaget described this as a cycle of assimilation (fitting new information into an existing framework) and accommodation (changing the framework when new information will not fit). A child does not absorb the concept of number; they construct it through repeated encounters with objects, quantities, and error.
 
-Constructivism sits in direct opposition to behaviorism: where behaviorism refuses to talk about internal states, constructivism insists that the internal model – the structure the learner builds – is the whole point. Applied to AI, this framework asks a pointed question: when a system produces increasingly accurate outputs after training, has it built something like an internal model of its domain, revised through something like assimilation and accommodation – or is "learning" here just a much longer word for curve-fitting?
+Constructivism therefore explains learning as a change in how a learner organizes and makes sense of experience. Piaget also argued that some forms of understanding emerge through developmental stages, as children develop new ways to reason about objects, relationships, and ideas.
 
 ## Example: Explaining Learning
 
-A child sees two equal amounts of water in identical glasses. When one is poured into a taller, narrower glass, a younger child may say the taller glass has more water. Later, the child understands that the amount stayed the same even though its appearance changed. Piaget treated this shift as evidence that the child's mental structures had changed across developmental stages.
+A child sees two equal amounts of water in identical glasses. When one is poured into a taller, narrower glass, a younger child may say the taller glass has more water. Later, the child understands that the amount stayed the same even though its appearance changed. Piaget treated this shift as evidence that **the child's mental structures had changed across developmental stages**.
 
-Assimilation and accommodation describe how such change happens. A child may initially fit new experiences into an existing idea, but when the idea no longer works, the child must revise it. Constructivism explains learning as this active process of building and revising an understanding of the world.
+***Assimilation*** and ***accommodation*** describe how such change happens. A child may initially fit new experiences into an existing idea (assimilation), but when the idea no longer works, the child must revise it (accommodation). Constructivism explains learning as this active process of building and revising an understanding of the world.
+
+- ***Assimilation*** - fitting an idea or experience into one's existing way of understanding the world.
+- ***Accommodation*** – changing an existing mental model, or creating a new one, when an new experience does not fit.
+
+## Why This Matters for AI
+
+Constructivism makes internal models central. For AI, it raises a question that behaviorism does not: when a system produces increasingly accurate outputs, has it built a model of its domain that helps it deal with new situations, or has it only learned patterns that fit its training data?
+
+It is easy to confuse that question with categorization in machine learning. In *supervised learning*, examples are paired with target labels such as "cat" or "dog," and the system may develop internal representations in which similar examples produce similar patterns. In *unsupervised learning*, a system may group examples into clusters based on similarity – but what those clusters mean depends on the data, features, objective, and human interpretation. Neither labels nor clusters are automatically Piagetian categories. For Piaget, a category is part of a learner's actively constructed way of understanding the world: it shapes interpretation, expectation, and revision through assimilation and accommodation. An ML label, cluster, or representation may resemble one piece of that process, but by itself it does not show that the system has constructed a category in Piaget's sense.
 
 <div class="diagnostic-question diagnostic-question--sky">
-  <p class="diagnostic-question-eyebrow">The Diagnostic Question</p>
+  <p class="diagnostic-question-eyebrow">Caveats</p>
   <p class="diagnostic-question-text">Is this system constructing its own understanding by actively building and revising internal models of the world, the way a child does – or is it just fitting a function to data?</p>
 </div>
 
 ## Questions To Ask
 
-- Does this system revise an internal model when it encounters information that contradicts its current one, or does it just update statistical weights without anything resembling a model changing?
-- Would a domain expert recognize the system's internal representations as a "model" of the domain, or only its outputs?
-- Is the system actively tested against reality and corrected by contact with it, or trained once on a fixed dataset and then frozen?
-- When a system's designers say it "understands" a domain, are they describing something like Piagetian assimilation and accommodation, or borrowing the prestige of that idea without the substance?
-- What would distinguish a system that has genuinely constructed a model of something from one that has only learned to produce outputs that look like it has?
+- What evidence suggests that this system has built a model of its domain, rather than only learned to produce familiar-looking outputs?
+- How does the system respond when new information conflicts with its earlier patterns?
+- Is the system tested and corrected through contact with the world, or trained once on a fixed dataset and then frozen?
+- When someone says the system "understands," what would count as evidence for that claim?
 
 ## Tensions and Limits
 
-Constructivism can be hard to falsify – almost any successful learning system can be redescribed as having "constructed a model," which risks becoming untestable rather than explanatory. It also developmentally centers the individual learner building knowledge largely alone, which is exactly what the sociocultural tradition pushed back on: the [Sociocultural](/field-guide/theories-of-learning/tl-sociocultural) card covers the argument that Piaget underweighted the social and cultural scaffolding learning actually depends on. Still, constructivism remains the sharpest available standard for asking whether an AI system has anything like an internal world-model, rather than settling for whether its outputs look right.
+Constructivism can be hard to test: almost any successful learning system can be described as having "constructed a model," which risks making the idea less explanatory. Piaget's account also centers the individual learner more than the social and cultural conditions that make learning possible. The [Sociocultural](/field-guide/theories-of-learning/tl-sociocultural) card develops that critique. Still, constructivism gives students a useful standard for asking whether an AI system has anything like an internal model, rather than stopping at whether its outputs look right.
 
 ## Key Thinkers
 
@@ -52,6 +60,8 @@ Constructivism can be hard to falsify – almost any successful learning system 
   </div>
   <p><strong>Jean Piaget</strong> (1896–1980) spent five decades studying how children's understanding develops, describing four qualitatively distinct stages of cognitive development in works including <em>The Origins of Intelligence in Children</em> (1952). His central claim – that knowledge is actively built through interaction with the world, not transmitted or absorbed – became the foundation of constructivist learning theory.</p>
 </div>
+
+<p><strong>John Dewey</strong> (1859–1952) was a pragmatist who argued that people learn through inquiry, action, and reflection on experience. He is not a Piagetian, but his work is an important bridge to constructivism: learners make sense of problems by testing ideas in the world, not by receiving finished knowledge. Dewey also connected this kind of shared inquiry to democratic participation.</p>
 
 <div class="thinker-entry">
   <div class="thinker-avatar-wrap">
@@ -64,6 +74,7 @@ Constructivism can be hard to falsify – almost any successful learning system 
 ## Sources
 
 - Jean Piaget, _The Origins of Intelligence in Children_, trans. Margaret Cook (New York: International Universities Press, 1952).
+- John Dewey, _Democracy and Education_ (New York: Macmillan, 1916).
 - ["Jean Piaget,"](https://www.britannica.com/biography/Jean-Piaget) Encyclopædia Britannica.
 
 **Further Reading (More Accessible):**

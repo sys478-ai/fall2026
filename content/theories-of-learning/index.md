@@ -7,4 +7,6 @@ priority: low
 field_guide_section_title: 'Theories of Learning'
 ---
 
-Each card on this page is a different account of how human learning actually happens – biological, behaviorist, constructivist, sociocultural, and sociopolitical. None of them is the whole story on its own; together they're a way of testing a claim you'll hear constantly in AI discourse: that a system "learns." Learns how, exactly – and by which of these standards?
+Each card on this page offers a different account of how human learning happens – through changes in the brain, reinforcement, active construction, social interaction, and participation in institutions and systems of power.
+
+None of these accounts explains everything on its own. Together, they give us a set of lenses for asking a more precise question when we hear that an AI system “learns”: What is changing, through what process, and in what sense does that resemble human learning?

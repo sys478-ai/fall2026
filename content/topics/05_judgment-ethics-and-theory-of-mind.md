@@ -1,5 +1,5 @@
 ---
-title: 'Judgment, Ethics, and the Limits of Imitation'
+title: 'Judgment & Ethics'
 slug: 05
 scheduled_day: 5
 module_id: 1

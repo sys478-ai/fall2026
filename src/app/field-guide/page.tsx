@@ -39,7 +39,7 @@ export default async function FieldGuideLandingPage() {
           <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
             AI in the Wild
           </h1>
-          <p className="mb-0 mt-5 max-w-4xl text-lg leading-8 text-gray-700 dark:text-gray-300">
+          <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">
             Tools for noticing patterns, asking better questions, and making sense of AI in everyday life.
           </p>
         </header>

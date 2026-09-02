@@ -21,7 +21,21 @@ There is no major new reading for this class. Students should bring notes from t
 
 ## Guiding Questions
 
-- What has each Module 1 lens helped us see about human learning, judgment, and action?
-- What does each lens leave out?
-- Why is asking "Which lens is best?" usually the wrong question?
-- How can these same habits prepare us to analyze AI systems in Module 2?
+- What do we mean when we say that something learns, knows, understands, judges, or acts intelligently?
+    - What kinds of evidence would support those claims?
+    - Why might the distinction matter morally?
+
+
+## Proposed Analytical Rubric
+
+{: .table-simple}
+| Dimension | Question  |
+| -- | --|
+| **1. Representation** | What information does the system use, and how is it represented? |
+| **2. Procedure** | What rules, algorithms, or steps transform inputs into outputs? |
+| **3. Learning**   | What changes through experience or training? |
+| **4. Categories** | What counts as similar, different, normal, or anomalous? |
+| **5. Values**     | What outcome is rewarded or optimized? |
+| **6. Norms**      | What counts as correct, desirable, or acceptable? |
+| **7. Power**      | Who chose these things, and who is affected? |
+| **8. Impacts**    | What benefits, harms, risks, or downstream effects follow? |
