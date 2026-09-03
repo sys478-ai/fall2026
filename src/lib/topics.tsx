@@ -100,7 +100,7 @@ export interface Meeting {
   otherPreparation?: Reading[];
   holiday?: boolean;
   draft?: number;
-  /** Synthetic row on /modules for deadlines that fall on non-class days. */
+  /** Synthetic row on /topics for deadlines that fall on non-class days. */
   scheduleOnly?: boolean;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];
@@ -151,7 +151,7 @@ interface BaseMeeting {
   otherPreparation?: Reading[];
   holiday?: boolean;
   draft?: number;
-  /** Synthetic row on /modules for deadlines that fall on non-class days. */
+  /** Synthetic row on /topics for deadlines that fall on non-class days. */
   scheduleOnly?: boolean;
   discussionQuestions?: DiscussionQuestion[];
   assigned?: Assignment | string | (Assignment | string)[];

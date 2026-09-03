@@ -108,7 +108,7 @@ function getHref(item: AssignmentData) {
   }
 
   if (item.topic_slug) {
-    return `/topics/${item.topic_slug}`;
+    return `/meetings/${item.topic_slug}`;
   }
 
   return `/assignments/${item.id}`;

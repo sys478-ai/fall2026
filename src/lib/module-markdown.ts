@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { getDefaultModuleColorToken, isModuleColorToken, type ModuleColorToken } from './module-colors';
 
-const modulesDirectory = path.join(process.cwd(), 'content', 'modules');
+const modulesDirectory = path.join(process.cwd(), 'content', 'topics');
 
 export interface ModuleMarkdownMetadata {
   contentId: string;

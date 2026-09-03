@@ -22,8 +22,8 @@ interface TopicSectionNavProps {
 }
 
 function resolveTabIdFromHash(hashId: string) {
-  if (hashId === 'topic-career') {
-    return 'topic-career';
+  if (hashId === 'meeting-career') {
+    return 'meeting-career';
   }
 
   if (
@@ -32,10 +32,10 @@ function resolveTabIdFromHash(hashId: string) {
     hashId.startsWith('topic-work-activity-')
   ) {
     if (hashId.includes('career-module')) {
-      return 'topic-career';
+      return 'meeting-career';
     }
 
-    return 'topic-class-work';
+    return 'meeting-class-work';
   }
 
   return resolveAssignmentTabIdFromHash(hashId);
@@ -43,32 +43,32 @@ function resolveTabIdFromHash(hashId: string) {
 
 function resolveScrollIdFromHash(hashId: string, itemIds: string[]) {
   if (hashId === 'read-watch') {
-    return itemIds.includes('topic-before-class') ? 'topic-before-class' : undefined;
+    return itemIds.includes('meeting-before-class') ? 'meeting-before-class' : undefined;
   }
 
-  if (hashId === 'topic-career') {
-    return itemIds.includes('topic-career') ? 'topic-career' : undefined;
+  if (hashId === 'meeting-career') {
+    return itemIds.includes('meeting-career') ? 'meeting-career' : undefined;
   }
 
   if (hashId === 'topic-today') {
-    return itemIds.includes('topic-overview') ? 'topic-overview' : undefined;
+    return itemIds.includes('meeting-overview') ? 'meeting-overview' : undefined;
   }
 
   if (hashId.startsWith('topic-work-assignment-') || hashId.startsWith('topic-work-activity-')) {
     if (hashId.includes('career-module')) {
-      return itemIds.includes('topic-career') ? 'topic-career' : undefined;
+      return itemIds.includes('meeting-career') ? 'meeting-career' : undefined;
     }
 
-    return itemIds.includes('topic-class-work') ? 'topic-class-work' : undefined;
+    return itemIds.includes('meeting-class-work') ? 'meeting-class-work' : undefined;
   }
 
   if (hashId === 'topic-work') {
-    if (itemIds.includes('topic-next')) {
-      return 'topic-next';
+    if (itemIds.includes('meeting-next')) {
+      return 'meeting-next';
     }
 
-    if (itemIds.includes('topic-class-work')) {
-      return 'topic-class-work';
+    if (itemIds.includes('meeting-class-work')) {
+      return 'meeting-class-work';
     }
   }
 

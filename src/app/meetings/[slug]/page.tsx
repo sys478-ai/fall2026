@@ -30,6 +30,7 @@ import {
   getPrepBadgeKindFromAssignment,
   type PrepBadgeKind,
 } from '@/lib/prep-materials';
+import { isEndOfDayDueTime } from '@/lib/utils';
 
 interface TopicPageProps {
   params: Promise<{
@@ -236,7 +237,13 @@ function TopicOverviewMarkdown({ content }: { content: string }) {
   );
 }
 
-function PrepBeforeClassBanner({ classDate }: { classDate?: string }) {
+function PrepBeforeClassBanner({
+  classDate,
+  deadlineLabel = 'before class',
+}: {
+  classDate?: string;
+  deadlineLabel?: 'before class' | 'before midnight';
+}) {
   if (!classDate) {
     return null;
   }
@@ -248,7 +255,7 @@ function PrepBeforeClassBanner({ classDate }: { classDate?: string }) {
     >
       <p className="mb-0 text leading-6 text-indigo-950 dark:text-indigo-100">
         <i aria-hidden="true" className="far text-2xl fa-calendar mr-1.5 text-indigo-700 dark:text-indigo-300" />
-        Please complete the tasks and readings listed below before class on{' '}
+        Please complete the tasks and readings listed below {deadlineLabel} on{' '}
         <span className="font-semibold">{classDate}</span>.
       </p>
     </div>
@@ -319,6 +326,14 @@ function isCareerEmbeddedContent(item: EmbeddedTopicContent) {
     sourceHref.includes('career-module') ||
     contentHref.includes('career-module')
   );
+}
+
+function isHomeworkEmbeddedContent(item: EmbeddedTopicContent) {
+  return (item.postData?.type || '').toLowerCase() === 'homework';
+}
+
+function isClassWorkExcludedContent(item: EmbeddedTopicContent) {
+  return isHomeworkEmbeddedContent(item) || isCareerEmbeddedContent(item);
 }
 
 function getMeetingTopicNumber(topic: Topic, meetingIndex: number) {
@@ -590,6 +605,7 @@ function TopicOverviewMaterials({
   beforeClassReminders,
   meetingSlug,
   classDate,
+  deadlineLabel = 'before class',
 }: {
   readings: Topic['meetings'][number]['readings'];
   optionalReadings: Topic['meetings'][number]['optionalReadings'];
@@ -607,6 +623,7 @@ function TopicOverviewMaterials({
   beforeClassReminders?: Topic['meetings'][number]['beforeClassReminders'];
   meetingSlug?: string;
   classDate?: string;
+  deadlineLabel?: 'before class' | 'before midnight';
 }) {
   const assignedReadings = readings || [];
   const extraReadings = optionalReadings || [];
@@ -626,7 +643,7 @@ function TopicOverviewMaterials({
 
   return (
     <div className="space-y-10">
-      <PrepBeforeClassBanner classDate={classDate} />
+      <PrepBeforeClassBanner classDate={classDate} deadlineLabel={deadlineLabel} />
       {reminders.length > 0 && (
         <PrepGroup label="Reminders">
           {reminders.map((reminder, index) => (
@@ -825,7 +842,7 @@ function TopicHeader({
       <div>
         <div className="mb-4 text-xs font-semibold uppercase tracking-wide">
           <span className={moduleColor.accent}>
-            Module {moduleId}. {moduleTitle}
+            Topic {moduleId}. {moduleTitle}
           </span>
         </div>
         <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
@@ -864,7 +881,7 @@ function TopicSequenceNavLink({
   }
 
   return (
-    <Link href={`/topics/${item.slug}`} className={`group min-w-0 max-w-[48%] no-underline ${alignClass}`}>
+    <Link href={`/meetings/${item.slug}`} className={`group min-w-0 max-w-[48%] no-underline ${alignClass}`}>
       <span className="block text-sm text-gray-500 dark:text-gray-400">{label}</span>
       <span className="mt-1 block text-base font-medium text-gray-950 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
         {item.title}
@@ -922,7 +939,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
   const otherPreparation = meeting.otherPreparation || [];
   const bibliographyReadings = getReadingsForTopic(meeting.scheduledDay);
   const topicPostData = meeting.topicContentId
-    ? await getPostData(meeting.topicContentId, 'topics').catch(() => null)
+    ? await getPostData(meeting.topicContentId, 'meetings').catch(() => null)
     : null;
   const embeddedTopicContent = await getEmbeddedTopicContent(meeting);
   const careerTopicContent = embeddedTopicContent.filter(isCareerEmbeddedContent);
@@ -931,15 +948,20 @@ export default async function TopicPage({ params }: TopicPageProps) {
     !hasCareerActivity &&
     embeddedTopicContent.length > 0 &&
     embeddedTopicContent.every(item => isCareerEmbeddedContent(item) && item.type === 'assignment');
-  const regularTopicContent = hasCareerActivity
-    ? embeddedTopicContent.filter(item => !isCareerEmbeddedContent(item))
-    : hasOnlyCareerHomework
-      ? []
-      : embeddedTopicContent;
+  const regularTopicContent = (
+    hasCareerActivity
+      ? embeddedTopicContent.filter(item => !isCareerEmbeddedContent(item))
+      : hasOnlyCareerHomework
+        ? []
+        : embeddedTopicContent
+  ).filter(item => !isClassWorkExcludedContent(item));
   const nextClassMeeting = getNextClassMeeting(topics, meeting.slug || slug);
   const nextTopicNavItem = nextClassMeeting?.slug
     ? topicNavigationItems.find(item => item.slug === nextClassMeeting.slug) ?? null
     : null;
+  const nextTimeRows = nextClassMeeting
+    ? getDashboardPrepRows(nextClassMeeting, { isDraft: nextTopicNavItem?.draft === 1 })
+    : [];
   const prepAssignments = getPrepAssignments(meeting);
   const todayContent = topicPostData?.content.trim()
     ? topicPostData.content
@@ -950,10 +972,14 @@ export default async function TopicPage({ params }: TopicPageProps) {
   }> = [];
 
   if (!meeting.holiday && hasPrepMaterials(meeting, bibliographyReadings)) {
+    const usesMidnightDeadline = prepAssignments.some(item => isEndOfDayDueTime(item.dueTime));
+    const prepSectionLabel = usesMidnightDeadline ? 'Before midnight' : 'Before class';
+    const prepDeadlineLabel = usesMidnightDeadline ? 'before midnight' : 'before class';
+
     topicSections.push({
-      navItem: { id: 'topic-before-class', label: 'Before class' },
+      navItem: { id: 'meeting-before-class', label: prepSectionLabel },
       panel: (
-        <TopicWorkflowSection id="topic-before-class" label="Before class">
+        <TopicWorkflowSection id="meeting-before-class" label={prepSectionLabel}>
           <TopicOverviewMaterials
             readings={readings}
             optionalReadings={optionalReadings}
@@ -962,6 +988,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
             prepAssignments={prepAssignments}
             beforeClassReminders={meeting.beforeClassReminders}
             meetingSlug={meeting.slug}
+            classDate={meeting.date}
+            deadlineLabel={prepDeadlineLabel}
           />
         </TopicWorkflowSection>
       ),
@@ -972,9 +1000,9 @@ export default async function TopicPage({ params }: TopicPageProps) {
     const ethicalFrameworks = await getFieldGuidePreviewItems('ethical-frameworks', 'ethical-framework');
     if (ethicalFrameworks.length > 0) {
       topicSections.push({
-        navItem: { id: 'topic-ethical-frameworks', label: 'Ethical Frameworks' },
+        navItem: { id: 'meeting-ethical-frameworks', label: 'Ethical Frameworks' },
         panel: (
-          <TopicWorkflowSection id="topic-ethical-frameworks" label="Ethical Frameworks">
+          <TopicWorkflowSection id="meeting-ethical-frameworks" label="Ethical Frameworks">
             <FieldGuideCardPreview
               intro="Markkula's framework gives you a general process for moving from analysis to judgment. Each card below unpacks one specific ethical tradition you can plug into that process - click a card to preview it."
               items={ethicalFrameworks}
@@ -998,9 +1026,9 @@ export default async function TopicPage({ params }: TopicPageProps) {
     );
     if (learningTheories.length > 0) {
       topicSections.push({
-        navItem: { id: 'topic-theories-of-learning', label: 'Theories of Learning' },
+        navItem: { id: 'meeting-theories-of-learning', label: 'Theories of Learning' },
         panel: (
-          <TopicWorkflowSection id="topic-theories-of-learning" label="Theories of Learning">
+          <TopicWorkflowSection id="meeting-theories-of-learning" label="Theories of Learning">
             <FieldGuideCardPreview
               intro="Each card below unpacks one account of how learning actually happens. Click a card to preview it, or open the full page for the complete write-up – worth holding up against whatever an AI system's makers mean when they say it 'learns.'"
               items={learningTheories}
@@ -1018,9 +1046,9 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
   if (todayContent || meeting.description) {
     topicSections.push({
-      navItem: { id: 'topic-overview', label: "Today's materials" },
+      navItem: { id: 'meeting-overview', label: "Today's materials" },
       panel: (
-        <TopicWorkflowSection id="topic-overview" label="Today's materials">
+        <TopicWorkflowSection id="meeting-overview" label="Today's materials">
           {todayContent ? (
             <TopicOverviewMarkdown content={todayContent} />
           ) : typeof meeting.description === 'string' ? (
@@ -1035,9 +1063,9 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
   if (!meeting.holiday && hasCareerActivity) {
     topicSections.push({
-      navItem: { id: 'topic-career', label: 'Career' },
+      navItem: { id: 'meeting-career', label: 'Career' },
       panel: (
-        <TopicWorkflowSection id="topic-career" label="Career">
+        <TopicWorkflowSection id="meeting-career" label="Career">
           <TopicCareerPanel careerContent={careerTopicContent} />
         </TopicWorkflowSection>
       ),
@@ -1046,20 +1074,20 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
   if (!meeting.holiday && regularTopicContent.length > 0) {
     topicSections.push({
-      navItem: { id: 'topic-class-work', label: 'Class work' },
+      navItem: { id: 'meeting-class-work', label: 'Class work' },
       panel: (
-        <TopicWorkflowSection id="topic-class-work" label="Class work">
+        <TopicWorkflowSection id="meeting-class-work" label="Class work">
           <TopicClassWorkPanel embeddedTopicContent={regularTopicContent} />
         </TopicWorkflowSection>
       ),
     });
   }
 
-  if (!meeting.holiday && nextClassMeeting && hasPrepMaterials(nextClassMeeting)) {
+  if (!meeting.holiday && nextClassMeeting && nextTimeRows.length > 0) {
     topicSections.push({
-      navItem: { id: 'topic-next', label: 'For next time' },
+      navItem: { id: 'meeting-next', label: 'For next time' },
       panel: (
-        <TopicWorkflowSection id="topic-next" label="For next time">
+        <TopicWorkflowSection id="meeting-next" label="For next time">
           <TopicForNextTimePanel nextMeeting={nextClassMeeting} nextTopicNavItem={nextTopicNavItem} />
         </TopicWorkflowSection>
       ),
@@ -1081,7 +1109,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             status_reviewer={topicPostData.status_reviewer}
             status_date={topicPostData.status_date}
             status_notes={topicPostData.status_notes}
-            contentType="topics"
+            contentType="meetings"
           />
         ) : undefined
       }
@@ -1090,7 +1118,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         <Breadcrumbs
           className="px-4 md:px-16"
           items={[
-            { label: 'Course Schedule', href: '/modules' },
+            { label: 'Course Overview', href: '/topics' },
             { label: `${topic.id}. ${topic.title}` },
             { label: `${topicNumber} ${meeting.topic}` },
           ]}
@@ -1112,7 +1140,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             ))}
           </TopicSectionNav>
 
-          <div id="topic-sequence" className="scroll-mt-24">
+          <div id="meeting-sequence" className="scroll-mt-24">
             <TopicSequenceNav previousTopic={previousTopic} nextTopic={nextTopic} />
           </div>
         </div>

@@ -12,7 +12,7 @@ export default function ConditionalFooter() {
   const normalizedPath = pathname.replace(/^\/fall2026/, '') || '/';
   
   const usesContentLayout = normalizedPath === '/' || 
-                            normalizedPath === '/modules' ||
+                            normalizedPath === '/topics' ||
                             normalizedPath === '/syllabus' ||
                             normalizedPath === '/braid-case-study' ||
                             normalizedPath.startsWith('/braid-case-study/') ||
@@ -26,7 +26,7 @@ export default function ConditionalFooter() {
                             normalizedPath === '/planning/taxonomy' ||
                             normalizedPath === '/field-guide' ||
                             normalizedPath.startsWith('/field-guide/') ||
-                            normalizedPath.startsWith('/topics/') ||
+                            normalizedPath.startsWith('/meetings/') ||
                             normalizedPath === '/exams' ||
                             normalizedPath.startsWith('/exams/') ||
                             normalizedPath === '/repos-hidden';

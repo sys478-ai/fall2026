@@ -1,5 +1,5 @@
 import { getAllModuleMarkdownMetadata } from '@/lib/module-markdown';
-import ModuleRedirectClient from './ModuleRedirectClient';
+import ModuleIdRedirectClient from './ModuleRedirectClient';
 
 export const dynamicParams = false;
 
@@ -9,6 +9,6 @@ export async function generateStaticParams(): Promise<Array<{ id: string }>> {
   }));
 }
 
-export default function ModuleRedirectPage() {
-  return <ModuleRedirectClient />;
+export default function LegacyModuleRedirectPage() {
+  return <ModuleIdRedirectClient />;
 }

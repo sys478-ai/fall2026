@@ -340,7 +340,7 @@ export default async function EthicalPatternPage({ params }: PageProps) {
               <ul className="list-tight">
                 {relatedTopics.map(topic => (
                   <li key={topic.meetingSlug}>
-                    <Link href={`/topics/${topic.meetingSlug}`}>{topic.meetingTitle}</Link>{' '}
+                    <Link href={`/meetings/${topic.meetingSlug}`}>{topic.meetingTitle}</Link>{' '}
                     <span className="text-sm text-gray-600 dark:text-gray-400">({topic.moduleTitle})</span>
                     {featuredTopics.includes(topic.meetingSlug) && (
                       <span className="ml-2 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300">

@@ -166,7 +166,7 @@ export default async function ReviewStatusPage() {
       return {
         id: m.slug!,
         title: m.topic,
-        href: `/topics/${m.slug}`,
+        href: `/meetings/${m.slug}`,
         status: (p?.status as string) || 'unverified',
         priority: (p?.priority as string) || 'low',
         status_reviewer: p?.status_reviewer,

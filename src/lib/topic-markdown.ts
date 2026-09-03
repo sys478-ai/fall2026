@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { getModuleMarkdownById } from './module-markdown';
 
-const topicsDirectory = path.join(process.cwd(), 'content', 'topics');
+const topicsDirectory = path.join(process.cwd(), 'content', 'meetings');
 
 export interface TopicReading {
   citation: string;

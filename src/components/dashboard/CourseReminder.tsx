@@ -77,7 +77,7 @@ export default function CourseReminder({
 
   const today = timeline?.todayMeeting || null;
   const todayIsOpenClass = Boolean(today && !today.isHoliday && !today.isDraft && today.slug);
-  const todayHref = todayIsOpenClass && today?.slug ? `/topics/${today.slug}` : null;
+  const todayHref = todayIsOpenClass && today?.slug ? `/meetings/${today.slug}` : null;
   const showBadge = mounted && (todayIsOpenClass || dueSoonTotal > 0);
 
   useEffect(() => {
@@ -183,7 +183,7 @@ export default function CourseReminder({
                         </span>
                       ) : (
                         <span className="mt-0.5 block text-xs text-slate-400! dark:text-slate-700!">
-                          No readings or prep listed yet.
+                          No readings or prep listed.
                         </span>
                       )}
                     </ReminderDayRow>

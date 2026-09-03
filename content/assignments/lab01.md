@@ -2,7 +2,7 @@
 title: 'Electricity as Information'
 num: '17'
 type: 'lab'
-draft: 0
+draft: 1
 scheduled_day: 7
 due_date: '2026-09-15'
 due_time: '11:59PM'

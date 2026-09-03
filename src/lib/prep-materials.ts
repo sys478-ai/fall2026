@@ -180,7 +180,7 @@ export function getDashboardPrepRows(
   const prepAssignments = getPrepAssignments(meeting);
   const hasClassPrep = readingCount > 0 || taskCount > 0 || reminders.length > 0;
   const isDraft = options.isDraft === true;
-  const beforeClassHref = meeting.slug && !isDraft ? `/topics/${meeting.slug}#topic-before-class` : null;
+  const beforeClassHref = meeting.slug && !isDraft ? `/meetings/${meeting.slug}#meeting-before-class` : null;
 
   const rows: DashboardPrepRow[] = [];
 

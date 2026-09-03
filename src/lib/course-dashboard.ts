@@ -32,6 +32,13 @@ export interface CourseTimeline {
   nextMeeting: TimelineMeeting | null;
 }
 
+export type FocusMeetingKind = 'today' | 'latest' | 'next';
+
+export interface FocusMeetingResult {
+  meeting: TimelineMeeting;
+  kind: FocusMeetingKind;
+}
+
 export interface DashboardAssignmentItem {
   id: string;
   title: string;
@@ -58,7 +65,7 @@ function buildClassPrepRows(meeting: TimelineMeeting): DashboardPrepRow[] {
   }
 
   const beforeClassHref =
-    meeting.slug && !meeting.isDraft ? `/topics/${meeting.slug}#topic-before-class` : null;
+    meeting.slug && !meeting.isDraft ? `/meetings/${meeting.slug}#meeting-before-class` : null;
 
   return [
     {
@@ -140,6 +147,39 @@ export function getCourseTimeline(
   };
 }
 
+/**
+ * Meeting students should land on from Topics nav:
+ * 1. today's open class
+ * 2. most recent past open class
+ * 3. next upcoming open class
+ */
+export function getFocusMeeting(
+  meetings: TimelineMeeting[],
+  referenceDate: Date = new Date()
+): FocusMeetingResult | null {
+  const todayIso = formatIsoDateLocal(referenceDate);
+  const sorted = [...meetings].sort((a, b) => a.dateIso.localeCompare(b.dateIso));
+  const openMeetings = sorted.filter(isOpenClassMeeting);
+
+  const todayMeeting = sorted.find(item => item.dateIso === todayIso) || null;
+  if (todayMeeting && isOpenClassMeeting(todayMeeting)) {
+    return { meeting: todayMeeting, kind: 'today' };
+  }
+
+  const mostRecentPast =
+    [...openMeetings].reverse().find(item => item.dateIso <= todayIso) || null;
+  if (mostRecentPast) {
+    return { meeting: mostRecentPast, kind: 'latest' };
+  }
+
+  const nextUpcoming = openMeetings.find(item => item.dateIso > todayIso) || null;
+  if (nextUpcoming) {
+    return { meeting: nextUpcoming, kind: 'next' };
+  }
+
+  return null;
+}
+
 type AssignmentSource = {
   title: string;
   due_date?: string;
@@ -198,6 +238,6 @@ export function getUpcomingPrepMeetings(
       meeting,
       prepRows: buildClassPrepRows(meeting),
       beforeClassHref:
-        meeting.slug && !meeting.isDraft ? `/topics/${meeting.slug}#topic-before-class` : null,
+        meeting.slug && !meeting.isDraft ? `/meetings/${meeting.slug}#meeting-before-class` : null,
     }));
 }

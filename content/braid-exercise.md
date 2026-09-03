@@ -17,23 +17,23 @@ Move through the materials in roughly this order:
 4. **Examples and analogies**: compare BRAID to more familiar AI systems.
 5. **Anticipatory governance**: ask what should be examined before deployment norms are settled.
 
-## 1. Course Modules to Start With
+## 1. Course Topics to Start With
 
-These module pages provide the broad frame for the BRAID exercise.
+These topic pages provide the broad frame for the BRAID exercise.
 
-- [Course Schedule](/modules)
-- [What Is Technically Different About Neuromorphic Computing?](/topics/26)
-- [How Can We Govern an Emerging Technology Before Its Uses Are Settled?](/topics/27)
-- [What Responsibilities Do We Have as Professionals and Global Citizens?](/topics/28)
+- [Course Overview](/topics)
+- [What Is Technically Different About Neuromorphic Computing?](/meetings/26)
+- [How Can We Govern an Emerging Technology Before Its Uses Are Settled?](/meetings/27)
+- [What Responsibilities Do We Have as Professionals and Global Citizens?](/meetings/28)
 
-## 2. Related Course Topics
+## 2. Related Course Meetings
 
-- [How Do Humans Learn? Neuroscience and Neurobiology](/topics/02)
-- [What Is Technically Different About Neuromorphic Computing?](/topics/26)
-- [How Can We Govern an Emerging Technology Before Its Uses Are Settled?](/topics/27)
-- [Are Predictions Ever Neutral?](/topics/16)
-- [Who Controls AI?](/topics/24)
-- [Responsibilities Inside Organizations Adopting AI](/topics/25)
+- [How Do Humans Learn? Neuroscience and Neurobiology](/meetings/02)
+- [What Is Technically Different About Neuromorphic Computing?](/meetings/26)
+- [How Can We Govern an Emerging Technology Before Its Uses Are Settled?](/meetings/27)
+- [Are Predictions Ever Neutral?](/meetings/16)
+- [Who Controls AI?](/meetings/24)
+- [Responsibilities Inside Organizations Adopting AI](/meetings/25)
 
 ## 3. Suggested Exercise Flow
 

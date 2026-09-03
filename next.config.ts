@@ -217,6 +217,21 @@ const nextConfig: NextConfig = {
         destination: '/fall2026/field-guide/ethical-frameworks',
         permanent: true,
       },
+      {
+        source: '/fall2026/modules',
+        destination: '/fall2026/topics',
+        permanent: true,
+      },
+      {
+        source: '/fall2026/modules/:id',
+        destination: '/fall2026/topics',
+        permanent: true,
+      },
+      {
+        source: '/fall2026/topics/:slug',
+        destination: '/fall2026/meetings/:slug',
+        permanent: true,
+      },
     ];
   },
 };

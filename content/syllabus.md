@@ -80,9 +80,9 @@ Required readings and other course materials, including articles, reports, video
 
 University and college courses engage diverse scholarly perspectives to develop critical thinking, analysis, and debate. Inclusion of a reading does not imply endorsement. Syllabi do not constitute an express or implied contract among the student, faculty, or institution. Rather, syllabi serve as a guide for courses. Syllabi are directed works that are developed within the scope of an instructor’s employment and under institutional direction. The institution is considered the copyright owner of course syllabi, as directed work. As such, syllabi shall be treated as “public records.” Publicly available syllabi are not required to include the location or time of day at which a course is being held. No syllabus shall include any personally identifiable information of students (e.g. race, gender, ethnicity, etc.).
 
-### Course Schedule
+### Course Overview
 
-The meeting-by-meeting course schedule, including assigned readings and due work, is on the [Course Schedule](/fall2026/modules) page.
+The meeting-by-meeting course schedule, including assigned readings and due work, is on the [Course Overview](/fall2026/topics) page.
 
 ### Final Exam Information
 

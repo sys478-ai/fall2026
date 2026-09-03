@@ -107,6 +107,12 @@ function parseDueTime(time: string): { hours: number; minutes: number } | null {
   return { hours, minutes };
 }
 
+/** True for 11:59 PM / end-of-day deadlines (also the course default when due_time is omitted). */
+function isEndOfDayDueTime(dueTime?: string | null): boolean {
+  const parsed = parseDueTime((dueTime && dueTime.trim()) || DEFAULT_DUE_TIME_LABEL);
+  return Boolean(parsed && parsed.hours === 23 && parsed.minutes === 59);
+}
+
 function parseDueDateTime(dueDateIso: string, dueTime?: string): Date | null {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dueDateIso)) {
     return null;
@@ -201,4 +207,4 @@ export const SCROLL_OFFSET_PX = 20;
  */
 export const DEFAULT_DUE_TIME_LABEL = '11:59 PM';
 
-export { formatDate, formatWeekdayAbbr, formatMonthDay, formatDueTime, formatDueDateTime, formatDueCountdown, formatDueCountdownBadge, getDueCountdownParts, parseDueDateTime, getWeek };
+export { formatDate, formatWeekdayAbbr, formatMonthDay, formatDueTime, formatDueDateTime, formatDueCountdown, formatDueCountdownBadge, getDueCountdownParts, parseDueDateTime, isEndOfDayDueTime, getWeek };

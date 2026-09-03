@@ -5,7 +5,7 @@
  *
  * {% schedule %}
  *
- * The live course schedule now lives on `/modules`. This tag is kept so older
+ * The live course schedule now lives on `/topics`. This tag is kept so older
  * markdown can still mark a schedule insertion point without rendering raw text.
  */
 

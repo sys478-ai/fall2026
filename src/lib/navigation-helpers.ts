@@ -6,9 +6,9 @@ export function slugifyForId(value: string): string {
 }
 
 export function getModuleAnchorId(moduleId: number): string {
-  return `module-${moduleId}`;
+  return `topic-${moduleId}`;
 }
 
 export function getMeetingAnchorId(moduleId: number, meetingIndex: number, meetingTopic: string): string {
-  return `module-${moduleId}-topic-${meetingIndex + 1}-${slugifyForId(meetingTopic)}`;
+  return `topic-${moduleId}-meeting-${meetingIndex + 1}-${slugifyForId(meetingTopic)}`;
 }

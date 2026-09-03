@@ -38,8 +38,8 @@ export default async function Navigation() {
       .filter(meeting => !meeting.scheduleOnly)
       .map((meeting, index) => {
       const contentHref = meeting.slug
-        ? `/topics/${meeting.slug}`
-        : `/modules#${getMeetingAnchorId(module.id, index, meeting.topic)}`;
+        ? `/meetings/${meeting.slug}`
+        : `/topics#${getMeetingAnchorId(module.id, index, meeting.topic)}`;
 
       return {
         id: meeting.slug || getMeetingAnchorId(module.id, index, meeting.topic),

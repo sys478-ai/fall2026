@@ -22,10 +22,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                               (normalizedPath.startsWith('/assignments/') && normalizedPath !== '/assignments') ||
                               (normalizedPath.startsWith('/activities/') && normalizedPath !== '/activities') ||
                               (normalizedPath.startsWith('/exams/') && normalizedPath !== '/exams') ||
-                              (normalizedPath.startsWith('/topics/') && normalizedPath !== '/topics') ||
+                              (normalizedPath.startsWith('/meetings/')) ||
                               (normalizedPath.startsWith('/field-guide/') && normalizedPath !== '/field-guide') ||
                               normalizedPath === '/repos-hidden';
-      const isListPage = normalizedPath === '/modules' ||
+      const isListPage = normalizedPath === '/topics' ||
                         normalizedPath === '/assignments' || 
                         normalizedPath === '/activities' || 
                         normalizedPath === '/resources' ||

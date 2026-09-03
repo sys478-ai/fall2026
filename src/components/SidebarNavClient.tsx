@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Bars3Icon,
@@ -18,7 +18,7 @@ import {
 } from '@heroicons/react/24/outline';
 import CourseReminder from '@/components/dashboard/CourseReminder';
 import { useDarkMode } from '@/hooks/useDarkMode';
-import type { TimelineMeeting } from '@/lib/course-dashboard';
+import { getFocusMeeting, type TimelineMeeting } from '@/lib/course-dashboard';
 import type { DashboardAssignmentInput } from '@/lib/dashboard-assignments';
 import { getModuleColorClasses, type ModuleColorToken } from '@/lib/module-colors';
 
@@ -76,6 +76,10 @@ function normalizePath(path: string) {
   return path.replace(/^\/fall2026/, '').replace(/\/$/, '') || '/';
 }
 
+function sidebarActiveId(path: string) {
+  return `sidebar-active-${normalizePath(path).replace(/\//g, '-') || 'home'}`;
+}
+
 export default function SidebarNavClient({
   courseTitle,
   modules,
@@ -83,24 +87,34 @@ export default function SidebarNavClient({
   assignments,
 }: SidebarNavClientProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const normalizedPath = normalizePath(pathname);
   const isDark = useDarkMode();
   const [mounted, setMounted] = useState(false);
+  const [referenceDate, setReferenceDate] = useState<Date | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scheduleOpen, setScheduleOpen] = useState(
-    () => normalizedPath === '/modules' || normalizedPath.startsWith('/topics/')
-  );
+  const [scheduleOpen, setScheduleOpen] = useState(() => normalizedPath.startsWith('/meetings/'));
   const [resourcesOpen, setResourcesOpen] = useState(() => isResourcePath(normalizedPath));
   const [expandedModuleIds, setExpandedModuleIds] = useState<number[]>([]);
 
   useEffect(() => {
     setMounted(true);
+    setReferenceDate(new Date());
     const savedCollapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY);
     if (savedCollapsed !== null) {
       setCollapsed(savedCollapsed === 'true');
     }
   }, []);
+
+  const focusMeeting = useMemo(
+    () => (referenceDate ? getFocusMeeting(meetings, referenceDate) : null),
+    [meetings, referenceDate]
+  );
+  const focusHref = focusMeeting?.meeting.slug ? `/meetings/${focusMeeting.meeting.slug}` : null;
+  const focusPath = focusHref ? normalizePath(focusHref) : null;
+  const focusBadgeLabel =
+    focusMeeting?.kind === 'today' ? 'Today' : focusMeeting?.kind === 'latest' ? 'Latest' : focusMeeting ? 'Next' : null;
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
@@ -112,7 +126,7 @@ export default function SidebarNavClient({
   }, [pathname]);
 
   useEffect(() => {
-    if (normalizedPath === '/modules' || normalizedPath.startsWith('/topics/')) {
+    if (normalizedPath.startsWith('/meetings/')) {
       setScheduleOpen(true);
     }
   }, [normalizedPath]);
@@ -129,13 +143,56 @@ export default function SidebarNavClient({
     );
     if (!moduleWithActiveTopic) return;
 
-    setExpandedModuleIds(prev =>
-      prev.includes(moduleWithActiveTopic.id) ? prev : [...prev, moduleWithActiveTopic.id]
-    );
+    setExpandedModuleIds([moduleWithActiveTopic.id]);
   }, [modules, normalizedPath]);
 
+  useEffect(() => {
+    if (!focusMeeting) return;
+    if (normalizedPath.startsWith('/meetings/')) return;
+
+    setExpandedModuleIds([focusMeeting.meeting.moduleId]);
+  }, [focusMeeting, normalizedPath]);
+
+  useEffect(() => {
+    if (!mounted || collapsed) return;
+
+    const frame = requestAnimationFrame(() => {
+      const activeEl = document.getElementById(sidebarActiveId(normalizedPath));
+      const navScroller = activeEl?.closest('nav')?.parentElement;
+      if (activeEl && navScroller instanceof HTMLElement) {
+        const scrollerRect = navScroller.getBoundingClientRect();
+        const elRect = activeEl.getBoundingClientRect();
+        const isFullyVisible = elRect.top >= scrollerRect.top && elRect.bottom <= scrollerRect.bottom;
+
+        if (!isFullyVisible) {
+          activeEl.scrollIntoView({ block: 'nearest' });
+        }
+      }
+    });
+
+    const timeout = window.setTimeout(() => {
+      const activeEl = document.getElementById(sidebarActiveId(normalizedPath));
+      const navScroller = activeEl?.closest('nav')?.parentElement;
+      if (activeEl && navScroller instanceof HTMLElement) {
+        const scrollerRect = navScroller.getBoundingClientRect();
+        const elRect = activeEl.getBoundingClientRect();
+        const isFullyVisible = elRect.top >= scrollerRect.top && elRect.bottom <= scrollerRect.bottom;
+
+        if (!isFullyVisible) {
+          activeEl.scrollIntoView({ block: 'nearest' });
+        }
+      }
+    }, 320);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(timeout);
+    };
+  }, [collapsed, expandedModuleIds, focusPath, mounted, normalizedPath, resourcesOpen, scheduleOpen]);
+
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
-  const activeModules = normalizedPath === '/modules' || normalizedPath.startsWith('/topics/');
+  const activeCourseOverview = normalizedPath === '/topics';
+  const activeTopicsNav = normalizedPath.startsWith('/meetings/');
   const activeResources = isResourcePath(normalizedPath);
   const activeSyllabus = normalizedPath === '/' || normalizedPath === '/syllabus';
 
@@ -143,20 +200,34 @@ export default function SidebarNavClient({
     () => [
       { label: 'Syllabus', href: '/', icon: DocumentTextIcon, active: activeSyllabus },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
-      { label: 'Course Schedule', href: '/modules', icon: CalendarDaysIcon, active: activeModules },
+      { label: 'Course Overview', href: '/topics', icon: BookOpenIcon, active: activeCourseOverview },
     ],
-    [activeAssignments, activeModules, activeSyllabus]
+    [activeAssignments, activeCourseOverview, activeSyllabus]
   );
 
-  function toggleScheduleOpen() {
+  function handleTopicsClick() {
     if (collapsed) {
       setCollapsed(false);
       localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
-      setScheduleOpen(true);
+    }
+
+    if (scheduleOpen && !collapsed) {
+      setScheduleOpen(false);
       return;
     }
 
-    setScheduleOpen(prev => !prev);
+    setScheduleOpen(true);
+
+    const focus = getFocusMeeting(meetings, new Date());
+    const href = focus?.meeting.slug ? `/meetings/${focus.meeting.slug}` : null;
+
+    if (focus) {
+      setExpandedModuleIds([focus.meeting.moduleId]);
+    }
+
+    if (href) {
+      router.push(href);
+    }
   }
 
   function toggleResourcesOpen() {
@@ -171,9 +242,7 @@ export default function SidebarNavClient({
   }
 
   function toggleModuleExpanded(moduleId: number) {
-    setExpandedModuleIds(prev =>
-      prev.includes(moduleId) ? prev.filter(id => id !== moduleId) : [...prev, moduleId]
-    );
+    setExpandedModuleIds(prev => (prev.includes(moduleId) ? [] : [moduleId]));
   }
 
   const toggleDarkMode = () => {
@@ -265,6 +334,7 @@ export default function SidebarNavClient({
         <nav className="divide-y divide-slate-200 overflow-hidden border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
           <Link
             href="/"
+            id={sidebarActiveId('/')}
             className={`${baseLinkClass} ${getTopLevelItemClass(navItems[0])} ${collapsed ? 'justify-center' : ''}`}
           >
             {renderNavContent('Syllabus', DocumentTextIcon)}
@@ -272,22 +342,31 @@ export default function SidebarNavClient({
 
           <Link
             href="/assignments"
+            id={sidebarActiveId('/assignments')}
             className={`${baseLinkClass} ${getTopLevelItemClass(navItems[1])} ${collapsed ? 'justify-center' : ''}`}
           >
             {renderNavContent('Assignments', ClipboardDocumentListIcon)}
           </Link>
 
+          <Link
+            href="/topics"
+            id={sidebarActiveId('/topics')}
+            className={`${baseLinkClass} ${getTopLevelItemClass(navItems[2])} ${collapsed ? 'justify-center' : ''}`}
+          >
+            {renderNavContent('Course Overview', BookOpenIcon)}
+          </Link>
+
           <div className="bg-slate-50 dark:bg-slate-950">
             <button
               type="button"
-              onClick={toggleScheduleOpen}
+              onClick={handleTopicsClick}
               aria-expanded={scheduleOpen}
               className={`${baseLinkClass} w-full ${
-                activeModules ? activeTopLevelClass : inactiveTopLevelClass
+                activeTopicsNav || scheduleOpen ? activeTopLevelClass : inactiveTopLevelClass
               } ${collapsed ? 'justify-center' : 'justify-between'}`}
             >
               <span className="flex min-w-0 items-center gap-3">
-                {renderNavContent('Course Schedule', CalendarDaysIcon)}
+                {renderNavContent('Topics', CalendarDaysIcon)}
               </span>
               {!collapsed && (
                 <ChevronDownIcon
@@ -301,23 +380,12 @@ export default function SidebarNavClient({
             {!collapsed && scheduleOpen && (
               <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
-                  <Link
-                    href="/modules"
-                    className={`group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
-                      normalizedPath === '/modules'
-                        ? 'bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50'
-                        : 'bg-transparent text-slate-800 hover:font-semibold hover:text-slate-950 dark:text-slate-200 dark:hover:text-slate-100'
-                    }`}
-                  >
-                    <span className="line-clamp-2 min-w-0 ml-5 leading-snug">Overview</span>
-                  </Link>
                   {modules.map(module => {
                     const isDraft = module.isDraft === true;
                     const isTopicInModule = module.topics.some(
                       topic => normalizePath(topic.contentHref) === normalizedPath
                     );
-                    const isOpen =
-                      !isDraft && (isTopicInModule || expandedModuleIds.includes(module.id));
+                    const isOpen = !isDraft && expandedModuleIds.includes(module.id);
                     const moduleColor = getModuleColorClasses(module.color);
                     const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
                       isDraft
@@ -370,10 +438,13 @@ export default function SidebarNavClient({
                                 const isNoClass = topic.isNoClass === true;
                                 const isDraftTopic = topic.isDraft === true;
                                 const isLocked = isNoClass || isDraftTopic;
-                                const isTopicActive =
-                                  !isLocked && normalizePath(topic.contentHref) === normalizedPath;
-                                const isModuleOverview = topic.date === 'Module overview';
-                                const showDate = !isModuleOverview && Boolean(topic.date);
+                                const topicPath = normalizePath(topic.contentHref);
+                                const isTopicActive = !isLocked && topicPath === normalizedPath;
+                                const isFocusTopic = Boolean(focusPath && topicPath === focusPath);
+                                const isTopicOverview =
+                                  topic.date === 'Topic overview' || topic.date === 'Module overview';
+                                const showDate = !isTopicOverview && Boolean(topic.date);
+                                const activeRowId = isTopicActive ? sidebarActiveId(topicPath) : undefined;
                                 const rowClassName = `block py-2 pl-6 pr-6 transition-colors no-underline! ${
                                   isLocked
                                     ? 'border-l-4 border-transparent text-slate-500 dark:text-slate-500'
@@ -396,6 +467,11 @@ export default function SidebarNavClient({
                                           {topic.date}
                                         </span>
                                       )}
+                                      {isFocusTopic && focusBadgeLabel && mounted && (
+                                        <span className="rounded-full bg-rose-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-rose-700 dark:bg-rose-950/50 dark:text-rose-300">
+                                          {focusBadgeLabel}
+                                        </span>
+                                      )}
                                     </span>
                                     {isNoClass && (
                                       <span className="mt-0.5 block text-xs font-medium text-slate-400 dark:text-slate-600">
@@ -414,12 +490,12 @@ export default function SidebarNavClient({
                                         title="Draft"
                                       />
                                     </span>
-                                  ) : isModuleOverview ? (
+                                  ) : isTopicOverview ? (
                                     <span className="ml-5 flex min-w-0 items-start gap-2">
                                       <i
                                         className="fas fa-book-open mt-0.5 h-4 w-4 shrink-0 text-slate-500 dark:text-slate-400"
-                                        aria-label="Module overview"
-                                        title="Module overview"
+                                        aria-label="Topic overview"
+                                        title="Topic overview"
                                       />
                                       <span className="min-w-0">{topicText}</span>
                                     </span>
@@ -429,14 +505,19 @@ export default function SidebarNavClient({
 
                                 if (isLocked) {
                                   return (
-                                    <div key={topic.id} className={rowClassName}>
+                                    <div key={topic.id} id={activeRowId} className={rowClassName}>
                                       {rowContent}
                                     </div>
                                   );
                                 }
 
                                 return (
-                                  <Link key={topic.id} href={topic.contentHref} className={rowClassName}>
+                                  <Link
+                                    key={topic.id}
+                                    id={activeRowId}
+                                    href={topic.contentHref}
+                                    className={rowClassName}
+                                  >
                                     {rowContent}
                                   </Link>
                                 );
@@ -483,6 +564,7 @@ export default function SidebarNavClient({
                     return (
                       <Link
                         key={item.href}
+                        id={isItemActive ? sidebarActiveId(item.href) : undefined}
                         href={item.href}
                         className={`block py-2 pl-6 pr-6 text-sm transition-colors no-underline! ${
                           isItemActive

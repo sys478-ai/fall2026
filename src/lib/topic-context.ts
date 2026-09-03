@@ -24,7 +24,7 @@ export async function getTopicContextForHref(targetHref: string) {
           moduleTitle: topic.title,
           topicNumber: getMeetingTopicNumber(topic.id, meetingIndex),
           topicTitle: meeting.topic,
-          topicHref: meeting.slug ? `/topics/${meeting.slug}` : undefined,
+          topicHref: meeting.slug ? `/meetings/${meeting.slug}` : undefined,
           itemTitle: activity.title,
         };
       }
@@ -51,7 +51,7 @@ export async function getTopicContextForHref(targetHref: string) {
           moduleTitle: topic.title,
           topicNumber: getMeetingTopicNumber(topic.id, meetingIndex),
           topicTitle: meeting.topic,
-          topicHref: meeting.slug ? `/topics/${meeting.slug}` : undefined,
+          topicHref: meeting.slug ? `/meetings/${meeting.slug}` : undefined,
           itemTitle: assignment.titleShort ? `${assignment.titleShort}: ${assignment.title}` : assignment.title,
         };
       }

@@ -249,7 +249,7 @@ export default function CourseScheduleList({ topics }: { topics: ScheduleTopics 
         <section key={topic.id}>
           <div className="border-b border-gray-200 pt-1 pb-2 dark:border-gray-800">
             <h2 className="m-0 text-lg font-semibold text-gray-950 dark:text-gray-50">
-              Module {topic.id}. {topic.title}
+              Topic {topic.id}. {topic.title}
             </h2>
           </div>
 
@@ -269,7 +269,7 @@ export default function CourseScheduleList({ topics }: { topics: ScheduleTopics 
               const topicTitle = topicNumber ? `${topicNumber} ${meeting.topic}` : meeting.topic;
               const topicHref =
                 meeting.slug && !isNoClass && !isScheduleOnly && meeting.draft !== 1
-                  ? `/topics/${meeting.slug}`
+                  ? `/meetings/${meeting.slug}`
                   : undefined;
               const readings = isNoClass || isScheduleOnly ? [] : getAssignedReadings(meeting);
               const dueItems = isNoClass ? [] : getDueItems(meeting);
