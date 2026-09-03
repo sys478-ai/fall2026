@@ -1,15 +1,11 @@
 ---
 title: 'Career Module 2: Three Possible Lives and SMART Goals'
-scheduled_day: 6
+scheduled_day: 9
 num: '2'
 type: 'career module'
 excerpt: 'Design thinking for future paths and a semester-scale SMART goal.'
 draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+
 ---
 
 ## Overview

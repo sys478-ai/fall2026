@@ -13,7 +13,7 @@ import { postprocessSequences, preprocessSequenceTags } from './sequence';
 import { postprocessStepStrips, preprocessStepStripTags } from './step-strip';
 import { preprocessExampleSliderTags, injectExampleSliders } from './example-slider';
 import { preprocessScheduleTags } from './schedule-embed';
-import { preprocessResourcePopoverTags, injectResourcePopovers } from './resource-popover';
+import { preprocessResourcePopoverTags, preprocessFieldGuideCardTags, injectResourcePopovers, injectFieldGuideCards } from './resource-popover';
 
 const postsDirectory = path.join(process.cwd(), 'content');
 const quizzesDirectory = path.join(process.cwd(), 'content', 'quizzes');
@@ -429,6 +429,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
   markdownContent = preprocessExampleSliderTags(markdownContent);
   markdownContent = preprocessScheduleTags(markdownContent);
   markdownContent = preprocessResourcePopoverTags(markdownContent);
+  markdownContent = preprocessFieldGuideCardTags(markdownContent);
 
   // Pre-process checkboxes: replace [ ] patterns with placeholders
   // This prevents GFM from converting them into disabled task list items
@@ -789,6 +790,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
     contentHtml = await injectExampleSliders(contentHtml, String(cardNum), subdirectory);
   }
   contentHtml = await injectResourcePopovers(contentHtml);
+  contentHtml = await injectFieldGuideCards(contentHtml);
 
   const sectionDefaults = subdirectory ? loadSectionDefaults(directory) : {};
   const groupMap = subdirectory ? loadGroupMap(directory) : new Map();
