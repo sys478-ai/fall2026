@@ -61,6 +61,15 @@ function formatWeekdayAbbr(dateString: string): string {
   return date.toLocaleDateString('en-US', { weekday: 'short' }).substring(0, 2);
 }
 
+/** Weekday + numeric month/day from YYYY-MM-DD (e.g. "Tu, 02/01"). */
+function formatWeekdayNumericDate(dateString: string): string {
+  const date = new Date(dateString + 'T00:00:00');
+  const weekday = date.toLocaleDateString('en-US', { weekday: 'short' }).substring(0, 2);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${weekday}, ${month}/${day}`;
+}
+
 /** Month + day from YYYY-MM-DD (e.g. "Aug 25"). */
 function formatMonthDay(dateString: string): string {
   const date = new Date(dateString + 'T00:00:00');
@@ -111,6 +120,16 @@ function parseDueTime(time: string): { hours: number; minutes: number } | null {
 function isEndOfDayDueTime(dueTime?: string | null): boolean {
   const parsed = parseDueTime((dueTime && dueTime.trim()) || DEFAULT_DUE_TIME_LABEL);
   return Boolean(parsed && parsed.hours === 23 && parsed.minutes === 59);
+}
+
+/** True when due after 3:00 PM (evening / tonight). 3:00 PM and earlier count as before class. */
+function isDueTonightTime(dueTime?: string | null): boolean {
+  const parsed = parseDueTime((dueTime && dueTime.trim()) || DEFAULT_DUE_TIME_LABEL);
+  if (!parsed) {
+    return true;
+  }
+
+  return parsed.hours * 60 + parsed.minutes > 15 * 60;
 }
 
 function parseDueDateTime(dueDateIso: string, dueTime?: string): Date | null {
@@ -207,4 +226,4 @@ export const SCROLL_OFFSET_PX = 20;
  */
 export const DEFAULT_DUE_TIME_LABEL = '11:59 PM';
 
-export { formatDate, formatWeekdayAbbr, formatMonthDay, formatDueTime, formatDueDateTime, formatDueCountdown, formatDueCountdownBadge, getDueCountdownParts, parseDueDateTime, isEndOfDayDueTime, getWeek };
+export { formatDate, formatWeekdayAbbr, formatWeekdayNumericDate, formatMonthDay, formatDueTime, formatDueDateTime, formatDueCountdown, formatDueCountdownBadge, getDueCountdownParts, parseDueDateTime, isEndOfDayDueTime, isDueTonightTime, getWeek };

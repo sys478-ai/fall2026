@@ -8,10 +8,23 @@ subtitle: 'Computers never encounter the world directly. They encounter encoded 
 optional_readings:
   - citation: 'Computerphile. (n.d.). How digital audio works [Video]. YouTube.'
     url: 'https://www.youtube.com/watch?v=1RIA9U5oXro'
+  - citation: 'Fireship. (n.d.). Binary explained in 01100100 seconds [Video]. YouTube.'
+    url: 'https://www.youtube.com/watch?v=zDNaUi2cjv4'
+  - citation: 'GCSE GURU. (n.d.). How to convert binary to decimal [Video]. YouTube.'
+    url: 'https://www.youtube.com/watch?v=Aw6wd_WE-n8'
+  - citation: 'GCSE GURU. (n.d.). How to convert decimal to binary [Video]. YouTube.'
+    url: 'https://www.youtube.com/watch?v=1TxAm9931TE'
+  - citation: 'University of Connecticut. (n.d.). ASCII: Letters in binary [PDF].'
+    url: 'https://www.phys.uconn.edu/~rozman/Courses/P2200_13F/downloads/ascii.pdf'
+    notes: 'Skim.'
+  - citation: 'RapidTables. (n.d.). RGB color codes chart.'
+    url: 'https://www.rapidtables.com/web/color/RGB_Color.html'
+    notes: 'Skim. How to represent colors in binary.'
   - citation: 'Computer History Museum. (n.d.). Digital logic. CHM Revolution.'
     url: 'https://www.computerhistory.org/revolution/digital-logic/12/intro'
+    notes: 'Great demo of how to make a chain of transistors do arithmetic.'
 ---
-
+`
 ## Topic / Focus
 
 What can a computer “see,” and what has to happen before the world becomes computable? We start with sound and move to people: the computer does not receive a voice or a student. It receives a representation.

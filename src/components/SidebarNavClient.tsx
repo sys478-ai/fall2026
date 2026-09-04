@@ -20,7 +20,9 @@ import CourseReminder from '@/components/dashboard/CourseReminder';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import { getFocusMeeting, type TimelineMeeting } from '@/lib/course-dashboard';
 import type { DashboardAssignmentInput } from '@/lib/dashboard-assignments';
+import { parseMeetingDate } from '@/lib/meeting-dates';
 import { getModuleColorClasses, type ModuleColorToken } from '@/lib/module-colors';
+import { formatWeekdayNumericDate } from '@/lib/utils';
 
 interface SidebarTopicItem {
   id: string;
@@ -80,6 +82,19 @@ function sidebarActiveId(path: string) {
   return `sidebar-active-${normalizePath(path).replace(/\//g, '-') || 'home'}`;
 }
 
+function getMeetingDateLabel(date: string): string {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return formatWeekdayNumericDate(date);
+  }
+
+  const dateIso = parseMeetingDate(date);
+  if (dateIso) {
+    return formatWeekdayNumericDate(dateIso);
+  }
+
+  return date;
+}
+
 export default function SidebarNavClient({
   courseTitle,
   modules,
@@ -113,12 +128,10 @@ export default function SidebarNavClient({
   );
   const focusHref = focusMeeting?.meeting.slug ? `/meetings/${focusMeeting.meeting.slug}` : null;
   const focusPath = focusHref ? normalizePath(focusHref) : null;
-  const focusBadgeLabel =
-    focusMeeting?.kind === 'today' ? 'Today' : focusMeeting?.kind === 'latest' ? 'Latest' : focusMeeting ? 'Next' : null;
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    document.documentElement.style.setProperty('--app-sidebar-width', collapsed ? '5rem' : '16rem');
+    document.documentElement.style.setProperty('--app-sidebar-width', collapsed ? '5rem' : '19rem');
   }, [collapsed]);
 
   useEffect(() => {
@@ -301,7 +314,7 @@ export default function SidebarNavClient({
   const sidebarInner = (
     <div
       className={`flex h-full flex-col border-r border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950 ${
-        collapsed ? 'w-20' : 'w-64'
+        collapsed ? 'w-20' : 'w-[19rem]'
       } transition-[width] duration-300 ease-in-out`}
     >
       <div className="flex items-center justify-between border-b border-slate-200 px-4 py-4 dark:border-slate-800">
@@ -378,151 +391,147 @@ export default function SidebarNavClient({
             </button>
 
             {!collapsed && scheduleOpen && (
-              <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
-                <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
+              <div className="border-t border-slate-200/70 py-1.5 dark:border-slate-800">
+                <div className="flex flex-col">
                   {modules.map(module => {
                     const isDraft = module.isDraft === true;
-                    const isTopicInModule = module.topics.some(
-                      topic => normalizePath(topic.contentHref) === normalizedPath
-                    );
                     const isOpen = !isDraft && expandedModuleIds.includes(module.id);
                     const moduleColor = getModuleColorClasses(module.color);
-                    const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-0 pl-6 pr-3 py-2.5 text-left text-sm no-underline! transition-colors ${
+                    const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-1 pl-3 pr-2.5 py-1.5 text-left text-sm no-underline! transition-colors ${
                       isDraft
-                        ? 'cursor-default bg-transparent text-slate-500 dark:text-slate-500'
+                        ? 'cursor-default text-slate-400 dark:text-slate-500'
                         : isOpen
-                          ? 'bg-white font-semibold text-slate-950 dark:bg-black dark:text-slate-50'
-                          : 'bg-transparent text-slate-800 hover:font-semibold hover:text-slate-950 dark:text-slate-200 dark:hover:text-slate-100'
+                          ? 'font-semibold text-slate-950 dark:text-slate-50'
+                          : 'text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100'
                     }`;
 
                     return (
-                      <section key={module.id} className="bg-slate-50/20 transition-colors dark:bg-transparent">
-                        <div className="flex items-center">
-                          {isDraft ? (
-                            <div className={moduleHeaderClass}>
-                              <span className="line-clamp-2 min-w-0 ml-5 leading-snug">
-                                {module.id}. {module.title}
-                              </span>
-                              <LockClosedIcon
-                                className="ml-auto h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
-                                aria-hidden="true"
-                              />
-                            </div>
-                          ) : (
-                            <button
-                              type="button"
-                              onClick={() => toggleModuleExpanded(module.id)}
-                              className={moduleHeaderClass}
-                              aria-expanded={isOpen}
-                            >
-                              <span className="line-clamp-2 min-w-0 ml-5 leading-snug">
-                                {module.id}. {module.title}
-                              </span>
-                              <ChevronDownIcon
-                                className={`ml-auto h-3.5 w-3.5 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
-                                  isOpen ? '' : '-rotate-90'
-                                }`}
-                              />
-                            </button>
-                          )}
-                        </div>
+                      <section key={module.id}>
+                        {isDraft ? (
+                          <div className={moduleHeaderClass}>
+                            <span className="truncate min-w-0">
+                              {module.id}. {module.title}
+                            </span>
+                            <LockClosedIcon
+                              className="ml-auto h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => toggleModuleExpanded(module.id)}
+                            className={moduleHeaderClass}
+                            aria-expanded={isOpen}
+                          >
+                            <span className="truncate min-w-0">
+                              {module.id}. {module.title}
+                            </span>
+                            <ChevronDownIcon
+                              className={`ml-auto h-3.5 w-3.5 shrink-0 text-slate-400 transition-transform dark:text-slate-500 ${
+                                isOpen ? '' : '-rotate-90'
+                              }`}
+                            />
+                          </button>
+                        )}
 
                         <div
                           className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
                             isOpen ? 'max-h-400 opacity-100' : 'max-h-0 opacity-0'
                           }`}
                         >
-                          <div className="border-t border-slate-200/80 bg-white dark:border-slate-800 dark:bg-black">
-                            <div className="divide-y divide-slate-100 pt-0 pb-4 dark:divide-slate-900">
-                              {module.topics.map(topic => {
-                                const isNoClass = topic.isNoClass === true;
-                                const isDraftTopic = topic.isDraft === true;
-                                const isLocked = isNoClass || isDraftTopic;
-                                const topicPath = normalizePath(topic.contentHref);
-                                const isTopicActive = !isLocked && topicPath === normalizedPath;
-                                const isFocusTopic = Boolean(focusPath && topicPath === focusPath);
-                                const isTopicOverview =
-                                  topic.date === 'Topic overview' || topic.date === 'Module overview';
-                                const showDate = !isTopicOverview && Boolean(topic.date);
-                                const activeRowId = isTopicActive ? sidebarActiveId(topicPath) : undefined;
-                                const rowClassName = `block py-2 pl-6 pr-6 transition-colors no-underline! ${
-                                  isLocked
-                                    ? 'border-l-4 border-transparent text-slate-500 dark:text-slate-500'
-                                    : isTopicActive
-                                      ? `${activeNestedClass} ${moduleColor.background} ${moduleColor.sidebarActive}`
-                                      : inactiveNestedClass
-                                }`;
-                                const topicText = (
-                                  <>
-                                    <span className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                                      <span
-                                        className={`min-w-0 text-sm leading-snug ${
-                                          isTopicActive ? 'font-semibold' : 'font-normal'
-                                        }`}
-                                      >
-                                        {topic.title}
-                                      </span>
-                                      {showDate && (
-                                        <span className="whitespace-nowrap text-[11px] font-medium uppercase tracking-wide text-slate-400 dark:text-slate-600">
-                                          {topic.date}
+                          <div className="pb-1.5">
+                            {module.topics.map(topic => {
+                              const isNoClass = topic.isNoClass === true;
+                              const isDraftTopic = topic.isDraft === true;
+                              const isLocked = isNoClass || isDraftTopic;
+                              const topicPath = normalizePath(topic.contentHref);
+                              const isTopicActive = !isLocked && topicPath === normalizedPath;
+                              const isTodayMeeting =
+                                mounted &&
+                                focusMeeting?.kind === 'today' &&
+                                Boolean(focusPath && topicPath === focusPath);
+                              const isTopicOverview =
+                                topic.date === 'Topic overview' || topic.date === 'Module overview';
+                              const showDate =
+                                !isTopicOverview && !isNoClass && Boolean(topic.date);
+                              const activeRowId = isTopicActive
+                                ? sidebarActiveId(topicPath)
+                                : undefined;
+                              const rowClassName = `flex items-start gap-2 py-1.5 pl-7 pr-2.5 text-sm no-underline! transition-colors ${
+                                isLocked
+                                  ? 'cursor-default text-slate-400 dark:text-slate-600'
+                                  : isTopicActive
+                                    ? `${activeNestedClass} ${moduleColor.background} ${moduleColor.sidebarActive}`
+                                    : inactiveNestedClass
+                              }`;
+                              const rowBody = (
+                                <>
+                                  <span className="min-w-0 flex-1">
+                                    <span
+                                      className={`block leading-snug ${
+                                        isTodayMeeting ? '' : 'truncate'
+                                      } ${isTopicActive ? 'font-semibold' : 'font-normal'}`}
+                                    >
+                                      {isTopicOverview ? (
+                                        <span className="inline-flex max-w-full items-center gap-1.5">
+                                          <i
+                                            className="fas fa-book-open shrink-0 text-xs text-slate-400 dark:text-slate-500"
+                                            aria-hidden="true"
+                                          />
+                                          <span className={isTodayMeeting ? '' : 'truncate'}>
+                                            {topic.title}
+                                          </span>
                                         </span>
-                                      )}
-                                      {isFocusTopic && focusBadgeLabel && mounted && (
-                                        <span className="rounded-full bg-rose-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-rose-700 dark:bg-rose-950/50 dark:text-rose-300">
-                                          {focusBadgeLabel}
-                                        </span>
+                                      ) : (
+                                        topic.title
                                       )}
                                     </span>
-                                    {isNoClass && (
-                                      <span className="mt-0.5 block text-xs font-medium text-slate-400 dark:text-slate-600">
-                                        No class
+                                    {isTodayMeeting && (
+                                      <span className="mt-1 inline-block rounded bg-rose-100 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-rose-700 dark:bg-rose-950/60 dark:text-rose-300">
+                                        today
                                       </span>
                                     )}
-                                  </>
-                                );
-                                const rowContent =
-                                  isDraftTopic ? (
-                                    <span className="flex min-w-0 items-start">
-                                      <span className="ml-5 min-w-0">{topicText}</span>
-                                      <LockClosedIcon
-                                        className="ml-auto mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
-                                        aria-hidden="true"
-                                        title="Draft"
-                                      />
+                                  </span>
+                                  {showDate && (
+                                    <span className="shrink-0 pt-0.5 text-[11px] font-medium tabular-nums text-slate-400 dark:text-slate-600">
+                                      {getMeetingDateLabel(topic.date)}
                                     </span>
-                                  ) : isTopicOverview ? (
-                                    <span className="ml-5 flex min-w-0 items-start gap-2">
-                                      <i
-                                        className="fas fa-book-open mt-0.5 h-4 w-4 shrink-0 text-slate-500 dark:text-slate-400"
-                                        aria-label="Topic overview"
-                                        title="Topic overview"
-                                      />
-                                      <span className="min-w-0">{topicText}</span>
+                                  )}
+                                  {isNoClass && (
+                                    <span className="shrink-0 pt-0.5 text-[10px] font-medium text-slate-400 dark:text-slate-600">
+                                      Off
                                     </span>
-                                  ) : (
-                                    <span className="ml-5 block min-w-0">{topicText}</span>
-                                  );
+                                  )}
+                                  {isDraftTopic && (
+                                    <LockClosedIcon
+                                      className="mt-0.5 h-3 w-3 shrink-0 text-slate-400 dark:text-slate-500"
+                                      aria-hidden="true"
+                                      title="Draft"
+                                    />
+                                  )}
+                                </>
+                              );
 
-                                if (isLocked) {
-                                  return (
-                                    <div key={topic.id} id={activeRowId} className={rowClassName}>
-                                      {rowContent}
-                                    </div>
-                                  );
-                                }
-
+                              if (isLocked) {
                                 return (
-                                  <Link
-                                    key={topic.id}
-                                    id={activeRowId}
-                                    href={topic.contentHref}
-                                    className={rowClassName}
-                                  >
-                                    {rowContent}
-                                  </Link>
+                                  <div key={topic.id} className={rowClassName}>
+                                    {rowBody}
+                                  </div>
                                 );
-                              })}
-                            </div>
+                              }
+
+                              return (
+                                <Link
+                                  key={topic.id}
+                                  id={activeRowId}
+                                  href={topic.contentHref}
+                                  className={rowClassName}
+                                >
+                                  {rowBody}
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
                       </section>

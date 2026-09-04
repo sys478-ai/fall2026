@@ -30,7 +30,7 @@ import {
   getPrepBadgeKindFromAssignment,
   type PrepBadgeKind,
 } from '@/lib/prep-materials';
-import { isEndOfDayDueTime } from '@/lib/utils';
+import { isDueTonightTime } from '@/lib/utils';
 
 interface TopicPageProps {
   params: Promise<{
@@ -242,11 +242,16 @@ function PrepBeforeClassBanner({
   deadlineLabel = 'before class',
 }: {
   classDate?: string;
-  deadlineLabel?: 'before class' | 'before midnight';
+  deadlineLabel?: 'before class' | 'tonight';
 }) {
   if (!classDate) {
     return null;
   }
+
+  const deadlinePhrase =
+    deadlineLabel === 'tonight' ? 'tonight on' : 'before class on';
+  const itemsPhrase =
+    deadlineLabel === 'tonight' ? 'the tasks listed below' : 'the tasks and readings listed below';
 
   return (
     <div
@@ -255,7 +260,7 @@ function PrepBeforeClassBanner({
     >
       <p className="mb-0 text leading-6 text-indigo-950 dark:text-indigo-100">
         <i aria-hidden="true" className="far text-2xl fa-calendar mr-1.5 text-indigo-700 dark:text-indigo-300" />
-        Please complete the tasks and readings listed below {deadlineLabel} on{' '}
+        Please complete {itemsPhrase} {deadlinePhrase}{' '}
         <span className="font-semibold">{classDate}</span>.
       </p>
     </div>
@@ -388,16 +393,17 @@ function getNextClassMeeting(topics: Topic[], currentSlug: string) {
   return null;
 }
 
-function hasPrepMaterials(
+function hasBeforeClassMaterials(
   meeting: Topic['meetings'][number],
-  bibliographyReadings: Reading[] = []
+  bibliographyReadings: Reading[] = [],
+  beforeClassAssignments: ReturnType<typeof getPrepAssignments> = []
 ) {
   return (
     (meeting.readings || []).length > 0 ||
     (meeting.optionalReadings || []).length > 0 ||
     (meeting.otherPreparation || []).length > 0 ||
     bibliographyReadings.length > 0 ||
-    getPrepAssignments(meeting).length > 0 ||
+    beforeClassAssignments.length > 0 ||
     (meeting.beforeClassReminders || []).length > 0
   );
 }
@@ -623,7 +629,7 @@ function TopicOverviewMaterials({
   beforeClassReminders?: Topic['meetings'][number]['beforeClassReminders'];
   meetingSlug?: string;
   classDate?: string;
-  deadlineLabel?: 'before class' | 'before midnight';
+  deadlineLabel?: 'before class' | 'tonight';
 }) {
   const assignedReadings = readings || [];
   const extraReadings = optionalReadings || [];
@@ -963,6 +969,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
     ? getDashboardPrepRows(nextClassMeeting, { isDraft: nextTopicNavItem?.draft === 1 })
     : [];
   const prepAssignments = getPrepAssignments(meeting);
+  const beforeClassAssignments = prepAssignments.filter(item => !isDueTonightTime(item.dueTime));
+  const dueTonightAssignments = prepAssignments.filter(item => isDueTonightTime(item.dueTime));
   const todayContent = topicPostData?.content.trim()
     ? topicPostData.content
     : null;
@@ -971,25 +979,21 @@ export default async function TopicPage({ params }: TopicPageProps) {
     panel: ReactElement;
   }> = [];
 
-  if (!meeting.holiday && hasPrepMaterials(meeting, bibliographyReadings)) {
-    const usesMidnightDeadline = prepAssignments.some(item => isEndOfDayDueTime(item.dueTime));
-    const prepSectionLabel = usesMidnightDeadline ? 'Before midnight' : 'Before class';
-    const prepDeadlineLabel = usesMidnightDeadline ? 'before midnight' : 'before class';
-
+  if (!meeting.holiday && hasBeforeClassMaterials(meeting, bibliographyReadings, beforeClassAssignments)) {
     topicSections.push({
-      navItem: { id: 'meeting-before-class', label: prepSectionLabel },
+      navItem: { id: 'meeting-before-class', label: 'Before class' },
       panel: (
-        <TopicWorkflowSection id="meeting-before-class" label={prepSectionLabel}>
+        <TopicWorkflowSection id="meeting-before-class" label="Before class">
           <TopicOverviewMaterials
             readings={readings}
             optionalReadings={optionalReadings}
             otherPreparation={otherPreparation}
             bibliographyReadings={bibliographyReadings}
-            prepAssignments={prepAssignments}
+            prepAssignments={beforeClassAssignments}
             beforeClassReminders={meeting.beforeClassReminders}
             meetingSlug={meeting.slug}
             classDate={meeting.date}
-            deadlineLabel={prepDeadlineLabel}
+            deadlineLabel="before class"
           />
         </TopicWorkflowSection>
       ),
@@ -1083,11 +1087,30 @@ export default async function TopicPage({ params }: TopicPageProps) {
     });
   }
 
+  if (!meeting.holiday && dueTonightAssignments.length > 0) {
+    topicSections.push({
+      navItem: { id: 'meeting-due-tonight', label: 'Due Tonight' },
+      panel: (
+        <TopicWorkflowSection id="meeting-due-tonight" label="Due Tonight">
+          <TopicOverviewMaterials
+            readings={[]}
+            optionalReadings={[]}
+            bibliographyReadings={[]}
+            prepAssignments={dueTonightAssignments}
+            meetingSlug={meeting.slug}
+            classDate={meeting.date}
+            deadlineLabel="tonight"
+          />
+        </TopicWorkflowSection>
+      ),
+    });
+  }
+
   if (!meeting.holiday && nextClassMeeting && nextTimeRows.length > 0) {
     topicSections.push({
-      navItem: { id: 'meeting-next', label: 'For next time' },
+      navItem: { id: 'meeting-next', label: 'For Next Time' },
       panel: (
-        <TopicWorkflowSection id="meeting-next" label="For next time">
+        <TopicWorkflowSection id="meeting-next" label="For Next Time">
           <TopicForNextTimePanel nextMeeting={nextClassMeeting} nextTopicNavItem={nextTopicNavItem} />
         </TopicWorkflowSection>
       ),
