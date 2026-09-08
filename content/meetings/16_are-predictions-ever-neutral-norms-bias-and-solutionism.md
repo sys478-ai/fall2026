@@ -1,45 +1,33 @@
 ---
-title: 'Are Predictions Ever Neutral? Norms, Bias, and Technological Solutionism'
-slug: 16
+title: 'Spikes, Timing, and Biological Metaphors'
+slug: '16'
 scheduled_day: 16
 module_id: 3
 draft: 1
-subtitle: 'Norms, bias, categories, power, and technological solutionism, and your introduction to the full anticipatory case-study framework.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Spike timing and plasticity inspire engineering mechanisms; biological
+  language can shape expectations and investment beyond demonstrated
+  capabilities.
+optional_readings:
+  - citation: 'Neuromorphic computing at scale. (2025). Nature, 637, 801–812.'
+    notes: >-
+      Selected introductory figure and short excerpt; compare mechanisms and
+      evidence for benefits.
+    url: 'https://www.nature.com/articles/s41586-024-08253-8'
 ---
-
-## Topic / Focus
-
-We close this unit by asking whether predictions are ever neutral once norms, bias, categories, and power are built into them, using Sidewalk Toronto as a case, and introduce the full anticipatory case-study framework you will use for the rest of the course.
-
-_Format: Full class · Lesson template: Case / BRAID Analysis_
-
-## Guiding Questions
-
-- Can a prediction be neutral once its categories are already contested?
-- How are 'normal' and default groups constructed rather than simply observed?
-- What does the full anticipatory case-study framework ask you to examine?
 
 ## In This Class
 
-In this meeting, we will:
+Use a brief timing activity, then compare the same proposed equipment monitor described as adaptive signal processing or brain-inspired intelligence. Separate biological metaphor, implemented mechanism, and evidence.
 
-- discuss Sidewalk Toronto as a case of contested categories and concentrated harm
-- connect 'normal' as constructed to knowledge/power co-production
-- introduce the anticipatory case-study framework used in later units
+## Mechanism and Society
 
-## Career / BRAID Integration
+Spike timing and plasticity inspire engineering mechanisms; biological language can shape expectations and investment beyond demonstrated capabilities.
 
-Introduce the full anticipatory case-study framework. No dedicated career module today.
+**Student question:** Different kinds of computing? Does biological resemblance imply sentience?
 
-## Field Guide & Resources
+**Project connection:** Short neuromorphic analysis 1: 400–600 words plus diagram connecting one benefit, one risk pathway, evidence needs, and two lenses.
 
-'Normal' is constructed, classification systems produce the world, and knowledge and power are co-produced; default groups, contested categories, and foreclosed alternatives are recurring patterns.
+## Closing Reflection
 
-- [STS Concepts](/field-guide/sts-concepts)
-- [Deployment Patterns](/field-guide/deployment-patterns)
-- [Examples in the Wild](/field-guide/examples)
+What does the brain metaphor explain, and what does it leave unproven?

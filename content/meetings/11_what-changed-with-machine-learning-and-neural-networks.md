@@ -1,44 +1,39 @@
 ---
-title: 'What Changed With Machine Learning and Neural Networks?'
-slug: 11
+title: 'Clustering, Similarity, and Social Hierarchy'
+slug: '11'
 scheduled_day: 11
 module_id: 2
 draft: 1
-subtitle: 'From programmed rules to learned patterns: training data, models, prediction, and GPUs.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Features shape groups; institutions can turn those groups into unequal
+  opportunities that influence later data.
+optional_readings:
+  - citation: >-
+      Massey, D. S. (2007). Categorically Unequal. Chapter 1: How Stratification
+      Works.
+    notes: >-
+      Pages 6–7: mechanisms through which categories become durable
+      inequalities.
+  - citation: 'Thorn, A. (2021). Social Constructs [Video]. Philosophy Tube.'
+    notes: >-
+      Original course activity links to the video; suggested segment around
+      minutes 5–7.
+    url: >-
+      https://csci174.github.io/fall2024/activities/04-categorization-classification
 ---
-
-## Topic / Focus
-
-Today marks the shift from programmed rules to learned patterns: training data, models, prediction, and the GPUs that make large-scale learning possible. This is where BRAID's mechanism-to-capability arc begins.
-
-_Format: Full class · Lesson template: Concept + Lab_
-
-## Guiding Questions
-
-- What changed when systems moved from programmed rules to learned patterns?
-- What do training data, models, and prediction actually do?
-- Why do GPUs matter for what became possible?
 
 ## In This Class
 
-In this meeting, we will:
+Cluster songs using different features, then group fictional student records and allocate opportunities. Distinguish finding similarity from imposing a hierarchy.
 
-- walk through supervised learning and neural networks as a technical pipeline
-- connect mechanism to capability using the BRAID framework
-- flag prediction as importing the past into the present
+## Mechanism and Society
 
-## Career / BRAID Integration
+Features shape groups; institutions can turn those groups into unequal opportunities that influence later data.
 
-BRAID: mechanism to capability. No dedicated career module today.
+**Student question:** AI for what? Similarity useful to whom?
 
-## Field Guide & Resources
+**Project connection:** Practice tracing representation → category → institutional action.
 
-Supervised learning and neural networks explain the mechanism; prediction importing the past is the deployment pattern to watch for.
+## Closing Reflection
 
-- [Technical Explainers](/field-guide/technical-explainers)
-- [Deployment Patterns](/field-guide/deployment-patterns)
+When does a useful category become a consequential social distinction?

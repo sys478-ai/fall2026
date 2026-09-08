@@ -1,45 +1,33 @@
 ---
-title: 'What Are Generative AI and LLMs Actually Doing?'
-slug: 12
+title: 'Generative AI: Outputs, Evidence, and Understanding'
+slug: '12'
 scheduled_day: 12
 module_id: 2
 draft: 1
-subtitle: 'Prediction, tokens, generation, and uncertainty.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Training and generation produce plausible outputs; institutional use can give
+  unsupported language authority.
+optional_readings:
+  - citation: '3Blue1Brown. (2024). Large Language Models explained briefly [Video].'
+    notes: 'Tokens, training, and generation; connect outputs to evidence.'
+    url: 'https://www.youtube.com/watch?v=LPZh9BOjkQs'
+  - citation: 'D’Ignazio, C., & Klein, L. F. (2020). Data Feminism. Introduction.'
+    notes: 'Selected opening passages: whose interests and knowledge shape data?'
+    url: 'https://data-feminism.mitpress.mit.edu/'
 ---
-
-## Topic / Focus
-
-We close this unit by asking what generative AI and large language models are actually doing: prediction, tokens, generation, and uncertainty, using the ChatGPT release as a case for examining anthropomorphism and aliveness claims.
-
-_Format: Full class · Lesson template: Concept + Lab_
-
-## Guiding Questions
-
-- What does an LLM actually do when it generates text?
-- How do tokens, prediction, and uncertainty relate to what looks like understanding?
-- How did the ChatGPT release shape public claims about AI?
 
 ## In This Class
 
-In this meeting, we will:
+Compare a generated fictional biography with an applicant summary used by a hypothetical hiring committee. Trace supported and unsupported statements; compare writing with brief image/code examples.
 
-- walk through the technical explainer on large language models
-- discuss the ChatGPT release as an example in the wild
-- flag anthropomorphism and aliveness claims as a recurring deployment pattern
+## Mechanism and Society
 
-## Career / BRAID Integration
+Training and generation produce plausible outputs; institutional use can give unsupported language authority.
 
-No dedicated career module today.
+**Student question:** AGI: does learning imply understanding or sentience?
 
-## Field Guide & Resources
+**Project connection:** Practice separating demonstrated capability from interpretation for the student-selected final.
 
-Large Language Models, the ChatGPT release, and anthropomorphism/aliveness claims all connect here.
+## Closing Reflection
 
-- [Technical Explainers](/field-guide/technical-explainers)
-- [Examples in the Wild](/field-guide/examples)
-- [Deployment Patterns](/field-guide/deployment-patterns)
+What changes when plausible text becomes evidence in a decision?

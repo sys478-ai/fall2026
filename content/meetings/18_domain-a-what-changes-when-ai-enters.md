@@ -1,45 +1,36 @@
 ---
-title: 'Domain A: What Changes When AI Enters?'
-slug: 18
+title: Who Makes a Technology Inevitable?
+slug: '18'
 scheduled_day: 18
 module_id: 4
 draft: 1
-subtitle: 'Apply the BRAID framework: capability, deployment conditions, and stakeholders.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Infrastructure and contracts constrain future options; investment and public
+  decisions shape which infrastructure gets built.
+optional_readings:
+  - citation: 'Winner, L. (1980). Do Artifacts Have Politics? Daedalus.'
+    notes: 'Printed pp. 127–128: design, authority, and choices that become durable.'
+    url: 'https://www.cc.gatech.edu/~beki/cs4001/Winner.pdf'
+  - citation: >-
+      International Energy Agency. (2026). Key Questions on Energy and AI.
+      Executive summary.
+    notes: Use selected charts to compare per-task efficiency with total demand.
+    url: >-
+      https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary
 ---
-
-## Topic / Focus
-
-Today we return to the first domain to ask what changes once AI enters, applying the BRAID application framework of capability, deployment conditions, and stakeholders, alongside a relevant technical explainer and ethical framework.
-
-_Format: Full class · Lesson template: Domain B: AI Enters_
-
-## Guiding Questions
-
-- What capability does the AI system add to this domain?
-- Under what deployment conditions does the system actually operate?
-- Which stakeholders gain or lose influence once AI enters?
 
 ## In This Class
 
-In this meeting, we will:
+Hold a mock data-center hearing. Compare an optional short-term service with long-term utility and vendor commitments; map alternatives and choices that become difficult to reverse.
 
-- return to Domain A's examples and add relevant technical explainers
-- apply the BRAID framework of capability, deployment conditions, and stakeholders
-- evaluate what changes using one ethical framework
+## Mechanism and Society
 
-## Career / BRAID Integration
+Infrastructure and contracts constrain future options; investment and public decisions shape which infrastructure gets built.
 
-BRAID application: capability, deployment conditions, stakeholders. No dedicated career module today.
+**Student question:** What makes AI hard to change later? Why inevitable?
 
-## Field Guide & Resources
+**Project connection:** Identify dependence, alternatives, and intervention points for the final.
 
-Technical explainers, deployment patterns, and an ethical framework help evaluate what changes once AI enters the domain.
+## Closing Reflection
 
-- [Technical Explainers](/field-guide/technical-explainers)
-- [Deployment Patterns](/field-guide/deployment-patterns)
-- [Ethical Frameworks](/field-guide/ethical-frameworks)
+Which decision remains open now but may be costly to revisit?

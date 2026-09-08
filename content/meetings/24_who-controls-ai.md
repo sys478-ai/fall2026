@@ -1,44 +1,35 @@
 ---
-title: 'Who Controls AI?'
-slug: 24
+title: 'Auditability, Contestability, and Post-Deployment Control'
+slug: '24'
 scheduled_day: 24
 module_id: 5
 draft: 1
-subtitle: 'Firms, infrastructure, data, compute, labor, concentration, and rents.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Adaptation changes behavior; logging, access, and permission designs determine
+  whether responsible institutions can investigate and intervene.
+optional_readings:
+  - citation: 'Winner, L. (1980). Do Artifacts Have Politics? Daedalus.'
+    notes: 'Printed pp. 127–128: design, authority, and choices that become durable.'
+    url: 'https://www.cc.gatech.edu/~beki/cs4001/Winner.pdf'
+  - citation: NIST. AI Risk Management Framework Playbook.
+    notes: >-
+      Select actions addressing documentation, oversight, and identified
+      evidence gaps.
+    url: 'https://airc.nist.gov/airmf-resources/playbook/'
 ---
-
-## Topic / Focus
-
-Today turns to political economy: who controls AI once firms, infrastructure, data, compute, and labor are concentrated, and how frontier-model economics shape what gets built and who benefits.
-
-_Format: Full class · Lesson template: Discussion / Systems Analysis_
-
-## Guiding Questions
-
-- How does power concentrate in AI's infrastructure, data, and compute?
-- What does 'extraction disguised as innovation' mean in practice?
-- Whose alternatives get foreclosed when power concentrates this way?
 
 ## In This Class
 
-In this meeting, we will:
+Assess fictional adaptive-ICD versions A/B/C with different hospital access and control. Investigate the same incident; separate evidence gaps from oversight gaps. All pilot evidence is simulated, and stronger control alone does not establish safety.
 
-- map how power concentrates in firms, infrastructure, data, and compute
-- discuss extraction disguised as innovation, invisible labor, and hidden material costs
-- connect AI's materiality to frontier-model political economy
+## Mechanism and Society
 
-## Career / BRAID Integration
+Adaptation changes behavior; logging, access, and permission designs determine whether responsible institutions can investigate and intervene.
 
-Frontier-model political economy. No dedicated career module today.
+**Student question:** What makes implementation difficult to change? Who can inspect or challenge it?
 
-## Field Guide & Resources
+**Project connection:** Short neuromorphic analysis 2: assessment table plus 300-word recommendation with evidence requirements, safeguards, and two lenses.
 
-Power can concentrate in infrastructure; extraction disguised as innovation, invisible labor, and hidden material costs recur alongside AI's materiality.
+## Closing Reflection
 
-- [Deployment Patterns](/field-guide/deployment-patterns)
-- [STS Concepts](/field-guide/sts-concepts)
+What must the hospital know and control before taking responsibility?

@@ -105,7 +105,9 @@ export default function FieldGuideCardPreview({
             onClick={event => openSheet(item, event.currentTarget)}
             className={`group flex flex-col items-start gap-2 rounded-xl border border-gray-200 bg-white p-5 text-left shadow-sm transition-colors dark:border-gray-800 dark:bg-black ${banner.previewCardHover}`}
           >
-            <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${banner.previewBadge}`}>{badgeLabel}</span>
+            <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${banner.previewBadge}`}>
+              {badgeLabel}
+            </span>
             <span className={`text-lg font-semibold text-gray-950 dark:text-gray-50 ${banner.previewTitleHover}`}>
               {item.title}
             </span>

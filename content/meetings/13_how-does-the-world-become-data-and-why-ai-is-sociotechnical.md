@@ -1,44 +1,34 @@
 ---
-title: 'How Does the World Become Data, and Why Is AI a Sociotechnical System?'
-slug: 13
+title: 'RLHF and Preference Shaping: Who Defines Helpful?'
+slug: '13'
 scheduled_day: 13
 module_id: 3
 draft: 1
-subtitle: 'Classification, measurement, representation, and proxies as your first step toward understanding AI as a sociotechnical system.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Feedback changes model behavior; evaluators and institutional incentives shape
+  which behavior is rewarded.
+optional_readings:
+  - citation: 'Benjamin, R. (2019). Race After Technology. Introduction.'
+    notes: >-
+      Short excerpt on objectivity, efficiency, and progress; revisit during
+      preference shaping.
+  - citation: 'D’Ignazio, C., & Klein, L. F. (2020). Data Feminism. Introduction.'
+    notes: 'Selected opening passages: whose interests and knowledge shape data?'
+    url: 'https://data-feminism.mitpress.mit.edu/'
 ---
-
-## Topic / Focus
-
-This unit's toolkit opens by asking how the world becomes data: classification, measurement, representation, and proxies, and why that makes AI a sociotechnical rather than purely technical system.
-
-_Format: Full class · Lesson template: Concept + Lab_
-
-## Guiding Questions
-
-- How does classification and measurement turn the world into data?
-- What gets built into data, models, and systems through baseline and category choices?
-- Why is AI best understood as a sociotechnical system?
 
 ## In This Class
 
-In this meeting, we will:
+Rank entertainment recommendations and tutor responses for speed, correctness, encouragement, or learning. Compare rankings and reconnect preference-based training to reinforcement.
 
-- trace how classification and measurement produce data, not simply record it
-- discuss features as value choices and baselines/categories as deployment patterns
-- connect data production to the sociotechnical-systems framing
+## Mechanism and Society
 
-## Career / BRAID Integration
+Feedback changes model behavior; evaluators and institutional incentives shape which behavior is rewarded.
 
-BRAID: what gets built into data, models, and systems? No dedicated career module today.
+**Student question:** How does training change? AI for what? Power?
 
-## Field Guide & Resources
+**Project connection:** Identify objectives, evaluators, and conflicting values for the final project.
 
-Data is produced, not found; classification systems produce the world; features are value choices; AI systems are sociotechnical systems.
+## Closing Reflection
 
-- [STS Concepts](/field-guide/sts-concepts)
-- [Deployment Patterns](/field-guide/deployment-patterns)
+Whose preferences would your training process privilege?

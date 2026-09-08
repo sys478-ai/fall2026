@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
 import FieldGuideCardPreview from '@/components/FieldGuideCardPreview';
 import { getFieldGuidePreviewItems } from '@/lib/field-guide-preview';
@@ -26,11 +25,6 @@ export default async function TechnicalExplainersPage() {
             banner={banner}
             sheetTitleId="technical-explainer-list-sheet-title"
           />
-          <p className="mb-0 border-t border-gray-200 pt-6 text-sm dark:border-gray-800">
-            <Link href="/field-guide/ai-history" className={`font-semibold ${banner.moreLink}`}>
-              History of AI timeline →
-            </Link>
-          </p>
         </section>
       )}
     </FieldGuideSectionLayout>

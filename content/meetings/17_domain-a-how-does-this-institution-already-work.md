@@ -1,45 +1,36 @@
 ---
-title: 'Domain A: How Does This Institution Already Work?'
-slug: 17
+title: Data Centers and Resource Use
+slug: '17'
 scheduled_day: 17
 module_id: 4
 draft: 1
-subtitle: 'Establish domain literacy before we turn to AI: values, institutions, authority, labor, and existing inequalities.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Hardware and computation require resources; prices, location, ownership, and
+  adoption scale shape total demand and who bears costs.
+optional_readings:
+  - citation: >-
+      International Energy Agency. (2026). Key Questions on Energy and AI.
+      Executive summary.
+    notes: Use selected charts to compare per-task efficiency with total demand.
+    url: >-
+      https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary
+  - citation: 'D’Ignazio, C., & Klein, L. F. (2020). Data Feminism. Introduction.'
+    notes: 'Selected opening passages: whose interests and knowledge shape data?'
+    url: 'https://data-feminism.mitpress.mit.edu/'
 ---
-
-## Topic / Focus
-
-This unit on domains opens by establishing how the first institution already works, before AI enters at all: its values, authority structures, labor, and existing inequalities. Understanding the institution on its own terms comes before understanding what AI changes.
-
-_Format: Full class · Lesson template: Domain A: Understand the System_
-
-## Guiding Questions
-
-- What values and forms of authority already structure this institution?
-- Whose labor keeps the institution running, and how is it currently distributed?
-- What inequalities already exist here, independent of any AI system?
 
 ## In This Class
 
-In this meeting, we will:
+Compare energy per task with total use under different adoption assumptions. Map electricity, water, land, and labor, identifying whose costs the boundary excludes.
 
-- use domain-relevant Examples in the Wild and STS concepts to establish institutional context
-- map values, authority, labor, and existing inequalities in the domain
-- select 2-3 deployment patterns to watch for once AI enters
+## Mechanism and Society
 
-## Career / BRAID Integration
+Hardware and computation require resources; prices, location, ownership, and adoption scale shape total demand and who bears costs.
 
-Domain literacy: values, institutions, authority, labor, existing inequalities. No dedicated career module today.
+**Student question:** Where does energy and resource use fit in the broader picture?
 
-## Field Guide & Resources
+**Project connection:** Define comparison boundaries for a student-selected AI case.
 
-Domain-relevant Examples in the Wild and STS concepts establish the institution before AI enters.
+## Closing Reflection
 
-- [Examples in the Wild](/field-guide/examples)
-- [STS Concepts](/field-guide/sts-concepts)
-- [Deployment Patterns](/field-guide/deployment-patterns)
+How could a more efficient task coexist with greater total resource use?

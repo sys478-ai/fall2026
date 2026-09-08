@@ -1,45 +1,35 @@
 ---
-title: 'How Do Predictions Become Decisions?'
-slug: 15
+title: Conventional and Neuromorphic Architectures
+slug: '15'
 scheduled_day: 15
 module_id: 3
 draft: 1
-subtitle: 'Scores, thresholds, classifications, error, and accountability.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Architecture shapes data movement and possible adaptation; power limits,
+  oversight needs, and ownership shape architectural choices.
+optional_readings:
+  - citation: 'Neuromorphic computing at scale. (2025). Nature, 637, 801–812.'
+    notes: >-
+      Selected introductory figure and short excerpt; compare mechanisms and
+      evidence for benefits.
+    url: 'https://www.nature.com/articles/s41586-024-08253-8'
+  - citation: 'Winner, L. (1980). Do Artifacts Have Politics? Daedalus.'
+    notes: 'Printed pp. 127–128: design, authority, and choices that become durable.'
+    url: 'https://www.cc.gatech.edu/~beki/cs4001/Winner.pdf'
 ---
-
-## Topic / Focus
-
-Today asks how predictions become decisions: scores, thresholds, classifications, error, and accountability, and who bears the cost when a threshold is set in the wrong place.
-
-_Format: Full class · Lesson template: Concept + Lab_
-
-## Guiding Questions
-
-- How does a threshold turn a continuous score into a consequential decision?
-- Who bears the cost when a threshold produces a false positive or false negative?
-- What does procedural justice ask of a system that makes threshold decisions?
 
 ## In This Class
 
-In this meeting, we will:
+Compare conventional and proposed neuromorphic processing for equipment monitoring and a hypothetical adaptive cardiac device. Trace data, changes, and controls; test efficiency claims rather than assuming them.
 
-- walk through threshold cases: blood pressure, FICO cutoffs, the Allegheny Family Screening Tool, face-recognition matching
-- connect thresholds making uncertainty consequential to procedural justice
-- discuss who bears the cost of error in each case
+## Mechanism and Society
 
-## Career / BRAID Integration
+Architecture shapes data movement and possible adaptation; power limits, oversight needs, and ownership shape architectural choices.
 
-Who bears the cost of error? No dedicated career module today.
+**Student question:** Could AI work differently: analog computing or other physical systems? Where do resources fit?
 
-## Field Guide & Resources
+**Project connection:** Draft the mechanism diagram for short neuromorphic analysis 1.
 
-Thresholds make uncertainty consequential; procedural justice is a useful ethical lens for evaluating them.
+## Closing Reflection
 
-- [Deployment Patterns](/field-guide/deployment-patterns)
-- [Examples in the Wild](/field-guide/examples)
-- [Ethical Frameworks](/field-guide/ethical-frameworks)
+Which claimed advantage depends on the deployment rather than the architecture alone?

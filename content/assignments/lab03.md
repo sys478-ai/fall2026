@@ -4,11 +4,6 @@ scheduled_day: 7
 num: '3'
 type: 'lab'
 draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: medium
 ---
 
 ## Features Are Value Choices

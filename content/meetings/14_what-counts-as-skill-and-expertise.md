@@ -1,44 +1,38 @@
 ---
-title: 'What Counts as Skill and Expertise?'
-slug: 14
+title: 'Anomaly Detection and Edge AI: Who Defines Normal?'
+slug: '14'
 scheduled_day: 14
 module_id: 3
 draft: 1
-subtitle: 'Human judgment, durable skills, automation, and changing work.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Representations and thresholds define unusual signals; care and workplace
+  institutions decide whether alerts lead to assistance, scrutiny, or
+  intervention.
+optional_readings:
+  - citation: >-
+      Massey, D. S. (2007). Categorically Unequal. Chapter 1: How Stratification
+      Works.
+    notes: >-
+      Pages 6–7: mechanisms through which categories become durable
+      inequalities.
+  - citation: >-
+      Benjamin, R. (2019). Race After Technology. Chapter 1: Engineered
+      Inequity.
+    notes: 'Selected excerpt: how classification can reproduce unequal treatment.'
 ---
-
-## Topic / Focus
-
-This career-forward session asks what counts as skill and expertise as automation changes work: human judgment, durable skills, and what gets retained or displaced.
-
-_Format: Career ~55-65 min + integrated course ~35-45 min · Lesson template: Career + Course Bridge_
-
-## Guiding Questions
-
-- What durable skills resist automation, and why?
-- How does dependency, offloading, or deskilling change what counts as expertise?
-- What expertise is retained, and what is displaced, as AI enters a field?
 
 ## In This Class
 
-In this meeting, we will:
+Adjust thresholds on synthetic equipment-vibration and elder-care movement traces. Compare false alarms, missed events, and alert-only versus automatic responses; trace what stays on the device.
 
-- complete Career 4: Strengths, Accomplishments, Durable Skills
-- discuss AI-driven dependency, offloading, and deskilling as a deployment pattern
-- connect durable skills to what employers and fields still value
+## Mechanism and Society
 
-## Career / BRAID Integration
+Representations and thresholds define unusual signals; care and workplace institutions decide whether alerts lead to assistance, scrutiny, or intervention.
 
-Career 4: Strengths, Accomplishments, Durable Skills.
+**Student question:** AI for what: safety, assistance, or surveillance?
 
-## Field Guide & Resources
+**Project connection:** Prepare the sensing mechanism and decision link for the first short analysis.
 
-AI can create dependency, offloading, and deskilling; Examples in the Wild support discussion of what expertise is retained or displaced.
+## Closing Reflection
 
-- [Deployment Patterns](/field-guide/deployment-patterns)
-- [Examples in the Wild](/field-guide/examples)
+How could the same alert support one person and burden another?

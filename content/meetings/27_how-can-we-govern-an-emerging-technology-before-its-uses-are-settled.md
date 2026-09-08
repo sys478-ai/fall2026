@@ -1,46 +1,39 @@
 ---
-title: 'How Can We Govern an Emerging Technology Before Its Uses Are Settled?'
-slug: 27
+title: What Did Engagement Change?
+slug: '27'
 scheduled_day: 27
-module_id: 6
+module_id: 5
 draft: 1
-subtitle: 'A full anticipatory case-study exercise: deployment conditions, domains, scenarios, and governance.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Public concerns may require new evidence, different controls, revised
+  purposes, or non-adoption; technical feasibility constrains proposed
+  responses.
+optional_readings:
+  - citation: >-
+      Benjamin, R. (2019). Race After Technology. Chapter 4: Technological
+      Benevolence.
+    notes: >-
+      Selected excerpt: whose definition of improvement shapes a technical
+      solution?
+  - citation: NIST. AI Risk Management Framework Playbook.
+    notes: >-
+      Select actions addressing documentation, oversight, and identified
+      evidence gaps.
+    url: 'https://airc.nist.gov/airmf-resources/playbook/'
 ---
-
-## Topic / Focus
-
-Today is a full anticipatory case-study exercise: you will map deployment conditions, domains, and scenarios, and apply governance frameworks to a technology before its uses are settled, using anticipatory governance and historical comparisons such as Asilomar and the EU AI Act.
-
-_Format: Full class · Lesson template: Case / BRAID Analysis_
-
-## Guiding Questions
-
-- What deployment conditions, domains, and scenarios should you map before a technology's uses are settled?
-- How does anticipatory governance differ from regulating a technology after the fact?
-- What can Asilomar and the EU AI Act teach us as points of comparison?
 
 ## In This Class
 
-In this meeting, we will:
+Use pilot feedback to compare adding safeguards with changing the purpose, deployment, or technology. Specify what changed and what remains disputed.
 
-- walk through the anticipatory governance framework and how-to-use guide
-- apply BRAID Case Study deployment scenarios to a governance synthesis exercise
-- compare the exercise to historical cases such as Asilomar and the EU AI Act
+## Mechanism and Society
 
-## Career / BRAID Integration
+Public concerns may require new evidence, different controls, revised purposes, or non-adoption; technical feasibility constrains proposed responses.
 
-Full anticipatory case-study exercise: deployment conditions, domains, scenarios, governance.
+**Student question:** Why inevitable? Where is this going?
 
-## Field Guide & Resources
+**Project connection:** Revise final-project analysis and public materials; briefly explain changes and unresolved questions.
 
-Anticipatory Governance, the how-to-use walkthrough, BRAID Case Study governance synthesis, and comparisons such as Asilomar and the EU AI Act.
+## Closing Reflection
 
-- [Anticipatory Governance](/field-guide/governance/anticipatory-governance)
-- [How to Use Anticipatory Governance](/field-guide/governance/how-to-use-anticipatory-governance)
-- [BRAID Case Study](/braid-case-study)
-- [Examples in the Wild](/field-guide/examples)
+What changed beyond the wording of your proposal?

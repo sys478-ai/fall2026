@@ -2,25 +2,29 @@
 id: 5
 draft: 1
 slug: patterns-across-domains-power-and-political-economy
-title: 'Patterns Across Domains: AI, Power, and Political Economy'
-color: rose
-excerpt: 'You will step back to compare patterns across domains and ask who controls AI, and what responsibilities you carry inside organizations that adopt it.'
-unit_focus: 'In this unit, you will compare deployment patterns across the domains studied so far, examine the political economy of who controls AI, and consider your own responsibility inside adopting organizations.'
+title: Public Engagement and Governance
+color: indigo
+excerpt: >-
+  Practice explanation, auditability, and control through short neuromorphic
+  analysis 2: a fictional adaptive cardiac-device proposal. Transfer the method
+  to public materials and peer deliberation about an AI case of your choice.
+unit_focus: >-
+  Practice explanation, auditability, and control through short neuromorphic
+  analysis 2: a fictional adaptive cardiac-device proposal. Transfer the method
+  to public materials and peer deliberation about an AI case of your choice.
 priority: low
 ---
 
-This unit steps back from individual domains to ask what patterns recur across all of them: labor, expertise, authority, dependency, and risk. It is a comparative synthesis, using the Field Guide's deployment patterns and ethical frameworks to move from explanation to judgment.
+Practice explanation, auditability, and control through short neuromorphic analysis 2: a fictional adaptive cardiac-device proposal. Transfer the method to public materials and peer deliberation about an AI case of your choice.
 
-We then turn to political economy: who controls AI once firms, infrastructure, data, compute, and labor are concentrated, and how frontier-model economics shape what gets built and who benefits.
+Compare relevant biological, psychological, social / political, and moral lenses. Distinguish descriptive, normative, and political / institutional claims; identify what remains uncertain.
 
-A closing career bridge asks what responsibilities you carry inside organizations that adopt AI, including the possibility that delay, refusal, or non-adoption can be responsible choices rather than obstacles to innovation.
+All readings are optional; reuse brief excerpts. Lower stakes are relative to the action and context.
 
-Fall 2026 dates: `Thu, Nov 5 - Tue, Nov 12 (includes University Senior Symposium, Nov 17)`
+**Fall 2026:** Nov. 5 – Nov. 24; Senior Symposium Nov. 17.
 
-Meeting sequence:
-
-1. `What Patterns Recur Across Domains?`
-2. `Who Controls AI?`
-3. `What Responsibilities Do People Have Inside Organizations Adopting AI?`
-
-By the end of this unit, you should be able to compare deployment patterns across domains, describe how power concentrates in AI's political economy, and articulate your own responsibilities inside an adopting organization.
+1. Explainability: Whose Questions and Knowledge Count?
+2. Auditability, Contestability, and Post-Deployment Control
+3. Who Should Shape Emerging Technology?
+4. Public-Engagement Pilot
+5. What Did Engagement Change?

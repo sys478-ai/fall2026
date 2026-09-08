@@ -203,6 +203,11 @@ table.table-simple tbody tr:last-child td {
   background: rgba(255, 255, 255, 0.03) !important;
 }
 
+table.top-cell-padding {
+  td, th {
+    padding-top: 1rem;
+  }
+}
 /* Slide-like bordered box for markdown {: .box } sections */
 .prose .slide-box,
 .slide-box {

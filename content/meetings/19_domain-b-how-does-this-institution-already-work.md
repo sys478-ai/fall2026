@@ -1,44 +1,34 @@
 ---
-title: 'Domain B: How Does This Institution Already Work?'
-slug: 19
+title: 'Creativity, Training Data, and Copyright'
+slug: '19'
 scheduled_day: 19
 module_id: 4
 draft: 1
-subtitle: 'A second domain, paired with your own career storytelling and interview introductions.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Data collection and generation depend on access to creative work; ownership
+  and compensation arrangements shape datasets and uses.
+optional_readings:
+  - citation: U.S. Copyright Office. Copyright and Artificial Intelligence.
+    notes: >-
+      Selected report passages on training; distinguish policy analysis from
+      court rulings.
+    url: 'https://www.copyright.gov/ai/'
+  - citation: 'Crawford, K. (2021). Atlas of AI. Chapter 3: Data.'
+    notes: 'Selected excerpt: collection, provenance, and the work behind datasets.'
 ---
-
-## Topic / Focus
-
-Today establishes a second domain's institutional context, paired with career storytelling and interview introductions, since expertise and credibility are socially recognized in professional life much as they are within institutions.
-
-_Format: Career ~50-60 min + domain ~40-50 min · Lesson template: Career + Domain Bridge_
-
-## Guiding Questions
-
-- What values and authority structures define this second institution?
-- How is expertise or credibility socially recognized here?
-- What does your own story reveal about how credibility gets established?
 
 ## In This Class
 
-In this meeting, we will:
+Trace a work from creation through training to output. Compare personal experimentation with a publisher replacing commissioned work; separate legal claims, moral judgments, and uncertain futures.
 
-- complete Career 5: Career Storytelling + Interview Introductions
-- use domain-relevant STS concepts and Examples in the Wild to establish institutional context
-- connect career storytelling to how expertise and credibility are socially recognized
+## Mechanism and Society
 
-## Career / BRAID Integration
+Data collection and generation depend on access to creative work; ownership and compensation arrangements shape datasets and uses.
 
-Career 5: Career Storytelling + Interview Introductions.
+**Student question:** Legal precedents: where is this going?
 
-## Field Guide & Resources
+**Project connection:** Map provenance and plausible alternative futures for the final.
 
-STS concepts and Examples in the Wild establish institutional context for the second domain.
+## Closing Reflection
 
-- [STS Concepts](/field-guide/sts-concepts)
-- [Examples in the Wild](/field-guide/examples)
+Whose contribution is visible, compensated, or omitted?

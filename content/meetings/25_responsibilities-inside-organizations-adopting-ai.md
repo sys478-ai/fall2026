@@ -1,45 +1,36 @@
 ---
-title: 'What Responsibilities Do People Have Inside Organizations Adopting AI?'
-slug: 25
+title: Who Should Shape Emerging Technology?
+slug: '25'
 scheduled_day: 25
 module_id: 5
 draft: 1
-subtitle: 'Fit, power, boundaries, and solutionism from the inside, paired with a career reflection on how you want to show up.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Design specifications encode priorities; public participation can change
+  purposes and controls when consequential choices remain open.
+optional_readings:
+  - citation: UKRI. Guidance on engaging the public with your research.
+    notes: >-
+      Use to ask what participants can influence and whose perspectives are
+      missing.
+    url: >-
+      https://www.ukri.org/manage-your-award/good-research-resource-hub/guidance-on-engaging-the-public-with-your-research/
+  - citation: 'D’Ignazio, C., & Klein, L. F. (2020). Data Feminism. Introduction.'
+    notes: 'Selected opening passages: whose interests and knowledge shape data?'
+    url: 'https://data-feminism.mitpress.mit.edu/'
 ---
-
-## Topic / Focus
-
-We close this unit by asking what responsibilities you carry inside organizations adopting AI: fit, power, boundaries, and solutionism, including the possibility that delay, refusal, or non-adoption can be responsible choices.
-
-_Format: Career ~55-70 min + integrated discussion ~30-45 min · Lesson template: Career + Course Bridge_
-
-## Guiding Questions
-
-- What responsibilities do you have inside an organization that is adopting AI?
-- When is governance framed as a barrier to innovation, and when is that framing wrong?
-- When are delay, refusal, or non-adoption responsible choices rather than obstacles?
 
 ## In This Class
 
-In this meeting, we will:
+Compare consultation after procurement with participation before goals are fixed. Develop contrasting scenarios for each group’s chosen AI case and identify which decisions participants could influence.
 
-- complete Career 7: How Do You Want to Show Up?
-- discuss governance framed as a barrier to innovation, and when that framing misleads
-- consider delay, refusal, and non-adoption as legitimate governance choices
+## Mechanism and Society
 
-## Career / BRAID Integration
+Design specifications encode priorities; public participation can change purposes and controls when consequential choices remain open.
 
-Career 7: How Do You Want to Show Up?
+**Student question:** AI for what? Power? Utopia? Why inevitable?
 
-## Field Guide & Resources
+**Project connection:** Draft a public-facing explainer or deliberation activity for the student-selected final.
 
-Governance framed as a barrier to innovation, delay/refusal/non-adoption as responsible choices, and governance broader than regulation all apply here.
+## Closing Reflection
 
-- [Deployment Patterns](/field-guide/deployment-patterns)
-- [STS Concepts](/field-guide/sts-concepts)
-- [Anticipatory Governance](/field-guide/governance/anticipatory-governance)
+Who could change the problem definition, and whose perspective is missing?

@@ -24,29 +24,39 @@ optional_readings:
     url: 'https://www.computerhistory.org/revolution/digital-logic/12/intro'
     notes: 'Great demo of how to make a chain of transistors do arithmetic.'
 ---
-`
+
 ## Topic / Focus
 
-What can a computer “see,” and what has to happen before the world becomes computable? We start with sound and move to people: the computer does not receive a voice or a student. It receives a representation.
+What can a computer “see,” and what has to happen before something in the world becomes data? We will look at several ways computers represent information – numbers, color, text, images, sound, the environment, and eventually people. In each case, the computer does not receive the thing itself. It receives a representation: selected features encoded as numbers according to some scheme.
 
-Before an algorithm can judge the world, someone has already decided how that world will be encoded.
+The central idea is that **data representation involves choices**. What gets captured? What gets left out? And when the thing being represented is a person, what are the consequences of those choices?
 
-This meeting is the first of three: representation (today), procedure (Sept. 8), then learning (Sept. 15).
+This meeting is the first of three: *data representation*, then *procedure*, then *learning*.
+
+## Slides
+
+* [Slides](https://docs.google.com/presentation/d/1Bwny_Ru_It3MfW5SyJ0Gscpe1pqJIps0b5Md1B6soQs/edit?usp=sharing)
+* [Activity](https://docs.google.com/document/d/1T3f53ag66yvNcO4dD8eQERBp108SglJiDsEnp71yYic/edit?usp=sharing)
 
 ## Guiding Questions
 
-- What does a computer receive when a person hears a voice?
-- Why do the same bits mean different things under different encodings?
-- What becomes data when a university tries to predict graduation, and what does not?
+- How do things in the world become numbers a computer can work with?
+- How does a computer know what those numbers mean?
+- What information does a representation preserve – and what does it leave out?
+- Who decides what gets represented when the data are about the world; about people?
 
 ## In This Class
 
 In this meeting, we will:
 
-- trace sound from air pressure to sampled numbers, then analog vs. digital and why binary is an encoding system, not the information itself
-- treat `01000001` as a meaning-depends-on-encoding problem, then compare representations of sound, images, text, and people
-- use a graduation-prediction case and a song-encoding lab to see that representation is a choice: what gets measured, omitted, simplified, and by whom
+- experiment with binary and several encoding schemes for numbers, color, text, and images
+- trace how a physical phenomenon such as sound can be sampled and represented as numerical data
+- distinguish **the thing being represented**, **its numerical representation**, and **the encoding used to interpret those numbers**
+- examine how changing a representation can preserve some information while losing or simplifying other information
+- use a mortgate lending case to ask what happens when people are represented through institutional data
 
 ## Closing Reflection
 
-Choose one real-world phenomenon. What would be easy to represent computationally, and what important information might be lost?
+Choose something in the world that we might want a computer to understand.
+
+**What could be represented easily? What might be difficult to represent – or disappear entirely – once it becomes data?**

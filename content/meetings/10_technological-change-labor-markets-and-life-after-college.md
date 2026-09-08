@@ -1,43 +1,37 @@
 ---
-title: 'How Do Technological Change and Labor Markets Shape Life After College?'
-slug: 10
+title: Supervised Learning and Neural Networks
+slug: '10'
 scheduled_day: 10
 module_id: 2
 draft: 1
-subtitle: 'A bridge from AI and work to your economic life after graduation.'
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+subtitle: >-
+  Training examples and evaluation choices shape performance; deployment stakes
+  determine what evidence is needed before acting.
+readings:
+  - citation: "Intro to Supervised Learning (Course Website)"
+    url: field-guide/technical-explainers/supervised-learning
+optional_readings:
+  - citation: 'Google. Teachable Machine [Interactive].'
+    notes: Try object classification; test unfamiliar backgrounds and examples.
+    url: 'https://teachablemachine.withgoogle.com/'
+  - citation: >-
+      Benjamin, R. (2019). Race After Technology. Chapter 1: Engineered
+      Inequity.
+    notes: 'Selected excerpt: how classification can reproduce unequal treatment.'
 ---
-
-## Topic / Focus
-
-This career-forward session bridges technological change and labor markets to your life after college: budgeting, salary context, and negotiation. Optional labor examples connect the abstract question of technological change to your own professional life.
-
-_Format: Career ~65-75 min + course bridge ~25-35 min · Lesson template: Career + Course Bridge_
-
-## Guiding Questions
-
-- How do technological change and labor markets shape economic life after college?
-- What do budgeting, salary context, and negotiation have to do with AI?
-- Which examples of AI reshaping labor are most relevant to your own field?
 
 ## In This Class
 
-In this meeting, we will:
+Train an object classifier, alter backgrounds and labels, and test unseen examples. Compare classroom sorting with a hypothetical recycling-line hazard detector. Introduce parameter adjustment and neural networks after the experiment.
 
-- complete Career 3: Life After College – budgeting, salary context, negotiation
-- discuss optional labor examples such as Amazon's hiring tool and entertainment-industry strikes
-- bridge technological change to the economic realities of life after college
+## Mechanism and Society
 
-## Career / BRAID Integration
+Training examples and evaluation choices shape performance; deployment stakes determine what evidence is needed before acting.
 
-Career 3: Life After College – budgeting, salary context, negotiation.
+**Student question:** As models improve, how does training change? Better for whom?
 
-## Field Guide & Resources
+**Project connection:** Practice defining success and documenting generalization limits.
 
-Optional Examples in the Wild connect technological change to labor and careers.
+## Closing Reflection
 
-- [Examples in the Wild](/field-guide/examples)
+Which test would you require before relying on the higher-stakes system?
