@@ -1,18 +1,8 @@
 ---
 id: 3
 draft: 1
-slug: toolkit-for-understanding-ai-in-society
-title: 'Feedback, Deployment, and Biological Inspiration'
-color: indigo
-excerpt: >-
-  Compare preference shaping, anomaly detection, and neuromorphic mechanisms.
-  Use short neuromorphic analysis 1 to connect a proposed equipment monitor’s
-  capabilities to evidence, institutional choices, and consequences.
-unit_focus: >-
-  Compare preference shaping, anomaly detection, and neuromorphic mechanisms.
-  Use short neuromorphic analysis 1 to connect a proposed equipment monitor’s
-  capabilities to evidence, institutional choices, and consequences.
-priority: low
+slug: ai-learning-adaptation
+title: 'How AI Systems Learn and Adapt'
 ---
 
 Compare preference shaping, anomaly detection, and neuromorphic mechanisms. Use short neuromorphic analysis 1 to connect a proposed equipment monitor’s capabilities to evidence, institutional choices, and consequences.

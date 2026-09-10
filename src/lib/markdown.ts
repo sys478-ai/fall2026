@@ -344,6 +344,8 @@ export interface PostData {
   no_render?: number;
   hide_from_list?: number;
   card_type?: string;
+  card_href?: string;
+  sheet_embed?: string;
   domains?: string[];
   tags?: string[];
   connected_cards?: Array<{ num: string; interpretation: string }>;

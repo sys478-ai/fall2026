@@ -1,10 +1,34 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 
 type View = 'card' | 'compact';
+
+const STORAGE_KEY = 'field-guide-index-view';
 const ViewContext = createContext<View>('card');
+
+function readStoredView(): View {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw === 'card' || raw === 'compact') return raw;
+  } catch {
+    // Ignore storage failures (private mode, quota, etc.).
+  }
+  return 'card';
+}
+
+function writeStoredView(view: View) {
+  try {
+    localStorage.setItem(STORAGE_KEY, view);
+  } catch {
+    // Ignore storage failures.
+  }
+}
+
+export function useFieldGuideView(): View {
+  return useContext(ViewContext);
+}
 
 export function FieldGuideViewProvider({ children }: { children: React.ReactNode }) {
   const [view, setView] = useState<View>('card');
@@ -12,15 +36,29 @@ export function FieldGuideViewProvider({ children }: { children: React.ReactNode
   const active = 'bg-gray-100 font-semibold text-gray-900 dark:bg-gray-800 dark:text-gray-50';
   const inactive = 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200';
 
+  useEffect(() => {
+    setView(readStoredView());
+  }, []);
+
+  function updateView(next: View) {
+    setView(next);
+    writeStoredView(next);
+  }
+
   return (
     <ViewContext.Provider value={view}>
       <div className="flex justify-end px-4 md:px-16 mb-4">
         <div className="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
-          <button onClick={() => setView('card')} className={`${base} ${view === 'card' ? active : inactive}`}>
+          <button
+            type="button"
+            onClick={() => updateView('card')}
+            className={`${base} ${view === 'card' ? active : inactive}`}
+          >
             Cards
           </button>
           <button
-            onClick={() => setView('compact')}
+            type="button"
+            onClick={() => updateView('compact')}
             className={`${base} border-l border-gray-200 dark:border-gray-700 ${view === 'compact' ? active : inactive}`}
           >
             Compact
@@ -44,7 +82,13 @@ export function FieldGuideCompactSection({
 }: {
   label?: string;
   description?: string;
-  cards: { title: string; subtitle?: string; href?: string; tags?: { label: string; href?: string }[] }[];
+  cards: {
+    title: string;
+    subtitle?: string;
+    href?: string;
+    onSelect?: () => void;
+    tags?: { label: string; href?: string }[];
+  }[];
 }) {
   const view = useContext(ViewContext);
   if (view !== 'compact') return null;
@@ -65,55 +109,71 @@ export function FieldGuideCompactSection({
         <div>
           <table className="w-full text-sm border-0!">
             <tbody>
-              {cards.map((card, i) => (
-                <tr key={i} className={i > 0 ? 'border-t border-gray-100 dark:border-gray-900' : ''}>
-                  <td className="py-2.5 pr-6 text-gray-600 dark:text-gray-400 align-top">
-                    <h3 className="m-0! text-base font-medium!">
-                      {card.href ? (
-                        <Link href={card.href} className="hover:underline">
-                          {card.title}
-                        </Link>
-                      ) : (
-                        card.title
+              {cards.map((card, i) => {
+                const titleClass = 'hover:underline cursor-pointer bg-transparent p-0 text-left font-medium text-inherit';
+                const titleControl = card.onSelect ? (
+                  <button type="button" onClick={card.onSelect} className={titleClass}>
+                    {card.title}
+                  </button>
+                ) : card.href ? (
+                  <Link href={card.href} className="hover:underline">
+                    {card.title}
+                  </Link>
+                ) : (
+                  card.title
+                );
+
+                const arrowControl = card.onSelect ? (
+                  <button
+                    type="button"
+                    onClick={card.onSelect}
+                    className="text-violet-600 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-200 cursor-pointer bg-transparent p-0"
+                    aria-label={`View ${card.title}`}
+                  >
+                    →
+                  </button>
+                ) : card.href ? (
+                  <Link
+                    href={card.href}
+                    className="text-violet-600 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-200"
+                    aria-label={`View ${card.title}`}
+                  >
+                    →
+                  </Link>
+                ) : null;
+
+                return (
+                  <tr key={i} className={i > 0 ? 'border-t border-gray-100 dark:border-gray-900' : ''}>
+                    <td className="py-2.5 pr-6 text-gray-600 dark:text-gray-400 align-top">
+                      <h3 className="m-0! text-base font-medium!">{titleControl}</h3>
+                      {card.subtitle ?? ''}
+                      {card.tags && card.tags.length > 0 && (
+                        <div className="mt-1.5 flex flex-wrap gap-1">
+                          {card.tags.map((tag, j) =>
+                            tag.href ? (
+                              <Link
+                                key={j}
+                                href={tag.href}
+                                className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-violet-700 no-underline hover:bg-violet-200 dark:bg-violet-900/50 dark:text-violet-300 dark:hover:bg-violet-800/50"
+                              >
+                                {tag.label}
+                              </Link>
+                            ) : (
+                              <span
+                                key={j}
+                                className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gray-500 dark:bg-gray-800 dark:text-gray-400"
+                              >
+                                {tag.label}
+                              </span>
+                            )
+                          )}
+                        </div>
                       )}
-                    </h3>
-                    {card.subtitle ?? ''}
-                    {card.tags && card.tags.length > 0 && (
-                      <div className="mt-1.5 flex flex-wrap gap-1">
-                        {card.tags.map((tag, j) => (
-                          tag.href ? (
-                            <Link
-                              key={j}
-                              href={tag.href}
-                              className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-violet-700 no-underline hover:bg-violet-200 dark:bg-violet-900/50 dark:text-violet-300 dark:hover:bg-violet-800/50"
-                            >
-                              {tag.label}
-                            </Link>
-                          ) : (
-                            <span
-                              key={j}
-                              className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-gray-500 dark:bg-gray-800 dark:text-gray-400"
-                            >
-                              {tag.label}
-                            </span>
-                          )
-                        ))}
-                      </div>
-                    )}
-                  </td>
-                  <td className="py-2.5 text-right align-top whitespace-nowrap">
-                    {card.href && (
-                      <Link
-                        href={card.href}
-                        className="text-violet-600 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-200"
-                        aria-label={`View ${card.title}`}
-                      >
-                        →
-                      </Link>
-                    )}
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="py-2.5 text-right align-top whitespace-nowrap">{arrowControl}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

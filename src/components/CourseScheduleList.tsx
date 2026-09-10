@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import type { ReactElement } from 'react';
+import CourseScheduleMeetingRow from '@/components/CourseScheduleMeetingRow';
+import CourseScheduleTopicSection from '@/components/CourseScheduleTopicSection';
+import { parseMeetingDate } from '@/lib/meeting-dates';
 import { getReadingsForTopic } from '@/lib/readings';
 import { groupReadingsByPickOne } from '@/lib/reading-groups';
 import { getTopics } from '@/lib/topics';
-import { DEFAULT_DUE_TIME_LABEL, formatDueTime } from '@/lib/utils';
+import { DEFAULT_DUE_TIME_LABEL, formatDueTime, formatMonthDay } from '@/lib/utils';
 
 type ScheduleTopics = Awaited<ReturnType<typeof getTopics>>;
 type ScheduleMeeting = ScheduleTopics[number]['meetings'][number];
@@ -242,17 +245,31 @@ function ReadingsHeaderLabel({ className }: { className?: string }) {
   );
 }
 
+function getTopicDateRange(meetings: ScheduleMeeting[]): string | null {
+  const dateIsos = meetings
+    .map(meeting => parseMeetingDate(meeting.date))
+    .filter((value): value is string => Boolean(value))
+    .sort();
+
+  if (dateIsos.length === 0) {
+    return null;
+  }
+
+  const startLabel = formatMonthDay(dateIsos[0]);
+  const endLabel = formatMonthDay(dateIsos[dateIsos.length - 1]);
+  return startLabel === endLabel ? startLabel : `${startLabel} – ${endLabel}`;
+}
+
 export default function CourseScheduleList({ topics }: { topics: ScheduleTopics }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-0">
       {topics.map(topic => (
-        <section key={topic.id}>
-          <div className="border-b border-gray-200 pt-1 pb-2 dark:border-gray-800">
-            <h2 className="m-0 text-lg font-semibold text-gray-950 dark:text-gray-50">
-              Topic {topic.id}. {topic.title}
-            </h2>
-          </div>
-
+        <CourseScheduleTopicSection
+          key={topic.id}
+          topicId={topic.id}
+          title={topic.title}
+          dateRange={getTopicDateRange(topic.meetings)}
+        >
           <div className={`hidden ${ROW_COLS} border-b border-gray-200 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500 dark:border-gray-800 dark:text-gray-400 lg:grid`}>
             <span>Date</span>
             <span>Topic</span>
@@ -275,7 +292,11 @@ export default function CourseScheduleList({ topics }: { topics: ScheduleTopics 
               const dueItems = isNoClass ? [] : getDueItems(meeting);
 
               return (
-                <li key={`${topic.id}-${meeting.slug || index}`} className={ROW_GRID}>
+                <CourseScheduleMeetingRow
+                  key={`${topic.id}-${meeting.slug || index}`}
+                  dateIso={parseMeetingDate(meeting.date)}
+                  className={ROW_GRID}
+                >
                   <span className="flex items-center text-sm text-gray-600 dark:text-gray-400">{meeting.date}</span>
                   <div className="min-w-0">
                     {topicHref ? (
@@ -358,11 +379,11 @@ export default function CourseScheduleList({ topics }: { topics: ScheduleTopics 
                       </div>
                     )}
                   </div>
-                </li>
+                </CourseScheduleMeetingRow>
               );
             })}
           </ol>
-        </section>
+        </CourseScheduleTopicSection>
       ))}
     </div>
   );

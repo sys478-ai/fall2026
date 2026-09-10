@@ -24,6 +24,7 @@
     "@heroicons/react": "*",
     "@tailwindcss/typography": "*",
     "@uiw/react-codemirror": "*",
+    "@xyflow/react": "^12.11.6",
     "canvas-confetti": "*",
     "clsx": "*",
     "date-fns": "*",

@@ -1,49 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Bars3Icon,
   BookOpenIcon,
-  CalendarDaysIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   ClipboardDocumentListIcon,
   DocumentTextIcon,
-  LockClosedIcon,
   MoonIcon,
   SunIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import CourseReminder from '@/components/dashboard/CourseReminder';
 import { useDarkMode } from '@/hooks/useDarkMode';
-import { getFocusMeeting, type TimelineMeeting } from '@/lib/course-dashboard';
+import type { TimelineMeeting } from '@/lib/course-dashboard';
 import type { DashboardAssignmentInput } from '@/lib/dashboard-assignments';
-import { parseMeetingDate } from '@/lib/meeting-dates';
-import { getModuleColorClasses, type ModuleColorToken } from '@/lib/module-colors';
-import { formatWeekdayNumericDate } from '@/lib/utils';
-
-interface SidebarTopicItem {
-  id: string;
-  title: string;
-  date: string;
-  contentHref: string;
-  isNoClass?: boolean;
-  isDraft?: boolean;
-}
-
-interface SidebarModuleItem {
-  id: number;
-  title: string;
-  color: ModuleColorToken;
-  isDraft?: boolean;
-  topics: SidebarTopicItem[];
-}
 
 interface SidebarNavClientProps {
   courseTitle: string;
-  modules: SidebarModuleItem[];
   meetings: TimelineMeeting[];
   assignments: DashboardAssignmentInput[];
 }
@@ -51,27 +28,16 @@ interface SidebarNavClientProps {
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
 
 const RESOURCE_NAV_ITEMS = [
-  // Temporarily hidden from Resources nav:
-  // { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
-  // { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns' },
-  // { label: 'Examples', href: '/field-guide/examples' },
+  { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
+  { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns' },
+  { label: 'Examples', href: '/field-guide/examples' },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
   { label: 'Theories of Learning', href: '/field-guide/theories-of-learning' },
-  // { label: 'STS Concepts', href: '/field-guide/sts-concepts' },
-] as const;
-
-const HIDDEN_RESOURCE_PATHS = [
-  '/field-guide/technical-explainers',
-  '/field-guide/deployment-patterns',
-  '/field-guide/examples',
-  '/field-guide/sts-concepts',
+  { label: 'STS Concepts', href: '/field-guide/sts-concepts' },
 ] as const;
 
 function isResourcePath(path: string) {
-  return (
-    RESOURCE_NAV_ITEMS.some(item => path === item.href || path.startsWith(`${item.href}/`)) ||
-    HIDDEN_RESOURCE_PATHS.some(item => path === item || path.startsWith(`${item}/`))
-  );
+  return RESOURCE_NAV_ITEMS.some(item => path === item.href || path.startsWith(`${item.href}/`));
 }
 
 function normalizePath(path: string) {
@@ -82,56 +48,29 @@ function sidebarActiveId(path: string) {
   return `sidebar-active-${normalizePath(path).replace(/\//g, '-') || 'home'}`;
 }
 
-function getMeetingDateLabel(date: string): string {
-  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return formatWeekdayNumericDate(date);
-  }
-
-  const dateIso = parseMeetingDate(date);
-  if (dateIso) {
-    return formatWeekdayNumericDate(dateIso);
-  }
-
-  return date;
-}
-
 export default function SidebarNavClient({
   courseTitle,
-  modules,
   meetings,
   assignments,
 }: SidebarNavClientProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const normalizedPath = normalizePath(pathname);
   const isDark = useDarkMode();
   const [mounted, setMounted] = useState(false);
-  const [referenceDate, setReferenceDate] = useState<Date | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scheduleOpen, setScheduleOpen] = useState(() => normalizedPath.startsWith('/meetings/'));
   const [resourcesOpen, setResourcesOpen] = useState(() => isResourcePath(normalizedPath));
-  const [expandedModuleIds, setExpandedModuleIds] = useState<number[]>([]);
 
   useEffect(() => {
     setMounted(true);
-    setReferenceDate(new Date());
     const savedCollapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY);
     if (savedCollapsed !== null) {
       setCollapsed(savedCollapsed === 'true');
     }
   }, []);
 
-  const focusMeeting = useMemo(
-    () => (referenceDate ? getFocusMeeting(meetings, referenceDate) : null),
-    [meetings, referenceDate]
-  );
-  const focusHref = focusMeeting?.meeting.slug ? `/meetings/${focusMeeting.meeting.slug}` : null;
-  const focusPath = focusHref ? normalizePath(focusHref) : null;
-
   useEffect(() => {
-    if (typeof document === 'undefined') return;
-    document.documentElement.style.setProperty('--app-sidebar-width', collapsed ? '5rem' : '19rem');
+    document.documentElement.style.setProperty('--app-sidebar-width', collapsed ? '5rem' : '15rem');
   }, [collapsed]);
 
   useEffect(() => {
@@ -139,32 +78,10 @@ export default function SidebarNavClient({
   }, [pathname]);
 
   useEffect(() => {
-    if (normalizedPath.startsWith('/meetings/')) {
-      setScheduleOpen(true);
-    }
-  }, [normalizedPath]);
-
-  useEffect(() => {
     if (isResourcePath(normalizedPath)) {
       setResourcesOpen(true);
     }
   }, [normalizedPath]);
-
-  useEffect(() => {
-    const moduleWithActiveTopic = modules.find(module =>
-      module.topics.some(topic => normalizePath(topic.contentHref) === normalizedPath)
-    );
-    if (!moduleWithActiveTopic) return;
-
-    setExpandedModuleIds([moduleWithActiveTopic.id]);
-  }, [modules, normalizedPath]);
-
-  useEffect(() => {
-    if (!focusMeeting) return;
-    if (normalizedPath.startsWith('/meetings/')) return;
-
-    setExpandedModuleIds([focusMeeting.meeting.moduleId]);
-  }, [focusMeeting, normalizedPath]);
 
   useEffect(() => {
     if (!mounted || collapsed) return;
@@ -201,11 +118,10 @@ export default function SidebarNavClient({
       cancelAnimationFrame(frame);
       window.clearTimeout(timeout);
     };
-  }, [collapsed, expandedModuleIds, focusPath, mounted, normalizedPath, resourcesOpen, scheduleOpen]);
+  }, [collapsed, mounted, normalizedPath, resourcesOpen]);
 
   const activeAssignments = normalizedPath === '/assignments' || normalizedPath.startsWith('/assignments/');
   const activeCourseOverview = normalizedPath === '/topics';
-  const activeTopicsNav = normalizedPath.startsWith('/meetings/');
   const activeResources = isResourcePath(normalizedPath);
   const activeSyllabus = normalizedPath === '/' || normalizedPath === '/syllabus';
 
@@ -213,35 +129,10 @@ export default function SidebarNavClient({
     () => [
       { label: 'Syllabus', href: '/', icon: DocumentTextIcon, active: activeSyllabus },
       { label: 'Assignments', href: '/assignments', icon: ClipboardDocumentListIcon, active: activeAssignments },
-      { label: 'Course Overview', href: '/topics', icon: BookOpenIcon, active: activeCourseOverview },
+      { label: 'Schedule', href: '/topics', icon: BookOpenIcon, active: activeCourseOverview },
     ],
     [activeAssignments, activeCourseOverview, activeSyllabus]
   );
-
-  function handleTopicsClick() {
-    if (collapsed) {
-      setCollapsed(false);
-      localStorage.setItem(SIDEBAR_COLLAPSED_KEY, 'false');
-    }
-
-    if (scheduleOpen && !collapsed) {
-      setScheduleOpen(false);
-      return;
-    }
-
-    setScheduleOpen(true);
-
-    const focus = getFocusMeeting(meetings, new Date());
-    const href = focus?.meeting.slug ? `/meetings/${focus.meeting.slug}` : null;
-
-    if (focus) {
-      setExpandedModuleIds([focus.meeting.moduleId]);
-    }
-
-    if (href) {
-      router.push(href);
-    }
-  }
 
   function toggleResourcesOpen() {
     if (collapsed) {
@@ -252,10 +143,6 @@ export default function SidebarNavClient({
     }
 
     setResourcesOpen(prev => !prev);
-  }
-
-  function toggleModuleExpanded(moduleId: number) {
-    setExpandedModuleIds(prev => (prev.includes(moduleId) ? [] : [moduleId]));
   }
 
   const toggleDarkMode = () => {
@@ -275,7 +162,6 @@ export default function SidebarNavClient({
     localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(newValue));
 
     if (newValue) {
-      setScheduleOpen(false);
       setResourcesOpen(false);
     }
   };
@@ -314,7 +200,7 @@ export default function SidebarNavClient({
   const sidebarInner = (
     <div
       className={`flex h-full flex-col border-r border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950 ${
-        collapsed ? 'w-20' : 'w-[19rem]'
+        collapsed ? 'w-20' : 'w-[15rem]'
       } transition-[width] duration-300 ease-in-out`}
     >
       <div className="flex items-center justify-between border-b border-slate-200 px-4 py-4 dark:border-slate-800">
@@ -366,181 +252,8 @@ export default function SidebarNavClient({
             id={sidebarActiveId('/topics')}
             className={`${baseLinkClass} ${getTopLevelItemClass(navItems[2])} ${collapsed ? 'justify-center' : ''}`}
           >
-            {renderNavContent('Course Overview', BookOpenIcon)}
+            {renderNavContent('Schedule', BookOpenIcon)}
           </Link>
-
-          <div className="bg-slate-50 dark:bg-slate-950">
-            <button
-              type="button"
-              onClick={handleTopicsClick}
-              aria-expanded={scheduleOpen}
-              className={`${baseLinkClass} w-full ${
-                activeTopicsNav || scheduleOpen ? activeTopLevelClass : inactiveTopLevelClass
-              } ${collapsed ? 'justify-center' : 'justify-between'}`}
-            >
-              <span className="flex min-w-0 items-center gap-3">
-                {renderNavContent('Topics', CalendarDaysIcon)}
-              </span>
-              {!collapsed && (
-                <ChevronDownIcon
-                  className={`h-4 w-4 shrink-0 text-slate-500 transition-transform dark:text-slate-400 ${
-                    scheduleOpen ? '' : '-rotate-90'
-                  }`}
-                />
-              )}
-            </button>
-
-            {!collapsed && scheduleOpen && (
-              <div className="border-t border-slate-200/70 py-1.5 dark:border-slate-800">
-                <div className="flex flex-col">
-                  {modules.map(module => {
-                    const isDraft = module.isDraft === true;
-                    const isOpen = !isDraft && expandedModuleIds.includes(module.id);
-                    const moduleColor = getModuleColorClasses(module.color);
-                    const moduleHeaderClass = `group flex w-full min-w-0 items-center gap-1 pl-3 pr-2.5 py-1.5 text-left text-sm no-underline! transition-colors ${
-                      isDraft
-                        ? 'cursor-default text-slate-400 dark:text-slate-500'
-                        : isOpen
-                          ? 'font-semibold text-slate-950 dark:text-slate-50'
-                          : 'text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100'
-                    }`;
-
-                    return (
-                      <section key={module.id}>
-                        {isDraft ? (
-                          <div className={moduleHeaderClass}>
-                            <span className="truncate min-w-0">
-                              {module.id}. {module.title}
-                            </span>
-                            <LockClosedIcon
-                              className="ml-auto h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500"
-                              aria-hidden="true"
-                            />
-                          </div>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={() => toggleModuleExpanded(module.id)}
-                            className={moduleHeaderClass}
-                            aria-expanded={isOpen}
-                          >
-                            <span className="truncate min-w-0">
-                              {module.id}. {module.title}
-                            </span>
-                            <ChevronDownIcon
-                              className={`ml-auto h-3.5 w-3.5 shrink-0 text-slate-400 transition-transform dark:text-slate-500 ${
-                                isOpen ? '' : '-rotate-90'
-                              }`}
-                            />
-                          </button>
-                        )}
-
-                        <div
-                          className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-                            isOpen ? 'max-h-400 opacity-100' : 'max-h-0 opacity-0'
-                          }`}
-                        >
-                          <div className="pb-1.5">
-                            {module.topics.map(topic => {
-                              const isNoClass = topic.isNoClass === true;
-                              const isDraftTopic = topic.isDraft === true;
-                              const isLocked = isNoClass || isDraftTopic;
-                              const topicPath = normalizePath(topic.contentHref);
-                              const isTopicActive = !isLocked && topicPath === normalizedPath;
-                              const isTodayMeeting =
-                                mounted &&
-                                focusMeeting?.kind === 'today' &&
-                                Boolean(focusPath && topicPath === focusPath);
-                              const isTopicOverview =
-                                topic.date === 'Topic overview' || topic.date === 'Module overview';
-                              const showDate =
-                                !isTopicOverview && !isNoClass && Boolean(topic.date);
-                              const activeRowId = isTopicActive
-                                ? sidebarActiveId(topicPath)
-                                : undefined;
-                              const rowClassName = `flex items-start gap-2 py-1.5 pl-7 pr-2.5 text-sm no-underline! transition-colors ${
-                                isLocked
-                                  ? 'cursor-default text-slate-400 dark:text-slate-600'
-                                  : isTopicActive
-                                    ? `${activeNestedClass} ${moduleColor.background} ${moduleColor.sidebarActive}`
-                                    : inactiveNestedClass
-                              }`;
-                              const rowBody = (
-                                <>
-                                  <span className="min-w-0 flex-1">
-                                    <span
-                                      className={`block leading-snug ${
-                                        isTodayMeeting ? '' : 'truncate'
-                                      } ${isTopicActive ? 'font-semibold' : 'font-normal'}`}
-                                    >
-                                      {isTopicOverview ? (
-                                        <span className="inline-flex max-w-full items-center gap-1.5">
-                                          <i
-                                            className="fas fa-book-open shrink-0 text-xs text-slate-400 dark:text-slate-500"
-                                            aria-hidden="true"
-                                          />
-                                          <span className={isTodayMeeting ? '' : 'truncate'}>
-                                            {topic.title}
-                                          </span>
-                                        </span>
-                                      ) : (
-                                        topic.title
-                                      )}
-                                    </span>
-                                    {isTodayMeeting && (
-                                      <span className="mt-1 inline-block rounded bg-rose-100 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-rose-700 dark:bg-rose-950/60 dark:text-rose-300">
-                                        today
-                                      </span>
-                                    )}
-                                  </span>
-                                  {showDate && (
-                                    <span className="shrink-0 pt-0.5 text-[11px] font-medium tabular-nums text-slate-400 dark:text-slate-600">
-                                      {getMeetingDateLabel(topic.date)}
-                                    </span>
-                                  )}
-                                  {isNoClass && (
-                                    <span className="shrink-0 pt-0.5 text-[10px] font-medium text-slate-400 dark:text-slate-600">
-                                      Off
-                                    </span>
-                                  )}
-                                  {isDraftTopic && (
-                                    <LockClosedIcon
-                                      className="mt-0.5 h-3 w-3 shrink-0 text-slate-400 dark:text-slate-500"
-                                      aria-hidden="true"
-                                      title="Draft"
-                                    />
-                                  )}
-                                </>
-                              );
-
-                              if (isLocked) {
-                                return (
-                                  <div key={topic.id} className={rowClassName}>
-                                    {rowBody}
-                                  </div>
-                                );
-                              }
-
-                              return (
-                                <Link
-                                  key={topic.id}
-                                  id={activeRowId}
-                                  href={topic.contentHref}
-                                  className={rowClassName}
-                                >
-                                  {rowBody}
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </section>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
 
           <div className="bg-slate-50 dark:bg-slate-950">
             <button

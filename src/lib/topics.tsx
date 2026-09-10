@@ -112,6 +112,7 @@ export interface Meeting {
   themes?: string[];
   showEthicalFrameworksPreview?: boolean;
   learningTheoryPreviewCards?: string[];
+  deploymentPatternPreviewCards?: string[];
 }
 
 export interface Topic {
@@ -163,6 +164,7 @@ interface BaseMeeting {
   themes?: string[];
   showEthicalFrameworksPreview?: boolean;
   learningTheoryPreviewCards?: string[];
+  deploymentPatternPreviewCards?: string[];
 }
 
 interface BaseTopic {
@@ -322,6 +324,7 @@ function buildTopicMeeting(
     draft: meeting.draft ?? 1,
     showEthicalFrameworksPreview: meeting.showEthicalFrameworksPreview,
     learningTheoryPreviewCards: meeting.learningTheoryPreviewCards,
+    deploymentPatternPreviewCards: meeting.deploymentPatternPreviewCards,
   };
 }
 

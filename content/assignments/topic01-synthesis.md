@@ -33,15 +33,30 @@ Apply each lens to your example. Do not just define the lens.
 
 ### What counts as a strong lens analysis?
 
-For each lens, use at least one course concept and connect it to a specific moment in your example.
+For each lens, focus on a specific moment in your example and use the questions below to help explain what happened. You do not need to answer every question. Choose the ones that are most useful, and use at least one course concept in your explanation.
 
-* **Biological:** synaptic change, plasticity, habituation, or sensitization
-* **Psychological:** reinforcement, consequence, mental model, assimilation, or accommodation
-* **Sociocultural:** scaffolding, zone of proximal development, funds of knowledge, or community of practice
-* **Socio-political:** institutional categories, authority, whose knowledge counts, recognition, or power
+**Biological**
+* What changed in the learner’s brain, body, or nervous system through experience or repetition?
+* Did repeated experience make a response stronger, weaker, faster, or more automatic?
+What role did repetition, timing, intensity, or practice play in producing that change?
 
-In other words, using one of the lenses or learning theories above, explain how you learned what you learned.
+**Psychological**
+* How did consequences or feedback affect what the learner did next?
+* What expectation, strategy, or mental model did the learner already have?
+* Did the learner fit the new experience into an existing understanding, or have to revise that understanding?
 
+**Sociocultural**
+* Why was learning this important in the first place – what activity, relationship, role, or community made it matter?
+* What activity, relationship, role, or community made this kind of learning important?
+* Who helped the learner do something they could not yet do alone, and how?
+* What knowledge, tools, language, routines, or experiences did the learner bring or gain through participation with others?
+
+**Socio-political**
+* Who had the authority to decide what counted as correct, knowledgeable, skilled, or successful?
+* Whose knowledge or way of doing things was recognized as legitimate, and whose was overlooked?
+* How did institutional categories, rules, or power shape the learner’s opportunities to learn or demonstrate what they knew?
+
+In other words, do not just name or define a theory. Use the lens to explain how learning happened in your example and what that lens helps you notice.
 ## Make a 4-Slide Deck
 
 Keep each slide concise. Use short phrases or 1–2 sentences per prompt. You are welcome to just use visuals for the slides and include more detail in the slide notes.

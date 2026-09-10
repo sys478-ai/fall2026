@@ -44,6 +44,7 @@ export interface TopicMarkdownMetadata {
   draft: number;
   showEthicalFrameworksPreview?: boolean;
   learningTheoryPreviewCards?: string[];
+  deploymentPatternPreviewCards?: string[];
 }
 
 function asStringArray(value: unknown): string[] {
@@ -52,6 +53,18 @@ function asStringArray(value: unknown): string[] {
   }
 
   return value.filter((item): item is string => typeof item === 'string');
+}
+
+/** Ensure in-site paths start with `/` so they are not resolved relative to the current page. */
+function normalizeCourseUrl(url: string): string {
+  const trimmed = url.trim();
+  if (!trimmed) {
+    return trimmed;
+  }
+  if (/^https?:\/\//i.test(trimmed) || trimmed.startsWith('/') || trimmed.startsWith('#')) {
+    return trimmed;
+  }
+  return `/${trimmed}`;
 }
 
 function asReadingArray(value: unknown): TopicReading[] {
@@ -76,7 +89,7 @@ function asReadingArray(value: unknown): TopicReading[] {
 
       return {
         citation,
-        url: typeof url === 'string' && url.trim() !== '' ? url : undefined,
+        url: typeof url === 'string' && url.trim() !== '' ? normalizeCourseUrl(url) : undefined,
         notes: typeof notes === 'string' && notes.trim() !== '' ? notes : undefined,
         pickOne: pickOne === true ? true : undefined,
       };
@@ -200,6 +213,7 @@ function readTopicMarkdownMetadata(fileName: string, fallbackOrder: number): Top
     draft: data.draft === 0 || data.draft === false ? 0 : 1,
     showEthicalFrameworksPreview: data.show_ethical_frameworks_preview === true,
     learningTheoryPreviewCards: asStringArray(data.learning_theory_preview_cards),
+    deploymentPatternPreviewCards: asStringArray(data.deployment_pattern_preview_cards),
   };
 }
 

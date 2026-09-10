@@ -1,5 +1,5 @@
 ---
-title: "Systems are reactive: they change what they measure."
+title: "Systems change the behavior they measure."
 num: '27'
 id: sts-systems-are-reactive
 slug: systems-are-reactive-they-change-what-they-measure

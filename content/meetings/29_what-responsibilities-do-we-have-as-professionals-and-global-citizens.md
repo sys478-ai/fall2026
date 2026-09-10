@@ -1,7 +1,7 @@
 ---
 title: Professional and Civic Responsibility
-slug: '28'
-scheduled_day: 28
+slug: '29'
+scheduled_day: 29
 module_id: 6
 draft: 1
 subtitle: >-

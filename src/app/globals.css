@@ -697,6 +697,70 @@ li.checkbox-checked input[type='checkbox'] {
   color: #8fc4ee;
 }
 
+/* Today / due-tonight highlight on schedule and assignments lists */
+.today-highlight {
+  @apply rounded-md bg-yellow-50 dark:bg-yellow-950/35;
+}
+
+/* Table rows need the fill on cells – tr backgrounds don't paint with border-collapse */
+tr.today-highlight {
+  background-color: transparent;
+}
+
+tr.today-highlight > td {
+  @apply bg-yellow-50;
+}
+
+.dark tr.today-highlight > td {
+  background-color: color-mix(in oklab, var(--color-yellow-950) 35%, transparent);
+}
+
+tr.today-highlight > td:first-child {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+tr.today-highlight > td:last-child {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
+.today-highlight .text-gray-300 {
+  @apply text-gray-700 dark:text-gray-100;
+}
+
+.today-highlight .text-gray-400 {
+  @apply text-gray-600 dark:text-gray-200;
+}
+
+.today-highlight .text-gray-500 {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.today-highlight .text-gray-600 {
+  @apply text-gray-800 dark:text-gray-200;
+}
+
+.today-highlight .text-gray-700 {
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.today-highlight .text-gray-950 {
+  @apply text-black;
+}
+
+.dark .today-highlight .text-gray-100 {
+  @apply text-white;
+}
+
+.today-highlight a {
+  color: #063a58;
+}
+
+.dark .today-highlight a {
+  color: #c5e4f8;
+}
+
 /* Numbered steps styling */
 .prose ol li {
   @apply pl-2;
@@ -1515,4 +1579,79 @@ table.next-time-checklist tbody tr:first-child td {
 .image-placeholder__caption strong {
   color: var(--foreground);
   font-weight: 600;
+}
+
+/* Circuit sandbox selection + edge affordances */
+.circuit-sandbox .react-flow__edge .react-flow__edge-path {
+  stroke: #64748b;
+  stroke-width: 2.5;
+  cursor: pointer;
+  transition: stroke-width 80ms ease, stroke 80ms ease;
+}
+
+.circuit-sandbox .react-flow__edge.circuit-edge-flowing .react-flow__edge-path,
+.circuit-sandbox .react-flow__edge.animated .react-flow__edge-path {
+  stroke: #f59e0b !important;
+  stroke-width: 3.25 !important;
+  stroke-dasharray: 7 8 !important;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 3px rgb(245 158 11 / 0.85));
+  animation: circuit-edge-flow 0.55s linear infinite;
+}
+
+.circuit-sandbox .react-flow__edge.selected .react-flow__edge-path,
+.circuit-sandbox .react-flow__edge:focus .react-flow__edge-path,
+.circuit-sandbox .react-flow__edge:focus-visible .react-flow__edge-path {
+  stroke: #0284c7 !important;
+  stroke-width: 7 !important;
+  filter: drop-shadow(0 0 4px rgb(14 165 233 / 0.9));
+}
+
+.circuit-sandbox .react-flow__edge.selected.circuit-edge-flowing .react-flow__edge-path,
+.circuit-sandbox .react-flow__edge.selected.animated .react-flow__edge-path {
+  stroke: #0284c7 !important;
+  stroke-dasharray: 7 8 !important;
+  animation: circuit-edge-flow 0.55s linear infinite;
+}
+
+.circuit-sandbox .react-flow__edge.selected .react-flow__edge-interaction {
+  stroke-width: 20 !important;
+}
+
+@keyframes circuit-edge-flow {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+
+.circuit-sandbox .react-flow__node {
+  cursor: grab;
+}
+
+.circuit-sandbox .react-flow__node.dragging {
+  cursor: grabbing;
+}
+
+/* Portaled outside the scaled viewport so zoom cannot skew menu placement/size. */
+.circuit-sandbox-context-menu {
+  position: fixed !important;
+  z-index: 1000;
+  min-width: 140px;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transform: none !important;
+  zoom: 1;
+}
+
+:is(html.dark) .circuit-sandbox-context-menu {
+  border-color: #374151;
+  background: #030712;
 }

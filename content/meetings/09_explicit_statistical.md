@@ -9,7 +9,7 @@ readings:
   - citation: 'Abu-Mostafa, Y. S. (2012, July). How to teach computers to learn on their own. Scientific American, 307(1), 78–81.'
     url: 'https://www.scientificamerican.com/article/how-to-teach-computers-think-for-themselves/'
   - citation: 'History of AI timeline (Course website)'
-    url: field-guide/ai-history
+    url: /field-guide/ai-history
 optional_readings:
   - citation: 'Mucci, T., Finio, M., & Downie, A. (2024, October 21). The history of artificial intelligence. IBM.'
     url: 'https://www.ibm.com/think/topics/history-of-artificial-intelligence'

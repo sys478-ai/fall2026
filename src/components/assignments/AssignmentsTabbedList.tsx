@@ -1,11 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
 import { getCareerModuleDisplayTitle } from '@/lib/assignment-display';
 import type { AssignmentBadgeKind } from '@/lib/assignment-badges';
 import AssignmentTypeBadge from '@/components/assignments/AssignmentTypeBadge';
-import { formatDate, formatDueTime, DEFAULT_DUE_TIME_LABEL } from '@/lib/utils';
+import { SCHEDULE_TODAY_HIGHLIGHT_CLASS } from '@/components/CourseScheduleMeetingRow';
+import { formatIsoDateLocal } from '@/lib/meeting-dates';
+import { formatDate, formatDueTime, DEFAULT_DUE_TIME_LABEL, isDueTonightTime } from '@/lib/utils';
 
 interface AssignmentData {
   id: string;
@@ -115,6 +118,12 @@ function getHref(item: AssignmentData) {
 }
 
 export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListProps) {
+  const [todayIso, setTodayIso] = useState<string | null>(null);
+
+  useEffect(() => {
+    setTodayIso(formatIsoDateLocal(new Date()));
+  }, []);
+
   return (
     <table className="mt-8 w-full max-w-5xl border-collapse text-left">
       <thead>
@@ -134,9 +143,16 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
           const daysLeftLabel = getDaysLeftLabel(item.due_date);
           const dueTimeLabel = getDueTimeLabel(item.due_date, item.due_time);
           const titleContent = <span>{getCareerModuleDisplayTitle(item)}</span>;
+          const isDueTonight =
+            Boolean(todayIso) &&
+            item.due_date === todayIso &&
+            isDueTonightTime(item.due_time);
 
           return (
-            <tr key={item.id} className="align-top">
+            <tr
+              key={item.id}
+              className={['align-top', isDueTonight ? SCHEDULE_TODAY_HIGHLIGHT_CLASS : ''].filter(Boolean).join(' ')}
+            >
               <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-600 dark:text-gray-400">
                 {item.due_date ? formatDate(item.due_date) : 'TBD'}
               </td>

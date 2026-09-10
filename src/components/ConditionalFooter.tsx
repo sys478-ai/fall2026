@@ -11,6 +11,7 @@ export default function ConditionalFooter() {
   // Normalize pathname by removing base path if present
   const normalizedPath = pathname.replace(/^\/fall2026/, '') || '/';
   
+  const isStandaloneTool = normalizedPath === '/activities/circuit-sandbox';
   const usesContentLayout = normalizedPath === '/' || 
                             normalizedPath === '/topics' ||
                             normalizedPath === '/syllabus' ||
@@ -19,7 +20,7 @@ export default function ConditionalFooter() {
                             normalizedPath === '/assignments' ||
                             normalizedPath.startsWith('/assignments/') ||
                             normalizedPath === '/activities' ||
-                            normalizedPath.startsWith('/activities/') ||
+                            (normalizedPath.startsWith('/activities/') && !isStandaloneTool) ||
                             normalizedPath === '/resources' ||
                             normalizedPath.startsWith('/resources/') ||
                             normalizedPath === '/bibliography' ||
@@ -31,7 +32,7 @@ export default function ConditionalFooter() {
                             normalizedPath.startsWith('/exams/') ||
                             normalizedPath === '/repos-hidden';
   
-  if (usesContentLayout) {
+  if (usesContentLayout || isStandaloneTool) {
     return null;
   }
   

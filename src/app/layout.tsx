@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Abril_Fatface, Outfit } from "next/font/google";
+import AppShell from "@/components/AppShell";
 import Navigation from "@/components/Nav";
-import LayoutWrapper from "@/components/LayoutWrapper";
-import ConditionalFooter from "@/components/ConditionalFooter";
 import ThemeInit from "@/components/ThemeInit";
 import ResourcePopover from "@/components/ResourcePopover";
 import { getCourseConfig } from "@/lib/config";
@@ -51,17 +50,7 @@ export default function RootLayout({
       <body className={`${inter.className} ${abril.variable} ${outfit.variable}`}>
         <ThemeInit />
         <ResourcePopover />
-        <div className="min-h-screen md:flex">
-          <Navigation />
-          <div className="min-w-0 flex-1">
-            <LayoutWrapper>
-              <main>
-                {children}
-              </main>
-            </LayoutWrapper>
-            <ConditionalFooter />
-          </div>
-        </div>
+        <AppShell navigation={<Navigation />}>{children}</AppShell>
       </body>
     </html>
   );

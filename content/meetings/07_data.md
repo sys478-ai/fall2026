@@ -5,6 +5,12 @@ scheduled_day: 7
 module_id: 2
 draft: 0
 subtitle: 'Computers never encounter the world directly. They encounter encoded representations of it.'
+deployment_pattern_preview_cards:
+  - dp-repurposed-data
+  - dp-prediction-imports-past
+  - dp-measurement-effects
+  - dp-meaningless-consent
+  - dp-baseline-and-categories
 optional_readings:
   - citation: 'Computerphile. (n.d.). How digital audio works [Video]. YouTube.'
     url: 'https://www.youtube.com/watch?v=1RIA9U5oXro'
@@ -33,7 +39,7 @@ The central idea is that **data representation involves choices**. What gets cap
 
 This meeting is the first of three: *data representation*, then *procedure*, then *learning*.
 
-## Slides
+## Slides & Activities
 
 * [Slides](https://docs.google.com/presentation/d/1Bwny_Ru_It3MfW5SyJ0Gscpe1pqJIps0b5Md1B6soQs/edit?usp=sharing)
 * [Activity](https://docs.google.com/document/d/1T3f53ag66yvNcO4dD8eQERBp108SglJiDsEnp71yYic/edit?usp=sharing)

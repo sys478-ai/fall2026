@@ -1,27 +1,8 @@
 import { getCourseConfig } from '@/lib/config';
 import { flattenCourseMeetings } from '@/lib/course-dashboard';
 import { getDashboardAssignments } from '@/lib/dashboard-assignments';
-import type { ModuleColorToken } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
-import { getMeetingAnchorId } from '@/lib/navigation-helpers';
 import SidebarNavClient from './SidebarNavClient';
-
-interface SidebarTopicItem {
-  id: string;
-  title: string;
-  date: string;
-  contentHref: string;
-  isNoClass?: boolean;
-  isDraft?: boolean;
-}
-
-interface SidebarModuleItem {
-  id: number;
-  title: string;
-  color: ModuleColorToken;
-  isDraft?: boolean;
-  topics: SidebarTopicItem[];
-}
 
 export default async function Navigation() {
   const courseConfig = getCourseConfig();
@@ -29,33 +10,9 @@ export default async function Navigation() {
   const meetings = flattenCourseMeetings(scheduledTopics);
   const assignments = await getDashboardAssignments();
 
-  const modules: SidebarModuleItem[] = scheduledTopics.map(module => ({
-    id: module.id,
-    title: module.title,
-    color: module.color,
-    isDraft: module.draft === 1,
-    topics: module.meetings
-      .filter(meeting => !meeting.scheduleOnly)
-      .map((meeting, index) => {
-      const contentHref = meeting.slug
-        ? `/meetings/${meeting.slug}`
-        : `/topics#${getMeetingAnchorId(module.id, index, meeting.topic)}`;
-
-      return {
-        id: meeting.slug || getMeetingAnchorId(module.id, index, meeting.topic),
-        title: meeting.topic,
-        date: meeting.date || '',
-        contentHref,
-        isNoClass: meeting.holiday === true,
-        isDraft: meeting.draft === 1,
-      };
-    }),
-  }));
-
   return (
     <SidebarNavClient
       courseTitle={`${courseConfig.courseNumber}: ${courseConfig.semester}`}
-      modules={modules}
       meetings={meetings}
       assignments={assignments}
     />

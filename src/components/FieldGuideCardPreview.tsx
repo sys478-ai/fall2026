@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import AIHistoryTimeline from '@/components/AIHistoryTimeline';
+import type { AIHistoryTimelineEntry } from '@/lib/ai-history-timeline';
 import { getFieldGuideContentClassFromBasePath, type FieldGuideBannerClasses } from '@/lib/field-guide-palettes';
 
 export interface FieldGuidePreviewItem {
@@ -11,6 +13,16 @@ export interface FieldGuidePreviewItem {
   title: string;
   subtitle: string;
   contentHtml: string;
+  /** When set, the sheet footer also links to this full-page destination. */
+  href?: string;
+  /** Label for the standalone-page footer link. */
+  hrefLabel?: string;
+  /** Optional special sheet body (e.g. the interactive AI history timeline). */
+  sheetEmbed?: 'ai-history';
+  groupKey?: string;
+  groupTitle?: string;
+  groupIntro?: string;
+  groupOrder?: number;
 }
 
 interface FieldGuideCardPreviewProps {
@@ -21,6 +33,11 @@ interface FieldGuideCardPreviewProps {
   moreLinkLabel: string;
   banner: FieldGuideBannerClasses;
   sheetTitleId: string;
+  aiHistoryEntries?: AIHistoryTimelineEntry[];
+  /** When true, append the item number to the badge (e.g. "Pattern 5"). */
+  showNumInBadge?: boolean;
+  /** Cards grid or compact list; both open the same side sheet. */
+  viewMode?: 'card' | 'compact';
 }
 
 // Keep in sync with the `duration-300` Tailwind classes below – Tailwind's class
@@ -41,6 +58,9 @@ export default function FieldGuideCardPreview({
   moreLinkLabel,
   banner,
   sheetTitleId,
+  aiHistoryEntries = [],
+  showNumInBadge = false,
+  viewMode = 'card',
 }: FieldGuideCardPreviewProps) {
   const pathname = usePathname();
   const isOnSectionPage = normalizePath(pathname) === normalizePath(linkBasePath);
@@ -50,6 +70,13 @@ export default function FieldGuideCardPreview({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function getBadgeText(item: FieldGuidePreviewItem) {
+    if (showNumInBadge && item.num) {
+      return `${badgeLabel} ${item.num}`;
+    }
+    return badgeLabel;
+  }
 
   function openSheet(item: FieldGuidePreviewItem, trigger: HTMLButtonElement) {
     if (closeTimeoutRef.current) {
@@ -94,27 +121,62 @@ export default function FieldGuideCardPreview({
   }, []);
 
   return (
-    <div className="space-y-6">
-      {intro && <p className="mb-0 max-w-3xl text-base leading-7 text-gray-700 dark:text-gray-300">{intro}</p>}
+    <div className={viewMode === 'card' ? 'space-y-6' : undefined}>
+      {viewMode === 'card' && intro ? (
+        <p className="mb-0 max-w-3xl text-base leading-7 text-gray-700 dark:text-gray-300">{intro}</p>
+      ) : null}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map(item => (
-          <button
-            key={item.id}
-            type="button"
-            onClick={event => openSheet(item, event.currentTarget)}
-            className={`group flex flex-col items-start gap-2 rounded-xl border border-gray-200 bg-white p-5 text-left shadow-sm transition-colors dark:border-gray-800 dark:bg-black ${banner.previewCardHover}`}
-          >
-            <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${banner.previewBadge}`}>
-              {badgeLabel}
-            </span>
-            <span className={`text-lg font-semibold text-gray-950 dark:text-gray-50 ${banner.previewTitleHover}`}>
-              {item.title}
-            </span>
-            <span className="text-sm leading-6 text-gray-600 dark:text-gray-400">{item.subtitle}</span>
-          </button>
-        ))}
-      </div>
+      {viewMode === 'card' ? (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map(item => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={event => openSheet(item, event.currentTarget)}
+              className={`group flex flex-col items-start gap-2 rounded-xl border border-gray-200 bg-white p-5 text-left shadow-sm transition-colors dark:border-gray-800 dark:bg-black ${banner.previewCardHover}`}
+            >
+              <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${banner.previewBadge}`}>
+                {getBadgeText(item)}
+              </span>
+              <span className={`text-lg font-semibold text-gray-950 dark:text-gray-50 ${banner.previewTitleHover}`}>
+                {item.title}
+              </span>
+              <span className="text-sm leading-6 text-gray-600 dark:text-gray-400">{item.subtitle}</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <table className="w-full text-sm border-0!">
+          <tbody>
+            {items.map((item, i) => (
+              <tr key={item.id} className={i > 0 ? 'border-t border-gray-100 dark:border-gray-900' : ''}>
+                <td className="py-2.5 pr-6 text-gray-600 dark:text-gray-400 align-top">
+                  <h3 className="m-0! text-base font-medium!">
+                    <button
+                      type="button"
+                      onClick={event => openSheet(item, event.currentTarget)}
+                      className="cursor-pointer bg-transparent p-0 text-left font-medium text-inherit hover:underline"
+                    >
+                      {item.title}
+                    </button>
+                  </h3>
+                  {item.subtitle}
+                </td>
+                <td className="py-2.5 text-right align-top whitespace-nowrap">
+                  <button
+                    type="button"
+                    onClick={event => openSheet(item, event.currentTarget)}
+                    className="cursor-pointer bg-transparent p-0 text-violet-600 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-200"
+                    aria-label={`View ${item.title}`}
+                  >
+                    →
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       {/* Backdrop */}
       <div
@@ -139,7 +201,9 @@ export default function FieldGuideCardPreview({
           <>
             <div className={`flex items-start justify-between gap-4 ${banner.sheetHeader}`}>
               <div>
-                <p className={`mb-1 text-xs font-semibold uppercase tracking-widest ${banner.label}`}>{badgeLabel}</p>
+                <p className={`mb-1 text-xs font-semibold uppercase tracking-widest ${banner.label}`}>
+                  {getBadgeText(activeItem)}
+                </p>
                 <h2 id={sheetTitleId} className="m-0 text-2xl font-semibold text-gray-950 dark:text-gray-50">
                   {activeItem.title}
                 </h2>
@@ -159,26 +223,50 @@ export default function FieldGuideCardPreview({
             </div>
 
             <div className="flex-1 px-6 py-6">
-              <div
-                className={`prose prose-lg max-w-none dark:prose-invert ${contentClass}`}
-                dangerouslySetInnerHTML={{ __html: activeItem.contentHtml }}
-              />
+              {activeItem.sheetEmbed === 'ai-history' && aiHistoryEntries.length > 0 ? (
+                <AIHistoryTimeline entries={aiHistoryEntries} showIntro />
+              ) : (
+                <div
+                  className={`prose prose-lg max-w-none dark:prose-invert ${contentClass}`}
+                  dangerouslySetInnerHTML={{ __html: activeItem.contentHtml }}
+                />
+              )}
             </div>
 
             <div className="border-t border-gray-200 px-6 py-4 dark:border-gray-800">
-              {isOnSectionPage ? (
-                <button
-                  type="button"
-                  onClick={closeSheet}
-                  className={`${MORE_LINK_BASE} ${banner.moreLink} cursor-pointer bg-transparent p-0`}
-                >
-                  {moreLinkLabel} →
-                </button>
-              ) : (
-                <Link href={linkBasePath} className={`${MORE_LINK_BASE} ${banner.moreLink}`}>
-                  {moreLinkLabel} →
-                </Link>
-              )}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                {activeItem.href ? (
+                  <Link href={activeItem.href} className={`${MORE_LINK_BASE} ${banner.moreLink}`}>
+                    {activeItem.hrefLabel || 'Open full page'} →
+                  </Link>
+                ) : isOnSectionPage ? (
+                  <button
+                    type="button"
+                    onClick={closeSheet}
+                    className={`${MORE_LINK_BASE} ${banner.moreLink} cursor-pointer bg-transparent p-0`}
+                  >
+                    {moreLinkLabel} →
+                  </button>
+                ) : (
+                  <Link href={linkBasePath} className={`${MORE_LINK_BASE} ${banner.moreLink}`}>
+                    {moreLinkLabel} →
+                  </Link>
+                )}
+                {activeItem.href &&
+                  (isOnSectionPage ? (
+                    <button
+                      type="button"
+                      onClick={closeSheet}
+                      className={`${MORE_LINK_BASE} text-gray-600 dark:text-gray-400 cursor-pointer bg-transparent p-0`}
+                    >
+                      {moreLinkLabel} →
+                    </button>
+                  ) : (
+                    <Link href={linkBasePath} className={`${MORE_LINK_BASE} text-gray-600 dark:text-gray-400`}>
+                      {moreLinkLabel} →
+                    </Link>
+                  ))}
+              </div>
             </div>
           </>
         )}

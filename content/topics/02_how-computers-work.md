@@ -2,15 +2,7 @@
 id: 2
 draft: 0
 slug: machines-data-and-ai
-title: 'Representation, Computation, and Learning'
-color: indigo
-excerpt: >-
-  Trace representation, stored procedures, and learned models while examining
-  whose labels, purposes, and acceptable errors shape computation.
-unit_focus: >-
-  Trace representation, stored procedures, and learned models while examining
-  whose labels, purposes, and acceptable errors shape computation.
-priority: low
+title: 'How Computers Work'
 ---
 
 Trace representation, stored procedures, and learned models while examining whose labels, purposes, and acceptable errors shape computation.

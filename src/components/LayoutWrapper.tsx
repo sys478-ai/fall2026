@@ -14,7 +14,9 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     if (mainElement) {
       // Determine layout type based on pathname
       const isResourcesDetail = normalizedPath.startsWith('/resources/') && normalizedPath !== '/resources';
+      const isStandaloneTool = normalizedPath === '/activities/circuit-sandbox';
       const isDetailWithToc =
+                              !isStandaloneTool && (
                               normalizedPath === '/' ||
                               normalizedPath === '/syllabus' ||
                               normalizedPath === '/braid-case-study' ||
@@ -24,7 +26,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                               (normalizedPath.startsWith('/exams/') && normalizedPath !== '/exams') ||
                               (normalizedPath.startsWith('/meetings/')) ||
                               (normalizedPath.startsWith('/field-guide/') && normalizedPath !== '/field-guide') ||
-                              normalizedPath === '/repos-hidden';
+                              normalizedPath === '/repos-hidden');
       const isListPage = normalizedPath === '/topics' ||
                         normalizedPath === '/assignments' || 
                         normalizedPath === '/activities' || 
@@ -51,6 +53,11 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         htmlElement.classList.remove('content-layout-page');
       }
     }
+
+    return () => {
+      mainElement?.removeAttribute('data-layout');
+      htmlElement.classList.remove('content-layout-page');
+    };
   }, [pathname]);
 
   return <>{children}</>;

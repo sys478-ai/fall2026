@@ -9,7 +9,7 @@ subtitle: >-
   determine what evidence is needed before acting.
 readings:
   - citation: "Intro to Supervised Learning (Course Website)"
-    url: field-guide/technical-explainers/supervised-learning
+    url: /field-guide/technical-explainers/supervised-learning
 optional_readings:
   - citation: 'Google. Teachable Machine [Interactive].'
     notes: Try object classification; test unfamiliar backgrounds and examples.

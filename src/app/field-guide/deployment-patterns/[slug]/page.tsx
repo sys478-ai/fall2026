@@ -247,8 +247,8 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
             </PatternSection>
           )}
 
-          <PatternSection label="Related Course Topics">
-            {relatedTopics.length > 0 ? (
+          {relatedTopics.length > 0 && (
+            <PatternSection label="Related Course Topics">
               <ul className="list-tight">
                 {relatedTopics.map(topic => (
                   <li key={topic.meetingSlug}>
@@ -260,13 +260,11 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
                   </li>
                 ))}
               </ul>
-            ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-400">No related topics are mapped yet.</p>
-            )}
-          </PatternSection>
+            </PatternSection>
+          )}
 
-          <PatternSection label="Related Labs & Activities">
-            {combinedScheduleItems.length > 0 ? (
+          {combinedScheduleItems.length > 0 && (
+            <PatternSection label="Related Labs & Activities">
               <ul className="list-tight">
                 {combinedScheduleItems.map(item => {
                   const slugFromHref = item.href.split('/').filter(Boolean).pop() || '';
@@ -282,13 +280,11 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
                   );
                 })}
               </ul>
-            ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-400">No related labs or activities are mapped yet.</p>
-            )}
-          </PatternSection>
+            </PatternSection>
+          )}
 
-          <PatternSection label="Related Resources & Articles">
-            {resourceItems.length > 0 ? (
+          {resourceItems.length > 0 && (
+            <PatternSection label="Related Resources & Articles">
               <ul className="list-tight">
                 {resourceItems.map(item => {
                   const slugFromHref = item.href.split('/').filter(Boolean).pop() || '';
@@ -302,10 +298,8 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
                   );
                 })}
               </ul>
-            ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-400">No tagged resources or articles are connected yet.</p>
-            )}
-          </PatternSection>
+            </PatternSection>
+          )}
 
           <FieldGuideReturnSection />
         </div>

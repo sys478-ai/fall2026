@@ -1,9 +1,13 @@
+import type { ReactNode } from 'react';
+
 interface TopLevelPageHeaderProps {
   label: string;
   title: string;
   description?: string;
   /** Secondary line under the title (e.g. assignment due date). */
   meta?: string;
+  /** Optional controls aligned to the right of the header (e.g. Expand all). */
+  actions?: ReactNode;
   tone?: 'sky' | 'indigo' | 'violet' | 'slate';
 }
 
@@ -35,24 +39,34 @@ export default function TopLevelPageHeader({
   title,
   description,
   meta,
+  actions,
   tone = 'sky',
 }: TopLevelPageHeaderProps) {
   const classes = toneClasses[tone];
 
   return (
     <header className={`border-y px-4 py-16 ${classes.border} ${classes.background} md:px-16`}>
-      <p className={`mb-4 text-xs font-semibold uppercase tracking-[0.18em] ${classes.accent}`}>{label}</p>
-      <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
-        {title}
-      </h1>
-      {description && (
-        <p className={`mb-1! max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300 ${meta ? 'mt-4' : 'mt-5'}`}>
-          {description}
-        </p>
-      )}
-      {meta ? (
-        <p className={`my-0! text-base font-semibold tabular-nums ${classes.accent}`}>{meta}</p>
-      ) : null}
+      <div className="flex items-start justify-between gap-6">
+        <div className="min-w-0 flex-1">
+          <p className={`mb-4 text-xs font-semibold uppercase tracking-[0.18em] ${classes.accent}`}>{label}</p>
+          <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
+            {title}
+          </h1>
+          {description && (
+            <p
+              className={`mb-1! max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300 ${
+                meta ? 'mt-4' : 'mt-5'
+              }`}
+            >
+              {description}
+            </p>
+          )}
+          {meta ? (
+            <p className={`my-0! text-base font-semibold tabular-nums ${classes.accent}`}>{meta}</p>
+          ) : null}
+        </div>
+        {actions ? <div className="shrink-0 pt-1">{actions}</div> : null}
+      </div>
     </header>
   );
 }

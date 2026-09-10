@@ -1,10 +1,12 @@
 import ContentLayout from '@/components/ContentLayout';
+import CourseScheduleExpandControls from '@/components/CourseScheduleExpandControls';
 import CourseScheduleList from '@/components/CourseScheduleList';
 import TopLevelPageHeader from '@/components/TopLevelPageHeader';
 import { getTopics } from '@/lib/topics';
 
 export default async function TopicsOverviewPage() {
   const topics = await getTopics();
+  const topicIds = topics.map(topic => topic.id);
 
   return (
     <ContentLayout
@@ -12,10 +14,11 @@ export default async function TopicsOverviewPage() {
       fullWidth
       header={
         <TopLevelPageHeader
-          label="Course Overview"
-          title="Course Overview"
+          label="Course Schedule"
+          title="Course Schedule"
           description="A semester overview of the course topics, meeting dates, readings, and assignments."
           tone="indigo"
+          actions={<CourseScheduleExpandControls topicIds={topicIds} />}
         />
       }
     >

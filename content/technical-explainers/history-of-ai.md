@@ -6,6 +6,8 @@ title: 'History of AI'
 subtitle: 'An interactive timeline from Turing to today, linking key moments to field guide recognition cards.'
 num: '0'
 order: 0
+card_href: /field-guide/ai-history
+sheet_embed: ai-history
 related_recognition_cards: []
 related_concept_cards: []
 field_guide_section: 'technical-explainers'

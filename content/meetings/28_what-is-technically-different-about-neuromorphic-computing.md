@@ -1,7 +1,7 @@
 ---
 title: Public-Engagement Pilot
-slug: '26'
-scheduled_day: 26
+slug: '27'
+scheduled_day: 27
 module_id: 5
 draft: 1
 subtitle: >-

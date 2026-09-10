@@ -249,18 +249,26 @@ export default function QuickLinksNavClient({ resources, assignments, readings }
                             index < dateReadings.length - 1 && 'pb-1 border-b border-gray-200 dark:border-gray-800'
                           )}>
                             {reading.url ? (
-                              <a
-                                href={reading.url}
-                                target={isExternal ? "_blank" : undefined}
-                                rel={isExternal ? "noopener noreferrer" : undefined}
-                                className="!border-0 !text-sm text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-2 min-w-0"
-                                title={reading.citation}
-                              >
-                                <span className="truncate flex-1 min-w-0">{reading.citation}</span>
-                                {isExternal && (
+                              isExternal ? (
+                                <a
+                                  href={reading.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="!border-0 !text-sm text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-2 min-w-0"
+                                  title={reading.citation}
+                                >
+                                  <span className="truncate flex-1 min-w-0">{reading.citation}</span>
                                   <span className="text-xs flex-shrink-0">↗</span>
-                                )}
-                              </a>
+                                </a>
+                              ) : (
+                                <Link
+                                  href={reading.url}
+                                  className="!border-0 !text-sm text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-2 min-w-0"
+                                  title={reading.citation}
+                                >
+                                  <span className="truncate flex-1 min-w-0">{reading.citation}</span>
+                                </Link>
+                              )
                             ) : (
                               <span className="!text-sm text-gray-800 dark:text-gray-100 block truncate" title={reading.citation}>
                                 {reading.citation}

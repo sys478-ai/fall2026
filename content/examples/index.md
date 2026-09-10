@@ -5,8 +5,8 @@ type: 'landing'
 section_label: 'Example Cards'
 card_columns: 2
 hide_from_list: 1
-featured_image: 'fall2026/images/ethics-field-guide/examples/examples-banner.png'
-thumb_image: 'fall2026/images/ethics-field-guide/examples/examples-square.png'
+# featured_image: 'fall2026/images/ethics-field-guide/examples/examples-banner.png'
+# thumb_image: 'fall2026/images/ethics-field-guide/examples/examples-square.png'
 priority: low
 field_guide_section_title: 'Examples'
 ---

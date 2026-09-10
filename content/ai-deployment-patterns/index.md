@@ -3,8 +3,8 @@ title: 'AI Deployment Patterns'
 subtitle: 'Recurring patterns in how AI systems are built, deployed, and used in the world.'
 type: 'landing'
 section_label: 'Field Guide'
-featured_image: 'fall2026/images/ethics-field-guide/landing/binoculars-landscape-banner.png'
-thumb_image: 'fall2026/images/ethics-field-guide/landing/binoculars-thumb.png'
+# featured_image: 'fall2026/images/ethics-field-guide/landing/binoculars-landscape-banner.png'
+# thumb_image: 'fall2026/images/ethics-field-guide/landing/binoculars-thumb.png'
 priority: low
 field_guide_section_order: 3
 ---

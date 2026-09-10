@@ -12,7 +12,7 @@ import { getAllPosts, getPostData } from '@/lib/markdown';
 import type { PostData } from '@/lib/markdown';
 import FieldGuideCardPreview from '@/components/FieldGuideCardPreview';
 import { getFieldGuidePreviewItems } from '@/lib/field-guide-preview';
-import { getFieldGuideBannerClasses } from '@/lib/field-guide-palettes';
+import { getFieldGuideBannerClasses, getFieldGuideBannerClassesByPalette } from '@/lib/field-guide-palettes';
 import { getModuleColorClasses, type ModuleColorClasses } from '@/lib/module-colors';
 import { getTopics } from '@/lib/topics';
 import type { Topic } from '@/lib/topics';
@@ -825,38 +825,33 @@ function TopicHeader({
   moduleId,
   moduleTitle,
   title,
-  subtitle,
 }: {
   moduleColor: ModuleColorClasses;
   date?: string;
   moduleId: number;
   moduleTitle: string;
   title: string;
-  subtitle?: string;
 }) {
   return (
     <header
-      className={`grid gap-6 border-y px-4 py-16 ${moduleColor.background} ${moduleColor.border} md:grid-cols-[10rem_1fr] md:px-16`}
+      className={`grid gap-4 border-y px-4 py-12 ${moduleColor.background} ${moduleColor.border} md:grid-cols-[10rem_1fr] md:gap-6 md:px-16`}
     >
       <div
         className={`flex flex-col justify-center border-b pb-4 ${moduleColor.border} md:border-b-0 md:border-r md:pb-0 md:pr-5`}
       >
-        <p className="mt-0! text-xl text-center font-bold uppercase tracking-wide text-gray-600 dark:text-gray-400">
+        <p className="mt-0! mb-0! text-center text-lg font-bold uppercase tracking-wide text-gray-600 dark:text-gray-400">
           {date ? date : 'Overview'}
         </p>
       </div>
       <div>
-        <div className="mb-4 text-xs font-semibold uppercase tracking-wide">
+        <div className="mb-2 text-xs font-semibold uppercase tracking-wide">
           <span className={moduleColor.accent}>
             Topic {moduleId}. {moduleTitle}
           </span>
         </div>
-        <h1 className="m-0! max-w-5xl text-5xl font-semibold leading-[1.05] tracking-tight text-gray-950 dark:text-gray-50">
+        <h1 className="m-0! max-w-5xl text-4xl font-semibold leading-tight tracking-tight text-gray-950 md:text-5xl dark:text-gray-50">
           {title}
         </h1>
-        {subtitle && (
-          <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">{subtitle}</p>
-        )}
       </div>
     </header>
   );
@@ -1048,6 +1043,33 @@ export default async function TopicPage({ params }: TopicPageProps) {
     }
   }
 
+  if (!meeting.holiday && meeting.deploymentPatternPreviewCards && meeting.deploymentPatternPreviewCards.length > 0) {
+    const deploymentPatterns = await getFieldGuidePreviewItems(
+      'ai-deployment-patterns',
+      'recognition',
+      meeting.deploymentPatternPreviewCards
+    );
+    if (deploymentPatterns.length > 0) {
+      topicSections.push({
+        navItem: { id: 'meeting-data-patterns', label: 'Data Patterns' },
+        panel: (
+          <TopicWorkflowSection id="meeting-data-patterns" label="Data Patterns">
+            <FieldGuideCardPreview
+              intro="Each card below names a recurring pattern in how data is made, reused, and treated as if it simply mirrored the world. Click a card to preview it – then ask which choices in representation made that pattern possible."
+              items={deploymentPatterns}
+              badgeLabel="Pattern"
+              showNumInBadge
+              linkBasePath="/field-guide/deployment-patterns"
+              moreLinkLabel="More deployment patterns"
+              banner={getFieldGuideBannerClassesByPalette('sts')}
+              sheetTitleId="data-pattern-sheet-title"
+            />
+          </TopicWorkflowSection>
+        ),
+      });
+    }
+  }
+
   if (todayContent || meeting.description) {
     topicSections.push({
       navItem: { id: 'meeting-overview', label: "Today's materials" },
@@ -1141,8 +1163,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         <Breadcrumbs
           className="px-4 md:px-16"
           items={[
-            { label: 'Course Overview', href: '/topics' },
-            { label: `${topic.id}. ${topic.title}` },
+            { label: 'Schedule', href: '/topics' },
             { label: `${topicNumber} ${meeting.topic}` },
           ]}
         />
@@ -1153,7 +1174,6 @@ export default async function TopicPage({ params }: TopicPageProps) {
           moduleId={topic.id}
           moduleTitle={topic.title}
           title={meeting.topic}
-          subtitle={meeting.subtitle}
         />
 
         <div className="topic-page space-y-10 px-4 md:px-16">

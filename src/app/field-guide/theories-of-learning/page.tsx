@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
-import FieldGuideCardPreview from '@/components/FieldGuideCardPreview';
+import FieldGuidePreviewIndex from '@/components/FieldGuidePreviewIndex';
 import { getFieldGuidePreviewItems } from '@/lib/field-guide-preview';
 import { getFieldGuideBannerClasses } from '@/lib/field-guide-palettes';
 
@@ -17,16 +17,14 @@ export default async function TheoriesOfLearningPage() {
   return (
     <FieldGuideSectionLayout contentDir="theories-of-learning">
       {() => (
-        <section className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16">
-          <FieldGuideCardPreview
-            items={cards}
-            badgeLabel="Theory of Learning"
-            linkBasePath="/field-guide/theories-of-learning"
-            moreLinkLabel="More theories of learning"
-            banner={banner}
-            sheetTitleId="learning-theory-list-sheet-title"
-          />
-        </section>
+        <FieldGuidePreviewIndex
+          sections={[{ key: 'all', items: cards }]}
+          badgeLabel="Theory of Learning"
+          linkBasePath="/field-guide/theories-of-learning"
+          moreLinkLabel="More theories of learning"
+          banner={banner}
+          sheetTitleIdPrefix="learning-theory-list-sheet"
+        />
       )}
     </FieldGuideSectionLayout>
   );

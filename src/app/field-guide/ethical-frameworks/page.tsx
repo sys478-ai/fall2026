@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import FieldGuideSectionLayout from '@/components/FieldGuideSectionLayout';
-import FieldGuideCardPreview from '@/components/FieldGuideCardPreview';
+import FieldGuidePreviewIndex from '@/components/FieldGuidePreviewIndex';
 import { getFieldGuidePreviewItems } from '@/lib/field-guide-preview';
 import { getFieldGuideBannerClasses } from '@/lib/field-guide-palettes';
 
@@ -16,16 +16,14 @@ export default async function EthicalFrameworksPage() {
   return (
     <FieldGuideSectionLayout contentDir="ethical-frameworks">
       {() => (
-        <section className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16">
-          <FieldGuideCardPreview
-            items={cards}
-            badgeLabel="Ethical Framework"
-            linkBasePath="/field-guide/ethical-frameworks"
-            moreLinkLabel="More theories of ethics"
-            banner={banner}
-            sheetTitleId="ethical-framework-list-sheet-title"
-          />
-        </section>
+        <FieldGuidePreviewIndex
+          sections={[{ key: 'all', items: cards }]}
+          badgeLabel="Ethical Framework"
+          linkBasePath="/field-guide/ethical-frameworks"
+          moreLinkLabel="More theories of ethics"
+          banner={banner}
+          sheetTitleIdPrefix="ethical-framework-list-sheet"
+        />
       )}
     </FieldGuideSectionLayout>
   );
