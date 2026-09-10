@@ -28,13 +28,15 @@ interface SidebarNavClientProps {
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
 
 const RESOURCE_NAV_ITEMS = [
-  { label: 'Technical Explainers', href: '/field-guide/technical-explainers' },
+  { label: 'Technical Explainers', href: '/field-guide/technical-explainers', hidden: true },
   { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns' },
-  { label: 'Examples', href: '/field-guide/examples' },
+  { label: 'Examples', href: '/field-guide/examples', hidden: true },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
   { label: 'Theories of Learning', href: '/field-guide/theories-of-learning' },
-  { label: 'STS Concepts', href: '/field-guide/sts-concepts' },
+  { label: 'STS Concepts', href: '/field-guide/sts-concepts', hidden: true },
 ] as const;
+
+const VISIBLE_RESOURCE_NAV_ITEMS = RESOURCE_NAV_ITEMS.filter(item => !('hidden' in item && item.hidden));
 
 function isResourcePath(path: string) {
   return RESOURCE_NAV_ITEMS.some(item => path === item.href || path.startsWith(`${item.href}/`));
@@ -279,7 +281,7 @@ export default function SidebarNavClient({
             {!collapsed && resourcesOpen && (
               <div className="border-t border-slate-200/80 bg-slate-100/40 dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="divide-y divide-slate-200/70 py-2 dark:divide-slate-800">
-                  {RESOURCE_NAV_ITEMS.map(item => {
+                  {VISIBLE_RESOURCE_NAV_ITEMS.map(item => {
                     const isItemActive =
                       normalizedPath === item.href || normalizedPath.startsWith(`${item.href}/`);
 
