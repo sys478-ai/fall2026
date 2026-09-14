@@ -128,11 +128,13 @@ export default function ResourcePopover() {
               />
             </div>
 
-            <div className="border-t border-gray-200 px-6 py-4 dark:border-gray-800">
-              <Link href={detail.href} className={`inline-flex items-center gap-1 text-sm font-semibold ${detail.moreLinkClass}`}>
-                {detail.moreLinkLabel} →
-              </Link>
-            </div>
+            {detail.moreLinkLabel ? (
+              <div className="border-t border-gray-200 px-6 py-4 dark:border-gray-800">
+                <Link href={detail.href} className={`inline-flex items-center gap-1 text-sm font-semibold ${detail.moreLinkClass}`}>
+                  {detail.moreLinkLabel} →
+                </Link>
+              </div>
+            ) : null}
           </>
         )}
       </div>

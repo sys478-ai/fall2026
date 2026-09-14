@@ -1,19 +1,24 @@
-import Link from 'next/link';
-import type { AIHistoryTimelineCard, AIHistoryTimelineEntry } from '@/lib/ai-history-timeline';
+'use client';
 
-function CardChip({ card }: { card: AIHistoryTimelineCard }) {
-  const base = 'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium no-underline transition-colors';
-  if (card.href) {
-    return (
-      <Link
-        href={card.href}
-        className={`${base} bg-violet-100 text-violet-800 hover:bg-violet-200 dark:bg-violet-900/50 dark:text-violet-200 dark:hover:bg-violet-800/60`}
-      >
-        {card.label}
-      </Link>
-    );
-  }
-  return <span className={`${base} bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-500`}>{card.label}</span>;
+import Link from 'next/link';
+import type { AIHistoryExampleSheet, AIHistoryTimelineEntry } from '@/lib/ai-history-timeline';
+
+function openExampleSheet(sheet: AIHistoryExampleSheet, trigger: HTMLElement) {
+  window.dispatchEvent(
+    new CustomEvent('resource-popover:open', {
+      detail: {
+        title: sheet.title,
+        href: sheet.href,
+        html: sheet.html,
+        badgeLabel: sheet.badgeLabel,
+        moreLinkLabel: sheet.moreLinkLabel,
+        headerClass: sheet.headerClass,
+        labelClass: sheet.labelClass,
+        moreLinkClass: sheet.moreLinkClass,
+        trigger,
+      },
+    })
+  );
 }
 
 export default function AIHistoryTimeline({
@@ -29,8 +34,7 @@ export default function AIHistoryTimeline({
     <div className={className}>
       {showIntro && (
         <p className="mb-8 text-base leading-7 text-gray-700 dark:text-gray-300">
-          Key moments in AI history, linked to field guide recognition cards. Purple chips link to published cards; gray
-          chips are connections to cards not yet published. Case study entries link to full example cards.
+          Key moments in AI history. Case study entries open example cards in a side sheet.
         </p>
       )}
       <div className="relative border-l-2 border-violet-200 pl-8 dark:border-violet-900">
@@ -56,18 +60,12 @@ export default function AIHistoryTimeline({
               )}
             </h2>
             <p className="mb-3 text-base leading-7 text-gray-700 dark:text-gray-300">{entry.description}</p>
-            {entry.cards.length > 0 && (
-              <div className="mb-3 flex flex-wrap gap-2">
-                {entry.cards.map(card => (
-                  <CardChip key={`${entry.year}-${card.label}`} card={card} />
-                ))}
-              </div>
-            )}
-            {entry.exampleSlug && (
+            {entry.exampleSheet && (
               <div className="mt-4">
-                <Link
-                  href={`/field-guide/examples/${entry.exampleSlug}`}
-                  className="group/example inline-flex items-center gap-2 rounded-md border border-violet-200 bg-violet-50/60 px-3.5 py-2 text-sm font-semibold text-violet-800 no-underline transition-colors hover:border-violet-300 hover:bg-violet-100 dark:border-violet-800/70 dark:bg-violet-950/25 dark:text-violet-200 dark:hover:border-violet-700 dark:hover:bg-violet-900/35"
+                <button
+                  type="button"
+                  onClick={event => openExampleSheet(entry.exampleSheet!, event.currentTarget)}
+                  className="group/example inline-flex cursor-pointer items-center gap-2 rounded-md border border-violet-200 bg-violet-50/60 px-3.5 py-2 text-sm font-semibold text-violet-800 transition-colors hover:border-violet-300 hover:bg-violet-100 dark:border-violet-800/70 dark:bg-violet-950/25 dark:text-violet-200 dark:hover:border-violet-700 dark:hover:bg-violet-900/35"
                 >
                   <span>View Full Example</span>
                   <span
@@ -76,7 +74,7 @@ export default function AIHistoryTimeline({
                   >
                     →
                   </span>
-                </Link>
+                </button>
               </div>
             )}
           </div>

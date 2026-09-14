@@ -10,8 +10,8 @@ export const metadata: Metadata = {
     'An interactive timeline of AI from Turing to today, linking key moments to field guide recognition cards.',
 };
 
-export default function AIHistoryPage() {
-  const entries = getAIHistoryTimelineEntries();
+export default async function AIHistoryPage() {
+  const entries = await getAIHistoryTimelineEntries();
 
   return (
     <ContentLayout

@@ -14,7 +14,7 @@ export default async function TechnicalExplainersPage() {
   const cards = await getFieldGuidePreviewItems('technical-explainers', 'technical-explainer');
   const banner = getFieldGuideBannerClasses('technical-explainers');
   const aiHistoryEntries = cards.some(card => card.sheetEmbed === 'ai-history')
-    ? getAIHistoryTimelineEntries()
+    ? await getAIHistoryTimelineEntries()
     : [];
 
   return (
