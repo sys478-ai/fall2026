@@ -1,11 +1,11 @@
 ---
-title: 'Career Module 2: Three Possible Lives and SMART Goals'
-scheduled_day: 9
+title: 'Three Possible Lives and SMART Goals'
 num: '2'
 type: 'career module'
 excerpt: 'Design thinking for future paths and a semester-scale SMART goal.'
 draft: 1
-
+due_date: '2026-09-24'
+due_time: '11:59PM'
 ---
 
 ## Overview
@@ -14,7 +14,7 @@ This is the **after-class submission** for Career Module 2.
 
 Use the paired activity page for the in-class work:
 
-- [Career Module 2 in-class activity](/fall2026/activities/career-module02-in-class)
+- [Career Module 2 in-class activity](/fall2026/activities/career-module02-in-classs)
 
 ## What To Submit
 

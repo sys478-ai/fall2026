@@ -2,10 +2,10 @@
 title: 'Career Module 2: Three Possible Lives and SMART Goals'
 num: '2'
 type: 'activity'
-scheduled_day: 6
+scheduled_day: 10
 order: 2
 excerpt: 'In-class career activity on possible futures, small-group discussion, and one semester-scale SMART goal.'
-draft: 1
+draft: 0
 ---
 
 ## Career Module 2: Three Possible Lives and SMART Goals
@@ -14,13 +14,11 @@ This in-class activity asks you to imagine several possible futures instead of t
 
 ### 1. Three Possible Lives
 
-Open the [Three Possible Lives worksheet](/fall2026/documents/module02/Three%20Possible%20Lives.docx). Sketch three possible paths:
+Open the [Three Possible Lives worksheet](https://docs.google.com/document/d/1LBPRWlVckseOfIYm8mPRF-NI7nc12w0NLbXXvSl53xo/edit?usp=sharing). Sketch three possible paths:
 
 1. A likely path.
 1. A path you are curious about.
 1. A wildcard path with fewer limits.
-
-For each path, note what it might look like, what values or interests show up, and what questions it raises.
 
 ### 2. Small Group Discussion
 
@@ -30,13 +28,9 @@ In small groups, share what you are comfortable sharing. As you listen and talk,
 - What would you like to explore next?
 - What resources, conversations, or experiences could help you learn more?
 
-### 3. Final Reflection
+### 3. SMART Goal
 
-Complete the final reflection on the worksheet.
-
-### 4. SMART Goal
-
-Open the [SMART Goal worksheet](/fall2026/documents/module02/SMART%20Goal.docx).
+Open the [SMART Goal worksheet](https://docs.google.com/document/d/1LBPRWlVckseOfIYm8mPRF-NI7nc12w0NLbXXvSl53xo/edit?tab=t.0) (second tab on Google Doc).
 
 Set one career or post-graduation goal for this semester. Your goal should be SMART:
 

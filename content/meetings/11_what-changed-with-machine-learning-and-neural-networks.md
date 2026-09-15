@@ -1,39 +1,36 @@
 ---
-title: 'Clustering, Similarity, and Social Hierarchy'
+title: 'Inside a Neural Network: Weights, Layers, and Learning'
 slug: '11'
 scheduled_day: 11
 module_id: 2
 draft: 1
-subtitle: >-
-  Features shape groups; institutions can turn those groups into unequal
-  opportunities that influence later data.
+subtitle: 'Weights and layers transform features into predictions; training adjusts weights, while people choose the task and evaluation criteria.'
 optional_readings:
-  - citation: >-
-      Massey, D. S. (2007). Categorically Unequal. Chapter 1: How Stratification
-      Works.
-    notes: >-
-      Pages 6–7: mechanisms through which categories become durable
-      inequalities.
-  - citation: 'Thorn, A. (2021). Social Constructs [Video]. Philosophy Tube.'
-    notes: >-
-      Original course activity links to the video; suggested segment around
-      minutes 5–7.
-    url: >-
-      https://csci174.github.io/fall2024/activities/04-categorization-classification
+  - citation: 'Neural Networks (Course Website)'
+    url: /field-guide/technical-explainers/neural-networks
 ---
+
+## Topic / Focus
+
+Use the visual experiment to introduce weights, layers, prediction error, and weight adjustment. Connect the network to supervised learning without requiring equations or implementation details.
 
 ## In This Class
 
-Cluster songs using different features, then group fictional student records and allocate opportunities. Distinguish finding similarity from imposing a hierarchy.
+Manipulate a small visual network and see how weights, features, and complexity change behavior. Compare predictions before and after training and inspect performance on unfamiliar examples.
 
-## Mechanism and Society
+## Familiar Systems
 
-Features shape groups; institutions can turn those groups into unequal opportunities that influence later data.
+Handwriting recognition and image classification.
 
-**Student question:** AI for what? Similarity useful to whom?
+## Societal / Ethical Questions
 
-**Project connection:** Practice tracing representation → category → institutional action.
+- When is a system too opaque to trust?
+- Is higher accuracy worth lower interpretability?
+
+## Connections to Course Lenses
+
+Return to the biological lens to distinguish artificial neurons from living cells. Use social / political and moral lenses to ask what explanations users need and who is responsible for errors. Distinguish descriptive, normative, and political / institutional claims, and identify what remains uncertain.
 
 ## Closing Reflection
 
-When does a useful category become a consequential social distinction?
+What would you need to know beyond accuracy before trusting a neural network in a consequential setting?

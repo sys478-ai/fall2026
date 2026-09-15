@@ -1,38 +1,37 @@
 ---
-title: 'Anomaly Detection and Edge AI: Who Defines Normal?'
+title: 'Transformers in Context: Attention, Meaning, and Generation'
 slug: '14'
 scheduled_day: 14
 module_id: 3
 draft: 1
-subtitle: >-
-  Representations and thresholds define unusual signals; care and workplace
-  institutions decide whether alerts lead to assistance, scrutiny, or
-  intervention.
+subtitle: 'Attention combines information across token positions; context, instructions, and generation settings shape outputs and their use.'
 optional_readings:
-  - citation: >-
-      Massey, D. S. (2007). Categorically Unequal. Chapter 1: How Stratification
-      Works.
-    notes: >-
-      Pages 6–7: mechanisms through which categories become durable
-      inequalities.
-  - citation: >-
-      Benjamin, R. (2019). Race After Technology. Chapter 1: Engineered
-      Inequity.
-    notes: 'Selected excerpt: how classification can reproduce unequal treatment.'
+  - citation: 'Large Language Models (Course Website)'
+    url: /field-guide/technical-explainers/large-language-models
 ---
+
+## Topic / Focus
+
+Build on tokens, embeddings, and prediction to explain how transformer layers produce context-sensitive representations. Compare generated summaries with their source text and identify support, omissions, and uncertainty.
 
 ## In This Class
 
-Adjust thresholds on synthetic equipment-vibration and elder-care movement traces. Compare false alarms, missed events, and alert-only versus automatic responses; trace what stays on the device.
+Explore how context and attention change representations and generated responses. Use a small visual attention example, then compare responses to a fixed task as context or instructions change. Distinguish observations about outputs from evidence about a model’s internal attention.
 
-## Mechanism and Society
+## Familiar Systems
 
-Representations and thresholds define unusual signals; care and workplace institutions decide whether alerts lead to assistance, scrutiny, or intervention.
+ChatGPT, translation, and summarization.
 
-**Student question:** AI for what: safety, assistance, or surveillance?
+## Societal / Ethical Questions
 
-**Project connection:** Prepare the sensing mechanism and decision link for the first short analysis.
+- Who controls the context and instructions?
+- Why do outputs vary?
+- When should generated text be trusted, attributed, or challenged?
+
+## Connections to Course Lenses
+
+Psychological and social / political lenses reveal how context shapes interpretation and who controls it. A moral lens asks what verification, attribution, and opportunities to challenge an output are needed. Distinguish descriptive, normative, and political / institutional claims, and identify what remains uncertain.
 
 ## Closing Reflection
 
-How could the same alert support one person and burden another?
+How did context change the response, and what would you verify before using it as evidence?

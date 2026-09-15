@@ -1,12 +1,10 @@
 ---
-title: Supervised Learning and Neural Networks
+title: 'Learning From Data: Training Sets, Errors, and Bias'
 slug: '10'
 scheduled_day: 10
 module_id: 2
-draft: 1
-subtitle: >-
-  Training examples and evaluation choices shape performance; deployment stakes
-  determine what evidence is needed before acting.
+draft: 0
+subtitle: 'Training examples shape what a model learns; the consequences of errors depend on whose examples and needs are represented.'
 readings:
   - citation: "Intro to Supervised Learning (Course Website)"
     url: /field-guide/technical-explainers/supervised-learning
@@ -14,24 +12,30 @@ optional_readings:
   - citation: 'Google. Teachable Machine [Interactive].'
     notes: Try object classification; test unfamiliar backgrounds and examples.
     url: 'https://teachablemachine.withgoogle.com/'
-  - citation: >-
-      Benjamin, R. (2019). Race After Technology. Chapter 1: Engineered
-      Inequity.
-    notes: 'Selected excerpt: how classification can reproduce unequal treatment.'
 ---
+
+## Topic / Focus
+
+Distinguish training examples from test examples, and separate model performance from the decision to rely on its output. Document one failure and whether revising the training set addresses it.
 
 ## In This Class
 
-Train an object classifier, alter backgrounds and labels, and test unseen examples. Compare classroom sorting with a hypothetical recycling-line hazard detector. Introduce parameter adjustment and neural networks after the experiment.
+Use AI for Oceans or Teachable Machine. Build stronger and weaker training sets and inspect errors. Change the examples, backgrounds, or labels, then test unfamiliar examples to compare performance.
 
-## Mechanism and Society
+## Familiar Systems
 
-Training examples and evaluation choices shape performance; deployment stakes determine what evidence is needed before acting.
+Image recognition and content moderation.
 
-**Student question:** As models improve, how does training change? Better for whom?
+## Societal / Ethical Questions
 
-**Project connection:** Practice defining success and documenting generalization limits.
+- Whose examples are represented?
+- What gets left out?
+- Which errors matter most, and to whom?
+
+## Connections to Course Lenses
+
+Social / political and moral lenses reveal whose experiences become training data and how the costs of errors are distributed. Distinguish descriptive, normative, and political / institutional claims, and identify what remains uncertain.
 
 ## Closing Reflection
 
-Which test would you require before relying on the higher-stakes system?
+Which missing examples or errors would you investigate before relying on this system?
