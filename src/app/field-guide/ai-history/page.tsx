@@ -35,8 +35,7 @@ export default async function AIHistoryPage() {
             History of AI
           </h1>
           <p className="mb-0 mt-5 max-w-4xl text-lg leading-6 text-gray-700 dark:text-gray-300">
-            Key moments in AI history, linked to field guide recognition cards. Purple chips link to published cards;
-            gray chips are connections to cards not yet published. Case study entries link to full example cards.
+            Key moments in AI history. Case study entries open full example cards.
           </p>
         </header>
       }

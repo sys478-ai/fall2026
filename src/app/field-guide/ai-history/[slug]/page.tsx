@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostData, type PostData } from '@/lib/markdown';
 import ContentLayout from '@/components/ContentLayout';
@@ -10,14 +9,8 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-interface TimelineCard {
-  label: string;
-  href?: string;
-}
-
 type AIHistoryPost = PostData & {
   year?: string | number;
-  timeline_cards?: TimelineCard[];
   hide_from_list?: boolean;
 };
 
@@ -44,7 +37,6 @@ export default async function AIHistoryDetailPage({ params }: PageProps) {
 
   try {
     const post = (await getPostData(slug, 'ai-history')) as AIHistoryPost;
-    const cards = post.timeline_cards ?? [];
 
     return (
       <ContentLayout
@@ -77,49 +69,6 @@ export default async function AIHistoryDetailPage({ params }: PageProps) {
         <div className="space-y-8">
           <section className="space-y-4 pt-4">
             <MarkdownContent content={post.content} />
-          </section>
-
-          {cards.length > 0 && (
-            <section className="space-y-4 pt-4">
-              <h2 className="text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-                Related Field Guide Pages
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {cards.map((card, i) =>
-                  card.href ? (
-                    <Link
-                      key={i}
-                      href={card.href}
-                      className="inline-flex items-center rounded-full bg-violet-100 px-3.5 py-1.5 text-sm font-medium text-violet-800 no-underline transition-colors hover:bg-violet-200 dark:bg-violet-900/50 dark:text-violet-200 dark:hover:bg-violet-800/60"
-                    >
-                      {card.label}
-                    </Link>
-                  ) : (
-                    <span
-                      key={i}
-                      className="inline-flex items-center rounded-full bg-gray-100 px-3.5 py-1.5 text-sm font-medium text-gray-500 dark:bg-gray-800 dark:text-gray-500"
-                    >
-                      {card.label}
-                    </span>
-                  )
-                )}
-              </div>
-            </section>
-          )}
-
-          <section className="rounded-2xl border border-violet-200 bg-violet-50/70 p-6 dark:border-violet-900 dark:bg-violet-950/20">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
-              Field Guide
-            </p>
-            <h2 className="m-0 text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-              Browse the Full Timeline
-            </h2>
-            <Link
-              href="/field-guide/ai-history"
-              className="mt-5 inline-flex items-center rounded-full bg-violet-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-violet-800 dark:bg-violet-500 dark:hover:bg-violet-400"
-            >
-              Back to History of AI
-            </Link>
           </section>
         </div>
       </ContentLayout>

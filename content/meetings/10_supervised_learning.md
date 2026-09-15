@@ -9,6 +9,7 @@ readings:
   - citation: "Intro to Supervised Learning (Course Website)"
     url: /field-guide/technical-explainers/supervised-learning
   - citation: "Zewe, Adam. “Can Machine-Learning Models Overcome Biased Datasets?” MIT CSAIL, 2 Mar. 2022."
+    url: https://news.mit.edu/2022/machine-learning-biased-data-0221
 optional_readings:
   - citation: 'Google. Teachable Machine [Interactive].'
     notes: Try object classification; test unfamiliar backgrounds and examples.
@@ -21,7 +22,13 @@ Distinguish training examples from test examples, and separate model performance
 
 ## In This Class
 
-Use AI for Oceans or Teachable Machine. Build stronger and weaker training sets and inspect errors. Change the examples, backgrounds, or labels, then test unfamiliar examples to compare performance.
+- Teachable Machine Activity
+- Key terms:
+    - False positive
+    - False negative
+    - Overfitting
+    - Training v. Test Data
+- How I learned in-class presentations
 
 ## Familiar Systems
 
@@ -32,11 +39,3 @@ Image recognition and content moderation.
 - Whose examples are represented?
 - What gets left out?
 - Which errors matter most, and to whom?
-
-## Connections to Course Lenses
-
-Social / political and moral lenses reveal whose experiences become training data and how the costs of errors are distributed. Distinguish descriptive, normative, and political / institutional claims, and identify what remains uncertain.
-
-## Closing Reflection
-
-Which missing examples or errors would you investigate before relying on this system?
