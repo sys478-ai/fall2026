@@ -12,6 +12,9 @@ optional_readings:
   - citation: 'D’Ignazio, C., & Klein, L. F. (2020). Data Feminism. Introduction.'
     notes: 'Selected opening passages: whose interests and knowledge shape data?'
     url: 'https://data-feminism.mitpress.mit.edu/'
+  - citation: 'Zewe, Adam. “Study: Transparency Is Often Lacking in Datasets Used to Train Large Language Models.” MIT News, 30 Aug. 2024.'
+    notes: 'Read the article.'
+    url: 'https://news.mit.edu/2024/study-large-language-models-datasets-lack-transparency-0830'
 ---
 
 ## Topic / Focus

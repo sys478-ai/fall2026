@@ -8,6 +8,7 @@ subtitle: 'Training examples shape what a model learns; the consequences of erro
 readings:
   - citation: "Intro to Supervised Learning (Course Website)"
     url: /field-guide/technical-explainers/supervised-learning
+  - citation: "Zewe, Adam. “Can Machine-Learning Models Overcome Biased Datasets?” MIT CSAIL, 2 Mar. 2022."
 optional_readings:
   - citation: 'Google. Teachable Machine [Interactive].'
     notes: Try object classification; test unfamiliar backgrounds and examples.

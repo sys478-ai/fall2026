@@ -3,8 +3,8 @@ title: 'Three Possible Lives and SMART Goals'
 num: '2'
 type: 'career module'
 excerpt: 'Design thinking for future paths and a semester-scale SMART goal.'
-draft: 1
-due_date: '2026-09-24'
+draft: 0
+due_date: '2026-09-22'
 due_time: '11:59PM'
 ---
 

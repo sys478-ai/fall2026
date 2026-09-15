@@ -2,7 +2,7 @@
 title: 'Career Module 2: Three Possible Lives and SMART Goals'
 num: '2'
 type: 'activity'
-scheduled_day: 10
+scheduled_day: 9
 order: 2
 excerpt: 'In-class career activity on possible futures, small-group discussion, and one semester-scale SMART goal.'
 draft: 0
@@ -40,6 +40,3 @@ Set one career or post-graduation goal for this semester. Your goal should be SM
 - **Realistic:** What makes this goal possible this semester?
 - **Timebound:** What is your deadline?
 
-## After Class
-
-Complete the paired homework: [Career Module 2 assignment](/fall2026/assignments/career-module02).
