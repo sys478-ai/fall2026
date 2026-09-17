@@ -3,21 +3,15 @@ title: 'Finding Patterns Without Labels: Clustering and Similarity'
 slug: '12'
 scheduled_day: 12
 module_id: 2
-draft: 1
+draft: 0
 subtitle: 'Clustering groups examples without supplied group labels; features and similarity measures shape the resulting categories.'
-optional_readings:
-  - citation: >-
-      Massey, D. S. (2007). Categorically Unequal. Chapter 1: How Stratification
-      Works.
-    notes: >-
-      Pages 6–7: mechanisms through which categories become durable
-      inequalities.
+readings:
   - citation: 'Thorn, A. (2021). Social Constructs [Video]. Philosophy Tube.'
-    notes: >-
-      Original course activity links to the video; suggested segment around
-      minutes 5–7.
-    url: >-
-      https://csci174.github.io/fall2024/activities/04-categorization-classification
+    url: https://www.youtube.com/watch?v=koud7hgGyQ8
+  - citation: 'J, Sara. “Why Clustering Algorithms Work So Well in Music Apps.” Medium, 16 Sept. 2026.'
+    notes: Introduces clustering and k-means through music recommendation and playlist examples.
+    url: 'https://medium.com/@sara.j.080604/why-clustering-algorithms-work-so-well-in-music-apps-eec8be93b913'
+
 ---
 
 ## Topic / Focus

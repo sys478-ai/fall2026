@@ -28,8 +28,8 @@ interface SidebarNavClientProps {
 const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
 
 const RESOURCE_NAV_ITEMS = [
-  { label: 'Technical Explainers', href: '/field-guide/technical-explainers', hidden: true },
-  { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns' },
+  { label: 'Technical Explainers', href: '/field-guide/technical-explainers', hidden: false },
+  { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns', hidden: true },
   { label: 'Examples', href: '/field-guide/examples', hidden: true },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
   { label: 'Theories of Learning', href: '/field-guide/theories-of-learning' },

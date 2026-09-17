@@ -66,7 +66,7 @@ export default function ContentLayout({
             <div className={contentWidthClass}>
               <div className="space-y-6 py-6">
                 {children}
-                {showFooter && <Footer />}
+                {false && <Footer />}
               </div>
             </div>
 

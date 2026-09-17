@@ -6,7 +6,7 @@ title: 'Supervised Learning'
 subtitle: 'How machines learn from labeled examples – and why what the system learns depends entirely on what people decided to label.'
 num: '1'
 order: 1
-related_recognition_cards: ['8', '23', '25', '7']
+# related_recognition_cards: ['8', '23', '25', '7']
 related_concept_cards: []
 field_guide_section: 'technical-explainers'
 ---
@@ -103,49 +103,6 @@ Two specialists looking at the same photograph sometimes disagree. Mild and mode
 3. Training data carries the context it came from, which means a system may work differently in a new setting.
 4. Accuracy alone is not enough. A system can perform well on average while still harming some groups more than others.
 5. The same technique can be used across many domains, but the consequences of being wrong depend on where it is used.
-
-## Related Course Concepts
-
-{% flip-cards %}
-
-    {% flip-card icon="fa-tags" title="Labels Are Made by People" %}
-        If supervised learning depends on labels, where did those labels come from?
-
-        ---
-
-        Labels do not appear naturally in the world. People define them, debate them, and apply them unevenly. That is why supervised learning connects to [Data is produced, not found](/fall2026/field-guide/sts-concepts/data-is-produced-not-found).
-    {% endflip-card %}
-
-    {% flip-card icon="fa-clock-rotate-left" title="Past Decisions Shape Future Predictions" %}
-        What happens when a model learns from historical decisions?
-
-        ---
-
-        A supervised system trained on past choices can reproduce the assumptions and inequalities built into those choices. That is why this explainer connects to [Prediction imports the past](/fall2026/field-guide/deployment-patterns/prediction-imports-the-past).
-    {% endflip-card %}
-
-    {% flip-card icon="fa-chart-simple" title="Averages Can Hide Harm" %}
-        Why isn't one accuracy score enough?
-
-        ---
-
-        Aggregate success can hide who is being misclassified more often and who absorbs the cost when the system is wrong. That is the broader issue in [Concentrated harm is hidden by aggregate benefit](/fall2026/field-guide/deployment-patterns/concentrated-harm-is-hidden-by-aggregate-benefit).
-    {% endflip-card %}
-
-{% endflip-cards %}
-
-{% collapsible closed %}
-
-## Going Deeper: How the Training Process Works
-
-During training, the system repeatedly compares its predictions to the correct labels, measures how wrong it was, and adjusts its internal settings slightly in the direction that would have reduced that error.[^4] After many thousands of repetitions, the settings stabilize.
-
-Two important limits of this process:
-
-- The system can only minimize errors on its training data. It has no guarantee of performing well on examples that look different from what it was trained on.[^5]
-- Minimizing errors does not mean the system has learned something meaningful about the world. It means it has gotten better at predicting the labels in its training set – whatever those labels encode.[^4]
-
-{% endcollapsible %}
 
 ## References
 
