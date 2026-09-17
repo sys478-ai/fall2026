@@ -66,6 +66,48 @@ function makeMissingCard(title: string, subtitle: string, iconClass: string): Fi
   };
 }
 
+// Falls back to a "Missing" card instead of crashing when a referenced post
+// hasn't been published yet (e.g. still sitting in a subdirectory like drafts/).
+function cardOrMissing(
+  post: PostData | undefined,
+  id: string,
+  options?: {
+    slugPrefix?: string;
+    subtitle?: string;
+    iconClass?: string;
+  }
+): FieldGuideFlipCardItem {
+  if (!post) {
+    return makeMissingCard(
+      id,
+      `No published field-guide entry found for "${id}".`,
+      options?.iconClass ?? 'fa-solid fa-file-circle-question'
+    );
+  }
+  return toFieldGuideCardItem(post, options);
+}
+
+// Same fallback, for the href-based cards that read post fields directly
+// instead of going through toFieldGuideCardItem.
+function hrefCardOrMissing(
+  post: PostData | undefined,
+  id: string,
+  href: string,
+  iconClass: string
+): FieldGuideFlipCardItem {
+  if (!post) {
+    return makeMissingCard(id, `No published field-guide entry found for "${id}".`, iconClass);
+  }
+  return {
+    href,
+    title: post.title,
+    subtitle: (post as PostData & { subtitle?: string }).subtitle ?? post.excerpt,
+    featured_image: normalizeFeaturedImagePath(post.featured_image),
+    featured_image_dark: getDarkFeaturedImagePath(post.featured_image),
+    iconClass,
+  };
+}
+
 function Section({
   title,
   intro,
@@ -97,19 +139,19 @@ export default async function BraidExercisePage() {
   const examplePosts = getPostMap('examples');
 
   const technicalCards: FieldGuideFlipCardItem[] = [
-    toFieldGuideCardItem(technicalPosts.get('neuromorphic-computing')!, {
+    cardOrMissing(technicalPosts.get('neuromorphic-computing'), 'neuromorphic-computing', {
       slugPrefix: 'technical-explainers',
       iconClass: TECHNICAL_EXPLAINER_ICONS['neuromorphic-computing'],
     }),
-    toFieldGuideCardItem(technicalPosts.get('anomaly-detection')!, {
+    cardOrMissing(technicalPosts.get('anomaly-detection'), 'anomaly-detection', {
       slugPrefix: 'technical-explainers',
       iconClass: TECHNICAL_EXPLAINER_ICONS['anomaly-detection'],
     }),
-    toFieldGuideCardItem(technicalPosts.get('unsupervised-learning')!, {
+    cardOrMissing(technicalPosts.get('unsupervised-learning'), 'unsupervised-learning', {
       slugPrefix: 'technical-explainers',
       iconClass: TECHNICAL_EXPLAINER_ICONS['unsupervised-learning'],
     }),
-    toFieldGuideCardItem(technicalPosts.get('neural-networks')!, {
+    cardOrMissing(technicalPosts.get('neural-networks'), 'neural-networks', {
       slugPrefix: 'technical-explainers',
       iconClass: TECHNICAL_EXPLAINER_ICONS['neural-networks'],
     }),
@@ -126,106 +168,102 @@ export default async function BraidExercisePage() {
   ];
 
   const stsCards: FieldGuideFlipCardItem[] = [
-    toFieldGuideCardItem(stsPosts.get('sts-materiality')!, {
+    cardOrMissing(stsPosts.get('sts-materiality'), 'sts-materiality', {
       slugPrefix: 'sts-concepts',
       iconClass: STS_CONCEPT_ICONS['sts-materiality'],
     }),
-    toFieldGuideCardItem(stsPosts.get('sts-framing-shapes-governance')!, {
+    cardOrMissing(stsPosts.get('sts-framing-shapes-governance'), 'sts-framing-shapes-governance', {
       slugPrefix: 'sts-concepts',
       iconClass: STS_CONCEPT_ICONS['sts-framing-shapes-governance'],
     }),
-    toFieldGuideCardItem(stsPosts.get('sts-sociotechnical-imaginaries')!, {
+    cardOrMissing(stsPosts.get('sts-sociotechnical-imaginaries'), 'sts-sociotechnical-imaginaries', {
       slugPrefix: 'sts-concepts',
       iconClass: STS_CONCEPT_ICONS['sts-sociotechnical-imaginaries'],
     }),
-    toFieldGuideCardItem(stsPosts.get('sts-situated-knowledge')!, {
+    cardOrMissing(stsPosts.get('sts-situated-knowledge'), 'sts-situated-knowledge', {
       slugPrefix: 'sts-concepts',
       iconClass: STS_CONCEPT_ICONS['sts-situated-knowledge'],
     }),
-    toFieldGuideCardItem(stsPosts.get('sts-normal-is-constructed')!, {
+    cardOrMissing(stsPosts.get('sts-normal-is-constructed'), 'sts-normal-is-constructed', {
       slugPrefix: 'sts-concepts',
       iconClass: STS_CONCEPT_ICONS['sts-normal-is-constructed'],
     }),
-    toFieldGuideCardItem(stsPosts.get('sts-governance')!, {
+    cardOrMissing(stsPosts.get('sts-governance'), 'sts-governance', {
       slugPrefix: 'sts-concepts',
       iconClass: STS_CONCEPT_ICONS['sts-governance'],
     }),
   ];
 
   const patternCards: FieldGuideFlipCardItem[] = [
-    toFieldGuideCardItem(patternPosts.get('dp-baseline-and-categories')!, { slugPrefix: 'deployment-patterns' }),
-    toFieldGuideCardItem(patternPosts.get('dp-thresholds')!, { slugPrefix: 'deployment-patterns' }),
-    toFieldGuideCardItem(patternPosts.get('dp-opacity')!, { slugPrefix: 'deployment-patterns' }),
-    toFieldGuideCardItem(patternPosts.get('dp-accountability-gap')!, { slugPrefix: 'deployment-patterns' }),
-    toFieldGuideCardItem(patternPosts.get('dp-asymmetric-visibility')!, { slugPrefix: 'deployment-patterns' }),
-    toFieldGuideCardItem(patternPosts.get('dp-infrastructure-power')!, { slugPrefix: 'deployment-patterns' }),
-    toFieldGuideCardItem(patternPosts.get('dp-anthropomorphism')!, { slugPrefix: 'deployment-patterns' }),
+    cardOrMissing(patternPosts.get('dp-baseline-and-categories'), 'dp-baseline-and-categories', { slugPrefix: 'deployment-patterns' }),
+    cardOrMissing(patternPosts.get('dp-thresholds'), 'dp-thresholds', { slugPrefix: 'deployment-patterns' }),
+    cardOrMissing(patternPosts.get('dp-opacity'), 'dp-opacity', { slugPrefix: 'deployment-patterns' }),
+    cardOrMissing(patternPosts.get('dp-accountability-gap'), 'dp-accountability-gap', { slugPrefix: 'deployment-patterns' }),
+    cardOrMissing(patternPosts.get('dp-asymmetric-visibility'), 'dp-asymmetric-visibility', { slugPrefix: 'deployment-patterns' }),
+    cardOrMissing(patternPosts.get('dp-infrastructure-power'), 'dp-infrastructure-power', { slugPrefix: 'deployment-patterns' }),
+    cardOrMissing(patternPosts.get('dp-anthropomorphism'), 'dp-anthropomorphism', { slugPrefix: 'deployment-patterns' }),
   ];
 
   const exampleCards: FieldGuideFlipCardItem[] = [
-    {
-      href: '/field-guide/examples/workplace-wellness-insurance',
-      title: examplePosts.get('workplace-wellness-insurance')!.title,
-      subtitle: examplePosts.get('workplace-wellness-insurance')!.excerpt,
-      iconClass: 'fa-solid fa-briefcase-medical',
-    },
-    {
-      href: '/field-guide/examples/prism-surveillance',
-      title: examplePosts.get('prism-surveillance')!.title,
-      subtitle: examplePosts.get('prism-surveillance')!.excerpt,
-      iconClass: 'fa-solid fa-satellite-dish',
-    },
-    {
-      href: '/field-guide/examples/speech-recognition-accent',
-      title: examplePosts.get('speech-recognition-accent')!.title,
-      subtitle: examplePosts.get('speech-recognition-accent')!.excerpt,
-      iconClass: 'fa-solid fa-microphone-lines',
-    },
-    {
-      href: '/field-guide/examples/pulse-oximeters-skin-tone',
-      title: examplePosts.get('pulse-oximeters-skin-tone')!.title,
-      subtitle: examplePosts.get('pulse-oximeters-skin-tone')!.excerpt,
-      iconClass: 'fa-solid fa-heart-pulse',
-    },
-    {
-      href: '/field-guide/examples/face-recognition-wrongful-arrests',
-      title: examplePosts.get('face-recognition-wrongful-arrests')!.title,
-      subtitle: examplePosts.get('face-recognition-wrongful-arrests')!.excerpt,
-      iconClass: 'fa-solid fa-camera',
-    },
-    {
-      href: '/field-guide/examples/boston-street-bump',
-      title: examplePosts.get('boston-street-bump')!.title,
-      subtitle: examplePosts.get('boston-street-bump')!.excerpt,
-      iconClass: 'fa-solid fa-road',
-    },
+    hrefCardOrMissing(
+      examplePosts.get('workplace-wellness-insurance'),
+      'workplace-wellness-insurance',
+      '/field-guide/examples/workplace-wellness-insurance',
+      'fa-solid fa-briefcase-medical'
+    ),
+    hrefCardOrMissing(
+      examplePosts.get('prism-surveillance'),
+      'prism-surveillance',
+      '/field-guide/examples/prism-surveillance',
+      'fa-solid fa-satellite-dish'
+    ),
+    hrefCardOrMissing(
+      examplePosts.get('speech-recognition-accent'),
+      'speech-recognition-accent',
+      '/field-guide/examples/speech-recognition-accent',
+      'fa-solid fa-microphone-lines'
+    ),
+    hrefCardOrMissing(
+      examplePosts.get('pulse-oximeters-skin-tone'),
+      'pulse-oximeters-skin-tone',
+      '/field-guide/examples/pulse-oximeters-skin-tone',
+      'fa-solid fa-heart-pulse'
+    ),
+    hrefCardOrMissing(
+      examplePosts.get('face-recognition-wrongful-arrests'),
+      'face-recognition-wrongful-arrests',
+      '/field-guide/examples/face-recognition-wrongful-arrests',
+      'fa-solid fa-camera'
+    ),
+    hrefCardOrMissing(
+      examplePosts.get('boston-street-bump'),
+      'boston-street-bump',
+      '/field-guide/examples/boston-street-bump',
+      'fa-solid fa-road'
+    ),
   ];
 
   const ethicalCards: FieldGuideFlipCardItem[] = [
-    toFieldGuideCardItem(frameworkPosts.get('ef-procedural-justice')!, {
+    cardOrMissing(frameworkPosts.get('ef-procedural-justice'), 'ef-procedural-justice', {
       slugPrefix: 'ethical-frameworks',
       iconClass: 'fa-solid fa-gavel',
     }),
-    toFieldGuideCardItem(frameworkPosts.get('ef-rights-based')!, {
+    cardOrMissing(frameworkPosts.get('ef-rights-based'), 'ef-rights-based', {
       slugPrefix: 'ethical-frameworks',
       iconClass: 'fa-solid fa-user-shield',
     }),
-    {
-      href: '/field-guide/governance/anticipatory-governance',
-      title: governancePosts.get('anticipatory-governance')!.title,
-      subtitle: (governancePosts.get('anticipatory-governance') as PostData & { subtitle?: string }).subtitle,
-      featured_image: normalizeFeaturedImagePath(governancePosts.get('anticipatory-governance')!.featured_image),
-      featured_image_dark: getDarkFeaturedImagePath(governancePosts.get('anticipatory-governance')!.featured_image),
-      iconClass: 'fa-solid fa-binoculars',
-    },
-    {
-      href: '/field-guide/governance/how-to-use-anticipatory-governance',
-      title: governancePosts.get('how-to-use-anticipatory-governance')!.title,
-      subtitle: (governancePosts.get('how-to-use-anticipatory-governance') as PostData & { subtitle?: string }).subtitle,
-      featured_image: normalizeFeaturedImagePath(governancePosts.get('how-to-use-anticipatory-governance')!.featured_image),
-      featured_image_dark: getDarkFeaturedImagePath(governancePosts.get('how-to-use-anticipatory-governance')!.featured_image),
-      iconClass: 'fa-solid fa-list-check',
-    },
+    hrefCardOrMissing(
+      governancePosts.get('anticipatory-governance'),
+      'anticipatory-governance',
+      '/field-guide/governance/anticipatory-governance',
+      'fa-solid fa-binoculars'
+    ),
+    hrefCardOrMissing(
+      governancePosts.get('how-to-use-anticipatory-governance'),
+      'how-to-use-anticipatory-governance',
+      '/field-guide/governance/how-to-use-anticipatory-governance',
+      'fa-solid fa-list-check'
+    ),
     makeMissingCard(
       'Auditability and Traceability',
       'No dedicated field-guide card exists yet for audit trails, hardware traceability, and post-hoc reconstruction in adaptive edge systems.',
