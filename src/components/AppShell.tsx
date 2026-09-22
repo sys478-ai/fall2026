@@ -11,7 +11,8 @@ function normalizePath(path: string) {
 
 /** Immersive tool pages that skip the course sidebar / syllabus shell. */
 export function isStandaloneToolPath(path: string) {
-  return normalizePath(path) === '/activities/circuit-sandbox';
+  const normalized = normalizePath(path);
+  return normalized === '/activities/circuit-sandbox' || normalized === '/activities/teachable-machine' || normalized.startsWith('/activities/teachable-machine/');
 }
 
 export default function AppShell({

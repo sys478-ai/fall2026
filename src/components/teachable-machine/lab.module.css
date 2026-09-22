@@ -1,0 +1,234 @@
+.app {
+  min-height: 100vh;
+  background: #f5f4ee;
+  color: #203630;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.app * {
+  box-sizing: border-box;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #d9dfd7;
+  padding: 20px 5%;
+  font-size: 13px;
+}
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+.content {
+  max-width: 960px;
+  margin: auto;
+  padding: 48px 28px;
+}
+.eyebrow {
+  font-size: 11px !important;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+.app h1 {
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  margin: 0 0 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.app h2 {
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.app p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.intro {
+  color: #596a60;
+  margin-bottom: 30px;
+}
+.section {
+  padding: 26px;
+  background: #fff;
+  border: 1px solid #d6ded4;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.section h2 > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #e9f0e7;
+  font-size: 13px;
+}
+.app input[type='text'],
+.app textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #adbbb0;
+  border-radius: 6px;
+  color: #203630;
+  background: white;
+  font: inherit;
+  font-size: 15px;
+}
+.app textarea {
+  margin-top: 9px;
+  resize: vertical;
+}
+.upload {
+  display: block;
+  background: #f3f6ef;
+  padding: 16px;
+  border: 1px dashed #96ac99;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.upload input {
+  display: block;
+  max-width: 100%;
+  margin-top: 12px;
+}
+.rule {
+  display: block;
+  margin-top: 22px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.success {
+  color: #286044;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.hint {
+  font-size: 13px !important;
+  color: #5e6c62;
+}
+.app button {
+  border: 1px solid #a4b6a7;
+  border-radius: 6px;
+  background: #fff;
+  color: #244b3b;
+  padding: 12px 18px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.app button:hover:enabled {
+  background: #e8efe4;
+}
+.app button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.app .primary {
+  background: #24553f;
+  border-color: #24553f;
+  color: #fff;
+}
+.app .primary:hover:enabled {
+  background: #173f2c;
+}
+.app :is(button, a, input, textarea):focus-visible {
+  outline: 3px solid #2587c0;
+  outline-offset: 3px;
+}
+.runHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 25px;
+}
+.runHeader button {
+  flex-shrink: 0;
+}
+.runGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+.app video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transform: scaleX(-1);
+  background: #1d3229;
+  border-radius: 10px;
+}
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.result {
+  padding: 28px;
+  border: 1px solid #bdd0bf;
+  border-radius: 10px;
+  background: #ecf3e8;
+  align-self: start;
+  overflow-wrap: anywhere;
+}
+.result h2 {
+  font-size: 30px;
+  line-height: 1.3;
+  margin: 24px 0;
+  white-space: pre-wrap;
+}
+.result small {
+  color: #58685c;
+  line-height: 1.6;
+}
+.error {
+  padding: 16px;
+  background: #ffebe4;
+  border: 1px solid #b85239;
+  border-radius: 6px;
+}
+.footer {
+  padding-top: 30px;
+  max-width: 680px;
+  font-size: 12px;
+  color: #59685e;
+  line-height: 1.7;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 680px) {
+  .content {
+    padding: 30px 18px;
+  }
+  .section {
+    padding: 20px;
+  }
+  .runGrid {
+    grid-template-columns: 1fr;
+  }
+  .runHeader {
+    flex-direction: column;
+  }
+  .header {
+    font-size: 11px;
+  }
+}

@@ -3,15 +3,22 @@ title: 'How Language Models Learn: Tokens, Embeddings, and Prediction'
 slug: '13'
 scheduled_day: 13
 module_id: 3
-draft: 1
+draft: 0
 subtitle: 'Token prediction trains language models; learned representations reflect patterns in training data without establishing that generated claims are true.'
-optional_readings:
+readings: 
+  - citation: Doctorow, C. (2026, September 12). LLMs are real, AI is fake. Pluralistic.
+    url: https://pluralistic.net/2026/09/12/god-in-the-box/
   - citation: '3Blue1Brown. (2024). Large Language Models explained briefly [Video].'
     notes: 'Tokens, training, and generation; connect outputs to evidence.'
     url: 'https://www.youtube.com/watch?v=LPZh9BOjkQs'
-  - citation: 'D’Ignazio, C., & Klein, L. F. (2020). Data Feminism. Introduction.'
-    notes: 'Selected opening passages: whose interests and knowledge shape data?'
-    url: 'https://data-feminism.mitpress.mit.edu/'
+optional_readings:
+  - citation: Welch, S. (2025, July 25). But how do AI images and videos actually work? Guest video by Welch Labs. 3Blue1Brown.
+    notes: 'A more technical video about how generative images and videos are produced.'
+    url: https://www.3blue1brown.com/lessons/diffusion-models/
+  - citation: Doctorow, C. (2026, September 16). How an AI moratorium can save AI bosses. Pluralistic.
+    url: https://pluralistic.net/2026/09/16/beggar-thy-neighbor/
+  - citation: "Klein, E. (2026, September 15). Ezra Klein podcast: Matt Sheehan. The New York Times."
+    url: https://www.nytimes.com/2026/09/15/opinion/ezra-klein-podcast-matt-sheehan.html
   - citation: 'Zewe, Adam. “Study: Transparency Is Often Lacking in Datasets Used to Train Large Language Models.” MIT News, 30 Aug. 2024.'
     notes: 'Read the article.'
     url: 'https://news.mit.edu/2024/study-large-language-models-datasets-lack-transparency-0830'

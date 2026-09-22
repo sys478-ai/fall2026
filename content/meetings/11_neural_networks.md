@@ -25,8 +25,9 @@ optional_readings:
 - How are Deep Neural Networks similar and different from what came before, and what new benefits / harms, possibilites / risks do they raise?
 
 ## In This Class
-- Teachable Machine activity
-- Discussion of 3Blue1Brown video and Teachable Machine
+- [Slides](https://docs.google.com/presentation/d/1Onp2vccpWYeh0rvKtdp0d12ILUj6gMeJFkSha_WkKhg/edit?usp=sharing)
+- [Demo](/fall2026/demos/number-predictor-0-4/index.html)
+- [Teachable Machine activity](https://docs.google.com/document/d/1LcHzbu5v9VhJkKB1lnHa2UcFVLG7dRRIy-bzgVFn-Po/edit?usp=sharing)
 
 ## Societal / Ethical Questions
 
