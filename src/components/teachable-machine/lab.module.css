@@ -7,6 +7,13 @@
 .app * {
   box-sizing: border-box;
 }
+/* globals.css sets color: var(--foreground) on bare h1/h2/p/li tags for the
+   site's dark mode. That variable flips to near-white when a student's OS
+   is in dark mode, which made text invisible against this page's fixed
+   light backgrounds. Force every text element here back to the local palette. */
+.app :is(h1, h2, p, li) {
+  color: inherit;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -38,12 +45,14 @@
   margin: 0 0 16px;
   font-weight: 600;
   overflow-wrap: anywhere;
+  color: #203630;
 }
 .app h2 {
   font-size: 19px;
   line-height: 1.4;
   font-weight: 600;
   margin: 0 0 14px;
+  color: #203630;
 }
 .app p {
   font-size: 14px;
@@ -186,6 +195,7 @@
   line-height: 1.3;
   margin: 24px 0;
   white-space: pre-wrap;
+  color: #203630;
 }
 .result small {
   color: #58685c;
@@ -196,6 +206,37 @@
   background: #ffebe4;
   border: 1px solid #b85239;
   border-radius: 6px;
+  color: #203630;
+}
+.error p {
+  margin: 0;
+}
+.errorDetails {
+  margin-top: 10px;
+}
+.errorDetails summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #203630;
+}
+.errorDetails pre {
+  margin: 10px 0;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #e3b3a5;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #203630;
+  max-height: 260px;
+  overflow: auto;
+}
+.errorDetails button {
+  font-size: 12px;
+  padding: 6px 12px;
 }
 .footer {
   padding-top: 30px;

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ImageModel, loadRuntime, Prediction, readModelFiles } from './runtime';
+import { diagnostics, ImageModel, loadRuntime, Prediction, readModelFiles } from './runtime';
 import styles from './lab.module.css';
 
 export default function TeachableLab() {
@@ -22,6 +22,8 @@ export default function TeachableLab() {
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraBusy, setCameraBusy] = useState(false);
   const [error, setError] = useState('');
+  const [errorDetails, setErrorDetails] = useState('');
+  const [copied, setCopied] = useState(false);
   const [result, setResult] = useState<{ prediction: Prediction; message: string } | null>(null);
 
   useEffect(() => {
@@ -31,6 +33,18 @@ export default function TeachableLab() {
       stream.current?.getTracks().forEach(track => track.stop());
     };
   }, []);
+
+  function clearError() {
+    setError('');
+    setErrorDetails('');
+    setCopied(false);
+  }
+
+  function showError(message: string, err?: unknown) {
+    setError(message);
+    setErrorDetails(err === undefined ? '' : diagnostics(err));
+    setCopied(false);
+  }
 
   function stopCamera() {
     requestId.current++;
@@ -44,7 +58,7 @@ export default function TeachableLab() {
   async function startCamera() {
     const request = ++requestId.current;
     setCameraBusy(true);
-    setError('');
+    clearError();
     try {
       if (!navigator.mediaDevices?.getUserMedia) throw new Error('Camera access requires HTTPS or localhost.');
       const media = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
@@ -59,8 +73,9 @@ export default function TeachableLab() {
     } catch (err) {
       if (alive.current && request === requestId.current) {
         stopCamera();
-        setError(
-          `Camera could not start. Allow camera access, then try again. ${err instanceof Error ? err.message : ''}`
+        showError(
+          `Camera could not start. Allow camera access, then try again. ${err instanceof Error ? err.message : ''}`,
+          err
         );
       }
     } finally {
@@ -71,7 +86,7 @@ export default function TeachableLab() {
   async function load(files: File[]) {
     if (!files.length) return;
     setLoading(true);
-    setError('');
+    clearError();
     try {
       const data = await readModelFiles(files);
       if (!data.labels.length) throw new Error('This model has no classes. Export a trained image model.');
@@ -86,8 +101,9 @@ export default function TeachableLab() {
       setResult(null);
     } catch (err) {
       if (alive.current)
-        setError(
-          `${err instanceof Error ? err.message : 'Could not load this image model.'}${model.current ? ' Your previously loaded model is still selected.' : ''}`
+        showError(
+          `${err instanceof Error ? err.message : 'Could not load this image model.'}${model.current ? ' Your previously loaded model is still selected.' : ''}`,
+          err
         );
     } finally {
       if (alive.current) setLoading(false);
@@ -97,7 +113,7 @@ export default function TeachableLab() {
   async function checkImage() {
     if (!model.current || !video.current?.videoWidth || !canvas.current) return;
     setChecking(true);
-    setError('');
+    clearError();
     const request = requestId.current;
     try {
       const context = canvas.current.getContext('2d')!;
@@ -118,7 +134,7 @@ export default function TeachableLab() {
     } catch (err) {
       if (alive.current && request === requestId.current) {
         setResult(null);
-        setError(`Could not classify the image. ${err instanceof Error ? err.message : 'Try again.'}`);
+        showError(`Could not classify the image. ${err instanceof Error ? err.message : 'Try again.'}`, err);
       }
     } finally {
       if (alive.current) setChecking(false);
@@ -239,7 +255,7 @@ export default function TeachableLab() {
               onClick={() => {
                 stopCamera();
                 setResult(null);
-                setError('');
+                clearError();
                 setRunning(false);
               }}
             >
@@ -293,9 +309,28 @@ export default function TeachableLab() {
         </div>
         <canvas ref={canvas} width="224" height="224" hidden />
         {error && (
-          <p className={styles.error} role="alert">
-            {error}
-          </p>
+          <div className={styles.error} role="alert">
+            <p>{error}</p>
+            {errorDetails && (
+              <details className={styles.errorDetails}>
+                <summary>Technical details (for reporting)</summary>
+                <pre>{errorDetails}</pre>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(errorDetails);
+                      setCopied(true);
+                    } catch {
+                      setCopied(false);
+                    }
+                  }}
+                >
+                  {copied ? 'Copied' : 'Copy details'}
+                </button>
+              </details>
+            )}
+          </div>
         )}
         <footer className={styles.footer}>
           Determinations are simulated messages. No actions are taken or records created. Model files and images stay in

@@ -5,12 +5,61 @@ export type ImageModel = {
 };
 
 type Runtime = { loadFromFiles(model: File, weights: File, metadata: File): Promise<ImageModel> };
+type TfGlobal = {
+  getBackend?: () => string;
+  version?: { tfjs?: string };
+  env?: () => { getFlags?: () => Record<string, unknown> };
+};
 declare global {
   interface Window {
     tmImage?: Runtime;
+    tf?: TfGlobal;
   }
 }
 let runtimePromise: Promise<Runtime> | undefined;
+
+// Gathers everything that varies machine-to-machine for a tfjs/WebGL failure,
+// so a report from one device is actually actionable instead of a bare
+// error message that only says "could not classify".
+export function diagnostics(err: unknown) {
+  const lines: string[] = [];
+  if (err instanceof Error) {
+    lines.push(`${err.name}: ${err.message}`);
+    if (err.stack) lines.push(err.stack);
+  } else {
+    lines.push(String(err));
+  }
+  lines.push('');
+  lines.push(`User agent: ${navigator.userAgent}`);
+  try {
+    const tf = window.tf;
+    if (tf) {
+      lines.push(`tfjs backend: ${tf.getBackend?.() ?? 'unknown'}`);
+      lines.push(`tfjs version: ${tf.version?.tfjs ?? 'unknown'}`);
+    } else {
+      lines.push('tfjs: not loaded');
+    }
+  } catch (diagError) {
+    lines.push(`tfjs diagnostics failed: ${diagError instanceof Error ? diagError.message : diagError}`);
+  }
+  try {
+    const gl = (document.createElement('canvas').getContext('webgl2') ||
+      document.createElement('canvas').getContext('webgl')) as WebGLRenderingContext | null;
+    if (gl) {
+      const info = gl.getExtension('WEBGL_debug_renderer_info');
+      lines.push(`WebGL: available (${gl instanceof WebGL2RenderingContext ? 'webgl2' : 'webgl1'})`);
+      if (info) {
+        lines.push(`GPU renderer: ${gl.getParameter(info.UNMASKED_RENDERER_WEBGL)}`);
+        lines.push(`GPU vendor: ${gl.getParameter(info.UNMASKED_VENDOR_WEBGL)}`);
+      }
+    } else {
+      lines.push('WebGL: not available');
+    }
+  } catch (glError) {
+    lines.push(`WebGL diagnostics failed: ${glError instanceof Error ? glError.message : glError}`);
+  }
+  return lines.join('\n');
+}
 
 function script(src: string) {
   return new Promise<void>((resolve, reject) => {
