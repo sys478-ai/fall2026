@@ -1,5 +1,5 @@
 ---
-title: 'Finding Patterns Without Labels: Clustering and Similarity'
+title: 'Making Up People: Categories, Classification, and Clustering'
 slug: '12'
 scheduled_day: 12
 module_id: 2
@@ -16,26 +16,19 @@ readings:
 
 ## Topic / Focus
 
-Introduce clustering as one kind of unsupervised learning. Distinguish grouping by similarity from predicting supplied labels, and distinguish a group assignment from an institutional decision about that group.
+How categories of people get made – by societies, by institutions, and by algorithms. We start with identity and social construction (Thorn, Hacking), then look at how machine learning uses existing categories, reinforces them, and rebuilds them. We introduce clustering: a kind of unsupervised learning that groups people by similarity without being given labels.
+
+## Guiding Questions
+- If a property is real (like height), what makes it socially significant?
+- How do categories change the people placed in them – and how do people change categories?
+- How is grouping by similarity different from predicting a label someone else supplied?
+- When an algorithm finds groups "without labels," what has already been decided before it runs?
 
 ## In This Class
-
-Cluster the same items using different features and compare the resulting groups. Start with songs, then consider what changes when the items being grouped are people or news stories.
-
-## Familiar Systems
-
-Music recommendations, customer segmentation, and news grouping. Clustering can be one component of these systems.
+- [Slides](https://docs.google.com/presentation/d/1exNpr5_T06yXsmlNUw8wG7KDcMquGVWzYqIZksOkO50/edit?usp=sharing)
 
 ## Societal / Ethical Questions
-
-- Are categories “found” or created?
-- Who decides what counts as similar?
-- What happens when people are grouped automatically?
-
-## Connections to Course Lenses
-
-Psychological and social / political lenses reveal how categories shape interpretation. A moral lens asks whether the treatment attached to a category is justified. Distinguish descriptive, normative, and political / institutional claims, and identify what remains uncertain.
-
-## Closing Reflection
-
-How did your choice of features change the groups, and what would happen if an institution acted on those groups?
+- Who decides what a category means, and what happens to the people in it?
+- Should people be able to see, challenge, or leave the categories a system assigns them?
+- If removing a category (like gender or zip code) doesn't stop a system from rebuilding it, what would?
+- When a system both discovers and shapes our interests, who is responsible for the result?
