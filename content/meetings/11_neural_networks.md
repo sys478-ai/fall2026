@@ -19,10 +19,9 @@ optional_readings:
   - citation: 'Neural Networks (Course Website)'
     url: /field-guide/technical-explainers/neural-networks
 
-
 assignments:
   - title: 'Teachable Machine (Supervised Learning) Reflection'
-    url: 'https://unca.instructure.com/courses/1907/discussion_topics/71706'
+    url: 'https://unca.instructure.com/courses/1907/assignments/136766'
     due_date: '2026-09-29'
     due_time: '11:59PM'
     type: 'assignment'
