@@ -16,8 +16,6 @@ optional_readings:
   - citation: 'Google. Teachable Machine [Interactive].'
     notes: Try object classification; test unfamiliar backgrounds and examples.
     url: 'https://teachablemachine.withgoogle.com/'
-  - citation: 'Neural Networks (Course Website)'
-    url: /field-guide/technical-explainers/neural-networks
 
 assignments:
   - title: 'Teachable Machine (Supervised Learning) Reflection'

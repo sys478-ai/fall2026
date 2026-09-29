@@ -1,10 +1,9 @@
 ---
-title: 'How Language Models Learn: Tokens, Embeddings, and Prediction'
+title: 'Language Models: How can predicting the next word produce something so useful?'
 slug: '13'
 scheduled_day: 13
 module_id: 3
 draft: 0
-subtitle: 'Token prediction trains language models; learned representations reflect patterns in training data without establishing that generated claims are true.'
 readings: 
   - citation: Doctorow, C. (2026, September 12). LLMs are real, AI is fake. Pluralistic.
     url: https://pluralistic.net/2026/09/12/god-in-the-box/
@@ -26,25 +25,20 @@ optional_readings:
 
 ## Topic / Focus
 
-Connect language models to neural networks. Explain self-supervised training: the text supplies target tokens. Introduce embeddings as learned numerical representations and distinguish training from generation; the next meeting examines attention in more detail.
+Large language models learn statistical patterns in enormous amounts of text and use those patterns to predict what comes next. By looking inside the technical process – and at the larger systems built around LLMs – we can better evaluate claims about what AI systems “know,” “decide,” or “want.”
+
+## Guiding Questions
+- How does an LLM learn to predict what comes next?
+- How do embeddings, transformers, and attention represent language and context?
+- How does a language model become a chatbot?
+- What roles do training data, human feedback, system instructions, and other software components play in producing a response?
 
 ## In This Class
-
-Human token prediction → embeddings → transformer layers → next-token prediction. Change context and compare outputs. Use a small example to trace how tokens become numerical representations and predictions.
-
-## Familiar Systems
-
-Autocomplete, ChatGPT, and writing assistants.
+- [Slides](https://docs.google.com/presentation/d/1q3b3AFuPhjuOvjyOS2m9jvXmz_C9nhjbqSqF6FS64JY/edit?usp=sharing)
+- [Activity](https://docs.google.com/document/d/1XCSe480pCesmux6yhB7jT95bVbS887RWvj9tBvgU7IU/edit?tab=t.0)
 
 ## Societal / Ethical Questions
-
-- What gets encoded from training data?
-- What does fluent language make us assume about understanding, knowledge, or sentience?
-
-## Connections to Course Lenses
-
-Psychological and biological lenses help examine claims about understanding and sentience. A social / political lens asks whose language and knowledge are represented in the training data. Distinguish descriptive, normative, and political / institutional claims, and identify what remains uncertain.
-
-## Closing Reflection
-
-What can fluent output demonstrate, and what claims about knowledge or understanding would require additional evidence?
+- How does the language we use to describe AI shape how we understand its capabilities?
+- Where, if anywhere, does "agency" exist in an AI system?
+- Who decides what counts as desirable chatbot behavior?
+- Does focusing on powerful or autonomous “AI” distract us from more immediate risks and human design choices?

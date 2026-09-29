@@ -1,10 +1,9 @@
 ---
-title: 'Transformers in Context: Attention, Meaning, and Generation'
+title: 'LLMs Continued: What happens when everyone starts depending on LLM-based infrastructures?'
 slug: '14'
 scheduled_day: 14
 module_id: 3
-draft: 1
-subtitle: 'Attention combines information across token positions; context, instructions, and generation settings shape outputs and their use.'
+draft: 0
 optional_readings:
   - citation: 'Large Language Models (Course Website)'
     url: /field-guide/technical-explainers/large-language-models
