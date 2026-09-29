@@ -10,6 +10,7 @@ export interface TopicReading {
   url?: string;
   notes?: string;
   pickOne?: boolean;
+  classPrep?: boolean;
 }
 
 export interface TopicAssignment {
@@ -82,6 +83,7 @@ function asReadingArray(value: unknown): TopicReading[] {
       const url = (item as Record<string, unknown>).url;
       const notes = (item as Record<string, unknown>).notes;
       const pickOne = (item as Record<string, unknown>).pick_one;
+      const classPrep = (item as Record<string, unknown>).class_prep;
 
       if (typeof citation !== 'string' || citation.trim() === '') {
         return null;
@@ -92,6 +94,7 @@ function asReadingArray(value: unknown): TopicReading[] {
         url: typeof url === 'string' && url.trim() !== '' ? normalizeCourseUrl(url) : undefined,
         notes: typeof notes === 'string' && notes.trim() !== '' ? notes : undefined,
         pickOne: pickOne === true ? true : undefined,
+        classPrep: classPrep === true ? true : undefined,
       };
     })
     .filter((reading): reading is TopicReading => reading !== null);

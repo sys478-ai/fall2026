@@ -1,9 +1,9 @@
 ---
 title: 'Showcase Brainstorm'
-num: '1'
+num: '2'
 type: 'homework'
 excerpt: 'What do we want to happen at the SYS showcase?'
-due_date: '2026-09-17'
+due_date: '2026-10-01'
 due_time: '11:59PM'
 draft: 0
 ---

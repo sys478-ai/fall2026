@@ -179,6 +179,10 @@ export function getDashboardPrepRows(
   const reminders = meeting.beforeClassReminders || [];
   const prepAssignments = getPrepAssignments(meeting);
   const hasClassPrep = readingCount > 0 || taskCount > 0 || reminders.length > 0;
+  // A lone flagged class-prep item (e.g. an in-class discussion) is named outright instead of "1 task".
+  const onlyTask = readingCount === 0 && reminders.length === 0 && taskCount === 1 ? meeting.otherPreparation?.[0] : undefined;
+  const classPrepTitle =
+    onlyTask?.classPrep && typeof onlyTask.citation === 'string' ? onlyTask.citation : undefined;
   const isDraft = options.isDraft === true;
   const beforeClassHref = meeting.slug && !isDraft ? `/meetings/${meeting.slug}#meeting-before-class` : null;
 
@@ -188,7 +192,7 @@ export function getDashboardPrepRows(
     rows.push({
       key: 'prep',
       category: 'prep',
-      summary: getClassPrepSummary(readingCount, taskCount, reminders),
+      summary: classPrepTitle ?? getClassPrepSummary(readingCount, taskCount, reminders),
       href: beforeClassHref,
     });
   }

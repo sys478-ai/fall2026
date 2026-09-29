@@ -63,6 +63,8 @@ export interface Reading {
   url?: string;
   notes?: string;
   pickOne?: boolean;
+  /** Pre-class item to think through and discuss in class; shown under "Class prep" instead of "Tasks". */
+  classPrep?: boolean;
 }
 
 export interface Quiz {

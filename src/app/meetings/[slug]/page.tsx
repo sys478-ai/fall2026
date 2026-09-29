@@ -634,6 +634,8 @@ function TopicOverviewMaterials({
   const assignedReadings = readings || [];
   const extraReadings = optionalReadings || [];
   const otherPrep = otherPreparation || [];
+  const classPrepItems = otherPrep.filter(item => item.classPrep);
+  const taskItems = otherPrep.filter(item => !item.classPrep);
   const reminders = beforeClassReminders || [];
   const hasContent =
     assignedReadings.length > 0 ||
@@ -666,9 +668,18 @@ function TopicOverviewMaterials({
           ))}
         </PrepGroup>
       )}
-      {otherPrep.length > 0 && (
+      {classPrepItems.length > 0 && (
+        <PrepGroup label="Class prep">
+          {classPrepItems.map((item, index) => (
+            <PrepItemRow key={`${meetingSlug}-class-prep-${index}`} kind="discussion">
+              {renderReading(item.citation, item.url, item.notes)}
+            </PrepItemRow>
+          ))}
+        </PrepGroup>
+      )}
+      {taskItems.length > 0 && (
         <PrepGroup label="Tasks">
-          {otherPrep.map((item, index) => (
+          {taskItems.map((item, index) => (
             <PrepItemRow key={`${meetingSlug}-other-prep-${index}`} kind={getTaskBadgeKind(item.citation)}>
               {renderReading(item.citation, item.url, item.notes)}
             </PrepItemRow>
