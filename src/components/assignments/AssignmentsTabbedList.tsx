@@ -38,6 +38,10 @@ interface AssignmentsTabbedListProps {
 function getAssignmentTag(item: AssignmentData): AssignmentBadgeKind {
   const raw = (item.external_type || item.type || '').toLowerCase().trim();
 
+  if (raw === 'in-class work' || raw === 'in-class activity') {
+    return 'in-class work';
+  }
+
   if (raw === 'discussion') {
     return 'discussion';
   }

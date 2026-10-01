@@ -34,6 +34,10 @@ export function getPrepBadgeKindFromAssignment(input: {
   const raw = (input.type || '').toLowerCase().trim();
   const haystack = `${raw} ${input.title || ''} ${input.href || ''}`.toLowerCase();
 
+  if (raw === 'in-class work' || raw === 'in-class activity') {
+    return 'in-class work';
+  }
+
   if (raw === 'quiz' || haystack.includes('/quizzes/')) {
     return 'quiz';
   }
@@ -63,7 +67,7 @@ export function getPrepBadgeKindFromAssignment(input: {
 }
 
 function getAssignmentTitle(item: { titleShort?: string; title: string }) {
-  return item.titleShort ? `${item.titleShort}: ${item.title}` : item.title;
+  return item.titleShort && item.titleShort !== item.title ? `${item.titleShort}: ${item.title}` : item.title;
 }
 
 function getDiscussionDueLabel(item: { dueDate?: string; dueTime?: string }, meetingDate: string) {
@@ -89,7 +93,7 @@ export function getPrepAssignments(meeting: Topic['meetings'][number]): PrepAssi
   const meetingDateIso = parseMeetingDate(meeting.date);
   const dueItems = Array.isArray(meeting.due) ? meeting.due : meeting.due ? [meeting.due] : [];
 
-  return [
+  const items: PrepAssignmentItem[] = [
     ...dueItems.flatMap(item => {
       if (typeof item === 'string' || item.draft === 1) {
         return [];
@@ -132,6 +136,15 @@ export function getPrepAssignments(meeting: Topic['meetings'][number]): PrepAssi
         }),
       })),
   ];
+
+  const seen = new Set<string>();
+  return items.filter(item => {
+    const identity = item.href?.replace(/\/$/, '') || item.title;
+    const key = `${identity}|${item.dueDateIso || ''}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 export function countRequiredReadingGroups(readings: Topic['meetings'][number]['readings']) {
