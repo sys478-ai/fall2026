@@ -2,7 +2,7 @@
 title: 'Language Models: How can predicting the next word produce something so useful?'
 slug: '13'
 scheduled_day: 13
-module_id: 3
+module_id: 2
 draft: 0
 readings: 
   - citation: Doctorow, C. (2026, September 12). LLMs are real, AI is fake. Pluralistic.
