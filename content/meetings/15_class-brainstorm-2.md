@@ -17,4 +17,14 @@ draft: 0
 | 20 mins | **Round 2: Investigate another case** | Now pick a different topic and repeat the exercise. This time, identify the technology, institutional incentives, and alternative choices. |
 | 5 mins | **Break** | Five-minute break before whole-class discussions |
 | 25 mins | **Share findings and sharpen questions** | Each group will share someting they discussed. As a class, we will revise the questions, cases, etc. and identify actual, researchable questions. |
-| 5 mins | **By midnight tonight** | Submit this Google Form, ranking your top three topics, identifying a case you'd like to investigate, and submiting any team considerations privately. |
+| 5 mins | **By midnight tonight** | Submit [this Google Form](https://forms.gle/wDMU2J6jPSnsUetRA), ranking your top three topics, identifying a case you'd like to investigate, and submiting any team considerations privately. |
+
+## Topic Assignments
+
+| Group | Topic | Round 1 students | Round 2 students |
+| -- | -- | -- | -- |
+| 1 | Surveillance, Privacy & Social Control | Bowie, Kate, Riley, Jack | Cameron, Ethan, Rebekah, Max |
+| 2 | Persuasion & Manipulation | Myo, Max, Michael, Jace | |
+| 3 | Education & Human Development | Cameron, Ethan, Kyle, Lauren | Amelia, Laina, Jessica,  Riley |
+| 4 | Automation & the Future of Work | | Bowie, Jace, Jack, Lauren |
+| 5 | Copyright & Creative Ownership | Amelia, Rebekah, Jessica, Laina | Kate, Kyle, Michael, Myo |
