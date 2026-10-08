@@ -17,4 +17,4 @@ draft: 0
 | 20 mins | **Round 2: Investigate another case** | Now pick a different topic and repeat the exercise. This time, identify the technology, institutional incentives, and alternative choices. |
 | 5 mins | **Break** | Five-minute break before whole-class discussions |
 | 25 mins | **Share findings and sharpen questions** | Each group will share someting they discussed. As a class, we will revise the questions, cases, etc. and identify actual, researchable questions. |
-| 5 mins | **By midnight tonight** | Submit this Google Form, ranking your top three topics, identifying a case they'd like to investigate, and submiting any team considerations privately. |
+| 5 mins | **By midnight tonight** | Submit this Google Form, ranking your top three topics, identifying a case you'd like to investigate, and submiting any team considerations privately. |
