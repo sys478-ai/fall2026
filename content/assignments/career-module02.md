@@ -14,7 +14,7 @@ This is the **after-class submission** for Career Module 2.
 
 Use the paired activity page for the in-class work:
 
-- [Career Module 2 in-class activity](/fall2026/activities/career-module02-in-classs)
+- [Career Module 2 in-class activity](/fall2026/activities/career-module02-in-class)
 
 ## What To Submit
 

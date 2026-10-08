@@ -1,17 +1,11 @@
 ---
 title: 'AI for What? Progress, Benevolence, and Solutionism'
 subtitle: 'Student-selected investigation'
-slug: '17'
-scheduled_day: 17
+slug: '16'
+scheduled_day: 16
 module_id: 4
-draft: 1
+draft: 0
 optional_readings:
-  - citation: >-
-      Benjamin, R. (2019). Race After Technology. Chapter 4: Technological
-      Benevolence.
-    notes: >-
-      Selected excerpt: whose definition of improvement shapes a technical
-      solution?
   - citation: 'Morozov, E. Will A.G.I. Save the World? [Video].'
     notes: >-
       Original course activity links to the video; select a short segment on

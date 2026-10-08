@@ -114,6 +114,17 @@ table.last-col-nowrap {
   }
 }
 
+table.first-col-nowrap {
+  td:first-child,
+  th:first-child {
+    min-width: 100px;
+    font-weight: bold;
+  }
+}
+table.first-col-nowrap a {
+  text-decoration: underline;
+}
+
 table .markdown-checkbox {
   margin-top: 0;
 }
