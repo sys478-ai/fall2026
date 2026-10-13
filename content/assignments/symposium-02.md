@@ -7,6 +7,8 @@ submission_notes: 'Evidence brief'
 due_date: '2026-10-22'
 due_time: '11:59PM'
 draft: 0
+prev_assignment: 'symposium-01'
+next_assignment: 'symposium-03'
 ---
 
 **Part 2 of 5** on the way to the AI & Society Symposium (Nov. 17). Team deliverable, 10 points.
@@ -15,16 +17,21 @@ draft: 0
 
 Research how your system works and what is known about its effects. Identify areas of uncertainty and competing interpretations.
 
-Four well-chosen, carefully read sources are more useful than ten skimmed ones. Choose sources you can explain, and say what each one lets you claim.
+- Four well-chosen, carefully read sources are more useful than ten skimmed ones. Choose sources you can explain, and say what each one lets you claim.
+- As you research, keep returning to your central question from Part 1:
+    - How does the evidence help you answer it? 
+    - Does anything you've discovered challenge your initial assumptions? 
+    - Does your research question need to be revised?
+- As you gather evidence, consider what your case might reveal about a larger social pattern, tension, or question. Are you finding evidence that supports, complicates, or challenges your initial ideas?
 
 ## What To Submit
 
 An evidence brief that includes:
 
 1. **An annotated list of at least four credible sources**, including original research where available. For each, note what it claims, how it knows, and how much you trust it.
-1. **Three to five important findings or claims**, each supported by evidence.
-1. **At least one important limitation, disagreement, or unanswered question.**
-1. **A preliminary explanation of how the system works.**
+2. **Three to five important findings or claims**, each supported by evidence. Explain how each helps answer your central research question. 
+3. **At least one important limitation, disagreement, or unanswered question.**
+4. **A preliminary explanation of how the system works.**
 
 Submit one brief per team on Canvas by the due date shown above.
 
@@ -38,3 +45,4 @@ Submit one brief per team on Canvas by the due date shown above.
 During class next week, you will compare conflicting claims with another group, and decide what you can responsibly say. Be prepared to talk about what you have discovered, what surprised you, and what you still don't know.
 
 
+Your next task will be to use this evidence to develop an argument about how the system's design, human choices, and social context shape its consequences.

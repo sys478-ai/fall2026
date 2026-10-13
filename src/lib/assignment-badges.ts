@@ -1,4 +1,13 @@
-export type AssignmentBadgeKind = 'reading' | 'quiz' | 'discussion' | 'homework' | 'career' | 'lab' | 'reflection' | 'in-class work';
+export type AssignmentBadgeKind =
+  | 'reading'
+  | 'quiz'
+  | 'discussion'
+  | 'homework'
+  | 'career'
+  | 'lab'
+  | 'reflection'
+  | 'symposium'
+  | 'in-class work';
 
 export const ASSIGNMENT_BADGE_LABELS: Record<AssignmentBadgeKind, string> = {
   reading: 'Reading',
@@ -9,6 +18,7 @@ export const ASSIGNMENT_BADGE_LABELS: Record<AssignmentBadgeKind, string> = {
   career: 'Career Module',
   lab: 'Lab',
   reflection: 'Reflection',
+  symposium: 'Symposium',
 };
 
 export const ASSIGNMENT_BADGE_CLASSES: Record<AssignmentBadgeKind, string> = {
@@ -20,6 +30,7 @@ export const ASSIGNMENT_BADGE_CLASSES: Record<AssignmentBadgeKind, string> = {
   career: 'bg-indigo-100 text-indigo-900 dark:bg-indigo-950/60 dark:text-indigo-300',
   lab: 'bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300',
   reflection: 'bg-teal-100 text-teal-900 dark:bg-teal-950/60 dark:text-teal-300',
+  symposium: 'bg-rose-100 text-rose-900 dark:bg-rose-950/60 dark:text-rose-300',
 };
 
 export const ASSIGNMENT_BADGE_BASE_CLASS =

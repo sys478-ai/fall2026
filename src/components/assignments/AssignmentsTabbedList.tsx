@@ -62,6 +62,10 @@ function getAssignmentTag(item: AssignmentData): AssignmentBadgeKind {
     return 'quiz';
   }
 
+  if (raw === 'symposium' || raw === 'symposium project' || item.id.startsWith('symposium')) {
+    return 'symposium';
+  }
+
   if (item.id.startsWith('discussion-')) {
     return 'discussion';
   }
@@ -121,22 +125,26 @@ function getHref(item: AssignmentData) {
   return `/assignments/${item.id}`;
 }
 
-export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListProps) {
-  const [todayIso, setTodayIso] = useState<string | null>(null);
-
-  useEffect(() => {
-    setTodayIso(formatIsoDateLocal(new Date()));
-  }, []);
-
+function AssignmentsTable({
+  items,
+  todayIso,
+  showDaysLeft,
+}: {
+  items: AssignmentData[];
+  todayIso: string | null;
+  showDaysLeft: boolean;
+}) {
   return (
-    <table className="mt-8 w-full max-w-5xl border-collapse text-left">
+    <table className="mt-4 w-full max-w-5xl border-collapse text-left">
       <thead>
         <tr className="border-b border-gray-200 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500 dark:border-gray-800 dark:text-gray-400">
           <th className="w-[6.5rem] px-2 pt-2 font-semibold">Due</th>
           <th className="w-[5.5rem] px-2 pt-2 font-semibold">Time</th>
           <th className="w-[7.5rem] px-2 pt-2 font-semibold">Type</th>
           <th className="px-2 py-2 font-semibold">Assignment</th>
-          <th className="hidden w-[8.5rem] px-2 pt-2 text-right font-semibold sm:table-cell">Days left</th>
+          {showDaysLeft && (
+            <th className="hidden w-[8.5rem] px-2 pt-2 text-right font-semibold sm:table-cell">Days left</th>
+          )}
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
@@ -209,13 +217,53 @@ export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListPr
                   </p>
                 )}
               </td>
-              <td className="hidden px-2 py-3 text-right text-xs font-medium leading-5 whitespace-nowrap text-gray-500 sm:table-cell dark:text-gray-500">
-                {daysLeftLabel}
-              </td>
+              {showDaysLeft && (
+                <td className="hidden px-2 py-3 text-right text-xs font-medium leading-5 whitespace-nowrap text-gray-500 sm:table-cell dark:text-gray-500">
+                  {daysLeftLabel}
+                </td>
+              )}
             </tr>
           );
         })}
       </tbody>
     </table>
+  );
+}
+
+export default function AssignmentsTabbedList({ items }: AssignmentsTabbedListProps) {
+  const [todayIso, setTodayIso] = useState<string | null>(null);
+
+  useEffect(() => {
+    setTodayIso(formatIsoDateLocal(new Date()));
+  }, []);
+
+  // Until the client knows today's date, show everything as current/upcoming.
+  const isPast = (item: AssignmentData) => Boolean(todayIso && item.due_date && item.due_date < todayIso);
+  const upcoming = items.filter(item => !isPast(item));
+  const past = items
+    .filter(isPast)
+    .slice()
+    .sort((a, b) => (b.due_date || '').localeCompare(a.due_date || ''));
+
+  return (
+    <div>
+      <section>
+        <h2 className="mb-0! mt-8! text-2xl font-semibold text-gray-950 dark:text-gray-50">
+          Current &amp; upcoming assignments
+        </h2>
+        {upcoming.length > 0 ? (
+          <AssignmentsTable items={upcoming} todayIso={todayIso} showDaysLeft />
+        ) : (
+          <p className="mt-4 text-base text-gray-600 dark:text-gray-400">No current or upcoming assignments.</p>
+        )}
+      </section>
+
+      {past.length > 0 && (
+        <section>
+          <h2 className="mb-0! mt-12! text-2xl font-semibold text-gray-950 dark:text-gray-50">Past assignments</h2>
+          <AssignmentsTable items={past} todayIso={todayIso} showDaysLeft={false} />
+        </section>
+      )}
+    </div>
   );
 }

@@ -9,6 +9,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import StatusBanner from '@/components/StatusBanner';
 import AssignmentSeriesHub from '@/components/assignments/AssignmentSeriesHub';
 import AssignmentSeriesClientRedirect from '@/components/assignments/AssignmentSeriesClientRedirect';
+import AssignmentPrevNext, { type AssignmentNeighbor } from '@/components/assignments/AssignmentPrevNext';
 import { resolveDueDate } from '@/lib/course-calendar';
 import { getCareerModuleDisplayTitle } from '@/lib/assignment-display';
 import { formatDueTime, DEFAULT_DUE_TIME_LABEL } from '@/lib/utils';
@@ -40,6 +41,16 @@ function formatAssignmentDueMeta(dueDate?: string, dueTimeLabel?: string): strin
   }
 
   return dueTimeLabel ? `Due ${formatDate(dueDate)} at ${dueTimeLabel}` : `Due ${formatDate(dueDate)}`;
+}
+
+async function getAssignmentNeighbor(slug?: string): Promise<AssignmentNeighbor | null> {
+  if (!slug) return null;
+  try {
+    const post = await getPostData(slug, 'assignments');
+    return { slug, title: post.title };
+  } catch {
+    return null;
+  }
 }
 
 export default async function AssignmentPage({ params }: AssignmentPageProps) {
@@ -97,6 +108,8 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
     const dueDate = resolveDueDate(postData);
     const dueTimeLabel = formatDueTime(postData.due_time || DEFAULT_DUE_TIME_LABEL);
     const dueMeta = formatAssignmentDueMeta(dueDate, dueTimeLabel);
+    const prevAssignment = await getAssignmentNeighbor(postData.prev_assignment);
+    const nextAssignment = await getAssignmentNeighbor(postData.next_assignment);
 
     const isSeriesHub = postData.series_role === 'hub' && postData.assignment_series;
     const series = isSeriesHub ? getAssignmentSeries(postData.assignment_series!) : null;
@@ -212,6 +225,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         <div className={`assignment-page max-w-4xl pr-8 pt-6${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
           {isStyleGuideDemo && <StyleGuideStyles />}
           <MarkdownContent content={postData.content} className="[&_a]:underline [&_a]:underline-offset-2" />
+          <AssignmentPrevNext prev={prevAssignment} next={nextAssignment} />
         </div>
       </ContentLayout>
     );

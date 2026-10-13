@@ -63,6 +63,10 @@ export function getPrepBadgeKindFromAssignment(input: {
     return 'lab';
   }
 
+  if (raw === 'symposium' || raw === 'symposium project' || haystack.includes('/symposium-')) {
+    return 'symposium';
+  }
+
   return 'homework';
 }
 

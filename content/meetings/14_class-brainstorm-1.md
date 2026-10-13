@@ -15,7 +15,6 @@ assignments:
     due_time: '11:59PM'
     type: 'in-class activity'
     url: 'https://unca.instructure.com/courses/1907/assignments/137235/'
-    notes: 'Due tonight. Submit your [Group Google Doc](https://docs.google.com/document/d/1RO0D4q9kl8DMpCRJ68HVNG8dENCveRFA9v198ugvguI/edit?usp=sharing).'
 
 ---
 

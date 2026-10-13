@@ -354,6 +354,8 @@ export interface PostData {
   status_date?: string;
   status_notes?: string;
   priority?: 'high' | 'medium' | 'low';
+  prev_assignment?: string;
+  next_assignment?: string;
   assignment_series?: string;
   series_role?: 'hub' | 'step' | 'resource';
   series_order?: number;
