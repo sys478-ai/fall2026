@@ -1,6 +1,6 @@
 ---
 title: 'Examples in the Wild'
-subtitle: 'Real situations where the recognition patterns appear. Each example is a crossroads – one situation that activates multiple lenses simultaneously..'
+subtitle: 'Real situations where societal and ethical debates become apparent.'
 type: 'landing'
 section_label: 'Example Cards'
 card_columns: 2

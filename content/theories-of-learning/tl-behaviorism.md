@@ -3,7 +3,7 @@ card_type: learning-theory
 id: tl-behaviorism
 slug: behaviorism
 title: "Behaviorism"
-subtitle: "Is this system learning through reinforcement—shaped by rewards and consequences—and can its behavior be explained without appealing to an inner mental life?"
+subtitle: "Is this system learning through reinforcement–shaped by rewards and consequences–and can its behavior be explained without appealing to an inner mental life?"
 num: '2'
 order: 2
 related_recognition_cards: []
@@ -25,7 +25,7 @@ B. F. Skinner's work on **operant conditioning** describes how behavior is shape
   <p class="diagnostic-question-text">Learning can be explained as a change in behavior produced by its consequences, without requiring an account of the learner's inner mental state</p>
 </div>
 
-This makes behaviorism especially relevant to AI. **Reinforcement learning (RL)** uses a related structure: an agent takes actions, receives reward signals, and updates its behavior or policy in ways that tend to increase future reward. RL was influenced by behaviorist ideas, but it is not simply operant conditioning translated directly into software. The analogy is useful precisely because it raises a question: **when an AI system is shaped by rewards, does that tell us what it has learned—or only how its behavior has been shaped?**
+This makes behaviorism especially relevant to AI. **Reinforcement learning (RL)** uses a related structure: an agent takes actions, receives reward signals, and updates its behavior or policy in ways that tend to increase future reward. RL was influenced by behaviorist ideas, but it is not simply operant conditioning translated directly into software. The analogy is useful precisely because it raises a question: **when an AI system is shaped by rewards, does that tell us what it has learned–or only how its behavior has been shaped?**
 
 ## Example: Explaining Learning
 
@@ -63,7 +63,7 @@ The comparison is nevertheless useful because it separates two questions that ar
 - How was the system's behavior shaped?
 - What (if anything) does the system represent or understand internally?
 
-A reinforcement signal can explain why a system tends to produce certain outputs without necessarily telling us what those outputs mean to the system — or whether they mean anything to it at all.
+A reinforcement signal can explain why a system tends to produce certain outputs without necessarily telling us what those outputs mean to the system – or whether they mean anything to it at all.
 
 ## Tensions and Limits
 
@@ -75,7 +75,7 @@ A similar tension appears in AI. Describing a language model or reinforcement-le
 
 At the same time, the behaviorist discipline remains valuable by encouraging learning processes to attend to the specifics: *What was actually reinforced, under what conditions, and what behavior changed as a result?* That question can expose problems that a vague claim that a system "learned" or "understood" might conceal.
 
-In AI, this matters particularly when the reward signal is only a proxy for what developers actually want. A system can become highly effective at maximizing a reward while exploiting weaknesses in the way that reward was defined—a phenomenon often described as **reward hacking** or **specification gaming**.
+In AI, this matters particularly when the reward signal is only a proxy for what developers actually want. A system can become highly effective at maximizing a reward while exploiting weaknesses in the way that reward was defined–a phenomenon often described as **reward hacking** or **specification gaming**.
 
 The behaviorist perspective therefore gives us a useful warning:
 

@@ -31,7 +31,8 @@ connected_cards:
   - num: '25'
     section: 'ai-deployment-patterns'
     interpretation: "COMPAS's aggregate accuracy statistics looked acceptable. The accuracy concealed a sharp disparity in error types by race. False positives – incorrectly predicting that someone would reoffend – were concentrated among Black defendants. False negatives were concentrated among white defendants. These errors are not equivalent in consequence, and they don't cancel each other out."
-  - num: '07'
+  - num: '9'
+    section: 'ai-deployment-patterns'
     interpretation: "The COMPAS score is a probability expressed as a categorical risk level. A threshold converts that category into a sentencing or bail input. The choice of threshold is not set by the model – it is a human decision – and its effects fall disproportionately on one group depending on where the line is drawn."
   - num: '22'
     interpretation: "When recorded recidivism rates differ between groups, no classifier can simultaneously achieve equal false positive rates and equal false negative rates. Northpointe's tool was calibrated for predictive parity – accuracy balanced across groups – which mathematically required accepting different error rates. Whether predictive parity or equal false positive rates is the correct criterion is a value judgment that the algorithm does not and cannot make."

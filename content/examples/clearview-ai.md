@@ -30,9 +30,11 @@ connected_cards:
   - num: '24'
     section: 'sts-concepts'
     interpretation: "Clearview described its facial recognition database using the language of open-source intelligence (OSINT), a category familiar to law enforcement with established norms about appropriate use. That framing determined which governance questions seemed applicable: if the images were publicly available, using them felt analogous to any investigative use of public records, and the frameworks that would have applied to a novel biometric surveillance system did not seem obviously relevant. By the time regulators began asking hard governance questions, the technology was embedded in hundreds of law enforcement workflows and years of adoption decisions had already been shaped by the framing. This is what Latour means by inscription: the description 'open-source intelligence' was not just a label – it was built into how the product was marketed, how customers understood what they were doing, and therefore which legal questions agencies' counsel thought to ask."
-  - num: '03'
+  - num: '5'
+    section: 'ai-deployment-patterns'
     interpretation: "Billions of images were posted publicly – for social purposes, professional profiles, news coverage, personal expression. Clearview scraped them without consent into a law enforcement identification database. The context of original posting bore no resemblance to the context of use. 'Publicly accessible' and 'available for any use' are not the same thing."
-  - num: '14'
+  - num: '13'
+    section: 'ai-deployment-patterns'
     interpretation: "Clearview framed its product as a new capability: a tool that makes public information useful for law enforcement in new ways. What it actually did was aggregate data that individuals had made available in fragmented public contexts and centralize it into a searchable surveillance database – extracting value from data produced by others, without their knowledge or compensation."
   - num: '26'
     section: 'ai-deployment-patterns'

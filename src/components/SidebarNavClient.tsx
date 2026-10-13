@@ -29,11 +29,12 @@ const SIDEBAR_COLLAPSED_KEY = 'sidebar-collapsed';
 
 const RESOURCE_NAV_ITEMS = [
   { label: 'Technical Explainers', href: '/field-guide/technical-explainers', hidden: false },
-  { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns', hidden: true },
-  { label: 'Examples', href: '/field-guide/examples', hidden: true },
+  { label: 'AI Deployment Patterns', href: '/field-guide/deployment-patterns' },
+  { label: 'Examples', href: '/field-guide/examples' },
   { label: 'Ethical Frameworks', href: '/field-guide/ethical-frameworks' },
   { label: 'Theories of Learning', href: '/field-guide/theories-of-learning' },
   { label: 'STS Concepts', href: '/field-guide/sts-concepts', hidden: true },
+  { label: 'Symposium Research & Design Tips', href: '/field-guide/symposium-tips' },
 ] as const;
 
 const VISIBLE_RESOURCE_NAV_ITEMS = RESOURCE_NAV_ITEMS.filter(item => !('hidden' in item && item.hidden));

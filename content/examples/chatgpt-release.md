@@ -22,7 +22,8 @@ connected_cards:
   - num: '27'
     section: 'ai-deployment-patterns'
     interpretation: "ChatGPT's training depended on human workers – largely in Kenya and other lower-income countries – who reviewed outputs, flagged harmful content, and provided preference signals used in reinforcement learning from human feedback (RLHF). This labor was contracted at low wages and involved repeated exposure to harmful content. It is structurally invisible in public accounts of the technology."
-  - num: '15'
+  - num: '14'
+    section: 'ai-deployment-patterns'
     interpretation: "The compute required to train frontier-scale language models is accessible only to a handful of companies with sufficient capital and infrastructure. This concentrates the power to determine what models exist, how they behave, on what terms they are available, and what data is included in training. Organizations and individuals who integrate these models become dependent on the terms set by a small number of providers."
 field_guide_section: 'examples'
 status: unverified

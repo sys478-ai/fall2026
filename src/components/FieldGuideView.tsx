@@ -30,7 +30,14 @@ export function useFieldGuideView(): View {
   return useContext(ViewContext);
 }
 
-export function FieldGuideViewProvider({ children }: { children: React.ReactNode }) {
+export function FieldGuideViewProvider({
+  children,
+  toolbar,
+}: {
+  children: React.ReactNode;
+  /** Optional controls rendered on the same row, to the left of the Cards/Compact toggle. */
+  toolbar?: React.ReactNode;
+}) {
   const [view, setView] = useState<View>('card');
   const base = 'px-3 py-1.5 text-sm transition-colors';
   const active = 'bg-gray-100 font-semibold text-gray-900 dark:bg-gray-800 dark:text-gray-50';
@@ -47,8 +54,9 @@ export function FieldGuideViewProvider({ children }: { children: React.ReactNode
 
   return (
     <ViewContext.Provider value={view}>
-      <div className="flex justify-end px-4 md:px-16 mb-4">
-        <div className="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 px-4 md:px-16">
+        {toolbar ?? <span />}
+        <div className="ml-auto flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
           <button
             type="button"
             onClick={() => updateView('card')}

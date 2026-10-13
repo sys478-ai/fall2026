@@ -262,7 +262,7 @@ export default async function EthicalPatternPage({ params }: PageProps) {
     const relatedTopics = getRelatedTopicsForPattern(slug);
     const relatedTaggedContent = getRelatedContentForPattern(slug);
     const relatedScheduleItems = await getRelatedScheduleItemsForPattern(slug);
-    const relatedExamples = await getExamplesForCard(postData.num ?? '', 'ai-deployment-patterns');
+    const relatedExamples = await getExamplesForCard(postData.num ?? '', contentDir);
     const bibliographyReadings = getReadingsForCard(postData.num ?? '');
 
     const featuredTopics = (postData as PostData & { featured_topics?: string[] }).featured_topics || [];

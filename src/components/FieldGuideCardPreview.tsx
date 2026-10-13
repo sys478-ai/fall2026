@@ -19,6 +19,9 @@ export interface FieldGuidePreviewItem {
   hrefLabel?: string;
   /** Optional special sheet body (e.g. the interactive AI history timeline). */
   sheetEmbed?: 'ai-history';
+  /** Examples page filters: sector tag ids and deployment-pattern family keys. */
+  filterSectors?: string[];
+  filterFamilies?: string[];
   groupKey?: string;
   groupTitle?: string;
   groupIntro?: string;
@@ -44,7 +47,8 @@ interface FieldGuideCardPreviewProps {
 // scanner needs literal class names, so this can't be interpolated into the JSX.
 const TRANSITION_MS = 300;
 
-const MORE_LINK_BASE = 'inline-flex items-center gap-1 text-sm font-semibold';
+const LEARN_MORE_BUTTON_CLASS =
+  'inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold no-underline transition-opacity hover:opacity-80';
 
 function normalizePath(path: string): string {
   return path.replace(/^\/fall2026/, '').replace(/\/$/, '') || '/';
@@ -55,7 +59,6 @@ export default function FieldGuideCardPreview({
   items,
   badgeLabel,
   linkBasePath,
-  moreLinkLabel,
   banner,
   sheetTitleId,
   aiHistoryEntries = [],
@@ -234,39 +237,19 @@ export default function FieldGuideCardPreview({
             </div>
 
             <div className="border-t border-gray-200 px-6 py-4 dark:border-gray-800">
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-                {activeItem.href ? (
-                  <Link href={activeItem.href} className={`${MORE_LINK_BASE} ${banner.moreLink}`}>
-                    {activeItem.hrefLabel || 'Open full page'} →
-                  </Link>
-                ) : isOnSectionPage ? (
-                  <button
-                    type="button"
-                    onClick={closeSheet}
-                    className={`${MORE_LINK_BASE} ${banner.moreLink} cursor-pointer bg-transparent p-0`}
-                  >
-                    {moreLinkLabel} →
-                  </button>
-                ) : (
-                  <Link href={linkBasePath} className={`${MORE_LINK_BASE} ${banner.moreLink}`}>
-                    {moreLinkLabel} →
-                  </Link>
-                )}
-                {activeItem.href &&
-                  (isOnSectionPage ? (
-                    <button
-                      type="button"
-                      onClick={closeSheet}
-                      className={`${MORE_LINK_BASE} text-gray-600 dark:text-gray-400 cursor-pointer bg-transparent p-0`}
-                    >
-                      {moreLinkLabel} →
-                    </button>
-                  ) : (
-                    <Link href={linkBasePath} className={`${MORE_LINK_BASE} text-gray-600 dark:text-gray-400`}>
-                      {moreLinkLabel} →
-                    </Link>
-                  ))}
-              </div>
+              {activeItem.href || !isOnSectionPage ? (
+                <Link href={activeItem.href || linkBasePath} className={LEARN_MORE_BUTTON_CLASS + ` ${banner.previewBadge}`}>
+                  Learn more
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={closeSheet}
+                  className={LEARN_MORE_BUTTON_CLASS + ` ${banner.previewBadge} cursor-pointer`}
+                >
+                  Learn more
+                </button>
+              )}
             </div>
           </>
         )}

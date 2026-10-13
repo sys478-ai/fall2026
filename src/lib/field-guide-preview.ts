@@ -4,6 +4,7 @@
 
 import { getAllPosts, getPostData, type PostData } from './markdown';
 import type { FieldGuidePreviewItem } from '@/components/FieldGuideCardPreview';
+import { getExampleFilterData, getExampleThemes } from './examples';
 
 const CONTENT_DIR_STANDALONE_BASE: Record<string, string> = {
   'ai-deployment-patterns': '/field-guide/deployment-patterns',
@@ -27,6 +28,31 @@ function getStandaloneHref(contentDir: string, post: PostData): string | undefin
   if (!slug) return undefined;
 
   return `${base}/${slug}`;
+}
+
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/** Course-themes block appended to an example's sheet content (mirrors the example page). */
+function buildCourseThemesHtml(connected: unknown): string {
+  const themes = getExampleThemes(connected as Array<{ num: string; section?: string; interpretation: string }> | undefined);
+  if (themes.length === 0) return '';
+
+  const items = themes
+    .map(theme => {
+      const title = theme.title
+        ? `<strong>${
+            theme.href
+              ? `<a href="/fall2026${escapeHtml(theme.href)}">${escapeHtml(theme.title)}</a>`
+              : escapeHtml(theme.title)
+          }</strong><br />`
+        : '';
+      return `<li style="margin-bottom:1.25rem">${title}${escapeHtml(theme.interpretation)}</li>`;
+    })
+    .join('');
+
+  return `<h2>Course themes</h2><ol>${items}</ol>`;
 }
 
 export interface FieldGuidePreviewSection {
@@ -57,6 +83,8 @@ export async function getFieldGuidePreviewItems(
     cards = cards.filter(post => idSet.has(post.id));
   }
 
+  const exampleFilters = contentDir === 'examples' ? getExampleFilterData() : null;
+
   return Promise.all(
     cards.map(async card => {
       const full = await getPostData(card.id, contentDir);
@@ -76,10 +104,16 @@ export async function getFieldGuidePreviewItems(
         num: String(full.num ?? ''),
         title: extras.field_guide_display_title || full.title,
         subtitle: extras.subtitle || full.excerpt || '',
-        contentHtml: full.content,
+        contentHtml:
+          contentDir === 'examples'
+            ? full.content + buildCourseThemesHtml(full.connected_cards)
+            : full.content,
         href,
         hrefLabel: sheetEmbed === 'ai-history' ? 'Open interactive timeline' : href ? 'Open full page' : undefined,
         sheetEmbed,
+        // Keyed by the list id (file name), not full.id, which frontmatter can override.
+        filterSectors: exampleFilters?.byExample[card.id]?.sectors,
+        filterFamilies: exampleFilters?.byExample[card.id]?.families,
         groupKey: extras.field_guide_group,
         groupTitle: extras.field_guide_group_title,
         groupIntro: extras.field_guide_group_intro,

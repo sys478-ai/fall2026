@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getPostData, getAllPosts } from '@/lib/markdown';
+import { getExampleThemes } from '@/lib/examples';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ContentLayout from '@/components/ContentLayout';
 import MarkdownContent from '@/components/MarkdownContent';
@@ -48,23 +49,9 @@ export default async function ExamplePage({ params }: PageProps) {
     const post = await getPostData(slug, 'examples');
     const domains = (post.domains as string[]) ?? [];
     const contested = (post as typeof post & { contested?: string }).contested;
-    const connectedCards = (post.connected_cards as Array<{ num: string; interpretation: string }>) ?? [];
-    const allPatterns = [
-      ...getAllPosts('ai-deployment-patterns'),
-      ...getAllPosts('sts-concepts'),
-      ...getAllPosts('governance'),
-    ];
-    const numToSlug = Object.fromEntries(
-      allPatterns.map(p => {
-        const section =
-          p.field_guide_section === 'ai-deployment-patterns'
-            ? 'deployment-patterns'
-            : p.field_guide_section || 'sts-concepts';
-        const urlSlug = (p as typeof p & { slug?: string }).slug || p.id;
-        return [String(p.num), `${section}/${urlSlug}`];
-      })
-    );
-    const numToTitle = Object.fromEntries(allPatterns.map(p => [String(p.num), p.title]));
+    const connectedCards =
+      (post.connected_cards as Array<{ num: string; section?: string; interpretation: string }>) ?? [];
+    const themes = getExampleThemes(connectedCards);
 
     return (
       <ContentLayout
@@ -118,7 +105,7 @@ export default async function ExamplePage({ params }: PageProps) {
           </>
         }
       >
-        <div className="space-y-8">
+        <div className="space-y-4">
           {contested && (
             <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-900/50 dark:bg-amber-950/20">
               <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-500">
@@ -127,59 +114,47 @@ export default async function ExamplePage({ params }: PageProps) {
               <p className="mb-0 text-sm italic leading-6 text-gray-700 dark:text-gray-300">{contested}</p>
             </div>
           )}
-          <section className="space-y-4 pt-4">
+          <section>
             <MarkdownContent content={post.content} />
           </section>
 
-          {connectedCards.length > 0 && (
-            <section className="space-y-4 pt-4">
-              <h2 className="text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-                Related Field Guide Pages
+          {themes.length > 0 && (
+            <section>
+              <h2 className="mb-4 mt-0 border-b-2 border-black pb-2.5 text-2xl font-bold text-black dark:border-gray-100 dark:text-gray-50 md:text-3xl">
+                Course themes
               </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                This example connects to multiple field guide pages. Each one offers a different way to interpret what
-                the case makes visible.
-              </p>
-              <div className="space-y-3">
-                {connectedCards.map(({ num: cardNum, interpretation }) => {
-                  const cardSlug = numToSlug[cardNum];
-                  const cardTitle = numToTitle[cardNum];
-                  return (
-                    <Link
-                      key={cardNum}
-                      href={cardSlug ? `/field-guide/${cardSlug}` : '/field-guide'}
-                      className="group block rounded-xl border border-gray-200 bg-white p-5 no-underline shadow-sm transition-colors hover:border-violet-300 hover:bg-violet-50/50 dark:border-gray-800 dark:bg-black dark:hover:border-violet-700 dark:hover:bg-violet-950/20"
-                    >
-                      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">
-                        Field Guide Page
+              <ol className="list-decimal pl-6 text-base leading-7 text-gray-800 dark:text-gray-200 [&>li:not(:last-child)]:mb-5!">
+                {themes.map(theme => (
+                  <li key={theme.num}>
+                    {theme.title && (
+                      <p className="m-0! font-semibold text-gray-950 dark:text-gray-50">
+                        {theme.href ? (
+                          <Link
+                            href={theme.href}
+                            className="text-inherit hover:text-violet-700 dark:hover:text-violet-300"
+                          >
+                            {theme.title}
+                          </Link>
+                        ) : (
+                          theme.title
+                        )}
                       </p>
-                      {cardTitle && (
-                        <p className="mb-2 font-semibold text-gray-950 group-hover:text-violet-700 dark:text-gray-50 dark:group-hover:text-violet-300">
-                          {cardTitle}
-                        </p>
-                      )}
-                      <p className="mb-0 text-sm leading-6 text-gray-800 dark:text-gray-200">{interpretation}</p>
-                    </Link>
-                  );
-                })}
-              </div>
+                    )}
+                    <p className="m-0! text-base leading-7">{theme.interpretation}</p>
+                  </li>
+                ))}
+              </ol>
             </section>
           )}
 
-          <section className="rounded-2xl border border-violet-200 bg-violet-50/70 p-6 dark:border-violet-900 dark:bg-violet-950/20">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
-              Field Guide
-            </p>
-            <h2 className="m-0 text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-              Browse More Examples
-            </h2>
+          <div>
             <Link
               href="/field-guide/examples"
-              className="mt-5 inline-flex items-center rounded-full bg-violet-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-violet-800 dark:bg-violet-500 dark:hover:bg-violet-400"
+              className="inline-flex items-center rounded-full bg-violet-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-violet-800 dark:bg-violet-500 dark:hover:bg-violet-400"
             >
               Back to Examples
             </Link>
-          </section>
+          </div>
         </div>
       </ContentLayout>
     );

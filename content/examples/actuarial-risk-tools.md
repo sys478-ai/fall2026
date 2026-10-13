@@ -24,7 +24,8 @@ timeline_cards:
 connected_cards:
   - num: '08'
     interpretation: "Actuarial tools were trained on historical recidivism data produced by a criminal justice system with documented disparities in surveillance, arrest, and prosecution rates. A person from a high-surveillance neighborhood appears higher-risk not because they are more likely to reoffend, but because the system recorded more of their prior contact with police. The tool encodes the outcomes of past enforcement as predictions about future behavior."
-  - num: '07'
+  - num: '9'
+    section: 'ai-deployment-patterns'
     interpretation: "Risk scores don't predict outcomes for individuals; they express statistical probabilities. A threshold converts those probabilities into sentencing inputs. That decision point transforms a range of uncertainty into a binary outcome – incarceration or release – with significant and irreversible consequences for the individual."
   - num: '22'
     interpretation: "Risk tools that use neighborhood, employment history, and family criminal history as features import the background conditions of structural inequality without naming them. The tool doesn't account for differential policing; it reproduces its outcomes. Groups most subject to surveillance and prosecution appear higher-risk – a consequence of who the system was watching, not only who was committing crimes."

@@ -122,11 +122,15 @@ function splitPatternCaseTabs(content: string): PatternCaseTab[] {
   return cases;
 }
 
+function removeWhatHappenedHeading(html: string) {
+  return html.replace(/<h2[^>]*>\s*What Happened\s*<\/h2>/i, '');
+}
+
 function PatternSection({ label, children }: { label: string; children: ReactNode }) {
   const excludeFromToc = label === 'Examples';
   return (
-    <section className="space-y-4 pt-4" {...(excludeFromToc ? { 'data-toc-exclude': 'true' } : {})}>
-      <h2 className="text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">{label}</h2>
+    <section className="space-y-3" {...(excludeFromToc ? { 'data-toc-exclude': 'true' } : {})}>
+      <h2 className="m-0! text-3xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">{label}</h2>
       <div className="min-w-0 [&_li]:my-2 [&_ol]:pl-5! [&_ul]:pl-5!">{children}</div>
     </section>
   );
@@ -143,25 +147,14 @@ function PatternContentSection({ section }: { section: { label: string; content:
   return <MarkdownContent content={section.content} />;
 }
 
-function FieldGuideReturnSection() {
+function BackLink() {
   return (
-    <section className="rounded-2xl border border-violet-200 bg-violet-50/70 p-6 dark:border-violet-900 dark:bg-violet-950/20">
-      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
-        Field Guide
-      </p>
-      <h2 className="m-0 text-2xl font-semibold tracking-tight text-gray-950 dark:text-gray-50">
-        Browse AI Deployment Patterns
-      </h2>
-      <p className="mb-0 mt-3 max-w-3xl text-sm leading-6 text-gray-700 dark:text-gray-300">
-        Return to the full list of deployment patterns.
-      </p>
-      <Link
-        href="/field-guide/deployment-patterns"
-        className="mt-5 inline-flex items-center rounded-full bg-violet-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-violet-800 dark:bg-violet-500 dark:hover:bg-violet-400"
-      >
-        Back to AI Deployment Patterns
-      </Link>
-    </section>
+    <Link
+      href="/field-guide/deployment-patterns"
+      className="inline-flex items-center rounded-full bg-violet-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-violet-800 dark:bg-violet-500 dark:hover:bg-violet-400"
+    >
+      &larr; Back
+    </Link>
   );
 }
 
@@ -214,7 +207,7 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
           </>
         }
       >
-        <div className="space-y-8">
+        <div className="space-y-10">
           {patternContentSections.map(section => (
             <PatternSection key={section.label} label={section.label}>
               <PatternContentSection section={section} />
@@ -227,7 +220,7 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
                 cases={relatedExamples.map(ex => ({
                   id: ex.slug,
                   label: ex.title,
-                  content: `${ex.content}<div class="mt-5 rounded-lg border border-violet-200 bg-violet-50 p-4 dark:border-violet-800 dark:bg-violet-950/30"><p class="mb-1 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">How this connects</p><p class="mb-0 text-sm leading-6 text-gray-800 dark:text-gray-200">${ex.interpretation}</p></div>`,
+                  content: `${removeWhatHappenedHeading(ex.content)}<div class="mt-5 rounded-lg border border-violet-200 bg-violet-50 p-4 dark:border-violet-800 dark:bg-violet-950/30"><p class="mb-1 text-sm font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-400">How this connects</p><p class="mb-0 text-base leading-7 text-gray-800 dark:text-gray-200">${ex.interpretation}</p></div>`,
                 }))}
               />
             </PatternSection>
@@ -301,7 +294,7 @@ export default async function DeploymentPatternPage({ params }: PageProps) {
             </PatternSection>
           )}
 
-          <FieldGuideReturnSection />
+          <BackLink />
         </div>
       </ContentLayout>
     );

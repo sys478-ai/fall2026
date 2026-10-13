@@ -26,7 +26,8 @@ timeline_cards:
   - label: "Consent was obtained but wasn't meaningful"
     href: '/field-guide/pattern-26'
 connected_cards:
-  - num: '03'
+  - num: '5'
+    section: 'ai-deployment-patterns'
     interpretation: "Users interacted with Google, Facebook, Apple, Microsoft, and other companies for social, commercial, and communication purposes. The data those interactions generated – email, search queries, files, communications – was accessible to the NSA through PRISM under legal authorities most users didn't know existed. The purposes of collection (service delivery) and the purposes of use (intelligence gathering) were entirely different."
   - num: '26'
     section: 'ai-deployment-patterns'

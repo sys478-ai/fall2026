@@ -20,6 +20,12 @@ interface FieldGuidePreviewIndexProps {
   banner: FieldGuideBannerClasses;
   sheetTitleIdPrefix: string;
   aiHistoryEntries?: AIHistoryTimelineEntry[];
+  /** Controls shown on the same row as the Cards/Compact toggle. */
+  toolbar?: React.ReactNode;
+  /** Shown below the toolbar row and above the cards. */
+  summary?: React.ReactNode;
+  /** Shown instead of the cards when every section is empty. */
+  emptyState?: React.ReactNode;
 }
 
 function FieldGuidePreviewSections({
@@ -30,12 +36,24 @@ function FieldGuidePreviewSections({
   banner,
   sheetTitleIdPrefix,
   aiHistoryEntries,
+  emptyState,
+  summary,
 }: FieldGuidePreviewIndexProps) {
   const view = useFieldGuideView();
 
+  if (emptyState && sections.every(section => section.items.length === 0)) {
+    return (
+      <div className="border-t border-gray-200 pt-8 dark:border-gray-800">
+        {summary}
+        {emptyState}
+      </div>
+    );
+  }
+
   return (
     <>
-      {sections.map(section => {
+      {sections.map((section, sectionIndex) => {
+        const sectionSummary = sectionIndex === 0 ? summary : null;
         const preview = (
           <FieldGuideCardPreview
             items={section.items}
@@ -56,6 +74,7 @@ function FieldGuidePreviewSections({
               key={section.key}
               className="border-t border-gray-200 px-4 pt-8 pb-6 dark:border-gray-800 md:px-16"
             >
+              {sectionSummary}
               <div className={`grid gap-6 ${hasLabel ? 'grid-cols-1 md:grid-cols-[2fr_3fr]' : 'grid-cols-1'}`}>
                 {hasLabel ? (
                   <div className="md:pr-6">
@@ -80,6 +99,7 @@ function FieldGuidePreviewSections({
             key={section.key}
             className="space-y-5 border-t border-gray-200 px-4 pt-8 dark:border-gray-800 md:px-16"
           >
+            {sectionSummary}
             {(section.title || section.intro) && (
               <div className="space-y-3">
                 {section.title ? (
@@ -104,7 +124,7 @@ function FieldGuidePreviewSections({
 
 export default function FieldGuidePreviewIndex(props: FieldGuidePreviewIndexProps) {
   return (
-    <FieldGuideViewProvider>
+    <FieldGuideViewProvider toolbar={props.toolbar}>
       <FieldGuidePreviewSections {...props} />
     </FieldGuideViewProvider>
   );
