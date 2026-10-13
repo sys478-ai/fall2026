@@ -21,7 +21,19 @@ optional_readings:
     url: https://time.com/collections/power-of-collaboration/6132399/timnit-gebru-ai-google/
 ---
 
-> When is AI a meaningful solution to a problem, and when does it distract us from addressing the problem's underlying causes?
+## Agenda
+1. [Team Assignments](https://docs.google.com/document/d/1RO0D4q9kl8DMpCRJ68HVNG8dENCveRFA9v198ugvguI/edit?tab=t.8tn3r7daxvms#heading=h.krthe29snub). Go ahead and get into your groups.
+1. Introduction to the course resources:
+    - [AI Deployment Patterns](/fall2026/field-guide/deployment-patterns)
+    - [Some examples to get you thinking](/fall2026/field-guide/examples)
+    - [Research & Presentation Resources](http://localhost:3000/fall2026/field-guide/symposium-tips):<br /> 
+       Some resources about different ways of getting people to think about deeper issues.
+1. [Overview of the deliverables](https://sys478-ai.github.io/fall2026/assignments)
+1. Team Agreement Activity - See Google Doc
+1. Discussion of Technological Solutionism 
+1. [Solutionism activity](#meeting-class-work).
+
+> **Overarching Question:** When is AI a meaningful solution to a problem, and when does it distract us from addressing the problem's underlying causes?
 
 ## Understanding the Main Arguments
 
@@ -32,10 +44,9 @@ optional_readings:
 
 
 ## Applying the Ideas
+When analyzing your technology, here are some important questions you can ask to figure out whether the technology is genuinely useful, whether it masks deeper issues, or both.
 
-<!-- .list-spaced -->
-1. Choose a proposed use of AI (education, healthcare, policing, hiring, etc.). What problem is AI supposed to solve? What might be the underlying social or institutional causes?
-1. What assumptions about people, society, or progress are built into the proposed technological solution?
+1. What assumptions about people, society, or progress are built into the proposed technological solution?s
 1. When might technological solutions reinforce the very problems they are intended to solve?
 1. How can we distinguish between problems that genuinely need better technology and problems that require political, economic, or institutional change?
 1. Is the alternative to technological solutionism rejecting technology? What might a more thoughtful approach to AI development look like?
