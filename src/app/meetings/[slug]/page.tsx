@@ -334,7 +334,8 @@ function isCareerEmbeddedContent(item: EmbeddedTopicContent) {
 }
 
 function isHomeworkEmbeddedContent(item: EmbeddedTopicContent) {
-  return (item.postData?.type || '').toLowerCase() === 'homework';
+  const postType = (item.postData?.type || '').toLowerCase();
+  return postType === 'homework' || postType === 'symposium project';
 }
 
 function isClassWorkExcludedContent(item: EmbeddedTopicContent) {

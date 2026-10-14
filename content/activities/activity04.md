@@ -2,7 +2,7 @@
 title: 'Technological Solutionism Activity'
 num: '3'
 type: 'activity'
-scheduled_day: 16
+scheduled_day: 17
 order: 4
 draft: 0
 ---
@@ -23,12 +23,12 @@ Nurses could view available shifts and submit bids indicating the additional pre
 
 The goal was to fill shifts while managing labor costs.
 
-### Group Discussion
-
-1. **Problem definition:** What problem is BidShift trying to solve? Are there other ways to understand the underlying problem?
-2. **Assumptions and incentives:** What assumptions does the system make about nurses and staffing? What behaviors does it encourage?
-3. **Power and consequences:** Who benefits, who might bear the costs, and who gets to establish the rules?
-4. **Broader significance:** What is this a case of? How does it relate to technological solutionism?
+> ### Discussion Questions
+> 
+> 1. **Problem definition:** What problem is BidShift trying to solve? Are there other ways to understand the underlying problem?
+> 2. **Assumptions and incentives:** What assumptions does the system make about nurses and staffing? What behaviors does it encourage?
+> 3. **Power and consequences:** Who benefits, who might bear the costs, and who gets to establish the rules?
+> 4. **Broader significance:** What larger pattern does this example illustrate? How does it relate to technological solutionism?
 
 
 ### Addendum: What Happened Next?
@@ -42,6 +42,8 @@ In August 2026, nurses raised objections to the bidding arrangement. UNC Hospita
 
 - Reeves, Dan. (August 15, 2026). "[UNC Hospitals says nurse shift-bidding feature will not be used](https://nsjonline.com/article/2026/08/unc-hospitals-says-nurse-shift-bidding-feature-will-not-be-used/)." *North State Journal*.
 - Suk, Michael. (October 8, 2026). "[The pitfalls in hospitals' ability to auction clinical labour](https://www.hospitalmanagement.net/comment/the-pitfalls-in-hospitals-ability-to-auction-clinical-labour/)." *Hospital Management*. Commentary.
+- [https://www.instagram.com/reels/Dbx69qwkfjw/](https://www.instagram.com/reels/Dbx69qwkfjw/)
+- [https://www.instagram.com/reels/Dbw3bqON2g-/](https://www.instagram.com/reels/Dbw3bqON2g-/)
 
 
 ## Case 2. Deconstructing a Technological Solution – AI Workplace Monitoring
@@ -57,12 +59,12 @@ In 2026, Co-op Legal Services in the UK was reported to be using an AI system to
 
 The system assesses interactions against more than 50 measures and generates scores used in employee performance evaluations. The company describes the technology as a way to support service quality and employee development.
 
-### Group Discussion
-
-1. **Problem definition:** What problem is this technology trying to solve? Are there other ways to understand the underlying problem?
-2. **Assumptions and measurement:** What assumptions does the system make about good customer service? What might be difficult to measure?
-3. **Power and consequences:** Who benefits, who might bear the costs, and who gets to define good performance?
-4. **Broader significance:** What is this a case of? How does it relate to technological solutionism and workplace surveillance?
+> ### Group Discussion
+> 
+> 1. **Problem definition:** What problem is this technology trying to solve? Are there other ways to understand the underlying problem?
+> 2. **Assumptions and measurement:** What assumptions does the system make about good customer service? What might be difficult to measure?
+> 3. **Power and consequences:** Who benefits, who might bear the costs, and who gets to establish the rules?
+> 4. **Broader significance:** What larger pattern does this example illustrate? How does it relate to technological solutionism and workplace surveillance?
 
 ### Source
 
