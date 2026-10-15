@@ -25,16 +25,19 @@ Your question does not have to be final. Teams are expected to revise it as they
 A one-page team proposal that includes:
 
 1. **The system and how people use it.**
-2. **Your central research question and why it matters.**
-3. **Two or three questions you'll need to investigate** to answer it.
-4. **Your initial ideas about what visitors should learn or reconsider.** 
+1. **Your central research question and why it matters.**
+1. **2-3 questions you'll need to investigate** to answer it.
+1. **Your initial ideas about what visitors should learn or reconsider.** 
    What broader issue or question might your system help illuminate?
-5. **Your audience.** Who do you most want to reach with your exhibit, and what do you hope they will understand, question, or do differently after visiting it?
+1. **Your audience.** Who do you most want to reach with your exhibit, and what do you hope they will understand, question, or do differently after visiting it?
    - An educator?
    - A parent?
    - A fellow student?
    - A child?
    - A policymaker?
+1. **A title for your project for the symposium.** Consider your specific technology / context, and how it intersects with broader social and political themes.
+1. **Equipment needs for the symposium?**: Will you need a table, a poster + easel, website hosting, digital equipment?
+
 
 Submit one proposal per team on Canvas by the due date shown above.
 
