@@ -1,6 +1,5 @@
 ---
 title: 'AI for What? Progress, Benevolence, and Solutionism'
-subtitle: 'Student-selected investigation'
 slug: '16'
 scheduled_day: 16
 module_id: 4

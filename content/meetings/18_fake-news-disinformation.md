@@ -1,6 +1,5 @@
 ---
 title: 'Fake News and Trustworthy Content'
-subtitle: 'Student-selected investigation'
 slug: '18'
 scheduled_day: 18
 module_id: 4
