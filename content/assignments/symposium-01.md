@@ -42,6 +42,7 @@ A one-page team proposal that includes:
 Submit one proposal per team on Canvas by the due date shown above.
 
 ### Tips
+
 - A strong question is specific, answerable with evidence, and about **why** and **who decides**, not just "is it good or bad?"
 - ou don't need to know yet what your case reveals about the larger issue. That is something you'll discover through your investigation.
 - Your audience shapes everything later: a parent, a college student who uses ChatGPT daily, and an educator deciding on classroom policy would each need a different exhibit.

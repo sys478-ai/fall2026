@@ -12,18 +12,19 @@ readings:
     notes: "Just read the abstract"
 ---
 
-## Discussion Questions: The long and brutal history of fake news
+* [Slides](https://docs.google.com/presentation/d/1ZyJa7o3sWcyjjO8mu940KwglO0oZhJhLA5oUMDU7MH0/edit?usp=sharing)
 
-1. Examples of Fake News:
-    - What were some examples given in the readings of how racial, ethnic, or religious stereotypes might have interacted to spread fake news more quickly?
-    - For each of the examples you found, can you think of some similar examples that are happening right now that mirror this phenomenon?
+
+
+## Additional Questions to Consider
+
 
 1. Consider the following quote…
 
     > Fake news is not a new phenomenon. It has been around since news became a concept 500 years ago with the invention of print—a lot longer, in fact, than verified, “objective” news, which emerged in force a little more than a century ago. …and then discuss the following questions:
       
       - How did society work to combat fake news in the past? Who did this work?
-      - In what ways have internet platforms changed this? Who does this work now?
+      - In what ways have internet platforms / GenAI changed this? Who does this work now?
 
 1. In the 16th century, officials argued that “Readers in search of fact had to pay close attention.” What are the benefits and drawbacks of putting the onus on the reader to sort everything out?
 
