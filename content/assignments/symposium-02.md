@@ -4,7 +4,7 @@ num: '2'
 type: 'symposium project'
 excerpt: 'Research how your system works and what is known about its effects, including what is uncertain or contested.'
 submission_notes: 'Evidence brief'
-due_date: '2026-10-22'
+due_date: '2026-10-23'
 due_time: '11:59PM'
 draft: 0
 prev_assignment: 'symposium-01'

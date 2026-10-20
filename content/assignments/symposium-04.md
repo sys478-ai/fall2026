@@ -4,7 +4,7 @@ num: '4'
 type: 'symposium project'
 excerpt: 'Translate your research into an exhibit a visitor can understand and engage with in about five minutes.'
 submission_notes: 'Exhibit storyboard and prototype'
-due_date: '2026-11-05'
+due_date: '2026-11-06'
 due_time: '11:59PM'
 draft: 0
 prev_assignment: 'symposium-03'

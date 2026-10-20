@@ -4,7 +4,7 @@ num: '3'
 type: 'symposium project'
 excerpt: 'Move from collecting information to explaining how design choices, human priorities, and institutions shape an AI system and its consequences.'
 submission_notes: 'Systems analysis and argument'
-due_date: '2026-10-29'
+due_date: '2026-10-30'
 due_time: '11:59PM'
 draft: 0
 prev_assignment: 'symposium-02'

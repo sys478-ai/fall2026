@@ -4,7 +4,7 @@ num: '5'
 type: 'symposium project'
 excerpt: 'Present your nearly complete exhibit to classmates, observe how people respond, and plan concrete revisions.'
 submission_notes: 'Prototype presentation and revision plan'
-due_date: '2026-11-12'
+due_date: '2026-11-13'
 due_time: '11:59PM'
 draft: 0
 prev_assignment: 'symposium-04'
