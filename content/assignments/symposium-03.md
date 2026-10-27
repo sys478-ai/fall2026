@@ -2,7 +2,7 @@
 title: 'Symposium 3: Develop Your Argument'
 num: '3'
 type: 'symposium project'
-excerpt: 'Move from collecting information to explaining how design choices, human priorities, and institutions shape an AI system and its consequences.'
+excerpt: 'Turn your research into a clear argument about your AI system and what it reveals about technology and society.'
 submission_notes: 'Systems analysis and argument'
 due_date: '2026-10-30'
 due_time: '11:59PM'
@@ -15,47 +15,52 @@ next_assignment: 'symposium-04'
 
 ## What You're Doing
 
-Move from collecting information to interpreting it. Your task is to develop an argument about how your AI system works, how it is shaped by human choices and institutions, and what consequences follow.
+You've gathered evidence about your AI system. Now it's time to decide **what story you want to tell about it, and why that story matters**.
 
+Your goal is to develop a central argument that explains something important about your system: how it works, what human choices and priorities shape it, who is affected, and what larger issue it helps us understand.
 
-Use the following **AI systems analysis questions** to guide your thinking. You do not need to answer each question separately, but your analysis should connect the technical system to its social context.
+Think of this as developing the story your exhibit will tell. By the end of this milestone, you should know **what you want visitors to understand, what evidence supports your argument, and why it matters**.
 
-- **Purpose:** What problem is the system intended to solve, and who gets to define that problem? Why is AI being used?
-- **Mechanism and design choices:** How does the system work? What data, categories, rules, or objectives shape its behavior? What important decisions were made about how to build it?
-- **Priorities and values:** What does the system prioritize or optimize? What counts as success, and for whom? What assumptions or tradeoffs are embedded in these choices?
-- **People, institutions, and power:** Who develops, owns, deploys, uses, or regulates the system? How do its outputs influence human decisions? Who can challenge or change how it operates?
-- **Consequences:** What benefits, harms, or unintended effects might follow? Who experiences them? How do the system's design and social context help explain these outcomes?
-- **Alternatives:** What could be different? Could the system be designed, used, or governed differently? What other approaches might address the underlying problem?
-- **Broader significance:** What is this a case of? What larger pattern, tension, or societal change does your system illustrate? What does studying this particular system help us understand about technology, power, human behavior, or social values more broadly?
+## Questions to Guide Your Analysis
 
-Throughout your analysis, ensure that you're making a distinction between what the evidence shows and what you want to infer / argue. Be clear about what remains uncertain or contested.
+Use these questions to guide your thinking. You don't need to answer each one separately, and not all of these questions may be relevant to your project.
 
-By this date you should have a *defensible argument*, even if it is tentative. Your argument should do more than describe the technology or list its advantages and disadvantages. It should help explain *why outcomes occur, whose choices matter, and what alternatives are possible*.
+- **Purpose:** What is the system designed to do? Why was it developed, and whose needs or interests does it serve?
+- **Design and priorities:** How does it work? What choices, assumptions, or incentives shape how it operates?
+- **People and power:** Who develops, owns, uses, or controls the system? Who benefits, who might be harmed, and who can change how it works?
+- **Consequences:** What are the intended and unintended effects of this system? Who benefits, who might be harmed, and how?
+- **Alternatives:** What could be done differently? What tradeoffs would those changes involve?
+- **Bigger picture:** What does your system reveal about technology, society, power, or human values more broadly? Does what's happening in your specific case connect to other things going on in the world?
 
-After this, the work is about communicating your argument effectively.
+Be careful to distinguish between what your evidence shows, what you're arguing, and what remains uncertain.
 
-## What To Submit
+## What to Submit
 
-1. **Your central argument**, in two or three sentences. What does your investigation reveal about this particular system, and what larger pattern, tension, or question does it illuminate? What is the most important thing you want visitors to understand or reconsider?
+Submit one document per team that includes:
 
-2. **A systems diagram** showing important inputs, processes, outputs, human decisions, and feedback loops. Identify at least two consequential design choices or assumptions. A hand-drawn diagram is fine as long as you can explain it.
+1. **Your central argument (2–3 sentences).** What does your research reveal about this system? What larger issue does it help us understand? What is the most important thing you want visitors to take away?
 
-3. **An explanation of your argument**, using two or three findings from your research. Explain how these findings support your interpretation of the system, including how its design, priorities, or institutional context contribute to the outcomes you identify. Acknowledge important uncertainties or limitations.
+2. **A systems diagram.** Show the important parts of your system, how they interact, and where human decisions or priorities shape what happens. Identify at least two important design choices or assumptions. A hand-drawn diagram is fine.
 
-4. **An analysis of stakeholders and consequences.** Consider at least three stakeholder groups. Who benefits, who might be harmed, who makes decisions, and who has the power to influence how the system operates?
+3. **Evidence and analysis.** Use 2–3 findings from your research to support your argument. Explain how the system's design, business model, or institutional context helps produce its outcomes. Who benefits, who might be harmed, and who has the power to make decisions? What remains uncertain?
 
-5. **One plausible alternative or question for collective action**, grounded in your analysis. What could be changed about the system, its use, or the conditions surrounding it? Who could make that change, and what tradeoffs might remain?
+4. **What could be different?** Identify at least one way the system could be designed, used, or governed differently. Who could make that change? What tradeoffs might it involve?
 
-Submit one document per team on Canvas by the due date shown above.
+5. **An initial exhibit idea.** How might you communicate your argument to visitors in five minutes? Describe one thing visitors could **see, do, or discover** that would help them understand your main point. This is just a starting idea – you'll develop it further in Milestone 4.
+
+Submit your document on Canvas by the due date above.
 
 ### Tips
 
-- Arguments can be provisional. Revising your claim as evidence changes is part of good inquiry.
-- You do not need to argue that your system causes harm or needs regulation (although you certainly can). A thoughtful conclusion might be that the evidence is inconclusive, the benefits depend on context, or a proposed fix addresses the wrong problem.
-- Your exhibit should not simply argue that AI is good or bad. It should help visitors see **why** outcomes happen, **who has the power** to shape them, and **what choices are possible**.
+- Your argument can be tentative. It's fine to revise it as you learn more.
+- You don't need to argue that AI is good or bad, or that your system necessarily causes harm. Your argument should be grounded in evidence.
+- Focus on explaining **why things happen, whose choices matter, and what could be different**.
+- Keep your exhibit audience in mind. What would make someone stop, pay attention, and reconsider something they thought they understood?
 
-The strongest arguments connect specific evidence about a system to a larger insight about how technology and society shape one another.
+## What's Next?
 
-## Next Class
+In **Milestone 4: Design the Visitor Experience**, you'll turn your argument into a concrete exhibit plan, including a storyboard and an interactive element.
 
-During the next class, you will share your systems diagram with another group and see whether they can understand how the system works and identify important choices or consequences. You will then give a **three-minute explanation** of your system, its consequences, and your central argument. Listeners will explain what they understood as your main takeaway and identify anything that needs further explanation.
+During our next class, you'll share your systems diagram and give another team a **three-minute explanation** of your central argument and exhibit idea. They'll tell you what they understood, what questions they still have, and what might make your story clearer.
+
+Your goal is to leave this milestone with a clear idea of **what you're trying to say**, so you can spend the next one figuring out **how to show it**.

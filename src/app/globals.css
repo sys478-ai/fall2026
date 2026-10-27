@@ -1481,12 +1481,40 @@ table.next-time-checklist tbody tr:first-child td {
   @apply text-3xl md:text-4xl;
 }
 
-.prose details.collapsible-h2 > summary {
-  @apply text-2xl md:text-3xl font-bold text-black dark:text-gray-50;
+.prose details.collapsible-h2 > summary,
+.prose details.collapsible-h3 > summary {
+  @apply text-2xl leading-none font-bold py-2.5 border-b border-gray-200 text-indigo-900 dark:border-gray-800 dark:text-indigo-300;
+  font-family: var(--font-outfit), serif;
+}
+
+/* Match the course schedule topic headers: down chevron, rotated when closed */
+.prose details.collapsible-h2 > summary::before,
+.prose details.collapsible-h3 > summary::before {
+  /* Heroicons solid chevron-down, same as the schedule page (h-5 w-5) */
+  content: '';
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: rotate(-90deg);
+}
+
+.prose details.collapsible-h2[open] > summary::before,
+.prose details.collapsible-h3[open] > summary::before {
+  content: '';
+  transform: none;
+}
+
+.prose details.collapsible-h2 > *:not(summary),
+.prose details.collapsible-h3 > *:not(summary) {
+  @apply ml-0;
 }
 
 .prose details.collapsible-h3 > summary {
-  @apply text-xl md:text-2xl font-semibold normal-case tracking-normal text-gray-800 dark:text-gray-300;
+  @apply text-xl;
 }
 
 .prose details.collapsible-h4 > summary {
