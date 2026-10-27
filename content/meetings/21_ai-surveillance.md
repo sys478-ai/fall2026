@@ -6,22 +6,67 @@ scheduled_day: 21
 module_id: 4
 draft: 0
 readings:
-  - citation: "Thompson, Stuart A., and Charlie Warzel. “Twelve Million Phones, One Dataset, Zero Privacy.” The New York Times, December 19, 2019."
-    url: https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html
-  - citation: "Hill, Kashmir. “The Secretive Company That Might End Privacy as We Know It.” The New York Times, January 18, 2020."
-    url: https://www.nytimes.com/2020/01/18/technology/clearview-privacy-facial-recognition.html
+  - citation: "Ayoub, Emile. “Dangers of Trump Administration’s Data Consolidation Efforts.” Brennan Center for Justice, July 9, 2026."
+    url: https://www.brennancenter.org/our-work/research-reports/dangers-trump-administrations-data-consolidation-efforts
+  - citation: "“AI Surveillance Cameras Along the U.S.-Mexico Border.” The New York Times, October 22, 2026."
+    url: https://www.nytimes.com/interactive/2026/10/22/us/politics/ai-surveillance-cameras-border-mexico.html?unlocked_article_code=1.K1E.Trtk.JbYn0GOfYUKH&smid=url-share
+optional_readings:
+  - citation: "Iliadis, Andrew, and Amelia Acker. “The Seer and the Seen: Surveying Palantir’s Surveillance Platform.” The Information Society, vol. 38, no. 5, 2022, pp. 334–363."
+    url: https://www.tandfonline.com/doi/full/10.1080/01972243.2022.2100851
   - citation: "Haggerty, Kevin D., and Richard V. Ericson. “The Surveillant Assemblage.” The British Journal of Sociology, vol. 51, no. 4, 2000, pp. 605–622."
     url: https://doi.org/10.1080/00071310020015280
-optional_readings:
-  - citation: "Hill, Kashmir. Your Face Belongs to Us: A Secretive Startup’s Quest to End Privacy as We Know It. Random House, 2023."
-    url: https://www.penguinrandomhouse.com/books/691288/your-face-belongs-to-us-by-kashmir-hill/9780593448588/
-
-  - citation: "Lyon, David. Surveillance Studies: An Overview. Polity, 2007."
-    url: https://books.google.com/books?id=_dTHJgh3-f0C
-  - citation: "Zuboff, Shoshana. The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power. PublicAffairs, 2019."
-    url: https://www.hachettebookgroup.com/titles/shoshana-zuboff/the-age-of-surveillance-capitalism/9781610395694/
-  - citation: "Ahad, Ali. “What Edge AI Actually Means in Video Surveillance.” Sighthound."
-    url: https://www.sighthound.com/blog/what-edge-ai-means-in-video-surveillance
+  # - citation: "Ahad, Ali. “What Edge AI Actually Means in Video Surveillance.” Sighthound."
+  #   url: https://www.sighthound.com/blog/what-edge-ai-means-in-video-surveillance
 ---
 
-Agenda TBD.
+## 1. Surveillance Discussion
+
+{% collapsible closed %}
+### 1.1. Questions
+
+#### Discussion Questions
+1. When is surveillance necessary or beneficial? Consider public safety, criminal investigations, national security, and emergency response. What problems would be difficult to address without it?
+
+2. When does surveillance become problematic? Does it depend on who is being monitored, what information is collected, how long it is retained, or what happens to it afterward?
+
+3. Who should decide what surveillance is permissible? What kinds of oversight, transparency, accountability, or legal restrictions should apply?
+
+#### Reading Questions
+1. What kinds of information can AI-enabled border surveillance cameras collect or help analyze, according to the New York Times article?
+
+2. What is ***data integration***, according to the Brennan Center?
+
+3. What role does Palantir play in the government's surveillance infrastructure?
+
+{% collapsible closed %}
+### 1.2. Case Analysis
+
+{:.mt-4}
+- Theory
+- Case Study
+- Broader Infrastructure
+
+## 2. Group Work
+Today we examined how surveillance technologies become part of larger social and institutional systems. Your task is to make that same move in your own investigation – from examining a particular AI application to explaining the broader system and its consequences.
+
+{% collapsible closed %}
+### 2.1. Draft your submission (20 min)
+
+{:.mt-4}
+- Open the assignment and start writing together.
+- Focus on turning your research and preliminary ideas into a coherent, evidence-supported analysis.
+
+{% collapsible closed %}
+### 2.2. Stress-test your argument (10 min)
+
+{:.mt-4}
+Exchange drafts with another group. Each group answers just two questions:
+- What's the central argument? Is it clear and specific?
+- Where does the argument need stronger evidence or explanation?
+
+
+{% collapsible closed %}
+### 2.3. Revise and delegate. (10 min) 
+
+{:.mt-4}
+Incorporate feedback, identify remaining gaps, and divide up what needs to be completed before Friday.
