@@ -19,32 +19,11 @@ optional_readings:
   #   url: https://www.sighthound.com/blog/what-edge-ai-means-in-video-surveillance
 ---
 
+
 ## 1. Surveillance Discussion
 
-{% collapsible closed %}
-### 1.1. Questions
-
-#### Discussion Questions
-1. When is surveillance necessary or beneficial? Consider public safety, criminal investigations, national security, and emergency response. What problems would be difficult to address without it?
-
-2. When does surveillance become problematic? Does it depend on who is being monitored, what information is collected, how long it is retained, or what happens to it afterward?
-
-3. Who should decide what surveillance is permissible? What kinds of oversight, transparency, accountability, or legal restrictions should apply?
-
-#### Reading Questions
-1. What kinds of information can AI-enabled border surveillance cameras collect or help analyze, according to the New York Times article?
-
-2. What is ***data integration***, according to the Brennan Center?
-
-3. What role does Palantir play in the government's surveillance infrastructure?
-
-{% collapsible closed %}
-### 1.2. Case Analysis
-
-{:.mt-4}
-- Theory
-- Case Study
-- Broader Infrastructure
+* [Slides](https://docs.google.com/presentation/d/1IZEc2bYCoXjDrUVApFhdzob1WpT4bTCfwCZ78Vp7YZw/edit?usp=sharing)
+* [Activity](https://docs.google.com/spreadsheets/d/1rAutyrvU2K7uZYuQGG3UGXJvmFqW8SlpHgmYvybXfIE/edit?usp=sharing)
 
 ## 2. Group Work
 Today we examined how surveillance technologies become part of larger social and institutional systems. Your task is to make that same move in your own investigation – from examining a particular AI application to explaining the broader system and its consequences.
@@ -53,7 +32,7 @@ Today we examined how surveillance technologies become part of larger social and
 ### 2.1. Draft your submission (20 min)
 
 {:.mt-4}
-- Open the assignment and start writing together.
+- Open [the assignment](../assignments/symposium-03) and start writing together.
 - Focus on turning your research and preliminary ideas into a coherent, evidence-supported analysis.
 
 {% collapsible closed %}
