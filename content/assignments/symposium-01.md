@@ -51,3 +51,5 @@ Submit one proposal per team on Canvas by the due date shown above.
 ## Next Class
 
 You will pitch your system and question to another group during the next class, and then revise based on what confused them. Be ready to explain your project in **60 seconds**, including what you're investigating and why someone should care.
+
+{% include design-resources %}

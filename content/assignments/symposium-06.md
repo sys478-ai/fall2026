@@ -80,3 +80,5 @@ The final exhibit is worth **45 points**. Full credit means the criterion is met
 | **Visual clarity** | 3 | The poster is readable on its own, with clear headings and purposeful visuals. Text is concise without losing substance. |
 | **Lightning talk** | 3 | Presents the system and argument clearly within the time limit. |
 | **Visitor discussion** | 4 | Team members answer questions with evidence, acknowledge uncertainty, and engage visitors thoughtfully. All members contribute. |
+
+{% include design-resources %}

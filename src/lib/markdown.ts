@@ -7,6 +7,7 @@ import gfm from 'remark-gfm';
 import highlight from 'remark-highlight.js';
 import smartypants from 'remark-smartypants';
 import { preprocessCheckboxes, postprocessCheckboxes } from './markdown-checkboxes';
+import { preprocessIncludeTags } from './include-snippets';
 import { preprocessMarkdownTags } from './markdown-tags';
 import { preprocessFlipCards } from './flip-cards';
 import { postprocessSequences, preprocessSequenceTags } from './sequence';
@@ -426,6 +427,7 @@ export async function getPostData(id: string, subdirectory?: string): Promise<Po
 
   // Pre-process custom markdown tags (e.g. {% sequence %}, {% no-copy %}, {% collapsible %}, {% flip-cards %})
   // This rewrites them into HTML comments or HTML blocks that post-processors understand
+  markdownContent = preprocessIncludeTags(markdownContent);
   markdownContent = preprocessSequenceTags(markdownContent);
   markdownContent = preprocessStepStripTags(markdownContent);
   markdownContent = preprocessMarkdownTags(markdownContent);

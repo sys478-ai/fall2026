@@ -64,3 +64,5 @@ In **Milestone 4: Design the Visitor Experience**, you'll turn your argument int
 During our next class, you'll share your systems diagram and give another team a **three-minute explanation** of your central argument and exhibit idea. They'll tell you what they understood, what questions they still have, and what might make your story clearer.
 
 Your goal is to leave this milestone with a clear idea of **what you're trying to say**, so you can spend the next one figuring out **how to show it**.
+
+{% include design-resources %}

@@ -46,3 +46,5 @@ During class next week, you will compare conflicting claims with another group, 
 
 
 Your next task will be to use this evidence to develop an argument about how the system's design, human choices, and social context shape its consequences.
+
+{% include design-resources %}

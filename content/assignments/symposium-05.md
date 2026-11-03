@@ -38,3 +38,5 @@ Submit one package per team on Canvas by the due date shown above.
 ## Next Class
 
 Our next meeting is the AI & Society Symposium on **Nov. 17** (the final exhibit, worth 45 points). Be ready to facilitate your visitor experience, explain your research, and answer visitors' questions.
+
+{% include design-resources %}

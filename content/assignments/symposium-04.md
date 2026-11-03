@@ -52,3 +52,5 @@ Submit one package per team on Canvas by the due date shown above.
 ## Next Class
 
 During the next class, you will test your interactive experience with classmates who have not seen it. Watch what they do, not just what they say. Be ready to walk someone through the exhibit and find out whether its main message is coming across.
+
+{% include design-resources %}
