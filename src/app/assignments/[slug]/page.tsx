@@ -203,7 +203,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
         header={
           <>
             <StatusBanner section="topicsAndAssignments" status={postData.status} status_reviewer={postData.status_reviewer} status_date={postData.status_date} status_notes={postData.status_notes} contentType={contentType} />
-            <div className="space-y-4 py-6">
+            <div className="space-y-4 pt-6 pb-2">
               <Breadcrumbs
                 className="px-4 md:px-16"
                 items={[
@@ -222,7 +222,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
           </>
         }
       >
-        <div className={`assignment-page max-w-4xl pr-8 pt-6${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
+        <div className={`assignment-page max-w-4xl pr-8 pt-0${isTutorial02 ? ' assignment-page-tutorial02' : ''}`}>
           {isStyleGuideDemo && <StyleGuideStyles />}
           <MarkdownContent content={postData.content} className="[&_a]:underline [&_a]:underline-offset-2" />
           <AssignmentPrevNext prev={prevAssignment} next={nextAssignment} />

@@ -8,6 +8,7 @@ due_date: '2026-11-13'
 due_time: '11:59PM'
 draft: 0
 prev_assignment: 'symposium-04'
+next_assignment: 'symposium-06'
 ---
 
 **Part 5 of 5** on the way to the AI & Society Symposium (Nov. 17). Team deliverable, 5 points.
