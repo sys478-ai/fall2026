@@ -1,7 +1,7 @@
 ---
 title: 'Tech Business Models & Incentive Structures'
-slug: '23'
-scheduled_day: 23
+slug: '24'
+scheduled_day: 24
 module_id: 4
 draft: 1
 optional_readings:
