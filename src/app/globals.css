@@ -646,6 +646,8 @@ li.checkbox-checked input[type='checkbox'] {
   a {
     @apply transition-colors duration-200;
     color: #0b5d8f;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   a:hover {
@@ -687,6 +689,8 @@ li.checkbox-checked input[type='checkbox'] {
 /* Prose links styling for all pages (syllabus, assignments, etc.) */
 .prose a {
   color: #0b5d8f;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .dark .prose a {

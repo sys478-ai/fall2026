@@ -15,24 +15,33 @@ next_assignment: 'symposium-06'
 
 ## What You're Doing
 
-Test your nearly complete exhibit with classmates. Observe how visitors engage with your visual display and interactive element, where they get confused, and whether they understand your central argument.
+**Finalize your poster and test your interactive element with classmates.** Observe how visitors engage with your exhibit, where they get confused, and whether they understand your central argument.
 
 In particular, can visitors recognize **what your system is a case of** – the larger issue or question about AI and society that your investigation illuminates?
 
+**Your poster must be finalized and submitted by the end of class on Thursday, November 12, so it can be printed. Your interactive experience can continue to be refined before the symposium.**
+
 ## What To Submit
 
-1. **A near-final exhibit**, including your visual display and interactive element.
-2. **A five-minute practice visitor experience**, showing how someone would encounter and engage with your exhibit. 
-3. **Feedback from at least two peers or groups.** Include what visitors understood as your main takeaway, what confused them, and whether the interactive element helped. 
-4. **Three concrete, feasible revisions** you will make before the symposium, based on the feedback and your observations. 
+1. **Final poster (due Thursday, Nov. 12, by the end of class).** Submit a print-ready PDF (48 × 36 inches, landscape) with all required exhibit sections, evidence, and citations.
+    * If all of your citations don't fit on your poster you can always have a QR code that points to a public google doc, or else have a supplementary handout that has everything.
 
-Submit one package per team on Canvas by the due date shown above.
+2. **Interactive element.** Submit a working version, prototype, script, diagram, or link showing what visitors will do. **Identify anything that still needs to be finished before the symposium.**
 
-### Tips
-  Watch what visitors do, not just what they say. Can they navigate the exhibit without extensive explanation? Does the interactive element help them understand something important?
+3. **Feedback you received in class from your peers.** Include what visitors understood as your main takeaway, what confused them, and whether the interactive element helped.
+
+4. **Two or three concrete, feasible revisions** based on the feedback and your observations. **Indicate which changes you've already made and which you'll complete before the symposium.**
+
+5. **Final symposium plan.** Identify team roles, equipment needs, and any remaining tasks (with assigned responsibilities).
+
+**Submit your final poster PDF separately on Thursday. Submit the remaining materials as one team package on Canvas by Friday, November 13, at 11:59 PM.**
+
+## Tips 
+
+- Watch what visitors do, not just what they say. Can they navigate the exhibit without extensive explanation? Does the interactive element help them understand something important?
 - Ask visitors what they think your exhibit's main message is, and what larger question or issue your case illustrates.
 - You do not have to act on every piece of feedback. Decide what to change and what to keep, and be able to say why.
-  Focus on changes you can realistically make before Nov. 17. Clearer wording, stronger visual explanations, or a better activity prompt may matter more than adding new features.
+- **Focus on final improvements you can realistically complete before Nov. 17.** Clearer wording, stronger visual explanations, or a better activity prompt may matter more than adding new features.
 - After the symposium, each of you will submit an individual reflection.
 
 ## Next Class
@@ -40,3 +49,4 @@ Submit one package per team on Canvas by the due date shown above.
 Our next meeting is the AI & Society Symposium on **Nov. 17** (the final exhibit, worth 45 points). Be ready to facilitate your visitor experience, explain your research, and answer visitors' questions.
 
 {% include design-resources %}
+
