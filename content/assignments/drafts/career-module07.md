@@ -1,15 +1,12 @@
 ---
 title: 'Career Module 7: How Do You Want To Show Up?'
-scheduled_day: 25
+scheduled_day: 28
 num: '7'
 type: 'career module'
 excerpt: 'Cultural capital, unwritten rules, "organizational fit," and boundaries.'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+draft: 0
+due_date: '2026-12-03'
+due_time: '11:59PM'
 ---
 
 ## Overview

@@ -4,12 +4,9 @@ scheduled_day: 28
 num: '8'
 type: 'career module'
 excerpt: 'Synthesis and presentation of the semester’s career-readiness work.'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+draft: 0
+due_date: '2026-12-03'
+due_time: '11:59PM'
 ---
 
 ## Overview

@@ -4,12 +4,9 @@ scheduled_day: 12
 num: '3'
 type: 'career module'
 excerpt: 'Post-college realities, budgeting, salary context, and negotiation.'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+draft: 0
+due_date: '2026-12-03'
+due_time: '11:59PM'
 ---
 
 ## Overview

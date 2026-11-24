@@ -4,12 +4,9 @@ scheduled_day: 22
 num: '6'
 type: 'career module'
 excerpt: 'Professional presence, networking, and informational interview practice.'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+draft: 0
+due_date: '2026-12-01'
+due_time: '11:59PM'
 ---
 
 ## Overview

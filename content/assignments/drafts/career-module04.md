@@ -4,12 +4,9 @@ scheduled_day: 15
 num: '4'
 type: 'career module'
 excerpt: 'Naming strengths, mapping accomplishments, and identifying durable skills.'
-draft: 1
-status: unverified
-status_reviewer:
-status_date:
-status_notes:
-priority: low
+draft: 0
+due_date: '2026-12-03'
+due_time: '11:59PM'
 ---
 
 ## Overview

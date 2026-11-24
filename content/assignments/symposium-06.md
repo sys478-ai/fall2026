@@ -8,6 +8,7 @@ due_date: '2026-11-17'
 due_time: '02:30PM'
 draft: 0
 prev_assignment: 'symposium-05'
+next_assignment: 'symposium-07'
 ---
 
 > ## Symposium Details
